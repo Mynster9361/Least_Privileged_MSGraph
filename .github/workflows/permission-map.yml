@@ -1,0 +1,46 @@
+name: Update Graph API Permissions Map
+
+on:
+  schedule:
+    # Run weekly on Sunday at 2am
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  update-permissions-map:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v3
+        with:
+          path: my-repo
+
+      - name: Checkout Microsoft Graph Docs
+        uses: actions/checkout@v3
+        with:
+          repository: microsoftgraph/microsoft-graph-docs-contrib
+          path: ms-graph-docs
+          ref: main
+
+      - name: Process Graph API Permissions
+        shell: pwsh
+        run: |
+          cd my-repo
+          pwsh -File ./Convert-PermissionMap.ps1 -DocsPath "../ms-graph-docs"
+
+
+      - name: Commit and Push Changes
+        run: |
+          cd my-repo
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add graph_api_permissions_map.json
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update Graph API permissions map [skip ci]"
+            git push
+          fi

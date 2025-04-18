@@ -3,9 +3,10 @@ param (
     [string]$DocsPath,
 
     [string]$JsonOutputPath = "graph_api_permissions_map.json",
+    [string]$MappingJsonOutputPath = "graph_api_permissions_friendly_names.json",
     [string[]]$Versions = @("v1.0", "beta"),
 
-    # New parameter for permissions reference file
+    # Parameter for permissions reference file
     [string]$PermissionsReferencePath
 )
 
@@ -55,6 +56,30 @@ function Extract-PermissionIdentifiers {
 
     Write-Host "Extracted $($identifiers.Count) permission identifiers"
     return $identifiers
+}
+
+function Export-PermissionMappings {
+    param (
+        [hashtable]$permissionIdentifiers,
+        [string]$outputPath
+    )
+
+    Write-Host "Exporting permission mappings to $outputPath"
+
+    $mappings = @()
+
+    foreach ($permissionName in $permissionIdentifiers.Keys) {
+        $mapping = [PSCustomObject]@{
+            "Role_Name" = $permissionName
+            "Application_Identifier" = $permissionIdentifiers[$permissionName].ApplicationId
+            "DelegatedWork_Identifier" = $permissionIdentifiers[$permissionName].DelegatedId
+        }
+
+        $mappings += $mapping
+    }
+
+    $mappings | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
+    Write-Host "Exported $($mappings.Count) permission mappings"
 }
 
 function Extract-HttpRequests {
@@ -336,6 +361,9 @@ $allResults = @()
 
 # Extract permission identifiers
 $permissionIdentifiers = Extract-PermissionIdentifiers -permissionsRefPath $PermissionsReferencePath
+
+# Export the permission mappings to a separate file
+Export-PermissionMappings -permissionIdentifiers $permissionIdentifiers -outputPath $MappingJsonOutputPath
 
 foreach ($version in $Versions) {
     Write-Host "Starting to process $version API files..."

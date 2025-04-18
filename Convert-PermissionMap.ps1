@@ -311,31 +311,7 @@ function Process-ApiFiles {
             # Try to extract example URL directly from the markdown
             $exampleUrl = Extract-ExampleUrl -content $content
 
-            # Add identifiers for permissions
-            $delegatedWorkIdentifiers = @()
-            $applicationIdentifiers = @()
-
-            # Process delegated work permissions
-            if ($delegatedWork -and $delegatedWork.least_privileged) {
-                foreach ($perm in $delegatedWork.least_privileged) {
-                    if ($permissionIdentifiers.ContainsKey($perm)) {
-                        $delegatedWorkIdentifiers += $permissionIdentifiers[$perm].DelegatedId
-                    }
-                }
-            }
-
-            # Process application permissions
-            if ($application -and $application.least_privileged) {
-                foreach ($perm in $application.least_privileged) {
-                    if ($permissionIdentifiers.ContainsKey($perm)) {
-                        $applicationIdentifiers += $permissionIdentifiers[$perm].ApplicationId
-                    }
-                }
-            }
-
             $results += [PSCustomObject]@{
-                "Application_Identifiers" = $applicationIdentifiers
-                "DelegatedWork_Identifiers" = $delegatedWorkIdentifiers
                 "path" = $endpoint.path
                 "version" = $version
                 "method" = $endpoint.method

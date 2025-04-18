@@ -1,0 +1,3332 @@
+[
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "aa85bf13-d771-4d5d-a9e6-bca04ce44edf"
+  },
+  {
+    "Role_Name": "People.Read.All",
+    "Application_Identifier": "b528084d-ad10-4598-8b93-929746b4d7d6",
+    "DelegatedWork_Identifier": "b89f9189-71a5-4e70-b041-9887f0bc7e4a"
+  },
+  {
+    "Role_Name": "EduReports",
+    "Application_Identifier": "f5d05dba-7ef0-46fc-b62c-a7282555f428",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "IMAP.AccessAsUser.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "652390e4-393a-48de-9484-05f9b1212954"
+  },
+  {
+    "Role_Name": "UserTimelineActivity.Write.CreatedByApp",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "367492fc-594d-4972-a9b5-0d58c622c91c"
+  },
+  {
+    "Role_Name": "OnlineMeetingAiInsight.Read.Chat",
+    "Application_Identifier": "01892c31-3b66-4bcf-b5f5-bf0a03d5ed9f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduCurricula.ReadWrite.All",
+    "Application_Identifier": "6a0c2318-d59d-4c7d-bf2e-5f3902dc2593",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForChat.All",
+    "Application_Identifier": "73a45059-f39c-4baf-9182-4954ac0e55cf",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "7a349935-c54d-44ab-ab66-1b460d315be7"
+  },
+  {
+    "Role_Name": "ConfigurationMonitoring.ReadWrite.All",
+    "Application_Identifier": "cfa85bfb-2ee8-4e13-8e7f-489e57a015a1",
+    "DelegatedWork_Identifier": "54505ce9-e719-41f7-a7cc-dbe114e1d811"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.ConsentRequest",
+    "Application_Identifier": "999f8c63-0a38-4f1b-91fd-ed1947bdd1a9",
+    "DelegatedWork_Identifier": "4d135e65-66b8-41a8-9f8b-081452c91774"
+  },
+  {
+    "Role_Name": "ChannelMember.ReadWrite.All",
+    "Application_Identifier": "35930dcf-aceb-4bd1-b99a-8ffed403c974",
+    "DelegatedWork_Identifier": "0c3e411a-ce45-4cd1-8f30-f99a3efa7b11"
+  },
+  {
+    "Role_Name": "DeviceManagementServiceConfig.Read.All",
+    "Application_Identifier": "06a5fe6d-c49d-46a7-b082-56b1b14103c7",
+    "DelegatedWork_Identifier": "8696daa5-bce5-4b2e-83f9-51b6defc4e1e"
+  },
+  {
+    "Role_Name": "SearchConfiguration.ReadWrite.All",
+    "Application_Identifier": "0e778b85-fefa-466d-9eec-750569d92122",
+    "DelegatedWork_Identifier": "b1a7d408-cab0-47d2-a2a5-a74a3733600d"
+  },
+  {
+    "Role_Name": "HealthMonitoringAlertConfig.ReadWrite.All",
+    "Application_Identifier": "432e76f0-8af6-4315-a853-66ab9538f480",
+    "DelegatedWork_Identifier": "b3e5ebc6-1c23-4337-8286-3f27165addb4"
+  },
+  {
+    "Role_Name": "ThreatAssessment.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "cac97e40-6730-457d-ad8d-4852fddab7ad"
+  },
+  {
+    "Role_Name": "InformationProtectionConfig.Read.All",
+    "Application_Identifier": "14f49b9f-4bf2-4d24-b80e-b27ec58409bd",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "User.Export.All",
+    "Application_Identifier": "405a51b5-8d8d-430b-9842-8be4b0e9f324",
+    "DelegatedWork_Identifier": "405a51b5-8d8d-430b-9842-8be4b0e9f324"
+  },
+  {
+    "Role_Name": "MailboxFolder.ReadWrite.All",
+    "Application_Identifier": "fef87b92-8391-4589-9da7-eb93dab7dc8a",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SharePointTenantSettings.Read.All",
+    "Application_Identifier": "83d4163d-a2d8-4d3b-9695-4ae3ca98f888",
+    "DelegatedWork_Identifier": "2ef70e10-5bfd-4ede-a5f6-67720500b258"
+  },
+  {
+    "Role_Name": "EWS.AccessAsUser.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9769c687-087d-48ac-9cb3-c37dde652038"
+  },
+  {
+    "Role_Name": "LearningContent.ReadWrite.All",
+    "Application_Identifier": "444d6fcb-b738-41e5-b103-ac4f2a2628a3",
+    "DelegatedWork_Identifier": "53cec1c4-a65f-4981-9dc1-ad75dbf1c077"
+  },
+  {
+    "Role_Name": "ExternalItem.Read.All",
+    "Application_Identifier": "7a7cffad-37d2-4f48-afa4-c6ab129adcc2",
+    "DelegatedWork_Identifier": "922f9392-b1b7-483c-a4be-0089be7704fb"
+  },
+  {
+    "Role_Name": "SecurityEvents.ReadWrite.All",
+    "Application_Identifier": "d903a879-88e0-4c09-b0c9-82f6a1333f84",
+    "DelegatedWork_Identifier": "6aedf524-7e1c-45a7-bd76-ded8cab8d0fc"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadBasic.All",
+    "Application_Identifier": "6e0a958b-b7fc-4348-b7c4-a6ab9fd3dd0e",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Notes.ReadWrite.All",
+    "Application_Identifier": "0c458cef-11f3-48c2-a568-c66751c238c0",
+    "DelegatedWork_Identifier": "64ac0503-b4fa-45d9-b544-71a463f05da0"
+  },
+  {
+    "Role_Name": "PlaceDeviceTelemetry.ReadWrite.All",
+    "Application_Identifier": "27fc435f-44e2-4b30-bf3c-e0ce74aed618",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduCurricula.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "484859e8-b9e2-4e92-b910-84db35dadd29"
+  },
+  {
+    "Role_Name": "AdministrativeUnit.Read.All",
+    "Application_Identifier": "134fd756-38ce-4afd-ba33-e9623dbe66c2",
+    "DelegatedWork_Identifier": "3361d15d-be43-4de6-b441-3c746d05163d"
+  },
+  {
+    "Role_Name": "Sites.Selected",
+    "Application_Identifier": "883ea226-0bf2-4a8f-9f9d-92c9162a727d",
+    "DelegatedWork_Identifier": "f89c84ef-20d0-4b54-87e9-02e856d66d53"
+  },
+  {
+    "Role_Name": "OnlineMeetings.ReadWrite.All",
+    "Application_Identifier": "b8bb2037-6e08-44ac-a4ea-4674e010e2a4",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Directory.ReadWrite.All",
+    "Application_Identifier": "19dbc75e-c2e2-444c-a770-ec69d8559fc7",
+    "DelegatedWork_Identifier": "c5366453-9fb0-48a5-a156-24f0c49a4b84"
+  },
+  {
+    "Role_Name": "EntitlementMgmt",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e9fdcbbb-8807-410f-b9ec-8d5468c7c2ac"
+  },
+  {
+    "Role_Name": "ShortNotes.ReadWrite.All",
+    "Application_Identifier": "842c284c-763d-4a97-838d-79787d129bab",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Contacts.ReadWrite.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "afb6c84b-06be-49af-80bb-8f3f77004eab"
+  },
+  {
+    "Role_Name": "SharePointTenantSettings.ReadWrite.All",
+    "Application_Identifier": "19b94e34-907c-4f43-bde9-38b1909ed408",
+    "DelegatedWork_Identifier": "aa07f155-3612-49b8-a147-6c590df35536"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForTeam.All",
+    "Application_Identifier": "91c32b81-0ef0-453f-a5c7-4ce2e562f449",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "RoleAssignmentSchedule.Remove.Directory",
+    "Application_Identifier": "d3495511-98b7-4df3-b317-4e35c19f6129",
+    "DelegatedWork_Identifier": "f71cd05c-3fdb-4568-aef2-e1cf62ee20d4"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForChat.All",
+    "Application_Identifier": "6e74eff9-4a21-45d6-bc03-3a20f61f8281",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Chat.ManageDeletion.All",
+    "Application_Identifier": "9c7abde0-eacd-4319-bf9e-35994b1a1717",
+    "DelegatedWork_Identifier": "bb64e6fc-6b6d-4752-aea0-dd922dbba588"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0f3420c2-c6ec-46de-ab72-fd51267087d5"
+  },
+  {
+    "Role_Name": "Chat.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9ff7295e-131b-4d94-90e1-69fde507ac11"
+  },
+  {
+    "Role_Name": "User.ReadWrite.CrossCloud",
+    "Application_Identifier": "5652f862-b626-407b-a3e6-248aeb95763c",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "a0e0e18b-8fb2-458f-8130-da2d7cab9c75"
+  },
+  {
+    "Role_Name": "ExternalUserProfile.ReadWrite.All",
+    "Application_Identifier": "761327c9-d819-4c08-9a5f-874cd2826608",
+    "DelegatedWork_Identifier": "c6068dc7-a791-46a4-a811-b8228e6649ab"
+  },
+  {
+    "Role_Name": "ApprovalSolution.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "6768d3af-4562-48ff-82d2-c5e19eb21b9c"
+  },
+  {
+    "Role_Name": "MailboxItem.ImportExport.All",
+    "Application_Identifier": "76577085-e73d-4f1d-b26a-85fb33892327",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ExternalItem.ReadWrite.All",
+    "Application_Identifier": "38c3d6ee-69ee-422f-b954-e17819665354",
+    "DelegatedWork_Identifier": "b02c54f8-eb48-4c50-a9f0-a149e5a2012f"
+  },
+  {
+    "Role_Name": "CallDelegation.ReadWrite.All",
+    "Application_Identifier": "8d06abce-e69b-4122-ba60-4f901bb1db2f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ChatMessage.Send",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "116b7235-7cc6-461e-b163-8e55691d839e"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForUser.All",
+    "Application_Identifier": "650a76ec-4118-4b25-9d3a-1f98048a5ee0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.Read.AzureAD",
+    "Application_Identifier": "4cdc2547-9148-4295-8d11-be0db1391d6b",
+    "DelegatedWork_Identifier": "b3a539c9-59cb-4ad5-825a-041ddbdc2bdb"
+  },
+  {
+    "Role_Name": "VirtualEvent.Read.All",
+    "Application_Identifier": "1dccb351-c4e4-4e09-a8d1-7a9ecbf027cc",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "RoleEligibilitySchedule.ReadWrite.Directory",
+    "Application_Identifier": "fee28b28-e1f3-4841-818e-2704dc62245f",
+    "DelegatedWork_Identifier": "62ade113-f8e0-4bf9-a6ba-5acb31db32fd"
+  },
+  {
+    "Role_Name": "FileIngestion.Ingest",
+    "Application_Identifier": "65891b00-2fd9-4e33-be27-04a53132e3df",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DelegatedAdminRelationship.ReadWrite.All",
+    "Application_Identifier": "cc13eba4-8cd8-44c6-b4d4-f93237adce58",
+    "DelegatedWork_Identifier": "885f682f-a990-4bad-a642-36736a74b0c7"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForUser.All",
+    "Application_Identifier": "425b4b59-d5af-45c8-832f-bb0b7402348a",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ChannelMessage.UpdatePolicyViolation.All",
+    "Application_Identifier": "4d02b0cc-d90b-441f-8d82-4fb55c34d6bb",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ThreatAssessment.Read.All",
+    "Application_Identifier": "f8f035bb-2cce-47fb-8bf5-7baf3ecbee48",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "InformationProtectionContent.Sign.All",
+    "Application_Identifier": "cbe6c7e4-09aa-4b8d-b3c3-2dbb59af4b54",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "AppCatalog.Submit",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "3db89e36-7fa6-4012-b281-85f3d9d9fd2e"
+  },
+  {
+    "Role_Name": "Domain.Read.All",
+    "Application_Identifier": "dbb9058a-0e50-45d7-ae91-66909b5d4664",
+    "DelegatedWork_Identifier": "2f9ee017-59c1-4f1d-9472-bd5529a7b311"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForChat.All",
+    "Application_Identifier": "fd9ce730-a250-40dc-bd44-8dc8d20f39ea",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamworkTag.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "539dabd7-b5b6-4117-b164-d60cd15a8671"
+  },
+  {
+    "Role_Name": "ExternalConnection.ReadWrite.All",
+    "Application_Identifier": "34c37bc0-2b40-4d5e-85e1-2365cd256d79",
+    "DelegatedWork_Identifier": "bbbbd9b3-3566-4931-ac37-2b2180d9e334"
+  },
+  {
+    "Role_Name": "CustomSecAttributeAssignment.Read.All",
+    "Application_Identifier": "3b37c5a4-1226-493d-bec3-5d6c6b866f3f",
+    "DelegatedWork_Identifier": "b46ffa80-fe3d-4822-9a1a-c200932d54d0"
+  },
+  {
+    "Role_Name": "Organization.ReadWrite.All",
+    "Application_Identifier": "292d869f-3427-49a8-9dab-8c70152b74e9",
+    "DelegatedWork_Identifier": "46ca0847-7e6b-426e-9775-ea810a948356"
+  },
+  {
+    "Role_Name": "AuthenticationContext.ReadWrite.All",
+    "Application_Identifier": "a88eef72-fed0-4bf7-a2a9-f19df33f8b83",
+    "DelegatedWork_Identifier": "ba6d575a-1344-4516-b777-1404f5593057"
+  },
+  {
+    "Role_Name": "ThreatSubmission.Read.All",
+    "Application_Identifier": "86632667-cd15-4845-ad89-48a88e8412e1",
+    "DelegatedWork_Identifier": "7083913a-4966-44b6-9886-c5822a5fd910"
+  },
+  {
+    "Role_Name": "Organization.Read.All",
+    "Application_Identifier": "498476ce-e0fe-48b0-b801-37ba7e2685c6",
+    "DelegatedWork_Identifier": "4908d5b9-3fb2-4b1e-9336-1888b7937185"
+  },
+  {
+    "Role_Name": "User.ReadWrite.All",
+    "Application_Identifier": "741f803b-c850-494e-b5df-cde7c675a1ca",
+    "DelegatedWork_Identifier": "204e0828-b5ca-4ad8-b9f3-f32a958e7cc4"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.PermissionGrant",
+    "Application_Identifier": "a402ca1c-2696-4531-972d-6e5ee4aa11ea",
+    "DelegatedWork_Identifier": "2672f8bb-fd5e-42e0-85e1-ec764dd2614e"
+  },
+  {
+    "Role_Name": "DirectoryRecommendations.ReadWrite.All",
+    "Application_Identifier": "0e9eea12-4f01-45f6-9b8d-3ea4c8144158",
+    "DelegatedWork_Identifier": "f37235e8-90a0-4189-93e2-e55b53867ccd"
+  },
+  {
+    "Role_Name": "AppRoleAssignment.ReadWrite.All",
+    "Application_Identifier": "06b708a9-e830-4db3-a914-8e69da51d44f",
+    "DelegatedWork_Identifier": "84bccea3-f856-4a8a-967b-dbe0a3d53a64"
+  },
+  {
+    "Role_Name": "RoleManagementAlert.Read.Directory",
+    "Application_Identifier": "ef31918f-2d50-4755-8943-b8638c0a077e",
+    "DelegatedWork_Identifier": "cce71173-f76d-446e-97ff-efb2d82e11b1"
+  },
+  {
+    "Role_Name": "SMTP.Send",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "258f6531-6087-4cc4-bb90-092c5fb3ed3f"
+  },
+  {
+    "Role_Name": "MutualTlsOauthConfiguration.ReadWrite.All",
+    "Application_Identifier": "78bbf8cf-07d8-45ba-b0eb-1a7b48efbcf1",
+    "DelegatedWork_Identifier": "a51115bc-f64f-498f-bcee-00dcd28f4a03"
+  },
+  {
+    "Role_Name": "ConsentRequest.Read.All",
+    "Application_Identifier": "1260ad83-98fb-4785-abbb-d6cc1806fd41",
+    "DelegatedWork_Identifier": "f3bfad56-966e-4590-a536-82ecf548ac1e"
+  },
+  {
+    "Role_Name": "Chat.Read.WhereInstalled",
+    "Application_Identifier": "1c1b4c8e-3cc7-4c58-8470-9b92c9d5848b",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduRoster.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "a4389601-22d9-4096-ac18-36a927199112"
+  },
+  {
+    "Role_Name": "VirtualAppointment.ReadWrite.All",
+    "Application_Identifier": "bf46a256-f47d-448f-ab78-f226fff08d40",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Calls.JoinGroupCall.All",
+    "Application_Identifier": "f6b49018-60ab-4f81-83bd-22caeabfed2d",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Notes.Read.All",
+    "Application_Identifier": "3aeca27b-ee3a-4c2b-8ded-80376e2134a4",
+    "DelegatedWork_Identifier": "dfabfca6-ee36-4db2-8208-7a28381419b3"
+  },
+  {
+    "Role_Name": "HealthMonitoringAlert.Read.All",
+    "Application_Identifier": "5183ed5d-b7f8-4e9a-915e-dafb46b9cb62",
+    "DelegatedWork_Identifier": "74b4ff32-4917-4536-a66d-38a4861e6220"
+  },
+  {
+    "Role_Name": "profile",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "14dad69e-099b-42c9-810b-d002981feec1"
+  },
+  {
+    "Role_Name": "DeviceManagementCloudCA.Read.All",
+    "Application_Identifier": "315b6e8c-d92a-4691-919d-00ce76d1344a",
+    "DelegatedWork_Identifier": "ac5c8443-d999-471f-9247-ce92cf5c5560"
+  },
+  {
+    "Role_Name": "User.DeleteRestore.All",
+    "Application_Identifier": "eccc023d-eccf-4e7b-9683-8813ab36cecc",
+    "DelegatedWork_Identifier": "4bb440cd-2cf2-4f90-8004-aa2acd2537c5"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForChat.All",
+    "Application_Identifier": "9e19bae1-2623-4c4f-ab6e-2664615ff9a0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0f4595f7-64b1-4e13-81bc-11a249df07a9"
+  },
+  {
+    "Role_Name": "LearningSelfInitiatedCourse.Read.All",
+    "Application_Identifier": "467524fc-ed22-4356-a910-af61191e3503",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Calendars.ReadWrite.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "12466101-c9b8-439a-8589-dd09ee67e8e9"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ea819e27-c92a-4118-b83b-4540b125d744"
+  },
+  {
+    "Role_Name": "APIConnectors.Read.All",
+    "Application_Identifier": "b86848a7-d5b1-41eb-a9b4-54a4e6306e97",
+    "DelegatedWork_Identifier": "1b6ff35f-31df-4332-8571-d31ea5a4893f"
+  },
+  {
+    "Role_Name": "MailboxItem.ImportExport",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "df96e8a0-f4e1-4ecf-8d83-a429f822cbd6"
+  },
+  {
+    "Role_Name": "Group.Create",
+    "Application_Identifier": "bf7b1a76-6e77-406b-b258-bf5c7720e98f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ThreatSubmission.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "68a3156e-46c9-443c-b85c-921397f082b5"
+  },
+  {
+    "Role_Name": "Chat.Create",
+    "Application_Identifier": "d9c48af6-9ad9-47ad-82c3-63757137b9af",
+    "DelegatedWork_Identifier": "38826093-1258-4dea-98f0-00003be2b8d0"
+  },
+  {
+    "Role_Name": "LearningSelfInitiatedCourse.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f6403ef7-4a96-47be-a190-69ba274c3f11"
+  },
+  {
+    "Role_Name": "DeviceManagementServiceConfig.ReadWrite.All",
+    "Application_Identifier": "5ac13192-7ace-4fcf-b828-1a26f28068ee",
+    "DelegatedWork_Identifier": "662ed50a-ac44-4eef-ad86-62eed9be2a29"
+  },
+  {
+    "Role_Name": "RecordsManagement.ReadWrite.All",
+    "Application_Identifier": "eb158f57-df43-4751-8b21-b8932adb3d34",
+    "DelegatedWork_Identifier": "f2833d75-a4e6-40ab-86d4-6dfe73c97605"
+  },
+  {
+    "Role_Name": "DelegatedAdminRelationship.Read.All",
+    "Application_Identifier": "f6e9e124-4586-492f-adc0-c6f96e4823fd",
+    "DelegatedWork_Identifier": "0c0064ea-477b-4130-82a5-4c2cc4ff68aa"
+  },
+  {
+    "Role_Name": "Chat.UpdatePolicyViolation.All",
+    "Application_Identifier": "7e847308-e030-4183-9899-5235d7270f58",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "email",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0"
+  },
+  {
+    "Role_Name": "ServiceHealth.Read.All",
+    "Application_Identifier": "79c261e0-fe76-4144-aad5-bdc68fbe4037",
+    "DelegatedWork_Identifier": "55896846-df78-47a7-aa94-8d3d4442ca7f"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.ExternalIdentities",
+    "Application_Identifier": "03cc4f92-788e-4ede-b93f-199424d144a5",
+    "DelegatedWork_Identifier": "b5219784-1215-45b5-b3f1-88fe1081f9c0"
+  },
+  {
+    "Role_Name": "AccessReview.Read.All",
+    "Application_Identifier": "d07a8cc0-3d51-4b77-b3b0-32704d1f69fa",
+    "DelegatedWork_Identifier": "ebfcd32b-babb-40f4-a14b-42706e83bd28"
+  },
+  {
+    "Role_Name": "Application",
+    "Application_Identifier": "3be0012a-cc4e-426b-895b-f9c836bf6381",
+    "DelegatedWork_Identifier": "ffa91d43-2ad8-45cc-b592-09caddeb24bb"
+  },
+  {
+    "Role_Name": "IdentityRiskEvent.Read.All",
+    "Application_Identifier": "6e472fd1-ad78-48da-a0f0-97ab2c6b769e",
+    "DelegatedWork_Identifier": "8f6a01e7-0391-4ee5-aa22-a3af122cef27"
+  },
+  {
+    "Role_Name": "VirtualAppointmentNotification.Send",
+    "Application_Identifier": "97e45b36-1250-48e4-bd70-2df6dab7e94a",
+    "DelegatedWork_Identifier": "20d02fff-a0ef-49e7-a46e-019d4a6523b7"
+  },
+  {
+    "Role_Name": "NetworkAccessBranch.Read.All",
+    "Application_Identifier": "39ae4a24-1ef0-49e8-9d63-2a66f5c39edd",
+    "DelegatedWork_Identifier": "4051c7fc-b429-4804-8d80-8f1f8c24a6f7"
+  },
+  {
+    "Role_Name": "Group.ReadWrite.All",
+    "Application_Identifier": "62a82d76-70ea-41e2-9197-370581804d09",
+    "DelegatedWork_Identifier": "4e46008b-f24c-477d-8fff-7bb4ec7aafe0"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.SecurityDefaults",
+    "Application_Identifier": "1c6e93a6-28e2-4cbb-9f64-1a46a821124d",
+    "DelegatedWork_Identifier": "0b2a744c-2abf-4f1e-ad7e-17a087e2be99"
+  },
+  {
+    "Role_Name": "LifecycleWorkflows.Read.All",
+    "Application_Identifier": "7c67316a-232a-4b84-be22-cea2c0906404",
+    "DelegatedWork_Identifier": "9bcb9916-765a-42af-bf77-02282e26b01a"
+  },
+  {
+    "Role_Name": "CrossTenantUserProfileSharing.Read.All",
+    "Application_Identifier": "8b919d44-6192-4f3d-8a3b-f86f8069ae3c",
+    "DelegatedWork_Identifier": "759dcd16-3c90-463c-937e-abf89f991c18"
+  },
+  {
+    "Role_Name": "User.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b4e74841-8e56-480b-be8b-910348b18b4c"
+  },
+  {
+    "Role_Name": "Sites.FullControl.All",
+    "Application_Identifier": "a82116e5-55eb-4c41-a434-62fe8a61c773",
+    "DelegatedWork_Identifier": "5a54b8b3-347c-476d-8f8e-42d5c7424d29"
+  },
+  {
+    "Role_Name": "CustomDetection.Read.All",
+    "Application_Identifier": "673a007a-9e0f-4c97-b066-3c0164486909",
+    "DelegatedWork_Identifier": "b13ff42e-f321-4d7d-a462-141c46a1b832"
+  },
+  {
+    "Role_Name": "Chat.ReadBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9547fcb5-d03f-419d-9948-5928bbf71b0f"
+  },
+  {
+    "Role_Name": "Agreement.ReadWrite.All",
+    "Application_Identifier": "c9090d00-6101-42f0-a729-c41074260d47",
+    "DelegatedWork_Identifier": "ef4b5d93-3104-4664-9053-a5c49ab44218"
+  },
+  {
+    "Role_Name": "NetworkAccess.ReadWrite.All",
+    "Application_Identifier": "b10642fc-a6cf-4c46-87f9-e1f96c2a18aa",
+    "DelegatedWork_Identifier": "ae2df9c5-f18d-4ec4-a51b-bdeb807f177b"
+  },
+  {
+    "Role_Name": "DelegatedPermissionGrant.ReadWrite.All",
+    "Application_Identifier": "8e8e4742-1d95-4f68-9d56-6ee75648c72a",
+    "DelegatedWork_Identifier": "41ce6ca6-6826-4807-84f1-1c82854f7ee5"
+  },
+  {
+    "Role_Name": "Domain.ReadWrite.All",
+    "Application_Identifier": "7e05723c-0bb0-42da-be95-ae9f08a6e53c",
+    "DelegatedWork_Identifier": "0b5d694c-a244-4bde-86e6-eb5cd07730fe"
+  },
+  {
+    "Role_Name": "Files.ReadWrite.All",
+    "Application_Identifier": "75359482-378d-4052-8f01-80520e7db3cd",
+    "DelegatedWork_Identifier": "863451e7-0667-486c-a5d6-d135439485f0"
+  },
+  {
+    "Role_Name": "Bookmark.Read.All",
+    "Application_Identifier": "be95e614-8ef3-49eb-8464-1c9503433b86",
+    "DelegatedWork_Identifier": "98b17b35-f3b1-4849-a85f-9f13733002f0"
+  },
+  {
+    "Role_Name": "Notifications.ReadWrite.CreatedByApp",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "89497502-6e42-46a2-8cb2-427fd3df970a"
+  },
+  {
+    "Role_Name": "DeviceLocalCredential.ReadBasic.All",
+    "Application_Identifier": "db51be59-e728-414b-b800-e0f010df1a79",
+    "DelegatedWork_Identifier": "9917900e-410b-4d15-846e-42a357488545"
+  },
+  {
+    "Role_Name": "Presence.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "8d3c54a7-cf58-4773-bf81-c0cd6ad522bb"
+  },
+  {
+    "Role_Name": "PartnerSecurity.Read.All",
+    "Application_Identifier": "21ffa320-2e7f-47d3-a466-7ff04d2dd68d",
+    "DelegatedWork_Identifier": "5567b981-0bf1-4796-9038-0648b46e116d"
+  },
+  {
+    "Role_Name": "Device.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "11d4cd79-5ba5-460f-803f-e22c8ab85ccd"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "690aa3b6-4b71-41c2-a990-77a8c4768d2b"
+  },
+  {
+    "Role_Name": "APIConnectors.ReadWrite.All",
+    "Application_Identifier": "1dfe531a-24a6-4f1b-80f4-7a0dc5a0a171",
+    "DelegatedWork_Identifier": "c67b52c5-7c69-48b6-9d48-7b3af3ded914"
+  },
+  {
+    "Role_Name": "Files.Read.All",
+    "Application_Identifier": "01d4889c-1287-42c6-ac1f-5d1e02578ef6",
+    "DelegatedWork_Identifier": "df85f4d6-205c-4ac5-a5ea-6bf408dba283"
+  },
+  {
+    "Role_Name": "FileIngestionHybridOnboarding.Manage",
+    "Application_Identifier": "766c601b-c009-4438-8290-c8b05fa00c4b",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "LicenseAssignment.Read.All",
+    "Application_Identifier": "e2f98668-2877-4f38-a2f4-8202e0717aa1",
+    "DelegatedWork_Identifier": "f395577a-0960-456b-979f-7228de0c5996"
+  },
+  {
+    "Role_Name": "Device.Command",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "bac3b9c2-b516-4ef4-bd3b-c2ef73d8d804"
+  },
+  {
+    "Role_Name": "Files.Read.Selected",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5447fe39-cb82-4c1a-b977-520e67e724eb"
+  },
+  {
+    "Role_Name": "TrustFrameworkKeySet.ReadWrite.All",
+    "Application_Identifier": "4a771c9a-1cf2-4609-b88e-3d3e02d539cd",
+    "DelegatedWork_Identifier": "39244520-1e7d-4b4a-aee0-57c65826e427"
+  },
+  {
+    "Role_Name": "NetworkAccess.Read.All",
+    "Application_Identifier": "e30060de-caa5-4331-99d3-6ac6c966a9a4",
+    "DelegatedWork_Identifier": "2f7013e0-ab4e-447f-a5e1-5d419950692d"
+  },
+  {
+    "Role_Name": "WorkforceIntegration.ReadWrite.All",
+    "Application_Identifier": "202bf709-e8e6-478e-bcfd-5d63c50b68e3",
+    "DelegatedWork_Identifier": "08c4b377-0d23-4a8b-be2a-23c1c1d88545"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f1d91a8f-88e7-4774-8401-b668d5bca0c5"
+  },
+  {
+    "Role_Name": "LearningAssignedCourse.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ac08cdae-e845-41db-adf9-5899a0ec9ef6"
+  },
+  {
+    "Role_Name": "Chat.ReadWrite.All",
+    "Application_Identifier": "294ce7c9-31ba-490a-ad7d-97a7d075e4ed",
+    "DelegatedWork_Identifier": "7e9a077b-3711-42b9-b7cb-5fa5f3f7fea7"
+  },
+  {
+    "Role_Name": "EduRoster.ReadWrite.All",
+    "Application_Identifier": "d1808e82-ce13-47af-ae0d-f9b254e6d58a",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "AccessReview.ReadWrite.All",
+    "Application_Identifier": "ef5f7d5c-338f-44b0-86c3-351f46c8bb5f",
+    "DelegatedWork_Identifier": "e4aa47b9-9a69-4109-82ed-36ec70d85ff1"
+  },
+  {
+    "Role_Name": "PrivilegedEligibilitySchedule.Remove.AzureADGroup",
+    "Application_Identifier": "55745561-7572-4314-a737-a2c2a1b0dd2e",
+    "DelegatedWork_Identifier": "c5ea9ab4-9b41-4c09-a400-53e652fb5096"
+  },
+  {
+    "Role_Name": "EventListener.Read.All",
+    "Application_Identifier": "b7f6385c-6ce6-4639-a480-e23c42ed9784",
+    "DelegatedWork_Identifier": "f7dd3bed-5eec-48da-bc73-1c0ef50bc9a1"
+  },
+  {
+    "Role_Name": "IndustryData.ReadBasic.All",
+    "Application_Identifier": "4f5ac95f-62fd-472c-b60f-125d24ca0bc5",
+    "DelegatedWork_Identifier": "60382b96-1f5e-46ea-a544-0407e489e588"
+  },
+  {
+    "Role_Name": "Files.ReadWrite.AppFolder",
+    "Application_Identifier": "b47b160b-1054-4efd-9ca0-e2f614696086",
+    "DelegatedWork_Identifier": "8019c312-3263-48e6-825e-2b833497195b"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.Read.AzureResources",
+    "Application_Identifier": "5df6fe86-1be0-44eb-b916-7bd443a71236",
+    "DelegatedWork_Identifier": "1d89d70c-dcac-4248-b214-903c457af83a"
+  },
+  {
+    "Role_Name": "InformationProtectionConfig.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "12f4bffb-b598-413c-984b-db99728f8b54"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5248dcb1-f83b-4ec3-9f4d-a4428a961a72"
+  },
+  {
+    "Role_Name": "PrintConnector.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d69c2d6d-4f72-4f99-a6b9-663e32f8cf68"
+  },
+  {
+    "Role_Name": "Tasks.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f45671fb-e0fe-4b4b-be20-3d3ce43f1bcb"
+  },
+  {
+    "Role_Name": "AgreementAcceptance.Read.All",
+    "Application_Identifier": "d8e4ec18-f6c0-4620-8122-c8b1f2bf400e",
+    "DelegatedWork_Identifier": "a66a5341-e66e-4897-9d52-c2df58c2bfb9"
+  },
+  {
+    "Role_Name": "Notes.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "615e26af-c38a-4150-ae3e-c3b0d4cb1d6a"
+  },
+  {
+    "Role_Name": "ShortNotes.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "328438b7-4c01-4c07-a840-e625a749bb89"
+  },
+  {
+    "Role_Name": "PrintSettings.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9ccc526a-c51c-4e5c-a1fd-74726ef50b8f"
+  },
+  {
+    "Role_Name": "ListItems.SelectedOperations.Selected",
+    "Application_Identifier": "de4e4161-a10a-4dfd-809c-e328d89aefeb",
+    "DelegatedWork_Identifier": "d6d361b3-211a-4191-9fa7-15f72de4aac4"
+  },
+  {
+    "Role_Name": "PrintJob.ReadBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "6a71a747-280f-4670-9ca0-a9cbf882b274"
+  },
+  {
+    "Role_Name": "Sites.Archive.All",
+    "Application_Identifier": "e3530185-4080-478c-a4ab-39322704df58",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Bookings.ReadWrite.All",
+    "Application_Identifier": "0c4b2d20-7919-468d-8668-c54b09d4dee8",
+    "DelegatedWork_Identifier": "948eb538-f19d-4ec5-9ccc-f059e1ea4c72"
+  },
+  {
+    "Role_Name": "TeamsActivity.Send",
+    "Application_Identifier": "a267235f-af13-44dc-8385-c1dc93023186",
+    "DelegatedWork_Identifier": "7ab1d787-bae7-4d5d-8db6-37ea32df9186"
+  },
+  {
+    "Role_Name": "Reports.Read.All",
+    "Application_Identifier": "230c1aed-a721-4c5d-9cb4-a90514e508ef",
+    "DelegatedWork_Identifier": "02e97553-ed7b-43d0-ab3c-f8bace0d040c"
+  },
+  {
+    "Role_Name": "TermStore.Read.All",
+    "Application_Identifier": "ea047cc2-df29-4f3e-83a3-205de61501ca",
+    "DelegatedWork_Identifier": "297f747b-0005-475b-8fef-c890f5152b38"
+  },
+  {
+    "Role_Name": "TeamMember.ReadWriteNonOwnerRole.All",
+    "Application_Identifier": "4437522e-9a86-4a41-a7da-e380edd4a97d",
+    "DelegatedWork_Identifier": "2104a4db-3a2f-4ea0-9dba-143d457dc666"
+  },
+  {
+    "Role_Name": "DeviceManagementConfiguration.Read.All",
+    "Application_Identifier": "dc377aa6-52d8-4e23-b271-2a7ae04cedf3",
+    "DelegatedWork_Identifier": "f1493658-876a-4c87-8fa7-edb559b3476a"
+  },
+  {
+    "Role_Name": "Calendars.ReadBasic.All",
+    "Application_Identifier": "8ba4a692-bc31-4128-9094-475872af8a53",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Printer.Create",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "90c30bed-6fd1-4279-bf39-714069619721"
+  },
+  {
+    "Role_Name": "UserAuthenticationMethod.Read.All",
+    "Application_Identifier": "38d9df27-64da-44fd-b7c5-a6fbac20248f",
+    "DelegatedWork_Identifier": "aec28ec7-4d02-4e8c-b864-50163aea77eb"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForChat.All",
+    "Application_Identifier": "25bbeaad-04be-4207-83ed-a263aae76ddf",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "OnlineMeetingAiInsight.Read.All",
+    "Application_Identifier": "c0cf7895-985f-42d4-a693-b618f36674ad",
+    "DelegatedWork_Identifier": "166741d6-eeb8-46fe-91f4-817d2af7bc88"
+  },
+  {
+    "Role_Name": "CallEvents",
+    "Application_Identifier": "f0a35f91-2aa6-4a99-9d5a-5b6bcb66204e",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.Authorization",
+    "Application_Identifier": "fb221be6-99f2-473f-bd32-01c6a0e9ca3b",
+    "DelegatedWork_Identifier": "edd3c878-b384-41fd-95ad-e7407dd775be"
+  },
+  {
+    "Role_Name": "Device.Read.All",
+    "Application_Identifier": "7438b122-aefc-4978-80ed-43db9fcc7715",
+    "DelegatedWork_Identifier": "951183d1-1a61-466f-a6d1-1fde911bfd95"
+  },
+  {
+    "Role_Name": "Analytics.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e03cf23f-8056-446a-8994-7d93dfc8b50e"
+  },
+  {
+    "Role_Name": "User.RevokeSessions.All",
+    "Application_Identifier": "77f3a031-c388-4f99-b373-dc68676a979e",
+    "DelegatedWork_Identifier": "fc30e98b-8810-4501-81f5-c20a3196387b"
+  },
+  {
+    "Role_Name": "MailboxSettings.Read",
+    "Application_Identifier": "40f97065-369a-49f4-947c-6a255697ae91",
+    "DelegatedWork_Identifier": "87f447af-9fa4-4c32-9dfa-4a57a73d18ce"
+  },
+  {
+    "Role_Name": "OnlineMeetingRecording.Read.All",
+    "Application_Identifier": "a4a08342-c95d-476b-b943-97e100569c8d",
+    "DelegatedWork_Identifier": "190c2bb6-1fdd-4fec-9aa2-7d571b5e1fe3"
+  },
+  {
+    "Role_Name": "Tasks.ReadWrite.All",
+    "Application_Identifier": "44e666d1-d276-445b-a5fc-8815eeb81d55",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduAssignments.Read.All",
+    "Application_Identifier": "4c37e1b6-35a1-43bf-926a-6f30f2cdf585",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SecurityAlert.ReadWrite.All",
+    "Application_Identifier": "ed4fca05-be46-441f-9803-1873825f8fdb",
+    "DelegatedWork_Identifier": "471f2a7f-2a42-4d45-a2bf-594d0838070d"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.DeviceConfiguration",
+    "Application_Identifier": "230fb2d5-aa21-49c1-bfa7-ae1be179d867",
+    "DelegatedWork_Identifier": "40b534c3-9552-4550-901b-23879c90bcf9"
+  },
+  {
+    "Role_Name": "Presence.ReadWrite.All",
+    "Application_Identifier": "83cded22-8297-4ff6-a7fa-e97e9545a259",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ChannelMessage.Read.All",
+    "Application_Identifier": "7b2449af-6ccd-4f4d-9f78-e550c193f0d1",
+    "DelegatedWork_Identifier": "767156cb-16ae-4d10-8f8b-41b657c8c8c8"
+  },
+  {
+    "Role_Name": "ExternalItem.ReadWrite.OwnedBy",
+    "Application_Identifier": "8116ae0f-55c2-452d-9944-d18420f5b2c8",
+    "DelegatedWork_Identifier": "4367b9d7-cee7-4995-853c-a0bdfe95c1f9"
+  },
+  {
+    "Role_Name": "CustomDetection.ReadWrite.All",
+    "Application_Identifier": "e0fd9c8d-a12e-4cc9-9827-20c8c3cd6fb8",
+    "DelegatedWork_Identifier": "c34088fb-0649-4714-af0b-bcbfec155897"
+  },
+  {
+    "Role_Name": "CustomSecAttributeProvisioning.ReadWrite.All",
+    "Application_Identifier": "1db69e9c-8d0a-498d-a5df-11fd0b68ceab",
+    "DelegatedWork_Identifier": "1140d9e4-6776-433e-a9e4-b9831adbb2e0"
+  },
+  {
+    "Role_Name": "PrivilegedEligibilitySchedule.Read.AzureADGroup",
+    "Application_Identifier": "edb419d6-7edc-42a3-9345-509bfdf5d87c",
+    "DelegatedWork_Identifier": "8f44f93d-ecef-46ae-a9bf-338508d44d6b"
+  },
+  {
+    "Role_Name": "Policy.Read.ConditionalAccess",
+    "Application_Identifier": "37730810-e9ba-4e46-b07e-8ca78d182097",
+    "DelegatedWork_Identifier": "633e0fce-8c58-4cfb-9495-12bbd5a24f7c"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForTeam.All",
+    "Application_Identifier": "b0c13be0-8e20-4bc5-8c55-963c23a39ce9",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Topic.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "79c4c76f-409a-4f98-884d-e2c09291ec26"
+  },
+  {
+    "Role_Name": "BookingsAppointment.ReadWrite.All",
+    "Application_Identifier": "9769393e-5a9f-4302-9e3d-7e018ecb64a7",
+    "DelegatedWork_Identifier": "02a5a114-36a6-46ff-a102-954d89d9ab02"
+  },
+  {
+    "Role_Name": "LearningSelfInitiatedCourse.ReadWrite.All",
+    "Application_Identifier": "7654ed61-8965-4025-846a-0856ec02b5b0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CustomSecAttributeProvisioning.Read.All",
+    "Application_Identifier": "9fd1f8bf-a443-4df6-bc2a-5d00c5ec7828",
+    "DelegatedWork_Identifier": "9ddd870d-077c-49e7-b3e3-6b3012a8a880"
+  },
+  {
+    "Role_Name": "TeamsActivity.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0e755559-83fb-4b44-91d0-4cc721b9323e"
+  },
+  {
+    "Role_Name": "RoleManagementPolicy.ReadWrite.Directory",
+    "Application_Identifier": "31e08e0a-d3f7-4ca2-ac39-7343fb83e8ad",
+    "DelegatedWork_Identifier": "1ff1be21-34eb-448c-9ac9-ce1f506b2a68"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b55df1c0-db20-435b-aef2-afe6ed487e16"
+  },
+  {
+    "Role_Name": "HealthMonitoringAlert.ReadWrite.All",
+    "Application_Identifier": "ac29eb50-f2f9-4518-a117-4bef18e84c7d",
+    "DelegatedWork_Identifier": "b7c60f27-2195-4d5f-96a7-6b98bdfd9664"
+  },
+  {
+    "Role_Name": "User.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
+  },
+  {
+    "Role_Name": "LifecycleWorkflows",
+    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
+    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
+  },
+  {
+    "Role_Name": "OrgSettings",
+    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
+    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
+  },
+  {
+    "Role_Name": "UserAuthMethod",
+    "Application_Identifier": "0400e371-7db1-4338-a269-96069eb65227",
+    "DelegatedWork_Identifier": "64930478-d0ea-4671-ad72-fe0d9821df09"
+  },
+  {
+    "Role_Name": "TrustFrameworkKeySet.Read.All",
+    "Application_Identifier": "fff194f1-7dce-4428-8301-1badb5518201",
+    "DelegatedWork_Identifier": "7ad34336-f5b1-44ce-8682-31d7dfcd9ab9"
+  },
+  {
+    "Role_Name": "PrintTaskDefinition.ReadWrite.All",
+    "Application_Identifier": "456b71a7-0ee0-4588-9842-c123fcc8f664",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.Read.AzureADGroup",
+    "Application_Identifier": "01e37dc9-c035-40bd-b438-b2879c4870a6",
+    "DelegatedWork_Identifier": "d329c81c-20ad-4772-abf9-3f6fdb7e5988"
+  },
+  {
+    "Role_Name": "ThreatSubmissionPolicy.ReadWrite.All",
+    "Application_Identifier": "926a6798-b100-4a20-a22f-a4918f13951d",
+    "DelegatedWork_Identifier": "059e5840-5353-4c68-b1da-666a033fc5e8"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.ConditionalAccess",
+    "Application_Identifier": "01c0a623-fc9b-48e9-b794-0756f8e8f067",
+    "DelegatedWork_Identifier": "ad902697-1014-4ef5-81ef-2b4301988e8c"
+  },
+  {
+    "Role_Name": "ChangeManagement.Read.All",
+    "Application_Identifier": "418dae40-2b65-4819-900c-519a04e4d278",
+    "DelegatedWork_Identifier": "4628dff5-c33e-4fde-b17a-b64e7acb1bed"
+  },
+  {
+    "Role_Name": "ServiceActivity",
+    "Application_Identifier": "4dfee10b-fa4a-41b5-b34d-ccf54cc0c394",
+    "DelegatedWork_Identifier": "404d76f0-e10e-460a-92be-ef19600c54d1"
+  },
+  {
+    "Role_Name": "PendingExternalUserProfile.Read.All",
+    "Application_Identifier": "bdfb26d9-bb36-49be-9b4c-b8cbf4b05808",
+    "DelegatedWork_Identifier": "d88fd3fb-53d3-4c1c-8c39-787fcac2ed7a"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForChat.All",
+    "Application_Identifier": "22b74aab-d9e4-46f7-9424-f24b42307227",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ChannelSettings.Read.All",
+    "Application_Identifier": "c97b873f-f59f-49aa-8a0e-52b32d762124",
+    "DelegatedWork_Identifier": "233e0cf1-dd62-48bc-b65b-b38fe87fcf8e"
+  },
+  {
+    "Role_Name": "RoleManagement.Read.All",
+    "Application_Identifier": "c7fbd983-d9aa-4fa7-84b8-17382c103bc4",
+    "DelegatedWork_Identifier": "48fec646-b2ba-4019-8681-8eb31435aded"
+  },
+  {
+    "Role_Name": "SecurityAnalyzedMessage.Read.All",
+    "Application_Identifier": "b48f7ac2-044d-4281-b02f-75db744d6f5f",
+    "DelegatedWork_Identifier": "53e6783e-b127-4a35-ab3a-6a52d80a9077"
+  },
+  {
+    "Role_Name": "TeamsActivity.Read.All",
+    "Application_Identifier": "70dec828-f620-4914-aa83-a29117306807",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Chat.Read.All",
+    "Application_Identifier": "6b7d71aa-70aa-4810-a8d9-5d9fb2830017",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamMember.Read.All",
+    "Application_Identifier": "660b7406-55f1-41ca-a0ed-0b035e182f3e",
+    "DelegatedWork_Identifier": "2497278c-d82d-46a2-b1ce-39d4cdde5570"
+  },
+  {
+    "Role_Name": "AppCertTrustConfiguration.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "af281d3a-030d-4122-886e-146fb30a0413"
+  },
+  {
+    "Role_Name": "AttackSimulation.Read.All",
+    "Application_Identifier": "93283d0a-6322-4fa8-966b-8c121624760d",
+    "DelegatedWork_Identifier": "104a7a4b-ca76-4677-b7e7-2f4bc482f381"
+  },
+  {
+    "Role_Name": "MailboxFolder.Read.All",
+    "Application_Identifier": "99280d24-a782-4793-93cc-0888549957f6",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Printer.ReadWrite.All",
+    "Application_Identifier": "f5b3f73d-6247-44df-a74c-866173fddab0",
+    "DelegatedWork_Identifier": "89f66824-725f-4b8f-928e-e1c5258dc565"
+  },
+  {
+    "Role_Name": "BrowserSiteLists.ReadWrite.All",
+    "Application_Identifier": "8349ca94-3061-44d5-9bfb-33774ea5e4f9",
+    "DelegatedWork_Identifier": "83b34c85-95bf-497b-a04e-b58eca9d49d0"
+  },
+  {
+    "Role_Name": "CustomSecAttributeAssignment.ReadWrite.All",
+    "Application_Identifier": "de89b5e4-5b8f-48eb-8925-29c2b33bd8bd",
+    "DelegatedWork_Identifier": "ca46335e-8453-47cd-a001-8459884efeae"
+  },
+  {
+    "Role_Name": "eDiscovery.ReadWrite.All",
+    "Application_Identifier": "b2620db1-3bf7-4c5b-9cb9-576d29eac736",
+    "DelegatedWork_Identifier": "acb8f680-0834-4146-b69e-4ab1b39745ad"
+  },
+  {
+    "Role_Name": "SchedulePermissions.ReadWrite.All",
+    "Application_Identifier": "7239b71d-b402-4150-b13d-78ecfe8df441",
+    "DelegatedWork_Identifier": "07919803-6073-4cd8-bc55-28077db0ee10"
+  },
+  {
+    "Role_Name": "Mail.ReadWrite.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5df07973-7d5d-46ed-9847-1271055cbd51"
+  },
+  {
+    "Role_Name": "TeamsTab.Read.All",
+    "Application_Identifier": "46890524-499a-4bb2-ad64-1476b4f3e1cf",
+    "DelegatedWork_Identifier": "59dacb05-e88d-4c13-a684-59f1afc8cc98"
+  },
+  {
+    "Role_Name": "Group.Read.All",
+    "Application_Identifier": "5b567255-7703-4780-807c-7be8301ae99b",
+    "DelegatedWork_Identifier": "5f8c59db-677d-491f-a6b8-5f174b11ec1d"
+  },
+  {
+    "Role_Name": "LearningContent.Read.All",
+    "Application_Identifier": "8740813e-d8aa-4204-860e-2a0f8f84dbc8",
+    "DelegatedWork_Identifier": "ea4c1fd9-6a9f-4432-8e5d-86e06cc0da77"
+  },
+  {
+    "Role_Name": "Application.Read.All",
+    "Application_Identifier": "9a5d68dd-52b0-4cc2-bd40-abcf44ac3a30",
+    "DelegatedWork_Identifier": "c79f8feb-a9db-4090-85f9-90d820caa0eb"
+  },
+  {
+    "Role_Name": "PrintJob.ReadWriteBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "6f2d22f2-1cb6-412c-a17c-3336817eaa82"
+  },
+  {
+    "Role_Name": "DeviceManagementApps.Read.All",
+    "Application_Identifier": "7a6ee1e7-141e-4cec-ae74-d9db155731ff",
+    "DelegatedWork_Identifier": "4edf5f54-4666-44af-9de9-0144fb4b6e8c"
+  },
+  {
+    "Role_Name": "MailboxFolder.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "52dc2051-4958-4636-8f2a-281d39c6981c"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c67b2d7e-6b80-4218-938a-05e73058e42d"
+  },
+  {
+    "Role_Name": "ApprovalSolutionResponse.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "89d944f2-2011-44ad-830c-aa9bf5ef2319"
+  },
+  {
+    "Role_Name": "PeopleSettings.ReadWrite.All",
+    "Application_Identifier": "b6890674-9dd5-4e42-bb15-5af07f541ae1",
+    "DelegatedWork_Identifier": "e67e6727-c080-415e-b521-e3f35d5248e9"
+  },
+  {
+    "Role_Name": "TeamSettings.Read.All",
+    "Application_Identifier": "242607bd-1d2c-432c-82eb-bdb27baa23ab",
+    "DelegatedWork_Identifier": "48638b3c-ad68-4383-8ac4-e6880ee6ca57"
+  },
+  {
+    "Role_Name": "Member.Read.Hidden",
+    "Application_Identifier": "658aa5d8-239f-45c4-aa12-864f4fc7e490",
+    "DelegatedWork_Identifier": "f6a3db3e-f7e8-4ed2-a414-557c8c9830be"
+  },
+  {
+    "Role_Name": "DeviceTemplate.ReadWrite.All",
+    "Application_Identifier": "9fadb66e-6421-4744-aede-4ab6fb98a884",
+    "DelegatedWork_Identifier": "2d372e98-f1ae-406c-a157-2ea83f6f5e4a"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForUser.All",
+    "Application_Identifier": "9ce09611-f4f7-4abd-a629-a05450422a97",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForTeam.All",
+    "Application_Identifier": "ad4600ae-d900-42cb-a9a2-2415d05593d0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamworkAppSettings.ReadWrite.All",
+    "Application_Identifier": "ab5b445e-8f10-45f4-9c79-dd3f8062cc4e",
+    "DelegatedWork_Identifier": "87c556f0-2bd9-4eed-bd74-5dd8af6eaf7e"
+  },
+  {
+    "Role_Name": "UserShiftPreferences.ReadWrite.All",
+    "Application_Identifier": "d1eec298-80f3-49b0-9efb-d90e224798ac",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "GroupMember.Read.All",
+    "Application_Identifier": "98830695-27a2-44f7-8c18-0c3ebc9698f6",
+    "DelegatedWork_Identifier": "bc024368-1153-4739-b217-4326f2e966d0"
+  },
+  {
+    "Role_Name": "Goals",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2edeb9fd-4228-480c-a26d-2ed52011cf3d"
+  },
+  {
+    "Role_Name": "ProfilePhoto.ReadWrite.All",
+    "Application_Identifier": "27baa7f6-5dfb-4ba8-b1d3-1e812c143013",
+    "DelegatedWork_Identifier": "f5b24df7-511e-48bb-ae88-643f023b55e1"
+  },
+  {
+    "Role_Name": "DeviceManagementManagedDevices.Read.All",
+    "Application_Identifier": "2f51be20-0bb4-4fed-bf7b-db946066c75e",
+    "DelegatedWork_Identifier": "314874da-47d6-4978-88dc-cf0d37f0bb82"
+  },
+  {
+    "Role_Name": "Mail.Read",
+    "Application_Identifier": "810c84a8-4a9e-49e6-bf7d-12d183f40d01",
+    "DelegatedWork_Identifier": "570282fd-fa5c-430d-a7fd-fc8dc98a9dca"
+  },
+  {
+    "Role_Name": "User.ReadBasic.All",
+    "Application_Identifier": "97235f07-e226-4f63-ace3-39588e11d3a1",
+    "DelegatedWork_Identifier": "b340eb25-3456-403f-be2f-af7a0d370277"
+  },
+  {
+    "Role_Name": "DeviceTemplate.Create",
+    "Application_Identifier": "abf6441f-0772-4932-96e7-0191478dd73a",
+    "DelegatedWork_Identifier": "0b1717ff-3e42-4a73-8c29-e6b2e1093960"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "946349d5-2a9d-4535-abc0-7beeacaedd1d"
+  },
+  {
+    "Role_Name": "UserTeamwork.Read.All",
+    "Application_Identifier": "fbcd7ef1-df0d-4e05-bb28-93424a89c6df",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForChat.All",
+    "Application_Identifier": "9f62e4a2-a2d6-4350-b28b-d244728c4f86",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamworkUserInteraction.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b4d26916-07e0-4daf-9096-9f6d9174aa96"
+  },
+  {
+    "Role_Name": "Mail.Send",
+    "Application_Identifier": "b633e1c5-b582-4048-a93e-9f11b44c7e96",
+    "DelegatedWork_Identifier": "e383f46e-2787-4529-855e-0e479a3ffac0"
+  },
+  {
+    "Role_Name": "Mail.ReadBasic.All",
+    "Application_Identifier": "693c5e45-0940-467d-9b8a-1022fb9d42ef",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "OnlineMeetingTranscript.Read.All",
+    "Application_Identifier": "a4a80d8d-d283-4bd8-8504-555ec3870630",
+    "DelegatedWork_Identifier": "30b87d18-ebb1-45db-97f8-82ccb1f0190c"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForChat.All",
+    "Application_Identifier": "ba1ba90b-2d8f-487e-9f16-80728d85bb5c",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadWriteBasic.All",
+    "Application_Identifier": "f431cc63-a2de-48c4-8054-a34bc093af84",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DeviceManagementScripts.Read.All",
+    "Application_Identifier": "c7a5be92-2b3d-4540-8a67-c96dcaae8b43",
+    "DelegatedWork_Identifier": "d32381d8-ee89-4220-9c83-b672aa68d404"
+  },
+  {
+    "Role_Name": "WorkforceIntegration.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f1ccd5a7-6383-466a-8db8-1a656f7d06fa"
+  },
+  {
+    "Role_Name": "TeamworkTag.Read.All",
+    "Application_Identifier": "b74fd6c4-4bde-488e-9695-eeb100e4907f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Bookings.Manage.All",
+    "Application_Identifier": "6b22000a-1228-42ec-88db-b8c00399aecb",
+    "DelegatedWork_Identifier": "7f36b48e-542f-4d3b-9bcb-8406f0ab9fdb"
+  },
+  {
+    "Role_Name": "BusinessScenarioData.Read.OwnedBy",
+    "Application_Identifier": "6c0257fd-cffe-415b-8239-2d0d70fdaa9c",
+    "DelegatedWork_Identifier": "25b265c4-5d34-4e44-952d-b567f6d3b96d"
+  },
+  {
+    "Role_Name": "Chat.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f501c180-9344-439a-bca0-6cbf209fd270"
+  },
+  {
+    "Role_Name": "MailboxItem.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "82305458-296d-4edd-8b0b-74dd74c34526"
+  },
+  {
+    "Role_Name": "OnlineMeetingArtifact.Read.All",
+    "Application_Identifier": "df01ed3b-eb61-4eca-9965-6b3d789751b2",
+    "DelegatedWork_Identifier": "110e5abb-a10c-4b59-8b55-9b4daa4ef743"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "eafad40c-bf7a-415a-b7f8-acdf5706b58f"
+  },
+  {
+    "Role_Name": "BusinessScenarioConfig.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d16480b2-e469-4118-846b-d3d177327bee"
+  },
+  {
+    "Role_Name": "ChannelSettings.ReadWrite.All",
+    "Application_Identifier": "243cded2-bd16-4fd6-a953-ff8177894c3d",
+    "DelegatedWork_Identifier": "d649fb7c-72b4-4eec-b2b4-b15acf79e378"
+  },
+  {
+    "Role_Name": "OnlineMeetings.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "a65f2972-a4f8-4f5e-afd7-69ccb046d5dc"
+  },
+  {
+    "Role_Name": "BrowserSiteLists.Read.All",
+    "Application_Identifier": "c5ee1f21-fc7f-4937-9af0-c91648ff9597",
+    "DelegatedWork_Identifier": "fb9be2b7-a7fc-4182-aec1-eda4597c43d5"
+  },
+  {
+    "Role_Name": "ConsentRequest.ReadWrite.All",
+    "Application_Identifier": "9f1b81a7-0223-4428-bfa4-0bcb5535f27d",
+    "DelegatedWork_Identifier": "497d9dfa-3bd1-481a-baab-90895e54568c"
+  },
+  {
+    "Role_Name": "ChannelMessage.Send",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ebf0f66e-9fb1-49e4-a278-222f76911cf4"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "830c2bd9-c335-4caf-bf83-c07fa8a23ef1"
+  },
+  {
+    "Role_Name": "PrintJob.Manage.All",
+    "Application_Identifier": "58a52f47-9e36-4b17-9ebe-ce4ef7f3e6c8",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f266662f-120a-4314-b26a-99b08617c7ef"
+  },
+  {
+    "Role_Name": "ThreatHunting.Read.All",
+    "Application_Identifier": "dd98c7f5-2d42-42d3-a0e4-633161547251",
+    "DelegatedWork_Identifier": "b152eca8-ea73-4a48-8c98-1a6742673d99"
+  },
+  {
+    "Role_Name": "UserAuthenticationMethod.ReadWrite.All",
+    "Application_Identifier": "50483e42-d915-4231-9639-7fdb7fd190e5",
+    "DelegatedWork_Identifier": "b7887744-6746-4312-813d-72daeaee7e2d"
+  },
+  {
+    "Role_Name": "Chat.ReadWrite.WhereInstalled",
+    "Application_Identifier": "ad73ce80-f3cd-40ce-b325-df12c33df713",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EduRoster.ReadBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5d186531-d1bf-4f07-8cea-7c42119e1bd9"
+  },
+  {
+    "Role_Name": "ThreatIntelligence.Read.All",
+    "Application_Identifier": "e0b77adb-e790-44a3-b0a0-257d06303687",
+    "DelegatedWork_Identifier": "f266d9c0-ccb9-4fb8-a228-01ac0d8d6627"
+  },
+  {
+    "Role_Name": "Family.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "3a1e4806-a744-4c70-80fc-223bf8582c46"
+  },
+  {
+    "Role_Name": "DeviceManagementManagedDevices.PrivilegedOperations.All",
+    "Application_Identifier": "5b07b0dd-2377-4e44-a38d-703f09a0dc3c",
+    "DelegatedWork_Identifier": "3404d2bf-2b13-457e-a330-c24615765193"
+  },
+  {
+    "Role_Name": "ChatMember.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "dea13482-7ea6-488f-8b98-eb5bbecf033d"
+  },
+  {
+    "Role_Name": "SecurityAlert.Read.All",
+    "Application_Identifier": "472e4a4d-bb4a-4026-98d1-0b0d74cb74a5",
+    "DelegatedWork_Identifier": "bc257fb8-46b4-4b15-8713-01e91bfbe4ea"
+  },
+  {
+    "Role_Name": "LearningAssignedCourse.ReadWrite.All",
+    "Application_Identifier": "236c1cbd-1187-427f-b0f5-b1852454973b",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ServicePrincipalEndpoint.ReadWrite.All",
+    "Application_Identifier": "89c8469c-83ad-45f7-8ff2-6e3d4285709e",
+    "DelegatedWork_Identifier": "7297d82c-9546-4aed-91df-3d4f0a9b3ff0"
+  },
+  {
+    "Role_Name": "AiEnterpriseInteraction.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "859cceb9-2ec2-4e48-bcd7-b8490b5248a5"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2e25a044-2580-450d-8859-42eeb6e996c0"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "bf3fbf03-f35f-4e93-963e-47e4d874c37a"
+  },
+  {
+    "Role_Name": "FileStorageContainer.Selected",
+    "Application_Identifier": "40dc41bc-0f7e-42ff-89bd-d9516947e474",
+    "DelegatedWork_Identifier": "085ca537-6565-41c2-aca7-db852babc212"
+  },
+  {
+    "Role_Name": "Device.ReadWrite.All",
+    "Application_Identifier": "1138cb37-bd11-4084-a2b7-9f71582aeddb",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CrossTenantUserProfileSharing.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "eed0129d-dc60-4f30-8641-daf337a39ffd"
+  },
+  {
+    "Role_Name": "Tasks.ReadWrite.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c5ddf11b-c114-4886-8558-8a4e557cd52b"
+  },
+  {
+    "Role_Name": "LearningProvider.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "dd8ce36f-9245-45ea-a99e-8ac398c22861"
+  },
+  {
+    "Role_Name": "EduAdministration.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "63589852-04e3-46b4-bae9-15d5b1050748"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadWriteBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2ef770a1-622a-47c4-93ee-28d6adbed3a0"
+  },
+  {
+    "Role_Name": "RoleManagementPolicy.Read.Directory",
+    "Application_Identifier": "fdc4c997-9942-4479-bfcb-75a36d1138df",
+    "DelegatedWork_Identifier": "3de2cdbe-0ff5-47d5-bdee-7f45b4749ead"
+  },
+  {
+    "Role_Name": "MultiTenantOrganization.Read.All",
+    "Application_Identifier": "4f994bc0-31bb-44bb-b480-7a7c1be8c02e",
+    "DelegatedWork_Identifier": "526aa72a-5878-49fe-bf4e-357973af9b06"
+  },
+  {
+    "Role_Name": "ChannelMessage.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5922d31f-46c8-4404-9eaf-2117e390a8a4"
+  },
+  {
+    "Role_Name": "Policy.Read.IdentityProtection",
+    "Application_Identifier": "b21b72f6-4e6a-4533-9112-47eea9f97b28",
+    "DelegatedWork_Identifier": "d146432f-b803-4ed4-8d42-ba74193a6ede"
+  },
+  {
+    "Role_Name": "PrintJob.Read.All",
+    "Application_Identifier": "ac6f956c-edea-44e4-bd06-64b1b4b9aec9",
+    "DelegatedWork_Identifier": "afdd6933-a0d8-40f7-bd1a-b5d778e8624b"
+  },
+  {
+    "Role_Name": "IdentityUserFlow.Read.All",
+    "Application_Identifier": "1b0c317f-dd31-4305-9932-259a8b6e8099",
+    "DelegatedWork_Identifier": "2903d63d-4611-4d43-99ce-a33f3f52e343"
+  },
+  {
+    "Role_Name": "SecurityEvents.Read.All",
+    "Application_Identifier": "bf394140-e372-4bf9-a898-299cfc7564e5",
+    "DelegatedWork_Identifier": "64733abd-851e-478a-bffb-e47a14b18235"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c37c9b61-7762-4bff-a156-afc0005847a0"
+  },
+  {
+    "Role_Name": "RoleManagement.ReadWrite.CloudPC",
+    "Application_Identifier": "274d0592-d1b6-44bd-af1d-26d259bcb43a",
+    "DelegatedWork_Identifier": "501d06f8-07b8-4f18-b5c6-c191a4af7a82"
+  },
+  {
+    "Role_Name": "ChatMember.Read.All",
+    "Application_Identifier": "a3410be2-8e48-4f32-8454-c29a7465209d",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Mail.ReadBasic",
+    "Application_Identifier": "6be147d2-ea4f-4b5a-a3fa-3eab6f3c140a",
+    "DelegatedWork_Identifier": "a4b8392a-d8d1-4954-a029-8e668a39a170"
+  },
+  {
+    "Role_Name": "TermStore.ReadWrite.All",
+    "Application_Identifier": "f12eb8d6-28e3-46e6-b2c0-b7e4dc69fc95",
+    "DelegatedWork_Identifier": "6c37c71d-f50f-4bff-8fd3-8a41da390140"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c0b0103b-c053-4b2e-9973-9f3a544ec9b8"
+  },
+  {
+    "Role_Name": "NetworkAccessPolicy.ReadWrite.All",
+    "Application_Identifier": "f0c341be-8348-4989-8e43-660324294538",
+    "DelegatedWork_Identifier": "b1fbad0f-ef6e-42ed-8676-bca7fa3e7291"
+  },
+  {
+    "Role_Name": "UserActivity.ReadWrite.CreatedByApp",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "47607519-5fb1-47d9-99c7-da4b48f369b1"
+  },
+  {
+    "Role_Name": "CustomSecAttributeDefinition.ReadWrite.All",
+    "Application_Identifier": "12338004-21f4-4896-bf5e-b75dfaf1016d",
+    "DelegatedWork_Identifier": "8b0160d4-5743-482b-bb27-efc0a485ca4a"
+  },
+  {
+    "Role_Name": "BusinessScenarioConfig.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "755e785b-b658-446f-bb22-5a46abd029ea"
+  },
+  {
+    "Role_Name": "EduAdministration.ReadWrite.All",
+    "Application_Identifier": "9bc431c3-b8bc-4a8d-a219-40f10f92eff6",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "NetworkAccessPolicy.Read.All",
+    "Application_Identifier": "8a3d36bf-cb46-4bcc-bec9-8d92829dab84",
+    "DelegatedWork_Identifier": "ba22922b-752c-446f-89d7-a2d92398fceb"
+  },
+  {
+    "Role_Name": "PrintJob.ReadWrite.All",
+    "Application_Identifier": "5114b07b-2898-4de7-a541-53b0004e2e13",
+    "DelegatedWork_Identifier": "036b9544-e8c5-46ef-900a-0646cc42b271"
+  },
+  {
+    "Role_Name": "Chat.ReadBasic.WhereInstalled",
+    "Application_Identifier": "818ba5bd-5b3e-4fe0-bbe6-aa4686669073",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DeviceManagementScripts.ReadWrite.All",
+    "Application_Identifier": "9255e99d-faf5-445e-bbf7-cb71482737c4",
+    "DelegatedWork_Identifier": "8b9d79d0-ad75-4566-8619-f7500ecfcebe"
+  },
+  {
+    "Role_Name": "CrossTenantUserProfileSharing.ReadWrite.All",
+    "Application_Identifier": "306785c5-c09b-4ba0-a4ee-023f3da165cb",
+    "DelegatedWork_Identifier": "64dfa325-cbf8-48e3-938d-51224a0cac01"
+  },
+  {
+    "Role_Name": "VirtualEvent.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d38d189c-e29b-4344-8b3b-829bfa81380b"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesHealth.Read.All",
+    "Application_Identifier": "f8dcd971-5d83-4e1e-aa95-ef44611ad351",
+    "DelegatedWork_Identifier": "a0d0da43-a6df-4416-b63d-99c79991aae8"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForChat.All",
+    "Application_Identifier": "2ff643d8-43e4-4a9b-88c1-86cb4a4b4c2f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CallDelegation.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "599abf67-f72b-4b5f-98a3-cb38fe646118"
+  },
+  {
+    "Role_Name": "BusinessScenarioData.ReadWrite.OwnedBy",
+    "Application_Identifier": "f2d21f22-5d80-499e-91cc-0a8a4ce16f54",
+    "DelegatedWork_Identifier": "19932d57-2952-4c60-8634-3655c79fc527"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForUser.All",
+    "Application_Identifier": "e97a9235-5b3c-43c4-b37d-6786a173fae4",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Channel.ReadBasic.All",
+    "Application_Identifier": "59a6b24b-4225-4393-8165-ebaec5f55d7a",
+    "DelegatedWork_Identifier": "9d8982ae-4365-4f57-95e9-d6032a4c0b87"
+  },
+  {
+    "Role_Name": "RoleManagement.Read.Directory",
+    "Application_Identifier": "483bed4a-2ad3-4361-a73b-c83ccdbdc53c",
+    "DelegatedWork_Identifier": "741c54c3-0c1e-44a1-818b-3f97ab4e8c83"
+  },
+  {
+    "Role_Name": "ChatMember.Read.WhereInstalled",
+    "Application_Identifier": "93e7c9e4-54c5-4a41-b796-f2a5adaacda7",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "HealthMonitoringAlertConfig.Read.All",
+    "Application_Identifier": "bb424d73-e898-4c97-9d42-688c32810003",
+    "DelegatedWork_Identifier": "fb873030-8626-47e6-96ff-8a5bff3b725f"
+  },
+  {
+    "Role_Name": "EduAssignments.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "091460c9-9c4a-49b2-81ef-1f3d852acce2"
+  },
+  {
+    "Role_Name": "NetworkAccess",
+    "Application_Identifier": "40049381-3cc1-42af-94ec-5ce755db4b0d",
+    "DelegatedWork_Identifier": "b0c61509-cfc3-42bd-9bd4-66d81785fee4"
+  },
+  {
+    "Role_Name": "Synchronization.Read.All",
+    "Application_Identifier": "5ba43d2f-fa88-4db2-bd1c-a67c5f0fb1ce",
+    "DelegatedWork_Identifier": "7aa02aeb-824f-4fbe-a3f7-611f751f5b55"
+  },
+  {
+    "Role_Name": "RoleAssignmentSchedule.Read.Directory",
+    "Application_Identifier": "d5fe8ce8-684c-4c83-a52c-46e882ce4be1",
+    "DelegatedWork_Identifier": "344a729c-0285-42c6-9014-f12b9b8d6129"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam.All",
+    "Application_Identifier": "1e4be56c-312e-42b8-a2c9-009600d732c0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "OnPremisesPublishingProfiles.ReadWrite.All",
+    "Application_Identifier": "0b57845e-aa49-4e6f-8109-ce654fffa618",
+    "DelegatedWork_Identifier": "8c4d5184-71c2-4bf8-bb9d-bc3378c9ad42"
+  },
+  {
+    "Role_Name": "RoleManagementAlert.ReadWrite.Directory",
+    "Application_Identifier": "11059518-d6a6-4851-98ed-509268489c4a",
+    "DelegatedWork_Identifier": "435644c6-a5b1-40bf-8f52-fe8e5b53e19c"
+  },
+  {
+    "Role_Name": "Subscription.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5f88184c-80bb-4d52-9ff2-757288b2e9b7"
+  },
+  {
+    "Role_Name": "UnifiedGroupMember.Read.AsGuest",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "73e75199-7c3e-41bb-9357-167164dbb415"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForUser.All",
+    "Application_Identifier": "acfca4d5-f49f-40ed-9648-84068b474c73",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "fe2e4e1d-101f-4fb2-9cb1-9d6659db45d4"
+  },
+  {
+    "Role_Name": "CustomSecAttributeDefinition.Read.All",
+    "Application_Identifier": "b185aa14-d8d2-42c1-a685-0f5596613624",
+    "DelegatedWork_Identifier": "ce026878-a0ff-4745-a728-d4fedd086c07"
+  },
+  {
+    "Role_Name": "RoleEligibilitySchedule.Remove.Directory",
+    "Application_Identifier": "79c7e69c-0d9f-4eff-97a8-49170a5a08ba",
+    "DelegatedWork_Identifier": "58ac4fa2-b484-4d6e-ba97-beee2a574220"
+  },
+  {
+    "Role_Name": "Team.Create",
+    "Application_Identifier": "23fc2474-f741-46ce-8465-674744c5c361",
+    "DelegatedWork_Identifier": "7825d5d6-6049-4ce7-bdf6-3b8d53f4bcd0"
+  },
+  {
+    "Role_Name": "EduRoster.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "359e19a6-e3fa-4d7f-bcab-d28ec592b51e"
+  },
+  {
+    "Role_Name": "VirtualAppointment.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "27470298-d3b8-4b9c-aad4-6334312a3eac"
+  },
+  {
+    "Role_Name": "RoleManagementPolicy.ReadWrite.AzureADGroup",
+    "Application_Identifier": "b38dcc4d-a239-4ed6-aa84-6c65b284f97c",
+    "DelegatedWork_Identifier": "0da165c7-3f15-4236-b733-c0b0f6abe41d"
+  },
+  {
+    "Role_Name": "PrivilegedAssignmentSchedule.Remove.AzureADGroup",
+    "Application_Identifier": "55d1104b-3821-413d-b3ca-e2393d333cd3",
+    "DelegatedWork_Identifier": "ca5fe595-68ff-4dfd-907d-4509501a0e49"
+  },
+  {
+    "Role_Name": "MultiTenantOrganization.ReadBasic.All",
+    "Application_Identifier": "f9c2b2a7-3895-4b2e-80f6-c924b456e50b",
+    "DelegatedWork_Identifier": "225db56b-15b2-4daa-acb3-0eec2bbe4849"
+  },
+  {
+    "Role_Name": "SpiffeTrustDomain.ReadWrite.All",
+    "Application_Identifier": "17b78cfd-eeff-447d-8bab-2795af00055a",
+    "DelegatedWork_Identifier": "8ba47079-8c47-4bfe-b2ce-13f28ef37247"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c395395c-ff9a-4dba-bc1f-8372ba9dca84"
+  },
+  {
+    "Role_Name": "Tasks.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2219042f-cab5-40cc-b0d2-16b1540b4c5f"
+  },
+  {
+    "Role_Name": "PrinterShare.ReadBasic.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5fa075e9-b951-4165-947b-c63396ff0a37"
+  },
+  {
+    "Role_Name": "LearningProvider.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "40c2eb57-abaf-49f5-9331-e90fd01f7130"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2f233e90-164b-4501-8bce-31af2559a2d3"
+  },
+  {
+    "Role_Name": "IdentityRiskyUser.ReadWrite.All",
+    "Application_Identifier": "656f6061-f9fe-4807-9708-6a2e0934df76",
+    "DelegatedWork_Identifier": "e0a7cdbb-08b0-4697-8264-0069786e9674"
+  },
+  {
+    "Role_Name": "CloudPC.ReadWrite.All",
+    "Application_Identifier": "3b4349e1-8cf5-45a3-95b7-69d1751d3e6a",
+    "DelegatedWork_Identifier": "9d77138f-f0e2-47ba-ab33-cd246c8b79d1"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2da62c49-dfbd-40df-ba16-fef3529d391c"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.CrossTenantAccess",
+    "Application_Identifier": "338163d7-f101-4c92-94ba-ca46fe52447c",
+    "DelegatedWork_Identifier": "014b43d0-6ed4-4fc6-84dc-4b6f7bae7d85"
+  },
+  {
+    "Role_Name": "ShortNotes.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "50f66e47-eb56-45b7-aaa2-75057d9afe08"
+  },
+  {
+    "Role_Name": "CustomAuthenticationExtension.Receive.Payload",
+    "Application_Identifier": "214e810f-fda8-4fd7-a475-29461495eb00",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.Read.All",
+    "Application_Identifier": "0fdf35a5-82f8-41ff-9ded-0b761cc73512",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CloudApp",
+    "Application_Identifier": "64a59178-dad3-4673-89db-84fdcd622fec",
+    "DelegatedWork_Identifier": "ad46d60e-1027-4b75-af88-7c14ccf43a19"
+  },
+  {
+    "Role_Name": "Mail.ReadWrite",
+    "Application_Identifier": "e2a3a72e-5f79-4c64-b1b1-878b674786c9",
+    "DelegatedWork_Identifier": "024d486e-b451-40bb-833d-3e66d98c5c73"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForTeam.All",
+    "Application_Identifier": "93c6a289-70fd-489e-a053-6cf8f7d772f6",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "IdentityUserFlow.ReadWrite.All",
+    "Application_Identifier": "65319a09-a2be-469d-8782-f6b07debf789",
+    "DelegatedWork_Identifier": "281892cc-4dbf-4e3a-b6cc-b21029bb4e82"
+  },
+  {
+    "Role_Name": "RoleManagement.Read.Exchange",
+    "Application_Identifier": "c769435f-f061-4d0b-8ff1-3d39870e5f85",
+    "DelegatedWork_Identifier": "3bc15058-7858-4141-b24f-ae43b4e80b52"
+  },
+  {
+    "Role_Name": "SecurityIncident.Read.All",
+    "Application_Identifier": "45cc0394-e837-488b-a098-1918f48d186c",
+    "DelegatedWork_Identifier": "b9abcc4f-94fc-4457-9141-d20ce80ec952"
+  },
+  {
+    "Role_Name": "Calendars.ReadBasic",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "662d75ba-a364-42ad-adee-f5f880ea4878"
+  },
+  {
+    "Role_Name": "PublicKeyInfrastructure.ReadWrite.All",
+    "Application_Identifier": "a2b63618-5350-462d-b1b3-ba6eb3684e26",
+    "DelegatedWork_Identifier": "3591b7f3-dba8-4bad-b667-7a64bd4f2b83"
+  },
+  {
+    "Role_Name": "ConsentRequest.ReadApprove.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e694a3a1-7878-46d8-8c29-3d195f6589f4"
+  },
+  {
+    "Role_Name": "Mail.Send.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "a367ab51-6b49-43bf-a716-a1fb06d2a174"
+  },
+  {
+    "Role_Name": "Directory.AccessAsUser.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0e263e50-5827-48a4-b97c-d940288653c7"
+  },
+  {
+    "Role_Name": "Calendars.Read",
+    "Application_Identifier": "798ee544-9d2d-430c-a058-570e29e34338",
+    "DelegatedWork_Identifier": "465a38f9-76ea-45b9-9f34-9e8b0d4b0b42"
+  },
+  {
+    "Role_Name": "Bookings.Read.All",
+    "Application_Identifier": "6e98f277-b046-4193-a4f2-6bf6a78cd491",
+    "DelegatedWork_Identifier": "33b1df99-4b29-4548-9339-7a7b83eaeebc"
+  },
+  {
+    "Role_Name": "DeviceManagementRBAC.Read.All",
+    "Application_Identifier": "58ca0d9a-1575-47e1-a3cb-007ef2e4583b",
+    "DelegatedWork_Identifier": "49f0cc30-024c-4dfd-ab3e-82e137ee5431"
+  },
+  {
+    "Role_Name": "ProgramControl.Read.All",
+    "Application_Identifier": "eedb7fdd-7539-4345-a38b-4839e4a84cbd",
+    "DelegatedWork_Identifier": "c492a2e1-2f8f-4caa-b076-99bbf6e40fe4"
+  },
+  {
+    "Role_Name": "Policy.Read.PermissionGrant",
+    "Application_Identifier": "9e640839-a198-48fb-8b9a-013fd6f6cbcd",
+    "DelegatedWork_Identifier": "414de6ea-2d92-462f-b120-6e2a809a6d01"
+  },
+  {
+    "Role_Name": "Acronym.Read.All",
+    "Application_Identifier": "8c0aed2c-0c61-433d-b63c-6370ddc73248",
+    "DelegatedWork_Identifier": "9084c10f-a2d6-4713-8732-348def50fe02"
+  },
+  {
+    "Role_Name": "PrintJob.Create",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "21f0d9c0-9f13-48b3-94e0-b6b231c7d320"
+  },
+  {
+    "Role_Name": "InformationProtectionContent.Write.All",
+    "Application_Identifier": "287bd98c-e865-4e8c-bade-1a85523195b9",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EntitlementManagement.Read.All",
+    "Application_Identifier": "c74fd47d-ed3c-45c3-9a9e-b8676de685d2",
+    "DelegatedWork_Identifier": "5449aa12-1393-4ea2-a7c7-d0e06c1a56b2"
+  },
+  {
+    "Role_Name": "DeviceLocalCredential.Read.All",
+    "Application_Identifier": "884b599e-4d48-43a5-ba94-15c414d00588",
+    "DelegatedWork_Identifier": "280b3b69-0437-44b1-bc20-3b2fca1ee3e9"
+  },
+  {
+    "Role_Name": "RoleEligibilitySchedule.Read.Directory",
+    "Application_Identifier": "ff278e11-4a33-4d0c-83d2-d01dc58929a5",
+    "DelegatedWork_Identifier": "eb0788c2-6d4e-4658-8c9e-c0fb8053f03d"
+  },
+  {
+    "Role_Name": "RoleManagement.ReadWrite.Exchange",
+    "Application_Identifier": "025d3225-3f02-4882-b4c0-cd5b541a4e80",
+    "DelegatedWork_Identifier": "c1499fe0-52b1-4b22-bed2-7a244e0e879f"
+  },
+  {
+    "Role_Name": "CustomTags.Read.All",
+    "Application_Identifier": "ab8a5872-7c88-47a6-8141-7becce939190",
+    "DelegatedWork_Identifier": "de6ea87d-10bd-467c-8682-d525a0c61b89"
+  },
+  {
+    "Role_Name": "AgreementAcceptance.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0b7643bb-5336-476f-80b5-18fbfbc91806"
+  },
+  {
+    "Role_Name": "TeamsResourceAccount.Read.All",
+    "Application_Identifier": "b55aa226-33a1-4396-bcf4-edce5e7a31c1",
+    "DelegatedWork_Identifier": "ea2cbd09-253c-4f69-a0e6-07383c5f07cc"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForUser.All",
+    "Application_Identifier": "3c42dec6-49e8-4a0a-b469-36cff0d9da93",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "OnPremDirectorySynchronization.Read.All",
+    "Application_Identifier": "bb70e231-92dc-4729-aff5-697b3f04be95",
+    "DelegatedWork_Identifier": "f6609722-4100-44eb-b747-e6ca0536989d"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesSensors.Read.All",
+    "Application_Identifier": "5f0ffea2-f474-4cf2-9834-61cda2bcea5c",
+    "DelegatedWork_Identifier": "2c221239-7c5c-4b30-9355-d84663bfcd96"
+  },
+  {
+    "Role_Name": "EngagementRole.Read.All",
+    "Application_Identifier": "30614864-4114-45ef-bdd9-0dd7894a1cc4",
+    "DelegatedWork_Identifier": "3cad91a5-8413-4c4a-acfe-dfeb83d1366d"
+  },
+  {
+    "Role_Name": "ManagedTenants.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "dc34164e-6c4a-41a0-be89-3ae2fbad7cd3"
+  },
+  {
+    "Role_Name": "CopilotSettings",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4704e5b2-0ada-4aa0-b18c-00ad7525bc06"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.MobilityManagement",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "a8ead177-1889-4546-9387-f25e658e2a79"
+  },
+  {
+    "Role_Name": "EduAdministration.Read.All",
+    "Application_Identifier": "7c9db06a-ec2d-4e7b-a592-5a1e30992566",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWrite.All",
+    "Application_Identifier": "a96d855f-016b-47d7-b51c-1218a98d791c",
+    "DelegatedWork_Identifier": "b98bfd41-87c6-45cc-b104-e2de4f0dafb9"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.TrustFramework",
+    "Application_Identifier": "79a677f7-b79d-40d0-a36a-3e6f8688dd7a",
+    "DelegatedWork_Identifier": "cefba324-1a70-4a6e-9c1d-fd670b7ae392"
+  },
+  {
+    "Role_Name": "Application.ReadWrite.All",
+    "Application_Identifier": "1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9",
+    "DelegatedWork_Identifier": "bdfbf15f-ee85-4955-8675-146e8e5296b5"
+  },
+  {
+    "Role_Name": "ConsentRequest.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5942b2f6-5a7b-40af-aa37-4b6ea5447506"
+  },
+  {
+    "Role_Name": "ChatMember.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c5a9e2b1-faf6-41d4-8875-d381aa549b24"
+  },
+  {
+    "Role_Name": "IdentityProvider.Read.All",
+    "Application_Identifier": "e321f0bb-e7f7-481e-bb28-e3b0b32d4bd0",
+    "DelegatedWork_Identifier": "43781733-b5a7-4d1b-98f4-e8edff23e1a9"
+  },
+  {
+    "Role_Name": "Policy.Read.All",
+    "Application_Identifier": "246dd0d5-5bd0-4def-940b-0421030a5b68",
+    "DelegatedWork_Identifier": "572fea84-0151-49b2-9301-11cb16974376"
+  },
+  {
+    "Role_Name": "QnA.Read.All",
+    "Application_Identifier": "ee49e170-1dd1-4030-b44c-61ad6e98f743",
+    "DelegatedWork_Identifier": "f73fa04f-b9a5-4df9-8843-993ce928925e"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.FedTokenValidation",
+    "Application_Identifier": "90bbca0b-227c-4cdc-8083-1c6cfb95bac6",
+    "DelegatedWork_Identifier": "be1be369-4540-4ac9-8928-79de99f70d8f"
+  },
+  {
+    "Role_Name": "LifecycleWorkflows.ReadWrite.All",
+    "Application_Identifier": "5c505cf4-8424-4b8e-aa14-ee06e3bb23e3",
+    "DelegatedWork_Identifier": "84b9d731-7db8-4454-8c90-fd9e95350179"
+  },
+  {
+    "Role_Name": "Place.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4c06a06a-098a-4063-868e-5dfee3827264"
+  },
+  {
+    "Role_Name": "PlaceDevice.Read.All",
+    "Application_Identifier": "8b724a84-ceac-4fd9-897e-e31ba8f2d7a3",
+    "DelegatedWork_Identifier": "4c7f93d2-6b0b-4e05-91aa-87842f0a2142"
+  },
+  {
+    "Role_Name": "MailboxFolder.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "077fde41-7e0b-4c5b-bcd1-e9d743a30c80"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "207e0cb1-3ce7-4922-b991-5a760c346ebc"
+  },
+  {
+    "Role_Name": "CallDelegation.Read.All",
+    "Application_Identifier": "5aa33e77-b893-495e-bdc5-4bf6f27d42a0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForTeam.All",
+    "Application_Identifier": "9f67436c-5415-4e7f-8ac1-3014a7132630",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Files.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "5c28f0bf-8a70-41f1-8ab2-9032436ddb65"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForChat.All",
+    "Application_Identifier": "cc7e7635-2586-41d6-adaa-a8d3bcad5ee5",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Directory.Read.All",
+    "Application_Identifier": "7ab1d382-f21e-4acd-a863-ba3e13f7da61",
+    "DelegatedWork_Identifier": "06da0dbc-49e2-44d2-8312-53f166ab848a"
+  },
+  {
+    "Role_Name": "Calls.Initiate.All",
+    "Application_Identifier": "284383ee-7f6e-4e40-a2a8-e85dcb029101",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "User.EnableDisableAccount.All",
+    "Application_Identifier": "3011c876-62b7-4ada-afa2-506cbbecc68c",
+    "DelegatedWork_Identifier": "f92e74e7-2563-467f-9dd0-902688cb5863"
+  },
+  {
+    "Role_Name": "Contacts.ReadWrite",
+    "Application_Identifier": "6918b873-d17a-4dc1-b314-35f528134491",
+    "DelegatedWork_Identifier": "d56682ec-c09e-4743-aaf4-1a3aac4caa21"
+  },
+  {
+    "Role_Name": "Contacts.Read.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "242b9d9e-ed24-4d09-9a52-f43769beb9d4"
+  },
+  {
+    "Role_Name": "OnlineMeetings.Read.All",
+    "Application_Identifier": "c1684f21-1984-47fa-9d61-2dc8c296bb70",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d1ba22c6-3f02-4c91-addb-bc3399bcca88"
+  },
+  {
+    "Role_Name": "ConfigurationMonitoring.Read.All",
+    "Application_Identifier": "aca929ec-9830-44dc-bda1-85cf938aaa95",
+    "DelegatedWork_Identifier": "c645bb69-adc4-4242-b620-02e635f03bf6"
+  },
+  {
+    "Role_Name": "CallRecords.Read.All",
+    "Application_Identifier": "45bbb07e-7321-4fd7-a8f6-3ff27e6a81c8",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ConsentRequest.Create",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f2143d35-9b4b-480d-951c-d083e69eeb2c"
+  },
+  {
+    "Role_Name": "Group",
+    "Application_Identifier": "6679c91b-820a-4900-ab47-e97b197a89c4",
+    "DelegatedWork_Identifier": "302bcbb5-855a-4e49-ae20-94a331b0281e"
+  },
+  {
+    "Role_Name": "Mail.ReadBasic.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b11fa0e7-fdb7-4dc9-b1f1-59facd463480"
+  },
+  {
+    "Role_Name": "AppCatalog.Read.All",
+    "Application_Identifier": "e12dae10-5a57-4817-b79d-dfbec5348930",
+    "DelegatedWork_Identifier": "88e58d74-d3df-44f3-ad47-e89edf4472e4"
+  },
+  {
+    "Role_Name": "AuthenticationContext.Read.All",
+    "Application_Identifier": "381f742f-e1f8-4309-b4ab-e3d91ae4c5c1",
+    "DelegatedWork_Identifier": "57b030f1-8c35-469c-b0d9-e4a077debe70"
+  },
+  {
+    "Role_Name": "ExternalUserProfile.Read.All",
+    "Application_Identifier": "1987d7a0-d602-4262-ab90-cfdd43b37545",
+    "DelegatedWork_Identifier": "47167bec-55a7-4caf-9ecc-8d4566e3cfb1"
+  },
+  {
+    "Role_Name": "MutualTlsOauthConfiguration.Read.All",
+    "Application_Identifier": "6daaff82-2880-496d-9d80-57e8e31195e2",
+    "DelegatedWork_Identifier": "51ae584e-e736-4718-897b-10af70f8e3cc"
+  },
+  {
+    "Role_Name": "Calendars.Read.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2b9c4092-424d-4249-948d-b43879977640"
+  },
+  {
+    "Role_Name": "User.ManageIdentities.All",
+    "Application_Identifier": "c529cfca-c91b-489c-af2b-d92990b66ce6",
+    "DelegatedWork_Identifier": "637d7bec-b31e-4deb-acc9-24275642a2c9"
+  },
+  {
+    "Role_Name": "Schedule.Read.All",
+    "Application_Identifier": "7b2ebf90-d836-437f-b90d-7b62722c4456",
+    "DelegatedWork_Identifier": "fccf6dd8-5706-49fa-811f-69e2e1b585d0"
+  },
+  {
+    "Role_Name": "Files.SelectedOperations.Selected",
+    "Application_Identifier": "bd61925e-3bf4-4d62-bc0b-06b06c96d95c",
+    "DelegatedWork_Identifier": "ef2779dc-ef1b-4211-8310-8a0ac2450081"
+  },
+  {
+    "Role_Name": "TeamsPolicyUserAssign.ReadWrite.All",
+    "Application_Identifier": "1801e8f4-cf09-4c4e-a1b5-036dfcca6c90",
+    "DelegatedWork_Identifier": "6997c35c-a586-440c-8a0b-4ffe5d118dc0"
+  },
+  {
+    "Role_Name": "SynchronizationData",
+    "Application_Identifier": "25c32ff3-849a-494b-b94f-20a8ac4e6774",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "PrinterShare.Read.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ed11134d-2f3f-440d-a2e1-411efada2502"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForUser.All",
+    "Application_Identifier": "74ef0291-ca83-4d02-8c7e-d2391e6a444f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "InformationProtectionPolicy.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4ad84827-5578-4e18-ad7a-86530b12f884"
+  },
+  {
+    "Role_Name": "PrintJob.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b81dd597-8abb-4b3f-a07a-820b0316ed04"
+  },
+  {
+    "Role_Name": "ReportSettings.ReadWrite.All",
+    "Application_Identifier": "2a60023f-3219-47ad-baa4-40e17cd02a1d",
+    "DelegatedWork_Identifier": "b955410e-7715-4a88-a940-dfd551018df3"
+  },
+  {
+    "Role_Name": "CallEvents.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "43431c03-960e-400f-87c6-8f910321dca3"
+  },
+  {
+    "Role_Name": "Calendars.ReadWrite",
+    "Application_Identifier": "ef54d2bf-783f-4e0f-bca1-3210c0444d99",
+    "DelegatedWork_Identifier": "1ec239c2-d7c9-4623-a91a-a9775856bb36"
+  },
+  {
+    "Role_Name": "Tasks.Read.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "88d21fd4-8e5a-4c32-b5e2-4a1c95f34f72"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForTeam.All",
+    "Application_Identifier": "7b5823ae-d0f2-424d-b90c-d843ffada7d9",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesHealth.ReadWrite.All",
+    "Application_Identifier": "ab03ddd5-7ae4-4f2e-8af8-86654f7e0a27",
+    "DelegatedWork_Identifier": "53e51eec-2d9b-4990-97f3-c9aa5d5652c3"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesSensors.ReadWrite.All",
+    "Application_Identifier": "d4dcee6d-0774-412a-b06c-aeabbd99e816",
+    "DelegatedWork_Identifier": "087c3ad9-c2ca-4b82-9885-d5e25ce9e183"
+  },
+  {
+    "Role_Name": "Schedule",
+    "Application_Identifier": "0b21c159-dbf4-4dbb-a6f6-490e412c716e",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "PrivilegedAssignmentSchedule.ReadWrite.AzureADGroup",
+    "Application_Identifier": "41202f2c-f7ab-45be-b001-85c9728b9d69",
+    "DelegatedWork_Identifier": "06dbc45d-6708-4ef0-a797-f797ee68bf4b"
+  },
+  {
+    "Role_Name": "Agreement.Read.All",
+    "Application_Identifier": "2f3e6f8c-093b-4c57-a58b-ba5ce494a169",
+    "DelegatedWork_Identifier": "af2819c9-df71-4dd3-ade7-4d7c9dc653b7"
+  },
+  {
+    "Role_Name": "EduAdministration.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "8523895c-6081-45bf-8a5d-f062a2f12c9f"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.AuthenticationMethod",
+    "Application_Identifier": "29c18626-4985-4dcd-85c0-193eef327366",
+    "DelegatedWork_Identifier": "7e823077-d88e-468f-a337-e18f1f0e6c7c"
+  },
+  {
+    "Role_Name": "BitlockerKey.Read.All",
+    "Application_Identifier": "57f1cf28-c0c4-4ec3-9a30-19a2eaaf2f6e",
+    "DelegatedWork_Identifier": "b27a61ec-b99c-4d6a-b126-c4375d08ae30"
+  },
+  {
+    "Role_Name": "SecurityActions.Read.All",
+    "Application_Identifier": "5e0edab9-c148-49d0-b423-ac253e121825",
+    "DelegatedWork_Identifier": "1638cddf-07a4-4de2-8645-69c96cacad73"
+  },
+  {
+    "Role_Name": "PendingExternalUserProfile.ReadWrite.All",
+    "Application_Identifier": "8363c2b8-6ff7-420b-9966-c5884c2d48bc",
+    "DelegatedWork_Identifier": "93a1fb28-c908-4826-904e-0c74ad352b73"
+  },
+  {
+    "Role_Name": "DirectoryRecommendations.Read.All",
+    "Application_Identifier": "ae73097b-cb2a-4447-b064-5d80f6093921",
+    "DelegatedWork_Identifier": "34d3bd24-f6a6-468c-b67c-0c365c1d6410"
+  },
+  {
+    "Role_Name": "Schedule.ReadWrite.All",
+    "Application_Identifier": "b7760610-0545-4e8a-9ec3-cce9e63db01c",
+    "DelegatedWork_Identifier": "63f27281-c9d9-4f29-94dd-6942f7f1feb0"
+  },
+  {
+    "Role_Name": "Files.ReadWrite.Selected",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "17dde5bd-8c17-420f-a486-969730c1b827"
+  },
+  {
+    "Role_Name": "SubjectRightsRequest.Read.All",
+    "Application_Identifier": "ee1460f0-368b-4153-870a-4e1ca7e72c42",
+    "DelegatedWork_Identifier": "9c3af74c-fd0f-4db4-b17a-71939e2a9d77"
+  },
+  {
+    "Role_Name": "ThreatSubmission.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "fd5353c6-26dd-449f-a565-c4e16b9fce78"
+  },
+  {
+    "Role_Name": "EduRoster.Read.All",
+    "Application_Identifier": "e0ac9e1b-cb65-4fc5-87c5-1a8bc181f648",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForUser.All",
+    "Application_Identifier": "32ca478f-f89e-41d0-aaf8-101deb7da510",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CustomSecAttributeAuditLogs.Read.All",
+    "Application_Identifier": "2a4f026d-e829-4e84-bdbf-d981a2703059",
+    "DelegatedWork_Identifier": "1fcdeaab-b519-44dd-bffc-ed1fd15a24e0"
+  },
+  {
+    "Role_Name": "TeamworkAppSettings.Read.All",
+    "Application_Identifier": "475ebe88-f071-4bd7-af2b-642952bd4986",
+    "DelegatedWork_Identifier": "44e060c4-bbdc-4256-a0b9-dcc0396db368"
+  },
+  {
+    "Role_Name": "ThreatSubmission.ReadWrite.All",
+    "Application_Identifier": "d72bdbf4-a59b-405c-8b04-5995895819ac",
+    "DelegatedWork_Identifier": "8458e264-4eb9-4922-abe9-768d58f13c7f"
+  },
+  {
+    "Role_Name": "SecurityActions.ReadWrite.All",
+    "Application_Identifier": "f2bf083f-0179-402a-bedb-b2784de8a49b",
+    "DelegatedWork_Identifier": "dc38509c-b87d-4da0-bd92-6bec988bac4a"
+  },
+  {
+    "Role_Name": "SubjectRightsRequest.ReadWrite.All",
+    "Application_Identifier": "8387eaa4-1a3c-41f5-b261-f888138e6041",
+    "DelegatedWork_Identifier": "2b8fcc74-bce1-4ae3-a0e8-60c53739299d"
+  },
+  {
+    "Role_Name": "RoleManagementPolicy.Read.AzureADGroup",
+    "Application_Identifier": "69e67828-780e-47fd-b28c-7b27d14864e6",
+    "DelegatedWork_Identifier": "7e26fdff-9cb1-4e56-bede-211fe0e420e8"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesUserActions.ReadWrite.All",
+    "Application_Identifier": "b4146a3a-dd4f-4af4-8d91-7cc0eef3d041",
+    "DelegatedWork_Identifier": "bf230e97-1957-4df6-b3f6-57f9029eacdf"
+  },
+  {
+    "Role_Name": "FileStorageContainer.Manage.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "527b6d64-cdf5-4b8b-b336-4aa0b8ca2ce5"
+  },
+  {
+    "Role_Name": "UserAuthenticationMethod.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "48971fc1-70d7-4245-af77-0beb29b53ee2"
+  },
+  {
+    "Role_Name": "Teamwork.Read.All",
+    "Application_Identifier": "75bcfbce-a647-4fba-ad51-b63d73b210f4",
+    "DelegatedWork_Identifier": "594f4bb6-c083-4cf9-8aa8-213823bdf351"
+  },
+  {
+    "Role_Name": "Community.Read.All",
+    "Application_Identifier": "407f0cce-3212-441f-9f55-3bc91342cf86",
+    "DelegatedWork_Identifier": "12ae2e92-14b5-47b2-babb-4e890bbedc0a"
+  },
+  {
+    "Role_Name": "EduRoster.ReadBasic.All",
+    "Application_Identifier": "0d412a8c-a06c-439f-b3ec-8abcf54d2f96",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForTeam.All",
+    "Application_Identifier": "5dad17ba-f6cc-4954-a5a2-a0dcc95154f0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "openid",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "37f7f235-527c-4136-accd-4a02d197296e"
+  },
+  {
+    "Role_Name": "ChatMessage.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "cdcdac3a-fd45-410d-83ef-554db620e5c7"
+  },
+  {
+    "Role_Name": "IdentityRiskyServicePrincipal.ReadWrite.All",
+    "Application_Identifier": "cb8d6980-6bcb-4507-afec-ed6de3a2d798",
+    "DelegatedWork_Identifier": "bb6f654c-d7fd-4ae3-85c3-fc380934f515"
+  },
+  {
+    "Role_Name": "Sites.Manage.All",
+    "Application_Identifier": "0c0bf378-bf22-4481-8f81-9e89a9b4960a",
+    "DelegatedWork_Identifier": "65e50fdc-43b7-4915-933e-e8138f11f40a"
+  },
+  {
+    "Role_Name": "PrintJob.ReadBasic.All",
+    "Application_Identifier": "fbf67eee-e074-4ef7-b965-ab5ce1c1f689",
+    "DelegatedWork_Identifier": "04ce8d60-72ce-4867-85cf-6d82f36922f3"
+  },
+  {
+    "Role_Name": "User.Invite.All",
+    "Application_Identifier": "09850681-111b-4a89-9bed-3f2cae46d706",
+    "DelegatedWork_Identifier": "63dd7cd9-b489-4adf-a28c-ac38b9a0f962"
+  },
+  {
+    "Role_Name": "DeviceManagementCloudCA.ReadWrite.All",
+    "Application_Identifier": "f15eb2ba-ef8a-4f70-991d-da5d045154e2",
+    "DelegatedWork_Identifier": "93028c58-65aa-48db-a706-1fe4ada325ec"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.ApplicationConfiguration",
+    "Application_Identifier": "be74164b-cff1-491c-8741-e671cb536e13",
+    "DelegatedWork_Identifier": "b27add92-efb2-4f16-84f5-8108ba77985c"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForUser.All",
+    "Application_Identifier": "44fb0e7c-1f9a-47f1-bb9e-7f92d48ed288",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EngagementConversation.Migration.All",
+    "Application_Identifier": "e1d2136d-eaaf-427a-a7db-f97dbe847c27",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Contacts.Read",
+    "Application_Identifier": "089fe4d0-434a-44c5-8827-41ba8a0b17f5",
+    "DelegatedWork_Identifier": "ff74d97f-43af-4b68-9f2a-b77ee6968c5d"
+  },
+  {
+    "Role_Name": "LearningAssignedCourse.Read.All",
+    "Application_Identifier": "535e6066-2894-49ef-ab33-e2c6d064bb81",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SecurityAnalyzedMessage.ReadWrite.All",
+    "Application_Identifier": "04c55753-2244-4c25-87fc-704ab82a4f69",
+    "DelegatedWork_Identifier": "48eb8c83-6e58-46e7-a6d3-8805822f5940"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.IdentityProtection",
+    "Application_Identifier": "2dcf8603-09eb-4078-b1ec-d30a1a76b873",
+    "DelegatedWork_Identifier": "7256e131-3efb-4323-9854-cf41c6021770"
+  },
+  {
+    "Role_Name": "Device.CreateFromOwnedTemplate",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "edc92e89-a987-48a9-911a-a7b1967dd7b1"
+  },
+  {
+    "Role_Name": "Community.ReadWrite.All",
+    "Application_Identifier": "35d59e32-eab5-4553-9345-abb62b4c703c",
+    "DelegatedWork_Identifier": "9e69467d-e0e2-402b-a926-3d796990197f"
+  },
+  {
+    "Role_Name": "EduAssignments.ReadWrite.All",
+    "Application_Identifier": "0d22204b-6cad-4dd0-8362-3e3f2ae699d9",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.FeatureRollout",
+    "Application_Identifier": "2044e4f1-e56c-435b-925c-44cd8f6ba89a",
+    "DelegatedWork_Identifier": "92a38652-f13b-4875-bc77-6e1dbb63e1b2"
+  },
+  {
+    "Role_Name": "NetworkAccessBranch.ReadWrite.All",
+    "Application_Identifier": "8137102d-ec16-4191-aaf8-7aeda8026183",
+    "DelegatedWork_Identifier": "b8a36cc2-b810-461a-baa4-a7281e50bd5c"
+  },
+  {
+    "Role_Name": "Mail.Read.Shared",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "7b9103a5-4610-446b-9670-80643382c1fa"
+  },
+  {
+    "Role_Name": "Place.Read.All",
+    "Application_Identifier": "913b9306-0ce1-42b8-9137-6a7df690a760",
+    "DelegatedWork_Identifier": "cb8f45a0-5c2e-4ea1-b803-84b870a7d7ec"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForTeam.All",
+    "Application_Identifier": "6163d4f4-fbf8-43da-a7b4-060fe85ed148",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForUser.All",
+    "Application_Identifier": "908de74d-f8b2-4d6b-a9ed-2a17b3b78179",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DeviceManagementApps.ReadWrite.All",
+    "Application_Identifier": "78145de6-330d-4800-a6ce-494ff2d33d07",
+    "DelegatedWork_Identifier": "7b3f05d5-f68c-4b8d-8c59-a2ecd12f24af"
+  },
+  {
+    "Role_Name": "IdentityRiskEvent.ReadWrite.All",
+    "Application_Identifier": "db06fb33-1953-4b7b-a2ac-f1e2c854f7ae",
+    "DelegatedWork_Identifier": "9e4862a5-b68f-479e-848a-4e07e25c9916"
+  },
+  {
+    "Role_Name": "EntitlementManagement.ReadWrite.All",
+    "Application_Identifier": "9acd699f-1e81-4958-b001-93b1d2506e19",
+    "DelegatedWork_Identifier": "ae7a573d-81d7-432b-ad44-4ed5c9d89038"
+  },
+  {
+    "Role_Name": "SpiffeTrustDomain.Read.All",
+    "Application_Identifier": "dcdfc277-41fd-4d68-ad0c-c3057235bd8e",
+    "DelegatedWork_Identifier": "9b4aa4b1-aaf3-41b7-b743-698b27e77ff6"
+  },
+  {
+    "Role_Name": "POP.AccessAsUser.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d7b7f2d9-0f45-4ea1-9d42-e50810c06991"
+  },
+  {
+    "Role_Name": "BillingConfiguration.ReadWrite.All",
+    "Application_Identifier": "9e8be751-7eee-4c09-bcfd-d64f6b087fd8",
+    "DelegatedWork_Identifier": "2bf6d319-dfca-4c22-9879-f88dcfaee6be"
+  },
+  {
+    "Role_Name": "TeamworkDevice.Read.All",
+    "Application_Identifier": "0591bafd-7c1c-4c30-a2a5-2b9aacb1dfe8",
+    "DelegatedWork_Identifier": "b659488b-9d28-4208-b2be-1c6652b3c970"
+  },
+  {
+    "Role_Name": "CallDelegation.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "305b375b-00fe-48bf-81bc-e8d78954c1b6"
+  },
+  {
+    "Role_Name": "PlaceDevice.ReadWrite.All",
+    "Application_Identifier": "2d510721-5c4e-43cd-bfdb-ac0f8819fb92",
+    "DelegatedWork_Identifier": "eafd6a71-e95a-4f8a-bb6e-fb84ab7fbd9e"
+  },
+  {
+    "Role_Name": "ChannelMember.Read.All",
+    "Application_Identifier": "3b55498e-47ec-484f-8136-9013221c06a9",
+    "DelegatedWork_Identifier": "2eadaff8-0bce-4198-a6b9-2cfc35a30075"
+  },
+  {
+    "Role_Name": "Notes.Create",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9d822255-d64d-4b7a-afdb-833b9a97ed02"
+  },
+  {
+    "Role_Name": "RoleManagement.ReadWrite.Defender",
+    "Application_Identifier": "8b7e8c0a-7e9d-4049-97ec-04b5e1bcaf05",
+    "DelegatedWork_Identifier": "d8914f8f-9f64-4bd1-b4d3-f5a701ed8457"
+  },
+  {
+    "Role_Name": "TeamworkTag.ReadWrite.All",
+    "Application_Identifier": "a3371ca5-911d-46d6-901c-42c8c7a937d8",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DeviceManagementConfiguration.ReadWrite.All",
+    "Application_Identifier": "9241abd9-d0e6-425a-bd4f-47ba86e767a4",
+    "DelegatedWork_Identifier": "0883f392-0a7a-443d-8c76-16a6d39c7b63"
+  },
+  {
+    "Role_Name": "PrintSettings.Read.All",
+    "Application_Identifier": "b5991872-94cf-4652-9765-29535087c6d8",
+    "DelegatedWork_Identifier": "490f32fd-d90f-4dd7-a601-ff6cdc1a3f6c"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "093f8818-d05f-49b8-95bc-9d2a73e9a43c"
+  },
+  {
+    "Role_Name": "TeamMember.ReadWrite.All",
+    "Application_Identifier": "0121dc95-1b9f-4aed-8bac-58c5ac466691",
+    "DelegatedWork_Identifier": "4a06efd2-f825-4e34-813e-82a57b03d1ee"
+  },
+  {
+    "Role_Name": "Sites.ReadWrite.All",
+    "Application_Identifier": "9492366f-7969-46a4-8d15-ed1a20078fff",
+    "DelegatedWork_Identifier": "89fe6a52-be36-487e-b7d8-d061c450a026"
+  },
+  {
+    "Role_Name": "EventListener.ReadWrite.All",
+    "Application_Identifier": "0edf5e9e-4ce8-468a-8432-d08631d18c43",
+    "DelegatedWork_Identifier": "d11625a6-fe21-4fc6-8d3d-063eba5525ad"
+  },
+  {
+    "Role_Name": "MultiTenantOrganization.ReadWrite.All",
+    "Application_Identifier": "920def01-ca61-4d2d-b3df-105b46046a70",
+    "DelegatedWork_Identifier": "77af1528-84f3-4023-8d90-d219cd433108"
+  },
+  {
+    "Role_Name": "PrintJob.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "248f5528-65c0-4c88-8326-876c7236df5e"
+  },
+  {
+    "Role_Name": "ProgramControl.ReadWrite.All",
+    "Application_Identifier": "60a901ed-09f7-4aa5-a16e-7dd3d6f9de36",
+    "DelegatedWork_Identifier": "50fd364f-9d93-4ae1-b170-300e87cccf84"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesUserActions.Read.All",
+    "Application_Identifier": "3e5d0bee-973f-4736-a123-4e1ab146f3a8",
+    "DelegatedWork_Identifier": "c7d0a939-da1c-4aca-80fa-d0a6cd924801"
+  },
+  {
+    "Role_Name": "LicenseAssignment.ReadWrite.All",
+    "Application_Identifier": "5facf0c1-8979-4e95-abcf-ff3d079771c0",
+    "DelegatedWork_Identifier": "f55016cc-149c-447e-8f21-7cf3ec1d6350"
+  },
+  {
+    "Role_Name": "SearchConfiguration.Read.All",
+    "Application_Identifier": "ada977a5-b8b1-493b-9a91-66c206d76ecf",
+    "DelegatedWork_Identifier": "7d307522-aa38-4cd0-bd60-90c6f0ac50bd"
+  },
+  {
+    "Role_Name": "People.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ba47897c-39ec-4d83-8086-ee8256fa737d"
+  },
+  {
+    "Role_Name": "RecordsManagement.Read.All",
+    "Application_Identifier": "ac3a2b8e-03a3-4da9-9ce0-cbe28bf1accd",
+    "DelegatedWork_Identifier": "07f995eb-fc67-4522-ad66-2b8ca8ea3efd"
+  },
+  {
+    "Role_Name": "TeamworkTag.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "57587d0b-8399-45be-b207-8050cec54575"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4a6bbf29-a0e1-4a4d-a7d1-cef17f772975"
+  },
+  {
+    "Role_Name": "EduCurricula.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4793c53b-df34-44fd-8d26-d15c517732f5"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadSelectedForChat.All",
+    "Application_Identifier": "53d40ddb-9b27-4c97-b800-985be6041990",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ChatMember.ReadWrite.WhereInstalled",
+    "Application_Identifier": "e32c2cd9-0124-4e44-88fc-772cd98afbdb",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ApprovalSolution.Read.All",
+    "Application_Identifier": "9f265de7-8d5e-4e9a-a805-5e8bbc49656f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Tasks.Read.All",
+    "Application_Identifier": "f10e1f91-74ed-437f-a6fd-d6ae88e26c1f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ProfilePhoto.Read.All",
+    "Application_Identifier": "e24d31aa-e1ab-4c80-85fe-23018690335d",
+    "DelegatedWork_Identifier": "469cd065-729e-4dee-b1fa-d92e0fab6310"
+  },
+  {
+    "Role_Name": "Channel.Create",
+    "Application_Identifier": "f3a65bd4-b703-46df-8f7e-0174fea562aa",
+    "DelegatedWork_Identifier": "101147cf-4178-4455-9d58-02b5c164e759"
+  },
+  {
+    "Role_Name": "PrintConnector.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "79ef9967-7d59-4213-9c64-4b10687637d8"
+  },
+  {
+    "Role_Name": "ServiceMessageViewpoint.Write",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "636e1b0b-1cc2-4b1c-9aa9-4eeed9b9761b"
+  },
+  {
+    "Role_Name": "BitlockerKey.ReadBasic.All",
+    "Application_Identifier": "f690d423-6b29-4d04-98c6-694c42282419",
+    "DelegatedWork_Identifier": "5a107bfc-4f00-4e1a-b67e-66451267bc68"
+  },
+  {
+    "Role_Name": "ExternalConnection.Read.All",
+    "Application_Identifier": "1914711b-a1cb-4793-b019-c2ce0ed21b8c",
+    "DelegatedWork_Identifier": "a38267a5-26b6-4d76-9493-935b7599116b"
+  },
+  {
+    "Role_Name": "AiEnterpriseInteraction.Read.All",
+    "Application_Identifier": "839c90ab-5771-41ee-aef8-a562e8487c1e",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.AuthenticationFlows",
+    "Application_Identifier": "25f85f3c-f66c-4205-8cd5-de92dd7f0cec",
+    "DelegatedWork_Identifier": "edb72de9-4252-4d03-a925-451deef99db7"
+  },
+  {
+    "Role_Name": "VirtualAppointment.ReadWrite",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2ccc2926-a528-4b17-b8bb-860eed29d64c"
+  },
+  {
+    "Role_Name": "GroupMember.ReadWrite.All",
+    "Application_Identifier": "dbaae8cf-10b5-4b86-a4a1-f871c94c6695",
+    "DelegatedWork_Identifier": "f81125ac-d3b7-4573-a3b2-7099cc39df9e"
+  },
+  {
+    "Role_Name": "EngagementRole.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9f1da0fc-345c-4dfb-bab5-5215a073a417"
+  },
+  {
+    "Role_Name": "PartnerBilling.Read.All",
+    "Application_Identifier": "7c3e1994-38ff-4412-a99b-9369f6bb7706",
+    "DelegatedWork_Identifier": "8804798e-5934-4e30-8ce3-ef88257cecd4"
+  },
+  {
+    "Role_Name": "AttackSimulation.ReadWrite.All",
+    "Application_Identifier": "e125258e-8c8a-42a8-8f55-ab502afa52f3",
+    "DelegatedWork_Identifier": "27608d7c-2c66-4cad-a657-951d575f5a60"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelectedForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9131c833-9a49-4c54-b38f-615ecfc4fc69"
+  },
+  {
+    "Role_Name": "PrivilegedAssignmentSchedule.Read.AzureADGroup",
+    "Application_Identifier": "cd4161cb-f098-48f8-a884-1eda9a42434c",
+    "DelegatedWork_Identifier": "02a32cc4-7ab5-4b58-879a-0586e0f7c495"
+  },
+  {
+    "Role_Name": "VirtualEvent.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "6b616635-ae58-433a-a918-8c45e4f304dc"
+  },
+  {
+    "Role_Name": "ServicePrincipalEndpoint.Read.All",
+    "Application_Identifier": "5256681e-b7f6-40c0-8447-2d9db68797a0",
+    "DelegatedWork_Identifier": "9f9ce928-e038-4e3b-8faf-7b59049a8ddc"
+  },
+  {
+    "Role_Name": "Financials.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "f534bf13-55d4-45a9-8f3c-c92fe64d6131"
+  },
+  {
+    "Role_Name": "ApprovalSolution.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b0df437d-d341-4df0-aa3e-89ca81a1207f"
+  },
+  {
+    "Role_Name": "RiskPreventionProviders.ReadWrite.All",
+    "Application_Identifier": "7fc7225d-eb37-4c39-90f3-a33a57cf1081",
+    "DelegatedWork_Identifier": "2a7babba-9623-4109-bc9c-79728cf3bb4f"
+  },
+  {
+    "Role_Name": "PartnerSecurity.ReadWrite.All",
+    "Application_Identifier": "04a2c935-5b4b-474a-be42-11f53111f271",
+    "DelegatedWork_Identifier": "0cd2c1f6-94a1-4075-ab8c-0b1aff2e1ad5"
+  },
+  {
+    "Role_Name": "Sites.Read.All",
+    "Application_Identifier": "332a536c-c7ef-4017-ab91-336970924f0d",
+    "DelegatedWork_Identifier": "205e70e5-aba6-4c52-a976-6d2d46c48043"
+  },
+  {
+    "Role_Name": "UserTeamwork.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "834bcc1c-762f-41b0-bb91-1cdc323ee4bf"
+  },
+  {
+    "Role_Name": "AppCertTrustConfiguration.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "4bae2ed4-473e-4841-a493-9829cfd51d48"
+  },
+  {
+    "Role_Name": "OnPremDirectorySynchronization.ReadWrite.All",
+    "Application_Identifier": "c22a92cc-79bf-4bb1-8b6c-e0a05d3d80ce",
+    "DelegatedWork_Identifier": "c2d95988-7604-4ba1-aaed-38a5f82a51c7"
+  },
+  {
+    "Role_Name": "AppCatalog.ReadWrite.All",
+    "Application_Identifier": "dc149144-f292-421e-b185-5953f2e98d7f",
+    "DelegatedWork_Identifier": "1ca167d5-1655-44a1-8adf-1414072e1ef9"
+  },
+  {
+    "Role_Name": "BusinessScenarioConfig.ReadWrite.OwnedBy",
+    "Application_Identifier": "bbea195a-4c47-4a4f-bff2-cba399e11698",
+    "DelegatedWork_Identifier": "b3b7fcff-b4d4-4230-bf6f-90bd91285395"
+  },
+  {
+    "Role_Name": "Notes.ReadWrite.CreatedByApp",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ed68249d-017c-4df5-9113-e684c7f8760b"
+  },
+  {
+    "Role_Name": "UserNotification.ReadWrite.CreatedByApp",
+    "Application_Identifier": "4e774092-a092-48d1-90bd-baad67c7eb47",
+    "DelegatedWork_Identifier": "26e2f3e8-b2a1-47fc-9620-89bb5b042024"
+  },
+  {
+    "Role_Name": "TeamSettings.ReadWrite.All",
+    "Application_Identifier": "bdd80a03-d9bc-451d-b7c4-ce7c63fe3c8f",
+    "DelegatedWork_Identifier": "39d65650-9d3e-4223-80db-a335590d027e"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ManageSelectedForTeam.All",
+    "Application_Identifier": "b448d252-1f26-4227-b6ff-21ab510975a2",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "PrinterShare.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "06ceea37-85e2-40d7-bec3-91337a46038f"
+  },
+  {
+    "Role_Name": "CallRecord",
+    "Application_Identifier": "a2611786-80b3-417e-adaa-707d4261a5f0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ApprovalSolution.ReadWrite.All",
+    "Application_Identifier": "45583558-1113-4d06-8969-e79a28edc9ad",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "IndustryData",
+    "Application_Identifier": "7afa7744-a782-4a32-b8c2-e3db637e8de7",
+    "DelegatedWork_Identifier": "b6d56528-3032-4f9d-830f-5a24a25e6661"
+  },
+  {
+    "Role_Name": "Printer.FullControl.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "93dae4bd-43a1-4a23-9a1a-92957e1d9121"
+  },
+  {
+    "Role_Name": "CustomAuthenticationExtension.Read.All",
+    "Application_Identifier": "88bb2658-5d9e-454f-aacd-a3933e079526",
+    "DelegatedWork_Identifier": "b2052569-c98c-4f36-a5fb-43e5c111e6d0"
+  },
+  {
+    "Role_Name": "TeamTemplates.Read.All",
+    "Application_Identifier": "6323133e-1f6e-46d4-9372-ac33a0870636",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "UserAuthenticationMethod.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "1f6b61c5-2f65-4135-9c9f-31c0f8d32b52"
+  },
+  {
+    "Role_Name": "IdentityRiskyServicePrincipal.Read.All",
+    "Application_Identifier": "607c7344-0eed-41e5-823a-9695ebe1b7b0",
+    "DelegatedWork_Identifier": "ea5c4ab0-5a73-4f35-8272-5d5337884e5d"
+  },
+  {
+    "Role_Name": "ChannelMessage.Edit",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "2b61aa8a-6d36-4b2f-ac7b-f29867937c53"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.ReadWrite.AzureADGroup",
+    "Application_Identifier": "2f6817f8-7b12-4f0f-bc18-eeaf60705a9e",
+    "DelegatedWork_Identifier": "32531c59-1f32-461f-b8df-6f8a3b89f73b"
+  },
+  {
+    "Role_Name": "Calls.JoinGroupCallAsGuest.All",
+    "Application_Identifier": "fd7ccf6b-3d28-418b-9701-cd10f5cd2fd4",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "IdentityProvider.ReadWrite.All",
+    "Application_Identifier": "90db2b9a-d928-4d33-a4dd-8442ae3d41e4",
+    "DelegatedWork_Identifier": "f13ce604-1677-429f-90bd-8a10b9f01325"
+  },
+  {
+    "Role_Name": "ChatMessage.Read.All",
+    "Application_Identifier": "b9bb2381-47a4-46cd-aafb-00cb12f68504",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "MailboxItem.Read.All",
+    "Application_Identifier": "7d9f353d-a7bd-4fbb-822a-26d5dd39a3ce",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "RiskPreventionProviders.Read.All",
+    "Application_Identifier": "2a6baefd-edea-4ff6-b24e-bebcaa27a50d",
+    "DelegatedWork_Identifier": "e197c06f-ae7b-4398-b0a2-89f76ebca159"
+  },
+  {
+    "Role_Name": "AccessReview.ReadWrite.Membership",
+    "Application_Identifier": "18228521-a591-40f1-b215-5fad4488c117",
+    "DelegatedWork_Identifier": "5af8c3f5-baca-439a-97b0-ea58a435e269"
+  },
+  {
+    "Role_Name": "CloudPC.Read.All",
+    "Application_Identifier": "a9e09520-8ed4-4cde-838e-4fdea192c227",
+    "DelegatedWork_Identifier": "5252ec4e-fd40-4d92-8c68-89dd1d3c6110"
+  },
+  {
+    "Role_Name": "OrganizationalBranding.Read.All",
+    "Application_Identifier": "eb76ac34-0d62-4454-b97c-185e4250dc20",
+    "DelegatedWork_Identifier": "9082f138-6f02-4f3a-9f4d-5f3c2ce5c688"
+  },
+  {
+    "Role_Name": "Presence.Read.All",
+    "Application_Identifier": "a70e0c2d-e793-494c-94c4-118fa0a67f42",
+    "DelegatedWork_Identifier": "9c7a330d-35b3-4aa1-963d-cb2b9f927841"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteSelfForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0ce33576-30e8-43b7-99e5-62f8569a4002"
+  },
+  {
+    "Role_Name": "User",
+    "Application_Identifier": "86ceff06-c822-49ff-989a-d912845ffe69",
+    "DelegatedWork_Identifier": "e29d5979-5b06-4a7f-ae24-6a9348d2e1ff"
+  },
+  {
+    "Role_Name": "WindowsUpdates.ReadWrite.All",
+    "Application_Identifier": "7dd1be58-6e76-4401-bf8d-31d1e8180d5b",
+    "DelegatedWork_Identifier": "11776c0c-6138-4db3-a668-ee621bea2555"
+  },
+  {
+    "Role_Name": "OnlineMeetings.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "9be106e1-f4e3-4df5-bdff-e4bc531cbe43"
+  },
+  {
+    "Role_Name": "EduCurricula.Read.All",
+    "Application_Identifier": "6cdb464c-3a03-40f8-900b-4cb7ea1da9c0",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ee928332-e9c2-4747-b4a0-f8c164b68de6"
+  },
+  {
+    "Role_Name": "TeamsTelephoneNumber.ReadWrite.All",
+    "Application_Identifier": "0a42382f-155c-4eb1-9bdc-21548ccaa387",
+    "DelegatedWork_Identifier": "424b07a8-1209-4d17-9fe4-9018a93a1024"
+  },
+  {
+    "Role_Name": "TeamsUserConfiguration.Read.All",
+    "Application_Identifier": "a91eadaf-2c3c-4362-908b-fb172d208fc6",
+    "DelegatedWork_Identifier": "5c469ce4-dab5-4afd-b9de-14f1ba4004a7"
+  },
+  {
+    "Role_Name": "OrganizationalBranding.ReadWrite.All",
+    "Application_Identifier": "d2ebfbc1-a5f8-424b-83a6-56ab5927a73c",
+    "DelegatedWork_Identifier": "15ce63de-b141-4c9a-a9a5-241bf27c6aaf"
+  },
+  {
+    "Role_Name": "TeamsTab.Create",
+    "Application_Identifier": "49981c42-fd7b-4530-be03-e77b21aed25e",
+    "DelegatedWork_Identifier": "a9ff19c2-f369-4a95-9a25-ba9d460efc8e"
+  },
+  {
+    "Role_Name": "CrossTenantUserProfileSharing.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "cb1ba48f-d22b-4325-a07f-74135a62ee41"
+  },
+  {
+    "Role_Name": "Printer.Read.All",
+    "Application_Identifier": "9709bb33-4549-49d4-8ed9-a8f65e45bb0f",
+    "DelegatedWork_Identifier": "3a736c8a-018e-460a-b60c-863b2683e8bf"
+  },
+  {
+    "Role_Name": "ManagedTenants.ReadWrite.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "b31fa710-c9b3-4d9e-8f5e-8036eecddab9"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.ReadWrite.AzureResources",
+    "Application_Identifier": "6f9d5abc-2db6-400b-a267-7de22a40fb87",
+    "DelegatedWork_Identifier": "a84a9652-ffd3-496e-a991-22ba5529156a"
+  },
+  {
+    "Role_Name": "CrossTenantInformation.ReadBasic.All",
+    "Application_Identifier": "cac88765-0581-4025-9725-5ebc13f729ee",
+    "DelegatedWork_Identifier": "81594d25-e88e-49cf-ac8c-fecbff49f994"
+  },
+  {
+    "Role_Name": "Notes.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "371361e4-b9e2-4a3f-8315-2a301a3b0a3d"
+  },
+  {
+    "Role_Name": "Team.ReadBasic.All",
+    "Application_Identifier": "2280dda6-0bfd-44ee-a2f4-cb867cfc4c1e",
+    "DelegatedWork_Identifier": "485be79e-c497-4b35-9400-0e3fa7f2a5d4"
+  },
+  {
+    "Role_Name": "ThreatIndicators.ReadWrite.OwnedBy",
+    "Application_Identifier": "21792b6c-c986-4ffc-85de-df9da54b52fa",
+    "DelegatedWork_Identifier": "91e7d36d-022a-490f-a748-f8e011357b42"
+  },
+  {
+    "Role_Name": "AuditLogsQuery",
+    "Application_Identifier": "91c64a47-a524-4fce-9bf3-3d569a344ecf",
+    "DelegatedWork_Identifier": "30630b65-ed12-4a81-9130-e3a964109fae"
+  },
+  {
+    "Role_Name": "Files.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "10465720-29dd-4523-a11a-6a75c743c9d9"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadForTeam.All",
+    "Application_Identifier": "1f615aea-6bf9-4b05-84bd-46388e138537",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "DeviceTemplate.Read.All",
+    "Application_Identifier": "dd9febb5-0c6d-419f-b256-3afe12c6adeb",
+    "DelegatedWork_Identifier": "2bcae0b0-aa93-48e4-a9e4-855482dffdcd"
+  },
+  {
+    "Role_Name": "RoleManagement.ReadWrite.Directory",
+    "Application_Identifier": "9e3f62cf-ca93-4989-b6ce-bf83c28f9fe8",
+    "DelegatedWork_Identifier": "d01b97e9-cbc0-49fe-810a-750afd5527a3"
+  },
+  {
+    "Role_Name": "ShortNotes.Read.All",
+    "Application_Identifier": "0c7d31ec-31ca-4f58-b6ec-9950b6b0de69",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EngagementRole.ReadWrite.All",
+    "Application_Identifier": "3ede5358-7366-4da8-a2f7-472bf9c7cc34",
+    "DelegatedWork_Identifier": "4905982d-6459-4ccd-949c-949fefc0a8f2"
+  },
+  {
+    "Role_Name": "CustomAuthenticationExtension.ReadWrite.All",
+    "Application_Identifier": "c2667967-7050-4e7e-b059-4cbbb3811d03",
+    "DelegatedWork_Identifier": "8dfcf82f-15d0-43b3-bc78-a958a13a5792"
+  },
+  {
+    "Role_Name": "VirtualAppointment.Read.All",
+    "Application_Identifier": "d4f67ec2-59b5-4bdc-b4af-d78f6f9c1954",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Teamwork.Migrate.All",
+    "Application_Identifier": "dfb0dd15-61de-45b2-be36-d6a69fba3c79",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ResourceSpecificPermissionGrant.ReadForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "cb530fca-534b-4e72-aa74-bca7e8bbd06f"
+  },
+  {
+    "Role_Name": "DeviceManagementRBAC.ReadWrite.All",
+    "Application_Identifier": "e330c4f0-4170-414e-a55a-2f022ec2b57b",
+    "DelegatedWork_Identifier": "0c5e8a55-87a6-4556-93ab-adc52c4d862d"
+  },
+  {
+    "Role_Name": "Lists.SelectedOperations.Selected",
+    "Application_Identifier": "23c5a9bd-d900-4ecf-be26-a0689755d9e5",
+    "DelegatedWork_Identifier": "033b51ee-d6fa-4add-b627-ee680c7212b5"
+  },
+  {
+    "Role_Name": "RoleManagement.Read.Defender",
+    "Application_Identifier": "4d6e30d1-e64e-4ae7-bf9d-c706cc928cef",
+    "DelegatedWork_Identifier": "dd689728-6eb8-4deb-bd38-2924a935f3de"
+  },
+  {
+    "Role_Name": "Presence.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "76bc735e-aecd-4a1d-8b4c-2b915deabb79"
+  },
+  {
+    "Role_Name": "PrivilegedAccess.ReadWrite.AzureAD",
+    "Application_Identifier": "854d9ab1-6657-4ec8-be45-823027bcd009",
+    "DelegatedWork_Identifier": "3c3c74f5-cdaa-4a97-b7e0-4e788bfcfb37"
+  },
+  {
+    "Role_Name": "BusinessScenarioConfig.Read.OwnedBy",
+    "Application_Identifier": "acc0fc4d-2cd6-4194-8700-1768d8423d86",
+    "DelegatedWork_Identifier": "c47e7b6e-d6f1-4be9-9ffd-1e00f3e32892"
+  },
+  {
+    "Role_Name": "Application.ReadWrite.OwnedBy",
+    "Application_Identifier": "18a4783c-866b-4cc7-a460-3d5e5662c884",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "ThreatIndicators.Read.All",
+    "Application_Identifier": "197ee4e9-b993-4066-898f-d6aecc55125b",
+    "DelegatedWork_Identifier": "9cc427b4-2004-41c5-aa22-757b755e9796"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteForTeam",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c975dd04-a06e-4fbb-9704-62daad77bb49"
+  },
+  {
+    "Role_Name": "RoleAssignmentSchedule.ReadWrite.Directory",
+    "Application_Identifier": "dd199f4a-f148-40a4-a2ec-f0069cc799ec",
+    "DelegatedWork_Identifier": "8c026be3-8e26-4774-9372-8d5d6f21daff"
+  },
+  {
+    "Role_Name": "VirtualEventRegistration",
+    "Application_Identifier": "23211fc1-f9d1-4e8e-8e9e-08a5d0a109bb",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e1408a66-8f82-451b-a2f3-3c3e38f7413f"
+  },
+  {
+    "Role_Name": "ReportSettings.Read.All",
+    "Application_Identifier": "ee353f83-55ef-4b78-82da-555bfa2b4b95",
+    "DelegatedWork_Identifier": "84fac5f4-33a9-4100-aa38-a20c6d29e5e7"
+  },
+  {
+    "Role_Name": "MailboxSettings.ReadWrite",
+    "Application_Identifier": "6931bccd-447a-43d1-b442-00a195474933",
+    "DelegatedWork_Identifier": "818c620a-27a9-40bd-a6a5-d96f7d610b4b"
+  },
+  {
+    "Role_Name": "Calls.InitiateGroupCall.All",
+    "Application_Identifier": "4c277553-8a09-487b-8023-29ee378d8324",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "OrgContact.Read.All",
+    "Application_Identifier": "e1a88a34-94c4-4418-be12-c87b00e26bea",
+    "DelegatedWork_Identifier": "08432d1b-5911-483c-86df-7980af5cdee0"
+  },
+  {
+    "Role_Name": "DelegatedPermissionGrant.Read.All",
+    "Application_Identifier": "81b4724a-58aa-41c1-8a55-84ef97466587",
+    "DelegatedWork_Identifier": "a197cdc4-a8e8-4d49-9d35-4ca7c83887b4"
+  },
+  {
+    "Role_Name": "DeviceManagementManagedDevices.ReadWrite.All",
+    "Application_Identifier": "243333ab-4d21-40cb-a475-36241daa0842",
+    "DelegatedWork_Identifier": "44642bfe-8385-4adc-8fc6-fe3cb2c375c3"
+  },
+  {
+    "Role_Name": "TeamsAppInstallation.ReadWriteAndConsentSelfForUser.All",
+    "Application_Identifier": "a87076cf-6abd-4e56-8559-4dbdf41bef96",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "TeamworkDevice.ReadWrite.All",
+    "Application_Identifier": "79c02f5b-bd4f-4713-bc2c-a8a4a66e127b",
+    "DelegatedWork_Identifier": "ddd97ecb-5c31-43db-a235-0ee20e635c40"
+  },
+  {
+    "Role_Name": "Channel.Delete.All",
+    "Application_Identifier": "6a118a39-1227-45d4-af0c-ea7b40d210bc",
+    "DelegatedWork_Identifier": "cc83893a-e232-4723-b5af-bd0b01bcfe65"
+  },
+  {
+    "Role_Name": "PrivilegedEligibilitySchedule.ReadWrite.AzureADGroup",
+    "Application_Identifier": "618b6020-bca8-4de6-99f6-ef445fa4d857",
+    "DelegatedWork_Identifier": "ba974594-d163-484e-ba39-c330d5897667"
+  },
+  {
+    "Role_Name": "TeamTemplates.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "cd87405c-5792-4f15-92f7-debc0db6d1d6"
+  },
+  {
+    "Role_Name": "TeamsTelephoneNumber.Read.All",
+    "Application_Identifier": "39b17d18-680c-41f4-b9c2-5f30629e7cb6",
+    "DelegatedWork_Identifier": "1bc6eab1-058d-4557-b011-d4c41cec88b7"
+  },
+  {
+    "Role_Name": "AuditLogsQuery.Read.All",
+    "Application_Identifier": "5e1e9171-754d-478c-812c-f1755a9a4c2d",
+    "DelegatedWork_Identifier": "1d9e7ac3-0eca-442c-82f9-e92625af6e6d"
+  },
+  {
+    "Role_Name": "PrintJob.ReadWriteBasic.All",
+    "Application_Identifier": "57878358-37f4-4d3a-8c20-4816e0d457b1",
+    "DelegatedWork_Identifier": "3a0db2f6-0d2a-4c19-971b-49109b19ad3d"
+  },
+  {
+    "Role_Name": "Synchronization.ReadWrite.All",
+    "Application_Identifier": "9b50c33d-700f-43b1-b2eb-87e89b703581",
+    "DelegatedWork_Identifier": "7bb27fa3-ea8f-4d67-a916-87715b6188bd"
+  },
+  {
+    "Role_Name": "CustomTags.ReadWrite.All",
+    "Application_Identifier": "2f503208-e509-4e39-974c-8cc16e5785c9",
+    "DelegatedWork_Identifier": "2f1bbe0a-f34b-4efb-9edb-8db8dcb50eca"
+  },
+  {
+    "Role_Name": "ChatMember.ReadWrite.All",
+    "Application_Identifier": "57257249-34ce-4810-a8a2-a03adf0c5693",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "AuditLog.Read.All",
+    "Application_Identifier": "b0afded3-3588-46d8-8b3d-9842eff778da",
+    "DelegatedWork_Identifier": "e4c9e354-4dc5-45b8-9e7c-e1393b0b1a20"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForChat",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "0c219d04-3abf-47f7-912d-5cca239e90e6"
+  },
+  {
+    "Role_Name": "ServiceMessage.Read.All",
+    "Application_Identifier": "1b620472-6534-4fe6-9df2-4680e8aa28ec",
+    "DelegatedWork_Identifier": "eda39fa6-f8cf-4c3c-a909-432c683e4c9b"
+  },
+  {
+    "Role_Name": "IdentityRiskyUser.Read.All",
+    "Application_Identifier": "dc5007c0-2d7d-4c42-879c-2dab87571379",
+    "DelegatedWork_Identifier": "d04bb851-cb7c-4146-97c7-ca3e71baf56c"
+  },
+  {
+    "Role_Name": "EAS.AccessAsUser.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "ff91d191-45a0-43fd-b837-bd682c4a0b0f"
+  },
+  {
+    "Role_Name": "Calls.AccessMedia.All",
+    "Application_Identifier": "a7a681dc-756e-4909-b988-f160edc6655f",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "UserShiftPreferences.Read.All",
+    "Application_Identifier": "de023814-96df-4f53-9376-1e2891ef5a18",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SecurityIncident.ReadWrite.All",
+    "Application_Identifier": "34bf0e97-1971-4929-b999-9e2442d941d7",
+    "DelegatedWork_Identifier": "128ca929-1a19-45e6-a3b8-435ec44a36ba"
+  },
+  {
+    "Role_Name": "TeamsTab.ReadWriteSelfForUser",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "395dfec1-a0b9-465f-a783-8250a430cb8c"
+  },
+  {
+    "Role_Name": "ExternalConnection.ReadWrite.OwnedBy",
+    "Application_Identifier": "f431331c-49a6-499f-be1c-62af19c34a9d",
+    "DelegatedWork_Identifier": "4082ad95-c812-4f02-be92-780c4c4f1830"
+  },
+  {
+    "Role_Name": "offline_access",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "7427e0e9-2fba-42fe-b0c0-848c9e6a8182"
+  },
+  {
+    "Role_Name": "CallEvents.Read.All",
+    "Application_Identifier": "1abb026f-7572-49f6-9ddd-ad61cbba181e",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Chat.ReadBasic.All",
+    "Application_Identifier": "b2e060da-3baf-4687-9611-f4ebc0f0cbde",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Insights",
+    "Application_Identifier": "34cbd96c-d824-4755-90d3-1008ef47efc1",
+    "DelegatedWork_Identifier": "7d249730-51a3-4180-8ec1-214f144f1bff"
+  },
+  {
+    "Role_Name": "RoleManagement.Read.CloudPC",
+    "Application_Identifier": "031a549a-bb80-49b6-8032-2068448c6a3c",
+    "DelegatedWork_Identifier": "9619b88a-8a25-48a7-9571-d23be0337a79"
+  },
+  {
+    "Role_Name": "InformationProtectionPolicy.Read.All",
+    "Application_Identifier": "19da66cb-0fb0-4390-b071-ebc76a349482",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "Policy.Read.DeviceConfiguration",
+    "Application_Identifier": "bdba4817-6ba1-4a7c-8a01-be9bc7c242dd",
+    "DelegatedWork_Identifier": "3616a4b0-6746-49c4-a678-4c237599074d"
+  },
+  {
+    "Role_Name": "PublicKeyInfrastructure.Read.All",
+    "Application_Identifier": "214fda0c-514a-4650-b037-b562b1a66124",
+    "DelegatedWork_Identifier": "04a4b2a2-3f26-4fc8-87ee-9c46e68db175"
+  },
+  {
+    "Role_Name": "eDiscovery.Read.All",
+    "Application_Identifier": "50180013-6191-4d1e-a373-e590ff4e66af",
+    "DelegatedWork_Identifier": "99201db3-7652-4d5a-809a-bdb94f85fe3c"
+  },
+  {
+    "Role_Name": "PeopleSettings.Read.All",
+    "Application_Identifier": "ef02f2e7-e22d-4c77-8614-8f765683b86e",
+    "DelegatedWork_Identifier": "ec762c5f-388b-4b16-8693-ac1efbc611bc"
+  },
+  {
+    "Role_Name": "Policy.ReadWrite.AccessReview",
+    "Application_Identifier": "77c863fd-06c0-47ce-a7eb-49773e89d319",
+    "DelegatedWork_Identifier": "4f5bc9c8-ea54-4772-973a-9ca119cb0409"
+  },
+  {
+    "Role_Name": "AdministrativeUnit.ReadWrite.All",
+    "Application_Identifier": "5eb59dd3-1da2-4329-8733-9dabdc435916",
+    "DelegatedWork_Identifier": "7b8a2d34-6b3f-4542-a343-54651608ad81"
+  },
+  {
+    "Role_Name": "BackupRestore",
+    "Application_Identifier": "f6135c51-c766-4be1-9638-ed90c2ed2443",
+    "DelegatedWork_Identifier": "2b24830f-f435-446f-ab5a-b1e70d9a2eb5"
+  },
+  {
+    "Role_Name": "User.Read.All",
+    "Application_Identifier": "df021288-bdef-4463-88db-98f22de89214",
+    "DelegatedWork_Identifier": "a154be20-db9c-4678-8ab7-66f6cc099a59"
+  }
+]

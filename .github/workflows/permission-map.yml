@@ -38,6 +38,7 @@ jobs:
           cd my-repo
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
+          git add graph_api_permissions_friendly_names.json
           git add graph_api_permissions_map.json
 
           # Only commit if there are changes

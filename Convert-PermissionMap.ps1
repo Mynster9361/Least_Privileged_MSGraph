@@ -32,16 +32,20 @@ function Extract-PermissionIdentifiers {
 
     $content = Get-Content -Path $permissionsRefPath -Raw
 
-    # Regular expression to extract permission sections
-    $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9\.\_]+)\s+\|\s+Category\s+\|\s+Application\s+\|\s+Delegated\s+\|(?:.+?)\|\s+Identifier\s+\|\s+([a-f0-9\-]+)\s+\|\s+([a-f0-9\-]+)\s+\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+    # Fixed regex pattern to avoid escape sequence issues
+    $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9._]+)\s*\|\s*Category\s*\|\s*Application\s*\|\s*Delegated\s*\|[\s\S]*?Identifier\s*\|\s*([a-f0-9-]+)\s*\|\s*([a-f0-9-]+)\s*\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
 
     $identifiers = @{}
     $matches = $permissionSectionPattern.Matches($content)
+
+    Write-Host "Found $($matches.Count) permission matches in reference file"
 
     foreach ($match in $matches) {
         $permissionName = $match.Groups[1].Value
         $appId = $match.Groups[2].Value
         $delegatedId = $match.Groups[3].Value
+
+        Write-Verbose "Found permission: $permissionName, App: $appId, Delegated: $delegatedId"
 
         $identifiers[$permissionName] = @{
             "ApplicationId" = $appId

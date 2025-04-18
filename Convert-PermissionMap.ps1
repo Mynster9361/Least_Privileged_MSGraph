@@ -51,6 +51,25 @@ function Extract-HttpRequests {
     return $endpoints
 }
 
+function Extract-ExampleUrl {
+    param (
+        [string]$content
+    )
+
+    $examplePattern = [regex]::new('```msgraph-interactive\s+((?:GET|POST|PATCH|PUT|DELETE).*?https://graph\.microsoft\.com/.*?)(?:\r?\n|$)', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+    $match = $examplePattern.Match($content)
+
+    if ($match.Success) {
+        $exampleLine = $match.Groups[1].Value.Trim()
+        # Extract just the URL part (after the HTTP method)
+        if ($exampleLine -match '(?:GET|POST|PATCH|PUT|DELETE)\s+(https://.*?)(?:\s|$)') {
+            return $matches[1].Trim()
+        }
+    }
+
+    return $null
+}
+
 function Extract-PermissionsInclude {
     param (
         [string]$content
@@ -216,11 +235,16 @@ function Process-ApiFiles {
                 }
             }
 
+            # Try to extract example URL directly from the markdown
+            $exampleUrl = Extract-ExampleUrl -content $content
+
             $results += [PSCustomObject]@{
                 "path" = $endpoint.path
                 "version" = $version
                 "method" = $endpoint.method
                 "operation_name" = $operationName
+                "full_example_url" = if ($exampleUrl) { $exampleUrl } else { "https://graph.microsoft.com/$($version)$($endpoint.path)" }
+                "example_from_docs" = [bool]$exampleUrl
                 "DelegatedWork_Least" = $delegatedWork.least_privileged
                 "DelegatedWork_Higher" = $delegatedWork.higher_privileged
                 "DelegatedPersonal_Least" = $delegatedPersonal.least_privileged

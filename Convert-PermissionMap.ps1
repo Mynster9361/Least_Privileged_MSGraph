@@ -32,8 +32,8 @@ function Extract-PermissionIdentifiers {
 
     $content = Get-Content -Path $permissionsRefPath -Raw
 
-    # Fixed regex pattern to avoid escape sequence issues
-    $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9._]+)\s*\|\s*Category\s*\|\s*Application\s*\|\s*Delegated\s*\|[\s\S]*?Identifier\s*\|\s*([a-f0-9-]+)\s*\|\s*([a-f0-9-]+)\s*\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+    # New regex pattern that properly matches the permissions reference format
+    $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9._]+)[\s\S]*?Identifier\s*\|\s*([a-f0-9-]+)\s*\|\s*([a-f0-9-]+)\s*\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
 
     $identifiers = @{}
     $matches = $permissionSectionPattern.Matches($content)

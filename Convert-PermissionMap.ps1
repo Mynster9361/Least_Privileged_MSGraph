@@ -3,12 +3,55 @@ param (
     [string]$DocsPath,
 
     [string]$JsonOutputPath = "graph_api_permissions_map.json",
-    [string[]]$Versions = @("v1.0", "beta")
+    [string[]]$Versions = @("v1.0", "beta"),
+
+    # New parameter for permissions reference file
+    [string]$PermissionsReferencePath
 )
 
 # Base paths
 $apiReferencePath = Join-Path -Path $DocsPath -ChildPath "api-reference"
 Write-Host "API Reference path: $apiReferencePath"
+
+# Default permissions reference path if not provided
+if (-not $PermissionsReferencePath) {
+    $PermissionsReferencePath = Join-Path -Path $DocsPath -ChildPath "concepts\permissions-reference.md"
+}
+
+function Extract-PermissionIdentifiers {
+    param (
+        [string]$permissionsRefPath
+    )
+
+    Write-Host "Extracting permission identifiers from $permissionsRefPath"
+
+    if (-not (Test-Path -Path $permissionsRefPath)) {
+        Write-Warning "Permissions reference file not found: $permissionsRefPath"
+        return @{}
+    }
+
+    $content = Get-Content -Path $permissionsRefPath -Raw
+
+    # Regular expression to extract permission sections
+    $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9\.\_]+)\s+\|\s+Category\s+\|\s+Application\s+\|\s+Delegated\s+\|(?:.+?)\|\s+Identifier\s+\|\s+([a-f0-9\-]+)\s+\|\s+([a-f0-9\-]+)\s+\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+
+    $identifiers = @{}
+    $matches = $permissionSectionPattern.Matches($content)
+
+    foreach ($match in $matches) {
+        $permissionName = $match.Groups[1].Value
+        $appId = $match.Groups[2].Value
+        $delegatedId = $match.Groups[3].Value
+
+        $identifiers[$permissionName] = @{
+            "ApplicationId" = $appId
+            "DelegatedId" = $delegatedId
+        }
+    }
+
+    Write-Host "Extracted $($identifiers.Count) permission identifiers"
+    return $identifiers
+}
 
 function Extract-HttpRequests {
     param (
@@ -155,7 +198,8 @@ function Parse-PermissionsTable {
 
 function Process-ApiFiles {
     param (
-        [string]$version
+        [string]$version,
+        [hashtable]$permissionIdentifiers = @{}
     )
 
     $versionPath = Join-Path -Path $apiReferencePath -ChildPath $version
@@ -238,7 +282,31 @@ function Process-ApiFiles {
             # Try to extract example URL directly from the markdown
             $exampleUrl = Extract-ExampleUrl -content $content
 
+            # Add identifiers for permissions
+            $delegatedWorkIdentifiers = @()
+            $applicationIdentifiers = @()
+
+            # Process delegated work permissions
+            if ($delegatedWork -and $delegatedWork.least_privileged) {
+                foreach ($perm in $delegatedWork.least_privileged) {
+                    if ($permissionIdentifiers.ContainsKey($perm)) {
+                        $delegatedWorkIdentifiers += $permissionIdentifiers[$perm].DelegatedId
+                    }
+                }
+            }
+
+            # Process application permissions
+            if ($application -and $application.least_privileged) {
+                foreach ($perm in $application.least_privileged) {
+                    if ($permissionIdentifiers.ContainsKey($perm)) {
+                        $applicationIdentifiers += $permissionIdentifiers[$perm].ApplicationId
+                    }
+                }
+            }
+
             $results += [PSCustomObject]@{
+                "Application_Identifiers" = $applicationIdentifiers
+                "DelegatedWork_Identifiers" = $delegatedWorkIdentifiers
                 "path" = $endpoint.path
                 "version" = $version
                 "method" = $endpoint.method
@@ -262,9 +330,12 @@ function Process-ApiFiles {
 # Main execution
 $allResults = @()
 
+# Extract permission identifiers
+$permissionIdentifiers = Extract-PermissionIdentifiers -permissionsRefPath $PermissionsReferencePath
+
 foreach ($version in $Versions) {
     Write-Host "Starting to process $version API files..."
-    $versionResults = Process-ApiFiles -version $version
+    $versionResults = Process-ApiFiles -version $version -permissionIdentifiers $permissionIdentifiers
     $allResults += $versionResults
     Write-Host "Completed processing $version API files. Found $($versionResults.Count) mappings."
 }

@@ -45279,6 +45279,20 @@
     ]
   },
   {
+    "path": "https://graph.microsoft.com/beta/chats/19:1c3af46e9e0f4a5293343c8813c47619@thread.v2/sendActivityNotification",
+    "version": "beta",
+    "method": "POST",
+    "operation_name": "chat_sendactivitynotification",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/chats/19:1c3af46e9e0f4a5293343c8813c47619@thread.v2/sendActivityNotification",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "TeamsActivity.Send",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "TeamsActivity.Send.Chat",
+    "Application_Higher": "TeamsActivity.Send"
+  },
+  {
     "path": "/chats/{chat-id}/installedApps/{app-installation-id}/upgrade",
     "version": "beta",
     "method": "POST",
@@ -81174,6 +81188,20 @@
     "Application_Higher": "Directory.ReadWrite.All"
   },
   {
+    "path": "https://graph.microsoft.com/beta/teams/e8bece96-d393-4b9b-b8da-69cedef1a7e7/sendActivityNotification",
+    "version": "beta",
+    "method": "POST",
+    "operation_name": "team_sendactivitynotification",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/teams/e8bece96-d393-4b9b-b8da-69cedef1a7e7/sendActivityNotification",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "TeamsActivity.Send",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "TeamsActivity.Send.Group",
+    "Application_Higher": "TeamsActivity.Send"
+  },
+  {
     "path": "/teams/{team-id}/installedApps/{app-installation-id}/upgrade",
     "version": "beta",
     "method": "POST",
@@ -81377,6 +81405,20 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Teamwork.Read.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "https://graph.microsoft.com/beta/teamwork/sendActivityNotificationToRecipients",
+    "version": "beta",
+    "method": "POST",
+    "operation_name": "teamwork_sendactivitynotificationtorecipients",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/teamwork/sendActivityNotificationToRecipients",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "TeamsActivity.Send",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "TeamsActivity.Send.User",
+    "Application_Higher": "TeamsActivity.Send"
   },
   {
     "path": "/appCatalogs/teamsApps/{teams-app-id}/appDefinitions/{app-definition-id}/colorIcon/hostedContent/",
@@ -84318,6 +84360,20 @@
       "TeamsAppInstallation.ReadWriteForUser.All",
       "TeamsAppInstallation.ReadWriteSelectedForUser.All"
     ]
+  },
+  {
+    "path": "https://graph.microsoft.com/beta/users/2f39ffba-51ca-4d2d-a66f-a020a83ce208/teamwork/sendActivityNotification",
+    "version": "beta",
+    "method": "POST",
+    "operation_name": "userteamwork_sendactivitynotification",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/users/2f39ffba-51ca-4d2d-a66f-a020a83ce208/teamwork/sendActivityNotification",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "TeamsActivity.Send",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "TeamsActivity.Send.User",
+    "Application_Higher": "TeamsActivity.Send"
   },
   {
     "path": "/users/{user-id | user-principal-name}/teamwork/installedApps/{app-installation-id}/upgrade",

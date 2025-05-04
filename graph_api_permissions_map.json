@@ -12833,6 +12833,20 @@
     "Application_Higher": "EduRoster.ReadWrite.All"
   },
   {
+    "path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "educationclass_getrecentlymodifiedsubmissions",
+    "full_example_url": "https://graph.microsoft.com/v1.0/education/classes/37d99af7-cfc5-4e3b-8566-f7d40e4a2070/getRecentlyModifiedSubmissions",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "EduAssignments.Read",
+    "DelegatedWork_Higher": "EduAssignments.ReadWrite",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "EduAssignments.Read.All",
+    "Application_Higher": "EduAssignments.ReadWrite.All"
+  },
+  {
     "path": "/education/classes/{id}/assignments",
     "version": "v1.0",
     "method": "GET",
@@ -54873,6 +54887,20 @@
     "Application_Higher": "Group.ReadWrite.All"
   },
   {
+    "path": "https://graph.microsoft.com/beta/copilot/settings/people/enhancedpersonalization",
+    "version": "beta",
+    "method": "PATCH",
+    "operation_name": "enhancedpersonalizationsetting_update",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/copilot/settings/people/enhancedpersonalization",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "PeopleSettings.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "PeopleSettings.ReadWrite.All",
+    "Application_Higher": "Not available."
+  },
+  {
     "path": "/identityGovernance/entitlementManagement/accessPackageAssignmentPolicies",
     "version": "beta",
     "method": "GET",
@@ -62671,15 +62699,15 @@
     "path": "/networkAccess/logs/traffic/{transactionId}",
     "version": "beta",
     "method": "GET",
-    "operation_name": "networkaccess_logs_list_traffic",
+    "operation_name": "networkaccess_networkaccesstraffic_get",
     "full_example_url": "https://graph.microsoft.com/beta/networkAccess/logs/traffic/5062f456-9d9e-477b-b788-b7aa6b5d402b",
     "example_from_docs": true,
     "DelegatedWork_Least": "NetworkAccess-Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
+    "DelegatedWork_Higher": "NetworkAccess.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "NetworkAccess-Reports.Read.All",
-    "Application_Higher": "Not available."
+    "Application_Higher": "NetworkAccess.ReadWrite.All"
   },
   {
     "path": "/sites/{site-id}/pages",

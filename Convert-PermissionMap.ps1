@@ -4,6 +4,7 @@ param (
 
     [string]$JsonOutputPath = "graph_api_permissions_map.json",
     [string]$MappingJsonOutputPath = "graph_api_permissions_friendly_names.json",
+    [string]$RoleEndpointMappingPath = "graph_api_permissions_endpoints.json",
     [string[]]$Versions = @("v1.0", "beta"),
 
     # Parameter for permissions reference file
@@ -332,6 +333,138 @@ function Process-ApiFiles {
     return $results
 }
 
+function Create-RoleToEndpointMapping {
+    param(
+        [array]$apiMappings
+    )
+
+    Write-Host "Creating role-to-endpoint mappings..."
+
+    # Create a hashtable to store the mappings
+    $roleEndpointMap = @{}
+
+    # Process all the API mappings
+    foreach ($mapping in $apiMappings) {
+        # Process Delegated Work permissions
+        if ($mapping.DelegatedWork_Least) {
+            foreach ($permission in $mapping.DelegatedWork_Least) {
+                $permission = $permission.Trim()
+                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                    continue
+                }
+
+                if (-not $roleEndpointMap.ContainsKey($permission)) {
+                    $roleEndpointMap[$permission] = @{
+                        "Role" = $permission
+                        "Type" = "Delegated"
+                        "Endpoints" = @()
+                    }
+                }
+
+                # Add endpoint to this permission's mapping
+                $roleEndpointMap[$permission].Endpoints += @{
+                    "Path" = $mapping.path
+                    "Method" = $mapping.method
+                    "Version" = $mapping.version
+                    "OperationName" = $mapping.operation_name
+                }
+            }
+        }
+
+        # Process Application permissions
+        if ($mapping.Application_Least) {
+            foreach ($permission in $mapping.Application_Least) {
+                $permission = $permission.Trim()
+                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                    continue
+                }
+
+                if (-not $roleEndpointMap.ContainsKey($permission)) {
+                    $roleEndpointMap[$permission] = @{
+                        "Role" = $permission
+                        "Type" = "Application"
+                        "Endpoints" = @()
+                    }
+                }
+
+                # Add endpoint to this permission's mapping
+                $roleEndpointMap[$permission].Endpoints += @{
+                    "Path" = $mapping.path
+                    "Method" = $mapping.method
+                    "Version" = $mapping.version
+                    "OperationName" = $mapping.operation_name
+                }
+            }
+        }
+
+        # Process higher permissions as well to provide complete mapping
+        if ($mapping.DelegatedWork_Higher) {
+            foreach ($permission in $mapping.DelegatedWork_Higher) {
+                $permission = $permission.Trim()
+                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                    continue
+                }
+
+                if (-not $roleEndpointMap.ContainsKey($permission)) {
+                    $roleEndpointMap[$permission] = @{
+                        "Role" = $permission
+                        "Type" = "Delegated"
+                        "Endpoints" = @()
+                    }
+                }
+
+                # Add endpoint to this permission's mapping
+                $roleEndpointMap[$permission].Endpoints += @{
+                    "Path" = $mapping.path
+                    "Method" = $mapping.method
+                    "Version" = $mapping.version
+                    "OperationName" = $mapping.operation_name
+                }
+            }
+        }
+
+        # Process Application higher permissions
+        if ($mapping.Application_Higher) {
+            foreach ($permission in $mapping.Application_Higher) {
+                $permission = $permission.Trim()
+                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                    continue
+                }
+
+                if (-not $roleEndpointMap.ContainsKey($permission)) {
+                    $roleEndpointMap[$permission] = @{
+                        "Role" = $permission
+                        "Type" = "Application"
+                        "Endpoints" = @()
+                    }
+                }
+
+                # Add endpoint to this permission's mapping
+                $roleEndpointMap[$permission].Endpoints += @{
+                    "Path" = $mapping.path
+                    "Method" = $mapping.method
+                    "Version" = $mapping.version
+                    "OperationName" = $mapping.operation_name
+                }
+            }
+        }
+    }
+
+    # Convert to array of objects for JSON export
+    $result = @()
+    foreach ($key in $roleEndpointMap.Keys) {
+        # Remove duplicate endpoints
+        $uniqueEndpoints = $roleEndpointMap[$key].Endpoints |
+            Sort-Object -Property Path, Method, Version -Unique |
+            ForEach-Object { [PSCustomObject]$_ }
+
+        $roleEndpointMap[$key].Endpoints = $uniqueEndpoints
+        $result += [PSCustomObject]$roleEndpointMap[$key]
+    }
+
+    return $result
+}
+
 # Main execution
 $allResults = @()
 
@@ -351,3 +484,8 @@ foreach ($version in $Versions) {
 # Save as JSON
 $allResults | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
 Write-Host "Saved JSON output to $JsonOutputPath"
+
+# Create and save the role-to-endpoint mappings
+$roleEndpointMappings = Create-RoleToEndpointMapping -apiMappings $allResults
+$roleEndpointMappings | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
+Write-Host "Saved role-to-endpoint mapping to $RoleEndpointMappingPath"

@@ -76,6 +76,7 @@ function Get-GraphPermissionUsage {
     # Format the time range
     $startTime = (Get-Date).AddDays(-$DaysToLookBack).ToString("yyyy-MM-dd")
     $endTime = Get-Date -Format "yyyy-MM-dd"
+    $timespan = (New-TimeSpan -Days $DaysToLookBack)
 
     # Build the KQL query
     $query = @"
@@ -100,30 +101,58 @@ MicrosoftGraphActivityLogs
 | order by RequestCount desc
 "@
 
-    # Run the query
-    #$results = Invoke-AzOperationalInsightsQuery -WorkspaceId $WorkspaceId -Query $query -ErrorAction Stop
-    $job = Invoke-AzOperationalInsightsQuery -WorkspaceId $WorkspaceId -Query $query -Timespan $timespan -AsJob
-	$job | Wait-Job
-	$results = $job | Receive-Job
+    try {
+        # Run the query
+        $job = Invoke-AzOperationalInsightsQuery -WorkspaceId $WorkspaceId -Query $query -Timespan $timespan -AsJob
+        $job | Wait-Job -Timeout 120
 
-    # Process results
-    if ($results -and $results.Results) {
-        $usageData = $results.Results
+        if ($job.State -eq 'Completed') {
+            $results = $job | Receive-Job
 
-        # Add a flag to indicate if the path is included in allowed permissions
-        $usageData | ForEach-Object {
-            $currentPath = $_.NormalizedPath
-            $currentMethod = $_.RequestMethod
-            $permissionMatch = $RoleAssignment.UrlPaths | Where-Object {
-                $path = $_.path -replace '{[^}]+}', '{id}'  # Normalize comparison path
-                $path -eq "/$currentPath" -or $path -eq $currentPath -or $currentPath.StartsWith($path)
+            # Process results
+            if ($results -and $results.Results) {
+                $usageData = $results.Results
+
+                # Add a flag to indicate if the path is included in allowed permissions
+                $usageData | ForEach-Object {
+                    $currentPath = $_.NormalizedPath
+                    $currentMethod = $_.RequestMethod
+
+                    # Safe path comparison
+                    $permissionMatch = $null
+                    if ($RoleAssignment.UrlPaths -and $currentPath) {
+                        $permissionMatch = $RoleAssignment.UrlPaths | Where-Object {
+                            $path = $null
+                            if ($_.path) {
+                                $path = $_.path -replace '{[^}]+}', '{id}'  # Normalize comparison path
+                                $path = $path.TrimStart('/')
+                            }
+
+                            $pathMatches = $false
+                            if ($path -and $currentPath) {
+                                $pathMatches = ($path -eq $currentPath) -or
+                                              ($currentPath -eq "/$path") -or
+                                              ($currentPath.GetType().Name -eq "String" -and $currentPath.StartsWith($path))
+                            }
+
+                            return $pathMatches
+                        }
+                    }
+
+                    $_ | Add-Member -MemberType NoteProperty -Name 'IsAuthorized' -Value ($null -ne $permissionMatch)
+                }
+
+                # Return the processed results
+                return $usageData
             }
-
-            $_ | Add-Member -MemberType NoteProperty -Name 'IsAuthorized' -Value ($null -ne $permissionMatch)
         }
-
-        # Return the processed results
-        return $usageData
+        else {
+            Write-Warning "Query timed out or failed for $($RoleAssignment.PrincipalDisplayName)"
+            $job | Remove-Job -Force
+        }
+    }
+    catch {
+        Write-Error "Error querying Log Analytics: $_"
     }
 
     return $null

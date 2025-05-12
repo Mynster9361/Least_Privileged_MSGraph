@@ -78,7 +78,7 @@ function Export-PermissionMappings {
         $mappings += $mapping
     }
 
-    $mappings | order-by Role_Name | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
+    $mappings | sort-obbject -Property Role_Name | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
     Write-Host "Exported $($mappings.Count) permission mappings"
 }
 
@@ -349,5 +349,5 @@ foreach ($version in $Versions) {
 }
 
 # Save as JSON
-$allResults | order-by path | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
+$allResults | sort-obbject -Property path | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
 Write-Host "Saved JSON output to $JsonOutputPath"

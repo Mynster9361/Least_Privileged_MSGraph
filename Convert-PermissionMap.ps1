@@ -79,7 +79,7 @@ function Export-PermissionMappings {
         $mappings += $mapping
     }
 
-    $mappings | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
+    $mappings | Sort-Object -Property Role_Name | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
     Write-Host "Exported $($mappings.Count) permission mappings"
 }
 
@@ -482,10 +482,10 @@ foreach ($version in $Versions) {
 }
 
 # Save as JSON
-$allResults | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
+$allResults | Sort-Object -Property path | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
 Write-Host "Saved JSON output to $JsonOutputPath"
 
 # Create and save the role-to-endpoint mappings
 $roleEndpointMappings = Create-RoleToEndpointMapping -apiMappings $allResults
-$roleEndpointMappings | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
+$roleEndpointMappings | Sort-Object -Property Role | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
 Write-Host "Saved role-to-endpoint mapping to $RoleEndpointMappingPath"

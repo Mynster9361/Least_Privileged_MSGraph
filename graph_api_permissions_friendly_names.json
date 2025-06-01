@@ -160,6 +160,16 @@
     "DelegatedWork_Identifier": "27608d7c-2c66-4cad-a657-951d575f5a60"
   },
   {
+    "Role_Name": "AuditActivity.Read",
+    "Application_Identifier": "99bc85fb-e857-4220-9f8c-3a1c83148d2e",
+    "DelegatedWork_Identifier": "16786f81-40d2-4116-bb26-d1a753bf0b20"
+  },
+  {
+    "Role_Name": "AuditActivity.Write",
+    "Application_Identifier": "f6318678-2713-4bb6-b123-233e7336c1bd",
+    "DelegatedWork_Identifier": "a78fd341-0672-4792-a8ae-a5925b2546eb"
+  },
+  {
     "Role_Name": "AuditLog.Read.All",
     "Application_Identifier": "b0afded3-3588-46d8-8b3d-9842eff778da",
     "DelegatedWork_Identifier": "e4c9e354-4dc5-45b8-9e7c-e1393b0b1a20"
@@ -618,6 +628,26 @@
     "Role_Name": "Contacts.ReadWrite.Shared",
     "Application_Identifier": "-",
     "DelegatedWork_Identifier": "afb6c84b-06be-49af-80bb-8f3f77004eab"
+  },
+  {
+    "Role_Name": "Content.Process.All",
+    "Application_Identifier": "5ad511bf-571c-4ef6-8c3c-85b94b85df98",
+    "DelegatedWork_Identifier": "7e2467d1-f874-46bb-828e-24cb06b29d3f"
+  },
+  {
+    "Role_Name": "Content.Process.User",
+    "Application_Identifier": "24ceb246-ad29-4680-90b4-3e91ffad15eb",
+    "DelegatedWork_Identifier": "1d787a13-f750-4ad6-875a-fcbd2725596b"
+  },
+  {
+    "Role_Name": "ContentActivity.Read",
+    "Application_Identifier": "368425e7-6954-4f5a-9d92-90b75bd580c9",
+    "DelegatedWork_Identifier": "62c55b2f-a2b1-4312-8385-be57afd901b4"
+  },
+  {
+    "Role_Name": "ContentActivity.Write",
+    "Application_Identifier": "2932e07a-3c29-44e4-bb36-6d0fc176387f",
+    "DelegatedWork_Identifier": "948caae6-152a-48cd-a746-4844af30e8e9"
   },
   {
     "Role_Name": "CopilotSettings",
@@ -2145,6 +2175,21 @@
     "DelegatedWork_Identifier": "50fd364f-9d93-4ae1-b170-300e87cccf84"
   },
   {
+    "Role_Name": "ProtectionScopes.Compute.All",
+    "Application_Identifier": "e5a76501-dbb0-492c-ab55-5d09e8837263",
+    "DelegatedWork_Identifier": "98f5a27a-539a-48bc-a597-f78e9e1e76bf"
+  },
+  {
+    "Role_Name": "ProtectionScopes.Compute.User",
+    "Application_Identifier": "fe696d63-5e1f-4515-8232-cccc316903c6",
+    "DelegatedWork_Identifier": "4fc04d16-a9fc-4c5e-8da4-79b6c33638a4"
+  },
+  {
+    "Role_Name": "ProvisioningLog.Read.All",
+    "Application_Identifier": "091937d3-3e38-47a1-8649-b2f99d3035f1",
+    "DelegatedWork_Identifier": "95aec97b-cf27-4a8d-a67d-42f60b5b38ef"
+  },
+  {
     "Role_Name": "PublicKeyInfrastructure.Read.All",
     "Application_Identifier": "214fda0c-514a-4650-b037-b562b1a66124",
     "DelegatedWork_Identifier": "04a4b2a2-3f26-4fc8-87ee-9c46e68db175"
@@ -2438,6 +2483,21 @@
     "Role_Name": "SecurityIncident.ReadWrite.All",
     "Application_Identifier": "34bf0e97-1971-4929-b999-9e2442d941d7",
     "DelegatedWork_Identifier": "128ca929-1a19-45e6-a3b8-435ec44a36ba"
+  },
+  {
+    "Role_Name": "SensitivityLabel.Evaluate",
+    "Application_Identifier": "57f0b71b-a759-45a0-9a0f-cc099fbd9a44",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SensitivityLabel.Read",
+    "Application_Identifier": "3b8e7aad-f6e3-4299-83f8-6fc6a5777f0b",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "SensitivityLabels.Read.All",
+    "Application_Identifier": "e46a01e9-b2cf-4d89-8424-bcdc6dd445ab",
+    "DelegatedWork_Identifier": "-"
   },
   {
     "Role_Name": "ServiceActivity",

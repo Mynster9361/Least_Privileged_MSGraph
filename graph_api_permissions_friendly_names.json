@@ -2490,6 +2490,11 @@
     "DelegatedWork_Identifier": "-"
   },
   {
+    "Role_Name": "SensitivityLabel.Evaluate.All",
+    "Application_Identifier": "986fa56a-6680-4aac-af09-4d1765376739",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
     "Role_Name": "SensitivityLabel.Read",
     "Application_Identifier": "3b8e7aad-f6e3-4299-83f8-6fc6a5777f0b",
     "DelegatedWork_Identifier": "-"

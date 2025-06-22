@@ -2034,7 +2034,7 @@
     "version": "v1.0",
     "method": "GET",
     "operation_name": "application_list_owners",
-    "full_example_url": "https://graph.microsoft.com/v1.0/applications(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/v1.0/applications/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -2057,7 +2057,7 @@
     "version": "beta",
     "method": "GET",
     "operation_name": "application_list_owners",
-    "full_example_url": "https://graph.microsoft.com/beta/applications(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/beta/applications/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -3118,7 +3118,7 @@
     "version": "beta",
     "method": "GET",
     "operation_name": "application_list_owners",
-    "full_example_url": "https://graph.microsoft.com/beta/applications(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/beta/applications/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -3141,7 +3141,7 @@
     "version": "v1.0",
     "method": "GET",
     "operation_name": "application_list_owners",
-    "full_example_url": "https://graph.microsoft.com/v1.0/applications(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/v1.0/applications/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -61141,7 +61141,7 @@
     "version": "v1.0",
     "method": "GET",
     "operation_name": "serviceprincipal_list_owners",
-    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -62268,7 +62268,7 @@
     "version": "v1.0",
     "method": "GET",
     "operation_name": "serviceprincipal_list_owners",
-    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [
@@ -62291,7 +62291,7 @@
     "version": "beta",
     "method": "GET",
     "operation_name": "serviceprincipal_list_owners",
-    "full_example_url": "https://graph.microsoft.com/beta/serviceprincipals(appId='bbec3106-565f-4907-941e-96b4dbfef21c')/owners",
+    "full_example_url": "https://graph.microsoft.com/beta/serviceprincipals/bbec3106-565f-4907-941e-96b4dbfef21c/owners",
     "example_from_docs": true,
     "DelegatedWork_Least": "Application.Read.All",
     "DelegatedWork_Higher": [

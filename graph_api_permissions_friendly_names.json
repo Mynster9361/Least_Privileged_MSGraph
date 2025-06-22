@@ -1070,6 +1070,11 @@
     "DelegatedWork_Identifier": "-"
   },
   {
+    "Role_Name": "EngagementMeetingConversation.Read.All",
+    "Application_Identifier": "d746beae-b46e-446e-924a-5b805a5c4467",
+    "DelegatedWork_Identifier": "58c5819e-29bd-4400-ad52-82cd82a63fbd"
+  },
+  {
     "Role_Name": "EngagementRole.Read",
     "Application_Identifier": "-",
     "DelegatedWork_Identifier": "9f1da0fc-345c-4dfb-bab5-5215a073a417"
@@ -2487,22 +2492,22 @@
   {
     "Role_Name": "SensitivityLabel.Evaluate",
     "Application_Identifier": "57f0b71b-a759-45a0-9a0f-cc099fbd9a44",
-    "DelegatedWork_Identifier": "-"
+    "DelegatedWork_Identifier": "a4633e44-d355-4474-99df-8c2de6b0e39e"
   },
   {
     "Role_Name": "SensitivityLabel.Evaluate.All",
     "Application_Identifier": "986fa56a-6680-4aac-af09-4d1765376739",
-    "DelegatedWork_Identifier": "-"
+    "DelegatedWork_Identifier": "a42e3c42-b31e-4919-b699-696dca5dc9e7"
   },
   {
     "Role_Name": "SensitivityLabel.Read",
     "Application_Identifier": "3b8e7aad-f6e3-4299-83f8-6fc6a5777f0b",
-    "DelegatedWork_Identifier": "-"
+    "DelegatedWork_Identifier": "1aeb73ce-68d7-49b7-913a-eedc80844551"
   },
   {
     "Role_Name": "SensitivityLabels.Read.All",
     "Application_Identifier": "e46a01e9-b2cf-4d89-8424-bcdc6dd445ab",
-    "DelegatedWork_Identifier": "-"
+    "DelegatedWork_Identifier": "8b377c27-ea19-4863-a948-8a8588c8f2c3"
   },
   {
     "Role_Name": "ServiceActivity",
@@ -3313,6 +3318,11 @@
     "Role_Name": "UserAuthMethod",
     "Application_Identifier": "0400e371-7db1-4338-a269-96069eb65227",
     "DelegatedWork_Identifier": "64930478-d0ea-4671-ad72-fe0d9821df09"
+  },
+  {
+    "Role_Name": "UserCloudClipboard.Read",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "61e8a09a-087f-4e36-8c8c-1c77c5228017"
   },
   {
     "Role_Name": "UserNotification.ReadWrite.CreatedByApp",

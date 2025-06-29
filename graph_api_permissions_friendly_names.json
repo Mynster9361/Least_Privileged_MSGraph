@@ -1850,6 +1850,11 @@
     "DelegatedWork_Identifier": "572fea84-0151-49b2-9301-11cb16974376"
   },
   {
+    "Role_Name": "Policy.Read.AuthenticationMethod",
+    "Application_Identifier": "8e3bc81b-d2f3-4b7b-838c-32c88218d2f0",
+    "DelegatedWork_Identifier": "a6ff13ac-1851-4993-8ca9-a671d70de2d5"
+  },
+  {
     "Role_Name": "Policy.Read.ConditionalAccess",
     "Application_Identifier": "37730810-e9ba-4e46-b07e-8ca78d182097",
     "DelegatedWork_Identifier": "633e0fce-8c58-4cfb-9495-12bbd5a24f7c"

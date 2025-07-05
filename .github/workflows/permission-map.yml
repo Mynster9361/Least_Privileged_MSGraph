@@ -73,12 +73,12 @@ jobs:
                 
                 # Count actual content changes (not just line shifts)
                 if [ "$additions" -le 20 ] && [ "$deletions" -le 20 ]; then
-                  # Small changes - capture actual diff content with better escaping
+                  # Small changes - capture actual diff content
                   file_diff=$(git diff --staged "$file" | grep -E "^\+[^+]|^\-[^-]" | head -20)
                   if [ ! -z "$file_diff" ]; then
                     change_details="${change_details}${file}:SMALL_CHANGES:${additions}:${deletions};"
-                    # Better escaping for PowerShell - encode special characters
-                    clean_diff=$(echo "$file_diff" | sed 's/^[+-]//' | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed "s/'/\\'/g" | tr '\n' '|')
+                    # Base64 encode the diff content to avoid all escaping issues
+                    clean_diff=$(echo "$file_diff" | sed 's/^[+-]//' | base64 -w 0)
                     diff_content="${diff_content}${file}:::${clean_diff};;;"
                   fi
                 else
@@ -140,14 +140,19 @@ jobs:
                 if ($changeType -eq "SMALL_CHANGES") {
                   $changeAnalysis += "📝 **$fileName**`n+$additions/-$deletions lines`n"
                   
-                  # Find corresponding diff content with better error handling
+                  # Find corresponding diff content with base64 decoding
                   if (![string]::IsNullOrWhiteSpace($diffContent)) {
                     try {
                       $diffEntries = $diffContent.Split(';;;') | Where-Object { $_ -ne '' }
                       foreach ($diffEntry in $diffEntries) {
                         $diffParts = $diffEntry.Split(':::')
                         if ($diffParts.Length -eq 2 -and $diffParts[0] -eq $fileName) {
-                          $diffLines = $diffParts[1].Split('|') | Where-Object { $_ -ne '' }
+                          # Decode base64 content
+                          $encodedContent = $diffParts[1]
+                          $decodedBytes = [System.Convert]::FromBase64String($encodedContent)
+                          $decodedContent = [System.Text.Encoding]::UTF8.GetString($decodedBytes)
+                          
+                          $diffLines = $decodedContent.Split("`n") | Where-Object { $_.Trim() -ne '' }
                           if ($diffLines.Count -gt 0) {
                             # Take first 10 lines to keep Discord message reasonable
                             $limitedLines = $diffLines | Select-Object -First 10
@@ -167,7 +172,7 @@ jobs:
                         }
                       }
                     } catch {
-                      Write-Host "Warning: Could not process diff content for $fileName"
+                      Write-Host "Warning: Could not process diff content for $fileName : $($_.Exception.Message)"
                     }
                   }
                 } else {

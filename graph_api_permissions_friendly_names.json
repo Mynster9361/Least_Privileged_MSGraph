@@ -3320,11 +3320,6 @@
     "DelegatedWork_Identifier": "aec28ec7-4d02-4e8c-b864-50163aea77eb"
   },
   {
-    "Role_Name": "UserAuthenticationMethod.ReadWrite",
-    "Application_Identifier": "-",
-    "DelegatedWork_Identifier": "48971fc1-70d7-4245-af77-0beb29b53ee2"
-  },
-  {
     "Role_Name": "UserAuthenticationMethod.ReadWrite.All",
     "Application_Identifier": "50483e42-d915-4231-9639-7fdb7fd190e5",
     "DelegatedWork_Identifier": "b7887744-6746-4312-813d-72daeaee7e2d"

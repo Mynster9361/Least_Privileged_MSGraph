@@ -163,9 +163,11 @@ jobs:
                               $formattedDiff = $formattedDiff.Substring(0, 1000) + "`n... (truncated)"
                             }
                             
-                            # Only add if we have meaningful content
+                            # Only add if we have meaningful content - fix backtick escaping
                             if ($formattedDiff.Trim() -ne "") {
-                              $codeBlocks += "**Changes in $fileName:**`n````json`n$formattedDiff`n````"
+                              $codeStart = '```json'
+                              $codeEnd = '```'
+                              $codeBlocks += "**Changes in $fileName:**`n$codeStart`n$formattedDiff`n$codeEnd`n`n"
                             }
                           }
                           break

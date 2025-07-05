@@ -349,7 +349,7 @@ function Create-RoleToEndpointMapping {
         if ($mapping.DelegatedWork_Least) {
             foreach ($permission in $mapping.DelegatedWork_Least) {
                 $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
                     continue
                 }
 
@@ -361,12 +361,17 @@ function Create-RoleToEndpointMapping {
                     }
                 }
 
-                # Add endpoint to this permission's mapping
-                $roleEndpointMap[$permission].Endpoints += @{
-                    "Path" = $mapping.path
-                    "Method" = $mapping.method
-                    "Version" = $mapping.version
-                    "OperationName" = $mapping.operation_name
+                # Create endpoint object with all required properties
+                $endpoint = @{
+                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
+                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
+                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
+                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
+                }
+
+                # Only add if we have meaningful data
+                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
+                    $roleEndpointMap[$permission].Endpoints += $endpoint
                 }
             }
         }
@@ -375,7 +380,7 @@ function Create-RoleToEndpointMapping {
         if ($mapping.Application_Least) {
             foreach ($permission in $mapping.Application_Least) {
                 $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
                     continue
                 }
 
@@ -387,12 +392,17 @@ function Create-RoleToEndpointMapping {
                     }
                 }
 
-                # Add endpoint to this permission's mapping
-                $roleEndpointMap[$permission].Endpoints += @{
-                    "Path" = $mapping.path
-                    "Method" = $mapping.method
-                    "Version" = $mapping.version
-                    "OperationName" = $mapping.operation_name
+                # Create endpoint object with all required properties
+                $endpoint = @{
+                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
+                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
+                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
+                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
+                }
+
+                # Only add if we have meaningful data
+                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
+                    $roleEndpointMap[$permission].Endpoints += $endpoint
                 }
             }
         }
@@ -401,7 +411,7 @@ function Create-RoleToEndpointMapping {
         if ($mapping.DelegatedWork_Higher) {
             foreach ($permission in $mapping.DelegatedWork_Higher) {
                 $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
                     continue
                 }
 
@@ -413,12 +423,17 @@ function Create-RoleToEndpointMapping {
                     }
                 }
 
-                # Add endpoint to this permission's mapping
-                $roleEndpointMap[$permission].Endpoints += @{
-                    "Path" = $mapping.path
-                    "Method" = $mapping.method
-                    "Version" = $mapping.version
-                    "OperationName" = $mapping.operation_name
+                # Create endpoint object with all required properties
+                $endpoint = @{
+                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
+                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
+                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
+                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
+                }
+
+                # Only add if we have meaningful data
+                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
+                    $roleEndpointMap[$permission].Endpoints += $endpoint
                 }
             }
         }
@@ -427,7 +442,7 @@ function Create-RoleToEndpointMapping {
         if ($mapping.Application_Higher) {
             foreach ($permission in $mapping.Application_Higher) {
                 $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or [string]::IsNullOrWhiteSpace($permission)) {
+                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
                     continue
                 }
 
@@ -439,12 +454,17 @@ function Create-RoleToEndpointMapping {
                     }
                 }
 
-                # Add endpoint to this permission's mapping
-                $roleEndpointMap[$permission].Endpoints += @{
-                    "Path" = $mapping.path
-                    "Method" = $mapping.method
-                    "Version" = $mapping.version
-                    "OperationName" = $mapping.operation_name
+                # Create endpoint object with all required properties
+                $endpoint = @{
+                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
+                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
+                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
+                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
+                }
+
+                # Only add if we have meaningful data
+                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
+                    $roleEndpointMap[$permission].Endpoints += $endpoint
                 }
             }
         }
@@ -453,12 +473,24 @@ function Create-RoleToEndpointMapping {
     # Convert to array of objects for JSON export with consistent sorting
     $result = @()
     foreach ($key in ($roleEndpointMap.Keys | Sort-Object)) {
-        # Remove duplicate endpoints and sort them consistently
-        $uniqueEndpoints = $roleEndpointMap[$key].Endpoints |
-            Sort-Object -Property Version, Path, Method -Unique |
-            ForEach-Object { [PSCustomObject]$_ }
-
-        $roleEndpointMap[$key].Endpoints = $uniqueEndpoints
+        # Create a unique key for deduplication that includes all properties
+        $uniqueEndpoints = @()
+        $seenEndpoints = @{}
+        
+        foreach ($endpoint in $roleEndpointMap[$key].Endpoints) {
+            # Create a unique identifier for the endpoint
+            $uniqueKey = "$($endpoint.Version)|$($endpoint.Path)|$($endpoint.Method)|$($endpoint.OperationName)"
+            
+            if (-not $seenEndpoints.ContainsKey($uniqueKey)) {
+                $seenEndpoints[$uniqueKey] = $true
+                $uniqueEndpoints += [PSCustomObject]$endpoint
+            }
+        }
+        
+        # Sort the unique endpoints consistently
+        $sortedEndpoints = $uniqueEndpoints | Sort-Object -Property Version, Path, Method, OperationName
+        
+        $roleEndpointMap[$key].Endpoints = $sortedEndpoints
         $result += [PSCustomObject]$roleEndpointMap[$key]
     }
 

@@ -32,8 +32,8 @@ jobs:
           cd my-repo
           pwsh -File ./Convert-PermissionMap.ps1 -DocsPath "../ms-graph-docs"
 
-
-      - name: Commit and Push Changes
+      - name: Check for changes and gather stats
+        id: changes
         run: |
           cd my-repo
           git config user.name "GitHub Actions Bot"
@@ -42,10 +42,144 @@ jobs:
           git add graph_api_permissions_map.json
           git add graph_api_permissions_endpoints.json
 
-          # Only commit if there are changes
+          # Check if there are changes
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
           else
-            git commit -m "Update Graph API permissions map [skip ci]"
-            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            # Get file stats
+            friendly_names_count=$(jq length graph_api_permissions_friendly_names.json 2>/dev/null || echo "0")
+            map_count=$(jq length graph_api_permissions_map.json 2>/dev/null || echo "0")
+            endpoints_count=$(jq length graph_api_permissions_endpoints.json 2>/dev/null || echo "0")
+            
+            echo "friendly_names_count=$friendly_names_count" >> $GITHUB_OUTPUT
+            echo "map_count=$map_count" >> $GITHUB_OUTPUT
+            echo "endpoints_count=$endpoints_count" >> $GITHUB_OUTPUT
+            
+            # Get changed files info
+            changed_files=$(git diff --staged --name-only | tr '\n' ' ')
+            echo "changed_files=$changed_files" >> $GITHUB_OUTPUT
+            
+            echo "Changes detected in: $changed_files"
           fi
+
+      - name: Commit and Push Changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          cd my-repo
+          git commit -m "Update Graph API permissions map [skip ci]"
+          git push
+
+      - name: Send Discord Notification
+        if: steps.changes.outputs.has_changes == 'true'
+        shell: pwsh
+        run: |
+          $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
+          
+          if ([string]::IsNullOrWhiteSpace($webhookUrl)) {
+            Write-Host "⚠️ Discord webhook URL not configured in secrets"
+            exit 0
+          }
+          
+          $friendlyNamesCount = "${{ steps.changes.outputs.friendly_names_count }}"
+          $mapCount = "${{ steps.changes.outputs.map_count }}"
+          $endpointsCount = "${{ steps.changes.outputs.endpoints_count }}"
+          $changedFiles = "${{ steps.changes.outputs.changed_files }}"
+          
+          $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
+          $repoUrl = "https://github.com/${{ github.repository }}"
+          $runUrl = "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          
+          $embed = @{
+            title = "🔄 Graph API Permissions Map Updated"
+            description = "The Microsoft Graph API permissions mapping has been successfully updated!"
+            color = 3447003  # Blue color
+            fields = @(
+              @{
+                name = "📊 **Statistics**"
+                value = "**Permission Names:** $friendlyNamesCount`n**API Mappings:** $mapCount`n**Permission Endpoints:** $endpointsCount"
+                inline = $true
+              },
+              @{
+                name = "📁 **Files Updated**"
+                value = "``````$changedFiles``````"
+                inline = $true
+              },
+              @{
+                name = "🔗 **Links**"
+                value = "[View Repository]($repoUrl) | [View Run]($runUrl)"
+                inline = $false
+              }
+            )
+            footer = @{
+              text = "Updated at $currentTime"
+            }
+            thumbnail = @{
+              url = "https://github.com/microsoft.png"
+            }
+          }
+          
+          $payload = @{
+            embeds = @($embed)
+          } | ConvertTo-Json -Depth 10
+          
+          try {
+            $response = Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $payload -ContentType "application/json"
+            Write-Host "✅ Discord notification sent successfully"
+          } catch {
+            Write-Host "❌ Failed to send Discord notification: $($_.Exception.Message)"
+            Write-Host "Response: $($_.Exception.Response)"
+          }
+
+      - name: Send Discord Notification (No Changes)
+        if: steps.changes.outputs.has_changes == 'false'
+        shell: pwsh
+        run: |
+          $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
+          
+          if ([string]::IsNullOrWhiteSpace($webhookUrl)) {
+            Write-Host "⚠️ Discord webhook URL not configured in secrets"
+            exit 0
+          }
+          
+          $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
+          $repoUrl = "https://github.com/${{ github.repository }}"
+          $runUrl = "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          
+          $embed = @{
+            title = "✅ Graph API Permissions Check Complete"
+            description = "No changes detected in the Microsoft Graph API permissions mapping."
+            color = 2067276  # Green color
+            fields = @(
+              @{
+                name = "📝 **Status**"
+                value = "All files are up to date with the latest Microsoft Graph documentation."
+                inline = $false
+              },
+              @{
+                name = "🔗 **Links**"
+                value = "[View Repository]($repoUrl) | [View Run]($runUrl)"
+                inline = $false
+              }
+            )
+            footer = @{
+              text = "Checked at $currentTime"
+            }
+            thumbnail = @{
+              url = "https://github.com/microsoft.png"
+            }
+          }
+          
+          $payload = @{
+            embeds = @($embed)
+          } | ConvertTo-Json -Depth 10
+          
+          try {
+            $response = Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $payload -ContentType "application/json"
+            Write-Host "✅ Discord notification sent successfully"
+          } catch {
+            Write-Host "❌ Failed to send Discord notification: $($_.Exception.Message)"
+            Write-Host "Response: $($_.Exception.Response)"
+          }

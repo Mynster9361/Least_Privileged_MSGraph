@@ -73,12 +73,12 @@ jobs:
                 
                 # Count actual content changes (not just line shifts)
                 if [ "$additions" -le 20 ] && [ "$deletions" -le 20 ]; then
-                  # Small changes - capture actual diff content
+                  # Small changes - capture actual diff content with better escaping
                   file_diff=$(git diff --staged "$file" | grep -E "^\+[^+]|^\-[^-]" | head -20)
                   if [ ! -z "$file_diff" ]; then
                     change_details="${change_details}${file}:SMALL_CHANGES:${additions}:${deletions};"
-                    # Clean up diff content for JSON - remove +/- prefixes and escape quotes
-                    clean_diff=$(echo "$file_diff" | sed 's/^[+-]//' | sed 's/"/\\"/g' | tr '\n' '|')
+                    # Better escaping for PowerShell - encode special characters
+                    clean_diff=$(echo "$file_diff" | sed 's/^[+-]//' | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed "s/'/\\'/g" | tr '\n' '|')
                     diff_content="${diff_content}${file}:::${clean_diff};;;"
                   fi
                 else
@@ -140,23 +140,34 @@ jobs:
                 if ($changeType -eq "SMALL_CHANGES") {
                   $changeAnalysis += "📝 **$fileName**`n+$additions/-$deletions lines`n"
                   
-                  # Find corresponding diff content
+                  # Find corresponding diff content with better error handling
                   if (![string]::IsNullOrWhiteSpace($diffContent)) {
-                    $diffEntries = $diffContent.Split(';;;') | Where-Object { $_ -ne '' }
-                    foreach ($diffEntry in $diffEntries) {
-                      $diffParts = $diffEntry.Split(':::')
-                      if ($diffParts.Length -eq 2 -and $diffParts[0] -eq $fileName) {
-                        $diffLines = $diffParts[1].Split('|') | Where-Object { $_ -ne '' }
-                        if ($diffLines.Count -gt 0) {
-                          $formattedDiff = ($diffLines | ForEach-Object { $_.Trim() }) -join "`n"
-                          # Truncate if too long for Discord (max ~1800 chars in code block)
-                          if ($formattedDiff.Length -gt 1800) {
-                            $formattedDiff = $formattedDiff.Substring(0, 1800) + "`n... (truncated)"
+                    try {
+                      $diffEntries = $diffContent.Split(';;;') | Where-Object { $_ -ne '' }
+                      foreach ($diffEntry in $diffEntries) {
+                        $diffParts = $diffEntry.Split(':::')
+                        if ($diffParts.Length -eq 2 -and $diffParts[0] -eq $fileName) {
+                          $diffLines = $diffParts[1].Split('|') | Where-Object { $_ -ne '' }
+                          if ($diffLines.Count -gt 0) {
+                            # Take first 10 lines to keep Discord message reasonable
+                            $limitedLines = $diffLines | Select-Object -First 10
+                            $formattedDiff = ($limitedLines | ForEach-Object { $_.Trim() }) -join "`n"
+                            
+                            # Additional safety - truncate if still too long
+                            if ($formattedDiff.Length -gt 1000) {
+                              $formattedDiff = $formattedDiff.Substring(0, 1000) + "`n... (truncated)"
+                            }
+                            
+                            # Only add if we have meaningful content
+                            if ($formattedDiff.Trim() -ne "") {
+                              $codeBlocks += "**Changes in $fileName:**`n````json`n$formattedDiff`n````"
+                            }
                           }
-                          $codeBlocks += "**Changes in $fileName:**`n````json`n$formattedDiff`n````"
+                          break
                         }
-                        break
                       }
+                    } catch {
+                      Write-Host "Warning: Could not process diff content for $fileName"
                     }
                   }
                 } else {
@@ -185,11 +196,18 @@ jobs:
             }
           )
           
-          # Add code blocks if we have small changes
-          if (![string]::IsNullOrWhiteSpace($codeBlocks)) {
+          # Add code blocks if we have small changes - but limit total message size
+          if (![string]::IsNullOrWhiteSpace($codeBlocks) -and $codeBlocks.Length -lt 4000) {
             $embedFields += @{
               name = "🔍 **Code Changes**"
               value = $codeBlocks
+              inline = $false
+            }
+          } elseif (![string]::IsNullOrWhiteSpace($codeBlocks)) {
+            # If code blocks are too long, just mention they exist
+            $embedFields += @{
+              name = "🔍 **Code Changes**"
+              value = "Code changes available - [View Commit]($commitUrl) for details"
               inline = $false
             }
           }

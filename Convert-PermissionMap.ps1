@@ -37,19 +37,22 @@ function Extract-PermissionIdentifiers {
     # New regex pattern that properly matches the permissions reference format
     $permissionSectionPattern = [regex]::new('### ([A-Za-z0-9._]+)[\s\S]*?Identifier\s*\|\s*([a-f0-9-]+)\s*\|\s*([a-f0-9-]+)\s*\|', [System.Text.RegularExpressions.RegexOptions]::Singleline)
 
-    $identifiers = @{}
+    $identifiers = [ordered]@{}
     $matches = $permissionSectionPattern.Matches($content)
 
     Write-Host "Found $($matches.Count) permission matches in reference file"
 
-    foreach ($match in $matches) {
+    # Sort matches by permission name for consistent ordering
+    $sortedMatches = $matches | Sort-Object { $_.Groups[1].Value }
+
+    foreach ($match in $sortedMatches) {
         $permissionName = $match.Groups[1].Value
         $appId = $match.Groups[2].Value
         $delegatedId = $match.Groups[3].Value
 
         Write-Verbose "Found permission: $permissionName, App: $appId, Delegated: $delegatedId"
 
-        $identifiers[$permissionName] = @{
+        $identifiers[$permissionName] = [ordered]@{
             "ApplicationId" = $appId
             "DelegatedId" = $delegatedId
         }
@@ -67,19 +70,24 @@ function Export-PermissionMappings {
 
     Write-Host "Exporting permission mappings to $outputPath"
 
-    $mappings = @()
+    $mappings = [System.Collections.ArrayList]::new()
 
-    foreach ($permissionName in $permissionIdentifiers.Keys) {
-        $mapping = [PSCustomObject]@{
+    # Sort permission names for consistent output
+    $sortedPermissionNames = $permissionIdentifiers.Keys | Sort-Object
+
+    foreach ($permissionName in $sortedPermissionNames) {
+        $mapping = [ordered]@{
             "Role_Name" = $permissionName
             "Application_Identifier" = $permissionIdentifiers[$permissionName].ApplicationId
             "DelegatedWork_Identifier" = $permissionIdentifiers[$permissionName].DelegatedId
         }
 
-        $mappings += $mapping
+        [void]$mappings.Add($mapping)
     }
 
-    $mappings | Sort-Object -Property Role_Name | ConvertTo-Json -Depth 1 | Out-File -FilePath $outputPath
+    # Convert to JSON with consistent formatting
+    $jsonOutput = $mappings | ConvertTo-Json -Depth 1 -Compress:$false
+    $jsonOutput | Out-File -FilePath $outputPath -Encoding UTF8 -NoNewline
     Write-Host "Exported $($mappings.Count) permission mappings"
 }
 
@@ -114,7 +122,7 @@ function Extract-HttpRequests {
         if ($parts.Count -eq 2 -and $validMethods -contains $parts[0]) {
             $method = $parts[0]
             $path = $parts[1]
-            $endpoints += @{
+            $endpoints += [ordered]@{
                 "method" = $method
                 "path" = $path
             }
@@ -154,7 +162,7 @@ function Extract-PermissionsInclude {
     if ($match.Success) {
         $operationName = $match.Groups[1].Value
         $permissionsPath = $match.Groups[2].Value
-        return @{
+        return [ordered]@{
             "operationName" = $operationName
             "permissionsPath" = $permissionsPath
         }
@@ -212,10 +220,10 @@ function Parse-PermissionsTable {
 
         if ($cells.Count -ge 3) {
             $permissionType = $cells[0]
-            $leastPrivileged = $cells[1] -split ',' | ForEach-Object { $_.Trim() }
-            $higherPrivileged = $cells[2] -split ',' | ForEach-Object { $_.Trim() }
+            $leastPrivileged = $cells[1] -split ',' | ForEach-Object { $_.Trim() } | Sort-Object
+            $higherPrivileged = $cells[2] -split ',' | ForEach-Object { $_.Trim() } | Sort-Object
 
-            $results += @{
+            $results += [ordered]@{
                 "permission_type" = $permissionType
                 "least_privileged" = $leastPrivileged
                 "higher_privileged" = $higherPrivileged
@@ -240,7 +248,7 @@ function Process-ApiFiles {
     # Get all API markdown files recursively
     $files = Get-ChildItem -Path $apiPath -Filter "*.md" -Recurse -File
 
-    $results = @()
+    $results = [System.Collections.ArrayList]::new()
     $processedCount = 0
     $totalFiles = $files.Count
 
@@ -312,20 +320,22 @@ function Process-ApiFiles {
             # Try to extract example URL directly from the markdown
             $exampleUrl = Extract-ExampleUrl -content $content
 
-            $results += [PSCustomObject]@{
-                "path" = $endpoint.path
+            $resultObject = [ordered]@{
+                "path" = if ($endpoint.path) { $endpoint.path } else { "" }
                 "version" = $version
-                "method" = $endpoint.method
+                "method" = if ($endpoint.method) { $endpoint.method } else { "" }
                 "operation_name" = $operationName
                 "full_example_url" = if ($exampleUrl) { $exampleUrl } else { "https://graph.microsoft.com/$($version)$($endpoint.path)" }
                 "example_from_docs" = [bool]$exampleUrl
-                "DelegatedWork_Least" = $delegatedWork.least_privileged
-                "DelegatedWork_Higher" = $delegatedWork.higher_privileged
-                "DelegatedPersonal_Least" = $delegatedPersonal.least_privileged
-                "DelegatedPersonal_Higher" = $delegatedPersonal.higher_privileged
-                "Application_Least" = $application.least_privileged
-                "Application_Higher" = $application.higher_privileged
+                "DelegatedWork_Least" = if ($delegatedWork) { $delegatedWork.least_privileged } else { @() }
+                "DelegatedWork_Higher" = if ($delegatedWork) { $delegatedWork.higher_privileged } else { @() }
+                "DelegatedPersonal_Least" = if ($delegatedPersonal) { $delegatedPersonal.least_privileged } else { @() }
+                "DelegatedPersonal_Higher" = if ($delegatedPersonal) { $delegatedPersonal.higher_privileged } else { @() }
+                "Application_Least" = if ($application) { $application.least_privileged } else { @() }
+                "Application_Higher" = if ($application) { $application.higher_privileged } else { @() }
             }
+
+            [void]$results.Add($resultObject)
         }
     }
 
@@ -340,141 +350,91 @@ function Create-RoleToEndpointMapping {
 
     Write-Host "Creating role-to-endpoint mappings..."
 
-    # Create a hashtable to store the mappings
-    $roleEndpointMap = @{}
+    # Use ordered hashtable for consistent ordering
+    $roleEndpointMap = [ordered]@{}
 
-    # Process all the API mappings
+    # Process all the API mappings and collect all unique permissions first
+    $allPermissions = [System.Collections.ArrayList]::new()
+    
     foreach ($mapping in $apiMappings) {
-        # Process Delegated Work permissions
-        if ($mapping.DelegatedWork_Least) {
-            foreach ($permission in $mapping.DelegatedWork_Least) {
-                $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
-                    continue
-                }
+        # Collect all permissions from all categories
+        $permissionCategories = @(
+            @{Permissions = $mapping.DelegatedWork_Least; Type = "Delegated"},
+            @{Permissions = $mapping.Application_Least; Type = "Application"},
+            @{Permissions = $mapping.DelegatedWork_Higher; Type = "Delegated"},
+            @{Permissions = $mapping.Application_Higher; Type = "Application"}
+        )
 
-                if (-not $roleEndpointMap.ContainsKey($permission)) {
-                    $roleEndpointMap[$permission] = @{
-                        "Role" = $permission
-                        "Type" = "Delegated"
-                        "Endpoints" = @()
+        foreach ($category in $permissionCategories) {
+            if ($category.Permissions) {
+                foreach ($permission in $category.Permissions) {
+                    $permission = $permission.Trim()
+                    if ($permission -ne "Not supported." -and $permission -ne "Not available." -and ![string]::IsNullOrWhiteSpace($permission)) {
+                        [void]$allPermissions.Add(@{Permission = $permission; Type = $category.Type})
                     }
-                }
-
-                # Create endpoint object with all required properties
-                $endpoint = @{
-                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
-                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
-                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
-                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
-                }
-
-                # Only add if we have meaningful data
-                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
-                    $roleEndpointMap[$permission].Endpoints += $endpoint
-                }
-            }
-        }
-
-        # Process Application permissions
-        if ($mapping.Application_Least) {
-            foreach ($permission in $mapping.Application_Least) {
-                $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
-                    continue
-                }
-
-                if (-not $roleEndpointMap.ContainsKey($permission)) {
-                    $roleEndpointMap[$permission] = @{
-                        "Role" = $permission
-                        "Type" = "Application"
-                        "Endpoints" = @()
-                    }
-                }
-
-                # Create endpoint object with all required properties
-                $endpoint = @{
-                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
-                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
-                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
-                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
-                }
-
-                # Only add if we have meaningful data
-                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
-                    $roleEndpointMap[$permission].Endpoints += $endpoint
-                }
-            }
-        }
-
-        # Process higher permissions as well to provide complete mapping
-        if ($mapping.DelegatedWork_Higher) {
-            foreach ($permission in $mapping.DelegatedWork_Higher) {
-                $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
-                    continue
-                }
-
-                if (-not $roleEndpointMap.ContainsKey($permission)) {
-                    $roleEndpointMap[$permission] = @{
-                        "Role" = $permission
-                        "Type" = "Delegated"
-                        "Endpoints" = @()
-                    }
-                }
-
-                # Create endpoint object with all required properties
-                $endpoint = @{
-                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
-                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
-                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
-                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
-                }
-
-                # Only add if we have meaningful data
-                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
-                    $roleEndpointMap[$permission].Endpoints += $endpoint
-                }
-            }
-        }
-
-        # Process Application higher permissions
-        if ($mapping.Application_Higher) {
-            foreach ($permission in $mapping.Application_Higher) {
-                $permission = $permission.Trim()
-                if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
-                    continue
-                }
-
-                if (-not $roleEndpointMap.ContainsKey($permission)) {
-                    $roleEndpointMap[$permission] = @{
-                        "Role" = $permission
-                        "Type" = "Application"
-                        "Endpoints" = @()
-                    }
-                }
-
-                # Create endpoint object with all required properties
-                $endpoint = @{
-                    "Path" = if ($mapping.path) { $mapping.path } else { "" }
-                    "Method" = if ($mapping.method) { $mapping.method } else { "" }
-                    "Version" = if ($mapping.version) { $mapping.version } else { "" }
-                    "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
-                }
-
-                # Only add if we have meaningful data
-                if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
-                    $roleEndpointMap[$permission].Endpoints += $endpoint
                 }
             }
         }
     }
 
-    # Convert to array of objects for JSON export with consistent sorting
-    $result = @()
-    foreach ($key in ($roleEndpointMap.Keys | Sort-Object)) {
-        # Create a unique key for deduplication that includes all properties
-        $uniqueEndpoints = @()
+    # Get unique permissions and sort them deterministically
+    $uniquePermissions = $allPermissions | Sort-Object -Property Type, Permission -Unique
+
+    # Initialize the ordered hashtable with sorted keys
+    foreach ($permEntry in $uniquePermissions) {
+        $key = $permEntry.Permission
+        if (-not $roleEndpointMap.ContainsKey($key)) {
+            $roleEndpointMap[$key] = [ordered]@{
+                "Role" = $key
+                "Type" = $permEntry.Type
+                "Endpoints" = [System.Collections.ArrayList]::new()
+            }
+        }
+    }
+
+    # Now process mappings and add endpoints
+    foreach ($mapping in $apiMappings) {
+        # Process each permission category
+        $permissionCategories = @(
+            @{Permissions = $mapping.DelegatedWork_Least; Type = "Delegated"},
+            @{Permissions = $mapping.Application_Least; Type = "Application"},
+            @{Permissions = $mapping.DelegatedWork_Higher; Type = "Delegated"},
+            @{Permissions = $mapping.Application_Higher; Type = "Application"}
+        )
+
+        foreach ($category in $permissionCategories) {
+            if ($category.Permissions) {
+                foreach ($permission in $category.Permissions) {
+                    $permission = $permission.Trim()
+                    if ($permission -eq "Not supported." -or $permission -eq "Not available." -or [string]::IsNullOrWhiteSpace($permission)) {
+                        continue
+                    }
+
+                    if ($roleEndpointMap.ContainsKey($permission)) {
+                        # Create endpoint object with consistent property ordering
+                        $endpoint = [ordered]@{
+                            "Method" = if ($mapping.method) { $mapping.method } else { "" }
+                            "OperationName" = if ($mapping.operation_name) { $mapping.operation_name } else { "" }
+                            "Path" = if ($mapping.path) { $mapping.path } else { "" }
+                            "Version" = if ($mapping.version) { $mapping.version } else { "" }
+                        }
+
+                        # Only add if we have meaningful data
+                        if ($endpoint.Path -or $endpoint.Method -or $endpoint.OperationName) {
+                            [void]$roleEndpointMap[$permission].Endpoints.Add($endpoint)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    # Convert to final result with consistent ordering
+    $result = [System.Collections.ArrayList]::new()
+
+    foreach ($key in $roleEndpointMap.Keys) {
+        # Remove duplicates and sort endpoints deterministically
+        $uniqueEndpoints = [System.Collections.ArrayList]::new()
         $seenEndpoints = @{}
         
         foreach ($endpoint in $roleEndpointMap[$key].Endpoints) {
@@ -483,22 +443,28 @@ function Create-RoleToEndpointMapping {
             
             if (-not $seenEndpoints.ContainsKey($uniqueKey)) {
                 $seenEndpoints[$uniqueKey] = $true
-                $uniqueEndpoints += [PSCustomObject]$endpoint
+                [void]$uniqueEndpoints.Add($endpoint)
             }
         }
         
-        # Sort the unique endpoints consistently
+        # Sort endpoints deterministically
         $sortedEndpoints = $uniqueEndpoints | Sort-Object -Property Version, Path, Method, OperationName
-        
-        $roleEndpointMap[$key].Endpoints = $sortedEndpoints
-        $result += [PSCustomObject]$roleEndpointMap[$key]
+
+        # Create final object with consistent property ordering
+        $roleObject = [ordered]@{
+            "Endpoints" = $sortedEndpoints
+            "Role" = $roleEndpointMap[$key].Role
+            "Type" = $roleEndpointMap[$key].Type
+        }
+
+        [void]$result.Add($roleObject)
     }
 
     return $result
 }
 
 # Main execution
-$allResults = @()
+$allResults = [System.Collections.ArrayList]::new()
 
 # Extract permission identifiers
 $permissionIdentifiers = Extract-PermissionIdentifiers -permissionsRefPath $PermissionsReferencePath
@@ -509,17 +475,20 @@ Export-PermissionMappings -permissionIdentifiers $permissionIdentifiers -outputP
 foreach ($version in $Versions) {
     Write-Host "Starting to process $version API files..."
     $versionResults = Process-ApiFiles -version $version -permissionIdentifiers $permissionIdentifiers
-    $allResults += $versionResults
+    foreach ($result in $versionResults) {
+        [void]$allResults.Add($result)
+    }
     Write-Host "Completed processing $version API files. Found $($versionResults.Count) mappings."
 }
 
 # Save as JSON with consistent sorting
 $sortedResults = $allResults | Sort-Object -Property version, path, method, operation_name
-$sortedResults | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
+$jsonOutput = $sortedResults | ConvertTo-Json -Depth 4 -Compress:$false
+$jsonOutput | Out-File -FilePath $JsonOutputPath -Encoding UTF8 -NoNewline
 Write-Host "Saved JSON output to $JsonOutputPath"
 
-# Create and save the role-to-endpoint mappings with consistent sorting
+# Create and save the role-to-endpoint mappings with deterministic sorting
 $roleEndpointMappings = Create-RoleToEndpointMapping -apiMappings $allResults
-$sortedRoleMappings = $roleEndpointMappings | Sort-Object -Property Type, Role
-$sortedRoleMappings | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
+$jsonOutput = $roleEndpointMappings | ConvertTo-Json -Depth 4 -Compress:$false
+$jsonOutput | Out-File -FilePath $RoleEndpointMappingPath -Encoding UTF8 -NoNewline
 Write-Host "Saved role-to-endpoint mapping to $RoleEndpointMappingPath"

@@ -167,7 +167,7 @@ jobs:
                             if ($formattedDiff.Trim() -ne "") {
                               $codeStart = '```json'
                               $codeEnd = '```'
-                              $codeBlocks += "**Changes in $fileName:**`n$codeStart`n$formattedDiff`n$codeEnd`n`n"
+                              $codeBlocks += "**Changes in $fileName :**`n$codeStart`n$formattedDiff`n$codeEnd`n`n"
                             }
                           }
                           break

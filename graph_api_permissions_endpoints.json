@@ -9,12 +9,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "accessreviewset_list_definitions",
-        "Path": "/identityGovernance/accessReviews/definitions",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "accessreview_get",
         "Path": "/accessReviews/{reviewId}",
         "Version": "beta"

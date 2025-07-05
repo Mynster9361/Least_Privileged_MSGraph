@@ -176,8 +176,8 @@
   },
   {
     "Role_Name": "AuditLogsQuery",
-    "Application_Identifier": "91c64a47-a524-4fce-9bf3-3d569a344ecf",
-    "DelegatedWork_Identifier": "30630b65-ed12-4a81-9130-e3a964109fae"
+    "Application_Identifier": "7276d950-48fc-4269-8348-f22f2bb296d0",
+    "DelegatedWork_Identifier": "5ff2f415-e0f1-4d11-bfd0-6d87c0f667fd"
   },
   {
     "Role_Name": "AuditLogsQuery.Read.All",
@@ -196,8 +196,8 @@
   },
   {
     "Role_Name": "BackupRestore",
-    "Application_Identifier": "f6135c51-c766-4be1-9638-ed90c2ed2443",
-    "DelegatedWork_Identifier": "2b24830f-f435-446f-ab5a-b1e70d9a2eb5"
+    "Application_Identifier": "5fbb5982-3230-4882-93c0-2167523ce0c2",
+    "DelegatedWork_Identifier": "444ed4b6-0554-4dc6-8e9c-3f9a34ee3ff6"
   },
   {
     "Role_Name": "BillingConfiguration.ReadWrite.All",
@@ -1026,7 +1026,7 @@
   },
   {
     "Role_Name": "EduReports",
-    "Application_Identifier": "f5d05dba-7ef0-46fc-b62c-a7282555f428",
+    "Application_Identifier": "ad248c30-1919-40c8-b3d2-304481894e88",
     "DelegatedWork_Identifier": "-"
   },
   {
@@ -1351,8 +1351,8 @@
   },
   {
     "Role_Name": "IndustryData",
-    "Application_Identifier": "7afa7744-a782-4a32-b8c2-e3db637e8de7",
-    "DelegatedWork_Identifier": "b6d56528-3032-4f9d-830f-5a24a25e6661"
+    "Application_Identifier": "24a65b4a-e501-47e2-8849-d679517887f0",
+    "DelegatedWork_Identifier": "aeb68e0b-e562-4a1f-b6dd-3484ad0cbb4b"
   },
   {
     "Role_Name": "IndustryData.ReadBasic.All",
@@ -1456,8 +1456,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
-    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
+    "Application_Identifier": "2cb19e7d-9012-40bf-9a22-69fc776af8b0",
+    "DelegatedWork_Identifier": "2973a298-1d69-4f87-8d30-7025f0ec19d7"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -1781,8 +1781,8 @@
   },
   {
     "Role_Name": "OrgSettings",
-    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
-    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
+    "Application_Identifier": "56c84fa9-ea1f-4a15-90f2-90ef41ece2c9",
+    "DelegatedWork_Identifier": "1e9b7a7e-4d64-44ff-acf5-2e9651c1519f"
   },
   {
     "Role_Name": "PartnerBilling.Read.All",

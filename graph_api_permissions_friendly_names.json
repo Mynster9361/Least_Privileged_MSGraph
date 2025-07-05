@@ -3325,26 +3325,6 @@
     "DelegatedWork_Identifier": "48971fc1-70d7-4245-af77-0beb29b53ee2"
   },
   {
-    "Role_Name": "UserAuthenticationMethod.ReadWrite.All",
-    "Application_Identifier": "50483e42-d915-4231-9639-7fdb7fd190e5",
-    "DelegatedWork_Identifier": "b7887744-6746-4312-813d-72daeaee7e2d"
-  },
-  {
-    "Role_Name": "UserAuthMethod",
-    "Application_Identifier": "0400e371-7db1-4338-a269-96069eb65227",
-    "DelegatedWork_Identifier": "64930478-d0ea-4671-ad72-fe0d9821df09"
-  },
-  {
-    "Role_Name": "UserCloudClipboard.Read",
-    "Application_Identifier": "-",
-    "DelegatedWork_Identifier": "61e8a09a-087f-4e36-8c8c-1c77c5228017"
-  },
-  {
-    "Role_Name": "UserNotification.ReadWrite.CreatedByApp",
-    "Application_Identifier": "4e774092-a092-48d1-90bd-baad67c7eb47",
-    "DelegatedWork_Identifier": "26e2f3e8-b2a1-47fc-9620-89bb5b042024"
-  },
-  {
     "Role_Name": "UserShiftPreferences.Read.All",
     "Application_Identifier": "de023814-96df-4f53-9376-1e2891ef5a18",
     "DelegatedWork_Identifier": "-"

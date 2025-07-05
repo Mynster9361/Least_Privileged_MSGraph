@@ -42,48 +42,6 @@
     "Application_Higher": "IdentityProvider.ReadWrite.All"
   },
   {
-    "path": "/identity/b2xUserFlows",
-    "version": "beta",
-    "method": "GET",
-    "operation_name": "identitycontainer_list_b2xuserflows",
-    "full_example_url": "https://graph.microsoft.com/beta/identity/b2xUserFlows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "IdentityUserFlow.Read.All",
-    "DelegatedWork_Higher": "IdentityUserFlow.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "IdentityUserFlow.Read.All",
-    "Application_Higher": "IdentityUserFlow.ReadWrite.All"
-  },
-  {
-    "path": "/identity/b2cUserFlows",
-    "version": "beta",
-    "method": "GET",
-    "operation_name": "identitycontainer_list_b2cuserflows",
-    "full_example_url": "https://graph.microsoft.com/beta/identity/b2cUserFlows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "IdentityUserFlow.Read.All",
-    "DelegatedWork_Higher": "IdentityUserFlow.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "IdentityUserFlow.Read.All",
-    "Application_Higher": "IdentityUserFlow.ReadWrite.All"
-  },
-  {
-    "path": "/identity/apiconnectors/{id}/uploadClientCertificate",
-    "version": "beta",
-    "method": "POST",
-    "operation_name": "identityapiconnector_uploadclientcertificate",
-    "full_example_url": "https://graph.microsoft.com/beta/identity/apiconnectors/{id}/uploadClientCertificate",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "APIConnectors.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "APIConnectors.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
     "path": "/identity/apiConnectors",
     "version": "beta",
     "method": "POST",

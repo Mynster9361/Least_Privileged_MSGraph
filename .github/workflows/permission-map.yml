@@ -62,8 +62,9 @@ jobs:
             changed_files=$(git diff --staged --name-only | tr '\n' ' ')
             echo "changed_files=$changed_files" >> $GITHUB_OUTPUT
             
-            # Analyze changes for each file
+            # Analyze changes for each file and capture actual diff content
             change_details=""
+            diff_content=""
             for file in $(git diff --staged --name-only); do
               if [ -f "$file" ]; then
                 # Get line change counts
@@ -71,11 +72,14 @@ jobs:
                 deletions=$(git diff --staged --numstat "$file" | cut -f2)
                 
                 # Count actual content changes (not just line shifts)
-                if [ "$additions" -le 10 ] && [ "$deletions" -le 10 ]; then
-                  # Small changes - get actual diff lines
-                  diff_lines=$(git diff --staged "$file" | grep -E "^\+[^+]|^\-[^-]" | head -10)
-                  if [ ! -z "$diff_lines" ]; then
+                if [ "$additions" -le 20 ] && [ "$deletions" -le 20 ]; then
+                  # Small changes - capture actual diff content
+                  file_diff=$(git diff --staged "$file" | grep -E "^\+[^+]|^\-[^-]" | head -20)
+                  if [ ! -z "$file_diff" ]; then
                     change_details="${change_details}${file}:SMALL_CHANGES:${additions}:${deletions};"
+                    # Clean up diff content for JSON - remove +/- prefixes and escape quotes
+                    clean_diff=$(echo "$file_diff" | sed 's/^[+-]//' | sed 's/"/\\"/g' | tr '\n' '|')
+                    diff_content="${diff_content}${file}:::${clean_diff};;;"
                   fi
                 else
                   # Large changes - just show stats
@@ -85,6 +89,7 @@ jobs:
             done
             
             echo "change_details=$change_details" >> $GITHUB_OUTPUT
+            echo "diff_content=$diff_content" >> $GITHUB_OUTPUT
             echo "Changes detected in: $changed_files"
           fi
 
@@ -111,6 +116,7 @@ jobs:
           $endpointsCount = "${{ steps.changes.outputs.endpoints_count }}"
           $changedFiles = "${{ steps.changes.outputs.changed_files }}"
           $changeDetails = "${{ steps.changes.outputs.change_details }}"
+          $diffContent = "${{ steps.changes.outputs.diff_content }}"
           
           $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
           $repoUrl = "https://github.com/${{ github.repository }}"
@@ -119,6 +125,8 @@ jobs:
           
           # Process change details
           $changeAnalysis = ""
+          $codeBlocks = ""
+          
           if (![string]::IsNullOrWhiteSpace($changeDetails)) {
             $changes = $changeDetails.Split(';') | Where-Object { $_ -ne '' }
             foreach ($change in $changes) {
@@ -131,6 +139,26 @@ jobs:
                 
                 if ($changeType -eq "SMALL_CHANGES") {
                   $changeAnalysis += "📝 **$fileName**`n+$additions/-$deletions lines`n"
+                  
+                  # Find corresponding diff content
+                  if (![string]::IsNullOrWhiteSpace($diffContent)) {
+                    $diffEntries = $diffContent.Split(';;;') | Where-Object { $_ -ne '' }
+                    foreach ($diffEntry in $diffEntries) {
+                      $diffParts = $diffEntry.Split(':::')
+                      if ($diffParts.Length -eq 2 -and $diffParts[0] -eq $fileName) {
+                        $diffLines = $diffParts[1].Split('|') | Where-Object { $_ -ne '' }
+                        if ($diffLines.Count -gt 0) {
+                          $formattedDiff = ($diffLines | ForEach-Object { $_.Trim() }) -join "`n"
+                          # Truncate if too long for Discord (max ~1800 chars in code block)
+                          if ($formattedDiff.Length -gt 1800) {
+                            $formattedDiff = $formattedDiff.Substring(0, 1800) + "`n... (truncated)"
+                          }
+                          $codeBlocks += "**Changes in $fileName:**`n````json`n$formattedDiff`n````"
+                        }
+                        break
+                      }
+                    }
+                  }
                 } else {
                   $diffUrl = "https://github.com/${{ github.repository }}/commit/${{ github.sha }}#diff-" + [System.Web.HttpUtility]::UrlEncode($fileName)
                   $changeAnalysis += "📊 **$fileName**`n+$additions/-$deletions lines - [View Diff]($diffUrl)`n"
@@ -143,27 +171,40 @@ jobs:
             $changeAnalysis = "Files updated with structural changes"
           }
           
+          # Build embed fields
+          $embedFields = @(
+            @{
+              name = "📊 **Statistics**"
+              value = "**Permission Names:** $friendlyNamesCount`n**API Mappings:** $mapCount`n**Permission Endpoints:** $endpointsCount"
+              inline = $true
+            },
+            @{
+              name = "📁 **Change Summary**"
+              value = $changeAnalysis
+              inline = $false
+            }
+          )
+          
+          # Add code blocks if we have small changes
+          if (![string]::IsNullOrWhiteSpace($codeBlocks)) {
+            $embedFields += @{
+              name = "🔍 **Code Changes**"
+              value = $codeBlocks
+              inline = $false
+            }
+          }
+          
+          $embedFields += @{
+            name = "🔗 **Links**"
+            value = "[View Repository]($repoUrl) | [View Run]($runUrl) | [View Commit]($commitUrl)"
+            inline = $false
+          }
+          
           $embed = @{
             title = "🔄 Graph API Permissions Map Updated"
             description = "The Microsoft Graph API permissions mapping has been successfully updated!"
             color = 3447003  # Blue color
-            fields = @(
-              @{
-                name = "📊 **Statistics**"
-                value = "**Permission Names:** $friendlyNamesCount`n**API Mappings:** $mapCount`n**Permission Endpoints:** $endpointsCount"
-                inline = $true
-              },
-              @{
-                name = "📁 **Change Details**"
-                value = $changeAnalysis
-                inline = $false
-              },
-              @{
-                name = "🔗 **Links**"
-                value = "[View Repository]($repoUrl) | [View Run]($runUrl) | [View Commit]($commitUrl)"
-                inline = $false
-              }
-            )
+            fields = $embedFields
             footer = @{
               text = "Updated at $currentTime"
             }

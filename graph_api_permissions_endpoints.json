@@ -3,12 +3,6 @@
     "Endpoints": [
       {
         "Method": "GET",
-        "OperationName": "accessreviewinstancedecisionitem_get",
-        "Path": "/identityGovernance/accessReviews/definitions/{accessReviewScheduleDefinitionId}/instances/{accessReviewInstanceId}/decisions/{accessReviewInstanceDecisionItemId}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "accessreviewset_list_definitions",
         "Path": "/identityGovernance/accessReviews/definitions",
         "Version": "v1.0"

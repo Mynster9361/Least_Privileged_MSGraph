@@ -450,12 +450,12 @@ function Create-RoleToEndpointMapping {
         }
     }
 
-    # Convert to array of objects for JSON export
+    # Convert to array of objects for JSON export with consistent sorting
     $result = @()
-    foreach ($key in $roleEndpointMap.Keys) {
-        # Remove duplicate endpoints
+    foreach ($key in ($roleEndpointMap.Keys | Sort-Object)) {
+        # Remove duplicate endpoints and sort them consistently
         $uniqueEndpoints = $roleEndpointMap[$key].Endpoints |
-            Sort-Object -Property Path, Method, Version -Unique |
+            Sort-Object -Property Version, Path, Method -Unique |
             ForEach-Object { [PSCustomObject]$_ }
 
         $roleEndpointMap[$key].Endpoints = $uniqueEndpoints
@@ -481,11 +481,13 @@ foreach ($version in $Versions) {
     Write-Host "Completed processing $version API files. Found $($versionResults.Count) mappings."
 }
 
-# Save as JSON
-$allResults | Sort-Object -Property path | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
+# Save as JSON with consistent sorting
+$sortedResults = $allResults | Sort-Object -Property version, path, method, operation_name
+$sortedResults | ConvertTo-Json -Depth 4 | Out-File -FilePath $JsonOutputPath
 Write-Host "Saved JSON output to $JsonOutputPath"
 
-# Create and save the role-to-endpoint mappings
+# Create and save the role-to-endpoint mappings with consistent sorting
 $roleEndpointMappings = Create-RoleToEndpointMapping -apiMappings $allResults
-$roleEndpointMappings | Sort-Object -Property Role | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
+$sortedRoleMappings = $roleEndpointMappings | Sort-Object -Property Type, Role
+$sortedRoleMappings | ConvertTo-Json -Depth 4 | Out-File -FilePath $RoleEndpointMappingPath
 Write-Host "Saved role-to-endpoint mapping to $RoleEndpointMappingPath"

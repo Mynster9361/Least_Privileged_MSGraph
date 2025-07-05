@@ -62,6 +62,29 @@ jobs:
             changed_files=$(git diff --staged --name-only | tr '\n' ' ')
             echo "changed_files=$changed_files" >> $GITHUB_OUTPUT
             
+            # Analyze changes for each file
+            change_details=""
+            for file in $(git diff --staged --name-only); do
+              if [ -f "$file" ]; then
+                # Get line change counts
+                additions=$(git diff --staged --numstat "$file" | cut -f1)
+                deletions=$(git diff --staged --numstat "$file" | cut -f2)
+                
+                # Count actual content changes (not just line shifts)
+                if [ "$additions" -le 10 ] && [ "$deletions" -le 10 ]; then
+                  # Small changes - get actual diff lines
+                  diff_lines=$(git diff --staged "$file" | grep -E "^\+[^+]|^\-[^-]" | head -10)
+                  if [ ! -z "$diff_lines" ]; then
+                    change_details="${change_details}${file}:SMALL_CHANGES:${additions}:${deletions};"
+                  fi
+                else
+                  # Large changes - just show stats
+                  change_details="${change_details}${file}:LARGE_CHANGES:${additions}:${deletions};"
+                fi
+              fi
+            done
+            
+            echo "change_details=$change_details" >> $GITHUB_OUTPUT
             echo "Changes detected in: $changed_files"
           fi
 
@@ -87,10 +110,38 @@ jobs:
           $mapCount = "${{ steps.changes.outputs.map_count }}"
           $endpointsCount = "${{ steps.changes.outputs.endpoints_count }}"
           $changedFiles = "${{ steps.changes.outputs.changed_files }}"
+          $changeDetails = "${{ steps.changes.outputs.change_details }}"
           
           $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
           $repoUrl = "https://github.com/${{ github.repository }}"
           $runUrl = "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          $commitUrl = "https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+          
+          # Process change details
+          $changeAnalysis = ""
+          if (![string]::IsNullOrWhiteSpace($changeDetails)) {
+            $changes = $changeDetails.Split(';') | Where-Object { $_ -ne '' }
+            foreach ($change in $changes) {
+              $parts = $change.Split(':')
+              if ($parts.Length -eq 4) {
+                $fileName = $parts[0]
+                $changeType = $parts[1]
+                $additions = $parts[2]
+                $deletions = $parts[3]
+                
+                if ($changeType -eq "SMALL_CHANGES") {
+                  $changeAnalysis += "📝 **$fileName**`n+$additions/-$deletions lines`n"
+                } else {
+                  $diffUrl = "https://github.com/${{ github.repository }}/commit/${{ github.sha }}#diff-" + [System.Web.HttpUtility]::UrlEncode($fileName)
+                  $changeAnalysis += "📊 **$fileName**`n+$additions/-$deletions lines - [View Diff]($diffUrl)`n"
+                }
+              }
+            }
+          }
+          
+          if ([string]::IsNullOrWhiteSpace($changeAnalysis)) {
+            $changeAnalysis = "Files updated with structural changes"
+          }
           
           $embed = @{
             title = "🔄 Graph API Permissions Map Updated"
@@ -103,13 +154,13 @@ jobs:
                 inline = $true
               },
               @{
-                name = "📁 **Files Updated**"
-                value = "``````$changedFiles``````"
-                inline = $true
+                name = "📁 **Change Details**"
+                value = $changeAnalysis
+                inline = $false
               },
               @{
                 name = "🔗 **Links**"
-                value = "[View Repository]($repoUrl) | [View Run]($runUrl)"
+                value = "[View Repository]($repoUrl) | [View Run]($runUrl) | [View Commit]($commitUrl)"
                 inline = $false
               }
             )

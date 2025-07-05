@@ -8,6 +8,96 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "accessreviewset_list_definitions",
+        "Path": "/identityGovernance/accessReviews/definitions",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreview_get",
+        "Path": "/accessReviews/{reviewId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreview_list",
+        "Path": "/accessReviews?$filter=businessFlowTemplateId eq {businessFlowTemplate-id}&$top={pagesize}&$skip=0",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreview_listdecisions",
+        "Path": "/accessReviews/{reviewId}/decisions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreview_listmydecisions",
+        "Path": "/accessReviews/{reviewId}/myDecisions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreview_listreviewers",
+        "Path": "/accessReviews/{reviewId}/reviewers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewinstance_get",
+        "Path": "/identityGovernance/accessReviews/definitions/{definition-id}/instances/{instance-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewinstance_pendingaccessreviewinstances",
+        "Path": "/me/pendingAccessReviewInstances",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewinstancedecisionitem_get",
+        "Path": "/identityGovernance/accessReviews/definitions/{accessReviewScheduleDefinitionId}/instances/{accessReviewInstanceId}/decisions/{accessReviewInstanceDecisionItemId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewinstancedecisionitem_listpendingapproval",
+        "Path": "/me/pendingAccessReviewInstances/{instance-id}/decisions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewscheduledefinition_get",
+        "Path": "/identityGovernance/accessReviews/definitions/{review-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewscheduledefinition_list_instances",
+        "Path": "/identityGovernance/accessReviews/definitions/{definition-id}/instances",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewset_list_definitions",
+        "Path": "/identityGovernance/accessReviews/definitions",
+        "Version": "beta"
+      }
+    ],
+    "Role": "AccessReview.Read.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
+        "OperationName": "accessreviewinstancedecisionitem_get",
+        "Path": "/identityGovernance/accessReviews/definitions/{accessReviewScheduleDefinitionId}/instances/{accessReviewInstanceId}/decisions/{accessReviewInstanceDecisionItemId}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
         "OperationName": "accessreviewinstance_acceptrecommendations",
         "Path": "/me/pendingAccessReviewInstances/{instance-id}/acceptRecommendations",

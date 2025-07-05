@@ -350,8 +350,8 @@ function Create-RoleToEndpointMapping {
 
     Write-Host "Creating role-to-endpoint mappings..."
 
-    # Use ordered hashtable for consistent ordering
-    $roleEndpointMap = [ordered]@{}
+    # Use regular hashtable for ContainsKey method, we'll sort at the end
+    $roleEndpointMap = @{}
 
     # Process all the API mappings and collect all unique permissions first
     $allPermissions = [System.Collections.ArrayList]::new()
@@ -380,11 +380,11 @@ function Create-RoleToEndpointMapping {
     # Get unique permissions and sort them deterministically
     $uniquePermissions = $allPermissions | Sort-Object -Property Type, Permission -Unique
 
-    # Initialize the ordered hashtable with sorted keys
+    # Initialize the hashtable with sorted keys
     foreach ($permEntry in $uniquePermissions) {
         $key = $permEntry.Permission
         if (-not $roleEndpointMap.ContainsKey($key)) {
-            $roleEndpointMap[$key] = [ordered]@{
+            $roleEndpointMap[$key] = @{
                 "Role" = $key
                 "Type" = $permEntry.Type
                 "Endpoints" = [System.Collections.ArrayList]::new()
@@ -432,7 +432,10 @@ function Create-RoleToEndpointMapping {
     # Convert to final result with consistent ordering
     $result = [System.Collections.ArrayList]::new()
 
-    foreach ($key in $roleEndpointMap.Keys) {
+    # Sort the keys for consistent output
+    $sortedKeys = $roleEndpointMap.Keys | Sort-Object
+
+    foreach ($key in $sortedKeys) {
         # Remove duplicates and sort endpoints deterministically
         $uniqueEndpoints = [System.Collections.ArrayList]::new()
         $seenEndpoints = @{}

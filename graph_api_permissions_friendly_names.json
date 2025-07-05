@@ -1265,6 +1265,16 @@
     "DelegatedWork_Identifier": "f81125ac-d3b7-4573-a3b2-7099cc39df9e"
   },
   {
+    "Role_Name": "GroupSettings.Read.All",
+    "Application_Identifier": "f3c4f514-c65a-43f5-bfce-1735872258dd",
+    "DelegatedWork_Identifier": "2eb2bc92-94ef-4c6b-b4ab-2a09bc975e0e"
+  },
+  {
+    "Role_Name": "GroupSettings.ReadWrite.All",
+    "Application_Identifier": "546168c3-1183-4281-9491-fafb24dea37e",
+    "DelegatedWork_Identifier": "c1691a6d-99e2-4cfa-b4b5-9e4d67dc0f36"
+  },
+  {
     "Role_Name": "HealthMonitoringAlert.Read.All",
     "Application_Identifier": "5183ed5d-b7f8-4e9a-915e-dafb46b9cb62",
     "DelegatedWork_Identifier": "74b4ff32-4917-4536-a66d-38a4861e6220"

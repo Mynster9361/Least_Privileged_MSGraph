@@ -42,6 +42,20 @@
     "Application_Higher": "IdentityProvider.ReadWrite.All"
   },
   {
+    "path": "/identity/b2xUserFlows",
+    "version": "beta",
+    "method": "GET",
+    "operation_name": "identitycontainer_list_b2xuserflows",
+    "full_example_url": "https://graph.microsoft.com/beta/identity/b2xUserFlows",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "IdentityUserFlow.Read.All",
+    "DelegatedWork_Higher": "IdentityUserFlow.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "IdentityUserFlow.Read.All",
+    "Application_Higher": "IdentityUserFlow.ReadWrite.All"
+  },
+  {
     "path": "/identity/b2cUserFlows",
     "version": "beta",
     "method": "GET",

@@ -10082,7 +10082,7 @@
         "Version": "beta"
       }
     ],
-    "Role": "Calls.JoinGroupCallasGuest.All",
+    "Role": "Calls.JoinGroupCallAsGuest.All",
     "Type": "Application"
   },
   {
@@ -77981,6 +77981,36 @@
       "Version": "beta"
     },
     "Role": "UserWindowsSettings.ReadWrite.All",
+    "Type": "Delegated"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEvent.Read",
+    "Type": "Delegated"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEvent.Read.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEvent.ReadWrite",
     "Type": "Delegated"
   },
   {

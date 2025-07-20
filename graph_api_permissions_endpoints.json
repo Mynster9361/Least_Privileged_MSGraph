@@ -15672,16 +15672,6 @@
     "Type": "Application"
   },
   {
-    "Endpoints": {
-      "Method": "GET",
-      "OperationName": "directorysetting_get",
-      "Path": "/settings/{directorySettingId}",
-      "Version": "beta"
-    },
-    "Role": "Directory.ReadWrite.Al",
-    "Type": "Delegated"
-  },
-  {
     "Endpoints": [
       {
         "Method": "GET",
@@ -39165,6 +39155,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_list_calendarview",
+        "Path": "/groups/{id}/calendarView?startDateTime={start_datetime}&endDateTime={end_datetime}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_conversations",
         "Path": "/groups/{id}/conversations",
         "Version": "beta"
@@ -39219,14 +39215,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_list_calendarview",
-        "Path": "/groups/{id}/calendarView?startDateTime={start_datetime}&endDateTime={end_datetime}",
+        "OperationName": "group_list_settings",
+        "Path": "/settings",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "group_list_threads",
         "Path": "/groups/{id}/threads",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list_transitivememberof",
+        "Path": "/groups/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -39279,20 +39281,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_list",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_list_transitivememberof",
-        "Path": "/groups/{id}/transitiveMemberOf",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "group_list_acceptedsenders",
         "Path": "/groups/{id}/acceptedSenders",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "openshiftchangerequest_list",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
         "Version": "beta"
       },
       {
@@ -39303,8 +39299,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_get_thread",
-        "Path": "/groups/{id}/threads/{id}",
+        "OperationName": "group_delta",
+        "Path": "/groups/delta",
         "Version": "beta"
       },
       {
@@ -39353,6 +39349,12 @@
         "Method": "POST",
         "OperationName": "directoryobject_getmembergroups_6",
         "Path": "/directoryObjects/{id}/getMemberGroups",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysetting_get",
+        "Path": "/settings/{directorySettingId}",
         "Version": "beta"
       },
       {
@@ -39429,8 +39431,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_delta",
-        "Path": "/groups/delta",
+        "OperationName": "group_get_thread",
+        "Path": "/groups/{id}/threads/{id}",
         "Version": "beta"
       },
       {
@@ -39449,12 +39451,6 @@
         "Method": "GET",
         "OperationName": "orgcontact_list_memberof",
         "Path": "/contacts/{id}/memberOf",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "planner_list_buckets",
-        "Path": "/planner/buckets",
         "Version": "beta"
       },
       {
@@ -39591,12 +39587,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "channel_list",
-        "Path": "/teams/{team-id}/channels",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "planneruser_list_recentplans",
         "Path": "/me/planner/recentPlans",
         "Version": "beta"
@@ -39604,7 +39594,19 @@
       {
         "Method": "GET",
         "OperationName": "planneruser_list_plans",
+        "Path": "/drive/root/createdByUser/planner/plans",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "planneruser_list_plans",
         "Path": "/users/{id}/planner/plans",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "planner_list_buckets",
+        "Path": "/planner/buckets",
         "Version": "beta"
       },
       {
@@ -39663,14 +39665,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_list_tasks",
-        "Path": "/planner/plans/{plan-id}/tasks",
+        "OperationName": "channel_list",
+        "Path": "/teams/{team-id}/channels",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplandetails_get",
-        "Path": "/planner/plans/{id}/details",
+        "OperationName": "plannerplan_list_tasks",
+        "Path": "/planner/plans/{plan-id}/tasks",
         "Version": "beta"
       },
       {
@@ -39735,8 +39737,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "planneruser_list_plans",
-        "Path": "/drive/root/createdByUser/planner/plans",
+        "OperationName": "plannerplandetails_get",
+        "Path": "/planner/plans/{id}/details",
         "Version": "beta"
       },
       {
@@ -39756,12 +39758,6 @@
         "OperationName": "channel_list_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members",
         "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_get_thread",
-        "Path": "/groups/{id}/threads/{id}",
-        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -39831,6 +39827,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/groupSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_threads",
         "Path": "/groups/{id}/threads",
         "Version": "v1.0"
@@ -39861,6 +39863,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "offershiftrequest_get",
         "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}",
         "Version": "v1.0"
@@ -39878,21 +39886,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "openshift_post",
-        "Path": "/teams/{id}/schedule/openShifts",
+        "Method": "GET",
+        "OperationName": "group_get_thread",
+        "Path": "/groups/{id}/threads/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "group_delta",
         "Path": "/groups/delta",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "openshiftchangerequest_get",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
         "Version": "v1.0"
       },
       {
@@ -39904,7 +39906,7 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/driveItem",
+        "Path": "/users/{user-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -39968,15 +39970,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "conversationthread_list_posts",
-        "Path": "/groups/{groupId}/threads/{threadId}/posts",
+        "Method": "POST",
+        "OperationName": "openshift_post",
+        "Path": "/teams/{id}/schedule/openShifts",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "conversationthread_list_posts",
-        "Path": "/groups/{groupId}/conversations/{conversationId}/threads/{threadId}/posts",
+        "Path": "/groups/{groupId}/threads/{threadId}/posts",
         "Version": "v1.0"
       },
       {
@@ -40036,7 +40038,13 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/users/{user-id}/drive/items/{item-id}",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/driveItem",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "conversationthread_list_posts",
+        "Path": "/groups/{groupId}/conversations/{conversationId}/threads/{threadId}/posts",
         "Version": "v1.0"
       },
       {
@@ -40047,14 +40055,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_list",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
+        "OperationName": "openshiftchangerequest_get",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "orgcontact_list_directreports",
-        "Path": "/contacts/{id}/directReports",
+        "OperationName": "orgcontact_get_manager",
+        "Path": "/contacts/{id}/manager",
         "Version": "v1.0"
       },
       {
@@ -40191,20 +40199,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "orgcontact_get_manager",
-        "Path": "/contacts/{id}/manager",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "post_get",
         "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
+        "OperationName": "post_get",
+        "Path": "/groups/{id}/threads/{id}/posts/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "planneruser_list_tasks",
         "Path": "/drive/root/createdByUser/planner/tasks",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "orgcontact_list_directreports",
+        "Path": "/contacts/{id}/directReports",
         "Version": "v1.0"
       },
       {
@@ -40263,14 +40277,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_get",
-        "Path": "/planner/plans/{plan-id}",
+        "OperationName": "openshiftchangerequest_list",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_list_buckets",
-        "Path": "/planner/plans/{plan-id}/buckets",
+        "OperationName": "plannerplan_get",
+        "Path": "/planner/plans/{plan-id}",
         "Version": "v1.0"
       },
       {
@@ -40335,8 +40349,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "post_get",
-        "Path": "/groups/{id}/threads/{id}/posts/{id}",
+        "OperationName": "plannerplan_list_buckets",
+        "Path": "/planner/plans/{plan-id}/buckets",
         "Version": "v1.0"
       },
       {
@@ -40356,18 +40370,6 @@
         "OperationName": "channel_delete_tabs",
         "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_post_owners",
-        "Path": "/groups/{id}/owners/$ref",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_post_groups",
-        "Path": "/groups",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -40395,6 +40397,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/settings",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_rejectedsenders",
         "Path": "/groups/{id}/rejectedSenders",
         "Version": "beta"
@@ -40406,21 +40414,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "group_post_rejectedsenders",
-        "Path": "/groups/{id}/rejectedSenders/$ref",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "group_list_owners",
         "Path": "/groups/{id}/owners",
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "group_post_groups",
+        "Path": "/groups",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "group_list_endpoints",
-        "Path": "/groups/{id}/endpoints",
+        "OperationName": "group_list_members",
+        "Path": "/groups/{id}/members",
         "Version": "beta"
       },
       {
@@ -40466,33 +40474,33 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "group_list_members",
-        "Path": "/groups/{id}/members",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "group_delete_rejectedsenders",
         "Path": "/groups/{id}/rejectedSenders/$ref?$id={id}",
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "group_list_endpoints",
+        "Path": "/groups/{id}/endpoints",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_post_owners",
+        "Path": "/groups/{id}/owners/$ref",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_post_rejectedsenders",
+        "Path": "/groups/{id}/rejectedSenders/$ref",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "group_removefavorite",
         "Path": "/groups/{id}/removeFavorite",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_resetunseencount",
-        "Path": "/groups/{id}/resetUnseenCount",
-        "Version": "beta"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "openshift_update",
-        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
         "Version": "beta"
       },
       {
@@ -40539,14 +40547,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_renew",
-        "Path": "/groups/{id}/renew",
+        "OperationName": "offershiftrequest_decline",
+        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/decline",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "offershiftrequest_decline",
-        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/decline",
+        "OperationName": "offershiftrequest_approve",
+        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/approve",
         "Version": "beta"
       },
       {
@@ -40599,8 +40607,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "offershiftrequest_approve",
-        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/approve",
+        "OperationName": "group_resetunseencount",
+        "Path": "/groups/{id}/resetUnseenCount",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_renew",
+        "Path": "/groups/{id}/renew",
         "Version": "beta"
       },
       {
@@ -40610,15 +40624,21 @@
         "Version": "beta"
       },
       {
+        "Method": "PUT",
+        "OperationName": "openshift_update",
+        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "group_delete_members",
         "Path": "/groups/{id}/members/{id}/$ref",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_acceptedsenders",
-        "Path": "/groups/{id}/acceptedSenders/$ref?$id={id}",
+        "Method": "POST",
+        "OperationName": "group_assignlicense",
+        "Path": "/groups/{id}/assignLicense",
         "Version": "beta"
       },
       {
@@ -40755,12 +40775,6 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_assignlicense",
-        "Path": "/groups/{id}/assignLicense",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "group_addfavorite",
         "Path": "/groups/{id}/addFavorite",
         "Version": "beta"
@@ -40838,6 +40852,12 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "directorysetting_get",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "directoryobject_getmembergroups_6",
         "Path": "/directoryObjects/{id}/getMemberGroups",
@@ -40868,9 +40888,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "openshiftchangerequest_approve",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
+        "Method": "DELETE",
+        "OperationName": "group_delete_acceptedsenders",
+        "Path": "/groups/{id}/acceptedSenders/$ref?$id={id}",
         "Version": "beta"
       },
       {
@@ -40881,20 +40901,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "openshiftchangerequest_decline",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
+        "OperationName": "openshiftchangerequest_approve",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_list",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "team_archive",
-        "Path": "/teams/{id}/archive",
+        "OperationName": "openshiftchangerequest_get",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
         "Version": "beta"
       },
       {
@@ -40940,20 +40954,20 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "shift_delete",
         "Path": "/teams/{teamId}/schedule/shifts/{shiftId}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "schedulinggroup_get",
+        "Method": "POST",
+        "OperationName": "team_archive",
+        "Path": "/teams/{id}/archive",
+        "Version": "beta"
+      },
+      {
+        "Method": "PUT",
+        "OperationName": "schedulinggroup_put",
         "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
         "Version": "beta"
       },
@@ -41000,15 +41014,21 @@
         "Version": "beta"
       },
       {
-        "Method": "PUT",
-        "OperationName": "schedulinggroup_put",
-        "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
+        "Method": "GET",
+        "OperationName": "schedule_list_schedulinggroups",
+        "Path": "/teams/{teamId}/schedule/schedulingGroups",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_list_schedulinggroups",
-        "Path": "/teams/{teamId}/schedule/schedulingGroups",
+        "OperationName": "schedulinggroup_get",
+        "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
         "Version": "beta"
       },
       {
@@ -41019,8 +41039,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "team_get",
-        "Path": "/teams/{team-id}",
+        "OperationName": "team_get_installedapps",
+        "Path": "/teams/{id}/installedApps/{id}",
         "Version": "beta"
       },
       {
@@ -41072,15 +41092,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "team_get_installedapps",
-        "Path": "/teams/{id}/installedApps/{id}",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "timeoff_delete",
         "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "team_update",
+        "Path": "/teams/{team-id}",
         "Version": "beta"
       },
       {
@@ -41132,8 +41152,8 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "team_update",
+        "Method": "GET",
+        "OperationName": "team_get",
         "Path": "/teams/{team-id}",
         "Version": "beta"
       },
@@ -41144,6 +41164,12 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "openshiftchangerequest_decline",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "post_list_attachments",
         "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
@@ -41151,14 +41177,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "post_list_attachments",
-        "Path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "plannerplan_list_buckets",
-        "Path": "/planner/plans/{plan-id}/buckets",
+        "OperationName": "post_get",
+        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}",
         "Version": "beta"
       },
       {
@@ -41205,20 +41225,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_list_tasks",
-        "Path": "/planner/plans/{plan-id}/tasks",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "plannerbucket_get",
         "Path": "/planner/buckets/{id}",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "plannerassignedtotaskboardtaskformat_update",
-        "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
+        "Method": "GET",
+        "OperationName": "plannerplan_list_buckets",
+        "Path": "/planner/plans/{plan-id}/buckets",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "plannerbucket_delete",
+        "Path": "/planner/buckets/{id}",
         "Version": "beta"
       },
       {
@@ -41264,9 +41284,21 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "plannerbucket_delete",
-        "Path": "/planner/buckets/{id}",
+        "Method": "GET",
+        "OperationName": "openshiftchangerequest_list",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "plannerassignedtotaskboardtaskformat_update",
+        "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "plannerplan_list_tasks",
+        "Path": "/planner/plans/{plan-id}/tasks",
         "Version": "beta"
       },
       {
@@ -41279,18 +41311,6 @@
         "Method": "GET",
         "OperationName": "plannerplandetails_get",
         "Path": "/planner/plans/{id}/details",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "plannerplandetails_update",
-        "Path": "/planner/plans/{id}/details",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "post_get",
-        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}",
         "Version": "beta"
       },
       {
@@ -41402,9 +41422,15 @@
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "plannerplandetails_update",
+        "Path": "/planner/plans/{id}/details",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_get",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
+        "OperationName": "post_list_attachments",
+        "Path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "beta"
       },
       {
@@ -41423,12 +41449,6 @@
         "Method": "GET",
         "OperationName": "timeoffrequest_list",
         "Path": "/teams/{teamId}/schedule/timeOffRequests",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_post_groups",
-        "Path": "/groups",
         "Version": "v1.0"
       },
       {
@@ -41457,6 +41477,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/groupSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_rejectedsenders",
         "Path": "/groups/{id}/rejectedSenders",
         "Version": "v1.0"
@@ -41475,8 +41501,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_post_owners",
-        "Path": "/groups/{id}/owners/$ref",
+        "OperationName": "group_post_groups",
+        "Path": "/groups",
         "Version": "v1.0"
       },
       {
@@ -41540,9 +41566,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_owners",
-        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Method": "POST",
+        "OperationName": "group_post_owners",
+        "Path": "/groups/{id}/owners/$ref",
         "Version": "v1.0"
       },
       {
@@ -41553,14 +41579,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_renew",
-        "Path": "/groups/{id}/renew",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "openshift_update",
-        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
+        "OperationName": "group_removefavorite",
+        "Path": "/groups/{id}/removeFavorite",
         "Version": "v1.0"
       },
       {
@@ -41607,14 +41627,20 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_removefavorite",
-        "Path": "/groups/{id}/removeFavorite",
+        "OperationName": "offershiftrequest_decline",
+        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/decline",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "offershiftrequest_decline",
-        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/decline",
+        "OperationName": "offershiftrequest_approve",
+        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/approve",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
         "Version": "v1.0"
       },
       {
@@ -41667,20 +41693,26 @@
       },
       {
         "Method": "POST",
-        "OperationName": "offershiftrequest_approve",
-        "Path": "/teams/{teamId}/schedule/offerShiftRequests/{offerShiftRequestId}/approve",
+        "OperationName": "group_renew",
+        "Path": "/groups/{id}/renew",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_owners",
+        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PUT",
+        "OperationName": "openshift_update",
+        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
         "Version": "v1.0"
       },
       {
         "Method": "DELETE",
         "OperationName": "group_delete_members",
         "Path": "/groups/{id}/members/{id}/$ref",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "group_delete_acceptedsenders",
-        "Path": "/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/groups/{other-group-id}",
         "Version": "v1.0"
       },
       {
@@ -41936,9 +41968,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "openshiftchangerequest_approve",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
+        "Method": "DELETE",
+        "OperationName": "group_delete_acceptedsenders",
+        "Path": "/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/groups/{other-group-id}",
         "Version": "v1.0"
       },
       {
@@ -41949,20 +41981,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "openshiftchangerequest_decline",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
+        "OperationName": "openshiftchangerequest_approve",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_list",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "team_archive",
-        "Path": "/teams/{id}/archive",
+        "OperationName": "openshiftchangerequest_get",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
         "Version": "v1.0"
       },
       {
@@ -42008,20 +42034,20 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
-        "Version": "v1.0"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "shift_delete",
         "Path": "/teams/{teamId}/schedule/shifts/{shiftId}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "schedulinggroup_get",
+        "Method": "POST",
+        "OperationName": "team_archive",
+        "Path": "/teams/{id}/archive",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PUT",
+        "OperationName": "schedulinggroup_put",
         "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
         "Version": "v1.0"
       },
@@ -42068,15 +42094,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PUT",
-        "OperationName": "schedulinggroup_put",
-        "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
+        "Method": "GET",
+        "OperationName": "schedule_list_timeoffreasons",
+        "Path": "/teams/{teamId}/schedule/timeOffReasons",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_list_timeoffreasons",
-        "Path": "/teams/{teamId}/schedule/timeOffReasons",
+        "OperationName": "schedulinggroup_get",
+        "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
         "Version": "v1.0"
       },
       {
@@ -42087,8 +42119,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "team_get",
-        "Path": "/teams/{team-id}",
+        "OperationName": "team_get_installedapps",
+        "Path": "/teams/{id}/installedApps/{id}",
         "Version": "v1.0"
       },
       {
@@ -42141,13 +42173,13 @@
       },
       {
         "Method": "GET",
-        "OperationName": "team_get_installedapps",
-        "Path": "/teams/{id}/installedApps/{id}",
+        "OperationName": "timeoff_get",
+        "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "timeoff_get",
+        "Method": "DELETE",
+        "OperationName": "timeoff_delete",
         "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
         "Version": "v1.0"
       },
@@ -42200,15 +42232,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "timeoff_delete",
-        "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
+        "Method": "GET",
+        "OperationName": "team_get",
+        "Path": "/teams/{team-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "schedule_list_shifts",
         "Path": "/teams/{teamId}/schedule/shifts",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "openshiftchangerequest_decline",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
         "Version": "v1.0"
       },
       {
@@ -42219,14 +42257,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_get",
-        "Path": "/teams/{teamId}/schedule",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "plannerplan_list_buckets",
-        "Path": "/planner/plans/{plan-id}/buckets",
+        "OperationName": "post_list_attachments",
+        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "v1.0"
       },
       {
@@ -42273,20 +42305,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_list_tasks",
-        "Path": "/planner/plans/{plan-id}/tasks",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "plannerbucket_get",
         "Path": "/planner/buckets/{id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "plannerassignedtotaskboardtaskformat_update",
-        "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
+        "Method": "GET",
+        "OperationName": "plannerplan_list_buckets",
+        "Path": "/planner/plans/{plan-id}/buckets",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "plannerbucket_delete",
+        "Path": "/planner/buckets/{id}",
         "Version": "v1.0"
       },
       {
@@ -42332,9 +42364,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "plannerbucket_delete",
-        "Path": "/planner/buckets/{id}",
+        "Method": "GET",
+        "OperationName": "openshiftchangerequest_list",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "plannerassignedtotaskboardtaskformat_update",
+        "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "plannerplan_list_tasks",
+        "Path": "/planner/plans/{plan-id}/tasks",
         "Version": "v1.0"
       },
       {
@@ -42347,18 +42391,6 @@
         "Method": "GET",
         "OperationName": "plannerplandetails_get",
         "Path": "/planner/plans/{id}/details",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "plannerplandetails_update",
-        "Path": "/planner/plans/{id}/details",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "post_list_attachments",
-        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "v1.0"
       },
       {
@@ -42470,9 +42502,15 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "plannerplandetails_update",
+        "Path": "/planner/plans/{id}/details",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
-        "OperationName": "openshiftchangerequest_get",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
+        "OperationName": "schedule_get",
+        "Path": "/teams/{teamId}/schedule",
         "Version": "v1.0"
       },
       {
@@ -42675,6 +42713,60 @@
       }
     ],
     "Role": "GroupMember.ReadWrite.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/groupSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsettingtemplate_get",
+        "Path": "/groupSettingTemplates/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsettingtemplate_list",
+        "Path": "/groupSettingTemplates",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysetting_get",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysettingtemplate_get",
+        "Path": "/directorySettingTemplates/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysettingtemplate_list",
+        "Path": "/directorySettingTemplates",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/settings",
+        "Version": "beta"
+      }
+    ],
+    "Role": "GroupSettings.Read.All",
     "Type": "Application"
   },
   {

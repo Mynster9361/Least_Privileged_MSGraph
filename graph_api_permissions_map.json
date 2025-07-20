@@ -797,12 +797,22 @@
     "operation_name": "group_list_settings",
     "full_example_url": "https://graph.microsoft.com/beta/settings",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ]
   },
   {
     "path": "/groups/{id}/rejectedSenders",
@@ -13222,12 +13232,18 @@
     "operation_name": "directorysettingtemplate_list",
     "full_example_url": "https://graph.microsoft.com/beta/directorySettingTemplates",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ]
   },
   {
     "path": "/settings/{directorySettingId}",
@@ -13250,12 +13266,22 @@
     "operation_name": "directorysetting_get",
     "full_example_url": "https://graph.microsoft.com/beta/settings/f0b2d6f5-097d-4177-91af-a24e530b53cc",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.Al",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ]
   },
   {
     "path": "/settings/{directorySettingId}",
@@ -13364,12 +13390,18 @@
     "operation_name": "directorysettingtemplate_get",
     "full_example_url": "https://graph.microsoft.com/beta/directorySettingTemplates/08d542b9-071f-4e16-94b0-74abb372e3d9",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ]
   },
   {
     "path": "/sites/{siteId}/drive/root/delta",
@@ -44544,12 +44576,22 @@
     "operation_name": "groupsetting_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/groups/05aa6a98-956a-45c0-b13b-88076a23f2cd/settings/a06fa228-3042-4662-bd09-33e298da1afe",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ]
   },
   {
     "path": "/groups/{id}/removeFavorite",
@@ -44586,12 +44628,18 @@
     "operation_name": "groupsettingtemplate_list",
     "full_example_url": "https://graph.microsoft.com/v1.0/groupSettingTemplates",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ]
   },
   {
     "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/fields/icon",
@@ -44850,12 +44898,18 @@
     "operation_name": "groupsettingtemplate_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/groupSettingTemplates/08d542b9-071f-4e16-94b0-74abb372e3d9",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ]
   },
   {
     "path": "/groupSettings",
@@ -45359,12 +45413,22 @@
     "operation_name": "group_list_settings",
     "full_example_url": "https://graph.microsoft.com/v1.0/groupSettings",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedWork_Least": "GroupSettings.Read.All",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Directory.Read.All",
-    "Application_Higher": "Directory.ReadWrite.All"
+    "Application_Least": "GroupSettings.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ]
   },
   {
     "path": "/groups/{id}/rejectedSenders",
@@ -63627,8 +63691,8 @@
     "version": "v1.0",
     "method": "POST",
     "operation_name": "chatmessage_post",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{team-id}/channels/{channel-id}/messages",
-    "example_from_docs": false,
+    "full_example_url": "https://graph.microsoft.com/v1.0/chats/19:7fb82b685f9c457296a0ab6a1d98b4c1@thread.v2/messages",
+    "example_from_docs": true,
     "DelegatedWork_Least": "ChannelMessage.Send",
     "DelegatedWork_Higher": "Group.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",

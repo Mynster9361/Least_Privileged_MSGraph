@@ -12838,7 +12838,7 @@
       {
         "Method": "GET",
         "OperationName": "contact_delta",
-        "Path": "/users/{id}/contactFolders/{id}/contacts/delta",
+        "Path": "/users/{id | userPrincipalName}/contactFolders/{id}/contacts/delta",
         "Version": "v1.0"
       },
       {
@@ -13114,7 +13114,7 @@
       {
         "Method": "GET",
         "OperationName": "contact_delta",
-        "Path": "/users/{id}/contactFolders/{id}/contacts/delta",
+        "Path": "/users/{id | userPrincipalName}/contactFolders/{id}/contacts/delta",
         "Version": "v1.0"
       },
       {
@@ -58558,9 +58558,25 @@
         "OperationName": "unifiedrbacapplication_list_customappscopes",
         "Path": "/roleManagement/exchange/customAppScopes",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "unifiedrbacapplication_list_customappscopes",
+        "Path": "/roleManagement/defender/customAppScopes",
+        "Version": "beta"
       }
     ],
     "Role": "RoleManagement.Read.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "unifiedrbacapplication_list_customappscopes",
+      "Path": "/roleManagement/defender/customAppScopes",
+      "Version": "beta"
+    },
+    "Role": "RoleManagement.Read.Defender",
     "Type": "Application"
   },
   {
@@ -58765,6 +58781,16 @@
       }
     ],
     "Role": "RoleManagement.ReadWrite.CloudPC",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "unifiedrbacapplication_list_customappscopes",
+      "Path": "/roleManagement/defender/customAppScopes",
+      "Version": "beta"
+    },
+    "Role": "RoleManagement.ReadWrite.Defender",
     "Type": "Application"
   },
   {

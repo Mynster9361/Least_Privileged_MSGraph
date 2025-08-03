@@ -43111,11 +43111,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/add",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
     "version": "beta",
     "method": "POST",
-    "operation_name": "chartcollection_add",
-    "full_example_url": "https://graph.microsoft.com/beta/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/add",
+    "operation_name": "worksheetprotection_unprotect",
+    "full_example_url": "https://graph.microsoft.com/beta/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -43125,11 +43125,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/add",
     "version": "beta",
-    "method": "PATCH",
-    "operation_name": "chartaxistitle_update",
-    "full_example_url": "https://graph.microsoft.com/beta/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
+    "method": "POST",
+    "operation_name": "chartcollection_add",
+    "full_example_url": "https://graph.microsoft.com/beta/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/add",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -65896,6 +65896,20 @@
     "Application_Higher": "Contacts.ReadWrite"
   },
   {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
+    "version": "beta",
+    "method": "PATCH",
+    "operation_name": "chartaxistitle_update",
+    "full_example_url": "https://graph.microsoft.com/beta/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
     "path": "/planner/plans/{plan-id}",
     "version": "v1.0",
     "method": "PATCH",
@@ -65908,24 +65922,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Tasks.ReadWrite.All",
     "Application_Higher": "Not available."
-  },
-  {
-    "path": "/planner/plans/{id}/details",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "plannerplandetails_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/details",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Tasks.Read",
-    "DelegatedWork_Higher": [
-      "Group.Read.All",
-      "Group.ReadWrite.All",
-      "Tasks.ReadWrite"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Tasks.Read.All",
-    "Application_Higher": "Tasks.ReadWrite.All"
   },
   {
     "path": "/planner/plans/{id}/details",
@@ -66488,21 +66484,21 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
+    "path": "/teamwork/workforceIntegrations",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "workbookformatprotection_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/protection",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
+    "method": "POST",
+    "operation_name": "workforceintegration_post",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teamwork/workforceIntegrations",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "WorkforceIntegration.ReadWrite.All",
     "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "WorkforceIntegration.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/protection",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "workbookformatprotection_get",
@@ -66526,6 +66522,20 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
     "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/createSession",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "workbook_createsession",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/createSession",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -66754,34 +66764,6 @@
     "Application_Higher": "Sites.ReadWrite.All"
   },
   {
-    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
-    "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "webpart_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/createSession",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "workbook_createsession",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/createSession",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/createSession",
     "version": "v1.0",
     "method": "POST",
@@ -66792,6 +66774,20 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/protection",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "workbookformatprotection_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/protection",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -66810,7 +66806,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names",
+    "path": "/me/drive/root:/{item-path}:/workbook/names",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "workbook_list_names",
@@ -66936,26 +66932,26 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/teamwork/workforceIntegrations",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "workforceintegration_post",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teamwork/workforceIntegrations",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "WorkforceIntegration.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "WorkforceIntegration.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
     "path": "/me/drive/items/{id}/workbook/application",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "workbookapplication_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/application",
     "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/application/calculate",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "workbookapplication_calculate",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/application/calculate",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
@@ -67062,7 +67058,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names",
+    "path": "/me/drive/items/{id}/workbook/names",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "workbook_list_names",
@@ -67074,34 +67070,6 @@
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/application/calculate",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "workbookapplication_calculate",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/application/calculate",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
-    "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "webpart_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
   },
   {
     "path": "/teamwork/workforceIntegrations/{workforceIntegrationId}",
@@ -67116,6 +67084,20 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "WorkforceIntegration.ReadWrite.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/cell(row={row},column={column})",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "worksheet_cell",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/cell(row=<row>,column=<column>)",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/cell(row={row},column={column})",
@@ -68147,18 +68129,18 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/cell(row={row},column={column})",
+    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "worksheet_cell",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/cell(row=<row>,column=<column>)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
+    "method": "DELETE",
+    "operation_name": "webpart_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Sites.Read.All",
+    "DelegatedWork_Higher": "Sites.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "Application_Least": "Sites.Read.All",
+    "Application_Higher": "Sites.ReadWrite.All"
   },
   {
     "path": "/identityGovernance/entitlementManagement/accessPackages/{id}/accessPackageResourceRoleScopes/{id}",
@@ -68301,18 +68283,18 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": " /identityGovernance/accessReviews/definitions/{definition-id}/instances/{instance-id}/stopApplyDecisions",
-    "version": "beta",
-    "method": "POST",
-    "operation_name": "accessreviewinstance_stopapplydecisions",
-    "full_example_url": "https://graph.microsoft.com/beta /identityGovernance/accessReviews/definitions/{definition-id}/instances/{instance-id}/stopApplyDecisions",
+    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "webpart_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "AccessReview.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
+    "DelegatedWork_Least": "Sites.Read.All",
+    "DelegatedWork_Higher": "Sites.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "AccessReview.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "Sites.Read.All",
+    "Application_Higher": "Sites.ReadWrite.All"
   },
   {
     "path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
@@ -68331,16 +68313,34 @@
   {
     "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "verticalsection_get",
+    "method": "PATCH",
+    "operation_name": "verticalsection_update",
     "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
+    "DelegatedWork_Least": "Sites.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
+    "Application_Least": "Sites.ReadWrite.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "timeoffreason_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Schedule.Read.All",
+    "DelegatedWork_Higher": [
+      "Group.Read.All",
+      "Group.ReadWrite.All",
+      "Schedule.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Schedule.Read.All",
+    "Application_Higher": "Schedule.ReadWrite.All"
   },
   {
     "path": "/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
@@ -68580,52 +68580,6 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/teamwork",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "teamwork_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teamwork",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Teamwork.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Teamwork.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "timeoffreason_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Schedule.Read.All",
-    "DelegatedWork_Higher": [
-      "Group.Read.All",
-      "Group.ReadWrite.All",
-      "Schedule.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Schedule.Read.All",
-    "Application_Higher": "Schedule.ReadWrite.All"
-  },
-  {
-    "path": "https://graph.microsoft.com/v1.0/teamwork/teamsAppSettings",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "teamsappsettings_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/teamwork/teamsAppSettings",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "TeamworkAppSettings.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/teams/{teamId}/schedule/timeOffReasons/{timeOffReasonId}",
     "version": "v1.0",
     "method": "PUT",
@@ -68640,11 +68594,25 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/decline",
+    "path": "/teamwork",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "teamwork_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teamwork",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Teamwork.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Teamwork.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/approve",
     "version": "v1.0",
     "method": "POST",
-    "operation_name": "timeoffrequest_decline",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/decline",
+    "operation_name": "timeoffrequest_approve",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/approve",
     "example_from_docs": false,
     "DelegatedWork_Least": "Schedule.ReadWrite.All",
     "DelegatedWork_Higher": "Group.ReadWrite.All",
@@ -68652,6 +68620,34 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Schedule.ReadWrite.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "timeoffrequest_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Schedule.ReadWrite.All",
+    "DelegatedWork_Higher": "Group.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Schedule.ReadWrite.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/policies/tokenLifetimePolicies/{id}",
+    "version": "v1.0",
+    "method": "PATCH",
+    "operation_name": "tokenlifetimepolicy_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Policy.Read.ApplicationConfiguration",
+    "DelegatedWork_Higher": "Policy.ReadWrite.ApplicationConfiguration",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Policy.Read.ApplicationConfiguration",
+    "Application_Higher": "Policy.ReadWrite.ApplicationConfiguration"
   },
   {
     "path": "policies/tokenLifetimePolicies",
@@ -68910,11 +68906,11 @@
     "Application_Higher": "Schedule.ReadWrite.All"
   },
   {
-    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}",
+    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/decline",
     "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "timeoffrequest_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}",
+    "method": "POST",
+    "operation_name": "timeoffrequest_decline",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/decline",
     "example_from_docs": false,
     "DelegatedWork_Least": "Schedule.ReadWrite.All",
     "DelegatedWork_Higher": "Group.ReadWrite.All",
@@ -68924,18 +68920,18 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/approve",
+    "path": "https://graph.microsoft.com/v1.0/teamwork/teamsAppSettings",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "timeoffrequest_approve",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/timeOffRequests/{timeOffRequestId}/approve",
+    "method": "PATCH",
+    "operation_name": "teamsappsettings_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/teamwork/teamsAppSettings",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Schedule.ReadWrite.All",
-    "DelegatedWork_Higher": "Group.ReadWrite.All",
+    "DelegatedWork_Least": "TeamworkAppSettings.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Schedule.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/appCatalogs/teamsApps/{id}/appDefinitions",
@@ -68972,19 +68968,16 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/appCatalogs/teamsApps/{id}",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/reapply",
     "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "teamsapp_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{id}",
+    "method": "POST",
+    "operation_name": "tablesort_reapply",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/reapply",
     "example_from_docs": false,
-    "DelegatedWork_Least": "AppCatalog.Submit",
-    "DelegatedWork_Higher": [
-      "AppCatalog.ReadWrite.All",
-      "Directory.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -69213,34 +69206,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/itemAt(index={index})",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablerowcollection_itemat",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows/itemAt(index=4)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/reapply",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "tablesort_reapply",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/reapply",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/sort/reapply",
     "version": "v1.0",
     "method": "POST",
@@ -69281,6 +69246,37 @@
     "DelegatedPersonal_Higher": "Tasks.ReadWrite",
     "Application_Least": "Tasks.Read.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/users/{id}/todo/lists/{id}/tasks/{id}/attachments/{id}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "taskfileattachment_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id}/todo/lists/{id}/tasks/{id}/attachments/{id}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Tasks.Read",
+    "DelegatedWork_Higher": "Tasks.ReadWrite",
+    "DelegatedPersonal_Least": "Tasks.Read",
+    "DelegatedPersonal_Higher": "Tasks.ReadWrite",
+    "Application_Least": "Tasks.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/appCatalogs/teamsApps/{id}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "teamsapp_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{id}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "AppCatalog.Submit",
+    "DelegatedWork_Higher": [
+      "AppCatalog.ReadWrite.All",
+      "Directory.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/teams",
@@ -69423,6 +69419,20 @@
     "Application_Higher": "Not available."
   },
   {
+    "path": "/roleManagement/directory/roleDefinitions/{id}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "unifiedroledefinition_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleDefinitions/{id}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "RoleManagement.ReadWrite.Directory",
+    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "RoleManagement.ReadWrite.Directory",
+    "Application_Higher": "Directory.ReadWrite.All"
+  },
+  {
     "path": "/teams",
     "version": "v1.0",
     "method": "POST",
@@ -69444,53 +69454,33 @@
     ]
   },
   {
-    "path": "/policies/tokenLifetimePolicies/{id}",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "tokenlifetimepolicy_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Policy.Read.ApplicationConfiguration",
-    "DelegatedWork_Higher": "Policy.ReadWrite.ApplicationConfiguration",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Policy.Read.ApplicationConfiguration",
-    "Application_Higher": "Policy.ReadWrite.ApplicationConfiguration"
-  },
-  {
-    "path": "/teams/{team-id}/installedApps",
+    "path": "/teams/{team-id}",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "team_list_installedapps",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/6903fa93-605b-43ef-920e-77c4729f8258/installedApps",
+    "operation_name": "team_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/893075dd-2487-4122-925f-022c42e20265",
     "example_from_docs": true,
-    "DelegatedWork_Least": "TeamsAppInstallation.ReadForTeam",
+    "DelegatedWork_Least": "Team.ReadBasic.All",
     "DelegatedWork_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
       "Group.Read.All",
       "Group.ReadWrite.All",
-      "TeamsAppInstallation.ManageSelectedForTeam",
-      "TeamsAppInstallation.ReadWriteAndConsentForTeam",
-      "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam",
-      "TeamsAppInstallation.ReadWriteForTeam",
-      "TeamsAppInstallation.ReadWriteSelfForTeam"
+      "TeamSettings.Read.All",
+      "TeamSettings.ReadWrite.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "TeamsAppInstallation.Read.Group",
+    "Application_Least": "TeamSettings.Read.Group",
     "Application_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
       "Group.Read.All",
       "Group.ReadWrite.All",
-      "TeamsAppInstallation.ManageSelectedForTeam.All",
-      "TeamsAppInstallation.Read.All",
-      "TeamsAppInstallation.ReadForTeam.All",
-      "TeamsAppInstallation.ReadWriteAndConsentForTeam.All",
-      "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam.All",
-      "TeamsAppInstallation.ReadWriteForTeam.All",
-      "TeamsAppInstallation.ReadWriteSelfForTeam.All"
+      "Team.ReadBasic.All",
+      "TeamSettings.Read.All",
+      "TeamSettings.ReadWrite.All",
+      "TeamSettings.ReadWrite.Group"
     ]
   },
   {
@@ -69650,68 +69640,60 @@
     ]
   },
   {
-    "path": "/users/{id}/todo/lists/{id}/tasks/{id}/attachments/{id}",
+    "path": "/teams/{team-id}/installedApps",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "taskfileattachment_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id}/todo/lists/{id}/tasks/{id}/attachments/{id}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Tasks.Read",
-    "DelegatedWork_Higher": "Tasks.ReadWrite",
-    "DelegatedPersonal_Least": "Tasks.Read",
-    "DelegatedPersonal_Higher": "Tasks.ReadWrite",
-    "Application_Least": "Tasks.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/teams/{team-id}",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "team_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/893075dd-2487-4122-925f-022c42e20265",
+    "operation_name": "team_list_installedapps",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/6903fa93-605b-43ef-920e-77c4729f8258/installedApps",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Team.ReadBasic.All",
+    "DelegatedWork_Least": "TeamsAppInstallation.ReadForTeam",
     "DelegatedWork_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
       "Group.Read.All",
       "Group.ReadWrite.All",
-      "TeamSettings.Read.All",
-      "TeamSettings.ReadWrite.All"
+      "TeamsAppInstallation.ManageSelectedForTeam",
+      "TeamsAppInstallation.ReadWriteAndConsentForTeam",
+      "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam",
+      "TeamsAppInstallation.ReadWriteForTeam",
+      "TeamsAppInstallation.ReadWriteSelfForTeam"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "TeamSettings.Read.Group",
+    "Application_Least": "TeamsAppInstallation.Read.Group",
     "Application_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
       "Group.Read.All",
       "Group.ReadWrite.All",
-      "Team.ReadBasic.All",
-      "TeamSettings.Read.All",
-      "TeamSettings.ReadWrite.All",
-      "TeamSettings.ReadWrite.Group"
+      "TeamsAppInstallation.ManageSelectedForTeam.All",
+      "TeamsAppInstallation.Read.All",
+      "TeamsAppInstallation.ReadForTeam.All",
+      "TeamsAppInstallation.ReadWriteAndConsentForTeam.All",
+      "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam.All",
+      "TeamsAppInstallation.ReadWriteForTeam.All",
+      "TeamsAppInstallation.ReadWriteSelfForTeam.All"
     ]
   },
   {
-    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "verticalsection_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
+    "path": " /identityGovernance/accessReviews/definitions/{definition-id}/instances/{instance-id}/stopApplyDecisions",
+    "version": "beta",
+    "method": "POST",
+    "operation_name": "accessreviewinstance_stopapplydecisions",
+    "full_example_url": "https://graph.microsoft.com/beta /identityGovernance/accessReviews/definitions/{definition-id}/instances/{instance-id}/stopApplyDecisions",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.ReadWrite.All",
+    "DelegatedWork_Least": "AccessReview.ReadWrite.All",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.ReadWrite.All",
+    "Application_Least": "AccessReview.ReadWrite.All",
     "Application_Higher": "Not available."
   },
   {
     "path": "/roleManagement/directory/roleDefinitions/{id}",
     "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "unifiedroledefinition_delete",
+    "method": "PATCH",
+    "operation_name": "unifiedroledefinition_update",
     "full_example_url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleDefinitions/{id}",
     "example_from_docs": false,
     "DelegatedWork_Least": "RoleManagement.ReadWrite.Directory",
@@ -69722,18 +69704,38 @@
     "Application_Higher": "Directory.ReadWrite.All"
   },
   {
-    "path": "/security/dataSecurityAndGovernance/sensitivityLabels/{labelId}/rights",
+    "path": "/users/{id | userPrincipalName}/assignLicense",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "usagerightsincluded_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/dataSecurityAndGovernance/sensitivityLabels/4e4234dd-377b-42a3-935b-0e42f138fa23/rights?ownerEmail=bob@contoso.com",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "SensitivityLabel.Read",
-    "DelegatedWork_Higher": "SensitivityLabels.Read.All",
+    "method": "POST",
+    "operation_name": "user_assignlicense",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/assignLicense",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "LicenseAssignment.ReadWrite.All",
+    "DelegatedWork_Higher": [
+      "Directory.ReadWrite.All",
+      "User.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SensitivityLabel.Read",
-    "Application_Higher": "SensitivityLabels.Read.All"
+    "Application_Least": "LicenseAssignment.ReadWrite.All",
+    "Application_Higher": [
+      "Directory.ReadWrite.All",
+      "User.ReadWrite.All"
+    ]
+  },
+  {
+    "path": "/users/{id | userPrincipalName}/sendMail",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "user_sendmail",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/sendMail",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Mail.Send",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Mail.Send",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Mail.Send",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/me/sendMail",
@@ -70005,58 +70007,6 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/users/{id | userPrincipalName}/ownedObjects",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "user_list_ownedobjects",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/ownedObjects",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "User.Read",
-    "DelegatedWork_Higher": [
-      "Directory.Read.All",
-      "Directory.ReadWrite.All",
-      "User.Read.All",
-      "User.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/users/{id | userPrincipalName}/sendMail",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "user_sendmail",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/sendMail",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Mail.Send",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Mail.Send",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Mail.Send",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/me/ownedObjects",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "user_list_ownedobjects",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/ownedObjects",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "User.Read",
-    "DelegatedWork_Higher": [
-      "Directory.Read.All",
-      "Directory.ReadWrite.All",
-      "User.Read.All",
-      "User.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/translateExchangeIds",
     "version": "v1.0",
     "method": "POST",
@@ -70076,11 +70026,49 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/mailboxSettings",
+    "path": "/users/{id | userPrincipalName}/ownedObjects",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "user_list_ownedobjects",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/ownedObjects",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "User.Read",
+    "DelegatedWork_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "User.Read.All",
+      "User.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/users/{id|userPrincipalName}/translateExchangeIds",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "user_translateexchangeids",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id|userPrincipalName}/translateExchangeIds",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "User.ReadBasic.All",
+    "DelegatedWork_Higher": [
+      "User.Read",
+      "User.Read.All",
+      "User.ReadWrite",
+      "User.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "User.Read",
+    "DelegatedPersonal_Higher": "User.ReadWrite",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/users/{id|userPrincipalName}/mailboxSettings",
     "version": "v1.0",
     "method": "PATCH",
     "operation_name": "user_update_mailboxsettings",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/mailboxSettings",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id|userPrincipalName}/mailboxSettings",
     "example_from_docs": false,
     "DelegatedWork_Least": "MailboxSettings.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -70088,6 +70076,20 @@
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "MailboxSettings.ReadWrite",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "verticalsection_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Sites.Read.All",
+    "DelegatedWork_Higher": "Sites.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Sites.Read.All",
+    "Application_Higher": "Sites.ReadWrite.All"
   },
   {
     "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
@@ -70395,11 +70397,11 @@
     "Application_Higher": "Content.Process.All"
   },
   {
-    "path": "/users/{id|userPrincipalName}/mailboxSettings",
+    "path": "/me/mailboxSettings",
     "version": "v1.0",
     "method": "PATCH",
     "operation_name": "user_update_mailboxsettings",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id|userPrincipalName}/mailboxSettings",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/mailboxSettings",
     "example_from_docs": false,
     "DelegatedWork_Least": "MailboxSettings.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -70409,21 +70411,21 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/users/{id|userPrincipalName}/translateExchangeIds",
+    "path": "/me/ownedObjects",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "user_translateexchangeids",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id|userPrincipalName}/translateExchangeIds",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "User.ReadBasic.All",
+    "method": "GET",
+    "operation_name": "user_list_ownedobjects",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/ownedObjects",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "User.Read",
     "DelegatedWork_Higher": [
-      "User.Read",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
       "User.Read.All",
-      "User.ReadWrite",
       "User.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "User.Read",
-    "DelegatedPersonal_Higher": "User.ReadWrite",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -70466,18 +70468,27 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/users/{id | userPrincipalName}/oauth2PermissionGrants",
+    "path": "/users/{id | userPrincipalName}/calendarGroups",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "user_list_oauth2permissiongrants",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/6e7b768e-07e2-4810-8459-485f84f8f204/oauth2PermissionGrants",
+    "operation_name": "user_list_calendargroups",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/calendarGroups",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Directory.Read.All",
-    "DelegatedWork_Higher": "DelegatedPermissionGrant.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "DelegatedWork_Least": "Calendars.ReadBasic",
+    "DelegatedWork_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ],
+    "DelegatedPersonal_Least": "Calendars.ReadBasic",
+    "DelegatedPersonal_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ],
+    "Application_Least": "Calendars.ReadBasic",
+    "Application_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ]
   },
   {
     "path": "/me/calendarGroups",
@@ -70721,49 +70732,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/users/{id | userPrincipalName}/assignLicense",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "user_assignlicense",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/assignLicense",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "LicenseAssignment.ReadWrite.All",
-    "DelegatedWork_Higher": [
-      "Directory.ReadWrite.All",
-      "User.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "LicenseAssignment.ReadWrite.All",
-    "Application_Higher": [
-      "Directory.ReadWrite.All",
-      "User.ReadWrite.All"
-    ]
-  },
-  {
-    "path": "/users/{id | userPrincipalName}/calendarGroups",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "user_list_calendargroups",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/calendarGroups",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Calendars.ReadBasic",
-    "DelegatedWork_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ],
-    "DelegatedPersonal_Least": "Calendars.ReadBasic",
-    "DelegatedPersonal_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ],
-    "Application_Least": "Calendars.ReadBasic",
-    "Application_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ]
-  },
-  {
     "path": "/me/calendars",
     "version": "v1.0",
     "method": "GET",
@@ -70835,6 +70803,43 @@
       "Calendars.Read",
       "Calendars.ReadWrite"
     ]
+  },
+  {
+    "path": "/users/{id | userPrincipalName}/calendarView?startDateTime={start_datetime}&endDateTime={end_datetime}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "user_list_calendarview",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/calendarView?startDateTime=2020-01-01T19:00:00-08:00&endDateTime=2020-01-02T19:00:00-08:00",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Calendars.ReadBasic",
+    "DelegatedWork_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ],
+    "DelegatedPersonal_Least": "Calendars.ReadBasic",
+    "DelegatedPersonal_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ],
+    "Application_Least": "Calendars.ReadBasic",
+    "Application_Higher": [
+      "Calendars.Read",
+      "Calendars.ReadWrite"
+    ]
+  },
+  {
+    "path": "/users/{id | userPrincipalName}/oauth2PermissionGrants",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "user_list_oauth2permissiongrants",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/6e7b768e-07e2-4810-8459-485f84f8f204/oauth2PermissionGrants",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Directory.Read.All",
+    "DelegatedWork_Higher": "DelegatedPermissionGrant.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/me/oauth2PermissionGrants",
@@ -70979,6 +70984,20 @@
     ]
   },
   {
+    "path": "/security/dataSecurityAndGovernance/sensitivityLabels/{labelId}/rights",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "usagerightsincluded_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/dataSecurityAndGovernance/sensitivityLabels/4e4234dd-377b-42a3-935b-0e42f138fa23/rights?ownerEmail=bob@contoso.com",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "SensitivityLabel.Read",
+    "DelegatedWork_Higher": "SensitivityLabels.Read.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SensitivityLabel.Read",
+    "Application_Higher": "SensitivityLabels.Read.All"
+  },
+  {
     "path": "/users/{id}/licenseDetails",
     "version": "v1.0",
     "method": "GET",
@@ -70999,38 +71018,28 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/roleManagement/directory/roleDefinitions/{id}",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "unifiedroledefinition_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleDefinitions/{id}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "RoleManagement.ReadWrite.Directory",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "RoleManagement.ReadWrite.Directory",
-    "Application_Higher": "Directory.ReadWrite.All"
-  },
-  {
-    "path": "/me/licenseDetails",
+    "path": "/users/{id | user-principal-name}/joinedTeams",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "user_list_licensedetails",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/licenseDetails",
+    "operation_name": "user_list_joinedteams",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/joinedTeams",
     "example_from_docs": true,
-    "DelegatedWork_Least": "LicenseAssignment.Read.All",
+    "DelegatedWork_Least": "Team.ReadBasic.All",
     "DelegatedWork_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
-      "User.Read",
+      "TeamSettings.Read.All",
+      "TeamSettings.ReadWrite.All",
       "User.Read.All",
       "User.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "User.Read",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Team.ReadBasic.All",
+    "Application_Higher": [
+      "TeamSettings.Read.All",
+      "TeamSettings.ReadWrite.All"
+    ]
   },
   {
     "path": "/me/joinedTeams",
@@ -71161,62 +71170,21 @@
     "Application_Higher": "Contacts.ReadWrite"
   },
   {
-    "path": "/users/{id | userPrincipalName}/calendarView?startDateTime={start_datetime}&endDateTime={end_datetime}",
+    "path": "/me/licenseDetails",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "user_list_calendarview",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/calendarView?startDateTime=2020-01-01T19:00:00-08:00&endDateTime=2020-01-02T19:00:00-08:00",
+    "operation_name": "user_list_licensedetails",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/licenseDetails",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Calendars.ReadBasic",
-    "DelegatedWork_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ],
-    "DelegatedPersonal_Least": "Calendars.ReadBasic",
-    "DelegatedPersonal_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ],
-    "Application_Least": "Calendars.ReadBasic",
-    "Application_Higher": [
-      "Calendars.Read",
-      "Calendars.ReadWrite"
-    ]
-  },
-  {
-    "path": "/users/{id | user-principal-name}/joinedTeams",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "user_list_joinedteams",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/joinedTeams",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Team.ReadBasic.All",
+    "DelegatedWork_Least": "LicenseAssignment.Read.All",
     "DelegatedWork_Higher": [
       "Directory.Read.All",
       "Directory.ReadWrite.All",
-      "TeamSettings.Read.All",
-      "TeamSettings.ReadWrite.All",
+      "User.Read",
       "User.Read.All",
       "User.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Team.ReadBasic.All",
-    "Application_Higher": [
-      "TeamSettings.Read.All",
-      "TeamSettings.ReadWrite.All"
-    ]
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "tablerowcollection_add",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Least": "User.Read",
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
@@ -71234,6 +71202,20 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "AccessReview.Read.All",
     "Application_Higher": "AccessReview.ReadWrite.All"
+  },
+  {
+    "path": "/me/pendingAccessReviewInstances/{instance-id}/decisions",
+    "version": "beta",
+    "method": "GET",
+    "operation_name": "accessreviewinstancedecisionitem_listpendingapproval",
+    "full_example_url": "https://graph.microsoft.com/beta/me/pendingAccessReviewInstances/70a68410-67f3-4d4c-b946-6989e050be19/decisions?$top=100&$skip=0",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "AccessReview.Read.All",
+    "DelegatedWork_Higher": "AccessReview.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/identityGovernance/accessReviews/definitions/{accessReviewScheduleDefinitionId}/instances/{accessReviewInstanceId}/decisions/{accessReviewInstanceDecisionItemId}",
@@ -73902,14 +73884,14 @@
     ]
   },
   {
-    "path": "/me/pendingAccessReviewInstances/{instance-id}/decisions",
-    "version": "beta",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/itemAt(index={index})",
+    "version": "v1.0",
     "method": "GET",
-    "operation_name": "accessreviewinstancedecisionitem_listpendingapproval",
-    "full_example_url": "https://graph.microsoft.com/beta/me/pendingAccessReviewInstances/70a68410-67f3-4d4c-b946-6989e050be19/decisions?$top=100&$skip=0",
+    "operation_name": "tablerowcollection_itemat",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows/itemAt(index=4)",
     "example_from_docs": true,
-    "DelegatedWork_Least": "AccessReview.Read.All",
-    "DelegatedWork_Higher": "AccessReview.ReadWrite.All",
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Not supported.",
@@ -76732,11 +76714,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
-    "version": "beta",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
+    "version": "v1.0",
     "method": "POST",
-    "operation_name": "worksheetprotection_unprotect",
-    "full_example_url": "https://graph.microsoft.com/beta/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
+    "operation_name": "tablerowcollection_add",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -76760,11 +76742,25 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "tablerowcollection_add",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "rangeformat_post_borders",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -76998,48 +76994,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "rangeformat_autofitrows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "rangeformat_post_borders",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "rangeformat_autofitrows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
     "version": "v1.0",
     "method": "POST",
@@ -77054,11 +77008,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
     "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "rangeformat_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
+    "method": "POST",
+    "operation_name": "rangeformat_autofitrows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77066,6 +77020,48 @@
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format",
+    "version": "v1.0",
+    "method": "PATCH",
+    "operation_name": "rangeformat_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format",
+    "version": "v1.0",
+    "method": "PATCH",
+    "operation_name": "rangeformat_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/reports/getEmailAppUsageUserCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getemailappusageusercounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/reports/getEmailAppUsageAppsUserCounts(period='{period_value}')",
@@ -77292,11 +77288,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format",
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
     "version": "v1.0",
     "method": "PATCH",
     "operation_name": "rangeformat_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77306,11 +77302,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
     "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "rangeformat_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format",
+    "method": "POST",
+    "operation_name": "rangeformat_autofitrows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitRows",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77348,11 +77344,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitRows",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "rangeformat_autofitrows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitRows",
+    "method": "PATCH",
+    "operation_name": "rangefill_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77586,34 +77582,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/itemAt(index={index})",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "rangebordercollection_itemat",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index=1)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "rangefill_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
     "version": "v1.0",
     "method": "PATCH",
@@ -77648,6 +77616,34 @@
     "operation_name": "rangefont_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/font",
     "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/font",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "rangefont_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/font",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitRows",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "rangeformat_autofitrows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitRows",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -77754,6 +77750,20 @@
     "Application_Higher": "Not supported."
   },
   {
+    "path": "/reports/getEmailAppUsageUserDetail(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getemailappusageuserdetail",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserDetail(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
     "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
     "version": "v1.0",
     "method": "PATCH",
@@ -77768,25 +77778,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/reports/getEmailAppUsageUserCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getemailappusageusercounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserCounts(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
     "version": "v1.0",
     "method": "PATCH",
     "operation_name": "rangefont_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77894,25 +77890,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/font",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "rangefont_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/font",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
     "version": "v1.0",
     "method": "PATCH",
     "operation_name": "rangefont_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -77922,7 +77904,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/itemAt(index={index})",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangebordercollection_itemat",
@@ -77936,7 +77918,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/reports/getEmailAppUsageUserDetail(period='{period_value}')",
+    "path": "/reports/getEmailAppUsageUserDetail(date={date_value})",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "reportroot_getemailappusageuserdetail",
@@ -77950,11 +77932,25 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getEmailAppUsageVersionsUserCounts(period='{period_value}')",
+    "path": "/reports/getM365AppPlatformUserCounts(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getemailappusageversionsusercounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageVersionsUserCounts(period='D7')",
+    "operation_name": "reportroot_getm365appplatformusercounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getM365AppPlatformUserCounts(period='D7')?$format=text/csv",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getTeamsDeviceUsageUserDetail(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getteamsdeviceusageuserdetail",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsDeviceUsageUserDetail(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78188,48 +78184,6 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getSkypeForBusinessActivityUserDetail(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getskypeforbusinessactivityuserdetail",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserDetail(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/reports/getTeamsDeviceUsageUserDetail(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getteamsdeviceusageuserdetail",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsDeviceUsageUserDetail(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/reports/getSkypeForBusinessActivityUserCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getskypeforbusinessactivityusercounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserCounts(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
     "path": "/reports/getTeamsDeviceUsageUserDetail(date='{date_value}')",
     "version": "v1.0",
     "method": "GET",
@@ -78244,11 +78198,53 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getTeamsTeamActivityDetail(period='{period_value}')",
+    "path": "/reports/getSkypeForBusinessActivityUserDetail(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getteamsteamactivitydetail",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityDetail(period='D7')",
+    "operation_name": "reportroot_getskypeforbusinessactivityuserdetail",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserDetail(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getTeamsTeamActivityCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getteamsteamactivitycounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getTeamsTeamActivityDistributionCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getteamsteamactivitydistributioncounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityDistributionCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getYammerGroupsActivityGroupCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getyammergroupsactivitygroupcounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityGroupCounts(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78482,11 +78478,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getTeamsTeamActivityDistributionCounts(period='{period_value}')",
+    "path": "/reports/getTeamsTeamActivityDetail(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getteamsteamactivitydistributioncounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityDistributionCounts(period='D7')",
+    "operation_name": "reportroot_getteamsteamactivitydetail",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityDetail(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78496,11 +78492,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getTeamsTeamActivityCounts(period='{period_value}')",
+    "path": "/reports/getSkypeForBusinessActivityUserCounts(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getteamsteamactivitycounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getTeamsTeamActivityCounts(period='D7')",
+    "operation_name": "reportroot_getskypeforbusinessactivityusercounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserCounts(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78538,11 +78534,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getSharePointSiteUsageSiteCounts(period='{period_value}')",
+    "path": "/reports/getOffice365GroupsActivityFileCounts(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getsharepointsiteusagesitecounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageSiteCounts(period='D7')",
+    "operation_name": "reportroot_getoffice365groupsactivityfilecounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityFileCounts(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78776,34 +78772,6 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getM365AppPlatformUserCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getm365appplatformusercounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getM365AppPlatformUserCounts(period='D7')?$format=text/csv",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/reports/getOffice365GroupsActivityFileCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getoffice365groupsactivityfilecounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityFileCounts(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
     "path": "/reports/getOffice365GroupsActivityGroupCounts(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
@@ -78837,6 +78805,34 @@
     "method": "GET",
     "operation_name": "reportroot_getoffice365servicesusercounts",
     "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOffice365ServicesUserCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getOneDriveActivityFileCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getonedriveactivityfilecounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityFileCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/reports/getSharePointSiteUsageSiteCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getsharepointsiteusagesitecounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageSiteCounts(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -78944,6 +78940,20 @@
     "Application_Higher": "Not available."
   },
   {
+    "path": "/reports/getEmailAppUsageVersionsUserCounts(period='{period_value}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "reportroot_getemailappusageversionsusercounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageVersionsUserCounts(period='D7')",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Reports.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Reports.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
     "path": "/reports/getSharePointActivityPages(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
@@ -78958,25 +78968,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getEmailAppUsageUserDetail(date={date_value})",
+    "path": "/reports/getOneDriveUsageStorage(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getemailappusageuserdetail",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserDetail(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/reports/getSharePointActivityFileCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getsharepointactivityfilecounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityFileCounts(period='D7')",
+    "operation_name": "reportroot_getonedriveusagestorage",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageStorage(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -79084,11 +79080,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getOneDriveActivityFileCounts(period='{period_value}')",
+    "path": "/reports/getSharePointActivityFileCounts(period='{period_value}')",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getonedriveactivityfilecounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityFileCounts(period='D7')",
+    "operation_name": "reportroot_getsharepointactivityfilecounts",
+    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityFileCounts(period='D7')",
     "example_from_docs": true,
     "DelegatedWork_Least": "Reports.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -79098,35 +79094,25 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/reports/getOneDriveUsageStorage(period='{period_value}')",
+    "path": "/me/onenote/resources/{id}/content",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "reportroot_getonedriveusagestorage",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageStorage(period='D7')",
+    "operation_name": "resource_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/resources/{id}/content",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
+    "DelegatedWork_Least": "Notes.Read",
+    "DelegatedWork_Higher": [
+      "Notes.Read.All",
+      "Notes.ReadWrite",
+      "Notes.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Notes.Read",
+    "DelegatedPersonal_Higher": "Notes.ReadWrite",
+    "Application_Least": "Notes.Read.All",
+    "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/reports/getYammerGroupsActivityGroupCounts(period='{period_value}')",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "reportroot_getyammergroupsactivitygroupcounts",
-    "full_example_url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityGroupCounts(period='D7')",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Reports.Read.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Reports.Read.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangebordercollection_itemat",
@@ -79140,7 +79126,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index={index})",
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/itemAt(index={index})",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangebordercollection_itemat",
@@ -79150,6 +79136,20 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/delete",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -79378,48 +79378,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/cell",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_cell",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/cell(row=5,column=6)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/delete",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/cell",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_cell",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/cell(row=5,column=6)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/delete",
     "version": "v1.0",
     "method": "POST",
@@ -79434,12 +79392,54 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/cell",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_cell",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/cell(row=5,column=6)",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
     "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/delete",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/delete",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -79672,11 +79672,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/delete",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -79686,12 +79686,12 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/cell",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
-    "example_from_docs": false,
+    "method": "GET",
+    "operation_name": "range_cell",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/cell(row=5,column=6)",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -79728,16 +79728,20 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/boundingRect",
+    "path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "range_boundingrect",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/boundingRect",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
+    "operation_name": "post_list_attachments",
+    "full_example_url": "https://graph.microsoft.com/v1.0/groups/02bd9fd6-8f93-4758-87c3-1fb73740a315/threads/AAQkAGI5MWY5ZmUyLTJiNzYtNDE0ZC04OWEwLWM3M2FjYmM3NzNlZgMkABAAG5c7eC4NYEynIoXsuxXB9RAAG5c7eC4NYEynIoXsuxXB9Q==/posts/AQMkAGI5MWY5ZmUyLTJiNzYtNDE0ZC04OWEwLWM3M2FjYmM3NwAzZWYARgAAA_b2VnUAiWNLj0xeSOs499YHAMT2RdsuOqRIlQZ4vOzp66YAAAIBDAAAAMT2RdsuOqRIlQZ4vOzp66YAAAINKgAAAA==/attachments",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Group-Conversation.Read.All",
+    "DelegatedWork_Higher": [
+      "Group-Conversation.ReadWrite.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -79812,24 +79816,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Group-Conversation.ReadWrite.All",
     "Application_Higher": "Group.ReadWrite.All"
-  },
-  {
-    "path": "/drive/root/createdByUser/planner/tasks",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "planneruser_list_tasks",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/planner/tasks",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Tasks.Read",
-    "DelegatedWork_Higher": [
-      "Group.Read.All",
-      "Group.ReadWrite.All",
-      "Tasks.ReadWrite"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Tasks.Read.All",
-    "Application_Higher": "Tasks.ReadWrite.All"
   },
   {
     "path": "/users/{id}/planner/tasks",
@@ -80032,24 +80018,6 @@
     "Application_Higher": "Tasks.ReadWrite.All"
   },
   {
-    "path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "post_list_attachments",
-    "full_example_url": "https://graph.microsoft.com/v1.0/groups/02bd9fd6-8f93-4758-87c3-1fb73740a315/threads/AAQkAGI5MWY5ZmUyLTJiNzYtNDE0ZC04OWEwLWM3M2FjYmM3NzNlZgMkABAAG5c7eC4NYEynIoXsuxXB9RAAG5c7eC4NYEynIoXsuxXB9Q==/posts/AQMkAGI5MWY5ZmUyLTJiNzYtNDE0ZC04OWEwLWM3M2FjYmM3NwAzZWYARgAAA_b2VnUAiWNLj0xeSOs499YHAMT2RdsuOqRIlQZ4vOzp66YAAAIBDAAAAMT2RdsuOqRIlQZ4vOzp66YAAAINKgAAAA==/attachments",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Group-Conversation.Read.All",
-    "DelegatedWork_Higher": [
-      "Group-Conversation.ReadWrite.All",
-      "Group.Read.All",
-      "Group.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
     "version": "v1.0",
     "method": "GET",
@@ -80094,6 +80062,37 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Presence.ReadWrite.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/me/print/recentPrinterShares",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "print_list_recentprintershares",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/print/recentPrinterShares",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "PrinterShare.ReadBasic.All",
+    "DelegatedWork_Higher": [
+      "PrinterShare.Read.All",
+      "PrinterShare.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/boundingRect",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_boundingrect",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/boundingRect",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/boundingRect",
@@ -80194,6 +80193,20 @@
     "Application_Higher": "Not supported."
   },
   {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/insert",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_insert",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/insert",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
     "path": "/me/activities/{id}/historyItems/{id}",
     "version": "v1.0",
     "method": "DELETE",
@@ -80208,30 +80221,16 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
+    "path": "/admin/people/profileCardProperties/{id}",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/activities/{id}",
-    "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "projectrome_delete_activity",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/activities/{id}",
+    "method": "PATCH",
+    "operation_name": "profilecardproperty_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties/{id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "UserActivity.ReadWrite.CreatedByApp",
+    "DelegatedWork_Least": "PeopleSettings.ReadWrite.All",
     "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "UserActivity.ReadWrite.CreatedByApp",
-    "DelegatedPersonal_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -80353,38 +80352,21 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/me/print/recentPrinterShares",
+    "path": "/me/activities/{id}",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "print_list_recentprintershares",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/print/recentPrinterShares",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "PrinterShare.ReadBasic.All",
-    "DelegatedWork_Higher": [
-      "PrinterShare.Read.All",
-      "PrinterShare.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/admin/people/profileCardProperties/{id}",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "profilecardproperty_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties/{id}",
+    "method": "DELETE",
+    "operation_name": "projectrome_delete_activity",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/activities/{id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "PeopleSettings.ReadWrite.All",
+    "DelegatedWork_Least": "UserActivity.ReadWrite.CreatedByApp",
     "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
+    "DelegatedPersonal_Least": "UserActivity.ReadWrite.CreatedByApp",
+    "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/itemAt(index={index})",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangebordercollection_itemat",
@@ -80398,11 +80380,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/insert",
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_insert",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/insert",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -80412,12 +80394,26 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/insert",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_insert",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/insert",
     "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/usedRange",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_usedrange",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/usedRange",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -80650,48 +80646,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_row",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/usedRange",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_usedrange",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/usedRange",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/row",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_row",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/row",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/usedRange",
     "version": "v1.0",
     "method": "GET",
@@ -80706,11 +80660,53 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/{sideIndex}",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_row",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/usedRange",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_usedrange",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/usedRange",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/{sideIndex}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangeborder_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/borders/{sideIndex}",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index={index})",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "rangebordercollection_itemat",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index=1)",
     "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -80944,7 +80940,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/{sideIndex}",
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/{sideIndex}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "rangeborder_get",
@@ -80958,12 +80954,12 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/usedRange",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/row",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_usedrange",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/usedRange",
-    "example_from_docs": true,
+    "method": "POST",
+    "operation_name": "range_row",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/row",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -81000,12 +80996,12 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/row",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/lastColumn",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_row",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/row",
-    "example_from_docs": false,
+    "method": "GET",
+    "operation_name": "range_lastcolumn",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/lastColumn",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -81238,34 +81234,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/insert",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_insert",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/insert",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/lastColumn",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_lastcolumn",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/lastColumn",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastColumn",
     "version": "v1.0",
     "method": "GET",
@@ -81300,6 +81268,34 @@
     "operation_name": "range_lastcolumn",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/lastColumn",
     "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "range_lastrow",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/names/{name}/range/row",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_row",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/row",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -81406,6 +81402,20 @@
     "Application_Higher": "Not supported."
   },
   {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "range_insert",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
     "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/merge",
     "version": "v1.0",
     "method": "POST",
@@ -81420,25 +81430,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "range_insert",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/merge",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/merge",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_merge",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/merge",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/merge",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -81546,25 +81542,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "range_lastrow",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/merge",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/merge",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "range_merge",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/merge",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/merge",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -81574,21 +81556,25 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
+    "path": "/planner/plans/{id}/details",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "tablerowcollection_add",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "method": "GET",
+    "operation_name": "plannerplandetails_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/details",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Tasks.Read",
+    "DelegatedWork_Higher": [
+      "Group.Read.All",
+      "Group.ReadWrite.All",
+      "Tasks.ReadWrite"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Tasks.Read.All",
+    "Application_Higher": "Tasks.ReadWrite.All"
   },
   {
-    "path": "/me/onenote/resources/{id}/content",
+    "path": "/users/{id | userPrincipalName}/onenote/resources/{id}/content",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "resource_get",
@@ -81606,7 +81592,7 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/groups/{id}/onenote/resources/{id}/content",
+    "path": "/sites/{id}/onenote/resources/{id}/content",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "resource_get",
@@ -81622,6 +81608,20 @@
     "DelegatedPersonal_Higher": "Notes.ReadWrite",
     "Application_Least": "Notes.Read.All",
     "Application_Higher": "Notes.ReadWrite.All"
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "table_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
@@ -81848,48 +81848,6 @@
     "Application_Higher": "Synchronization.ReadWrite.All"
   },
   {
-    "path": "/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "synchronization_synchronizationjob_validatecredentials",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Synchronization.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Application.ReadWrite.OwnedBy",
-    "Application_Higher": "Synchronization.ReadWrite.All"
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
-    "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "table_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "https://graph.microsoft.com/v1.0/servicePrincipals/{servicePrincipalId}/synchronization/jobs/{jobId}/bulkUpload",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "synchronization_synchronizationjob_post_bulkupload",
-    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/servicePrincipals/{servicePrincipalId}/synchronization/jobs/{jobId}/bulkUpload",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "SynchronizationData-User.Upload",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SynchronizationData-User.Upload.OwnedBy",
-    "Application_Higher": "SynchronizationData-User.Upload"
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}",
     "version": "v1.0",
     "method": "DELETE",
@@ -81904,12 +81862,54 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
+    "path": "/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "synchronization_synchronizationjob_validatecredentials",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Synchronization.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Application.ReadWrite.OwnedBy",
+    "Application_Higher": "Synchronization.ReadWrite.All"
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "table_get",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}",
     "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "table_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "table_post_columns",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -82142,7 +82142,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "table_get",
@@ -82156,18 +82156,18 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}",
+    "path": "https://graph.microsoft.com/v1.0/servicePrincipals/{servicePrincipalId}/synchronization/jobs/{jobId}/bulkUpload",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "table_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
+    "method": "POST",
+    "operation_name": "synchronization_synchronizationjob_post_bulkupload",
+    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/servicePrincipals/{servicePrincipalId}/synchronization/jobs/{jobId}/bulkUpload",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "SynchronizationData-User.Upload",
     "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SynchronizationData-User.Upload.OwnedBy",
+    "Application_Higher": "SynchronizationData-User.Upload"
   },
   {
     "path": "/servicePrincipals/{id}/synchronization/secrets",
@@ -82198,17 +82198,17 @@
     "Application_Higher": "Directory.ReadWrite.All"
   },
   {
-    "path": "/teams/{teamId}/schedule/swapShiftsChangeRequests",
+    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
     "version": "v1.0",
     "method": "POST",
-    "operation_name": "swapshiftschangerequest_post",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/swapShiftsChangeRequests",
+    "operation_name": "sitepage_create_webpart",
+    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Schedule.ReadWrite.All",
-    "DelegatedWork_Higher": "Group.ReadWrite.All",
+    "DelegatedWork_Least": "Sites.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Schedule.ReadWrite.All",
+    "Application_Least": "Sites.ReadWrite.All",
     "Application_Higher": "Not available."
   },
   {
@@ -82460,34 +82460,6 @@
     "Application_Higher": "Directory.Read.All"
   },
   {
-    "path": "/auditLogs/signIns/{id}",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "signin_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/auditLogs/signIns/66ea54eb-6301-4ee5-be62-ff5a759b0100",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "AuditLog.Read.All",
-    "DelegatedWork_Higher": "Directory.Read.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "AuditLog.Read.All",
-    "Application_Higher": "Directory.Read.All"
-  },
-  {
-    "path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "sitepage_create_webpart",
-    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
     "path": "/sites/{site-id}/pages",
     "version": "v1.0",
     "method": "POST",
@@ -82528,6 +82500,34 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Sites.Read.All",
     "Application_Higher": "Sites.ReadWrite.All"
+  },
+  {
+    "path": "/sites/{site-id}/pages/microsoft.graph.sitePage",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "sitepage_list",
+    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/microsoft.graph.sitePage",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Sites.Read.All",
+    "DelegatedWork_Higher": "Sites.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Sites.Read.All",
+    "Application_Higher": "Sites.ReadWrite.All"
+  },
+  {
+    "path": "/teams/{teamId}/schedule/swapShiftsChangeRequests",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "swapshiftschangerequest_post",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/swapShiftsChangeRequests",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Schedule.ReadWrite.All",
+    "DelegatedWork_Higher": "Group.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Schedule.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/teams/{teamId}/schedule/swapShiftsChangeRequests",
@@ -82657,6 +82657,20 @@
     "Application_Higher": "Not supported."
   },
   {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "table_post_rows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
     "path": "/drives/{driveId}/root/subscriptions/socketIo",
     "version": "v1.0",
     "method": "GET",
@@ -82678,39 +82692,28 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "table_post_columns",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root/subscriptions/socketIo",
+    "path": "/subscribedSkus",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "subscriptions_socketio",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root/subscriptions/socketIo",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.Read",
+    "operation_name": "subscribedsku_list",
+    "full_example_url": "https://graph.microsoft.com/v1.0/subscribedSkus",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "LicenseAssignment.Read.All",
     "DelegatedWork_Higher": [
-      "Files.ReadWrite",
-      "Files.ReadWrite.All",
-      "Sites.ReadWrite.All"
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Organization.Read.All",
+      "Organization.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "Files.Read",
-    "DelegatedPersonal_Higher": [
-      "Files.ReadWrite",
-      "Files.ReadWrite.All"
-    ],
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "LicenseAssignment.Read.All",
+    "Application_Higher": [
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Organization.Read.All",
+      "Organization.ReadWrite.All"
+    ]
   },
   {
     "path": "/subscribedSkus/{id}",
@@ -82823,63 +82826,46 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/sites/{site-id}/pages/microsoft.graph.sitePage",
+    "path": "/me/drive/root/subscriptions/socketIo",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "sitepage_list",
-    "full_example_url": "https://graph.microsoft.com/v1.0/sites/{site-id}/pages/microsoft.graph.sitePage",
+    "operation_name": "subscriptions_socketio",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root/subscriptions/socketIo",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
+    "DelegatedWork_Least": "Files.Read",
+    "DelegatedWork_Higher": [
+      "Files.ReadWrite",
+      "Files.ReadWrite.All",
+      "Sites.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Files.Read",
+    "DelegatedPersonal_Higher": [
+      "Files.ReadWrite",
+      "Files.ReadWrite.All"
+    ],
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
-    "path": "/subscribedSkus",
+    "path": "/auditLogs/signIns/{id}",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "subscribedsku_list",
-    "full_example_url": "https://graph.microsoft.com/v1.0/subscribedSkus",
+    "operation_name": "signin_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/auditLogs/signIns/66ea54eb-6301-4ee5-be62-ff5a759b0100",
     "example_from_docs": true,
-    "DelegatedWork_Least": "LicenseAssignment.Read.All",
-    "DelegatedWork_Higher": [
-      "Directory.Read.All",
-      "Directory.ReadWrite.All",
-      "Organization.Read.All",
-      "Organization.ReadWrite.All"
-    ],
+    "DelegatedWork_Least": "AuditLog.Read.All",
+    "DelegatedWork_Higher": "Directory.Read.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "LicenseAssignment.Read.All",
-    "Application_Higher": [
-      "Directory.Read.All",
-      "Directory.ReadWrite.All",
-      "Organization.Read.All",
-      "Organization.ReadWrite.All"
-    ]
+    "Application_Least": "AuditLog.Read.All",
+    "Application_Higher": "Directory.Read.All"
   },
   {
-    "path": "/users/{userId}/settings/shiftPreferences",
-    "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "shiftpreferences_put",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/871dbd5c-3a6a-4392-bfe1-042452793a50/settings/shiftPreferences",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "User.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "UserShiftPreferences.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "table_post_rows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -82889,16 +82875,30 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "table_post_rows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/itemAt(index={index})",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "tablecolumncollection_itemat",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/itemAt(index=3)",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Not supported.",
     "Application_Higher": "Not supported."
   },
@@ -83127,48 +83127,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablecolumn_range",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/itemAt(index={index})",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablecolumncollection_itemat",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/itemAt(index=3)",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablecolumn_range",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
     "version": "v1.0",
     "method": "DELETE",
@@ -83183,11 +83141,53 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "tablecolumn_range",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
     "version": "v1.0",
     "method": "DELETE",
     "operation_name": "tablerow_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "version": "v1.0",
+    "method": "DELETE",
+    "operation_name": "tablerow_delete",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "tablerowcollection_add",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -83421,11 +83421,11 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
     "version": "v1.0",
     "method": "DELETE",
     "operation_name": "tablerow_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
     "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
@@ -83435,12 +83435,12 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
     "version": "v1.0",
-    "method": "DELETE",
-    "operation_name": "tablerow_delete",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
-    "example_from_docs": false,
+    "method": "GET",
+    "operation_name": "tablecolumn_range",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -83477,12 +83477,12 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+    "path": "/me/drive/items/{id}/workbook/tables/add",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablecolumn_list",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns",
-    "example_from_docs": true,
+    "method": "POST",
+    "operation_name": "tablecollection_add",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/add",
+    "example_from_docs": false,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -83715,34 +83715,6 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "table_post_rows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/add",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "tablecollection_add",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/add",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
     "path": "/me/drive/root:/{item-path}:/workbook/tables/add",
     "version": "v1.0",
     "method": "POST",
@@ -83777,6 +83749,34 @@
     "operation_name": "tablecollection_add",
     "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/add",
     "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/dataBodyRange",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "tablecolumn_databodyrange",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/dataBodyRange",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Files.ReadWrite",
+    "DelegatedPersonal_Higher": "Not available.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "tablecolumn_list",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+    "example_from_docs": true,
     "DelegatedWork_Least": "Files.ReadWrite",
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Files.ReadWrite",
@@ -83883,6 +83883,20 @@
     "Application_Higher": "Not supported."
   },
   {
+    "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "table_post_rows",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Files.ReadWrite",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
+  },
+  {
     "path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}",
     "version": "v1.0",
     "method": "GET",
@@ -83897,21 +83911,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "table_post_rows",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}",
+    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "tablecolumn_get",
@@ -84023,21 +84023,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/dataBodyRange",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "tablecolumn_databodyrange",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/dataBodyRange",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Files.ReadWrite",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Files.ReadWrite",
-    "DelegatedPersonal_Higher": "Not available.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
-  },
-  {
-    "path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}",
+    "path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "tablecolumn_get",
@@ -84051,7 +84037,7 @@
     "Application_Higher": "Not supported."
   },
   {
-    "path": "/users/{id | userPrincipalName}/onenote/resources/{id}/content",
+    "path": "/groups/{id}/onenote/resources/{id}/content",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "resource_get",
@@ -84071,34 +84057,44 @@
   {
     "path": "/users/{userId}/settings/shiftPreferences",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "shiftpreferences_get",
+    "method": "PATCH",
+    "operation_name": "shiftpreferences_put",
     "full_example_url": "https://graph.microsoft.com/v1.0/users/871dbd5c-3a6a-4392-bfe1-042452793a50/settings/shiftPreferences",
     "example_from_docs": true,
-    "DelegatedWork_Least": "User.Read.All",
-    "DelegatedWork_Higher": "User.ReadWrite.All",
+    "DelegatedWork_Least": "User.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "UserShiftPreferences.Read.All",
-    "Application_Higher": "UserShiftPreferences.ReadWrite.All"
+    "Application_Least": "UserShiftPreferences.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/teams/{teamId}/schedule/shifts/{shiftId}",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "shift_get",
+    "method": "PUT",
+    "operation_name": "shift_put",
     "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/shifts/{shiftId}",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Group.Read.All",
-    "DelegatedWork_Higher": [
-      "Group.ReadWrite.All",
-      "Schedule.Read.All",
-      "Schedule.ReadWrite.All"
-    ],
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Schedule.ReadWrite.All",
+    "DelegatedWork_Higher": "Group.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Schedule.Read.All",
-    "Application_Higher": "Schedule.ReadWrite.All"
+    "Application_Least": "Schedule.ReadWrite.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/security/secureScoreControlProfiles/{id}",
+    "version": "v1.0",
+    "method": "PATCH",
+    "operation_name": "securescorecontrolprofile_update",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles/{id}",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "SecurityEvents.ReadWrite.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SecurityEvents.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/security/secureScoreControlProfiles/{id}",
@@ -84397,6 +84393,20 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
+    "path": "/security/threatIntelligence/articles/{articleId}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "security_article_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articles/a272d5ab",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "ThreatIntelligence.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "ThreatIntelligence.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
     "path": "/users/{id | userPrincipalName}/onenote/sectionGroups/{id}/sectionGroups",
     "version": "v1.0",
     "method": "GET",
@@ -84419,68 +84429,60 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/security/secureScoreControlProfiles/{id}",
+    "path": "/security/threatIntelligence/articles/{articleId}/indicators",
     "version": "v1.0",
-    "method": "PATCH",
-    "operation_name": "securescorecontrolprofile_update",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles/{id}",
+    "method": "GET",
+    "operation_name": "security_article_list_indicators",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articles/a272d5ab/indicators",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "ThreatIntelligence.Read.All",
+    "DelegatedWork_Higher": "Not available.",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "ThreatIntelligence.Read.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/security/auditLog/queries/{auditLogQueryId}/records",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "security_auditlogquery_list_records",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/auditLog/queries/{auditLogQueryId}/records",
     "example_from_docs": false,
-    "DelegatedWork_Least": "SecurityEvents.ReadWrite.All",
-    "DelegatedWork_Higher": "Not available.",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SecurityEvents.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/me/onenote/sectionGroups/{id}/sectionGroups",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "sectiongroup_list_sectiongroups",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/{id}/sectionGroups",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Notes.Create",
+    "DelegatedWork_Least": "AuditLogsQuery-Entra.Read.All",
     "DelegatedWork_Higher": [
-      "Notes.Read",
-      "Notes.Read.All",
-      "Notes.ReadWrite",
-      "Notes.ReadWrite.All"
+      "AuditLogsQuery-CRM.Read.All",
+      "AuditLogsQuery-Endpoint.Read.All",
+      "AuditLogsQuery-Exchange.Read.All",
+      "AuditLogsQuery-OneDrive.Read.All",
+      "AuditLogsQuery-SharePoint.Read.All",
+      "AuditLogsQuery.Read.All"
     ],
-    "DelegatedPersonal_Least": "Notes.Create",
-    "DelegatedPersonal_Higher": [
-      "Notes.Read",
-      "Notes.ReadWrite"
-    ],
-    "Application_Least": "Notes.Read.All",
-    "Application_Higher": "Notes.ReadWrite.All"
-  },
-  {
-    "path": "/security/threatIntelligence/articles/{articleId}",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "security_article_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articles/a272d5ab",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "ThreatIntelligence.Read.All",
-    "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ThreatIntelligence.Read.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "AuditLogsQuery-Entra.Read.All",
+    "Application_Higher": [
+      "AuditLogsQuery-CRM.Read.All",
+      "AuditLogsQuery-Endpoint.Read.All",
+      "AuditLogsQuery-Exchange.Read.All",
+      "AuditLogsQuery-OneDrive.Read.All",
+      "AuditLogsQuery-SharePoint.Read.All",
+      "AuditLogsQuery.Read.All"
+    ]
   },
   {
-    "path": "/security/threatIntelligence/articleIndicators/{articleIndicatorId}",
+    "path": "/security/secureScoreControlProfiles",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "security_articleindicator_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articleIndicators/ZmFrZS1tYWxpY2lvdXMuc2l0ZQ==",
+    "operation_name": "security_list_securescorecontrolprofiles",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles",
     "example_from_docs": true,
-    "DelegatedWork_Least": "ThreatIntelligence.Read.All",
-    "DelegatedWork_Higher": "Not available.",
+    "DelegatedWork_Least": "SecurityEvents.Read.All",
+    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ThreatIntelligence.Read.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "SecurityEvents.Read.All",
+    "Application_Higher": "SecurityEvents.ReadWrite.All"
   },
   {
     "path": "/security/threatIntelligence/intelligenceProfileIndicators/{intelligenceProfileIndicatorId}",
@@ -84707,39 +84709,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/security/auditLog/queries/{auditLogQueryId}/records",
+    "path": "/security/threatIntelligence/articleIndicators/{articleIndicatorId}",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "security_auditlogquery_list_records",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/auditLog/queries/{auditLogQueryId}/records",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "AuditLogsQuery-Entra.Read.All",
-    "DelegatedWork_Higher": [
-      "AuditLogsQuery-CRM.Read.All",
-      "AuditLogsQuery-Endpoint.Read.All",
-      "AuditLogsQuery-Exchange.Read.All",
-      "AuditLogsQuery-OneDrive.Read.All",
-      "AuditLogsQuery-SharePoint.Read.All",
-      "AuditLogsQuery.Read.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "AuditLogsQuery-Entra.Read.All",
-    "Application_Higher": [
-      "AuditLogsQuery-CRM.Read.All",
-      "AuditLogsQuery-Endpoint.Read.All",
-      "AuditLogsQuery-Exchange.Read.All",
-      "AuditLogsQuery-OneDrive.Read.All",
-      "AuditLogsQuery-SharePoint.Read.All",
-      "AuditLogsQuery.Read.All"
-    ]
-  },
-  {
-    "path": "/security/threatIntelligence/articles/{articleId}/indicators",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "security_article_list_indicators",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articles/a272d5ab/indicators",
+    "operation_name": "security_articleindicator_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articleIndicators/ZmFrZS1tYWxpY2lvdXMuc2l0ZQ==",
     "example_from_docs": true,
     "DelegatedWork_Least": "ThreatIntelligence.Read.All",
     "DelegatedWork_Higher": "Not available.",
@@ -84747,6 +84721,28 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ThreatIntelligence.Read.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/me/onenote/sectionGroups/{id}/sectionGroups",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "sectiongroup_list_sectiongroups",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/{id}/sectionGroups",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Notes.Create",
+    "DelegatedWork_Higher": [
+      "Notes.Read",
+      "Notes.Read.All",
+      "Notes.ReadWrite",
+      "Notes.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Notes.Create",
+    "DelegatedPersonal_Higher": [
+      "Notes.Read",
+      "Notes.ReadWrite"
+    ],
+    "Application_Least": "Notes.Read.All",
+    "Application_Higher": "Notes.ReadWrite.All"
   },
   {
     "path": "/sites/{id}/onenote/sectionGroups/{id}",
@@ -84793,26 +84789,18 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/users/{id | userPrincipalName}/onenote/sectionGroups/{id}",
+    "path": "https://graph.microsoft.com/v1.0/search/acronyms",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "sectiongroup_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/1-0b13154b-d92d-46c3-b18b-838c4c9fb88d",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Notes.Create",
-    "DelegatedWork_Higher": [
-      "Notes.Read",
-      "Notes.Read.All",
-      "Notes.ReadWrite",
-      "Notes.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Notes.Create",
-    "DelegatedPersonal_Higher": [
-      "Notes.Read",
-      "Notes.ReadWrite"
-    ],
-    "Application_Least": "Notes.Read.All",
-    "Application_Higher": "Notes.ReadWrite.All"
+    "method": "POST",
+    "operation_name": "search_searchentity_post_acronyms",
+    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/search/acronyms",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "SearchConfiguration.Read.All",
+    "DelegatedWork_Higher": "SearchConfiguration.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SearchConfiguration.Read.All",
+    "Application_Higher": "SearchConfiguration.ReadWrite.All"
   },
   {
     "path": "https://graph.microsoft.com/v1.0/search/query",
@@ -85072,38 +85060,6 @@
     "Application_Higher": "Schedule.ReadWrite.All"
   },
   {
-    "path": "/sites/{id}/onenote/resources/{id}/content",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "resource_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/resources/{id}/content",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Notes.Read",
-    "DelegatedWork_Higher": [
-      "Notes.Read.All",
-      "Notes.ReadWrite",
-      "Notes.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Notes.Read",
-    "DelegatedPersonal_Higher": "Notes.ReadWrite",
-    "Application_Least": "Notes.Read.All",
-    "Application_Higher": "Notes.ReadWrite.All"
-  },
-  {
-    "path": "https://graph.microsoft.com/v1.0/search/acronyms",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "search_searchentity_post_acronyms",
-    "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/search/acronyms",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "SearchConfiguration.Read.All",
-    "DelegatedWork_Higher": "SearchConfiguration.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SearchConfiguration.Read.All",
-    "Application_Higher": "SearchConfiguration.ReadWrite.All"
-  },
-  {
     "path": "/search/bookmarks",
     "version": "v1.0",
     "method": "POST",
@@ -85147,6 +85103,45 @@
     "DelegatedPersonal_Higher": "Notes.ReadWrite",
     "Application_Least": "Notes.ReadWrite.All",
     "Application_Higher": "Not available."
+  },
+  {
+    "path": "/users/{id | userPrincipalName}/onenote/sections/{id}/copyToNotebook",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "section_copytonotebook",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/onenote/sections/{id}/copyToNotebook",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Notes.Create",
+    "DelegatedWork_Higher": [
+      "Notes.ReadWrite",
+      "Notes.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Notes.Create",
+    "DelegatedPersonal_Higher": "Notes.ReadWrite",
+    "Application_Least": "Notes.ReadWrite.All",
+    "Application_Higher": "Not available."
+  },
+  {
+    "path": "/users/{id | userPrincipalName}/onenote/sectionGroups/{id}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "sectiongroup_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/1-0b13154b-d92d-46c3-b18b-838c4c9fb88d",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Notes.Create",
+    "DelegatedWork_Higher": [
+      "Notes.Read",
+      "Notes.Read.All",
+      "Notes.ReadWrite",
+      "Notes.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Notes.Create",
+    "DelegatedPersonal_Higher": [
+      "Notes.Read",
+      "Notes.ReadWrite"
+    ],
+    "Application_Least": "Notes.Read.All",
+    "Application_Higher": "Notes.ReadWrite.All"
   },
   {
     "path": "/me/onenote/sectionGroups/{id}",
@@ -85275,6 +85270,20 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
+    "path": "/security/secureScoreControlProfiles?$top=1",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "security_list_securescorecontrolprofiles",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "SecurityEvents.Read.All",
+    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SecurityEvents.Read.All",
+    "Application_Higher": "SecurityEvents.ReadWrite.All"
+  },
+  {
     "path": "/users/{id | userPrincipalName}/onenote/sections/{id}/pages",
     "version": "v1.0",
     "method": "GET",
@@ -85293,34 +85302,24 @@
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/security/secureScoreControlProfiles",
+    "path": "/sites/{id}/onenote/sections/{id}",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "security_list_securescorecontrolprofiles",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles",
+    "operation_name": "section_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sections/1-0bc35248-e4e2-4759-ad85-89407bceccfe",
     "example_from_docs": true,
-    "DelegatedWork_Least": "SecurityEvents.Read.All",
-    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SecurityEvents.Read.All",
-    "Application_Higher": "SecurityEvents.ReadWrite.All"
-  },
-  {
-    "path": "/me/onenote/sections/{id}/pages",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "section_list_pages",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/pages",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Notes.Read",
+    "DelegatedWork_Least": "Notes.Create",
     "DelegatedWork_Higher": [
+      "Notes.Read",
       "Notes.Read.All",
       "Notes.ReadWrite",
       "Notes.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "Notes.Read",
-    "DelegatedPersonal_Higher": "Notes.ReadWrite",
+    "DelegatedPersonal_Least": "Notes.Create",
+    "DelegatedPersonal_Higher": [
+      "Notes.Read",
+      "Notes.ReadWrite"
+    ],
     "Application_Least": "Notes.Read.All",
     "Application_Higher": "Notes.ReadWrite.All"
   },
@@ -85459,60 +85458,39 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/users/{id | userPrincipalName}/onenote/sections/{id}/copyToNotebook",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "section_copytonotebook",
-    "full_example_url": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}/onenote/sections/{id}/copyToNotebook",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Notes.Create",
-    "DelegatedWork_Higher": [
-      "Notes.ReadWrite",
-      "Notes.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Notes.Create",
-    "DelegatedPersonal_Higher": "Notes.ReadWrite",
-    "Application_Least": "Notes.ReadWrite.All",
-    "Application_Higher": "Not available."
-  },
-  {
-    "path": "/sites/{id}/onenote/sections/{id}",
+    "path": "/me/onenote/sections/{id}/pages",
     "version": "v1.0",
     "method": "GET",
-    "operation_name": "section_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sections/1-0bc35248-e4e2-4759-ad85-89407bceccfe",
+    "operation_name": "section_list_pages",
+    "full_example_url": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/pages",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Notes.Create",
+    "DelegatedWork_Least": "Notes.Read",
     "DelegatedWork_Higher": [
-      "Notes.Read",
       "Notes.Read.All",
       "Notes.ReadWrite",
       "Notes.ReadWrite.All"
     ],
-    "DelegatedPersonal_Least": "Notes.Create",
-    "DelegatedPersonal_Higher": [
-      "Notes.Read",
-      "Notes.ReadWrite"
-    ],
+    "DelegatedPersonal_Least": "Notes.Read",
+    "DelegatedPersonal_Higher": "Notes.ReadWrite",
     "Application_Least": "Notes.Read.All",
     "Application_Higher": "Notes.ReadWrite.All"
   },
   {
-    "path": "/teams/{teamId}/schedule/shifts/{shiftId}",
+    "path": "/users/{userId}/settings/shiftPreferences",
     "version": "v1.0",
-    "method": "PUT",
-    "operation_name": "shift_put",
-    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/shifts/{shiftId}",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Schedule.ReadWrite.All",
-    "DelegatedWork_Higher": "Group.ReadWrite.All",
+    "method": "GET",
+    "operation_name": "shiftpreferences_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/users/871dbd5c-3a6a-4392-bfe1-042452793a50/settings/shiftPreferences",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "User.Read.All",
+    "DelegatedWork_Higher": "User.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Schedule.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "UserShiftPreferences.Read.All",
+    "Application_Higher": "UserShiftPreferences.ReadWrite.All"
   },
   {
-    "path": "/security/secureScoreControlProfiles?$top=1",
+    "path": "/security/secureScoreControlProfiles?$filter={property} eq '{property-value}'",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "security_list_securescorecontrolprofiles",
@@ -85526,7 +85504,7 @@
     "Application_Higher": "SecurityEvents.ReadWrite.All"
   },
   {
-    "path": "/security/secureScores",
+    "path": "/security/secureScores?$top=1",
     "version": "v1.0",
     "method": "GET",
     "operation_name": "security_list_securescores",
@@ -85538,6 +85516,20 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "SecurityEvents.Read.All",
     "Application_Higher": "SecurityEvents.ReadWrite.All"
+  },
+  {
+    "path": "/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "serviceprincipal_post_approleassignedto",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
+    "DelegatedWork_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
+    "Application_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All"
   },
   {
     "path": "/servicePrincipals/{id}/appRoleAssignedTo",
@@ -85858,6 +85850,20 @@
     ]
   },
   {
+    "path": "/servicePrincipals/{id}/appRoleAssignments",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "serviceprincipal_post_approleassignments",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
+    "DelegatedWork_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
+    "Application_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All"
+  },
+  {
     "path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
     "version": "v1.0",
     "method": "GET",
@@ -85881,48 +85887,11 @@
     ]
   },
   {
-    "path": "/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "serviceprincipal_post_approleassignedto",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
-    "DelegatedWork_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
-    "Application_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All"
-  },
-  {
-    "path": "/servicePrincipals/{id}/appRoleAssignments",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "serviceprincipal_list_approleassignments",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/00063ffc-54e9-405d-b8f3-56124728e051/appRoleAssignments",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Application.Read.All",
-    "DelegatedWork_Higher": [
-      "Application.ReadWrite.All",
-      "Directory.Read.All",
-      "Directory.ReadWrite.All"
-    ],
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Application.Read.All",
-    "Application_Higher": [
-      "Application.ReadWrite.All",
-      "Application.ReadWrite.OwnedBy",
-      "Directory.Read.All",
-      "Directory.ReadWrite.All"
-    ]
-  },
-  {
-    "path": "/servicePrincipals/{id}/appRoleAssignments",
+    "path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "serviceprincipal_post_approleassignments",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/appRoleAssignments",
     "example_from_docs": false,
     "DelegatedWork_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
     "DelegatedWork_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All",
@@ -85932,11 +85901,11 @@
     "Application_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All"
   },
   {
-    "path": "/servicePrincipals/{id}/claimsMappingPolicies/$ref",
+    "path": "/servicePrincipals(appId='{appId}')/claimsMappingPolicies/$ref",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "serviceprincipal_post_claimsmappingpolicies",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/claimsMappingPolicies/$ref",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/claimsMappingPolicies/$ref",
     "example_from_docs": false,
     "DelegatedWork_Least": "Application.ReadWrite.All and Policy.Read.All",
     "DelegatedWork_Higher": "Application.ReadWrite.All and Policy.ReadWrite.ApplicationConfiguration",
@@ -85948,6 +85917,24 @@
       "Policy.Read.All and Application.ReadWrite.All",
       "Policy.ReadWrite.ApplicationConfiguration and Application.ReadWrite.All"
     ]
+  },
+  {
+    "path": "/teams/{teamId}/schedule/shifts/{shiftId}",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "shift_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/teams/{teamId}/schedule/shifts/{shiftId}",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Group.Read.All",
+    "DelegatedWork_Higher": [
+      "Group.ReadWrite.All",
+      "Schedule.Read.All",
+      "Schedule.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Schedule.Read.All",
+    "Application_Higher": "Schedule.ReadWrite.All"
   },
   {
     "path": "/teams/{teamId}/schedule/shifts/{shiftId}",
@@ -86215,11 +86202,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "/servicePrincipals(appId='{appId}')/claimsMappingPolicies/$ref",
+    "path": "/servicePrincipals/{id}/claimsMappingPolicies/$ref",
     "version": "v1.0",
     "method": "POST",
     "operation_name": "serviceprincipal_post_claimsmappingpolicies",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/claimsMappingPolicies/$ref",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/claimsMappingPolicies/$ref",
     "example_from_docs": false,
     "DelegatedWork_Least": "Application.ReadWrite.All and Policy.Read.All",
     "DelegatedWork_Higher": "Application.ReadWrite.All and Policy.ReadWrite.ApplicationConfiguration",
@@ -86233,18 +86220,27 @@
     ]
   },
   {
-    "path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
+    "path": "/servicePrincipals/{id}/appRoleAssignments",
     "version": "v1.0",
-    "method": "POST",
-    "operation_name": "serviceprincipal_post_approleassignments",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/appRoleAssignments",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
-    "DelegatedWork_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All",
+    "method": "GET",
+    "operation_name": "serviceprincipal_list_approleassignments",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/00063ffc-54e9-405d-b8f3-56124728e051/appRoleAssignments",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Application.Read.All",
+    "DelegatedWork_Higher": [
+      "Application.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "AppRoleAssignment.ReadWrite.All and Application.Read.All",
-    "Application_Higher": "AppRoleAssignment.ReadWrite.All and Directory.Read.All"
+    "Application_Least": "Application.Read.All",
+    "Application_Higher": [
+      "Application.ReadWrite.All",
+      "Application.ReadWrite.OwnedBy",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ]
   },
   {
     "path": "/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
@@ -86293,25 +86289,19 @@
     ]
   },
   {
-    "path": "/servicePrincipals(appId='{appId}')",
+    "path": "/serviceprincipals/{id}/addKey",
     "version": "v1.0",
-    "method": "GET",
-    "operation_name": "serviceprincipal_get",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/00063ffc-54e9-405d-b8f3-56124728e051",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "Application.Read.All",
-    "DelegatedWork_Higher": [
-      "Application.ReadWrite.All",
-      "Directory.Read.All",
-      "Directory.ReadWrite.All"
-    ],
+    "method": "POST",
+    "operation_name": "serviceprincipal_addkey",
+    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals/{id}/addKey",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Application.ReadWrite.All",
+    "DelegatedWork_Higher": "Directory.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Application.Read.All",
+    "Application_Least": "Application.ReadWrite.OwnedBy",
     "Application_Higher": [
       "Application.ReadWrite.All",
-      "Application.ReadWrite.OwnedBy",
-      "Directory.Read.All",
       "Directory.ReadWrite.All"
     ]
   },
@@ -86540,37 +86530,6 @@
     "Application_Higher": "SecurityEvents.ReadWrite.All"
   },
   {
-    "path": "/security/secureScores?$top=1",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "security_list_securescores",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScores?$top=1",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "SecurityEvents.Read.All",
-    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SecurityEvents.Read.All",
-    "Application_Higher": "SecurityEvents.ReadWrite.All"
-  },
-  {
-    "path": "/serviceprincipals/{id}/addKey",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "serviceprincipal_addkey",
-    "full_example_url": "https://graph.microsoft.com/v1.0/serviceprincipals/{id}/addKey",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Application.ReadWrite.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Application.ReadWrite.OwnedBy",
-    "Application_Higher": [
-      "Application.ReadWrite.All",
-      "Directory.ReadWrite.All"
-    ]
-  },
-  {
     "path": "/servicePrincipals(appId='{appId}')/addKey",
     "version": "v1.0",
     "method": "POST",
@@ -86618,6 +86577,46 @@
     "Application_Least": "Application.ReadWrite.OwnedBy",
     "Application_Higher": [
       "Application.ReadWrite.All",
+      "Directory.ReadWrite.All"
+    ]
+  },
+  {
+    "path": "/servicePrincipals/{id}/addTokenSigningCertificate",
+    "version": "v1.0",
+    "method": "POST",
+    "operation_name": "serviceprincipal_addtokensigningcertificate",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/addTokenSigningCertificate",
+    "example_from_docs": false,
+    "DelegatedWork_Least": "Application.ReadWrite.All",
+    "DelegatedWork_Higher": "Directory.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Application.ReadWrite.OwnedBy",
+    "Application_Higher": [
+      "Application.ReadWrite.All",
+      "Directory.ReadWrite.All"
+    ]
+  },
+  {
+    "path": "/servicePrincipals(appId='{appId}')",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "serviceprincipal_get",
+    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/00063ffc-54e9-405d-b8f3-56124728e051",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "Application.Read.All",
+    "DelegatedWork_Higher": [
+      "Application.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "Application.Read.All",
+    "Application_Higher": [
+      "Application.ReadWrite.All",
+      "Application.ReadWrite.OwnedBy",
+      "Directory.Read.All",
       "Directory.ReadWrite.All"
     ]
   },
@@ -86754,6 +86753,20 @@
     ]
   },
   {
+    "path": "/security/secureScores",
+    "version": "v1.0",
+    "method": "GET",
+    "operation_name": "security_list_securescores",
+    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScores?$top=1",
+    "example_from_docs": true,
+    "DelegatedWork_Least": "SecurityEvents.Read.All",
+    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
+    "DelegatedPersonal_Least": "Not supported.",
+    "DelegatedPersonal_Higher": "Not supported.",
+    "Application_Least": "SecurityEvents.Read.All",
+    "Application_Higher": "SecurityEvents.ReadWrite.All"
+  },
+  {
     "path": "/servicePrincipals/{id}/homeRealmDiscoveryPolicies/{id}/$ref",
     "version": "v1.0",
     "method": "DELETE",
@@ -86770,20 +86783,6 @@
       "Policy.Read.All and Application.ReadWrite.All",
       "Policy.ReadWrite.ApplicationConfiguration and Application.ReadWrite.All"
     ]
-  },
-  {
-    "path": "/security/secureScoreControlProfiles?$filter={property} eq '{property-value}'",
-    "version": "v1.0",
-    "method": "GET",
-    "operation_name": "security_list_securescorecontrolprofiles",
-    "full_example_url": "https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles",
-    "example_from_docs": true,
-    "DelegatedWork_Least": "SecurityEvents.Read.All",
-    "DelegatedWork_Higher": "SecurityEvents.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SecurityEvents.Read.All",
-    "Application_Higher": "SecurityEvents.ReadWrite.All"
   },
   {
     "path": "/servicePrincipals/{id}/delegatedPermissionClassifications/{id}",
@@ -86897,23 +86896,6 @@
     "method": "POST",
     "operation_name": "serviceprincipal_addtokensigningcertificate",
     "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals(appId='{appId}')/addTokenSigningCertificate",
-    "example_from_docs": false,
-    "DelegatedWork_Least": "Application.ReadWrite.All",
-    "DelegatedWork_Higher": "Directory.ReadWrite.All",
-    "DelegatedPersonal_Least": "Not supported.",
-    "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Application.ReadWrite.OwnedBy",
-    "Application_Higher": [
-      "Application.ReadWrite.All",
-      "Directory.ReadWrite.All"
-    ]
-  },
-  {
-    "path": "/servicePrincipals/{id}/addTokenSigningCertificate",
-    "version": "v1.0",
-    "method": "POST",
-    "operation_name": "serviceprincipal_addtokensigningcertificate",
-    "full_example_url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/addTokenSigningCertificate",
     "example_from_docs": false,
     "DelegatedWork_Least": "Application.ReadWrite.All",
     "DelegatedWork_Higher": "Directory.ReadWrite.All",

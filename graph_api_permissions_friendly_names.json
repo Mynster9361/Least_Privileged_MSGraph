@@ -320,6 +320,11 @@
     "DelegatedWork_Identifier": "12466101-c9b8-439a-8589-dd09ee67e8e9"
   },
   {
+    "Role_Name": "CallAiInsights.Read.All",
+    "Application_Identifier": "792b782b-7822-4b92-8103-77e44f2f706c",
+    "DelegatedWork_Identifier": "e24bdaf9-83f8-468b-a144-c681ccb6caf4"
+  },
+  {
     "Role_Name": "CallDelegation.Read",
     "Application_Identifier": "-",
     "DelegatedWork_Identifier": "305b375b-00fe-48bf-81bc-e8d78954c1b6"
@@ -618,6 +623,11 @@
     "Role_Name": "ConsentRequest.ReadWrite.All",
     "Application_Identifier": "9f1b81a7-0223-4428-bfa4-0bcb5535f27d",
     "DelegatedWork_Identifier": "497d9dfa-3bd1-481a-baab-90895e54568c"
+  },
+  {
+    "Role_Name": "Contacts",
+    "Application_Identifier": "c8948c23-e66b-42db-83fd-770b71ab78d2",
+    "DelegatedWork_Identifier": "1e4c6c41-0803-4f52-85ef-0a5d63ad8670"
   },
   {
     "Role_Name": "Contacts.Read",
@@ -930,6 +940,11 @@
     "DelegatedWork_Identifier": "f37235e8-90a0-4189-93e2-e55b53867ccd"
   },
   {
+    "Role_Name": "Domain",
+    "Application_Identifier": "64d40371-8d58-4270-bc8a-b4a66de36b9a",
+    "DelegatedWork_Identifier": "857bd3ea-490e-4284-88a7-a7de1893b6ee"
+  },
+  {
     "Role_Name": "Domain.Read.All",
     "Application_Identifier": "dbb9058a-0e50-45d7-ae91-66909b5d4664",
     "DelegatedWork_Identifier": "2f9ee017-59c1-4f1d-9472-bd5529a7b311"
@@ -1078,6 +1093,11 @@
     "Role_Name": "EngagementConversation.Migration.All",
     "Application_Identifier": "e1d2136d-eaaf-427a-a7db-f97dbe847c27",
     "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "EngagementConversation.ReadWrite.All",
+    "Application_Identifier": "bfbd4840-fba0-43a7-93a9-465b687e47d0",
+    "DelegatedWork_Identifier": "ebbfd079-1634-4640-8618-68b19ebbed1d"
   },
   {
     "Role_Name": "EngagementMeetingConversation.Read.All",
@@ -1235,6 +1255,11 @@
     "DelegatedWork_Identifier": "085ca537-6565-41c2-aca7-db852babc212"
   },
   {
+    "Role_Name": "FileStorageContainerTypeReg.Selected",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "d1e4f63a-1569-475c-b9b2-bdc140405e38"
+  },
+  {
     "Role_Name": "Financials.ReadWrite.All",
     "Application_Identifier": "-",
     "DelegatedWork_Identifier": "f534bf13-55d4-45a9-8f3c-c92fe64d6131"
@@ -1361,8 +1386,8 @@
   },
   {
     "Role_Name": "IndustryData",
-    "Application_Identifier": "24a65b4a-e501-47e2-8849-d679517887f0",
-    "DelegatedWork_Identifier": "aeb68e0b-e562-4a1f-b6dd-3484ad0cbb4b"
+    "Application_Identifier": "7ab52c2f-a2ee-4d98-9ebc-725e3934aae2",
+    "DelegatedWork_Identifier": "d19c0de5-7ecb-4aba-b090-da35ebcd5425"
   },
   {
     "Role_Name": "IndustryData.ReadBasic.All",
@@ -1466,8 +1491,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "2cb19e7d-9012-40bf-9a22-69fc776af8b0",
-    "DelegatedWork_Identifier": "2973a298-1d69-4f87-8d30-7025f0ec19d7"
+    "Application_Identifier": "3a87a643-13d2-47aa-8d6a-b0a8377cb03b",
+    "DelegatedWork_Identifier": "df1c25b3-072c-45cd-8403-c63441e4cca1"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -3281,8 +3306,8 @@
   },
   {
     "Role_Name": "User",
-    "Application_Identifier": "86ceff06-c822-49ff-989a-d912845ffe69",
-    "DelegatedWork_Identifier": "e29d5979-5b06-4a7f-ae24-6a9348d2e1ff"
+    "Application_Identifier": "925f1248-0f97-47b9-8ec8-538c54e01325",
+    "DelegatedWork_Identifier": "7ee7473e-bd4b-4c9f-987c-bd58481f5fa2"
   },
   {
     "Role_Name": "User.DeleteRestore.All",
@@ -3418,6 +3443,11 @@
     "Role_Name": "UserWindowsSettings.ReadWrite.All",
     "Application_Identifier": "-",
     "DelegatedWork_Identifier": "dcb1026d-b7e1-4d31-9f61-6724d5140bf9"
+  },
+  {
+    "Role_Name": "VerifiedId",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "e4a9cb5e-4767-48f8-9029-decf26a54456"
   },
   {
     "Role_Name": "VirtualAppointment.Read",

@@ -636,6 +636,54 @@
   {
     "Endpoints": [
       {
+        "Method": "POST",
+        "OperationName": "application_post_applications",
+        "Path": "/applications",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_post_applications",
+        "Path": "/applications",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
+        "Version": "beta"
+      }
+    ],
+    "Role": "AgentApplication.Create",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
+        "Version": "beta"
+      }
+    ],
+    "Role": "AgentIdentity.Create",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
         "Method": "GET",
         "OperationName": "agreement_get",
         "Path": "/identityGovernance/termsOfUse/agreements/{id}",
@@ -764,24 +812,6 @@
     ],
     "Role": "AgreementAcceptance.Read.All",
     "Type": "Delegated"
-  },
-  {
-    "Endpoints": [
-      {
-        "Method": "GET",
-        "OperationName": "aiinteractionhistory_getallenterpriseinteractions",
-        "Path": "/copilot/users/{id}/interactionHistory/getAllEnterpriseInteractions",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "aiinteractionhistory_getallenterpriseinteractions",
-        "Path": "/copilot/users/{id}/interactionHistory/getAllEnterpriseInteractions",
-        "Version": "beta"
-      }
-    ],
-    "Role": "AiEnterpriseInteraction.Read.All",
-    "Type": "Application"
   },
   {
     "Endpoints": [
@@ -1045,6 +1075,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list",
+        "Path": "/servicePrincipals",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "application_delta",
         "Path": "/applications/delta",
         "Version": "beta"
@@ -1183,8 +1225,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list",
-        "Path": "/servicePrincipals",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -1195,14 +1237,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/ownedObjects",
         "Version": "v1.0"
       },
       {
@@ -1315,6 +1357,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "serviceprincipal_list_delegatedpermissionclassifications",
         "Path": "/servicePrincipals/{id}/delegatedPermissionClassifications",
         "Version": "v1.0"
@@ -1339,14 +1393,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals/{id}/owners",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals/{id}/owners",
         "Version": "v1.0"
       },
       {
@@ -1399,6 +1453,18 @@
       },
       {
         "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications(appId='{appId}')/extensionProperties",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_post_federatedidentitycredentials",
+        "Path": "/applications/{id}/federatedIdentityCredentials",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
         "OperationName": "application_post_federatedidentitycredentials",
         "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
         "Version": "beta"
@@ -1441,14 +1507,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "application_post_federatedidentitycredentials",
-        "Path": "/applications/{id}/federatedIdentityCredentials",
+        "OperationName": "application_unsetverifiedpublisher",
+        "Path": "/applications/{id}/unsetVerifiedPublisher",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "application_unsetverifiedpublisher",
-        "Path": "/applications/{id}/unsetVerifiedPublisher",
+        "Path": "/applications(appId='{appId}')/unsetVerifiedPublisher",
         "Version": "beta"
       },
       {
@@ -1488,6 +1554,12 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications/{application ObjectId}/extensionProperties",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "extensionproperty_delete",
         "Path": "/applications(appId='{appId}')/extensionProperties/{extensionPropertyId}",
@@ -1495,27 +1567,27 @@
       },
       {
         "Method": "POST",
-        "OperationName": "application_unsetverifiedpublisher",
-        "Path": "/applications(appId='{appId}')/unsetVerifiedPublisher",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications(appId='{appId}')/extensionProperties",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications/{application ObjectId}/extensionProperties",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "application_post_applications",
         "Path": "/applications",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "application_list_owners",
+        "Path": "/applications/{id}/owners",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "serviceprincipal_update",
+        "Path": "/servicePrincipals(appId='{appId}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "serviceprincipal_upsert",
+        "Path": "/servicePrincipals(appId='appId')",
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -1610,14 +1682,14 @@
       {
         "Method": "GET",
         "OperationName": "application_list_owners",
-        "Path": "/applications/{id}/owners",
+        "Path": "/applications(appId='{appId}')/owners",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "application_list_owners",
-        "Path": "/applications(appId='{appId}')/owners",
-        "Version": "beta"
+        "Method": "PATCH",
+        "OperationName": "serviceprincipal_update",
+        "Path": "/servicePrincipals/{id}",
+        "Version": "v1.0"
       },
       {
         "Method": "DELETE",
@@ -1626,21 +1698,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "serviceprincipal_upsert",
-        "Path": "/servicePrincipals(appId='appId')",
-        "Version": "v1.0"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_delta",
+        "Path": "/servicePrincipals/delta",
         "Version": "beta"
       },
       {
@@ -1687,14 +1753,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_delta",
-        "Path": "/servicePrincipals/delta",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals/{id}/owners",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals/{id}/owners",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -1740,15 +1806,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
+        "Method": "DELETE",
+        "OperationName": "serviceprincipal_delete",
+        "Path": "/servicePrincipals(appId='{appId}')",
         "Version": "beta"
       },
       {
         "Method": "DELETE",
-        "OperationName": "serviceprincipal_delete",
-        "Path": "/servicePrincipals(appId='{appId}')",
+        "OperationName": "federatedidentitycredential_delete",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "beta"
       },
       {
@@ -1758,9 +1824,15 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_addtokensigningcertificate",
+        "Path": "/servicePrincipals(appId='{appId}')/addTokenSigningCertificate",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
-        "OperationName": "serviceprincipal_delete_owners",
-        "Path": "/servicePrincipals/{id}/owners/{id}/$ref",
+        "OperationName": "federatedidentitycredential_delete",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "beta"
       },
       {
@@ -1860,15 +1932,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addtokensigningcertificate",
-        "Path": "/servicePrincipals(appId='{appId}')/addTokenSigningCertificate",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
-        "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "OperationName": "serviceprincipal_delete_owners",
+        "Path": "/servicePrincipals/{id}/owners/{id}/$ref",
         "Version": "beta"
       },
       {
@@ -1876,17 +1942,17 @@
         "OperationName": "serviceprincipal_update",
         "Path": "/servicePrincipals(appId='{appId}')",
         "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "serviceprincipal_update",
-        "Path": "/servicePrincipals(appId='{appId}')",
-        "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "serviceprincipal_removepassword",
         "Path": "/servicePrincipals(appId='{appId}')/removePassword",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_removekey",
+        "Path": "/servicePrincipals(appId='{appId}')/removeKey",
         "Version": "v1.0"
       },
       {
@@ -1933,14 +1999,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "application_post_federatedidentitycredentials",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
+        "OperationName": "application_unsetverifiedpublisher",
+        "Path": "/applications(appId='{appId}')/unsetVerifiedPublisher",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_unsetverifiedpublisher",
-        "Path": "/applications(appId='{appId}')/unsetVerifiedPublisher",
+        "Method": "PATCH",
+        "OperationName": "application_update",
+        "Path": "/applications/{applicationObjectId}",
         "Version": "v1.0"
       },
       {
@@ -1986,21 +2052,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "application_update",
-        "Path": "/applications/{applicationObjectId}",
+        "Method": "DELETE",
+        "OperationName": "federatedidentitycredential_delete",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_post_federatedidentitycredentials",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "federatedidentitycredential_delete",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "application_post_federatedidentitycredentials",
         "Path": "/applications/{id}/federatedIdentityCredentials",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications(appId='{appId}')/extensionProperties",
         "Version": "v1.0"
       },
       {
@@ -2112,33 +2184,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications(appId='{appId}')/extensionProperties",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "serviceprincipal_update",
-        "Path": "/servicePrincipals/{id}",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_removepassword",
+        "Path": "/servicePrincipals/{id}/removePassword",
         "Version": "v1.0"
       },
       {
         "Method": "DELETE",
         "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals(appId='{appId}')",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "v1.0"
       },
       {
@@ -2167,6 +2233,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "serviceprincipal_list_memberof",
         "Path": "/servicePrincipals/{id}/memberOf",
         "Version": "v1.0"
@@ -2179,14 +2257,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/ownedObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list_owners",
         "Path": "/servicePrincipals/{id}/owners",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
@@ -2220,45 +2310,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_removekey",
-        "Path": "/servicePrincipals(appId='{appId}')/removeKey",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_removepassword",
-        "Path": "/servicePrincipals/{id}/removePassword",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals(appId='{appId}')",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "OperationName": "federatedidentitycredential_get",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_delta",
-        "Path": "/servicePrincipals/delta",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "DELETE",
         "OperationName": "serviceprincipal_delete",
         "Path": "/servicePrincipals(appId='{appId}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "serviceprincipal_delete",
-        "Path": "/servicePrincipals/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "v1.0"
       },
       {
@@ -2359,8 +2431,14 @@
       },
       {
         "Method": "DELETE",
-        "OperationName": "federatedidentitycredential_delete",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "OperationName": "serviceprincipal_delete",
+        "Path": "/servicePrincipals/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_delta",
+        "Path": "/servicePrincipals/delta",
         "Version": "v1.0"
       },
       {
@@ -3109,6 +3187,18 @@
       },
       {
         "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications(appId='{appId}')/extensionProperties",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_post_federatedidentitycredentials",
+        "Path": "/applications/{id}/federatedIdentityCredentials",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
         "OperationName": "application_post_federatedidentitycredentials",
         "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
         "Version": "beta"
@@ -3150,15 +3240,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_post_federatedidentitycredentials",
-        "Path": "/applications/{id}/federatedIdentityCredentials",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "application_upsert",
         "Path": "/applications(uniqueName='{uniqueName}')",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "applicationtemplate_instantiate",
+        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
         "Version": "beta"
       },
       {
@@ -3198,6 +3288,12 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications/{application ObjectId}/extensionProperties",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "federatedidentitycredential_get",
         "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
@@ -3205,27 +3301,27 @@
       },
       {
         "Method": "POST",
-        "OperationName": "applicationtemplate_instantiate",
-        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications(appId='{appId}')/extensionProperties",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications/{application ObjectId}/extensionProperties",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "application_post_applications",
         "Path": "/applications",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "application_list_owners",
+        "Path": "/applications/{id}/owners",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "synchronization_synchronizationschema_parseexpression",
+        "Path": "/servicePrincipals/{id}/synchronization/jobs/{id}/schema/parseExpression",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "synchronization_synchronizationschema_parseexpression",
+        "Path": "/servicePrincipals/{id}/synchronization/templates/{id}/schema/parseExpression",
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -3320,14 +3416,14 @@
       {
         "Method": "GET",
         "OperationName": "application_list_owners",
-        "Path": "/applications/{id}/owners",
+        "Path": "/applications(appId='{appId}')/owners",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "application_list_owners",
-        "Path": "/applications(appId='{appId}')/owners",
-        "Version": "beta"
+        "Method": "POST",
+        "OperationName": "synchronization_synchronizationjob_validatecredentials",
+        "Path": "/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -3336,21 +3432,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "synchronization_synchronizationschema_parseexpression",
-        "Path": "/servicePrincipals/{id}/synchronization/templates/{id}/schema/parseExpression",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "federatedidentitycredential_update",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
         "Version": "beta"
       },
       {
@@ -3396,15 +3486,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_createdobjects",
-        "Path": "/servicePrincipals/{id}/createdObjects",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_removekey",
+        "Path": "/serviceprincipals(appId='{appId}')/removeKey",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_removekey",
-        "Path": "/serviceprincipals(appId='{appId}')/removeKey",
+        "OperationName": "serviceprincipal_removepassword",
+        "Path": "/servicePrincipals/{id}/removePassword",
         "Version": "beta"
       },
       {
@@ -3450,15 +3540,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_removepassword",
-        "Path": "/servicePrincipals/{id}/removePassword",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals/{id}/appRoleAssignments",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals/{id}/appRoleAssignments",
+        "OperationName": "federatedidentitycredential_get",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "beta"
       },
       {
@@ -3470,7 +3560,13 @@
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals(appId='{appId}')",
+        "Path": "/servicePrincipals/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "federatedidentitycredential_update",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "beta"
       },
       {
@@ -3572,13 +3668,7 @@
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Path": "/servicePrincipals(appId='{appId}')",
         "Version": "beta"
       },
       {
@@ -3586,17 +3676,17 @@
         "OperationName": "synchronization_synchronizationschema_parseexpression",
         "Path": "/servicePrincipals/{id}/synchronization/jobs/{id}/schema/parseExpression",
         "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "synchronization_synchronizationschema_parseexpression",
-        "Path": "/servicePrincipals/{id}/synchronization/jobs/{id}/schema/parseExpression",
-        "Version": "v1.0"
       },
       {
         "Method": "PUT",
         "OperationName": "synchronization_serviceprincipal_put_synchronization",
         "Path": "/servicePrincipals/{id}/synchronization/secrets",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "serviceprincipal_upsert",
+        "Path": "/servicePrincipals(appId='appId')",
         "Version": "v1.0"
       },
       {
@@ -3643,14 +3733,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "application_post_federatedidentitycredentials",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
+        "OperationName": "applicationtemplate_instantiate",
+        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "applicationtemplate_instantiate",
-        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
+        "Method": "DELETE",
+        "OperationName": "extensionproperty_delete",
+        "Path": "/applications/{application ObjectId}/extensionProperties/{extensionPropertyId}",
         "Version": "v1.0"
       },
       {
@@ -3696,21 +3786,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "extensionproperty_delete",
-        "Path": "/applications/{application ObjectId}/extensionProperties/{extensionPropertyId}",
+        "Method": "GET",
+        "OperationName": "federatedidentitycredential_get",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_post_federatedidentitycredentials",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "federatedidentitycredential_get",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "application_post_federatedidentitycredentials",
         "Path": "/applications/{id}/federatedIdentityCredentials",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_extensionproperty",
-        "Path": "/applications(appId='{appId}')/extensionProperties",
         "Version": "v1.0"
       },
       {
@@ -3822,27 +3918,33 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Method": "POST",
+        "OperationName": "application_post_extensionproperty",
+        "Path": "/applications(appId='{appId}')/extensionProperties",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "synchronization_synchronizationjob_validatecredentials",
-        "Path": "/servicePrincipals/{id}/synchronization/jobs/{id}/validateCredentials",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "federatedidentitycredential_get",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "OperationName": "synchronization_directorydefinition_discover",
+        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "federatedidentitycredential_update",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "federatedidentitycredential_update",
+        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/createdObjects",
         "Version": "v1.0"
       },
       {
@@ -3871,6 +3973,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "serviceprincipal_list_owners",
         "Path": "/servicePrincipals/{id}/owners",
         "Version": "v1.0"
@@ -3888,15 +4002,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
+        "OperationName": "serviceprincipal_removekey",
+        "Path": "/serviceprincipals/{id}/removeKey",
         "Version": "v1.0"
       },
       {
@@ -3930,45 +4044,27 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
+        "Version": "v1.0"
+      },
+      {
         "Method": "PATCH",
-        "OperationName": "serviceprincipal_upsert",
-        "Path": "/servicePrincipals(appId='appId')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "synchronization_directorydefinition_discover",
-        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_removekey",
-        "Path": "/serviceprincipals/{id}/removeKey",
+        "OperationName": "federatedidentitycredential_update",
+        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialName}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals/{id}/appRoleAssignments",
+        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list_approleassignedto",
         "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignedto",
-        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "federatedidentitycredential_update",
-        "Path": "/applications(appId='{appId}')/federatedIdentityCredentials/{federatedIdentityCredentialId}",
         "Version": "v1.0"
       },
       {
@@ -4068,9 +4164,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "federatedidentitycredential_update",
-        "Path": "/applications/{id}/federatedIdentityCredentials/{federatedIdentityCredentialId}",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignedto",
+        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals/{id}/appRoleAssignments",
         "Version": "v1.0"
       },
       {
@@ -14085,6 +14187,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "device_list",
+        "Path": "/devices",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/administrativeUnits",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "directory_list_administrativeunits",
         "Path": "/directory/administrativeUnits",
         "Version": "beta"
@@ -14151,14 +14265,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "directoryrole_list_scopedmembers",
-        "Path": "/directoryRoles(roleTemplateId='{roleTemplateId}')/scopedMembers",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "directoryrole_list",
-        "Path": "/directoryRoles",
+        "OperationName": "directoryrole_list_scopedmembers",
+        "Path": "/directoryRoles(roleTemplateId='{roleTemplateId}')/scopedMembers",
         "Version": "beta"
       },
       {
@@ -14241,32 +14355,38 @@
       },
       {
         "Method": "GET",
+        "OperationName": "directoryrole_list",
+        "Path": "/directoryRoles",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_owners",
         "Path": "/groups/{id}/owners",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/administrativeUnits",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "device_list_transitivememberof",
         "Path": "/devices/{id}/transitiveMemberOf",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "device_list_registeredusers",
+        "Path": "/devices/{id}/registeredUsers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "administrativeunit_get",
+        "Path": "/administrativeUnits/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "administrativeunit_get",
+        "Path": "/directory/administrativeUnits/{id}",
         "Version": "beta"
       },
       {
@@ -14337,26 +14457,26 @@
       },
       {
         "Method": "GET",
+        "OperationName": "device_list_registeredusers",
+        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "application_list_owners",
         "Path": "/applications(appId='{appId}')/owners",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "channel_get_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_list_settings",
-        "Path": "/settings",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "channel_get",
         "Path": "/teams/{team-id}/channels/{channel-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "channel_list_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs",
         "Version": "beta"
       },
       {
@@ -14427,20 +14547,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_registeredusers",
-        "Path": "/devices/{id}/registeredUsers",
+        "OperationName": "channel_get_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_registeredusers",
-        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_list_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs",
+        "OperationName": "group_list_settings",
+        "Path": "/settings",
         "Version": "beta"
       },
       {
@@ -14453,12 +14567,6 @@
         "Method": "GET",
         "OperationName": "group_list_transitivemembers",
         "Path": "/groups/{id}/transitiveMembers",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_list",
-        "Path": "/groups",
         "Version": "beta"
       },
       {
@@ -14637,20 +14745,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get",
-        "Path": "/directory/administrativeUnits/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "serviceprincipal_list_transitivememberof",
         "Path": "/servicePrincipals/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals/{id}/owners",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "serviceprincipal_list_ownedobjects",
         "Path": "/servicePrincipals/{id}/ownedObjects",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list",
+        "Path": "/groups",
         "Version": "beta"
       },
       {
@@ -14732,15 +14846,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals/{id}/owners",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "orgcontact_retryserviceprovisioning",
         "Path": "/contacts/{id}/retryServiceProvisioning",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "permissiongrantpolicy_list_excludes",
+        "Path": "/policies/permissionGrantPolicies/{id}/excludes",
         "Version": "beta"
       },
       {
@@ -14823,18 +14937,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "permissiongrantpolicy_list_excludes",
-        "Path": "/policies/permissionGrantPolicies/{id}/excludes",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "administrativeunit_get",
-        "Path": "/administrativeUnits/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "administrativeunit_get_scopedrolemembers",
         "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
         "Version": "beta"
@@ -14847,8 +14949,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/directory/administrativeUnits",
+        "OperationName": "administrativeunit_delta",
+        "Path": "/administrativeUnits/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "user_list_registereddevices",
+        "Path": "/users/{id | userPrincipalName}/registeredDevices",
         "Version": "v1.0"
       },
       {
@@ -14925,20 +15033,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "directoryroletemplate_get",
         "Path": "/directoryRoleTemplates/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "domain_get",
-        "Path": "/domains/{id}",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/directory/administrativeUnits",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directoryroletemplate_list",
+        "Path": "/directoryRoleTemplates",
         "Version": "v1.0"
       },
       {
@@ -15015,14 +15123,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "directoryroletemplate_list",
-        "Path": "/directoryRoleTemplates",
+        "OperationName": "group_list",
+        "Path": "/groups",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "group_list",
-        "Path": "/groups",
+        "OperationName": "domain_get",
+        "Path": "/domains/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "device_list",
+        "Path": "/devices",
         "Version": "v1.0"
       },
       {
@@ -15033,8 +15147,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_registeredusers",
-        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices/{id | userPrincipalName}/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -15117,14 +15231,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices/{id | userPrincipalName}/transitiveMemberOf",
+        "OperationName": "channel_get_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "channel_get_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
+        "OperationName": "channel_get",
+        "Path": "/teams/{team-id}/channels/{channel-id}",
         "Version": "v1.0"
       },
       {
@@ -15207,8 +15321,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "channel_get",
-        "Path": "/teams/{team-id}/channels/{channel-id}",
+        "OperationName": "device_list_registeredusers",
+        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "grouplifecyclepolicy_get",
+        "Path": "/groupLifecyclePolicies/{id}",
         "Version": "v1.0"
       },
       {
@@ -15219,14 +15339,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "grouplifecyclepolicy_get",
-        "Path": "/groupLifecyclePolicies/{id}",
+        "OperationName": "grouplifecyclepolicy_list",
+        "Path": "/groupLifecyclePolicies",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "groupsetting_get",
-        "Path": "/groupSettings/{groupSettingId}",
+        "OperationName": "groupsettingtemplate_get",
+        "Path": "/groupSettingTemplates/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -15297,26 +15429,26 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "user_list_createdobjects",
         "Path": "/users/{id | userPrincipalName}/createdObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_createdobjects",
-        "Path": "/me/createdObjects",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
+        "OperationName": "user_list_joinedteams",
+        "Path": "/me/joinedTeams",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "user_list_joinedteams",
-        "Path": "/me/joinedTeams",
+        "Path": "/users/{id | user-principal-name}/joinedTeams",
         "Version": "v1.0"
       },
       {
@@ -15387,32 +15519,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_registereddevices",
-        "Path": "/users/{id | userPrincipalName}/registeredDevices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "administrativeunit_delta",
-        "Path": "/administrativeUnits/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_joinedteams",
-        "Path": "/users/{id | user-principal-name}/joinedTeams",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "grouplifecyclepolicy_list",
-        "Path": "/groupLifecyclePolicies",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
+        "OperationName": "user_list_createdobjects",
+        "Path": "/me/createdObjects",
         "Version": "v1.0"
       },
       {
@@ -15423,8 +15531,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "groupsettingtemplate_get",
-        "Path": "/groupSettingTemplates/{id}",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
         "Version": "v1.0"
       },
       {
@@ -15501,14 +15615,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "OperationName": "permissiongrantpolicy_list_excludes",
+        "Path": "/policies/permissionGrantPolicies/{id}/excludes",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "permissiongrantpolicy_list_excludes",
-        "Path": "/policies/permissionGrantPolicies/{id}/excludes",
+        "OperationName": "permissiongrantpolicy_list_includes",
+        "Path": "/policies/permissionGrantPolicies/{id}/includes",
         "Version": "v1.0"
       },
       {
@@ -15555,6 +15669,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/createdObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "serviceprincipal_list_delegatedpermissionclassifications",
         "Path": "/servicePrincipals/{id}/delegatedPermissionClassifications",
         "Version": "v1.0"
@@ -15591,8 +15717,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "permissiongrantpolicy_list_includes",
-        "Path": "/policies/permissionGrantPolicies/{id}/includes",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
         "Version": "v1.0"
       },
       {
@@ -15678,18 +15804,6 @@
         "OperationName": "administrativeunit_get_members",
         "Path": "/directory/administrativeUnits/{id}/members/{id}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_assignlicense",
-        "Path": "/groups/{id}/assignLicense",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "featurerolloutpolicy_update",
-        "Path": "/policies/featureRolloutPolicies/{id}",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -15818,33 +15932,39 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_members",
-        "Path": "/groups/{id}/members/{id}/$ref",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "directoryobject_getmembergroups_6",
         "Path": "/directoryObjects/{id}/getMemberGroups",
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/directory/administrativeUnits",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "featurerolloutpolicy_update",
+        "Path": "/policies/featureRolloutPolicies/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_assignlicense",
+        "Path": "/groups/{id}/assignLicense",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_members",
+        "Path": "/groups/{id}/members/{id}/$ref",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "group_delete_owners",
         "Path": "/groups/{id}/owners/{id}/$ref",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_get",
-        "Path": "/groups/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "beta"
       },
       {
@@ -15914,15 +16034,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "group_retryserviceprovisioning",
-        "Path": "/groups/{id}/retryServiceProvisioning",
+        "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/administrativeUnits",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "group_renew",
-        "Path": "/groups/{id}/renew",
+        "OperationName": "group_retryserviceprovisioning",
+        "Path": "/groups/{id}/retryServiceProvisioning",
         "Version": "beta"
       },
       {
@@ -15981,20 +16101,26 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_get",
+        "Path": "/groups/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_delta",
         "Path": "/groups/delta",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/directory/administrativeUnits",
+        "Method": "POST",
+        "OperationName": "group_renew",
+        "Path": "/groups/{id}/renew",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/administrativeUnits",
+        "OperationName": "licensedetails_getteamslicensingdetails",
+        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "beta"
       },
       {
@@ -16005,14 +16131,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "connector_get",
-        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "OperationName": "device_list",
+        "Path": "/devices",
         "Version": "beta"
       },
       {
@@ -16143,6 +16263,30 @@
       },
       {
         "Method": "GET",
+        "OperationName": "application_list_extensionproperty",
+        "Path": "/applications(appId='{appId}')/extensionProperties",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "application_list_extensionproperty",
+        "Path": "/applications/{application ObjectId}/extensionProperties",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "channel_update_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "connector_get",
+        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "connector_list_memberof",
         "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors/{id}/memberOf",
         "Version": "beta"
@@ -16151,30 +16295,6 @@
         "Method": "GET",
         "OperationName": "connector_list",
         "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "connector_post_memberof",
-        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors/{id}/memberOf/$ref",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "connectorgroup_delete",
-        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectorGroups/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "device_update",
-        "Path": "/devices/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
         "Version": "beta"
       },
       {
@@ -16233,12 +16353,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "list_featurerolloutpolicies",
-        "Path": "/policies/featureRolloutPolicies",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "device_get",
         "Path": "/devices/{id}",
         "Version": "beta"
@@ -16246,13 +16360,19 @@
       {
         "Method": "PATCH",
         "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/members/{id}",
+        "Path": "/teams/{id}/channels/{id}/members/{id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "contract_list",
-        "Path": "/contracts",
+        "Method": "PATCH",
+        "OperationName": "device_update",
+        "Path": "/devices/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "conversationmember_update",
+        "Path": "/teams/{id}/members/{id}",
         "Version": "beta"
       },
       {
@@ -16310,9 +16430,27 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
+        "Method": "DELETE",
+        "OperationName": "connectorgroup_delete",
+        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectorGroups/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "connector_post_memberof",
+        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors/{id}/memberOf/$ref",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contract_list",
+        "Path": "/contracts",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_featurerolloutpolicies",
+        "Path": "/policies/featureRolloutPolicies",
         "Version": "beta"
       },
       {
@@ -16325,12 +16463,6 @@
         "Method": "GET",
         "OperationName": "oauth2permissiongrant_delta",
         "Path": "/oauth2PermissionGrants/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "oauth2permissiongrant_get",
-        "Path": "/oauth2PermissionGrants/{id}",
         "Version": "beta"
       },
       {
@@ -16646,15 +16778,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "application_list_extensionproperty",
-        "Path": "/applications(appId='{appId}')/extensionProperties",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
+        "OperationName": "serviceprincipal_post_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners/$ref",
         "Version": "beta"
       },
       {
@@ -16730,15 +16862,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "onpremisesagentgroup_update",
-        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups/{agentGroup-id}",
+        "Method": "POST",
+        "OperationName": "rbacapplication_post_roledefinitions",
+        "Path": "/roleManagement/deviceManagement/roleDefinitions",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "onpremisesagentgroup_post",
-        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups",
+        "Method": "PATCH",
+        "OperationName": "onpremisesagentgroup_update",
+        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups/{agentGroup-id}",
         "Version": "beta"
       },
       {
@@ -16802,21 +16934,27 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "oauth2permissiongrant_get",
+        "Path": "/oauth2PermissionGrants/{id}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "rbacapplication_post_roledefinitions",
-        "Path": "/roleManagement/deviceManagement/roleDefinitions",
+        "OperationName": "onpremisesagentgroup_post",
+        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "application_get",
+        "Path": "/applications(appId='{appId}')",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "serviceprincipal_addkey",
         "Path": "/servicePrincipals/{id}/addKey",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addkey",
-        "Path": "/servicePrincipals(appId='{appId}')/addKey",
         "Version": "beta"
       },
       {
@@ -16893,8 +17031,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_post_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners/$ref",
+        "OperationName": "serviceprincipal_addkey",
+        "Path": "/servicePrincipals(appId='{appId}')/addKey",
         "Version": "beta"
       },
       {
@@ -16977,21 +17115,27 @@
       },
       {
         "Method": "GET",
-        "OperationName": "application_list_extensionproperty",
-        "Path": "/applications/{application ObjectId}/extensionProperties",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "application_get",
-        "Path": "/applications(appId='{appId}')",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "application_get",
         "Path": "/applications/{applicationObjectId}",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "application_delta",
+        "Path": "/applications/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "application_delete_owners",
+        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_owners",
+        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Version": "v1.0"
       },
       {
         "Method": "DELETE",
@@ -17127,18 +17271,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/directory/administrativeUnits",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "group_delete_owners",
-        "Path": "/groups/{id}/owners/{id}/$ref",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "group_delta",
         "Path": "/groups/delta",
         "Version": "v1.0"
@@ -17153,6 +17285,18 @@
         "Method": "GET",
         "OperationName": "group_list_approleassignments",
         "Path": "/groups/{id}/appRoleAssignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list_grouplifecyclepolicies",
+        "Path": "/groups/{id}/groupLifecyclePolicies",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "invitation_post",
+        "Path": "/invitations",
         "Version": "v1.0"
       },
       {
@@ -17216,6 +17360,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/directory/administrativeUnits",
+        "Version": "v1.0"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "grouplifecyclepolicy_delete",
         "Path": "/groupLifecyclePolicies/{id}",
@@ -17223,14 +17373,8 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "device_update",
-        "Path": "/devices(deviceId='{deviceId}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "grouplifecyclepolicy_addgroup",
-        "Path": "/groupLifecyclePolicies/{id}/addGroup",
+        "OperationName": "group_upsert",
+        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
         "Version": "v1.0"
       },
       {
@@ -17294,21 +17438,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "group_list_grouplifecyclepolicies",
-        "Path": "/groups/{id}/groupLifecyclePolicies",
+        "Method": "POST",
+        "OperationName": "grouplifecyclepolicy_addgroup",
+        "Path": "/groupLifecyclePolicies/{id}/addGroup",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
-        "OperationName": "group_upsert",
-        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "invitation_post",
-        "Path": "/invitations",
+        "OperationName": "device_update",
+        "Path": "/devices(deviceId='{deviceId}')",
         "Version": "v1.0"
       },
       {
@@ -17319,8 +17457,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
+        "OperationName": "device_list",
+        "Path": "/devices",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "application_removekey",
+        "Path": "/applications/{id}/removeKey",
         "Version": "v1.0"
       },
       {
@@ -17384,15 +17528,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "application_delta",
-        "Path": "/applications/delta",
+        "Method": "POST",
+        "OperationName": "application_removekey",
+        "Path": "/applications(appId='{appId}')/removeKey",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "application_delete_owners",
-        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
+        "Method": "GET",
+        "OperationName": "application_delta",
+        "Path": "/applications/delta",
         "Version": "v1.0"
       },
       {
@@ -17462,15 +17606,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_removekey",
-        "Path": "/applications/{id}/removeKey",
+        "Method": "DELETE",
+        "OperationName": "application_delete_owners",
+        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_removekey",
-        "Path": "/applications(appId='{appId}')/removeKey",
+        "Method": "GET",
+        "OperationName": "licensedetails_getteamslicensingdetails",
+        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "v1.0"
       },
       {
@@ -17481,8 +17625,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "application_removepassword",
-        "Path": "/applications(appId='{appId}')/removePassword",
+        "OperationName": "applicationtemplate_instantiate",
+        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -17546,21 +17696,21 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "application_removepassword",
+        "Path": "/applications(appId='{appId}')/removePassword",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "contract_list",
         "Path": "/contracts",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "contract_get",
-        "Path": "/contracts/{id}",
+        "Method": "PATCH",
+        "OperationName": "channel_update_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
@@ -17624,15 +17774,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "applicationtemplate_instantiate",
-        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Method": "GET",
+        "OperationName": "contract_get",
+        "Path": "/contracts/{id}",
         "Version": "v1.0"
       },
       {
@@ -17642,27 +17786,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "Method": "DELETE",
+        "OperationName": "oauth2permissiongrant_delete",
+        "Path": "/oAuth2PermissionGrants/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "oauth2permissiongrant_delta",
-        "Path": "/oauth2PermissionGrants/delta",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_manager",
-        "Path": "/me/manager",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_licensedetails",
-        "Path": "/users/{id}/licenseDetails",
+        "OperationName": "oauth2permissiongrant_get",
+        "Path": "/oauth2PermissionGrants/{id}",
         "Version": "v1.0"
       },
       {
@@ -17793,6 +17925,30 @@
       },
       {
         "Method": "GET",
+        "OperationName": "team_get_installedapps",
+        "Path": "/teams/{id}/installedApps/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "team_delete_installedapps",
+        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "user_list_licensedetails",
+        "Path": "/users/{id}/licenseDetails",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "user_list_manager",
+        "Path": "/me/manager",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "user_list_manager",
         "Path": "/users/{id | userPrincipalName}/manager",
         "Version": "v1.0"
@@ -17802,30 +17958,6 @@
         "OperationName": "user_list_owneddevices",
         "Path": "/me/ownedDevices",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_owneddevices",
-        "Path": "/users/{id | userPrincipalName}/ownedDevices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_ownedobjects",
-        "Path": "/me/ownedObjects",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "application_delta",
-        "Path": "/applications/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "application_delete_owners",
-        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
-        "Version": "beta"
       },
       {
         "Method": "DELETE",
@@ -17883,26 +18015,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "team_get_installedapps",
-        "Path": "/teams/{id}/installedApps/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "administrativeunit_get",
         "Path": "/directory/administrativeUnits/{id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get_scopedrolemembers",
-        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
+        "OperationName": "administrativeunit_get",
+        "Path": "/administrativeUnits/{id}",
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
-        "OperationName": "administrativeunit_get_members",
-        "Path": "/administrativeUnits/{id}/members/{id}",
+        "OperationName": "administrativeunit_get_scopedrolemembers",
+        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
         "Version": "beta"
       },
       {
@@ -17961,26 +18093,50 @@
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get",
-        "Path": "/administrativeUnits/{id}",
+        "OperationName": "user_list_ownedobjects",
+        "Path": "/me/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "user_list_owneddevices",
+        "Path": "/users/{id | userPrincipalName}/ownedDevices",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "administrativeunit_get_members",
+        "Path": "/administrativeUnits/{id}/members/{id}",
         "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "oauth2permissiongrant_delete",
-        "Path": "/oAuth2PermissionGrants/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "team_delete_installedapps",
-        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
-        "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "team_archive",
         "Path": "/teams/{id}/archive",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "synchronization_directorydefinition_discover",
+        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "subscribedsku_list",
+        "Path": "/subscribedSkus",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals(appId='{appId}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals/{id}",
         "Version": "v1.0"
       },
       {
@@ -18038,15 +18194,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addkey",
-        "Path": "/servicePrincipals(appId='{appId}')/addKey",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignedto",
+        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "serviceprincipal_addkey",
-        "Path": "/serviceprincipals/{id}/addKey",
+        "Path": "/servicePrincipals(appId='{appId}')/addKey",
         "Version": "v1.0"
       },
       {
@@ -18116,27 +18272,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "oauth2permissiongrant_get",
-        "Path": "/oauth2PermissionGrants/{id}",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_addkey",
+        "Path": "/serviceprincipals/{id}/addKey",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals(appId='{appId}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignedto",
-        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
+        "OperationName": "oauth2permissiongrant_delta",
+        "Path": "/oauth2PermissionGrants/delta",
         "Version": "v1.0"
       },
       {
@@ -18146,15 +18290,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "synchronization_directorydefinition_discover",
-        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
-        "OperationName": "subscribedsku_list",
-        "Path": "/subscribedSkus",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
         "Version": "v1.0"
       },
       {
@@ -18213,26 +18351,26 @@
       },
       {
         "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
+        "OperationName": "serviceprincipal_post_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners/$ref",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "serviceprincipal_post_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners/$ref",
+        "Path": "/servicePrincipals/{id}/owners/$ref",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals/{id}/appRoleAssignments",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list",
         "Path": "/servicePrincipals",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -18251,6 +18389,18 @@
         "Method": "GET",
         "OperationName": "serviceprincipal_list_owners",
         "Path": "/servicePrincipals/{id}/owners",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/ownedObjects",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
         "Version": "v1.0"
       },
       {
@@ -18279,20 +18429,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals(appId='{appId}')/createdObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals/{id}/appRoleAssignments",
+        "OperationName": "serviceprincipal_list_createdobjects",
+        "Path": "/servicePrincipals/{id}/createdObjects",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_owners",
-        "Path": "/servicePrincipals/{id}/owners/$ref",
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -42761,6 +42911,96 @@
     "Endpoints": [
       {
         "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/groupSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_post_settings",
+        "Path": "/groupSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "groupsetting_delete",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "groupsetting_update",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsettingtemplate_get",
+        "Path": "/groupSettingTemplates/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsettingtemplate_list",
+        "Path": "/groupSettingTemplates",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "directorysetting_delete",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysetting_get",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "directorysetting_update",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysettingtemplate_get",
+        "Path": "/directorySettingTemplates/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directorysettingtemplate_list",
+        "Path": "/directorySettingTemplates",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list_settings",
+        "Path": "/settings",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "group_post_settings",
+        "Path": "/settings",
+        "Version": "beta"
+      }
+    ],
+    "Role": "GroupSettings.ReadWrite.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
         "OperationName": "identitycontainer_list_identityproviders",
         "Path": "/identity/identityProviders",
         "Version": "v1.0"
@@ -51941,6 +52181,60 @@
     "Endpoints": [
       {
         "Method": "GET",
+        "OperationName": "meetingattendancereport_get",
+        "Path": "/me/onlineMeetings/{meetingId}/attendanceReports/{reportId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_get",
+        "Path": "/users/{userId}/onlineMeetings/{meetingId}/attendanceReports/{reportId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_list",
+        "Path": "/me/onlineMeetings/{meetingId}/attendanceReports",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_list",
+        "Path": "/users/{userId}/onlineMeetings/{meetingId}/attendanceReports",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_get",
+        "Path": "/me/onlineMeetings/{meetingId}/attendanceReports/{reportId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_get",
+        "Path": "/users/{userId}/onlineMeetings/{meetingId}/attendanceReports/{reportId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_list",
+        "Path": "/me/onlineMeetings/{meetingId}/attendanceReports",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "meetingattendancereport_list",
+        "Path": "/users/{userId}/onlineMeetings/{meetingId}/attendanceReports",
+        "Version": "beta"
+      }
+    ],
+    "Role": "OnlineMeetingArtifact.Read.Chat",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
         "OperationName": "callrecording_delta",
         "Path": "https://graph.microsoft.com/v1.0/users/8b081ef6-4792-4def-b2c9-c363a1bf41d5/onlineMeetings/getAllRecordings(meetingOrganizerUserId='8b081ef6-4792-4def-b2c9-c363a1bf41d5')/delta",
         "Version": "v1.0"
@@ -52836,18 +53130,6 @@
         "OperationName": "place_list",
         "Path": "/places/microsoft.graph.room",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "place_get",
-        "Path": "/places/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "place_list",
-        "Path": "/places/microsoft.graph.room",
-        "Version": "beta"
       }
     ],
     "Role": "Place.Read.All",
@@ -52863,8 +53145,8 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "place_update",
-        "Path": "/places/{id | emailAddress}",
+        "OperationName": "place-update-permissions",
+        "Path": "https://graph.microsoft.com/beta/places/e18a8e21-0494-4296-a5bc-f848dba2740d",
         "Version": "beta"
       }
     ],
@@ -52935,20 +53217,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "emailauthenticationmethodconfiguration_get",
-        "Path": "/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/email",
+        "OperationName": "appmanagementpolicy_list",
+        "Path": "/policies/appManagementPolicies",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "homerealmdiscoverypolicy_get",
         "Path": "/policies/homeRealmDiscoveryPolicies/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "homerealmdiscoverypolicy_list",
-        "Path": "/policies/homeRealmDiscoveryPolicies",
         "Version": "beta"
       },
       {
@@ -53007,8 +53283,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "appmanagementpolicy_list",
-        "Path": "/policies/appManagementPolicies",
+        "OperationName": "homerealmdiscoverypolicy_list",
+        "Path": "/policies/homeRealmDiscoveryPolicies",
         "Version": "beta"
       },
       {
@@ -53091,14 +53367,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "trustframework_list_trustframeworkpolicies",
-        "Path": "/trustFramework/policies/",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "emailauthenticationmethodconfiguration_get",
-        "Path": "/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/email",
+        "OperationName": "homerealmdiscoverypolicy_get",
+        "Path": "/policies/homeRealmDiscoveryPolicies/{id}",
         "Version": "v1.0"
       },
       {
@@ -53163,9 +53433,9 @@
       },
       {
         "Method": "GET",
-        "OperationName": "homerealmdiscoverypolicy_get",
-        "Path": "/policies/homeRealmDiscoveryPolicies/{id}",
-        "Version": "v1.0"
+        "OperationName": "trustframework_list_trustframeworkpolicies",
+        "Path": "/trustFramework/policies/",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -53877,6 +54147,24 @@
       }
     ],
     "Role": "Policy.Read.ApplicationConfiguration",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
+        "OperationName": "emailauthenticationmethodconfiguration_get",
+        "Path": "/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/email",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "emailauthenticationmethodconfiguration_get",
+        "Path": "/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/email",
+        "Version": "beta"
+      }
+    ],
+    "Role": "Policy.Read.AuthenticationMethod",
     "Type": "Application"
   },
   {
@@ -54822,6 +55110,18 @@
         "Version": "v1.0"
       },
       {
+        "Method": "DELETE",
+        "OperationName": "groupsetting_delete",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "groupsetting_update",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "authorizationpolicy_get",
         "Path": "/policies/authorizationPolicy",
@@ -54831,6 +55131,18 @@
         "Method": "PATCH",
         "OperationName": "authorizationpolicy_update",
         "Path": "/policies/authorizationPolicy/authorizationPolicy",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "directorysetting_delete",
+        "Path": "/settings/{directorySettingId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "directorysetting_update",
+        "Path": "/settings/{directorySettingId}",
         "Version": "beta"
       }
     ],
@@ -55280,19 +55592,19 @@
       {
         "Method": "POST",
         "OperationName": "presence_clearuserpreferredpresence",
-        "Path": "/users/{userId}/presence/clearUserPreferredPresence",
+        "Path": "/users/{id}/presence/clearUserPreferredPresence",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "presence_setuserpreferredpresence",
-        "Path": "/users/{userId}/presence/setUserPreferredPresence",
+        "Path": "/users/{id}/presence/setUserPreferredPresence",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "presence_clearuserpreferredpresence",
-        "Path": "/users/{userId}/presence/clearUserPreferredPresence",
+        "Path": "/users/{id}/presence/clearUserPreferredPresence",
         "Version": "beta"
       }
     ],
@@ -55304,24 +55616,54 @@
       {
         "Method": "POST",
         "OperationName": "presence_clearuserpreferredpresence",
-        "Path": "/users/{userId}/presence/clearUserPreferredPresence",
+        "Path": "/users/{id}/presence/clearUserPreferredPresence",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "presence_setuserpreferredpresence",
-        "Path": "/users/{userId}/presence/setUserPreferredPresence",
+        "Path": "/users/{id}/presence/setUserPreferredPresence",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "presence_clearuserpreferredpresence",
-        "Path": "/users/{userId}/presence/clearUserPreferredPresence",
+        "Path": "/users/{id}/presence/clearUserPreferredPresence",
         "Version": "beta"
       }
     ],
     "Role": "Presence.ReadWrite.All",
     "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "GET",
+        "OperationName": "print_list_services",
+        "Path": "/print/services",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "printservice_get",
+        "Path": "/print/services/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "printservice_list_endpoints",
+        "Path": "/print/services/{id}/endpoints",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "printserviceendpoint_get",
+        "Path": "/print/services/{id}/endpoints/{name}",
+        "Version": "beta"
+      }
+    ],
+    "Role": "PrintAlertSettings.Read.All",
+    "Type": "Delegated"
   },
   {
     "Endpoints": [
@@ -58549,7 +58891,7 @@
       },
       {
         "Method": "GET",
-        "OperationName": "unifiedrbacapplication_list_customappscopes",
+        "OperationName": "unifiedrbacapplicationmultiple_list_customappscopes",
         "Path": "/roleManagement/defender/customAppScopes",
         "Version": "beta"
       }
@@ -58560,7 +58902,7 @@
   {
     "Endpoints": {
       "Method": "GET",
-      "OperationName": "unifiedrbacapplication_list_customappscopes",
+      "OperationName": "unifiedrbacapplicationmultiple_list_customappscopes",
       "Path": "/roleManagement/defender/customAppScopes",
       "Version": "beta"
     },
@@ -58774,7 +59116,7 @@
   {
     "Endpoints": {
       "Method": "GET",
-      "OperationName": "unifiedrbacapplication_list_customappscopes",
+      "OperationName": "unifiedrbacapplicationmultiple_list_customappscopes",
       "Path": "/roleManagement/defender/customAppScopes",
       "Version": "beta"
     },
@@ -77832,6 +78174,12 @@
   {
     "Endpoints": [
       {
+        "Method": "PATCH",
+        "OperationName": "phoneauthenticationmethod_update",
+        "Path": "https://graph.microsoft.com/v1.0/users/kim@contoso.com/authentication/phoneMethods/3179e48a-750b-4051-897c-87b9720928f7",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "authenticationmethod_get",
         "Path": "/me/authentication/methods/{id}",
@@ -77845,14 +78193,14 @@
       },
       {
         "Method": "DELETE",
-        "OperationName": "fido2authenticationmethod_delete",
-        "Path": "/me/authentication/fido2Methods/{id}",
+        "OperationName": "passwordlessmicrosoftauthenticatorauthenticationmethod_delete",
+        "Path": "/me/authentication/passwordlessMicrosoftAuthenticatorMethods/{id}",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "passwordlessmicrosoftauthenticatorauthenticationmethod_delete",
-        "Path": "/me/authentication/passwordlessMicrosoftAuthenticatorMethods/{id}",
+        "Method": "PATCH",
+        "OperationName": "phoneauthenticationmethod_update",
+        "Path": "https://graph.microsoft.com/beta/users/kim@contoso.com/authentication/phoneMethods/3179e48a-750b-4051-897c-87b9720928f7",
         "Version": "beta"
       }
     ],
@@ -77863,14 +78211,14 @@
     "Endpoints": [
       {
         "Method": "POST",
-        "OperationName": "authentication_post_temporaryaccesspassmethods",
-        "Path": "https://graph.microsoft.com/v1.0/users/071cc716-8147-4397-a5ba-b2105951cc0b/authentication/temporaryAccessPassMethods",
+        "OperationName": "authenticationmethod_resetpassword",
+        "Path": "/users/{id | userPrincipalName}/authentication/methods/{passwordMethods-id}/resetPassword",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "authenticationmethod_resetpassword",
-        "Path": "/users/{id | userPrincipalName}/authentication/methods/{passwordMethods-id}/resetPassword",
+        "Method": "PATCH",
+        "OperationName": "phoneauthenticationmethod_update",
+        "Path": "https://graph.microsoft.com/v1.0/users/kim@contoso.com/authentication/phoneMethods/3179e48a-750b-4051-897c-87b9720928f7",
         "Version": "v1.0"
       },
       {
@@ -77893,28 +78241,18 @@
       },
       {
         "Method": "DELETE",
-        "OperationName": "fido2authenticationmethod_delete",
-        "Path": "/me/authentication/fido2Methods/{id}",
+        "OperationName": "passwordlessmicrosoftauthenticatorauthenticationmethod_delete",
+        "Path": "/me/authentication/passwordlessMicrosoftAuthenticatorMethods/{id}",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "passwordlessmicrosoftauthenticatorauthenticationmethod_delete",
-        "Path": "/me/authentication/passwordlessMicrosoftAuthenticatorMethods/{id}",
+        "Method": "PATCH",
+        "OperationName": "phoneauthenticationmethod_update",
+        "Path": "https://graph.microsoft.com/beta/users/kim@contoso.com/authentication/phoneMethods/3179e48a-750b-4051-897c-87b9720928f7",
         "Version": "beta"
       }
     ],
     "Role": "UserAuthenticationMethod.ReadWrite.All",
-    "Type": "Application"
-  },
-  {
-    "Endpoints": {
-      "Method": "DELETE",
-      "OperationName": "fido2authenticationmethod_delete",
-      "Path": "/me/authentication/fido2Methods/{id}",
-      "Version": "beta"
-    },
-    "Role": "UserAuthMethod-Passkey.ReadWrite.All",
     "Type": "Application"
   },
   {
@@ -78005,6 +78343,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "usersettings_list_windows",
+        "Path": "/me/settings/windows",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "windowssetting_get",
         "Path": "/me/settings/windows/{windowsSettingId}",
         "Version": "beta"
@@ -78072,28 +78416,8 @@
       "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
       "Version": "v1.0"
     },
-    "Role": "VirtualEvent.Read",
-    "Type": "Delegated"
-  },
-  {
-    "Endpoints": {
-      "Method": "GET",
-      "OperationName": "virtualeventregistration_get",
-      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
-      "Version": "v1.0"
-    },
-    "Role": "VirtualEvent.Read.All",
+    "Role": "VirtualEvent.Read.Chat",
     "Type": "Application"
-  },
-  {
-    "Endpoints": {
-      "Method": "GET",
-      "OperationName": "virtualeventregistration_get",
-      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
-      "Version": "v1.0"
-    },
-    "Role": "VirtualEvent.ReadWrite",
-    "Type": "Delegated"
   },
   {
     "Endpoints": [

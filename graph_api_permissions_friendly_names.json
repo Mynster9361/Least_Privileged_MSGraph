@@ -365,6 +365,11 @@
     "DelegatedWork_Identifier": "-"
   },
   {
+    "Role_Name": "CallRecordings.Read.All",
+    "Application_Identifier": "ce8fb1f1-5e1f-44a0-b102-4ec28454d0dc",
+    "DelegatedWork_Identifier": "63d31bd6-bcf5-40ca-8283-ba4130a66405"
+  },
+  {
     "Role_Name": "CallRecords.Read.All",
     "Application_Identifier": "45bbb07e-7321-4fd7-a8f6-3ff27e6a81c8",
     "DelegatedWork_Identifier": "-"
@@ -393,6 +398,11 @@
     "Role_Name": "Calls.JoinGroupCallAsGuest.All",
     "Application_Identifier": "fd7ccf6b-3d28-418b-9701-cd10f5cd2fd4",
     "DelegatedWork_Identifier": "-"
+  },
+  {
+    "Role_Name": "CallTranscripts.Read.All",
+    "Application_Identifier": "4cd61b6d-8692-40bf-9d90-7f38db5e5fce",
+    "DelegatedWork_Identifier": "fbace248-5d8e-441c-85ca-cc19221a69a2"
   },
   {
     "Role_Name": "ChangeManagement.Read.All",
@@ -1255,8 +1265,18 @@
     "DelegatedWork_Identifier": "085ca537-6565-41c2-aca7-db852babc212"
   },
   {
-    "Role_Name": "FileStorageContainerTypeReg.Selected",
+    "Role_Name": "FileStorageContainerType.Manage.All",
     "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "8e6ec84c-5fcd-4cc7-ac8a-2296efc0ed9b"
+  },
+  {
+    "Role_Name": "FileStorageContainerTypeReg.Manage.All",
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "c319a7df-930e-44c0-a43b-7e5e9c7f4f24"
+  },
+  {
+    "Role_Name": "FileStorageContainerTypeReg.Selected",
+    "Application_Identifier": "2dcc6599-bd30-442b-8f11-90f88ad441dc",
     "DelegatedWork_Identifier": "d1e4f63a-1569-475c-b9b2-bdc140405e38"
   },
   {
@@ -1267,12 +1287,12 @@
   {
     "Role_Name": "Goals",
     "Application_Identifier": "-",
-    "DelegatedWork_Identifier": "2edeb9fd-4228-480c-a26d-2ed52011cf3d"
+    "DelegatedWork_Identifier": "092211d9-ca1a-427b-813e-b79c7653fe71"
   },
   {
     "Role_Name": "Group",
-    "Application_Identifier": "6679c91b-820a-4900-ab47-e97b197a89c4",
-    "DelegatedWork_Identifier": "302bcbb5-855a-4e49-ae20-94a331b0281e"
+    "Application_Identifier": "2d9bd318-b883-40be-9df7-63ec4fcdc424",
+    "DelegatedWork_Identifier": "37e00479-5776-4659-aecf-4841ec5d590a"
   },
   {
     "Role_Name": "Group.Create",
@@ -1491,8 +1511,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "3a87a643-13d2-47aa-8d6a-b0a8377cb03b",
-    "DelegatedWork_Identifier": "df1c25b3-072c-45cd-8403-c63441e4cca1"
+    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
+    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -1816,8 +1836,8 @@
   },
   {
     "Role_Name": "OrgSettings",
-    "Application_Identifier": "434d7c66-07c6-4b1f-ab21-417cf2cdaaca",
-    "DelegatedWork_Identifier": "210051a0-1ffc-435c-ae76-02d226d05752"
+    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
+    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
   },
   {
     "Role_Name": "PartnerBilling.Read.All",

@@ -74776,7 +74776,7 @@
     "version": "beta",
     "method": "GET",
     "operation_name": "activitybasedtimeoutpolicy_get",
-    "full_example_url": "https://graph.microsoft.com/beta/policies/activityBasedTimeoutPolicies/{id}",
+    "full_example_url": "https://graph.microsoft.com/beta/policies/activityBasedTimeoutPolicies/cf70ac6c-8a1a-40cd-a523-a2b4a56de0df",
     "example_from_docs": true,
     "DelegatedWork_Least": "Policy.Read.All",
     "DelegatedWork_Higher": [

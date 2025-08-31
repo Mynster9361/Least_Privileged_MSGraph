@@ -206,8 +206,8 @@
   },
   {
     "Role_Name": "BackupRestore",
-    "Application_Identifier": "fb240865-88f8-4a1d-923f-98dbc7920860",
-    "DelegatedWork_Identifier": "96d46335-d92d-41b8-bc9f-273a692381ea"
+    "Application_Identifier": "5fbb5982-3230-4882-93c0-2167523ce0c2",
+    "DelegatedWork_Identifier": "444ed4b6-0554-4dc6-8e9c-3f9a34ee3ff6"
   },
   {
     "Role_Name": "BillingConfiguration.ReadWrite.All",
@@ -951,8 +951,8 @@
   },
   {
     "Role_Name": "Domain",
-    "Application_Identifier": "64d40371-8d58-4270-bc8a-b4a66de36b9a",
-    "DelegatedWork_Identifier": "857bd3ea-490e-4284-88a7-a7de1893b6ee"
+    "Application_Identifier": "c0e5a7b0-e8b7-40a7-b8e0-8249e6ea81d5",
+    "DelegatedWork_Identifier": "33203a2a-a761-40f0-8a7c-a7e74a9f8ac6"
   },
   {
     "Role_Name": "Domain.Read.All",
@@ -1061,7 +1061,7 @@
   },
   {
     "Role_Name": "EduReports",
-    "Application_Identifier": "040330d7-be7e-4130-b349-a6eb3a56e2f8",
+    "Application_Identifier": "ad248c30-1919-40c8-b3d2-304481894e88",
     "DelegatedWork_Identifier": "-"
   },
   {
@@ -1533,6 +1533,11 @@
     "Role_Name": "Lists.SelectedOperations.Selected",
     "Application_Identifier": "23c5a9bd-d900-4ecf-be26-a0689755d9e5",
     "DelegatedWork_Identifier": "033b51ee-d6fa-4add-b627-ee680c7212b5"
+  },
+  {
+    "Role_Name": "Mail",
+    "Application_Identifier": "e118f1da-5c1c-46cf-bff6-8858d786f46f",
+    "DelegatedWork_Identifier": "-"
   },
   {
     "Role_Name": "Mail.Read",
@@ -3326,8 +3331,8 @@
   },
   {
     "Role_Name": "User",
-    "Application_Identifier": "925f1248-0f97-47b9-8ec8-538c54e01325",
-    "DelegatedWork_Identifier": "7ee7473e-bd4b-4c9f-987c-bd58481f5fa2"
+    "Application_Identifier": "86ceff06-c822-49ff-989a-d912845ffe69",
+    "DelegatedWork_Identifier": "e29d5979-5b06-4a7f-ae24-6a9348d2e1ff"
   },
   {
     "Role_Name": "User.DeleteRestore.All",
@@ -3416,8 +3421,8 @@
   },
   {
     "Role_Name": "UserAuthMethod",
-    "Application_Identifier": "0400e371-7db1-4338-a269-96069eb65227",
-    "DelegatedWork_Identifier": "64930478-d0ea-4671-ad72-fe0d9821df09"
+    "Application_Identifier": "72e00c1d-3e3d-43bb-a0b9-c435611bb1d2",
+    "DelegatedWork_Identifier": "14195339-1fe4-48a7-a0d3-a39eb9fd8958"
   },
   {
     "Role_Name": "UserCloudClipboard.Read",

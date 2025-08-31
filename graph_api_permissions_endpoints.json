@@ -636,54 +636,6 @@
   {
     "Endpoints": [
       {
-        "Method": "POST",
-        "OperationName": "application_post_applications",
-        "Path": "/applications",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_post_applications",
-        "Path": "/applications",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
-        "Version": "beta"
-      }
-    ],
-    "Role": "AgentApplication.Create",
-    "Type": "Application"
-  },
-  {
-    "Endpoints": [
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
-        "Version": "beta"
-      }
-    ],
-    "Role": "AgentIdentity.Create",
-    "Type": "Application"
-  },
-  {
-    "Endpoints": [
-      {
         "Method": "GET",
         "OperationName": "agreement_get",
         "Path": "/identityGovernance/termsOfUse/agreements/{id}",
@@ -60989,6 +60941,12 @@
       },
       {
         "Method": "POST",
+        "OperationName": "contenttype_publish",
+        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/publish",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
         "OperationName": "contenttype_post_columns",
         "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
         "Version": "beta"
@@ -61036,15 +60994,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "contenttype_publish",
-        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/publish",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "contenttype_delete",
         "Path": "/sites/{site-id}/contentTypes/{contentType-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "contenttype_copytodefaultcontentlocation",
+        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/copyToDefaultContentLocation",
         "Version": "beta"
       },
       {
@@ -61097,14 +61055,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "contenttype_copytodefaultcontentlocation",
-        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/copyToDefaultContentLocation",
+        "OperationName": "contenttype_unpublish",
+        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/unpublish",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "contenttype_unpublish",
-        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/unpublish",
+        "Method": "GET",
+        "OperationName": "columndefinition_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
         "Version": "beta"
       },
       {
@@ -61114,9 +61072,9 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "contenttype_update",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}",
+        "Method": "POST",
+        "OperationName": "driveitem_post_permissions",
+        "Path": "https://graph.microsoft.com/beta/drives/b!s8RqPCGh0ESQS2EYnKM0IKS3lM7GxjdAviiob7oc5pXv_0LiL-62Qq3IXyrXnEop/items/1/permissions",
         "Version": "beta"
       },
       {
@@ -61147,6 +61105,12 @@
         "Method": "GET",
         "OperationName": "site_getapplicablecontenttypesforlist",
         "Path": "/sites/{siteId}/getApplicableContentTypesForList",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "site_delta",
+        "Path": "/sites/delta",
         "Version": "beta"
       },
       {
@@ -61228,15 +61192,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_post_permissions",
-        "Path": "https://graph.microsoft.com/beta/drives/b!s8RqPCGh0ESQS2EYnKM0IKS3lM7GxjdAviiob7oc5pXv_0LiL-62Qq3IXyrXnEop/items/1/permissions",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "columndefinition_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
+        "Method": "PATCH",
+        "OperationName": "contenttype_update",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}",
         "Version": "beta"
       },
       {
@@ -61256,6 +61214,12 @@
         "OperationName": "columndefinition_delete",
         "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns/{column-id}",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contenttype_ispublished",
+        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/isPublished",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -61306,15 +61270,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "contenttype_ispublished",
-        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/isPublished",
+        "Method": "PATCH",
+        "OperationName": "columndefinition_update",
+        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns/{column-id}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "columndefinition_update",
-        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns/{column-id}",
+        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
         "Version": "v1.0"
       },
       {
@@ -61362,12 +61326,6 @@
       {
         "Method": "DELETE",
         "OperationName": "columndefinition_delete",
-        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "columndefinition_update",
         "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
         "Version": "v1.0"
       },
@@ -61376,6 +61334,12 @@
         "OperationName": "contenttype_list_columns",
         "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
         "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "columndefinition_delete",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -61386,7 +61350,7 @@
       {
         "Method": "POST",
         "OperationName": "contenttype_post_columns",
-        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
         "Version": "v1.0"
       },
       {
@@ -61429,6 +61393,12 @@
         "Method": "GET",
         "OperationName": "site_getapplicablecontenttypesforlist",
         "Path": "/sites/{siteId}/getApplicableContentTypesForList",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "site_delta",
+        "Path": "/sites/delta",
         "Version": "v1.0"
       },
       {
@@ -61500,14 +61470,8 @@
       {
         "Method": "POST",
         "OperationName": "contenttype_post_columns",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
+        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
         "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "columndefinition_delete",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -61636,15 +61600,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "columndefinition_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "contenttype_update",
         "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_post_permissions",
+        "Path": "https://graph.microsoft.com/beta/drives/b!s8RqPCGh0ESQS2EYnKM0IKS3lM7GxjdAviiob7oc5pXv_0LiL-62Qq3IXyrXnEop/items/1/permissions",
         "Version": "beta"
       },
       {
@@ -61679,6 +61643,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "site_delta",
+        "Path": "/sites/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "pagetemplate_list",
         "Path": "/sites/{site-id}/pageTemplates/microsoft.graph.pageTemplate",
         "Version": "beta"
@@ -61696,15 +61666,15 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "nameditem_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}",
+        "Method": "GET",
+        "OperationName": "columndefinition_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/columns/{column-id}",
         "Version": "beta"
       },
       {
         "Method": "DELETE",
         "OperationName": "nameditem_delete",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}",
         "Version": "beta"
       },
       {
@@ -61756,9 +61726,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_post_permissions",
-        "Path": "https://graph.microsoft.com/beta/drives/b!s8RqPCGh0ESQS2EYnKM0IKS3lM7GxjdAviiob7oc5pXv_0LiL-62Qq3IXyrXnEop/items/1/permissions",
+        "Method": "DELETE",
+        "OperationName": "nameditem_delete",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}",
         "Version": "beta"
       },
       {
@@ -61888,15 +61858,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "columndefinition_delete",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
-        "Version": "beta"
+        "Method": "GET",
+        "OperationName": "contenttype_list_columns",
+        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "contenttype_list_columns",
-        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
         "Version": "v1.0"
       },
       {
@@ -61948,15 +61918,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "listitemversion_restore",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Method": "GET",
+        "OperationName": "site_delta",
+        "Path": "/sites/delta",
         "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "columndefinition_delete",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
+        "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "listitemversion_restore",
-        "Path": "/sites/{site-id}/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
@@ -62008,9 +61984,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "contenttype_list_columns",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
+        "Method": "POST",
+        "OperationName": "listitemversion_restore",
+        "Path": "/sites/{site-id}/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
@@ -78468,7 +78444,47 @@
       "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
       "Version": "v1.0"
     },
+    "Role": "VirtualEvent.Read",
+    "Type": "Delegated"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEvent.Read.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
     "Role": "VirtualEvent.Read.Chat",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEvent.ReadWrite",
+    "Type": "Delegated"
+  },
+  {
+    "Endpoints": {
+      "Method": "GET",
+      "OperationName": "virtualeventregistration_get",
+      "Path": "https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
+      "Version": "v1.0"
+    },
+    "Role": "VirtualEventRegistration-Anon.ReadWrite.All",
     "Type": "Application"
   },
   {

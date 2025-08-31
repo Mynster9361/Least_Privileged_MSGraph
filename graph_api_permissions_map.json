@@ -24884,12 +24884,12 @@
     "operation_name": "sensitivitylabel_computeinheritance",
     "full_example_url": "https://graph.microsoft.com/beta/security/dataSecurityAndGovernance/sensitivityLabels/computeInheritance(labelIds=[\"4e4234dd-377b-42a3-935b-0e42f138fa23\"],locale='en-US',contentFormats=[\"File\"])",
     "example_from_docs": true,
-    "DelegatedWork_Least": "SensitivityLabel.Evaluate.All",
-    "DelegatedWork_Higher": "SensitivityLabel.Evaluate",
+    "DelegatedWork_Least": "SensitivityLabel.Evaluate",
+    "DelegatedWork_Higher": "SensitivityLabel.Evaluate.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SensitivityLabel.Evaluate.All",
-    "Application_Higher": "SensitivityLabel.Evaluate"
+    "Application_Least": "SensitivityLabel.Evaluate",
+    "Application_Higher": "SensitivityLabel.Evaluate.All"
   },
   {
     "path": "me/devices/{id}/commands",
@@ -26871,12 +26871,16 @@
     "operation_name": "site_delta",
     "full_example_url": "https://graph.microsoft.com/beta/sites/delta",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
+    "DelegatedWork_Least": "Not supported.",
+    "DelegatedWork_Higher": "Not supported.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
+    "Application_Higher": [
+      "Sites.FullControl.All",
+      "Sites.Manage.All",
+      "Sites.ReadWrite.All"
+    ]
   },
   {
     "path": "/sites/{site-id}/archive",
@@ -27235,8 +27239,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Application.ReadWrite.OwnedBy",
     "Application_Higher": [
-      "AgentApplication.Create",
-      "AgentIdentity.Create",
       "Application.ReadWrite.All",
       "Directory.ReadWrite.All"
     ]
@@ -57225,10 +57227,7 @@
     "DelegatedPersonal_Least": "Application.ReadWrite.All",
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Application.ReadWrite.OwnedBy",
-    "Application_Higher": [
-      "AgentApplication.Create",
-      "Application.ReadWrite.All"
-    ]
+    "Application_Higher": "Application.ReadWrite.All"
   },
   {
     "path": "/applications(appId='{appId}')/tokenLifetimePolicies",
@@ -66830,12 +66829,15 @@
     "operation_name": "virtualeventregistration_get",
     "full_example_url": "https://graph.microsoft.com/v1.0https://graph.microsoft.com/v1.0/solutions/virtualEvent/webinars/f4b39f1c-520e-4e75-805a-4b0f2016a0c6@a1a56d21/registrations/127962bb-84e1-7b62-fd98-1c9d39def7b6?$expand=sessions",
     "example_from_docs": false,
-    "DelegatedWork_Least": "Not supported.",
-    "DelegatedWork_Higher": "Not supported.",
+    "DelegatedWork_Least": "VirtualEvent.Read",
+    "DelegatedWork_Higher": "VirtualEvent.ReadWrite",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "VirtualEvent.Read.Chat",
-    "Application_Higher": "Not available."
+    "Application_Higher": [
+      "VirtualEvent.Read.All",
+      "VirtualEventRegistration-Anon.ReadWrite.All"
+    ]
   },
   {
     "path": "/me/drive/items/{id}/workbook/closeSession",
@@ -74373,10 +74375,7 @@
     "DelegatedPersonal_Least": "Application.ReadWrite.All",
     "DelegatedPersonal_Higher": "Not available.",
     "Application_Least": "Application.ReadWrite.OwnedBy",
-    "Application_Higher": [
-      "AgentApplication.Create",
-      "Application.ReadWrite.All"
-    ]
+    "Application_Higher": "Application.ReadWrite.All"
   },
   {
     "path": "/servicePrincipals(appId='{appId}')/tokenLifetimePolicies",
@@ -82449,12 +82448,16 @@
     "operation_name": "site_delta",
     "full_example_url": "https://graph.microsoft.com/v1.0/sites/delta",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Sites.Read.All",
-    "DelegatedWork_Higher": "Sites.ReadWrite.All",
+    "DelegatedWork_Least": "Not supported.",
+    "DelegatedWork_Higher": "Not supported.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Sites.Read.All",
-    "Application_Higher": "Sites.ReadWrite.All"
+    "Application_Higher": [
+      "Sites.FullControl.All",
+      "Sites.Manage.All",
+      "Sites.ReadWrite.All"
+    ]
   },
   {
     "path": "/security/attackSimulation/simulations/{simulationId}",
@@ -86149,8 +86152,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "Application.ReadWrite.OwnedBy",
     "Application_Higher": [
-      "AgentApplication.Create",
-      "AgentIdentity.Create",
       "Application.ReadWrite.All",
       "Directory.ReadWrite.All"
     ]
@@ -86441,12 +86442,12 @@
     "operation_name": "sensitivitylabel_computeinheritance",
     "full_example_url": "https://graph.microsoft.com/v1.0/security/dataSecurityAndGovernance/sensitivityLabels/computeInheritance(labelIds=[\"4e4234dd-377b-42a3-935b-0e42f138fa23\"],locale='en-US',contentFormats=[\"File\"])",
     "example_from_docs": true,
-    "DelegatedWork_Least": "SensitivityLabel.Evaluate.All",
-    "DelegatedWork_Higher": "SensitivityLabel.Evaluate",
+    "DelegatedWork_Least": "SensitivityLabel.Evaluate",
+    "DelegatedWork_Higher": "SensitivityLabel.Evaluate.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "SensitivityLabel.Evaluate.All",
-    "Application_Higher": "SensitivityLabel.Evaluate"
+    "Application_Least": "SensitivityLabel.Evaluate",
+    "Application_Higher": "SensitivityLabel.Evaluate.All"
   },
   {
     "path": "/security/threatIntelligence/whoisRecords/{id}/history",

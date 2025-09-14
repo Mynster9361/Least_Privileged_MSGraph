@@ -1105,6 +1105,11 @@
     "DelegatedWork_Identifier": "-"
   },
   {
+    "Role_Name": "EngagementConversation.Read.All",
+    "Application_Identifier": "2c495153-cd0e-41b4-9980-3bcecf1ca22f",
+    "DelegatedWork_Identifier": "c55541d9-2cdd-4fad-8ead-0c08fae5b0c8"
+  },
+  {
     "Role_Name": "EngagementConversation.ReadWrite.All",
     "Application_Identifier": "bfbd4840-fba0-43a7-93a9-465b687e47d0",
     "DelegatedWork_Identifier": "ebbfd079-1634-4640-8618-68b19ebbed1d"
@@ -1536,8 +1541,8 @@
   },
   {
     "Role_Name": "Mail",
-    "Application_Identifier": "e118f1da-5c1c-46cf-bff6-8858d786f46f",
-    "DelegatedWork_Identifier": "-"
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "bebf0bb6-2ff3-4295-a17d-f3561da294fb"
   },
   {
     "Role_Name": "Mail.Read",
@@ -1841,8 +1846,8 @@
   },
   {
     "Role_Name": "OrgSettings",
-    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
-    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
+    "Application_Identifier": "434d7c66-07c6-4b1f-ab21-417cf2cdaaca",
+    "DelegatedWork_Identifier": "210051a0-1ffc-435c-ae76-02d226d05752"
   },
   {
     "Role_Name": "PartnerBilling.Read.All",

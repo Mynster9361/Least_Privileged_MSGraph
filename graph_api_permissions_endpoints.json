@@ -10136,7 +10136,7 @@
         "Version": "beta"
       }
     ],
-    "Role": "Calls.JoinGroupCallAsGuest.All",
+    "Role": "Calls.JoinGroupCallasGuest.All",
     "Type": "Application"
   },
   {
@@ -10299,18 +10299,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "channel_get_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "beta"
@@ -10325,18 +10313,6 @@
         "Method": "GET",
         "OperationName": "channel_list_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
         "Version": "beta"
       }
     ],
@@ -10388,123 +10364,39 @@
   {
     "Endpoints": [
       {
-        "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
-        "Version": "beta"
-      }
-    ],
-    "Role": "ChannelMember.ReadWrite",
-    "Type": "Delegated"
-  },
-  {
-    "Endpoints": [
-      {
         "Method": "DELETE",
         "OperationName": "channel_delete_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/members/{id}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
+        "OperationName": "channel_get_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "channel_post_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_list_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members",
-        "Version": "beta"
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "channel_list_allmembers",
         "Path": "/teams/{team-id}/channels/{channel-id}/allMembers",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "channel_delete_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "conversationmember_delete",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
+        "Method": "GET",
+        "OperationName": "channel_list_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "channel_post_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "channel_update_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
@@ -10514,45 +10406,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/users/{user-id | user-principal-name}/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chat_get_members",
-        "Path": "/chats/{chat-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "channel_post_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_list_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_list_allmembers",
-        "Path": "/teams/{team-id}/channels/{channel-id}/allMembers",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Method": "DELETE",
+        "OperationName": "conversationmember_delete",
+        "Path": "/teams/{id}/channels/{id}/members/{id}",
         "Version": "v1.0"
       },
       {
@@ -10562,9 +10418,39 @@
         "Version": "v1.0"
       },
       {
+        "Method": "DELETE",
+        "OperationName": "channel_delete_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "channel_get_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "channel_list_allmembers",
+        "Path": "/teams/{team-id}/channels/{channel-id}/allMembers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "channel_list_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "channel_post_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
+        "OperationName": "channel_update_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "beta"
       }
     ],
@@ -15758,6 +15644,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "featurerolloutpolicy_update",
+        "Path": "/policies/featureRolloutPolicies/{id}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "featurerolloutpolicy_post_appliesto",
         "Path": "/policies/featureRolloutPolicies/{id}/appliesTo/$ref",
@@ -15890,21 +15782,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/directory/administrativeUnits",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "featurerolloutpolicy_update",
-        "Path": "/policies/featureRolloutPolicies/{id}",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "group_assignlicense",
         "Path": "/groups/{id}/assignLicense",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/directory/administrativeUnits",
         "Version": "beta"
       },
       {
@@ -15914,9 +15800,9 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_owners",
-        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Method": "GET",
+        "OperationName": "group_delta",
+        "Path": "/groups/delta",
         "Version": "beta"
       },
       {
@@ -15986,15 +15872,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/administrativeUnits",
+        "Method": "POST",
+        "OperationName": "group_retryserviceprovisioning",
+        "Path": "/groups/{id}/retryServiceProvisioning",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "group_retryserviceprovisioning",
-        "Path": "/groups/{id}/retryServiceProvisioning",
+        "OperationName": "group_renew",
+        "Path": "/groups/{id}/renew",
         "Version": "beta"
       },
       {
@@ -16058,21 +15944,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "group_delta",
-        "Path": "/groups/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "group_renew",
-        "Path": "/groups/{id}/renew",
+        "Method": "DELETE",
+        "OperationName": "group_delete_owners",
+        "Path": "/groups/{id}/owners/{id}/$ref",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/administrativeUnits",
         "Version": "beta"
       },
       {
@@ -16082,15 +15962,9 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "channel_post",
-        "Path": "/teams/{team-id}/channels",
+        "Method": "PATCH",
+        "OperationName": "device_update",
+        "Path": "/devices/{id}",
         "Version": "beta"
       },
       {
@@ -16226,6 +16100,18 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "application_get",
+        "Path": "/applications(appId='{appId}')",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "channel_post",
+        "Path": "/teams/{team-id}/channels",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "channel_update_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
@@ -16245,8 +16131,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "connector_list",
-        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors",
+        "OperationName": "device_list",
+        "Path": "/devices",
         "Version": "beta"
       },
       {
@@ -16310,27 +16196,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "device_update",
-        "Path": "/devices/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/members/{id}",
+        "Method": "GET",
+        "OperationName": "licensedetails_getteamslicensingdetails",
+        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "contract_get",
-        "Path": "/contracts/{id}",
+        "OperationName": "contract_list",
+        "Path": "/contracts",
         "Version": "beta"
       },
       {
@@ -16395,8 +16269,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "contract_list",
-        "Path": "/contracts",
+        "OperationName": "connector_list",
+        "Path": "/onPremisesPublishingProfiles/applicationProxy/connectors",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contract_get",
+        "Path": "/contracts/{id}",
         "Version": "beta"
       },
       {
@@ -16415,12 +16295,6 @@
         "Method": "GET",
         "OperationName": "oauth2permissiongrant_delta",
         "Path": "/oauth2PermissionGrants/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "beta"
       },
       {
@@ -16556,6 +16430,12 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_removekey",
+        "Path": "/serviceprincipals/{id}/removeKey",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "team_update",
         "Path": "/teams/{team-id}",
@@ -16647,8 +16527,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_removekey",
-        "Path": "/serviceprincipals/{id}/removeKey",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
         "Version": "beta"
       },
       {
@@ -16730,9 +16610,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
+        "Method": "GET",
+        "OperationName": "application_get",
+        "Path": "/applications/{applicationObjectId}",
         "Version": "beta"
       },
       {
@@ -16742,15 +16622,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_owners",
-        "Path": "/servicePrincipals/{id}/owners/$ref",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "rbacapplication_list_transitiveroleassignments",
-        "Path": "/roleManagement/directory/transitiveRoleAssignments?$filter=principalId eq '{principalId}'",
+        "OperationName": "serviceprincipal_list",
+        "Path": "/servicePrincipals",
         "Version": "beta"
       },
       {
@@ -16814,15 +16688,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rbacapplication_post_roledefinitions",
-        "Path": "/roleManagement/deviceManagement/roleDefinitions",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "onpremisesagentgroup_update",
         "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups/{agentGroup-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "onpremisesagentgroup_post",
+        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups",
         "Version": "beta"
       },
       {
@@ -16892,15 +16766,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "onpremisesagentgroup_post",
-        "Path": "/onPremisesPublishingProfiles/{profile-id}/agentGroups",
+        "Method": "GET",
+        "OperationName": "rbacapplication_list_transitiveroleassignments",
+        "Path": "/roleManagement/directory/transitiveRoleAssignments?$filter=principalId eq '{principalId}'",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "application_get",
-        "Path": "/applications(appId='{appId}')",
+        "Method": "POST",
+        "OperationName": "rbacapplication_post_roledefinitions",
+        "Path": "/roleManagement/deviceManagement/roleDefinitions",
         "Version": "beta"
       },
       {
@@ -16911,14 +16785,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_addpassword",
-        "Path": "/servicePrincipals/{id}/addPassword",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list",
-        "Path": "/servicePrincipals",
+        "OperationName": "serviceprincipal_addkey",
+        "Path": "/servicePrincipals(appId='{appId}')/addKey",
         "Version": "beta"
       },
       {
@@ -16982,21 +16850,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addkey",
-        "Path": "/servicePrincipals(appId='{appId}')/addKey",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "serviceprincipal_get",
         "Path": "/servicePrincipals(appId='{appId}')",
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_owners",
+        "Path": "/servicePrincipals/{id}/owners/$ref",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "serviceprincipal_delta",
-        "Path": "/servicePrincipals/delta",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals/{id}",
         "Version": "beta"
       },
       {
@@ -17060,15 +16928,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_addpassword",
+        "Path": "/servicePrincipals/{id}/addPassword",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "application_get",
-        "Path": "/applications/{applicationObjectId}",
+        "OperationName": "serviceprincipal_delta",
+        "Path": "/servicePrincipals/delta",
         "Version": "beta"
       },
       {
@@ -17085,9 +16953,9 @@
       },
       {
         "Method": "DELETE",
-        "OperationName": "group_delete_owners",
-        "Path": "/groups/{id}/owners/{id}/$ref",
-        "Version": "v1.0"
+        "OperationName": "application_delete_owners",
+        "Path": "/applications/{id}/owners/{id}/$ref",
+        "Version": "beta"
       },
       {
         "Method": "DELETE",
@@ -17223,6 +17091,18 @@
       },
       {
         "Method": "GET",
+        "OperationName": "directory_list_administrativeunits",
+        "Path": "/directory/administrativeUnits",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_owners",
+        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_delta",
         "Path": "/groups/delta",
         "Version": "v1.0"
@@ -17237,18 +17117,6 @@
         "Method": "GET",
         "OperationName": "group_list_approleassignments",
         "Path": "/groups/{id}/appRoleAssignments",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_list_grouplifecyclepolicies",
-        "Path": "/groups/{id}/groupLifecyclePolicies",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "invitation_post",
-        "Path": "/invitations",
         "Version": "v1.0"
       },
       {
@@ -17312,12 +17180,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "directory_list_administrativeunits",
-        "Path": "/directory/administrativeUnits",
-        "Version": "v1.0"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "grouplifecyclepolicy_delete",
         "Path": "/groupLifecyclePolicies/{id}",
@@ -17325,8 +17187,14 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "group_upsert",
-        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
+        "OperationName": "device_update",
+        "Path": "/devices(deviceId='{deviceId}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "grouplifecyclepolicy_addgroup",
+        "Path": "/groupLifecyclePolicies/{id}/addGroup",
         "Version": "v1.0"
       },
       {
@@ -17390,15 +17258,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "grouplifecyclepolicy_addgroup",
-        "Path": "/groupLifecyclePolicies/{id}/addGroup",
+        "Method": "GET",
+        "OperationName": "group_list_grouplifecyclepolicies",
+        "Path": "/groups/{id}/groupLifecyclePolicies",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
-        "OperationName": "device_update",
-        "Path": "/devices(deviceId='{deviceId}')",
+        "OperationName": "group_upsert",
+        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "invitation_post",
+        "Path": "/invitations",
         "Version": "v1.0"
       },
       {
@@ -17409,14 +17283,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "application_removekey",
-        "Path": "/applications/{id}/removeKey",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -17480,15 +17348,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_removekey",
-        "Path": "/applications(appId='{appId}')/removeKey",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "application_delta",
         "Path": "/applications/delta",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "application_delete_owners",
+        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
         "Version": "v1.0"
       },
       {
@@ -17558,15 +17426,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "application_delete_owners",
-        "Path": "/applications(appId='{appId}')/owners/{id}/$ref",
+        "Method": "POST",
+        "OperationName": "application_removekey",
+        "Path": "/applications/{id}/removeKey",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "Method": "POST",
+        "OperationName": "application_removekey",
+        "Path": "/applications(appId='{appId}')/removeKey",
         "Version": "v1.0"
       },
       {
@@ -17577,14 +17445,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "applicationtemplate_instantiate",
-        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
+        "OperationName": "application_removepassword",
+        "Path": "/applications(appId='{appId}')/removePassword",
         "Version": "v1.0"
       },
       {
@@ -17648,21 +17510,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "application_removepassword",
-        "Path": "/applications(appId='{appId}')/removePassword",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "contract_list",
         "Path": "/contracts",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
+        "Method": "GET",
+        "OperationName": "device_list",
+        "Path": "/devices",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contract_get",
+        "Path": "/contracts/{id}",
         "Version": "v1.0"
       },
       {
@@ -17726,9 +17588,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "contract_get",
-        "Path": "/contracts/{id}",
+        "Method": "POST",
+        "OperationName": "applicationtemplate_instantiate",
+        "Path": "/applicationTemplates/{applicationTemplate-id}/instantiate",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "channel_update_members",
+        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
@@ -17738,21 +17606,15 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "oauth2permissiongrant_delete",
-        "Path": "/oAuth2PermissionGrants/{id}",
+        "Method": "GET",
+        "OperationName": "licensedetails_getteamslicensingdetails",
+        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "oauth2permissiongrant_get",
-        "Path": "/oauth2PermissionGrants/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_licensedetails",
-        "Path": "/me/licenseDetails",
+        "OperationName": "oauth2permissiongrant_delta",
+        "Path": "/oauth2PermissionGrants/delta",
         "Version": "v1.0"
       },
       {
@@ -17834,12 +17696,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "team_unarchive",
         "Path": "/teams/{id}/unarchive",
@@ -17888,6 +17744,24 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "team_archive",
+        "Path": "/teams/{id}/archive",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "user_list_licensedetails",
+        "Path": "/me/licenseDetails",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "user_list_licensedetails",
         "Path": "/users/{id}/licenseDetails",
@@ -17904,18 +17778,6 @@
         "OperationName": "user_list_manager",
         "Path": "/users/{id | userPrincipalName}/manager",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_owneddevices",
-        "Path": "/me/ownedDevices",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "application_delete_owners",
-        "Path": "/applications/{id}/owners/{id}/$ref",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -17978,21 +17840,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "administrativeunit_get_scopedrolemembers",
         "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "synchronization_directorydefinition_discover",
+        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
-        "OperationName": "administrativeunit_delta",
-        "Path": "/administrativeUnits/delta",
+        "OperationName": "administrativeunit_get_members",
+        "Path": "/administrativeUnits/{id}/members/{id}",
         "Version": "beta"
       },
       {
@@ -18057,20 +17919,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get_members",
-        "Path": "/administrativeUnits/{id}/members/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "team_archive",
-        "Path": "/teams/{id}/archive",
+        "OperationName": "user_list_owneddevices",
+        "Path": "/me/ownedDevices",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "synchronization_directorydefinition_discover",
-        "Path": "/servicePrincipals/{id}/synchronization/jobs/{jobId}/schema/directories/{directoryId}/discover",
+        "Method": "GET",
+        "OperationName": "administrativeunit_delta",
+        "Path": "/administrativeUnits/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "oauth2permissiongrant_delete",
+        "Path": "/oAuth2PermissionGrants/{id}",
         "Version": "v1.0"
       },
       {
@@ -18080,15 +17942,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals(appId='{appId}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
+        "Method": "PATCH",
+        "OperationName": "serviceprincipal_upsert",
+        "Path": "/servicePrincipals(appId='appId')",
         "Version": "v1.0"
       },
       {
@@ -18146,15 +18002,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignedto",
-        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_addkey",
+        "Path": "/servicePrincipals(appId='{appId}')/addKey",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "serviceprincipal_addkey",
-        "Path": "/servicePrincipals(appId='{appId}')/addKey",
+        "Path": "/serviceprincipals/{id}/addKey",
         "Version": "v1.0"
       },
       {
@@ -18224,39 +18080,33 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addkey",
-        "Path": "/serviceprincipals/{id}/addKey",
+        "Method": "GET",
+        "OperationName": "oauth2permissiongrant_get",
+        "Path": "/oauth2PermissionGrants/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "oauth2permissiongrant_delta",
-        "Path": "/oauth2PermissionGrants/delta",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals(appId='{appId}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignedto",
+        "Path": "/servicePrincipals/{id}/appRoleAssignedTo",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list_approleassignedto",
         "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignedTo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "subscribedsku_get",
-        "Path": "/subscribedSkus/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "serviceprincipal_upsert",
-        "Path": "/servicePrincipals(appId='appId')",
         "Version": "v1.0"
       },
       {
@@ -18315,12 +18165,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_approleassignments",
-        "Path": "/servicePrincipals/{id}/appRoleAssignments",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "serviceprincipal_list",
         "Path": "/servicePrincipals",
         "Version": "v1.0"
@@ -18328,13 +18172,19 @@
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
+        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "OperationName": "subscribedsku_get",
+        "Path": "/subscribedSkus/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_transitivememberof",
+        "Path": "/servicePrincipals/{id}/transitiveMemberOf",
         "Version": "v1.0"
       },
       {
@@ -18393,8 +18243,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_transitivememberof",
-        "Path": "/servicePrincipals(appId='{appId}')/transitiveMemberOf",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals(appId='{appId}')/appRoleAssignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_approleassignments",
+        "Path": "/servicePrincipals/{id}/appRoleAssignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
@@ -40706,6 +40568,12 @@
         "Version": "beta"
       },
       {
+        "Method": "PUT",
+        "OperationName": "openshift_update",
+        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "group_delete_owners",
         "Path": "/groups/{id}/owners/{id}/$ref",
@@ -40713,20 +40581,8 @@
       },
       {
         "Method": "DELETE",
-        "OperationName": "group_delete_members",
-        "Path": "/groups/{id}/members/{id}/$ref",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
         "OperationName": "group_delete_acceptedsenders",
         "Path": "/groups/{id}/acceptedSenders/$ref?$id={id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/members/{id}",
         "Version": "beta"
       },
       {
@@ -40773,20 +40629,20 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
         "OperationName": "channel_update_members",
         "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "conversationthread_get",
+        "Path": "/groups/{id}/threads/{id}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "channel_post_tabs",
-        "Path": "/teams/{id}/channels/{id}/tabs",
+        "OperationName": "channel_post",
+        "Path": "/teams/{team-id}/channels",
         "Version": "beta"
       },
       {
@@ -40832,15 +40688,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "channel_post",
-        "Path": "/teams/{team-id}/channels",
+        "Method": "GET",
+        "OperationName": "channel_get_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "conversationthread_get",
-        "Path": "/groups/{id}/threads/{id}",
+        "Method": "POST",
+        "OperationName": "channel_post_tabs",
+        "Path": "/teams/{id}/channels/{id}/tabs",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_members",
+        "Path": "/groups/{id}/members/{id}/$ref",
         "Version": "beta"
       },
       {
@@ -40852,7 +40714,7 @@
       {
         "Method": "GET",
         "OperationName": "conversationthread_list_posts",
-        "Path": "/groups/{groupId}/threads/{threadId}/posts",
+        "Path": "/groups/{groupId}/conversations/{conversationId}/threads/{threadId}/posts",
         "Version": "beta"
       },
       {
@@ -40905,14 +40767,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/me/drive/items/{item-id}",
+        "OperationName": "conversationthread_list_posts",
+        "Path": "/groups/{groupId}/threads/{threadId}/posts",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/teams/{teamId}/channels/{channelId}/filesFolder",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "beta"
       },
       {
@@ -40965,14 +40827,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "conversationthread_list_posts",
-        "Path": "/groups/{groupId}/conversations/{conversationId}/threads/{threadId}/posts",
-        "Version": "beta"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "openshift_update",
-        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
+        "OperationName": "driveitem_get",
+        "Path": "/teams/{teamId}/channels/{channelId}/filesFolder",
         "Version": "beta"
       },
       {
@@ -41108,15 +40964,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
+        "Method": "GET",
+        "OperationName": "schedule_get",
+        "Path": "/teams/{teamId}/schedule",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "team_delete_installedapps",
-        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
         "Version": "beta"
       },
       {
@@ -41175,20 +41031,14 @@
       },
       {
         "Method": "DELETE",
+        "OperationName": "team_delete_installedapps",
+        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
         "OperationName": "timeoff_delete",
         "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update",
-        "Path": "/teams/{team-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "beta"
       },
       {
@@ -41240,21 +41090,21 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "schedule_get",
-        "Path": "/teams/{teamId}/schedule",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_get_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
+        "Method": "PATCH",
+        "OperationName": "team_update",
+        "Path": "/teams/{team-id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "post_list_attachments",
         "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "post_list_attachments",
+        "Path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "beta"
       },
       {
@@ -41511,12 +41361,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "post_list_attachments",
-        "Path": "/groups/{id}/threads/{id}/posts/{id}/attachments",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "channel_get_filesfolder",
         "Path": "/teams/{id}/channels/{id}/filesFolder",
         "Version": "beta"
@@ -41532,6 +41376,12 @@
         "OperationName": "channel_delete_tabs",
         "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "timeoffrequest_list",
+        "Path": "/teams/{teamId}/schedule/timeOffRequests",
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -41648,6 +41498,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "DELETE",
+        "OperationName": "group_delete_owners",
+        "Path": "/groups/{id}/owners/{id}/$ref",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
         "OperationName": "group_post_owners",
         "Path": "/groups/{id}/owners/$ref",
@@ -41655,20 +41511,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "group_post_rejectedsenders",
-        "Path": "/groups/{id}/rejectedSenders/$ref",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
         "OperationName": "group_removefavorite",
         "Path": "/groups/{id}/removeFavorite",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "openshift_post",
-        "Path": "/teams/{id}/schedule/openShifts",
         "Version": "v1.0"
       },
       {
@@ -41720,15 +41564,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "groupsetting_get",
-        "Path": "/groupSettings/{groupSettingId}",
+        "Method": "POST",
+        "OperationName": "group_post_rejectedsenders",
+        "Path": "/groups/{id}/rejectedSenders/$ref",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "group_validateproperties",
-        "Path": "/groups/{id}/validateProperties",
+        "Method": "GET",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
         "Version": "v1.0"
       },
       {
@@ -41780,21 +41624,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_owners",
-        "Path": "/groups/{id}/owners/{id}/$ref",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "openshift_update",
-        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
+        "Method": "POST",
+        "OperationName": "group_validateproperties",
+        "Path": "/groups/{id}/validateProperties",
         "Version": "v1.0"
       },
       {
         "Method": "DELETE",
         "OperationName": "group_delete_members",
         "Path": "/groups/{id}/members/{id}/$ref",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "group_delete_acceptedsenders",
+        "Path": "/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/groups/{other-group-id}",
         "Version": "v1.0"
       },
       {
@@ -42050,9 +41894,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "group_delete_acceptedsenders",
-        "Path": "/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/groups/{other-group-id}",
+        "Method": "POST",
+        "OperationName": "openshift_post",
+        "Path": "/teams/{id}/schedule/openShifts",
         "Version": "v1.0"
       },
       {
@@ -42062,21 +41906,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "openshiftchangerequest_approve",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "openshiftchangerequest_get",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
+        "Method": "PUT",
+        "OperationName": "openshift_update",
+        "Path": "/teams/{id}/schedule/openShifts/{openShiftId}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "team_archive",
-        "Path": "/teams/{id}/archive",
+        "OperationName": "openshiftchangerequest_decline",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
         "Version": "v1.0"
       },
       {
@@ -42122,20 +41960,20 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "team_clone",
-        "Path": "/teams/{id}/clone",
-        "Version": "v1.0"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "shift_delete",
         "Path": "/teams/{teamId}/schedule/shifts/{shiftId}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "schedulinggroup_get",
+        "Method": "POST",
+        "OperationName": "team_archive",
+        "Path": "/teams/{id}/archive",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PUT",
+        "OperationName": "schedulinggroup_put",
         "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
         "Version": "v1.0"
       },
@@ -42182,33 +42020,33 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PUT",
-        "OperationName": "schedulinggroup_put",
+        "Method": "GET",
+        "OperationName": "schedule_list_timeoffreasons",
+        "Path": "/teams/{teamId}/schedule/timeOffReasons",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "schedulinggroup_get",
         "Path": "/teams/{teamId}/schedule/schedulingGroups/{schedulingGroupId}",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "team_delete_installedapps",
-        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
+        "Method": "GET",
+        "OperationName": "schedule_list_shifts",
+        "Path": "/teams/{teamId}/schedule/shifts",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "team_clone",
+        "Path": "/teams/{id}/clone",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "team_get_installedapps",
         "Path": "/teams/{id}/installedApps/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "team_get",
-        "Path": "/teams/{team-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "timeoffrequest_list",
-        "Path": "/teams/{teamId}/schedule/timeOffRequests",
         "Version": "v1.0"
       },
       {
@@ -42260,14 +42098,14 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "timeoff_get",
-        "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
+        "Method": "DELETE",
+        "OperationName": "team_delete_installedapps",
+        "Path": "/teams/{team-id}/installedApps/{app-installation-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "timeoff_delete",
+        "Method": "GET",
+        "OperationName": "timeoff_get",
         "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
         "Version": "v1.0"
       },
@@ -42275,12 +42113,6 @@
         "Method": "PATCH",
         "OperationName": "team_update",
         "Path": "/teams/{team-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update_members",
-        "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "v1.0"
       },
       {
@@ -42321,20 +42153,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_list_timeoffreasons",
-        "Path": "/teams/{teamId}/schedule/timeOffReasons",
+        "OperationName": "team_get",
+        "Path": "/teams/{team-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "openshiftchangerequest_decline",
-        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/decline",
+        "Method": "DELETE",
+        "OperationName": "timeoff_delete",
+        "Path": "/teams/{teamId}/schedule/timesOff/{timeOffId}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_list_shifts",
-        "Path": "/teams/{teamId}/schedule/shifts",
+        "OperationName": "schedule_list_schedulinggroups",
+        "Path": "/teams/{teamId}/schedule/schedulingGroups",
         "Version": "v1.0"
       },
       {
@@ -42345,8 +42177,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerplan_get",
-        "Path": "/planner/plans/{plan-id}",
+        "OperationName": "post_list_attachments",
+        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "v1.0"
       },
       {
@@ -42392,12 +42224,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "plannerplan_list_buckets",
-        "Path": "/planner/plans/{plan-id}/buckets",
-        "Version": "v1.0"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "plannerbucket_delete",
         "Path": "/planner/buckets/{id}",
@@ -42405,7 +42231,13 @@
       },
       {
         "Method": "GET",
-        "OperationName": "plannerassignedtotaskboardtaskformat_get",
+        "OperationName": "plannerplan_get",
+        "Path": "/planner/plans/{plan-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "plannerassignedtotaskboardtaskformat_update",
         "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
         "Version": "v1.0"
       },
@@ -42452,9 +42284,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "plannerassignedtotaskboardtaskformat_update",
+        "Method": "GET",
+        "OperationName": "openshiftchangerequest_get",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftsChangeRequestId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "plannerassignedtotaskboardtaskformat_get",
         "Path": "/planner/tasks/{id}/assignedToTaskBoardFormat",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "plannerplan_list_buckets",
+        "Path": "/planner/plans/{plan-id}/buckets",
         "Version": "v1.0"
       },
       {
@@ -42467,18 +42311,6 @@
         "Method": "PATCH",
         "OperationName": "plannerplan_update",
         "Path": "/planner/plans/{plan-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "plannerplandetails_get",
-        "Path": "/planner/plans/{id}/details",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "post_list_attachments",
-        "Path": "/groups/{id}/conversations/{id}/threads/{id}/posts/{id}/attachments",
         "Version": "v1.0"
       },
       {
@@ -42591,8 +42423,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "schedule_list_schedulinggroups",
-        "Path": "/teams/{teamId}/schedule/schedulingGroups",
+        "OperationName": "plannerplandetails_get",
+        "Path": "/planner/plans/{id}/details",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "openshiftchangerequest_approve",
+        "Path": "/teams/{id}/schedule/openShiftChangeRequests/{openShiftChangeRequestId}/approve",
         "Version": "v1.0"
       },
       {
@@ -53127,7 +52965,7 @@
       }
     ],
     "Role": "Place.ReadWrite.All",
-    "Type": "Application"
+    "Type": "Delegated"
   },
   {
     "Endpoints": [
@@ -69651,12 +69489,6 @@
     "Endpoints": [
       {
         "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "chat_get_members",
         "Path": "/chats/{chat-id}/members/{membership-id}",
         "Version": "v1.0"
@@ -69672,12 +69504,6 @@
         "OperationName": "team_get_members",
         "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "channel_get_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -69704,21 +69530,9 @@
   {
     "Endpoints": [
       {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "conversationmember_remove",
         "Path": "/teams/{team-id}/members/remove",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "conversationmember_update",
-        "Path": "/teams/{id}/channels/{id}/members/{id}",
         "Version": "v1.0"
       },
       {
@@ -69732,12 +69546,6 @@
         "OperationName": "team_update_members",
         "Path": "/teams/{team-id}/members/{membership-id}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "channel_update_members",
-        "Path": "/teams/{team-id}/channels/{channel-id}/members/{membership-id}",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -69771,6 +69579,36 @@
       }
     ],
     "Role": "TeamMember.ReadWrite.All",
+    "Type": "Application"
+  },
+  {
+    "Endpoints": [
+      {
+        "Method": "PATCH",
+        "OperationName": "team_update_members",
+        "Path": "/teams/{team-id}/members/{membership-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "conversationmember_update",
+        "Path": "/teams/{id}/members/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "conversationmember_update",
+        "Path": "/teams/{id}/channels/{id}/members/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "team_update_members",
+        "Path": "/teams/{team-id}/members/{membership-id}",
+        "Version": "beta"
+      }
+    ],
+    "Role": "TeamMember.ReadWriteNonOwnerRole.All",
     "Type": "Application"
   },
   {

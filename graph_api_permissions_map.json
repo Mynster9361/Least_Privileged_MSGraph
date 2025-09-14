@@ -11249,20 +11249,12 @@
     "operation_name": "conversationmember_update",
     "full_example_url": "https://graph.microsoft.com/beta/teams/{id}/channels/{id}/members/{id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
-    "DelegatedWork_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "DelegatedWork_Higher": "TeamMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ChannelMember.ReadWrite.All",
-    "Application_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ]
+    "Application_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "Application_Higher": "TeamMember.ReadWrite.All"
   },
   {
     "path": "/sites/{site-id}/lists/{list-id}/contentTypes/addCopy",
@@ -11575,20 +11567,12 @@
     "operation_name": "conversationmember_update",
     "full_example_url": "https://graph.microsoft.com/beta/teams/{id}/members/{id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
-    "DelegatedWork_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "DelegatedWork_Higher": "TeamMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ChannelMember.ReadWrite.All",
-    "Application_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ]
+    "Application_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "Application_Higher": "TeamMember.ReadWrite.All"
   },
   {
     "path": "/teams/{team-id}/members/remove",
@@ -15595,8 +15579,6 @@
     "example_from_docs": true,
     "DelegatedWork_Least": "Chat.ReadBasic",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite",
       "Chat.Read",
       "Chat.ReadWrite",
       "ChatMember.Read",
@@ -15606,8 +15588,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChatMember.Read.All",
     "Application_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All",
       "Chat.Manage.Chat",
       "Chat.Read.All",
       "Chat.ReadBasic.All",
@@ -15626,8 +15606,6 @@
     "example_from_docs": true,
     "DelegatedWork_Least": "Chat.ReadBasic",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite",
       "Chat.Read",
       "Chat.ReadWrite",
       "ChatMember.Read",
@@ -15637,8 +15615,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChatMember.Read.All",
     "Application_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All",
       "Chat.Manage.Chat",
       "Chat.Read.All",
       "Chat.ReadBasic.All",
@@ -27625,20 +27601,12 @@
     "operation_name": "team_update_members",
     "full_example_url": "https://graph.microsoft.com/beta/teams/{team-id}/members/{membership-id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
-    "DelegatedWork_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "DelegatedWork_Higher": "TeamMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ChannelMember.ReadWrite.All",
-    "Application_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ]
+    "Application_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "Application_Higher": "TeamMember.ReadWrite.All"
   },
   {
     "path": "/me/drive/root:/{item-path}:/workbook/comments",
@@ -36958,8 +36926,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Place.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/print/taskDefinitions/{id}",
@@ -38130,8 +38098,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Place.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/me/planner/tasks/delta",
@@ -50699,8 +50667,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Place.ReadWrite.All",
-    "Application_Higher": "Not available."
+    "Application_Least": "Not supported.",
+    "Application_Higher": "Not supported."
   },
   {
     "path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
@@ -54675,10 +54643,10 @@
     "operation_name": "channel_list_members",
     "full_example_url": "https://graph.microsoft.com/v1.0/teams/2ab9c796-2902-45f8-b712-7c5a63cf41c4/channels/19%3A20bc1df46b1148e9b22539b83bc66809%40thread.skype/members",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Group.Read.All",
+    "DelegatedWork_Least": "ChannelMember.Read.All",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All"
+      "ChannelMember.ReadWrite.All",
+      "Group.Read.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
@@ -54833,18 +54801,14 @@
     "full_example_url": "https://graph.microsoft.com/v1.0/teams/ece6f0a1-7ca4-498b-be79-edf6c8fc4d82/channels/19%3A56eb04e133944cf69e603c5dac2d292e%40thread.skype/members/ZWUwZjVhZTItOGJjNi00YWU1LTg0NjYtN2RhZWViYmZhMDYyIyM3Mzc2MWYwNi0yYWM5LTQ2OWMtOWYxMC0yNzlhOGNjMjY3Zjk=",
     "example_from_docs": true,
     "DelegatedWork_Least": "ChannelMember.Read.All",
-    "DelegatedWork_Higher": [
-      "ChannelMember.ReadWrite",
-      "ChannelMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Higher": "ChannelMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChannelMember.Read.Group",
     "Application_Higher": [
       "ChannelMember.Read.All",
       "ChannelMember.ReadWrite.All",
-      "ChannelMember.ReadWrite.Group",
-      "TeamMember.Read.Group"
+      "ChannelMember.ReadWrite.Group"
     ]
   },
   {
@@ -56401,8 +56365,7 @@
     "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
     "DelegatedWork_Higher": [
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
@@ -56410,8 +56373,7 @@
     "Application_Higher": [
       "ChannelMember.ReadWrite.All",
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ]
   },
   {
@@ -63439,8 +63401,6 @@
     "example_from_docs": true,
     "DelegatedWork_Least": "Chat.ReadBasic",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite",
       "Chat.Read",
       "Chat.ReadWrite",
       "ChatMember.Read",
@@ -63450,8 +63410,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChatMember.Read.All",
     "Application_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All",
       "Chat.Manage.Chat",
       "Chat.Read.All",
       "Chat.ReadBasic.All",
@@ -63470,8 +63428,6 @@
     "example_from_docs": true,
     "DelegatedWork_Least": "Chat.ReadBasic",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite",
       "Chat.Read",
       "Chat.ReadWrite",
       "ChatMember.Read",
@@ -63481,8 +63437,6 @@
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChatMember.Read.All",
     "Application_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All",
       "Chat.Manage.Chat",
       "Chat.Read.All",
       "Chat.ReadBasic.All",
@@ -64984,8 +64938,7 @@
     "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
     "DelegatedWork_Higher": [
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
@@ -64993,8 +64946,7 @@
     "Application_Higher": [
       "ChannelMember.ReadWrite.All",
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ]
   },
   {
@@ -69366,20 +69318,12 @@
     "operation_name": "team_update_members",
     "full_example_url": "https://graph.microsoft.com/v1.0/teams/{team-id}/members/{membership-id}",
     "example_from_docs": false,
-    "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
-    "DelegatedWork_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "DelegatedWork_Higher": "TeamMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "ChannelMember.ReadWrite.All",
-    "Application_Higher": [
-      "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
-    ]
+    "Application_Least": "TeamMember.ReadWriteNonOwnerRole.All",
+    "Application_Higher": "TeamMember.ReadWrite.All"
   },
   {
     "path": "/teams/{id}/unarchive",
@@ -73215,8 +73159,7 @@
     "DelegatedWork_Least": "ChannelMember.ReadWrite.All",
     "DelegatedWork_Higher": [
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
@@ -73224,8 +73167,7 @@
     "Application_Higher": [
       "ChannelMember.ReadWrite.All",
       "Directory.ReadWrite.All",
-      "Group.ReadWrite.All",
-      "TeamMember.ReadWrite.All"
+      "Group.ReadWrite.All"
     ]
   },
   {
@@ -73526,18 +73468,14 @@
     "full_example_url": "https://graph.microsoft.com/beta/teams/ece6f0a1-7ca4-498b-be79-edf6c8fc4d82/channels/19%3A56eb04e133944cf69e603c5dac2d292e%40thread.skype/members/ZWUwZjVhZTItOGJjNi00YWU1LTg0NjYtN2RhZWViYmZhMDYyIyM3Mzc2MWYwNi0yYWM5LTQ2OWMtOWYxMC0yNzlhOGNjMjY3Zjk=",
     "example_from_docs": true,
     "DelegatedWork_Least": "ChannelMember.Read.All",
-    "DelegatedWork_Higher": [
-      "ChannelMember.ReadWrite",
-      "ChannelMember.ReadWrite.All"
-    ],
+    "DelegatedWork_Higher": "ChannelMember.ReadWrite.All",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
     "Application_Least": "ChannelMember.Read.Group",
     "Application_Higher": [
       "ChannelMember.Read.All",
       "ChannelMember.ReadWrite.All",
-      "ChannelMember.ReadWrite.Group",
-      "TeamMember.Read.Group"
+      "ChannelMember.ReadWrite.Group"
     ]
   },
   {
@@ -73860,10 +73798,10 @@
     "operation_name": "channel_list_members",
     "full_example_url": "https://graph.microsoft.com/beta/teams/2ab9c796-2902-45f8-b712-7c5a63cf41c4/channels/19%3A20bc1df46b1148e9b22539b83bc66809%40thread.skype/members",
     "example_from_docs": true,
-    "DelegatedWork_Least": "Group.Read.All",
+    "DelegatedWork_Least": "ChannelMember.Read.All",
     "DelegatedWork_Higher": [
-      "ChannelMember.Read.All",
-      "ChannelMember.ReadWrite.All"
+      "ChannelMember.ReadWrite.All",
+      "Group.Read.All"
     ],
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",

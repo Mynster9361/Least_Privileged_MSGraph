@@ -36926,8 +36926,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "Application_Least": "Place.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/print/taskDefinitions/{id}",
@@ -38098,8 +38098,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "Application_Least": "Place.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/me/planner/tasks/delta",
@@ -50667,8 +50667,8 @@
     "DelegatedWork_Higher": "Not available.",
     "DelegatedPersonal_Least": "Not supported.",
     "DelegatedPersonal_Higher": "Not supported.",
-    "Application_Least": "Not supported.",
-    "Application_Higher": "Not supported."
+    "Application_Least": "Place.ReadWrite.All",
+    "Application_Higher": "Not available."
   },
   {
     "path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",

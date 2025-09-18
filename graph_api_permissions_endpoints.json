@@ -52965,7 +52965,7 @@
       }
     ],
     "Role": "Place.ReadWrite.All",
-    "Type": "Delegated"
+    "Type": "Application"
   },
   {
     "Endpoints": [

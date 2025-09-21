@@ -19575,12 +19575,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
-        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
@@ -19595,6 +19589,12 @@
         "Method": "PATCH",
         "OperationName": "educationassignmentsettings_update",
         "Path": "https://graph.microsoft.com/beta/education/classes/37d99af7-cfc5-4e3b-8566-f7d40e4a2070/assignmentSettings",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationassignmentsettings_post_gradingschemes",
+        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
         "Version": "beta"
       },
       {
@@ -19641,8 +19641,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
+        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
         "Version": "beta"
       },
       {
@@ -19724,9 +19724,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationassignment_deactivate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "Method": "GET",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "beta"
       },
       {
@@ -19737,8 +19737,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationclass_post_category",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationclass_post_assignments",
+        "Path": "/education/classes/{class-id}/assignments",
         "Version": "beta"
       },
       {
@@ -19808,15 +19808,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationclass_post_assignments",
-        "Path": "/education/classes/{class-id}/assignments",
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_submittedresources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationsubmission_list_submittedresources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
+        "OperationName": "educationsubmission_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
         "Version": "beta"
       },
       {
@@ -19886,9 +19886,21 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "educationclass_post_category",
+        "Path": "/education/classes/{id}/assignmentCategories",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationassignment_deactivate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "educationsubmission_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
+        "OperationName": "educationuser_list_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "beta"
       },
       {
@@ -19896,12 +19908,6 @@
         "OperationName": "educationassignment_activate",
         "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
         "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationuser_post_rubrics",
-        "Path": "/education/me/rubrics",
-        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -20228,10 +20234,10 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationuser_list_rubrics",
+        "Method": "POST",
+        "OperationName": "educationuser_post_rubrics",
         "Path": "/education/me/rubrics",
-        "Version": "beta"
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -20582,6 +20588,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "educationassignmentresource_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "educationassignmentresource_delete",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
@@ -20625,14 +20637,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationassignment_post_categories",
-        "Path": "/education/classes/{id}/assignments/{id}/categories/$ref",
+        "OperationName": "educationassignmentsettings_post_gradingschemes",
+        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_submissions",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
+        "Method": "POST",
+        "OperationName": "educationassignment_post_categories",
+        "Path": "/education/classes/{id}/assignments/{id}/categories/$ref",
         "Version": "beta"
       },
       {
@@ -20685,20 +20697,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignmentresource_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "OperationName": "educationassignment_list_submissions",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationassignment_deactivate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "educationassignmentsettings_update",
         "Path": "https://graph.microsoft.com/beta/education/classes/37d99af7-cfc5-4e3b-8566-f7d40e4a2070/assignmentSettings",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "educationcategory_delete",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
       {
@@ -20756,9 +20768,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationassignment_deactivate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "Method": "DELETE",
+        "OperationName": "educationcategory_delete",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
       {
@@ -20822,16 +20834,16 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationassignment_activate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
+        "Method": "GET",
+        "OperationName": "educationuser_list_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "educationuser_post_rubrics",
-        "Path": "/education/me/rubrics",
-        "Version": "v1.0"
+        "OperationName": "educationassignment_activate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -20954,10 +20966,10 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationuser_list_rubrics",
+        "Method": "POST",
+        "OperationName": "educationuser_post_rubrics",
         "Path": "/education/me/rubrics",
-        "Version": "beta"
+        "Version": "v1.0"
       },
       {
         "Method": "PATCH",
@@ -26448,6 +26460,24 @@
       {
         "Method": "POST",
         "OperationName": "driveitemversion_restore",
+        "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restore",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restore",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restore",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
@@ -26482,15 +26512,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}",
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitemversion_get_contents",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}/content",
+        "OperationName": "driveitemversion_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}",
         "Version": "beta"
       },
       {
@@ -26500,15 +26530,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Method": "GET",
+        "OperationName": "driveitemversion_get_contents",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get_contents",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}/content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
@@ -26548,45 +26578,45 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/items/{item-id}/unfollow",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/following/{item-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitemversion_get_contents",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "filter_apply",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/items/{id}/workbook/names/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "listitem_createlink",
+        "Path": "https://graph.microsoft.com/beta/sites/{siteId}/lists/{listId}/items/{itemId}/createLink",
         "Version": "beta"
       },
       {
@@ -26699,20 +26729,20 @@
       },
       {
         "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/items/{item-id}/unfollow",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/following/{item-id}",
         "Version": "beta"
       },
       {
@@ -26722,21 +26752,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "listitem_createlink",
-        "Path": "https://graph.microsoft.com/beta/sites/{siteId}/lists/{listId}/items/{itemId}/createLink",
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/users/{user-id}/drive/root/search(q='{search-text}')",
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/me/drive/root/search(q='{search-text}')",
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "beta"
       },
       {
@@ -26794,15 +26824,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_list_thumbnails",
+        "Path": "/drives/{drive-id}/items/{item-id}/thumbnails",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_thumbnails",
-        "Path": "/drives/{drive-id}/items/{item-id}/thumbnails",
+        "OperationName": "driveitem_list_permissions",
+        "Path": "/users/{userId}/drive/items/{itemId}/permissions",
         "Version": "beta"
       },
       {
@@ -26848,39 +26878,45 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/me/drive/items/{item-id}/children",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_permissions",
-        "Path": "/users/{userId}/drive/items/{itemId}/permissions",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/me/drive/items/{item-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "driveitem_move",
         "Path": "/sites/{site-id}/drive/items/{item-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/users/{user-id}/drive/items/{item-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_post_children",
+        "Path": "/drives/{drive-id}/items/{parent-item-id}/children",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/users/{user-id}/drive/root/search(q='{search-text}')",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/sites/{site-id}/drive/root/search(q='{search-text}')",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/me/drive/root/search(q='{search-text}')",
         "Version": "beta"
       },
       {
@@ -26993,44 +27029,44 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_post_children",
-        "Path": "/drives/{drive-id}/items/{parent-item-id}/children",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "driveitem_permanentdelete",
         "Path": "/drives/{drive-id}/items/{item-id}/permanentDelete",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/users/{user-id}/drive/items/{item-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/sites/{site-id}/drive/root/search(q='{search-text}')",
+        "OperationName": "driveitem_list_children",
+        "Path": "/me/drive/items/{item-id}/children",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "nameditem_add",
-        "Path": "/me/drive/items/{id}/workbook/names/add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "nameditem_add",
+        "OperationName": "nameditem_addformulalocal",
         "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
+        "Method": "GET",
+        "OperationName": "range_entirerow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/EntireRow",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_entirerow",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/EntireRow",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_entirerow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/EntireRow",
         "Version": "beta"
       },
       {
@@ -27071,14 +27107,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/EntireColumn",
+        "OperationName": "range_entirerow",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/EntireRow",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/delete",
+        "Method": "GET",
+        "OperationName": "range_entirecolumn",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/EntireColumn",
         "Version": "beta"
       },
       {
@@ -27088,15 +27124,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_entirerow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/EntireRow",
+        "Method": "POST",
+        "OperationName": "range_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "range_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/delete",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
         "Version": "beta"
       },
       {
@@ -27136,45 +27172,45 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/Column",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/Column",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/clear",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "range_delete",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/delete",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "range_entirerow",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/EntireRow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/EntireRow",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "range_entirerow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/EntireRow",
+        "OperationName": "range_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "range_entirerow",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/EntireRow",
+        "OperationName": "range_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/LastColumn",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcell",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/LastCell",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcell",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/LastCell",
         "Version": "beta"
       },
       {
@@ -27287,20 +27323,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')",
+        "OperationName": "range_column",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/Column",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')",
+        "OperationName": "range_column",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/Column",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_entirerow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/EntireRow",
+        "Method": "POST",
+        "OperationName": "range_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/clear",
         "Version": "beta"
       },
       {
@@ -27310,21 +27346,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/clear",
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_clear",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/clear",
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/clear",
+        "Method": "DELETE",
+        "OperationName": "permission_delete",
+        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
@@ -27436,9 +27472,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "nameditem_addformulalocal",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
@@ -27448,33 +27484,33 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
+        "OperationName": "permission_grant",
+        "Path": "/shares/{encoded-sharing-url}/permission/grant",
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "permission_delete",
-        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Method": "POST",
+        "OperationName": "range_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/clear",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/drives/{drive-id}/items/{item-id}/children",
+        "Method": "POST",
+        "OperationName": "range_clear",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/clear",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Method": "POST",
+        "OperationName": "range_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/clear",
         "Version": "beta"
       },
       {
@@ -27586,12 +27622,6 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "permission_grant",
-        "Path": "/shares/{encoded-sharing-url}/permission/grant",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "permission_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
@@ -27599,14 +27629,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/LastColumn",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "OperationName": "driveitem_list_children",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
         "Version": "beta"
       },
       {
@@ -27616,15 +27646,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/me/drive/items/{item-id}/invite",
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
         "Version": "beta"
       },
       {
@@ -27671,6 +27701,12 @@
       },
       {
         "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
         "OperationName": "chartfont_update",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/font",
         "Version": "beta"
@@ -27678,19 +27714,13 @@
       {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/format/font",
         "Version": "beta"
       },
       {
@@ -27736,39 +27766,39 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/format/font",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartgridlines_update",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartlineformat_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartlineformat_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
         "Version": "beta"
       },
       {
@@ -27886,15 +27916,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
@@ -27910,15 +27940,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
+        "Method": "GET",
+        "OperationName": "chartaxistitle_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
+        "Method": "GET",
+        "OperationName": "chartaxistitle_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
         "Version": "beta"
       },
       {
@@ -28036,39 +28066,39 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chart_post_series",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "chart_post_series",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartaxistitle_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
@@ -28186,12 +28216,6 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "chartaxistitle_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
@@ -28199,26 +28223,32 @@
       },
       {
         "Method": "GET",
-        "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastcell",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/LastCell",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
+        "OperationName": "driveitem_list_children",
+        "Path": "/drives/{drive-id}/items/{item-id}/children",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "chartpoint_get",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points/{point-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chartpoint_list",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/me/drive/items/{item-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/me/drive/root:/{item-path}:/content",
         "Version": "beta"
       },
       {
@@ -28264,27 +28294,27 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "driveitem_follow",
         "Path": "/groups/{group-id}/drive/items/{item-id}/follow",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/drives/{drive-id}/items/{item-id}/follow",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/root:/{item-path}:/content",
+        "OperationName": "driveitem_delta",
+        "Path": "/users/{userId}/drive/root/delta",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/users/{userId}/drive/root/delta",
+        "Path": "/sites/{siteId}/drive/root/delta",
         "Version": "beta"
       },
       {
@@ -28330,39 +28360,39 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/drives/{drive-id}/items/{item-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/users/{userId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_delta",
-        "Path": "/sites/{siteId}/drive/root/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/items/{item-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "OperationName": "driveitem_follow",
+        "Path": "/drives/{drive-id}/items/{item-id}/follow",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
         "Path": "/sites/{siteId}/drive/items/{item-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/users/{userId}/drive/items/{item-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_contentstream",
+        "Path": "/drives/{drive-id}/items/{item-id}/contentStream",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/me/drive/items/{item-id}/invite",
         "Version": "beta"
       },
       {
@@ -28480,15 +28510,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get_contentstream",
-        "Path": "/drives/{drive-id}/items/{item-id}/contentStream",
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/users/{userId}/drive/items/{item-id}/content",
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{itemId}/createUploadSession",
         "Version": "beta"
       },
       {
@@ -28504,15 +28534,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}/createUploadSession",
+        "Method": "GET",
+        "OperationName": "drive_list_following",
+        "Path": "/me/drive/following",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/createUploadSession",
+        "Method": "GET",
+        "OperationName": "drive_get",
+        "Path": "/me/drive",
         "Version": "beta"
       },
       {
@@ -28631,8 +28661,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "chartpoint_list",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points",
+        "OperationName": "drive_list",
+        "Path": "/groups/{groupId}/drives",
         "Version": "beta"
       },
       {
@@ -28643,26 +28673,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "drive_get",
-        "Path": "/me/drive",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "drive_list_following",
-        "Path": "/me/drive/following",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "drive_recent",
         "Path": "/me/drive/recent",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_checkin",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/me/drive/items/{itemId}/createUploadSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/createUploadSession",
         "Version": "beta"
       },
       {
@@ -28782,37 +28812,49 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_checkin",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_checkin",
         "Path": "/drives/{driveId}/items/{itemId}/checkin",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "drive_list",
-        "Path": "/groups/{groupId}/drives",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastcell",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/LastCell",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/LastColumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/LastColumn",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/LastColumn",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablerowcollection_add",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablerowcollection_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablerowcollection_add",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "tablerow_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "beta"
       },
       {
@@ -28846,15 +28888,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerow_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}/range",
+        "Method": "POST",
+        "OperationName": "tablerowcollection_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "tablerow_range",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}/range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}/range",
         "Version": "beta"
       },
       {
@@ -28870,69 +28912,9 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "tablerow_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "tablerow_list",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumncollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/ItemAt(index={index})",
         "Version": "beta"
       },
       {
@@ -28942,21 +28924,81 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablerowcollection_add",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/add",
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_range",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}/range",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/ItemAt(index={index})",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/ItemAt(index={index})",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/ItemAt(index={index})",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "tablerowcollection_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/add",
+        "OperationName": "workbook_createsession",
+        "Path": "/me/drive/root:/{item-path}:/workbook/createSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "tablerowcollection_add",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
+        "OperationName": "workbook_createsession",
+        "Path": "/me/drive/items/{id}/workbook/createSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbook_closesession",
+        "Path": "/me/drive/root:/{item-path}:/workbook/closeSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbook_closesession",
+        "Path": "/me/drive/items/{id}/workbook/closeSession",
         "Version": "beta"
       },
       {
@@ -29062,51 +29104,51 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/ItemAt(index={index})",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/ItemAt(index={index})",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/ItemAt(index={index})",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "tablerowcollection_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/add",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "tablecolumncollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/ItemAt(index={index})",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/ItemAt(index={index})",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "tablecolumncollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/ItemAt(index={index})",
+        "OperationName": "tablecolumn_headerrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/HeaderRowRange",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "tablecolumncollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/ItemAt(index={index})",
+        "OperationName": "tablecolumn_headerrowrange",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/HeaderRowRange",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablecolumncollection_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/add",
+        "Method": "GET",
+        "OperationName": "tablecolumn_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumn_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}",
         "Version": "beta"
       },
       {
@@ -29212,51 +29254,51 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
+        "Method": "GET",
+        "OperationName": "tablecolumn_headerrowrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/HeaderRowRange",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "table_totalrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/TotalRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_totalrowrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/TotalRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_totalrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/TotalRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_closesession",
-        "Path": "/me/drive/items/{id}/workbook/closeSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}",
+        "OperationName": "workbook_list_comments",
+        "Path": "/me/drive/items/{id}/workbook/comments",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "tablecolumn_headerrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/HeaderRowRange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/HeaderRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumncollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/ItemAt(index={index})",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumncollection_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/ItemAt(index={index})",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumncollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/ItemAt(index={index})",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablecolumncollection_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/add",
         "Version": "beta"
       },
       {
@@ -29364,49 +29406,25 @@
       {
         "Method": "GET",
         "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_headerrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/HeaderRowRange",
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "tablecolumn_headerrowrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/HeaderRowRange",
+        "OperationName": "workbook_list_comments",
+        "Path": "/me/drive/root:/{item-path}:/workbook/comments",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "tablecolumn_headerrowrange",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/HeaderRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_totalrowrange",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/TotalRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_closesession",
-        "Path": "/me/drive/root:/{item-path}:/workbook/closeSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_createsession",
-        "Path": "/me/drive/root:/{item-path}:/workbook/createSession",
+        "OperationName": "workbook_list_names",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names",
         "Version": "beta"
       },
       {
@@ -29728,6 +29746,30 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "workbookcomment-post-comments",
+        "Path": "/users/{id}/drive/root:/{id}:/workbook/comments",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbookcomment-post-comments",
+        "Path": "/users/{id}/drive/items/{id}/workbook/comments",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbookcomment-post-comments",
+        "Path": "/me/drive/root:/{item-path}:/workbook/comments",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbookcomment-post-comments",
+        "Path": "/me/drive/items/{id}/workbook/comments",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "workbookcomment_list_replies",
         "Path": "/me/drive/root:/{item-path}:/workbook/comments/{id}/replies",
@@ -29807,38 +29849,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "workbook_list_names",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names",
+        "OperationName": "workbookdocumenttask_get",
+        "Path": "/me/drive/items/{id}/workbook/comments/{id}/task",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "workbook_list_names",
         "Path": "/me/drive/items/{id}/workbook/names",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbook_list_comments",
-        "Path": "/me/drive/root:/{item-path}:/workbook/comments",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbook_list_comments",
-        "Path": "/me/drive/items/{id}/workbook/comments",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbookdocumenttask_get",
-        "Path": "/me/drive/items/{id}/workbook/comments/{id}/task",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_createsession",
-        "Path": "/me/drive/items/{id}/workbook/createSession",
         "Version": "beta"
       },
       {
@@ -29987,20 +30005,38 @@
       },
       {
         "Method": "GET",
-        "OperationName": "chart_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
+        "OperationName": "table_totalrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/TotalRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_totalrowrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/TotalRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_totalrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/TotalRowRange",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "table_reapplyfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/reapplyFilters",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill/clear",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "table_reapplyfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/reapplyFilters",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill/clear",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill/clear",
         "Version": "beta"
       },
       {
@@ -30040,15 +30076,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "rangeborder_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
+        "Method": "POST",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill/clear",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "rangeborder_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
@@ -30058,15 +30094,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill/clear",
+        "Method": "PATCH",
+        "OperationName": "rangeborder_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "rangeborder_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders(<sideIndex>)",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
@@ -30106,45 +30142,45 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_get",
+        "Method": "PATCH",
+        "OperationName": "rangeborder_update",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
-        "OperationName": "rangeborder_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders(<sideIndex>)",
+        "OperationName": "rangefont_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill/clear",
+        "Method": "PATCH",
+        "OperationName": "rangefont_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill/clear",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill/clear",
+        "Method": "PATCH",
+        "OperationName": "rangefont_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/font",
         "Version": "beta"
       },
       {
@@ -30257,20 +30293,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
@@ -30280,21 +30316,21 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "rangeborder_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders(<sideIndex>)",
+        "Method": "POST",
+        "OperationName": "range_row",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/Row",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_row",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/Row",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "rangeborder_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders(<sideIndex>)",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_get",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders(<sideIndex>)",
+        "OperationName": "range_offsetrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/OffsetRange",
         "Version": "beta"
       },
       {
@@ -30406,45 +30442,45 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/LastColumn",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_offsetrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/OffsetRange",
+        "Method": "POST",
+        "OperationName": "range_row",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/Row",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "rangefont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/font",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "range_row",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/Row",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/Row",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "range_row",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/Row",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/Row",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders(<sideIndex>)",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders(<sideIndex>)",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders(<sideIndex>)",
         "Version": "beta"
       },
       {
@@ -30558,43 +30594,49 @@
       {
         "Method": "POST",
         "OperationName": "range_row",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/Row",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_row",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/Row",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_row",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/Row",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_row",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/Row",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "table_reapplyfilters",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/reapplyFilters",
-        "Version": "beta"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "rangefont_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "rangefont_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitColumns",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitColumns",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_headerrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/HeaderRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_headerrowrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/HeaderRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_headerrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/HeaderRowRange",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_headerrowrange",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/HeaderRowRange",
         "Version": "beta"
       },
       {
@@ -30653,14 +30695,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "table_headerrowrange",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/HeaderRowRange",
+        "OperationName": "table_databodyrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/DataBodyRange",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "table_databodyrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/DataBodyRange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/DataBodyRange",
         "Version": "beta"
       },
       {
@@ -30700,45 +30742,51 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "table_clearfilters",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/clearFilters",
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_totalrowrange",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/TotalRowRange",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "table_clearfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/clearFilters",
+        "OperationName": "table_reapplyfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/reapplyFilters",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "table_clearfilters",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/clearFilters",
+        "OperationName": "table_reapplyfilters",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/reapplyFilters",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_databodyrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/DataBodyRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_headerrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/HeaderRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_headerrowrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/HeaderRowRange",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_headerrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/HeaderRowRange",
+        "Method": "POST",
+        "OperationName": "table_reapplyfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/reapplyFilters",
         "Version": "beta"
       },
       {
@@ -30846,25 +30894,19 @@
       {
         "Method": "GET",
         "OperationName": "table_list_columns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_list_columns",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_list_columns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
+        "Method": "POST",
+        "OperationName": "chart_post_series",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_list_columns",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+        "Method": "POST",
+        "OperationName": "table_clearfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/clearFilters",
         "Version": "beta"
       },
       {
@@ -30875,20 +30917,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
+        "OperationName": "rangeformat_list_borders",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/drives/{driveId}/list/subscriptions/socketIo",
+        "OperationName": "rangeformat_list_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/drives/{driveId}/root/subscriptions/socketIo",
+        "OperationName": "rangeformat_list_borders",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
         "Version": "beta"
       },
       {
@@ -31000,45 +31042,45 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitColumns",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitColumns",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "rangefont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/font",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "rangeformat_list_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "table_clearfilters",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/clearFilters",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "rangefont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/font",
+        "Method": "GET",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "rangeformat_list_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/drives/{driveId}/list/subscriptions/socketIo",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "rangeformat_list_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/drives/{driveId}/root/subscriptions/socketIo",
         "Version": "beta"
       },
       {
@@ -31152,25 +31194,7 @@
       {
         "Method": "POST",
         "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
         "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeformat_list_borders",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
         "Version": "beta"
       },
       {
@@ -31180,16 +31204,22 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "chart_post_series",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "chart_list",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "chart_list_series",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -31240,21 +31270,21 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
         "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
@@ -31306,21 +31336,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/me/drive/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
@@ -31333,6 +31351,18 @@
         "Method": "POST",
         "OperationName": "filter_clear",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/clear",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "filter_clear",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/clear",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
@@ -31456,21 +31486,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "filter_clear",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/clear",
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "driveitem_update",
         "Path": "/groups/{group-id}/drive/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
@@ -31482,7 +31506,13 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/items/{item-id}/unfollow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/users/{user-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -31540,15 +31570,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/users/{user-id}/drive/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_list_thumbnails",
+        "Path": "/users/{user-id}/drive/items/{item-id}/thumbnails",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_thumbnails",
-        "Path": "/users/{user-id}/drive/items/{item-id}/thumbnails",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/thumbnails",
         "Version": "v1.0"
       },
       {
@@ -31606,15 +31636,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_list_thumbnails",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/thumbnails",
+        "Method": "POST",
+        "OperationName": "driveitem_permanentdelete",
+        "Path": "/drives/{drive-id}/items/{item-id}/permanentDelete",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_permanentdelete",
-        "Path": "/drives/{drive-id}/items/{item-id}/permanentDelete",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
@@ -31626,7 +31656,13 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_post_children",
-        "Path": "/groups/{group-id}/drive/items/{parent-item-id}/children",
+        "Path": "/me/drive/items/{parent-item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/items/{item-id}/unfollow",
         "Version": "v1.0"
       },
       {
@@ -31752,19 +31788,13 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_post_children",
-        "Path": "/me/drive/items/{parent-item-id}/children",
+        "Path": "/groups/{group-id}/drive/items/{parent-item-id}/children",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/users/{user-id}/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
@@ -31776,7 +31806,13 @@
       {
         "Method": "POST",
         "OperationName": "nameditem_addformulalocal",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_get",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
         "Version": "v1.0"
       },
       {
@@ -31829,20 +31865,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "range_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "range_entirecolumn",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/entireColumn",
         "Version": "v1.0"
       },
       {
@@ -31894,21 +31930,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_delete",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/entireColumn",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
         "Version": "v1.0"
       },
       {
@@ -31921,6 +31945,18 @@
         "Method": "POST",
         "OperationName": "range_insert",
         "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_insert",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
         "Version": "v1.0"
       },
       {
@@ -32045,8 +32081,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "range_insert",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+        "OperationName": "range_delete",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
         "Version": "v1.0"
       },
       {
@@ -32068,9 +32104,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/column",
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
@@ -32194,33 +32230,33 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "nameditem_addformulalocal",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/users/{user-id}/drive/items/{item-id}/children",
-        "Version": "v1.0"
-      },
-      {
         "Method": "PATCH",
         "OperationName": "permission_update",
         "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "nameditem_addformulalocal",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
+        "Version": "v1.0"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "permission_update",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_column",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/column",
         "Version": "v1.0"
       },
       {
@@ -32346,25 +32382,19 @@
       {
         "Method": "PATCH",
         "OperationName": "permission_update",
-        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Method": "GET",
+        "OperationName": "range_lastrow",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
         "Path": "/sites/{site-id}/drive/items/{item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/me/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
@@ -32951,8 +32981,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
+        "OperationName": "driveitem_list_children",
+        "Path": "/me/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
@@ -33546,12 +33576,6 @@
       {
         "Method": "GET",
         "OperationName": "range_lastrow",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastrow",
         "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/lastRow",
         "Version": "v1.0"
       },
@@ -33559,6 +33583,24 @@
         "Method": "GET",
         "OperationName": "range_lastrow",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastrow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
@@ -33604,6 +33646,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/sort/apply",
+        "Version": "v1.0"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "tablerow_update",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
@@ -33612,19 +33660,13 @@
       {
         "Method": "PATCH",
         "OperationName": "tablerow_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "tablerow_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows/{index}",
+        "OperationName": "tablerow_range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})/range",
         "Version": "v1.0"
       },
       {
@@ -33670,39 +33712,39 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerow_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/sort/apply",
+        "Method": "PATCH",
+        "OperationName": "tablerow_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "tablesort_apply",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/apply",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbook_list_worksheets",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbook_list_worksheets",
+        "Path": "/me/drive/items/{id}/workbook/worksheets",
         "Version": "v1.0"
       },
       {
@@ -33820,15 +33862,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
@@ -33844,15 +33886,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
@@ -33970,39 +34012,39 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablecollection_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "tablecollection_add",
+        "OperationName": "workbook_post_tables",
         "Path": "/me/drive/items/{id}/workbook/tables/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbook_list_worksheets",
-        "Path": "/me/drive/items/{id}/workbook/worksheets",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "tablecolumn_range",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumn_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
@@ -34122,37 +34164,37 @@
       {
         "Method": "GET",
         "OperationName": "tablecolumn_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablecolumn_range",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbook_list_worksheets",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets",
+        "Method": "POST",
+        "OperationName": "tablecollection_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "workbook_post_tables",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "workbook_refreshsession",
+        "Path": "/me/drive/root:/{item-path}:/workbook/refreshSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range",
         "Version": "v1.0"
       },
       {
@@ -34198,6 +34240,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "worksheet_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "worksheet_list_tables",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables",
@@ -34206,19 +34254,13 @@
       {
         "Method": "GET",
         "OperationName": "worksheet_list_names",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_list_names",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_list_charts",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
         "Version": "v1.0"
       },
       {
@@ -34265,32 +34307,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "workbookworksheet_list_pivottables",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/pivotTables",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbookworksheet_list_pivottables",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_list_charts",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "worksheet_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}",
+        "OperationName": "worksheet_list_names",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names",
         "Version": "v1.0"
       },
       {
@@ -34298,6 +34316,30 @@
         "OperationName": "worksheet_update",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}",
         "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_usedrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/usedRange",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_usedrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/usedRange",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chart_list_series",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chart_list_series",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -34415,14 +34457,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "worksheet_usedrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/usedRange",
+        "OperationName": "workbookworksheet_list_pivottables",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/pivotTables",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "worksheet_usedrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/usedRange",
+        "OperationName": "workbookworksheet_list_pivottables",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables",
         "Version": "v1.0"
       },
       {
@@ -34438,15 +34480,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "workbookrangeview_list_rows",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(<address>)/format/protection",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "workbookrangeview_list_rows",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
         "Version": "v1.0"
       },
       {
@@ -34564,9 +34606,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "workbook_refreshsession",
-        "Path": "/me/drive/root:/{item-path}:/workbook/refreshSession",
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
         "Version": "v1.0"
       },
       {
@@ -34578,25 +34620,25 @@
       {
         "Method": "PATCH",
         "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_post_tables",
-        "Path": "/me/drive/items/{id}/workbook/tables/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(<address>)/format/protection",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookpivottable_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookrangeview_list_rows",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookrangeview_list_rows",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
         "Version": "v1.0"
       },
       {
@@ -34715,27 +34757,21 @@
       },
       {
         "Method": "GET",
-        "OperationName": "workbookpivottable_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "workbookoperation_get",
         "Path": "/me/drive/items/{id}/workbook/operations/{operation-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
+        "Method": "POST",
+        "OperationName": "tablecollection_add",
+        "Path": "/me/drive/items/{id}/workbook/tables/add",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "chart_list_series",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}",
+        "Version": "v1.0"
       },
       {
         "Method": "PATCH",
@@ -34744,9 +34780,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
+        "Method": "GET",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill",
         "Version": "v1.0"
       },
       {
@@ -34799,20 +34835,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
@@ -34865,20 +34901,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
@@ -34891,6 +34915,18 @@
         "Method": "GET",
         "OperationName": "rangefill_get",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
         "Version": "v1.0"
       },
       {
@@ -35015,8 +35051,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
         "Version": "v1.0"
       },
       {
@@ -35038,9 +35074,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
+        "Method": "POST",
+        "OperationName": "range_unmerge",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/unmerge",
         "Version": "v1.0"
       },
       {
@@ -35164,24 +35200,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_lastrow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/unmerge",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "range_unmerge",
         "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/unmerge",
@@ -35189,8 +35207,26 @@
       },
       {
         "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
         "OperationName": "range_unmerge",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_unmerge",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/unmerge",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
         "Version": "v1.0"
       },
       {
@@ -35316,31 +35352,37 @@
       {
         "Method": "POST",
         "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/unmerge",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "rangeformat_autofitcolumns",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitrows",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitRows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_list_rows",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
@@ -35399,14 +35441,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "table_list_columns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "OperationName": "table_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "table_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
         "Version": "v1.0"
       },
       {
@@ -35458,6 +35500,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "table_list_rows",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
         "OperationName": "table_converttorange",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/convertToRange",
@@ -35465,26 +35513,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "table_get",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_list_rows",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_list_rows",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "table_list_rows",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "table_post_columns",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
         "Version": "v1.0"
       },
       {
@@ -35602,16 +35650,16 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "table_post_columns",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "table_list_rows",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
         "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chart_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
+        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -35622,19 +35670,13 @@
       {
         "Method": "POST",
         "OperationName": "table_converttorange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/convertToRange",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "table_converttorange",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/convertToRange",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "table_clearfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/clearFilters",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
         "Version": "v1.0"
       },
       {
@@ -35759,32 +35801,32 @@
       },
       {
         "Method": "POST",
-        "OperationName": "rangeformat_autofitrows",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitRows",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
         "OperationName": "rangeformat_post_borders",
         "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "table_converttorange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/convertToRange",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Version": "v1.0"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "rangeformat_update",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "table_clearfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/clearFilters",
         "Version": "v1.0"
       },
       {
@@ -35910,13 +35952,7 @@
       {
         "Method": "PATCH",
         "OperationName": "rangeformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format",
         "Version": "v1.0"
       },
       {

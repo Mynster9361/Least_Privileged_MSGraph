@@ -29747,25 +29747,25 @@
       },
       {
         "Method": "POST",
-        "OperationName": "workbookcomment-post-comments",
+        "OperationName": "workbookcomment_post_comments",
         "Path": "/users/{id}/drive/root:/{id}:/workbook/comments",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "workbookcomment-post-comments",
+        "OperationName": "workbookcomment_post_comments",
         "Path": "/users/{id}/drive/items/{id}/workbook/comments",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "workbookcomment-post-comments",
+        "OperationName": "workbookcomment_post_comments",
         "Path": "/me/drive/root:/{item-path}:/workbook/comments",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "workbookcomment-post-comments",
+        "OperationName": "workbookcomment_post_comments",
         "Path": "/me/drive/items/{id}/workbook/comments",
         "Version": "beta"
       },

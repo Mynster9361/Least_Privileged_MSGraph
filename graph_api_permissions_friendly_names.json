@@ -120,6 +120,11 @@
     "DelegatedWork_Identifier": "c79f8feb-a9db-4090-85f9-90d820caa0eb"
   },
   {
+    "Role_Name": "Application.ReadUpdate.All",
+    "Application_Identifier": "fc023787-fd04-4e44-9bc7-d454f00c0f0a",
+    "DelegatedWork_Identifier": "0586a906-4d89-4de8-b3c8-1aacdcc0c679"
+  },
+  {
     "Role_Name": "Application.ReadWrite.All",
     "Application_Identifier": "1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9",
     "DelegatedWork_Identifier": "bdfbf15f-ee85-4955-8675-146e8e5296b5"
@@ -206,8 +211,8 @@
   },
   {
     "Role_Name": "BackupRestore",
-    "Application_Identifier": "5fbb5982-3230-4882-93c0-2167523ce0c2",
-    "DelegatedWork_Identifier": "444ed4b6-0554-4dc6-8e9c-3f9a34ee3ff6"
+    "Application_Identifier": "fb240865-88f8-4a1d-923f-98dbc7920860",
+    "DelegatedWork_Identifier": "96d46335-d92d-41b8-bc9f-273a692381ea"
   },
   {
     "Role_Name": "BillingConfiguration.ReadWrite.All",
@@ -398,11 +403,6 @@
     "Role_Name": "Calls.JoinGroupCallAsGuest.All",
     "Application_Identifier": "fd7ccf6b-3d28-418b-9701-cd10f5cd2fd4",
     "DelegatedWork_Identifier": "-"
-  },
-  {
-    "Role_Name": "CallTranscripts.Read.All",
-    "Application_Identifier": "4cd61b6d-8692-40bf-9d90-7f38db5e5fce",
-    "DelegatedWork_Identifier": "fbace248-5d8e-441c-85ca-cc19221a69a2"
   },
   {
     "Role_Name": "ChangeManagement.Read.All",
@@ -1061,7 +1061,7 @@
   },
   {
     "Role_Name": "EduReports",
-    "Application_Identifier": "ad248c30-1919-40c8-b3d2-304481894e88",
+    "Application_Identifier": "040330d7-be7e-4130-b349-a6eb3a56e2f8",
     "DelegatedWork_Identifier": "-"
   },
   {
@@ -1516,8 +1516,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
-    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
+    "Application_Identifier": "3a87a643-13d2-47aa-8d6a-b0a8377cb03b",
+    "DelegatedWork_Identifier": "df1c25b3-072c-45cd-8403-c63441e4cca1"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -1846,8 +1846,8 @@
   },
   {
     "Role_Name": "OrgSettings",
-    "Application_Identifier": "434d7c66-07c6-4b1f-ab21-417cf2cdaaca",
-    "DelegatedWork_Identifier": "210051a0-1ffc-435c-ae76-02d226d05752"
+    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
+    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
   },
   {
     "Role_Name": "PartnerBilling.Read.All",
@@ -2290,6 +2290,11 @@
     "DelegatedWork_Identifier": "f73fa04f-b9a5-4df9-8843-993ce928925e"
   },
   {
+    "Role_Name": "RealTimeActivityFeed.Read.All",
+    "Application_Identifier": "abafe00f-ea87-4c63-b8a8-0e7bb0a88144",
+    "DelegatedWork_Identifier": "-"
+  },
+  {
     "Role_Name": "RecordsManagement.Read.All",
     "Application_Identifier": "ac3a2b8e-03a3-4da9-9ce0-cbe28bf1accd",
     "DelegatedWork_Identifier": "07f995eb-fc67-4522-ad66-2b8ca8ea3efd"
@@ -2638,6 +2643,16 @@
     "Role_Name": "ServicePrincipalEndpoint.ReadWrite.All",
     "Application_Identifier": "89c8469c-83ad-45f7-8ff2-6e3d4285709e",
     "DelegatedWork_Identifier": "7297d82c-9546-4aed-91df-3d4f0a9b3ff0"
+  },
+  {
+    "Role_Name": "SharePointCrossTenantMigration.Manage.All",
+    "Application_Identifier": "a0521574-fcd8-4742-b29c-f796df57ea70",
+    "DelegatedWork_Identifier": "c608c170-08b5-466b-a8fe-0b4074b01613"
+  },
+  {
+    "Role_Name": "SharePointCrossTenantMigration.Read.All",
+    "Application_Identifier": "f5fa52a5-b9ab-4dc3-885e-9e5b4a67068e",
+    "DelegatedWork_Identifier": "00dcb678-f9af-4e73-acb1-4f1657364629"
   },
   {
     "Role_Name": "SharePointTenantSettings.Read.All",

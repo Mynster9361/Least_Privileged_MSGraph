@@ -405,6 +405,11 @@
     "DelegatedWork_Identifier": "-"
   },
   {
+    "Role_Name": "CallTranscripts.Read.All",
+    "Application_Identifier": "4cd61b6d-8692-40bf-9d90-7f38db5e5fce",
+    "DelegatedWork_Identifier": "fbace248-5d8e-441c-85ca-cc19221a69a2"
+  },
+  {
     "Role_Name": "ChangeManagement.Read.All",
     "Application_Identifier": "418dae40-2b65-4819-900c-519a04e4d278",
     "DelegatedWork_Identifier": "4628dff5-c33e-4fde-b17a-b64e7acb1bed"
@@ -1061,7 +1066,7 @@
   },
   {
     "Role_Name": "EduReports",
-    "Application_Identifier": "040330d7-be7e-4130-b349-a6eb3a56e2f8",
+    "Application_Identifier": "ad248c30-1919-40c8-b3d2-304481894e88",
     "DelegatedWork_Identifier": "-"
   },
   {
@@ -1516,8 +1521,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "3a87a643-13d2-47aa-8d6a-b0a8377cb03b",
-    "DelegatedWork_Identifier": "df1c25b3-072c-45cd-8403-c63441e4cca1"
+    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
+    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -1541,8 +1546,8 @@
   },
   {
     "Role_Name": "Mail",
-    "Application_Identifier": "-",
-    "DelegatedWork_Identifier": "bebf0bb6-2ff3-4295-a17d-f3561da294fb"
+    "Application_Identifier": "e118f1da-5c1c-46cf-bff6-8858d786f46f",
+    "DelegatedWork_Identifier": "-"
   },
   {
     "Role_Name": "Mail.Read",

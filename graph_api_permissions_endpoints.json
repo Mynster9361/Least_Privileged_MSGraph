@@ -5089,6 +5089,12 @@
     "Endpoints": [
       {
         "Method": "GET",
+        "OperationName": "directoryaudit_list",
+        "Path": "/auditLogs/directoryaudits",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "signin_get",
         "Path": "/auditLogs/signIns/{id}",
         "Version": "v1.0"
@@ -5103,6 +5109,12 @@
         "Method": "GET",
         "OperationName": "appcredentialsigninactivity_get",
         "Path": "/reports/appCredentialSignInActivities/{appCredentialSignInActivityId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directoryaudit_list",
+        "Path": "/auditLogs/directoryAudits",
         "Version": "beta"
       },
       {
@@ -14025,12 +14037,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "directory_list_administrativeunits",
         "Path": "/administrativeUnits",
         "Version": "beta"
@@ -14045,6 +14051,12 @@
         "Method": "GET",
         "OperationName": "directory_list_subscriptions",
         "Path": "/directory/subscriptions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directoryaudit_list",
+        "Path": "/auditLogs/directoryAudits",
         "Version": "beta"
       },
       {
@@ -14103,8 +14115,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
+        "OperationName": "device_list",
+        "Path": "/devices",
         "Version": "beta"
       },
       {
@@ -14199,8 +14211,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_list_owners",
-        "Path": "/groups/{id}/owners",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -14212,7 +14224,7 @@
       {
         "Method": "GET",
         "OperationName": "device_list_registeredusers",
-        "Path": "/devices/{id}/registeredUsers",
+        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
         "Version": "beta"
       },
       {
@@ -14295,14 +14307,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_registeredusers",
-        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
+        "OperationName": "application_list_owners",
+        "Path": "/applications(appId='{appId}')/owners",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "application_list_owners",
-        "Path": "/applications(appId='{appId}')/owners",
+        "OperationName": "channel_get_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "beta"
       },
       {
@@ -14385,20 +14397,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "channel_get_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
+        "OperationName": "device_list_registeredusers",
+        "Path": "/devices/{id}/registeredUsers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "group_list_owners",
+        "Path": "/groups/{id}/owners",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "administrativeunit_get_scopedrolemembers",
+        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "group_list_settings",
         "Path": "/settings",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "group_list_transitivememberof",
-        "Path": "/groups/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -14775,8 +14793,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get_scopedrolemembers",
-        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
+        "OperationName": "group_list_transitivememberof",
+        "Path": "/groups/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -14801,6 +14819,12 @@
         "Method": "GET",
         "OperationName": "directory_list_subscriptions",
         "Path": "/directory/subscriptions",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "directoryaudit_list",
+        "Path": "/auditLogs/directoryaudits",
         "Version": "v1.0"
       },
       {
@@ -14871,20 +14895,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "directoryroletemplate_get",
-        "Path": "/directoryRoleTemplates/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "directory_list_administrativeunits",
         "Path": "/directory/administrativeUnits",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "directoryroletemplate_list",
-        "Path": "/directoryRoleTemplates",
+        "OperationName": "directoryroletemplate_get",
+        "Path": "/directoryRoleTemplates/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "domain_get",
+        "Path": "/domains/{id}",
         "Version": "v1.0"
       },
       {
@@ -14961,14 +14985,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_list",
-        "Path": "/groups",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "domain_get",
-        "Path": "/domains/{id}",
+        "OperationName": "directoryroletemplate_list",
+        "Path": "/directoryRoleTemplates",
         "Version": "v1.0"
       },
       {
@@ -15165,15 +15183,15 @@
       },
       {
         "Method": "GET",
-        "OperationName": "grouplifecyclepolicy_get",
-        "Path": "/groupLifecyclePolicies/{id}",
+        "OperationName": "group_list",
+        "Path": "/groups",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_scopedrolememberof",
-        "Path": "/me/scopedRoleMemberOf",
-        "Version": "beta"
+        "OperationName": "grouplifecyclepolicy_get",
+        "Path": "/groupLifecyclePolicies/{id}",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -15183,8 +15201,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "groupsettingtemplate_get",
-        "Path": "/groupSettingTemplates/{id}",
+        "OperationName": "groupsetting_get",
+        "Path": "/groupSettings/{groupSettingId}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
@@ -15267,14 +15291,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
+        "OperationName": "user_list_createdobjects",
+        "Path": "/users/{id | userPrincipalName}/createdObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "user_list_createdobjects",
-        "Path": "/users/{id | userPrincipalName}/createdObjects",
+        "Path": "/me/createdObjects",
         "Version": "v1.0"
       },
       {
@@ -15357,15 +15381,15 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_createdobjects",
-        "Path": "/me/createdObjects",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals/{id}/owners",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals/{id}/owners",
-        "Version": "v1.0"
+        "OperationName": "user_list_scopedrolememberof",
+        "Path": "/me/scopedRoleMemberOf",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -15375,8 +15399,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_ownedobjects",
-        "Path": "/servicePrincipals/{id}/ownedObjects",
+        "OperationName": "serviceprincipal_list_oauth2permissiongrants",
+        "Path": "/servicePrincipals(appId='{appId}')/oauth2PermissionGrants",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "groupsettingtemplate_get",
+        "Path": "/groupSettingTemplates/{id}",
         "Version": "v1.0"
       },
       {
@@ -15549,14 +15579,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_oauth2permissiongrants",
-        "Path": "/servicePrincipals(appId='{appId}')/oauth2PermissionGrants",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "groupsetting_get",
-        "Path": "/groupSettings/{groupSettingId}",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
         "Version": "v1.0"
       },
       {

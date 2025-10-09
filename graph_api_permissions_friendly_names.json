@@ -1066,7 +1066,7 @@
   },
   {
     "Role_Name": "EduReports",
-    "Application_Identifier": "ad248c30-1919-40c8-b3d2-304481894e88",
+    "Application_Identifier": "040330d7-be7e-4130-b349-a6eb3a56e2f8",
     "DelegatedWork_Identifier": "-"
   },
   {
@@ -1521,8 +1521,8 @@
   },
   {
     "Role_Name": "LifecycleWorkflows",
-    "Application_Identifier": "94c88098-1d9d-4c42-a356-4d5a95312554",
-    "DelegatedWork_Identifier": "29e49f0c-a053-4cc5-a4b1-7da0c8c1e643"
+    "Application_Identifier": "2cb19e7d-9012-40bf-9a22-69fc776af8b0",
+    "DelegatedWork_Identifier": "2973a298-1d69-4f87-8d30-7025f0ec19d7"
   },
   {
     "Role_Name": "LifecycleWorkflows.Read.All",
@@ -1546,8 +1546,8 @@
   },
   {
     "Role_Name": "Mail",
-    "Application_Identifier": "e118f1da-5c1c-46cf-bff6-8858d786f46f",
-    "DelegatedWork_Identifier": "-"
+    "Application_Identifier": "-",
+    "DelegatedWork_Identifier": "bebf0bb6-2ff3-4295-a17d-f3561da294fb"
   },
   {
     "Role_Name": "Mail.Read",
@@ -1851,8 +1851,8 @@
   },
   {
     "Role_Name": "OrgSettings",
-    "Application_Identifier": "5febc9da-e0d0-4576-bd13-ae70b2179a39",
-    "DelegatedWork_Identifier": "087502c2-5263-433e-abe3-8f77231a0627"
+    "Application_Identifier": "434d7c66-07c6-4b1f-ab21-417cf2cdaaca",
+    "DelegatedWork_Identifier": "210051a0-1ffc-435c-ae76-02d226d05752"
   },
   {
     "Role_Name": "PartnerBilling.Read.All",
@@ -2297,7 +2297,7 @@
   {
     "Role_Name": "RealTimeActivityFeed.Read.All",
     "Application_Identifier": "abafe00f-ea87-4c63-b8a8-0e7bb0a88144",
-    "DelegatedWork_Identifier": "-"
+    "DelegatedWork_Identifier": "db5d5bae-0c9e-444e-9390-8a5fea98c253"
   },
   {
     "Role_Name": "RecordsManagement.Read.All",
@@ -2558,6 +2558,16 @@
     "Role_Name": "SecurityIdentitiesActions.ReadWrite.All",
     "Application_Identifier": "af2bf46f-7bf1-4be3-8bad-e17e279e8462",
     "DelegatedWork_Identifier": "818229ce-20e4-47bd-92f4-bc94dbb37a56"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesAutoConfig.Read.All",
+    "Application_Identifier": "58971758-9844-4fe4-9fba-7e4ce7a659bf",
+    "DelegatedWork_Identifier": "8ff90903-1ecb-4f3a-b8b2-42120374ecd6"
+  },
+  {
+    "Role_Name": "SecurityIdentitiesAutoConfig.ReadWrite.All",
+    "Application_Identifier": "4f1f0deb-08d1-4ffb-8cca-21dfc362b7c0",
+    "DelegatedWork_Identifier": "b810fdb4-8733-43bd-9b37-fddb7215c69f"
   },
   {
     "Role_Name": "SecurityIdentitiesHealth.Read.All",
@@ -3356,8 +3366,8 @@
   },
   {
     "Role_Name": "User",
-    "Application_Identifier": "86ceff06-c822-49ff-989a-d912845ffe69",
-    "DelegatedWork_Identifier": "e29d5979-5b06-4a7f-ae24-6a9348d2e1ff"
+    "Application_Identifier": "280d0935-0796-47d1-8d26-273470a3f17a",
+    "DelegatedWork_Identifier": "6166886a-9576-433b-8544-658177bdef1d"
   },
   {
     "Role_Name": "User.DeleteRestore.All",
@@ -3446,8 +3456,8 @@
   },
   {
     "Role_Name": "UserAuthMethod",
-    "Application_Identifier": "72e00c1d-3e3d-43bb-a0b9-c435611bb1d2",
-    "DelegatedWork_Identifier": "14195339-1fe4-48a7-a0d3-a39eb9fd8958"
+    "Application_Identifier": "0400e371-7db1-4338-a269-96069eb65227",
+    "DelegatedWork_Identifier": "64930478-d0ea-4671-ad72-fe0d9821df09"
   },
   {
     "Role_Name": "UserCloudClipboard.Read",

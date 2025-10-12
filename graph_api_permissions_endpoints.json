@@ -23827,7 +23827,7 @@
     "Endpoints": {
       "Method": "POST",
       "OperationName": "identitycontainer_post_authenticationeventlisteners",
-      "Path": "https://graph.microsoft.com/v1.0/identity/authenticationEventListeners",
+      "Path": "https://graph.microsoft.com/beta/identity/authenticationEventListeners",
       "Version": "beta"
     },
     "Role": "EventListener.ReadWrite.All",

@@ -78,11 +78,11 @@
     "Application_Higher": "Not available."
   },
   {
-    "path": "https://graph.microsoft.com/v1.0/identity/authenticationEventListeners",
+    "path": "https://graph.microsoft.com/beta/identity/authenticationEventListeners",
     "version": "beta",
     "method": "POST",
     "operation_name": "identitycontainer_post_authenticationeventlisteners",
-    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/v1.0/identity/authenticationEventListeners",
+    "full_example_url": "https://graph.microsoft.com/betahttps://graph.microsoft.com/beta/identity/authenticationEventListeners",
     "example_from_docs": false,
     "DelegatedWork_Least": "EventListener.ReadWrite.All",
     "DelegatedWork_Higher": "Not available.",

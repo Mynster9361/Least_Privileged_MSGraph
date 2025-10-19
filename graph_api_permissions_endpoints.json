@@ -14037,6 +14037,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "device_list",
+        "Path": "/devices",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "directory_list_administrativeunits",
         "Path": "/administrativeUnits",
         "Version": "beta"
@@ -14109,20 +14115,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "device_list_transitivememberof",
+        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "directoryrole_list_scopedmembers",
         "Path": "/directoryroles/{role-id}/scopedMembers",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "directoryrole_list_scopedmembers",
-        "Path": "/directoryRoles(roleTemplateId='{roleTemplateId}')/scopedMembers",
+        "OperationName": "directoryrole_list",
+        "Path": "/directoryRoles",
         "Version": "beta"
       },
       {
@@ -14199,20 +14205,14 @@
       },
       {
         "Method": "GET",
+        "OperationName": "directoryrole_list_scopedmembers",
+        "Path": "/directoryRoles(roleTemplateId='{roleTemplateId}')/scopedMembers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list_members",
         "Path": "/groups/{id}/members",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "directoryrole_list",
-        "Path": "/directoryRoles",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "device_list_transitivememberof",
-        "Path": "/devices(deviceId='{deviceId}')/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -14224,7 +14224,7 @@
       {
         "Method": "GET",
         "OperationName": "device_list_registeredusers",
-        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
+        "Path": "/devices/{id}/registeredUsers",
         "Version": "beta"
       },
       {
@@ -14307,14 +14307,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "application_list_owners",
-        "Path": "/applications(appId='{appId}')/owners",
+        "OperationName": "device_list_registeredusers",
+        "Path": "/devices(deviceId='{deviceId}')/registeredUsers",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "channel_get_tabs",
-        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
+        "OperationName": "application_list_owners",
+        "Path": "/applications(appId='{appId}')/owners",
         "Version": "beta"
       },
       {
@@ -14397,8 +14397,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list_registeredusers",
-        "Path": "/devices/{id}/registeredUsers",
+        "OperationName": "channel_get_tabs",
+        "Path": "/teams/{team-id}/channels/{channel-id}/tabs/{tab-id}",
         "Version": "beta"
       },
       {
@@ -14409,20 +14409,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "administrativeunit_get_scopedrolemembers",
-        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "group_list_settings",
         "Path": "/settings",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "group_list_transitivemembers",
-        "Path": "/groups/{id}/transitiveMembers",
+        "OperationName": "group_list_transitivememberof",
+        "Path": "/groups/{id}/transitiveMemberOf",
         "Version": "beta"
       },
       {
@@ -14619,6 +14613,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "group_list_transitivemembers",
+        "Path": "/groups/{id}/transitiveMembers",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "group_list",
         "Path": "/groups",
         "Version": "beta"
@@ -14633,12 +14633,6 @@
         "Method": "GET",
         "OperationName": "grouplifecyclepolicy_list",
         "Path": "/groupLifecyclePolicies",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "beta"
       },
       {
@@ -14793,8 +14787,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_list_transitivememberof",
-        "Path": "/groups/{id}/transitiveMemberOf",
+        "OperationName": "administrativeunit_get_scopedrolemembers",
+        "Path": "/administrativeUnits/{id}/scopedRoleMembers/{id}",
         "Version": "beta"
       },
       {
@@ -15189,26 +15183,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "user_list_scopedrolememberof",
+        "Path": "/me/scopedRoleMemberOf",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "grouplifecyclepolicy_get",
         "Path": "/groupLifecyclePolicies/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "grouplifecyclepolicy_list",
-        "Path": "/groupLifecyclePolicies",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "groupsetting_get",
         "Path": "/groupSettings/{groupSettingId}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
@@ -15291,14 +15279,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_createdobjects",
-        "Path": "/users/{id | userPrincipalName}/createdObjects",
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals(appId='{appId}')/owners",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "user_list_createdobjects",
-        "Path": "/me/createdObjects",
+        "Path": "/users/{id | userPrincipalName}/createdObjects",
         "Version": "v1.0"
       },
       {
@@ -15381,15 +15369,15 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_owners",
-        "Path": "/servicePrincipals/{id}/owners",
+        "OperationName": "user_list_createdobjects",
+        "Path": "/me/createdObjects",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_scopedrolememberof",
-        "Path": "/me/scopedRoleMemberOf",
-        "Version": "beta"
+        "OperationName": "serviceprincipal_list_owners",
+        "Path": "/servicePrincipals/{id}/owners",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -15399,8 +15387,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_oauth2permissiongrants",
-        "Path": "/servicePrincipals(appId='{appId}')/oauth2PermissionGrants",
+        "OperationName": "serviceprincipal_list_ownedobjects",
+        "Path": "/servicePrincipals/{id}/ownedObjects",
         "Version": "v1.0"
       },
       {
@@ -15413,12 +15401,6 @@
         "Method": "GET",
         "OperationName": "groupsettingtemplate_list",
         "Path": "/groupSettingTemplates",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
         "Version": "v1.0"
       },
       {
@@ -15579,8 +15561,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list_ownedobjects",
-        "Path": "/servicePrincipals/{id}/ownedObjects",
+        "OperationName": "serviceprincipal_list_oauth2permissiongrants",
+        "Path": "/servicePrincipals(appId='{appId}')/oauth2PermissionGrants",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "grouplifecyclepolicy_list",
+        "Path": "/groupLifecyclePolicies",
         "Version": "v1.0"
       },
       {
@@ -16221,8 +16209,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "OperationName": "list_featurerolloutpolicies",
+        "Path": "/policies/featureRolloutPolicies",
         "Version": "beta"
       },
       {
@@ -16305,8 +16293,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "list_featurerolloutpolicies",
-        "Path": "/policies/featureRolloutPolicies",
+        "OperationName": "application_get",
+        "Path": "/applications/{applicationObjectId}",
         "Version": "beta"
       },
       {
@@ -16317,8 +16305,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "oauth2permissiongrant_delta",
-        "Path": "/oauth2PermissionGrants/delta",
+        "OperationName": "oauth2permissiongrant_get",
+        "Path": "/oauth2PermissionGrants/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "team_update",
+        "Path": "/teams/{team-id}",
         "Version": "beta"
       },
       {
@@ -16455,20 +16449,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "serviceprincipal_removekey",
-        "Path": "/serviceprincipals/{id}/removeKey",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "team_update",
-        "Path": "/teams/{team-id}",
+        "OperationName": "teamsapp_publish",
+        "Path": "/appCatalogs/teamsApps",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "teamsapp_publish",
-        "Path": "/appCatalogs/teamsApps",
+        "OperationName": "serviceprincipal_removekey",
+        "Path": "/serviceprincipals/{id}/removeKey",
         "Version": "beta"
       },
       {
@@ -16478,8 +16466,8 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "unifiedroledefinition_delete",
+        "Method": "PATCH",
+        "OperationName": "unifiedroledefinition_update",
         "Path": "/roleManagement/deviceManagement/roleDefinitions/{id}",
         "Version": "beta"
       },
@@ -16550,15 +16538,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_serviceprincipals",
-        "Path": "/servicePrincipals",
+        "Method": "GET",
+        "OperationName": "user_list_manager",
+        "Path": "/me/manager",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_manager",
-        "Path": "/me/manager",
+        "OperationName": "user_list_licensedetails",
+        "Path": "/users/{id}/licenseDetails",
         "Version": "beta"
       },
       {
@@ -16622,21 +16610,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "unifiedroledefinition_update",
+        "Method": "DELETE",
+        "OperationName": "unifiedroledefinition_delete",
         "Path": "/roleManagement/deviceManagement/roleDefinitions/{id}",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "user_list_licensedetails",
-        "Path": "/users/{id}/licenseDetails",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "application_get",
-        "Path": "/applications/{applicationObjectId}",
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_serviceprincipals",
+        "Path": "/servicePrincipals",
         "Version": "beta"
       },
       {
@@ -16646,9 +16628,15 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_post_owners",
+        "Path": "/servicePrincipals/{id}/owners/$ref",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "serviceprincipal_list",
-        "Path": "/servicePrincipals",
+        "OperationName": "rbacapplication_list_transitiveroleassignments",
+        "Path": "/roleManagement/directory/transitiveRoleAssignments?$filter=principalId eq '{principalId}'",
         "Version": "beta"
       },
       {
@@ -16784,18 +16772,6 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "oauth2permissiongrant_get",
-        "Path": "/oauth2PermissionGrants/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rbacapplication_list_transitiveroleassignments",
-        "Path": "/roleManagement/directory/transitiveRoleAssignments?$filter=principalId eq '{principalId}'",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "rbacapplication_post_roledefinitions",
         "Path": "/roleManagement/deviceManagement/roleDefinitions",
@@ -16811,6 +16787,18 @@
         "Method": "POST",
         "OperationName": "serviceprincipal_addkey",
         "Path": "/servicePrincipals(appId='{appId}')/addKey",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "serviceprincipal_addpassword",
+        "Path": "/servicePrincipals/{id}/addPassword",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_list",
+        "Path": "/servicePrincipals",
         "Version": "beta"
       },
       {
@@ -16875,20 +16863,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals(appId='{appId}')",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_post_owners",
-        "Path": "/servicePrincipals/{id}/owners/$ref",
+        "OperationName": "oauth2permissiongrant_delta",
+        "Path": "/oauth2PermissionGrants/delta",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "serviceprincipal_get",
-        "Path": "/servicePrincipals/{id}",
+        "Path": "/servicePrincipals(appId='{appId}')",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "serviceprincipal_delta",
+        "Path": "/servicePrincipals/delta",
         "Version": "beta"
       },
       {
@@ -16952,15 +16940,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "serviceprincipal_addpassword",
-        "Path": "/servicePrincipals/{id}/addPassword",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "serviceprincipal_delta",
-        "Path": "/servicePrincipals/delta",
+        "OperationName": "serviceprincipal_get",
+        "Path": "/servicePrincipals/{id}",
         "Version": "beta"
       },
       {
@@ -17126,6 +17108,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "device_update",
+        "Path": "/devices(deviceId='{deviceId}')",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "group_delta",
         "Path": "/groups/delta",
@@ -17133,20 +17121,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "group_get",
-        "Path": "/groups/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "group_list_approleassignments",
         "Path": "/groups/{id}/appRoleAssignments",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "groupsettingtemplate_list",
-        "Path": "/groupSettingTemplates",
         "Version": "v1.0"
       },
       {
@@ -17210,15 +17186,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "device_update",
-        "Path": "/devices(deviceId='{deviceId}')",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "grouplifecyclepolicy_addgroup",
         "Path": "/groupLifecyclePolicies/{id}/addGroup",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "group_upsert",
+        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
         "Version": "v1.0"
       },
       {
@@ -17288,21 +17264,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "group_upsert",
-        "Path": "https://graph.microsoft.com/v1.0/groups(uniqueName='uniqueName')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "invitation_post",
-        "Path": "/invitations",
+        "Method": "GET",
+        "OperationName": "group_get",
+        "Path": "/groups/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "device_update",
         "Path": "/devices/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "device_list",
+        "Path": "/devices",
         "Version": "v1.0"
       },
       {
@@ -17541,8 +17517,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "device_list",
-        "Path": "/devices",
+        "OperationName": "groupsettingtemplate_list",
+        "Path": "/groupSettingTemplates",
         "Version": "v1.0"
       },
       {
@@ -17625,14 +17601,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "user_revokesigninsessions",
-        "Path": "/me/revokeSignInSessions",
-        "Version": "beta"
+        "OperationName": "invitation_post",
+        "Path": "/invitations",
+        "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "Method": "DELETE",
+        "OperationName": "oauth2permissiongrant_delete",
+        "Path": "/oAuth2PermissionGrants/{id}",
         "Version": "v1.0"
       },
       {
@@ -17954,10 +17930,10 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "oauth2permissiongrant_delete",
-        "Path": "/oAuth2PermissionGrants/{id}",
-        "Version": "v1.0"
+        "Method": "POST",
+        "OperationName": "user_revokesigninsessions",
+        "Path": "/me/revokeSignInSessions",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -18663,6 +18639,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignment_get",
+        "Path": "/education/classes/{id}/assignments/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignment_list_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories",
         "Version": "beta"
@@ -18711,14 +18693,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get",
-        "Path": "/education/classes/{id}/assignments/{id}",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationrubric_get",
+        "Path": "/education/me/rubrics/{id}",
         "Version": "beta"
       },
       {
@@ -18771,12 +18753,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationrubric_get",
-        "Path": "/education/me/rubrics/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationassignment_get_rubric",
         "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "beta"
@@ -18791,6 +18767,12 @@
         "Method": "GET",
         "OperationName": "educationuser_list_rubrics",
         "Path": "/education/me/rubrics",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -18831,6 +18813,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "v1.0"
@@ -18843,14 +18831,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
-        "Version": "v1.0"
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
+        "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -18891,6 +18879,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
@@ -18903,15 +18897,9 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -18933,6 +18921,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignment_get",
+        "Path": "/education/classes/{id}/assignments/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignment_list_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories",
         "Version": "beta"
@@ -18975,14 +18969,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get",
-        "Path": "/education/classes/{id}/assignments/{id}",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "beta"
       },
       {
@@ -19029,12 +19023,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationassignment_get_rubric",
         "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "beta"
@@ -19049,6 +19037,12 @@
         "Method": "GET",
         "OperationName": "educationuser_list_assignments",
         "Path": "/education/users/{user-id}/assignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
         "Version": "v1.0"
       },
       {
@@ -19089,20 +19083,26 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
-        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
-        "Version": "v1.0"
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
+        "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
+        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
         "Version": "v1.0"
       },
       {
@@ -19143,21 +19143,21 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -19179,6 +19179,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignment_get",
+        "Path": "/education/classes/{id}/assignments/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignment_list_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories",
         "Version": "beta"
@@ -19221,14 +19227,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get",
-        "Path": "/education/classes/{id}/assignments/{id}",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationrubric_get",
+        "Path": "/education/me/rubrics/{id}",
         "Version": "beta"
       },
       {
@@ -19275,12 +19281,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationrubric_get",
-        "Path": "/education/me/rubrics/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationassignment_get_rubric",
         "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "beta"
@@ -19295,6 +19295,12 @@
         "Method": "GET",
         "OperationName": "educationuser_list_rubrics",
         "Path": "/education/me/rubrics",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -19335,20 +19341,26 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
-        "Version": "v1.0"
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
+        "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -19383,6 +19395,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
@@ -19395,15 +19413,9 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -19425,6 +19437,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignment_get",
+        "Path": "/education/classes/{id}/assignments/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignment_list_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories",
         "Version": "beta"
@@ -19461,14 +19479,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get",
-        "Path": "/education/classes/{id}/assignments/{id}",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
         "Version": "beta"
       },
       {
@@ -19509,12 +19527,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationassignment_get_rubric",
         "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "beta"
@@ -19529,6 +19541,12 @@
         "Method": "GET",
         "OperationName": "educationuser_list_assignments",
         "Path": "/education/users/{user-id}/assignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
         "Version": "v1.0"
       },
       {
@@ -19569,14 +19587,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationcategory_get",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationcategory_get",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "v1.0"
       },
       {
@@ -19611,21 +19635,21 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -19644,12 +19668,6 @@
         "OperationName": "educationassignment_activate",
         "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
-        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -19796,15 +19814,21 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "educationassignment_delete_gradingcategory",
         "Path": "/education/classes/{classId}/assignments/{assignmentId}/gradingCategory/$ref",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
+        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "beta"
       },
       {
@@ -19815,8 +19839,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationclass_post_category",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationclass_post_assignments",
+        "Path": "/education/classes/{class-id}/assignments",
         "Version": "beta"
       },
       {
@@ -19892,15 +19916,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationsubmission_list_submittedresources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
+        "Method": "POST",
+        "OperationName": "educationassignment_deactivate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationsubmission_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
+        "OperationName": "educationsubmission_list_submittedresources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
         "Version": "beta"
       },
       {
@@ -19971,8 +19995,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationclass_post_assignments",
-        "Path": "/education/classes/{class-id}/assignments",
+        "OperationName": "educationclass_post_category",
+        "Path": "/education/classes/{id}/assignmentCategories",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
         "Version": "beta"
       },
       {
@@ -19983,20 +20013,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationassignment_deactivate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "OperationName": "educationassignment_activate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationuser_post_rubrics",
-        "Path": "/education/me/rubrics",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
-        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
-        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
+        "OperationName": "educationuser_list_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "v1.0"
       },
       {
@@ -20015,6 +20039,12 @@
         "Method": "PATCH",
         "OperationName": "educationassignmentsettings_update",
         "Path": "https://graph.microsoft.com/v1.0/education/classes/37d99af7-cfc5-4e3b-8566-f7d40e4a2070/assignmentSettings",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -20145,15 +20175,15 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "OperationName": "educationclass_getrecentlymodifiedsubmissions",
+        "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationassignment_activate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/activate",
-        "Version": "beta"
+        "Method": "GET",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -20163,14 +20193,8 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationclass_post_category",
-        "Path": "/education/classes/{id}/assignmentCategories",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_rubrics",
-        "Path": "/education/me/rubrics",
+        "OperationName": "educationclass_post_assignments",
+        "Path": "/education/classes/{class-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -20189,6 +20213,12 @@
         "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -20240,15 +20270,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationsubmission_list_submittedresources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
+        "Method": "POST",
+        "OperationName": "educationuser_post_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationsubmission_list_resources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources",
+        "OperationName": "educationsubmission_list_submittedresources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
         "Version": "v1.0"
       },
       {
@@ -20319,8 +20349,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationclass_post_assignments",
-        "Path": "/education/classes/{class-id}/assignments",
+        "OperationName": "educationclass_post_category",
+        "Path": "/education/classes/{id}/assignmentCategories",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_resources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources",
         "Version": "v1.0"
       },
       {
@@ -20340,6 +20376,12 @@
         "OperationName": "educationassignment_delete",
         "Path": "/education/classes/{id}/assignments/{id}",
         "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_get_rubric",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -20427,98 +20469,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get_rubric",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationclass_list_categories",
         "Path": "/education/classes/{id}/assignmentCategories",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationfeedbackresourceoutcome_post_outcomes",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/outcomes",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "educationoutcome_update",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/outcomes/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationsubmission_excuse",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/excuse",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmission_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmission_list_outcomes",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/outcomes",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmission_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmission_list_submittedresources",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationsubmission_reassign",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/reassign",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationsubmission_return",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/return",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationsubmission_submit",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/submit",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationsubmission_unsubmit",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/unsubmit",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmissionresource_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmissionresource_list_dependentresources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmittedsubmissionresource_get",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "beta"
       },
       {
@@ -20529,8 +20481,92 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmittedsubmissionresource_get",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmissionresource_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationsubmission_unsubmit",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/unsubmit",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationsubmission_submit",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/submit",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationsubmission_return",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/return",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignment_delta",
         "Path": "/education/classes/{educationClassId}/assignments/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationsubmission_reassign",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/reassign",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/resources",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_outcomes",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/outcomes",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationsubmission_excuse",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/excuse",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "educationoutcome_update",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/outcomes/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationfeedbackresourceoutcome_post_outcomes",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/submissions/{submissionId}/outcomes",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmission_list_submittedresources",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources",
         "Version": "beta"
       },
       {
@@ -20547,74 +20583,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_delta",
-        "Path": "/education/classes/{educationClassId}/assignments/delta",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_get_rubric",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_get",
-        "Path": "/education/classes/{id}/assignments/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_categories",
-        "Path": "/education/classes/{id}/assignments/{id}/categories",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/resources",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_submissions",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationassignment_post_resources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationassignment_publish",
-        "Path": "/education/classes/{id}/assignments/{id}/publish",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationassignment_setupresourcesfolder",
-        "Path": "/education/classes/{id}/assignments/{id}/setUpResourcesFolder",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "educationassignment_update",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "educationassignmentresource_delete",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignmentresource_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
         "Version": "v1.0"
       },
       {
@@ -20625,20 +20595,98 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignmentresource_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "educationassignmentresource_delete",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "educationassignment_update",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationassignment_setupresourcesfolder",
+        "Path": "/education/classes/{id}/assignments/{id}/setUpResourcesFolder",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationclass_getrecentlymodifiedsubmissions",
         "Path": "/education/classes/{class-id}/getRecentlyModifiedSubmissions",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationclass_list_assignments",
-        "Path": "/education/classes/{id}/assignments",
+        "Method": "POST",
+        "OperationName": "educationassignment_publish",
+        "Path": "/education/classes/{id}/assignments/{id}/publish",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationclass_list_categories",
-        "Path": "/education/classes/{id}/assignmentCategories",
+        "OperationName": "educationassignment_list_submissions",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/resources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_list_categories",
+        "Path": "/education/classes/{id}/assignments/{id}/categories",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_get",
+        "Path": "/education/classes/{id}/assignments/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_get_rubric",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_delta",
+        "Path": "/education/classes/{educationClassId}/assignments/delta",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationassignment_post_resources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationclass_list_assignments",
+        "Path": "/education/classes/{id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -20649,14 +20697,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
+        "OperationName": "educationsubmittedsubmissionresource_get",
+        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationsubmittedsubmissionresource_get",
-        "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -20685,9 +20733,9 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
-        "Version": "beta"
+        "OperationName": "educationclass_list_categories",
+        "Path": "/education/classes/{id}/assignmentCategories",
+        "Version": "v1.0"
       },
       {
         "Method": "POST",
@@ -20756,12 +20804,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationassignmentresource_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "educationassignmentresource_delete",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
@@ -20805,20 +20847,20 @@
       },
       {
         "Method": "POST",
-        "OperationName": "educationassignmentsettings_post_gradingschemes",
-        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "educationassignment_post_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories/$ref",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/resources",
+        "OperationName": "educationassignmentresource_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_list_submissions",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
         "Version": "beta"
       },
       {
@@ -20864,15 +20906,21 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "educationassignment_deactivate",
+        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "educationassignment_list_submissions",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
+        "OperationName": "educationassignment_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/resources",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "educationassignment_deactivate",
-        "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
+        "OperationName": "educationassignmentsettings_post_gradingschemes",
+        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
         "Version": "beta"
       },
       {
@@ -20882,8 +20930,8 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationcategory_get",
+        "Method": "DELETE",
+        "OperationName": "educationcategory_delete",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
@@ -20936,15 +20984,15 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "educationcategory_delete",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "educationsubmission_get",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "educationrubric_update",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "beta"
       },
       {
@@ -20996,15 +21044,9 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "educationrubric_update",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
-        "OperationName": "educationuser_list_rubrics",
-        "Path": "/education/me/rubrics",
+        "OperationName": "educationcategory_get",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
       {
@@ -21017,6 +21059,18 @@
         "Method": "GET",
         "OperationName": "educationuser_list_rubrics",
         "Path": "/education/me/rubrics",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "educationuser_post_rubrics",
+        "Path": "/education/me/rubrics",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -21134,9 +21188,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "educationuser_post_rubrics",
-        "Path": "/education/me/rubrics",
+        "Method": "GET",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -21146,15 +21200,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationcategory_get",
+        "Method": "DELETE",
+        "OperationName": "educationcategory_delete",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -21167,6 +21215,12 @@
         "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -21200,15 +21254,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "educationcategory_delete",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
-        "Version": "v1.0"
-      },
-      {
         "Method": "GET",
         "OperationName": "educationsubmission_get",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "educationrubric_update",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "v1.0"
       },
       {
@@ -21260,9 +21314,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "educationrubric_update",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Method": "GET",
+        "OperationName": "educationcategory_get",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "v1.0"
       },
       {
@@ -21282,6 +21342,12 @@
         "OperationName": "educationassignment_delete",
         "Path": "/education/classes/{id}/assignments/{id}",
         "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationassignment_get_rubric",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -21339,14 +21405,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignment_get_rubric",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignmentresource_list_dependentresources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "OperationName": "educationcategory_get",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
       {
@@ -21405,12 +21471,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "educationcategory_get",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "educationassignment_delta",
         "Path": "/education/classes/{educationClassId}/assignments/delta",
         "Version": "beta"
@@ -21425,6 +21485,12 @@
         "Method": "GET",
         "OperationName": "educationuser_list_assignments",
         "Path": "/education/users/{user-id}/assignments",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
         "Version": "v1.0"
       },
       {
@@ -21489,6 +21555,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/me/assignments",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationassignmentresource_get",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
         "Version": "v1.0"
@@ -21543,21 +21615,21 @@
       },
       {
         "Method": "GET",
+        "OperationName": "educationsubmissionresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
+        "OperationName": "educationassignmentresource_list_dependentresources",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/me/assignments",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -74393,6 +74465,12 @@
       },
       {
         "Method": "GET",
+        "OperationName": "schemaextension_get",
+        "Path": "/schemaExtensions/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "regionalandlanguagesettings_get",
         "Path": "/users/{user-id | userPrincipalName}/settings/regionalAndLanguageSettings",
         "Version": "beta"
@@ -74453,20 +74531,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "schemaextension_list",
+        "Path": "/schemaExtensions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "profile_list_skills",
         "Path": "/users/{id | userPrincipalName}/profile/skills",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "schemaextension_get",
-        "Path": "/schemaExtensions/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "profile_list_skills",
-        "Path": "/me/profile/skills",
+        "OperationName": "profile_list_projects",
+        "Path": "/users/{id | userPrincipalName}/profile/projects",
         "Version": "beta"
       },
       {
@@ -74531,20 +74609,14 @@
       },
       {
         "Method": "GET",
+        "OperationName": "profile_list_skills",
+        "Path": "/me/profile/skills",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "profile_list_interests",
         "Path": "/me/profile/interests",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "profile_list_projects",
-        "Path": "/users/{id | userPrincipalName}/profile/projects",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "schemaextension_list",
-        "Path": "/schemaExtensions",
         "Version": "beta"
       },
       {
@@ -74555,8 +74627,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "skillproficiency_get",
-        "Path": "/users/{id | userPrincipalName}/profile/skills/{id}",
+        "OperationName": "user_findroomlists",
+        "Path": "/me/findRoomLists",
         "Version": "beta"
       },
       {
@@ -74627,14 +74699,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_registereddevices",
-        "Path": "/users/{id | userPrincipalName}/registeredDevices",
+        "OperationName": "skillproficiency_get",
+        "Path": "/users/{id | userPrincipalName}/profile/skills/{id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "user_list_registereddevices",
-        "Path": "/me/registeredDevices",
+        "Path": "/users/{id | userPrincipalName}/registeredDevices",
         "Version": "beta"
       },
       {
@@ -74705,14 +74777,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_findroomlists",
-        "Path": "/me/findRoomLists",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "profile_list_emails",
-        "Path": "/users/{id | userPrincipalName}/profile/emails",
+        "OperationName": "user_list_registereddevices",
+        "Path": "/me/registeredDevices",
         "Version": "beta"
       },
       {
@@ -74724,14 +74790,20 @@
       {
         "Method": "GET",
         "OperationName": "profile_list_emails",
-        "Path": "/me/profile/emails",
+        "Path": "/users/{id | userPrincipalName}/profile/emails",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "profile_list_educationalactivities",
-        "Path": "/me/profile/educationalActivities",
+        "Path": "/users/{id | userPrincipalName}/profile/educationalActivities",
         "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "usersettings_get",
+        "Path": "/me/settings/",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -74795,20 +74867,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "drive_get",
+        "Path": "/me/drive",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "user_list_owneddevices",
         "Path": "/me/ownedDevices",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "usersettings_get",
-        "Path": "/me/settings/",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "user_list_licensedetails",
-        "Path": "/users/{id}/licenseDetails",
+        "Path": "/me/licenseDetails",
         "Version": "v1.0"
       },
       {
@@ -74873,20 +74945,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "user_list_licensedetails",
-        "Path": "/me/licenseDetails",
+        "Path": "/users/{id}/licenseDetails",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "drive_get",
-        "Path": "/me/drive",
+        "OperationName": "profile_list_emails",
+        "Path": "/me/profile/emails",
         "Version": "beta"
       },
       {
@@ -74897,8 +74963,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "itememail_get",
-        "Path": "/users/{id | userPrincipalName}/profile/emails/{id}",
+        "OperationName": "itemphone_get",
+        "Path": "/me/profile/phones/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "profile_list_educationalactivities",
+        "Path": "/me/profile/educationalActivities",
         "Version": "beta"
       },
       {
@@ -74963,14 +75035,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "personinterest_get",
-        "Path": "/users/{id | userPrincipalName}/profile/interests/{id}",
+        "OperationName": "itememail_get",
+        "Path": "/users/{id | userPrincipalName}/profile/emails/{id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "personinterest_get",
-        "Path": "/me/profile/interests/{id}",
+        "Path": "/users/{id | userPrincipalName}/profile/interests/{id}",
         "Version": "beta"
       },
       {
@@ -75023,12 +75095,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "languageproficiency_get",
         "Path": "/users/{id | userPrincipalName}/profile/languages/{id}",
         "Version": "beta"
@@ -75047,14 +75113,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "itemphone_get",
-        "Path": "/me/profile/phones/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "profile_list_educationalactivities",
-        "Path": "/users/{id | userPrincipalName}/profile/educationalActivities",
+        "OperationName": "personinterest_get",
+        "Path": "/me/profile/interests/{id}",
         "Version": "beta"
       },
       {
@@ -75074,6 +75134,12 @@
         "OperationName": "directoryobject_getmembergroups_6",
         "Path": "/directoryObjects/{id}/getMemberGroups",
         "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "shiftpreferences_get",
+        "Path": "/users/{userId}/settings/shiftPreferences",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -75221,20 +75287,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "profile_list_emails",
-        "Path": "/users/{id | userPrincipalName}/profile/emails",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "shiftpreferences_get",
-        "Path": "/users/{userId}/settings/shiftPreferences",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "skillproficiency_get",
         "Path": "/me/profile/skills/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "profile_list_emails",
+        "Path": "/users/{id | userPrincipalName}/profile/emails",
         "Version": "beta"
       },
       {
@@ -75245,8 +75305,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_delta",
-        "Path": "/users/delta",
+        "OperationName": "user_findroomlists",
+        "Path": "/me/findRoomLists",
         "Version": "beta"
       },
       {
@@ -75323,14 +75383,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "profile_list_emails",
-        "Path": "/me/profile/emails",
+        "OperationName": "user_list_owneddevices",
+        "Path": "/users/{id | userPrincipalName}/ownedDevices",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_owneddevices",
-        "Path": "/users/{id | userPrincipalName}/ownedDevices",
+        "OperationName": "user_list_manager",
+        "Path": "/users/{id | userPrincipalName}/manager",
         "Version": "beta"
       },
       {
@@ -75401,14 +75461,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "user_findroomlists",
-        "Path": "/me/findRoomLists",
+        "OperationName": "user_delta",
+        "Path": "/users/delta",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_manager",
-        "Path": "/users/{id | userPrincipalName}/manager",
+        "OperationName": "profile_list_emails",
+        "Path": "/me/profile/emails",
         "Version": "beta"
       },
       {
@@ -75421,12 +75481,6 @@
         "Method": "GET",
         "OperationName": "profile_list_educationalactivities",
         "Path": "/me/profile/educationalActivities",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "profile_list_anniversaries",
-        "Path": "/users/{id | userPrincipalName}/profile/anniversaries",
         "Version": "beta"
       },
       {
@@ -75503,14 +75557,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "usersettings_get",
-        "Path": "/me/settings/",
+        "OperationName": "user_list_licensedetails",
+        "Path": "/me/licenseDetails",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "user_list_licensedetails",
-        "Path": "/me/licenseDetails",
+        "OperationName": "user_list_joinedteams",
+        "Path": "/users/{id | user-principal-name}/joinedTeams",
         "Version": "v1.0"
       },
       {
@@ -75581,21 +75635,9 @@
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
+        "OperationName": "usersettings_get",
+        "Path": "/me/settings/",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "user_list_joinedteams",
-        "Path": "/users/{id | user-principal-name}/joinedTeams",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workposition_get",
-        "Path": "/me/profile/positions/{id}",
-        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -75606,7 +75648,19 @@
       {
         "Method": "GET",
         "OperationName": "itememail_get",
+        "Path": "/me/profile/emails/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itememail_get",
         "Path": "/users/{id | userPrincipalName}/profile/emails/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "profile_list_anniversaries",
+        "Path": "/users/{id | userPrincipalName}/profile/anniversaries",
         "Version": "beta"
       },
       {
@@ -75677,20 +75731,20 @@
       },
       {
         "Method": "GET",
+        "OperationName": "workposition_get",
+        "Path": "/me/profile/positions/{id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "personanniversary_get",
         "Path": "/users/{id | userPrincipalName}/profile/anniversaries/{id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "itememail_get",
-        "Path": "/me/profile/emails/{id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "personanniversary_get",
-        "Path": "/me/profile/anniversaries/{id}",
+        "OperationName": "outlookuser_supportedtimezones",
+        "Path": "/users/{id|userPrincipalName}/outlook/supportedTimeZones(TimeZoneStandard=microsoft.graph.timeZoneStandard'{timezone_format}')",
         "Version": "beta"
       },
       {
@@ -75737,12 +75791,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "licensedetails_getteamslicensingdetails",
-        "Path": "/users/{user-id}/licenseDetails/getTeamsLicensingDetails",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "languageproficiency_get",
         "Path": "/users/{id | userPrincipalName}/profile/languages/{id}",
         "Version": "beta"
@@ -75767,8 +75815,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "outlookuser_supportedtimezones",
-        "Path": "/users/{id|userPrincipalName}/outlook/supportedTimeZones(TimeZoneStandard=microsoft.graph.timeZoneStandard'{timezone_format}')",
+        "OperationName": "personanniversary_get",
+        "Path": "/me/profile/anniversaries/{id}",
         "Version": "beta"
       },
       {

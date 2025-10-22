@@ -20804,6 +20804,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "educationassignmentresource_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
+        "Version": "beta"
+      },
+      {
         "Method": "DELETE",
         "OperationName": "educationassignmentresource_delete",
         "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
@@ -20847,20 +20853,20 @@
       },
       {
         "Method": "POST",
+        "OperationName": "educationassignmentsettings_post_gradingschemes",
+        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
         "OperationName": "educationassignment_post_categories",
         "Path": "/education/classes/{id}/assignments/{id}/categories/$ref",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "educationassignmentresource_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_submissions",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
+        "OperationName": "educationassignment_list_resources",
+        "Path": "/education/classes/{id}/assignments/{id}/resources",
         "Version": "beta"
       },
       {
@@ -20906,21 +20912,15 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "educationassignment_list_submissions",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "educationassignment_deactivate",
         "Path": "/education/classes/{classId}/assignments/{assignmentId}/deactivate",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationassignment_list_resources",
-        "Path": "/education/classes/{id}/assignments/{id}/resources",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationassignmentsettings_post_gradingschemes",
-        "Path": "/education/classes/{id}/assignmentSettings/gradingSchemes",
         "Version": "beta"
       },
       {
@@ -20930,8 +20930,8 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "educationcategory_delete",
+        "Method": "GET",
+        "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
@@ -20984,15 +20984,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationsubmission_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
+        "Method": "DELETE",
+        "OperationName": "educationcategory_delete",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "educationrubric_update",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Method": "GET",
+        "OperationName": "educationsubmission_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
         "Version": "beta"
       },
       {
@@ -21044,9 +21044,15 @@
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "educationrubric_update",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
-        "OperationName": "educationcategory_get",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
+        "OperationName": "educationuser_list_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "beta"
       },
       {
@@ -21059,18 +21065,6 @@
         "Method": "GET",
         "OperationName": "educationuser_list_rubrics",
         "Path": "/education/me/rubrics",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "educationuser_post_rubrics",
-        "Path": "/education/me/rubrics",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_assignments",
-        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -21188,9 +21182,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationassignmentresource_list_dependentresources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/resources/{resource-id}/dependentResources",
+        "Method": "POST",
+        "OperationName": "educationuser_post_rubrics",
+        "Path": "/education/me/rubrics",
         "Version": "v1.0"
       },
       {
@@ -21200,9 +21194,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "educationcategory_delete",
+        "Method": "GET",
+        "OperationName": "educationcategory_get",
         "Path": "/education/classes/{id}/assignmentCategories/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "educationuser_list_assignments",
+        "Path": "/education/users/{user-id}/assignments",
         "Version": "v1.0"
       },
       {
@@ -21215,12 +21215,6 @@
         "Method": "GET",
         "OperationName": "educationsubmittedsubmissionresource_get",
         "Path": "/education/classes/{id}/assignments/{id}/submissions/{id}/submittedResources/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationsubmissionresource_list_dependentresources",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}/resources/{resource-id}/dependentResources",
         "Version": "v1.0"
       },
       {
@@ -21254,15 +21248,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationsubmission_get",
-        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
+        "Method": "DELETE",
+        "OperationName": "educationcategory_delete",
+        "Path": "/education/classes/{id}/assignmentCategories/{id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "educationrubric_update",
-        "Path": "/education/classes/{id}/assignments/{id}/rubric",
+        "Method": "GET",
+        "OperationName": "educationsubmission_get",
+        "Path": "/education/classes/{class-id}/assignments/{assignment-id}/submissions/{submission-id}",
         "Version": "v1.0"
       },
       {
@@ -21314,15 +21308,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "educationcategory_get",
-        "Path": "/education/classes/{id}/assignmentCategories/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "educationuser_list_rubrics",
-        "Path": "/education/me/rubrics",
+        "Method": "PATCH",
+        "OperationName": "educationrubric_update",
+        "Path": "/education/classes/{id}/assignments/{id}/rubric",
         "Version": "v1.0"
       },
       {
@@ -26783,31 +26771,31 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
@@ -27953,14 +27941,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/LastColumn",
+        "OperationName": "driveitem_list_children",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
+        "Path": "/drives/{drive-id}/items/{item-id}/children",
         "Version": "beta"
       },
       {
@@ -27970,18 +27958,6 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "chartgridlines_get",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
@@ -28025,12 +28001,6 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
         "OperationName": "chartfont_update",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/font",
         "Version": "beta"
@@ -28038,13 +28008,19 @@
       {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/format/font",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
         "Version": "beta"
       },
       {
@@ -28090,39 +28066,39 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "chartfont_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/format/font",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/format/font",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/minorGridlines",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartgridlines_update",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/majorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartgridlines_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
         "Version": "beta"
       },
       {
@@ -28240,15 +28216,15 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/legend/format/fill/setSolidColor",
+        "Method": "PATCH",
+        "OperationName": "chartgridlines_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorGridlines",
         "Version": "beta"
       },
       {
@@ -28264,15 +28240,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
+        "Method": "POST",
+        "OperationName": "chartfill_setsolidcolor",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
@@ -28390,39 +28366,39 @@
         "Version": "beta"
       },
       {
+        "Method": "POST",
+        "OperationName": "chart_post_series",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "chart_post_series",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
         "OperationName": "chartlineformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chartaxistitle_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "chartaxistitle_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "chartfill_setsolidcolor",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/format/fill/setSolidColor",
         "Version": "beta"
       },
       {
@@ -28540,6 +28516,12 @@
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "chartaxistitle_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/valueAxis/title",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "chartaxistitle_get",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/title",
@@ -28547,20 +28529,26 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/drives/{drive-id}/items/{item-id}/children",
+        "OperationName": "chartaxistitle_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/title",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartlineformat_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "chartlineformat_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "chartpoint_get",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points/{point-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chartpoint_list",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points",
         "Version": "beta"
       },
       {
@@ -28618,15 +28606,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "Method": "POST",
+        "OperationName": "driveitem_follow",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/follow",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_follow",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/follow",
+        "Path": "/drives/{drive-id}/items/{item-id}/follow",
         "Version": "beta"
       },
       {
@@ -28684,21 +28672,27 @@
         "Version": "beta"
       },
       {
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/drives/{drive-id}/items/{item-id}/follow",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
         "Path": "/sites/{siteId}/drive/items/{item-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/users/{userId}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
@@ -28834,39 +28828,27 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/drives/{drive-id}/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/users/{userId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}:/{fileName}:/createUploadSession",
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/users/{userId}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "drive_list_following",
-        "Path": "/me/drive/following",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/LastColumn",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "drive_get",
-        "Path": "/me/drive",
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
@@ -28985,8 +28967,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "drive_list",
-        "Path": "/groups/{groupId}/drives",
+        "OperationName": "chartpoint_list",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series/{series-id}/points",
         "Version": "beta"
       },
       {
@@ -28997,32 +28979,32 @@
       },
       {
         "Method": "GET",
+        "OperationName": "drive_get",
+        "Path": "/me/drive",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "drive_list_following",
+        "Path": "/me/drive/following",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "drive_recent",
         "Path": "/me/drive/recent",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_checkin",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/drives/{driveId}/items/{itemId}/createUploadSession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
@@ -29136,19 +29118,31 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_checkin",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_checkin",
         "Path": "/drives/{driveId}/items/{itemId}/checkin",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "drive_list",
+        "Path": "/groups/{groupId}/drives",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chart_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "range_lastcolumn",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
         "Version": "beta"
       },
       {
@@ -31222,9 +31216,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "chart_post_series",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Method": "GET",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/LastColumn",
         "Version": "beta"
       },
       {
@@ -31522,68 +31516,50 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "worksheetprotection_unprotect",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "chart_post_series",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "chart_list",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
-        "Version": "v1.0"
+        "Method": "GET",
+        "OperationName": "chart_list_series",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "chart_list_series",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
+        "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
@@ -31591,12 +31567,6 @@
         "Method": "GET",
         "OperationName": "driveitemversion_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "filter_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "v1.0"
       },
       {
@@ -31608,19 +31578,25 @@
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitemversion_get",
         "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
         "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get_contents",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "v1.0"
       },
       {
@@ -31660,45 +31636,45 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/me/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
+        "OperationName": "driveitemversion_get_contents",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "filter_clear",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/clear",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "filter_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/clear",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "filter_clear",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/clear",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "nameditem_add",
-        "Path": "/me/drive/items/{id}/workbook/names/add",
+        "OperationName": "filter_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/apply",
         "Version": "v1.0"
       },
       {
@@ -31810,21 +31786,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/me/drive/items/{item-id}",
+        "Method": "POST",
+        "OperationName": "filter_clear",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/filter/clear",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "POST",
+        "OperationName": "filter_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/filter/clear",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Method": "POST",
+        "OperationName": "filter_clear",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/filter/clear",
         "Version": "v1.0"
       },
       {
@@ -31834,21 +31810,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/users/{user-id}/drive/items/{item-id}",
+        "Method": "POST",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/items/{item-id}/unfollow",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/sites/{site-id}/drive/items/{item-id}",
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/following/{item-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/me/drive/items/{item-id}",
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/following/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -31960,45 +31936,45 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_permanentdelete",
-        "Path": "/drives/{drive-id}/items/{item-id}/permanentDelete",
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/users/{user-id}/drive/items/{item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/me/drive/items/{item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "nameditem_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
+        "Path": "/me/drive/items/{id}/workbook/names/add",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/sites/{site-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_post_children",
-        "Path": "/drives/{drive-id}/items/{parent-item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_post_children",
-        "Path": "/me/drive/items/{parent-item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/items/{item-id}/unfollow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/following/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/following/{item-id}",
+        "OperationName": "driveitem_permanentdelete",
+        "Path": "/drives/{drive-id}/items/{item-id}/permanentDelete",
         "Version": "v1.0"
       },
       {
@@ -32112,43 +32088,43 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_post_children",
+        "Path": "/me/drive/items/{parent-item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_post_children",
         "Path": "/groups/{group-id}/drive/items/{parent-item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_post_children",
+        "Path": "/drives/{drive-id}/items/{parent-item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/users/{user-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
-        "Path": "/users/{user-id}/drive/items/{item-id}/children",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "nameditem_addformulalocal",
-        "Path": "/me/drive/items/{id}/workbook/names/add",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/add",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "nameditem_addformulalocal",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
@@ -32189,14 +32165,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
+        "OperationName": "range_entirecolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
         "Version": "v1.0"
       },
       {
@@ -32207,14 +32183,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/entireColumn",
+        "OperationName": "range_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/entireColumn",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/entireColumn",
         "Version": "v1.0"
       },
       {
@@ -32254,45 +32230,45 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "range_delete",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_column",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/column",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_column",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/column",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "range_entirecolumn",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/entireColumn",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_insert",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/insert",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_insert",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_insert",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/entireColumn",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
+        "OperationName": "range_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
+        "OperationName": "range_get",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastcolumn",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastColumn",
+        "OperationName": "range_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
         "Version": "v1.0"
       },
       {
@@ -32405,20 +32381,20 @@
       },
       {
         "Method": "POST",
-        "OperationName": "range_delete",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/delete",
+        "OperationName": "range_insert",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/insert",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/column",
+        "Method": "POST",
+        "OperationName": "range_insert",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/insert",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/column",
+        "Method": "POST",
+        "OperationName": "range_insert",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/insert",
         "Version": "v1.0"
       },
       {
@@ -32428,21 +32404,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "permission_grant",
-        "Path": "/shares/{encoded-sharing-url}/permission/grant",
+        "Method": "GET",
+        "OperationName": "range_column",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/column",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "OperationName": "range_column",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/column",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_column",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/column",
         "Version": "v1.0"
       },
       {
@@ -32554,9 +32530,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Method": "POST",
+        "OperationName": "nameditem_addformulalocal",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
@@ -32566,33 +32542,33 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Method": "POST",
+        "OperationName": "nameditem_addformulalocal",
+        "Path": "/me/drive/items/{id}/workbook/names/add",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
+        "Method": "GET",
+        "OperationName": "permission_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/column",
+        "Method": "POST",
+        "OperationName": "nameditem_add",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/add",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/column",
+        "Method": "POST",
+        "OperationName": "permission_grant",
+        "Path": "/shares/{encoded-sharing-url}/permission/grant",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_column",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/column",
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
@@ -32706,25 +32682,43 @@
       {
         "Method": "PATCH",
         "OperationName": "permission_update",
+        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "permission_update",
         "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "range_lastrow",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/children",
+        "Path": "/drives/{drive-id}/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/users/{userId}/drive/items/{itemId}/invite",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
         "Version": "v1.0"
       },
       {
@@ -33305,12 +33299,6 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/me/drive/items/{item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "chartlineformat_get",
         "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
         "Version": "v1.0"
@@ -33318,25 +33306,13 @@
       {
         "Method": "GET",
         "OperationName": "chartlineformat_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get_content_format",
-        "Path": "/drive/items/{item-id}/content?format={format}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/follow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/follow",
+        "OperationName": "chartlineformat_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/axes/seriesAxis/majorgridlines/format/line",
         "Version": "v1.0"
       },
       {
@@ -33377,14 +33353,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get_content_format",
-        "Path": "/drive/root:/{path and filename}:/content?format={format}",
+        "OperationName": "driveitem_delta",
+        "Path": "/groups/{groupId}/drive/root/delta",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/groups/{groupId}/drive/root/delta",
+        "Path": "/drives/{drive-id}/root/delta",
         "Version": "v1.0"
       },
       {
@@ -33420,7 +33396,31 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
         "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "v1.0"
       },
       {
@@ -33442,45 +33442,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_delta",
-        "Path": "/drives/{drive-id}/root/delta",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/drives/{drive-id}/items/{item-id}/content",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/root:/{item-path}:/content",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/drives/{drive-id}/items/{item-id}/children",
+        "Method": "POST",
+        "OperationName": "driveitem_follow",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/follow",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/users/{userId}/drive/items/{itemId}/invite",
+        "OperationName": "driveitem_createlink",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/createLink",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
+        "OperationName": "driveitem_follow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/follow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content_format",
+        "Path": "/drive/root:/{path and filename}:/content?format={format}",
         "Version": "v1.0"
       },
       {
@@ -33592,21 +33574,39 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_createlink",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/createLink",
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/me/drive/root:/{item-path}:/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/drives/{drive-id}/items/{item-id}/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content_format",
+        "Path": "/drive/items/{item-id}/content?format={format}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastColumn",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createlink",
         "Path": "/drives/{driveId}/items/{itemId}/createLink",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_copy",
-        "Path": "/users/{userId}/drive/items/{itemId}/copy",
         "Version": "v1.0"
       },
       {
@@ -33748,9 +33748,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "chartlineformat_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/axes/categoryAxis/format/line",
+        "Method": "POST",
+        "OperationName": "driveitem_copy",
+        "Path": "/users/{userId}/drive/items/{itemId}/copy",
         "Version": "v1.0"
       },
       {
@@ -33899,38 +33899,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "range_lastrow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/lastRow",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastcolumn",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/lastColumn",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "range_lastrow",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "range_lastrow",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "tablerowcollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/itemAt(index={index})",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/lastRow",
         "Version": "v1.0"
       },
       {
@@ -33970,15 +33952,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/sort/apply",
+        "Method": "PATCH",
+        "OperationName": "tablerow_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "tablerow_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
@@ -33989,14 +33971,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "tablerow_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})/range",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "tablerow_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})/range",
         "Version": "v1.0"
       },
       {
@@ -34036,45 +34018,45 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "tablerow_update",
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablerow_get",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/apply",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "tablesort_apply",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
+        "Method": "GET",
+        "OperationName": "tablerow_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})range",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "workbook_list_worksheets",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "workbook_list_worksheets",
-        "Path": "/me/drive/items/{id}/workbook/worksheets",
+        "OperationName": "tablerowcollection_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "workbook_list_names",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names",
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/sort/apply",
         "Version": "v1.0"
       },
       {
@@ -34186,21 +34168,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/sort/apply",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablerow_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+        "Method": "POST",
+        "OperationName": "tablesort_apply",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/sort/apply",
         "Version": "v1.0"
       },
       {
@@ -34210,21 +34192,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+        "Method": "DELETE",
+        "OperationName": "tablerow_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
         "Version": "v1.0"
       },
       {
@@ -34336,45 +34318,45 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Method": "POST",
+        "OperationName": "tablecollection_add",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "workbook_post_tables",
+        "OperationName": "tablecollection_add",
         "Path": "/me/drive/items/{id}/workbook/tables/add",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "tablecolumn_range",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "tablecolumn_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "GET",
+        "OperationName": "workbook_list_names",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows/{index}",
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "tablerow_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows/{index}",
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
         "Version": "v1.0"
       },
       {
@@ -34488,37 +34470,43 @@
       {
         "Method": "GET",
         "OperationName": "tablecolumn_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumn_range",
         "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablecollection_add",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
+        "Method": "GET",
+        "OperationName": "tablecolumn_range",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "tablecolumn_list",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbook_list_worksheets",
+        "Path": "/me/drive/items/{id}/workbook/worksheets",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbook_list_worksheets",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "workbook_post_tables",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "workbook_refreshsession",
-        "Path": "/me/drive/root:/{item-path}:/workbook/refreshSession",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range",
+        "Path": "/me/drive/items/{id}/workbook/tables/add",
         "Version": "v1.0"
       },
       {
@@ -34564,15 +34552,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "worksheet_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}",
+        "Method": "GET",
+        "OperationName": "worksheet_list_tables",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "worksheet_list_tables",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables",
+        "OperationName": "worksheet_list_names",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names",
         "Version": "v1.0"
       },
       {
@@ -34631,8 +34619,38 @@
       },
       {
         "Method": "GET",
-        "OperationName": "worksheet_list_names",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/names",
+        "OperationName": "workbookworksheet_list_pivottables",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/pivotTables",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookworksheet_list_pivottables",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookrangeview_range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "workbookrangeview_range",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/range(address={address})/visibleView/range",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "worksheet_range",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range",
         "Version": "v1.0"
       },
       {
@@ -34640,30 +34658,6 @@
         "OperationName": "worksheet_update",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_usedrange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/usedRange",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "worksheet_usedrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/usedRange",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chart_list_series",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "chart_list_series",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/charts/{name}/series",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -34781,44 +34775,38 @@
       },
       {
         "Method": "GET",
-        "OperationName": "workbookworksheet_list_pivottables",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/pivotTables",
+        "OperationName": "worksheet_usedrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/usedRange",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "workbookworksheet_list_pivottables",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables",
+        "OperationName": "worksheet_usedrange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/usedRange",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "worksheet_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "workbookrangeview_range",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/range",
+        "OperationName": "workbookrangeview_list_rows",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "workbookrangeview_range",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/range(address={address})/visibleView/range",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(<address>)/format/protection",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/protection",
+        "OperationName": "workbookrangeview_itemat",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/itemAt(index={n})",
         "Version": "v1.0"
       },
       {
@@ -34930,9 +34918,9 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
+        "Method": "POST",
+        "OperationName": "workbook_refreshsession",
+        "Path": "/me/drive/root:/{item-path}:/workbook/refreshSession",
         "Version": "v1.0"
       },
       {
@@ -34942,21 +34930,15 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "workbook_post_tables",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/add",
+        "Version": "v1.0"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "workbookformatprotection_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbookpivottable_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables/{id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "workbookrangeview_list_rows",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/rows",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/protection",
         "Version": "v1.0"
       },
       {
@@ -34966,9 +34948,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "workbookrangeview_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id}/range(address={address})/visibleView/itemAt(index={n})",
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(<address>)/format/protection",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
         "Version": "v1.0"
       },
       {
@@ -35081,44 +35069,44 @@
       },
       {
         "Method": "GET",
+        "OperationName": "workbookpivottable_get",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id}/pivotTables/{id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "workbookoperation_get",
         "Path": "/me/drive/items/{id}/workbook/operations/{operation-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "tablecollection_add",
-        "Path": "/me/drive/items/{id}/workbook/tables/add",
+        "Method": "PATCH",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/protection",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill",
+        "OperationName": "workbookformatprotection_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(<address>)/format/protection",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "rangefill_clear",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
+        "OperationName": "worksheetprotection_unprotect",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/protection/unprotect",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_totalrowrange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/totalRowRange",
         "Version": "v1.0"
       },
       {
@@ -35159,14 +35147,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "rangefill_get",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
+        "OperationName": "rangebordercollection_itemat",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/itemAt(index={index})",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
@@ -35176,15 +35164,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/itemAt(index={index})",
+        "Method": "POST",
+        "OperationName": "rangefill_clear",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill/clear",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index={index})",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
@@ -35225,44 +35213,44 @@
       },
       {
         "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "rangebordercollection_itemat",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders/itemAt(index={index})",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders/itemAt(index={index})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "rangefill_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/fill",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "rangefill_get",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/fill",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "rangefill_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitColumns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitColumns",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
         "Version": "v1.0"
       },
       {
@@ -35375,20 +35363,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/fill",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
+        "OperationName": "rangefill_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/fill",
         "Version": "v1.0"
       },
       {
@@ -35398,21 +35386,21 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/unmerge",
+        "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_row",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/row",
+        "Method": "GET",
+        "OperationName": "rangeborder_list",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "range_row",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
+        "Method": "GET",
+        "OperationName": "rangeborder_get",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/{sideIndex}",
         "Version": "v1.0"
       },
       {
@@ -35524,45 +35512,45 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "range_lastrow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastrow",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/lastRow",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "range_lastrow",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/lastRow",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
-        "OperationName": "range_unmerge",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/unmerge",
+        "OperationName": "range_row",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/row",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitColumns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_row",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/row",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "range_unmerge",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/unmerge",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_list",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "rangeborder_get",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders/{sideIndex}",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/unmerge",
         "Version": "v1.0"
       },
       {
@@ -35676,43 +35664,43 @@
       {
         "Method": "POST",
         "OperationName": "range_unmerge",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/unmerge",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_unmerge",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
+        "OperationName": "range_unmerge",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/unmerge",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "range_unmerge",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/unmerge",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "rangeformat_autofitcolumns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/autofitColumns",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "rangeformat_autofitrows",
-        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitRows",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_list_rows",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_list_columns",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "table_list_columns",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/autofitColumns",
         "Version": "v1.0"
       },
       {
@@ -35824,45 +35812,45 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_list_rows",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "table_converttorange",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/convertToRange",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "table_list_rows",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+        "Method": "POST",
+        "OperationName": "table_converttorange",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/convertToRange",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "table_post_columns",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "table_update",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
+        "OperationName": "table_converttorange",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/convertToRange",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "table_totalrowrange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/totalRowRange",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "table_converttorange",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/convertToRange",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_list_columns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/columns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "table_list_rows",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/rows",
         "Version": "v1.0"
       },
       {
@@ -35974,6 +35962,12 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "table_post_columns",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "table_list_rows",
         "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/rows",
@@ -35981,38 +35975,32 @@
       },
       {
         "Method": "GET",
-        "OperationName": "chart_list",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/charts",
-        "Version": "beta"
+        "OperationName": "table_list_rows",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/rows",
+        "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "table_converttorange",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/{id|name}/convertToRange",
+        "Method": "GET",
+        "OperationName": "table_list_rows",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/rows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "table_update",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "table_converttorange",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/convertToRange",
+        "OperationName": "table_clearfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/clearFilters",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
+        "OperationName": "table_clearfilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/clearFilters",
         "Version": "v1.0"
       },
       {
@@ -36125,32 +36113,26 @@
       },
       {
         "Method": "POST",
+        "OperationName": "rangeformat_autofitrows",
+        "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format/autofitRows",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_autofitcolumns",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/autofitColumns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
         "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "table_converttorange",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/convertToRange",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "rangeformat_post_borders",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "rangeformat_update",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "table_clearfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/tables/{id|name}/clearFilters",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format/borders",
         "Version": "v1.0"
       },
       {
@@ -36161,8 +36143,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "table_clearfilters",
-        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/clearFilters",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/items/{id}/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
         "Version": "v1.0"
       },
       {
@@ -36276,7 +36264,25 @@
       {
         "Method": "PATCH",
         "OperationName": "rangeformat_update",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}/range/format",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "rangeformat_update",
         "Path": "/me/drive/items/{id}/workbook/names/{name}/range/format",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/tables/{id|name}/columns/{id|name}/range/format/borders",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "rangeformat_post_borders",
+        "Path": "/me/drive/root:/{item-path}:/workbook/worksheets/{id|name}/range(address='<address>')/format/borders",
         "Version": "v1.0"
       },
       {
@@ -36296,12 +36302,6 @@
         "OperationName": "channel_get_filesfolder",
         "Path": "/teams/{id}/channels/{id}/filesFolder",
         "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/users/{userId}/drive/root:/{item-path}",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -36412,33 +36412,33 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/drives/{drive-id}/items/{item-id}/invite",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
         "Path": "/sites/{siteId}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/invite",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/users/{userId}/drive/root:/{item-path}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/versions",
+        "OperationName": "driveitem_get_content",
+        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/drives/{drive-id}/items/{item-id}/invite",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/me/drive/items/{item-id}/invite",
         "Version": "beta"
       },
       {
@@ -36552,13 +36552,13 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_invite",
-        "Path": "/me/drive/items/{item-id}/invite",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/invite",
         "Version": "beta"
       },
       {
@@ -36574,15 +36574,9 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/drives/{driveId}/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createlink",
-        "Path": "/users/{userId}/drive/items/{itemId}/createLink",
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
@@ -36689,32 +36683,38 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/createUploadSession",
+        "OperationName": "driveitem_checkin",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_checkin",
+        "Path": "/drives/{driveId}/items/{itemId}/checkin",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createlink",
+        "Path": "/users/{userId}/drive/items/{itemId}/createLink",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}/createUploadSession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}:/{fileName}:/createUploadSession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
@@ -36767,20 +36767,20 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/me/drive/items/{item-id}/versions",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "driveitem_delta",
         "Path": "/users/{userId}/drive/root/delta",
         "Version": "beta"
       },
       {
         "Method": "GET",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/versions",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/me/drive/root/delta",
+        "Path": "/sites/{siteId}/drive/root/delta",
         "Version": "beta"
       },
       {
@@ -36828,19 +36828,25 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/users/{userId}/drive/items/{itemId}/createUploadSession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/sites/{siteId}/drive/root/delta",
+        "Path": "/me/drive/root/delta",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_checkin",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/checkin",
+        "Method": "GET",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/me/drive/items/{item-id}/versions",
         "Version": "beta"
       },
       {
@@ -36850,15 +36856,9 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/driveitem/retentionLabel",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "nameditem_delete",
-        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}",
+        "Method": "GET",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
         "Version": "beta"
       },
       {
@@ -36911,31 +36911,31 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
@@ -36970,15 +36970,21 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "nameditem_delete",
-        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/{name}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitemversion_get_contents",
         "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "nameditem_delete",
+        "Path": "/me/drive/root:/{item-path}:/workbook/names/{name}",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "nameditem_delete",
+        "Path": "/me/drive/items/{id}/workbook/worksheets/{id|name}/names/{name}",
         "Version": "beta"
       },
       {
@@ -36990,7 +36996,7 @@
       {
         "Method": "DELETE",
         "OperationName": "permission_delete",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
@@ -37048,15 +37054,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "permission_update",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
+        "Method": "GET",
+        "OperationName": "driveitemversion_get_contents",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "permission_grant",
-        "Path": "/shares/{encoded-sharing-url}/permission/grant",
+        "Method": "PATCH",
+        "OperationName": "permission_update",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
         "Version": "beta"
       },
       {
@@ -37110,13 +37116,19 @@
       {
         "Method": "DELETE",
         "OperationName": "permission_delete",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "permission_grant",
+        "Path": "/shares/{encoded-sharing-url}/permission/grant",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitemversion_get_contents",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}/content",
+        "OperationName": "drive_recent",
+        "Path": "/me/drive/recent",
         "Version": "beta"
       },
       {
@@ -37128,13 +37140,7 @@
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get_contents",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_preview",
-        "Path": "/shares/{shareId}/driveItem/preview",
+        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
@@ -37246,6 +37252,18 @@
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/driveitem/retentionLabel",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_preview",
+        "Path": "/shares/{shareId}/driveItem/preview",
+        "Version": "beta"
+      },
+      {
         "Method": "PUT",
         "OperationName": "driveitem_put_content",
         "Path": "/drives/{drive-id}/items/{item-id}/content",
@@ -37261,18 +37279,6 @@
         "Method": "PUT",
         "OperationName": "driveitem_put_content",
         "Path": "/me/drive/items/{item-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "driveitem_put_content",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/content",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get_contents",
-        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}/content",
         "Version": "beta"
       },
       {
@@ -37324,12 +37330,6 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
-        "Version": "beta"
-      },
-      {
         "Method": "DELETE",
         "OperationName": "driveitem_unfollow",
         "Path": "/me/drive/following/{item-id}",
@@ -37337,8 +37337,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/users/{user-id}/drive/root/search(q='{search-text}')",
+        "OperationName": "driveitemversion_get_contents",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_setretentionlabel",
+        "Path": "https://graph.microsoft.com/beta/drives/22e064df-3562-4a3c-98c3-74721ca06aa0/items/44d372fc-2eb6-4c85-8538-f3a0386a568f/retentionLabel",
         "Version": "beta"
       },
       {
@@ -37390,21 +37396,15 @@
         "Version": "beta"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_setretentionlabel",
-        "Path": "https://graph.microsoft.com/beta/drives/22e064df-3562-4a3c-98c3-74721ca06aa0/items/44d372fc-2eb6-4c85-8538-f3a0386a568f/retentionLabel",
+        "Method": "PUT",
+        "OperationName": "driveitem_put_content",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_checkin",
-        "Path": "/drives/{driveId}/items/{itemId}/checkin",
+        "OperationName": "driveitem_search",
+        "Path": "/users/{user-id}/drive/root/search(q='{search-text}')",
         "Version": "beta"
       },
       {
@@ -37415,27 +37415,15 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/drives/{drive-id}/items/{item-id}/children",
-        "Version": "v1.0"
+        "OperationName": "drive_list_following",
+        "Path": "/me/drive/following",
+        "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/users/{userId}/drive/items/{itemId}/invite",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_invite",
-        "Path": "/me/drive/items/{item-id}/invite",
-        "Version": "v1.0"
+        "Method": "GET",
+        "OperationName": "drive_get",
+        "Path": "/me/drive",
+        "Version": "beta"
       },
       {
         "Method": "POST",
@@ -37529,44 +37517,50 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "driveitem_get_content",
         "Path": "/shares/{shareIdOrEncodedSharingUrl}/driveItem/content",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/me/drive/items/{item-id}/children",
+        "OperationName": "driveitem_get_content",
+        "Path": "/me/drive/items/{item-id}/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/me/drive/root:/{item-path}:/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/me/drive/items/{item-id}/invite",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/invite",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_invite",
+        "Path": "/users/{userId}/drive/items/{itemId}/invite",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
-        "Path": "/users/{user-id}/drive/items/{item-id}/children",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/drives/{drive-id}/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/driveitem/retentionLabel",
+        "Path": "/drives/{drive-id}/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
@@ -37625,14 +37619,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_thumbnails",
-        "Path": "/drives/{drive-id}/items/{item-id}/thumbnails",
+        "OperationName": "driveitem_get_content",
+        "Path": "/drives/{drive-id}/items/{item-id}/content",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_permissions",
-        "Path": "/users/{userId}/drive/items/{itemId}/permissions",
+        "OperationName": "driveitem_list_thumbnails",
+        "Path": "/drives/{drive-id}/items/{item-id}/thumbnails",
         "Version": "v1.0"
       },
       {
@@ -37668,25 +37662,49 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
+        "Path": "/users/{user-id}/drive/items/{item-id}/children",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
         "Path": "/sites/{site-id}/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/items/{item-id}/content",
+        "OperationName": "driveitem_list_children",
+        "Path": "/me/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/root:/{item-path}:/content",
+        "OperationName": "driveitem_list_children",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "OperationName": "driveitem_list_permissions",
+        "Path": "/users/{userId}/drive/items/{itemId}/permissions",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/driveitem/retentionLabel",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get_content_format",
+        "Path": "/drive/root:/{path and filename}:/content?format={format}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_follow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/follow",
         "Version": "v1.0"
       },
       {
@@ -37828,30 +37846,6 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content",
-        "Path": "/drives/{drive-id}/items/{item-id}/content",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content_format",
-        "Path": "/drive/root:/{path and filename}:/content?format={format}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get_content_format",
-        "Path": "/drive/items/{item-id}/content?format={format}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/follow",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
         "OperationName": "driveitem_follow",
         "Path": "/sites/{site-id}/drive/items/{item-id}/follow",
@@ -37882,15 +37876,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_delta",
+        "Path": "/sites/{siteId}/drive/root/delta",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/sites/{siteId}/drive/root/delta",
+        "Path": "/me/drive/root/delta",
         "Version": "v1.0"
       },
       {
@@ -37906,15 +37900,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/users/{userId}/drive/items/{itemId}",
+        "Method": "GET",
+        "OperationName": "driveitem_get_content_format",
+        "Path": "/drive/items/{item-id}/content?format={format}",
         "Version": "v1.0"
       },
       {
         "Method": "DELETE",
         "OperationName": "driveitem_delete",
-        "Path": "/sites/{siteId}/drive/items/{itemId}",
+        "Path": "/users/{userId}/drive/items/{itemId}",
         "Version": "v1.0"
       },
       {
@@ -37938,7 +37932,31 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
         "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "v1.0"
       },
       {
@@ -37948,45 +37966,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_delta",
-        "Path": "/me/drive/root/delta",
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/sites/{siteId}/drive/items/{itemId}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "drive_recent",
-        "Path": "/me/drive/recent",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
         "Version": "beta"
       },
       {
         "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/me/drive/items/{item-id}",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "driveitem_move",
-        "Path": "/users/{user-id}/drive/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "permission_delete",
-        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -38069,20 +38069,56 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restoreversion",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restoreversion",
+        "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitemversion_get",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "permission_delete",
+        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
@@ -38090,36 +38126,6 @@
         "OperationName": "permission_get",
         "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "permission_grant",
-        "Path": "/shares/{encoded-sharing-url}/permission/grant",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "drive_list_following",
-        "Path": "/me/drive/following",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "drive_get",
-        "Path": "/me/drive",
-        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -38177,14 +38183,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/me/drive/root/subscriptions/socketIo",
+        "OperationName": "driveitemversion_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "sitepage_publish",
-        "Path": "/sites/{siteId}/pages/{pageId}/microsoft.graph.sitePage/publish",
+        "Method": "GET",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/me/drive/root/subscriptions/socketIo",
         "Version": "v1.0"
       },
       {
@@ -38224,45 +38230,45 @@
         "Version": "v1.0"
       },
       {
+        "Method": "POST",
+        "OperationName": "permission_grant",
+        "Path": "/shares/{encoded-sharing-url}/permission/grant",
+        "Version": "v1.0"
+      },
+      {
         "Method": "GET",
         "OperationName": "permission_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
+        "OperationName": "sitepage_publish",
+        "Path": "/sites/{siteId}/pages/{pageId}/microsoft.graph.sitePage/publish",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_removeretentionlabel",
-        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_removeretentionlabel",
-        "Path": "/driveitem/retentionLabel",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PUT",
-        "OperationName": "driveitem_put_content",
-        "Path": "/users/{user-id}/drive/items/{item-id}/content",
+        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
@@ -38362,45 +38368,45 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/users/{user-id}/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/sites/{site-id}/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/me/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PUT",
+        "OperationName": "driveitem_put_content",
+        "Path": "/users/{user-id}/drive/items/{item-id}/content",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_removeretentionlabel",
+        "Path": "/driveitem/retentionLabel",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_removeretentionlabel",
+        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
         "OperationName": "driveitem_restore",
         "Path": "/me/drive/items/{item-id}/restore",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/drives/{drive-id}/root/search(q='{search-text}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/groups/{group-id}/drive/root/search(q='{search-text}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_search",
-        "Path": "/me/drive/root/search(q='{search-text}')",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
@@ -38441,14 +38447,14 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "driveitem_move",
+        "OperationName": "driveitem_update",
         "Path": "/sites/{site-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "driveitem_update",
-        "Path": "/sites/{site-id}/drive/items/{item-id}",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -38458,15 +38464,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitemversion_get",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -38506,9 +38512,27 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/me/drive/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/me/drive/root/search(q='{search-text}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/groups/{group-id}/drive/root/search(q='{search-text}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_search",
+        "Path": "/drives/{drive-id}/root/search(q='{search-text}')",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
         "Version": "v1.0"
       },
       {
@@ -64314,12 +64338,6 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_list_versions",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_versions",
         "Path": "/sites/{site-id}/drive/items/{item-id}/versions",
         "Version": "beta"
       },
@@ -64403,14 +64421,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_permissions",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/users/{user-id}/drive/items/{item-id}/children",
+        "OperationName": "driveitem_list_permissions",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions",
         "Version": "beta"
       },
       {
@@ -64486,6 +64504,30 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/sites/{siteId}/drive/items/{itemId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/me/drive/root:/{item-path}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/users/{user-id}/drive/items/{item-id}/children",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/me/drive/items/{item-id}",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
         "OperationName": "driveitem_lockorunlockrecord",
         "Path": "/driveitem/retentionLabel",
@@ -64493,26 +64535,8 @@
       },
       {
         "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
         "OperationName": "driveitem_move",
         "Path": "/drives/{drive-id}/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/following/{item-id}",
         "Version": "beta"
       },
       {
@@ -64594,21 +64618,21 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/sites/{siteId}/drive/items/{itemId}",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "driveitem_preview",
         "Path": "/shares/{shareId}/driveItem/preview",
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "driveitem_preview",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/preview",
+        "Path": "/users/{userId}/drive/items/{itemId}/preview",
         "Version": "beta"
       },
       {
@@ -64690,21 +64714,21 @@
         "Version": "beta"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
         "OperationName": "driveitem_preview",
-        "Path": "/users/{userId}/drive/items/{itemId}/preview",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/preview",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/me/drive/root:/{item-path}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/me/drive/items/{item-id}",
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/following/{item-id}",
         "Version": "beta"
       },
       {
@@ -64714,45 +64738,33 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/users/{userId}/drive/items/{itemId}/createUploadSession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/createUploadSession",
+        "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}:/{fileName}:/createUploadSession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
-        "Path": "/me/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/createUploadSession",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "driveitem_createuploadsession",
-        "Path": "/drives/{driveId}/items/{itemId}/createUploadSession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
@@ -64798,15 +64810,15 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "POST",
+        "OperationName": "driveitem_copy",
+        "Path": "/me/drive/items/{item-id}/copy",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_copy",
-        "Path": "/me/drive/items/{item-id}/copy",
+        "Path": "/groups/{groupId}/drive/items/{itemId}/copy",
         "Version": "beta"
       },
       {
@@ -64817,14 +64829,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_checkout",
-        "Path": "/users/{userId}/drive/items/{itemId}/checkout",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "beta"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_checkout",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/checkout",
+        "Path": "/users/{userId}/drive/items/{itemId}/checkout",
         "Version": "beta"
       },
       {
@@ -64894,27 +64906,27 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "drive_get",
+        "Path": "/me/drive",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contenttype_list_columns",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "contenttype_list_columns",
+        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
+        "Version": "beta"
+      },
+      {
         "Method": "POST",
-        "OperationName": "driveitem_copy",
-        "Path": "/groups/{groupId}/drive/items/{itemId}/copy",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/following/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/me/drive/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/users/{userId}/drive/items/{itemId}",
+        "OperationName": "driveitem_checkout",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/checkout",
         "Version": "beta"
       },
       {
@@ -64924,9 +64936,15 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/me/drive/items/{item-id}",
         "Version": "beta"
       },
       {
@@ -65002,12 +65020,6 @@
         "Version": "beta"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_delete",
-        "Path": "/sites/{siteId}/drive/items/{itemId}",
-        "Version": "beta"
-      },
-      {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
         "Path": "/me/drive/items/{item-id}/content",
@@ -65016,13 +65028,19 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "Path": "/me/drive/root:/{item-path}:/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
-        "Path": "/drives/{drive-id}/items/{item-id}/content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
         "Version": "beta"
       },
       {
@@ -65098,9 +65116,27 @@
         "Version": "beta"
       },
       {
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/users/{userId}/drive/items/{itemId}",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_delete",
+        "Path": "/sites/{siteId}/drive/items/{itemId}",
+        "Version": "beta"
+      },
+      {
         "Method": "GET",
         "OperationName": "driveitem_get_content",
-        "Path": "/me/drive/root:/{item-path}:/content",
+        "Path": "/drives/{drive-id}/items/{item-id}/content",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/following/{item-id}",
         "Version": "beta"
       },
       {
@@ -65113,12 +65149,6 @@
         "Method": "POST",
         "OperationName": "driveitem_unfollow",
         "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "beta"
       },
       {
@@ -65512,27 +65542,21 @@
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "drive_get",
-        "Path": "/me/drive",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
         "OperationName": "pageTemplate_create",
         "Path": "/sites/{site-id}/pageTemplates/microsoft.graph.pageTemplate",
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "newslinkpage_create",
-        "Path": "/sites/{site-id}/pages",
+        "Method": "GET",
+        "OperationName": "newslinkpage_list",
+        "Path": "/sites/{site-id}/pages/microsoft.graph.newsLinkPage",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "insights_list_used",
-        "Path": "/me/insights/used",
+        "Method": "POST",
+        "OperationName": "newslinkpage_create",
+        "Path": "/sites/{site-id}/pages",
         "Version": "beta"
       },
       {
@@ -65597,38 +65621,38 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
-        "Method": "GET",
-        "OperationName": "itemactivity_getbyinterval",
-        "Path": "/drives/{drive-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
-        "Version": "beta"
-      },
-      {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
+        "OperationName": "insights_list_used",
+        "Path": "/me/insights/used",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restoreversion",
+        "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "beta"
       },
       {
@@ -65710,15 +65734,21 @@
         "Version": "beta"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "newslinkpage_list",
-        "Path": "/sites/{site-id}/pages/microsoft.graph.newsLinkPage",
+        "OperationName": "driveitemversion_get",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemactivity_getbyinterval",
+        "Path": "/drives/{drive-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
         "Version": "beta"
       },
       {
@@ -65729,8 +65759,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/analytics",
+        "OperationName": "itemactivity_getbyinterval",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
         "Version": "beta"
       },
       {
@@ -65819,98 +65849,8 @@
       },
       {
         "Method": "GET",
-        "OperationName": "itemactivity_getbyinterval",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
         "OperationName": "listitem_get",
         "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}?expand=fields(select=Column1,Column2)",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "listitem_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "listitem_delta",
-        "Path": "/sites/{siteId}/lists/{listId}/items/delta",
-        "Version": "beta"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "listitem_delete",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "listitem_createlink",
-        "Path": "https://graph.microsoft.com/beta/sites/{siteId}/lists/{listId}/items/{itemId}/createLink",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "listitem_create",
-        "Path": "/sites/{site-id}/lists/{list-id}/items",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_list",
-        "Path": "/sites/{site-id}/lists",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_list_contenttypes",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_list_columns",
-        "Path": "/sites/{site-id}/lists/{list-id}/columns",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_get",
-        "Path": "/sites/{site-id}/lists/{list-id}?expand=columns,items(expand=fields)",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_get",
-        "Path": "/sites/{site-id}/lists/{list-title}",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "list_get",
-        "Path": "/sites/{site-id}/lists/{list-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "list_create",
-        "Path": "/sites/{site-id}/lists",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/analytics",
         "Version": "beta"
       },
       {
@@ -65921,14 +65861,44 @@
       },
       {
         "Method": "GET",
-        "OperationName": "contenttype_list_columns",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns",
+        "OperationName": "listitem_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}",
         "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "contenttype_list_columns",
-        "Path": "/sites/{site-id}/contentTypes/{contentType-id}/columns",
+        "OperationName": "itemanalytics_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/analytics",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/analytics",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "list_create",
+        "Path": "/sites/{site-id}/lists",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_get",
+        "Path": "/sites/{site-id}/lists/{list-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_get",
+        "Path": "/sites/{site-id}/lists/{list-title}",
         "Version": "beta"
       },
       {
@@ -65938,28 +65908,70 @@
         "Version": "beta"
       },
       {
+        "Method": "GET",
+        "OperationName": "list_get",
+        "Path": "/sites/{site-id}/lists/{list-id}?expand=columns,items(expand=fields)",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list_contenttypes",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list",
+        "Path": "/sites/{site-id}/lists",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "listitem_create",
+        "Path": "/sites/{site-id}/lists/{list-id}/items",
+        "Version": "beta"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "listitem_createlink",
+        "Path": "https://graph.microsoft.com/beta/sites/{siteId}/lists/{listId}/items/{itemId}/createLink",
+        "Version": "beta"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "listitem_delete",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "listitem_delta",
+        "Path": "/sites/{siteId}/lists/{listId}/items/delta",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list_columns",
+        "Path": "/sites/{site-id}/lists/{list-id}/columns",
+        "Version": "beta"
+      },
+      {
         "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/driveitem/retentionLabel",
-        "Version": "v1.0"
+        "OperationName": "webpart_update",
+        "Path": "/sites/{sitesId}/pages/{sitePageId}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webPartIndex}",
+        "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
-        "Version": "v1.0"
+        "OperationName": "contenttype_get",
+        "Path": "/sites/{site-id}/contentTypes/{contentType-id}",
+        "Version": "beta"
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/versions",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_list_versions",
-        "Path": "/me/drive/items/{item-id}/versions",
-        "Version": "v1.0"
+        "OperationName": "columndefinition_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
+        "Version": "beta"
       },
       {
         "Method": "GET",
@@ -66022,15 +66034,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_lockorunlockrecord",
-        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
+        "Method": "GET",
+        "OperationName": "driveitem_list_permissions",
+        "Path": "/me/drive/items/{item-id}/permissions",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_permissions",
-        "Path": "/me/drive/items/{item-id}/permissions",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions",
         "Version": "v1.0"
       },
       {
@@ -66047,14 +66059,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_children",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/children",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/me/drive/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_list_children",
-        "Path": "/me/drive/items/{item-id}/children",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
@@ -66119,50 +66131,50 @@
       },
       {
         "Method": "GET",
-        "OperationName": "driveitem_list_permissions",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "driveitem_get",
         "Path": "/sites/{site-id}/drive/root:/{item-path}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/me/drive/root:/{item-path}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "driveitem_get",
         "Path": "/me/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/items/{item-id}/unfollow",
+        "Method": "GET",
+        "OperationName": "driveitem_list_children",
+        "Path": "/me/drive/items/{item-id}/children",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/following/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_get",
+        "Path": "/groups/{group-id}/drive/root:/{item-path}",
         "Version": "v1.0"
       },
       {
-        "Method": "DELETE",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/me/drive/following/{item-id}",
+        "Method": "GET",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
-        "OperationName": "driveitem_setretentionlabel",
-        "Path": "https://graph.microsoft.com/v1.0/drives/22e064df-3562-4a3c-98c3-74721ca06aa0/items/44d372fc-2eb6-4c85-8538-f3a0386a568f/retentionLabel",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/driveitem/retentionLabel",
         "Version": "v1.0"
       },
       {
@@ -66226,15 +66238,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_move",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "PUT",
+        "OperationName": "driveitem_put_content",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
         "Version": "v1.0"
       },
       {
         "Method": "PUT",
         "OperationName": "driveitem_put_content",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/content",
+        "Path": "/drives/{drive-id}/items/{item-id}/content",
         "Version": "v1.0"
       },
       {
@@ -66250,15 +66262,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "POST",
-        "OperationName": "driveitem_preview",
-        "Path": "/sites/{siteId}/drive/items/{itemId}/preview",
+        "Method": "GET",
+        "OperationName": "driveitem_list_versions",
+        "Path": "/users/{user-id}/drive/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_preview",
-        "Path": "/me/drive/items/{itemId}/preview",
+        "Path": "/sites/{siteId}/drive/items/{itemId}/preview",
         "Version": "v1.0"
       },
       {
@@ -66322,27 +66334,51 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PUT",
-        "OperationName": "driveitem_put_content",
-        "Path": "/drives/{drive-id}/items/{item-id}/content",
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/me/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_move",
+        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_lockorunlockrecord",
+        "Path": "/drives/{drive-id}/items/{item-id}/retentionLabel",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_unfollow",
-        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
+        "OperationName": "driveitem_preview",
+        "Path": "/me/drive/items/{itemId}/preview",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_setretentionlabel",
+        "Path": "https://graph.microsoft.com/v1.0/drives/22e064df-3562-4a3c-98c3-74721ca06aa0/items/44d372fc-2eb6-4c85-8538-f3a0386a568f/retentionLabel",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/sites/{site-id}/drive/items/{item-id}",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/me/drive/items/{item-id}",
+        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -66534,7 +66570,7 @@
       {
         "Method": "GET",
         "OperationName": "driveitem_get",
-        "Path": "/me/drive/root:/{item-path}",
+        "Path": "/drives/{drive-id}/root:/{item-path}",
         "Version": "v1.0"
       },
       {
@@ -66547,30 +66583,6 @@
         "Method": "POST",
         "OperationName": "driveitem_createlink",
         "Path": "/sites/{siteId}/drive/items/{itemId}/createLink",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/groups/{group-id}/drive/root:/{item-path}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/drives/{drive-id}/root:/{item-path}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitem_get",
-        "Path": "/drives/{drive-id}/items/{item-id}",
         "Version": "v1.0"
       },
       {
@@ -66635,14 +66647,14 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitem_createlink",
-        "Path": "/me/drive/items/{itemId}/createLink",
+        "OperationName": "driveitem_follow",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/follow",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "driveitem_follow",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/follow",
+        "Path": "/me/drive/items/{item-id}/follow",
         "Version": "v1.0"
       },
       {
@@ -66658,15 +66670,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "driveitem_delta",
-        "Path": "/users/{userId}/drive/root/delta",
+        "Method": "POST",
+        "OperationName": "driveitem_createlink",
+        "Path": "/me/drive/items/{itemId}/createLink",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitem_delta",
-        "Path": "/sites/{siteId}/drive/root/delta",
+        "Path": "/users/{userId}/drive/root/delta",
         "Version": "v1.0"
       },
       {
@@ -66720,7 +66732,31 @@
       {
         "Method": "POST",
         "OperationName": "driveitem_createuploadsession",
+        "Path": "/users/{userId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/sites/{siteId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
         "Path": "/me/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/groups/{groupId}/drive/items/{parentItemId}:/{fileName}:/createUploadSession",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitem_createuploadsession",
+        "Path": "/drives/{driveId}/items/{parentItemId}:/{fileName}:/createUploadSession",
         "Version": "v1.0"
       },
       {
@@ -66730,45 +66766,27 @@
         "Version": "v1.0"
       },
       {
+        "Method": "GET",
+        "OperationName": "driveitem_delta",
+        "Path": "/sites/{siteId}/drive/root/delta",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/following/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/following/{item-id}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
-        "OperationName": "driveitem_follow",
-        "Path": "/me/drive/items/{item-id}/follow",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "webpart_update",
-        "Path": "/sites/{sitesId}/pages/{sitePageId}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webPartIndex}",
-        "Version": "beta"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/drives/{drive-id}/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/me/drive/items/{item-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/drives/{driveId}/root/subscriptions/socketIo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/me/drive/root/subscriptions/socketIo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "sites_list_followed",
-        "Path": "/me/followedSites",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/me/drive/items/{item-id}/unfollow",
         "Version": "v1.0"
       },
       {
@@ -66839,14 +66857,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/drives/{driveId}/list/subscriptions/socketIo",
+        "OperationName": "site_list_subsites",
+        "Path": "/sites/{site-id}/sites",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "site_list_subsites",
-        "Path": "/sites/{site-id}/sites",
+        "OperationName": "site_list_contenttypes",
+        "Path": "/sites/{site-id}/contentTypes",
         "Version": "v1.0"
       },
       {
@@ -66857,14 +66875,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "site_getapplicablecontenttypesforlist",
-        "Path": "/sites/{siteId}/getApplicableContentTypesForList",
+        "OperationName": "sites_list_followed",
+        "Path": "/me/followedSites",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "site_getallsites",
-        "Path": "/sites/getAllSites",
+        "OperationName": "site_getapplicablecontenttypesforlist",
+        "Path": "/sites/{siteId}/getApplicableContentTypesForList",
         "Version": "v1.0"
       },
       {
@@ -66935,45 +66953,45 @@
       },
       {
         "Method": "GET",
-        "OperationName": "site_list_contenttypes",
-        "Path": "/sites/{site-id}/contentTypes",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
         "OperationName": "permission_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "site_getallsites",
+        "Path": "/sites/getAllSites",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "permission_get",
+        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
         "OperationName": "subscriptions_socketio",
-        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "verticalsection_delete",
-        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
+        "Path": "/me/drive/root/subscriptions/socketIo",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "contenttype_get",
-        "Path": "/sites/{site-id}/contentTypes/{contentType-id}",
-        "Version": "beta"
-      },
-      {
-        "Method": "POST",
-        "OperationName": "contenttype_copytodefaultcontentlocation",
-        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/copyToDefaultContentLocation",
-        "Version": "beta"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "columndefinition_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes/{contentType-id}/columns/{column-id}",
-        "Version": "beta"
+        "OperationName": "subscriptions_socketio",
+        "Path": "/drives/{driveId}/list/subscriptions/socketIo",
+        "Version": "v1.0"
       },
       {
         "Method": "GET",
@@ -67042,15 +67060,15 @@
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "subscriptions_socketio",
-        "Path": "/sites/{siteId}/lists/{listId}/drive/root/subscriptions/socketIo",
+        "Method": "PATCH",
+        "OperationName": "webpart_update",
+        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
         "Version": "v1.0"
       },
       {
         "Method": "PATCH",
         "OperationName": "webpart_update",
-        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection/webparts/{webpart-index}",
+        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
         "Version": "v1.0"
       },
       {
@@ -67061,14 +67079,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "webpart_list",
-        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/drives/{driveId}/root/subscriptions/socketIo",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "webpart_list",
-        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webparts",
+        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/horizontalSections/{horizontal-section-id}/columns/{horizontal-section-column-id}/webparts",
         "Version": "v1.0"
       },
       {
@@ -67138,51 +67156,45 @@
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "webpart_update",
-        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webParts/{webpart-id}",
+        "Method": "DELETE",
+        "OperationName": "verticalsection_delete",
+        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/canvasLayout/verticalSection",
         "Version": "v1.0"
       },
       {
-        "Method": "PATCH",
-        "OperationName": "driveitem_update",
-        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Method": "GET",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/sites/{siteId}/lists/{listId}/drive/root/subscriptions/socketIo",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "subscriptions_socketio",
+        "Path": "/groups/{groupId}/drive/root/subscriptions/socketIo",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "webpart_list",
+        "Path": "/sites/{site-id}/pages/{page-id}/microsoft.graph.sitePage/webparts",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "permission_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "permission_delete",
+        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "DELETE",
+        "OperationName": "permission_delete",
         "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/groups/{group-id}/drive/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemactivitystat_getactivitybyinterval",
-        "Path": "/sites/{site-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemactivitystat_getactivitybyinterval",
-        "Path": "/drives/{drive-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "insights_list_used",
-        "Path": "/me/insights/used",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "insights_list_trending",
-        "Path": "/users/{id | userPrincipalName}/insights/trending",
         "Version": "v1.0"
       },
       {
@@ -67241,44 +67253,44 @@
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/users/{userId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
-        "Method": "GET",
-        "OperationName": "itemactivitystat_getactivitybyinterval",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
-        "Version": "v1.0"
-      },
-      {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/sites/{siteId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
+        "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/groups/{groupId}/drive/items/{itemId}/versions/{version-id}/restoreVersion",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
+        "OperationName": "driveitemversion_restoreversion",
         "Path": "/drives/{driveId}/items/{itemId}/versions/{version-id}/restoreVersion",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "insights_list_trending",
+        "Path": "/users/{id | userPrincipalName}/insights/trending",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "driveitemversion_get",
         "Path": "/users/{user-id}/drive/items/{item-id}/versions/{version-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "driveitemversion_get",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
@@ -67342,45 +67354,51 @@
         "Version": "v1.0"
       },
       {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/me/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/groups/{group-id}/drive/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "PATCH",
+        "OperationName": "driveitem_update",
+        "Path": "/drives/{drive-id}/items/{item-id}",
+        "Version": "v1.0"
+      },
+      {
         "Method": "POST",
-        "OperationName": "driveitemversion_restore",
-        "Path": "/me/drive/items/{item-id}/versions/{version-id}/restoreVersion",
+        "OperationName": "driveitem_unfollow",
+        "Path": "/users/{user-id}/drive/items/{item-id}/unfollow",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/me/drive/items/{item-id}/permissions/{perm-id}",
+        "OperationName": "driveitemversion_get",
+        "Path": "/sites/{site-id}/drive/items/{item-id}/versions/{version-id}",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/analytics/allTime",
+        "OperationName": "insights_list_used",
+        "Path": "/me/insights/used",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics/allTime",
+        "OperationName": "itemactivitystat_getactivitybyinterval",
+        "Path": "/drives/{drive-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "permission_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "permission_delete",
-        "Path": "/users/{user-id}/drive/items/{item-id}/permissions/{perm-id}",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "DELETE",
-        "OperationName": "permission_delete",
-        "Path": "/sites/{site-id}/drive/items/{item-id}/permissions/{perm-id}",
+        "OperationName": "itemactivitystat_getactivitybyinterval",
+        "Path": "/sites/{site-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
         "Version": "v1.0"
       },
       {
@@ -67451,14 +67469,14 @@
       },
       {
         "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/analytics/allTime",
+        "OperationName": "listitem_list_versions",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "listitem_list_versions",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/versions",
+        "Path": "/sites/{site-id}/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {
@@ -67487,26 +67505,56 @@
       },
       {
         "Method": "GET",
-        "OperationName": "list_list",
-        "Path": "/sites/{site-id}/lists",
+        "OperationName": "itemactivitystat_getactivitybyinterval",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/getActivitiesByInterval(startDateTime={startDateTime},endDateTime={endDateTime},interval={interval})",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "list_list_contenttypes",
-        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes",
+        "OperationName": "itemanalytics_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/analytics/allTime",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
-        "OperationName": "list_list_columns",
-        "Path": "/sites/{site-id}/lists/{list-id}/columns",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/analytics/allTime",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics/allTime",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/drives/{drive-id}/items/{item-id}/analytics/lastSevenDays",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/analytics/lastSevenDays",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "POST",
+        "OperationName": "contenttype_copytodefaultcontentlocation",
+        "Path": "/sites/{siteId}/contentTypes/{contentTypeId}/copyToDefaultContentLocation",
+        "Version": "beta"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "itemanalytics_get",
+        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics/lastSevenDays",
         "Version": "v1.0"
       },
       {
         "Method": "GET",
         "OperationName": "list_get",
-        "Path": "/sites/{site-id}/lists/{list-id}?expand=columns,items(expand=fields)",
+        "Path": "/sites/{site-id}/lists/{list-id}",
         "Version": "v1.0"
       },
       {
@@ -67518,37 +67566,31 @@
       {
         "Method": "GET",
         "OperationName": "list_get",
-        "Path": "/sites/{site-id}/lists/{list-id}",
+        "Path": "/sites/{site-id}/lists/{list-id}?expand=columns,items(expand=fields)",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list_columns",
+        "Path": "/sites/{site-id}/lists/{list-id}/columns",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list_contenttypes",
+        "Path": "/sites/{site-id}/lists/{list-id}/contentTypes",
+        "Version": "v1.0"
+      },
+      {
+        "Method": "GET",
+        "OperationName": "list_list",
+        "Path": "/sites/{site-id}/lists",
         "Version": "v1.0"
       },
       {
         "Method": "POST",
         "OperationName": "list_create",
         "Path": "/sites/{site-id}/lists",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/lists/{list-id}/items/{item-id}/analytics/lastSevenDays",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/sites/{site-id}/analytics/lastSevenDays",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "itemanalytics_get",
-        "Path": "/drives/{drive-id}/items/{item-id}/analytics/lastSevenDays",
-        "Version": "v1.0"
-      },
-      {
-        "Method": "GET",
-        "OperationName": "listitem_list_versions",
-        "Path": "/sites/{site-id}/items/{item-id}/versions",
         "Version": "v1.0"
       },
       {

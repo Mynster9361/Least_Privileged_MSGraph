@@ -130,47 +130,46 @@ foreach ($version in $Versions) {
 
 
 foreach ($permissionSet in $allPermissions) {
-        # Add debugging here
+    # Add debugging here
     Write-Host "Original permission file: $($permissionSet.fileName)" -ForegroundColor Gray
     Write-Host "Calculated API reference file: $($permissionSet.apiReferencePath)" -ForegroundColor Yellow
     
-    # Let's see what files actually exist in the api directory
-    $apiDir = Split-Path $permissionSet.apiReferencePath -Parent
-    if (Test-Path $apiDir) {
-        $actualApiFiles = Get-ChildItem -Path $apiDir -Filter "*.md" | Select-Object -First 5 -ExpandProperty Name
-        Write-Host "Sample actual API files in directory:" -ForegroundColor Cyan
-        $actualApiFiles | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
-        
-        # Try to find a matching file by removing the -permissions suffix and looking for similar names
-        $baseFileName = $permissionSet.fileName -replace '-permissions\.md$', '.md'
-        $possibleMatches = Get-ChildItem -Path $apiDir -Filter "*$($baseFileName.Replace('-permissions', ''))*" | Select-Object -ExpandProperty FullName
-        
-        if ($possibleMatches) {
-            Write-Host "Possible matches found:" -ForegroundColor Green
-            $possibleMatches | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
+    # Check if the API reference file exists
+    if (-not (Test-Path $permissionSet.apiReferencePath)) {
+        # Let's see what files actually exist in the api directory
+        $apiDir = Split-Path $permissionSet.apiReferencePath -Parent
+        if (Test-Path $apiDir) {
+            $actualApiFiles = Get-ChildItem -Path $apiDir -Filter "*.md" | Select-Object -First 5 -ExpandProperty Name
+            Write-Host "Sample actual API files in directory:" -ForegroundColor Cyan
+            $actualApiFiles | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
             
-            # Use the first match
-            $permissionSet.apiReferencePath = $possibleMatches[0]
-            Write-Host "Using: $($permissionSet.apiReferencePath)" -ForegroundColor Green
+            # Try to find a matching file by removing the -permissions suffix and looking for similar names
+            $baseFileName = $permissionSet.fileName -replace '-permissions\.md$', '.md'
+            $possibleMatches = Get-ChildItem -Path $apiDir -Filter "*$($baseFileName.Replace('-permissions', ''))*" | Select-Object -ExpandProperty FullName
+            
+            if ($possibleMatches) {
+                Write-Host "Possible matches found:" -ForegroundColor Green
+                $possibleMatches | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
+                
+                # Use the first match - FIXED: Make sure we get the full path
+                $permissionSet.apiReferencePath = $possibleMatches[0]
+                Write-Host "Using: $($permissionSet.apiReferencePath)" -ForegroundColor Green
+            }
+        } else {
+            Write-Host "API directory doesn't exist: $apiDir" -ForegroundColor Red
         }
-    } else {
-        Write-Host "API directory doesn't exist: $apiDir" -ForegroundColor Red
     }
     
     Write-Host "---" -ForegroundColor DarkGray
     
-    # Check if the API reference file exists
+    # Check if the API reference file exists (after potential correction)
     if (-not (Test-Path $permissionSet.apiReferencePath)) {
         Write-Warning "API reference file not found: $($permissionSet.apiReferencePath). Skipping..."
         continue
     }
+    
     Write-Host "Processing API reference file: $($permissionSet.apiReferencePath)" -ForegroundColor Cyan
     
-    # Check if the API reference file exists
-    if (-not (Test-Path $permissionSet.apiReferencePath)) {
-        Write-Warning "API reference file not found: $($permissionSet.apiReferencePath). Skipping..."
-        continue
-    }
     
     $apiData = get-content $permissionSet.apiReferencePath -Raw
     $version = $permissionSet.apiReferencePath -match "v1.0" ? "v1.0" : "beta"

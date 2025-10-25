@@ -265,10 +265,10 @@ function Process-ApiFiles {
 
         $content = Get-Content -Path $filePath -Raw
         if (!$content) { continue }
-
+        #BUG: Need to verify this against api endpoints like users
         $endpoints = Extract-HttpRequests -content $content
         if (!$endpoints -or $endpoints.Count -eq 0) { continue }
-
+        #BUG: Need to verify this against api endpoints like users
         $permissionsInfo = Extract-PermissionsInclude -content $content
         if (!$permissionsInfo) { continue }
 

@@ -30,7 +30,8 @@ jobs:
         shell: pwsh
         run: |
           cd my-repo
-          pwsh -File ./Convert-PermissionMap.ps1 -DocsPath "../ms-graph-docs"
+          #pwsh -File ./Convert-PermissionMap.ps1 -DocsPath "../ms-graph-docs"
+          pwsh -File ./newConvert-PermissionMap.ps1 -DocsPath "../ms-graph-docs"
 
       - name: Check for changes and gather stats
         id: changes

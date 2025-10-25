@@ -98,7 +98,7 @@ function Convert-MultiplePermissionFiles {
         $result = Convert-PermissionsMarkdownToObject -MarkdownFilePath $file.FullName
         if ($result) {
             # Handle numbered permission files (e.g., -2-permissions.md, -3-permissions.md)
-            $apiReferencePath = $($result.FilePath -replace "\includes\permissions", "\api") -replace '-\d+-permissions\.md$', '.md' -replace '-permissions\.md$', '.md'
+            $apiReferencePath = $($result.FilePath -replace "\\includes\\permissions", "\api") -replace '-\d+-permissions\.md$', '.md' -replace '-permissions\.md$', '.md'
 
             $allPermissions += [PSCustomObject]@{
                 fileName                = $result.FileName

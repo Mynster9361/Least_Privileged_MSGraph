@@ -39,9 +39,9 @@ jobs:
           cd my-repo
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git add graph_api_permissions_friendly_names.json
+          #git add graph_api_permissions_friendly_names.json
           git add graph_api_permissions_map.json
-          git add graph_api_permissions_endpoints.json
+          #git add graph_api_permissions_endpoints.json
 
           # Check if there are changes
           if git diff --staged --quiet; then
@@ -51,13 +51,13 @@ jobs:
             echo "has_changes=true" >> $GITHUB_OUTPUT
             
             # Get file stats
-            friendly_names_count=$(jq length graph_api_permissions_friendly_names.json 2>/dev/null || echo "0")
+            #friendly_names_count=$(jq length graph_api_permissions_friendly_names.json 2>/dev/null || echo "0")
             map_count=$(jq length graph_api_permissions_map.json 2>/dev/null || echo "0")
-            endpoints_count=$(jq length graph_api_permissions_endpoints.json 2>/dev/null || echo "0")
+            #endpoints_count=$(jq length graph_api_permissions_endpoints.json 2>/dev/null || echo "0")
             
-            echo "friendly_names_count=$friendly_names_count" >> $GITHUB_OUTPUT
+            #echo "friendly_names_count=$friendly_names_count" >> $GITHUB_OUTPUT
             echo "map_count=$map_count" >> $GITHUB_OUTPUT
-            echo "endpoints_count=$endpoints_count" >> $GITHUB_OUTPUT
+            #echo "endpoints_count=$endpoints_count" >> $GITHUB_OUTPUT
             
             # Get changed files info
             changed_files=$(git diff --staged --name-only | tr '\n' ' ')
@@ -112,9 +112,9 @@ jobs:
             exit 0
           }
           
-          $friendlyNamesCount = "${{ steps.changes.outputs.friendly_names_count }}"
+          #$friendlyNamesCount = "${{ steps.changes.outputs.friendly_names_count }}"
           $mapCount = "${{ steps.changes.outputs.map_count }}"
-          $endpointsCount = "${{ steps.changes.outputs.endpoints_count }}"
+          #$endpointsCount = "${{ steps.changes.outputs.endpoints_count }}"
           $changedFiles = "${{ steps.changes.outputs.changed_files }}"
           $changeDetails = "${{ steps.changes.outputs.change_details }}"
           $diffContent = "${{ steps.changes.outputs.diff_content }}"

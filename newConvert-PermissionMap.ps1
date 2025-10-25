@@ -1,5 +1,5 @@
 param (
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [string]$DocsPath,
     [string]$JsonOutputPath = "graph_api_permissions_map.json",
     [string[]]$Versions = @("v1.0", "beta")
@@ -75,9 +75,9 @@ function Convert-PermissionsMarkdownToObject {
         Metadata     = $metadata
         FilePath     = $MarkdownFilePath
         FileName     = Split-Path $MarkdownFilePath -Leaf
-        Permissions              = $permissions
-        TableHeaders             = $tableHeaders
-        ParsedDate               = Get-Date
+        Permissions  = $permissions
+        TableHeaders = $tableHeaders
+        ParsedDate   = Get-Date
     }
     
     return $result
@@ -98,12 +98,12 @@ function Convert-MultiplePermissionFiles {
         $result = Convert-PermissionsMarkdownToObject -MarkdownFilePath $file.FullName
         if ($result) {
             # Handle numbered permission files (e.g., -2-permissions.md, -3-permissions.md)
-            $apiReferencePath = $($result.FilePath -replace "\\includes\\permissions", "\api") -replace '-\d+-permissions\.md$', '.md' -replace '-permissions\.md$', '.md'
+            $apiReferencePath = $($result.FilePath -replace "\includes\permissions", "\api") -replace '-\d+-permissions\.md$', '.md' -replace '-permissions\.md$', '.md'
 
             $allPermissions += [PSCustomObject]@{
-                fileName         = $result.FileName
-                filePath         = $result.FilePath
-                apiReferencePath = $apiReferencePath
+                fileName                = $result.FileName
+                filePath                = $result.FilePath
+                apiReferencePath        = $apiReferencePath
                 delegatedPersonal_Least = $result.Permissions | Where-Object { $_.PermissionType -eq 'Delegated (personal Microsoft account)' } | Select-Object -ExpandProperty LeastPrivilegedPermissions
                 delegatedWork_Least     = $result.Permissions | Where-Object { $_.PermissionType -eq 'Delegated (work or school account)' } | Select-Object -ExpandProperty LeastPrivilegedPermissions
                 application_Least       = $result.Permissions | Where-Object { $_.PermissionType -eq 'Application' } | Select-Object -ExpandProperty LeastPrivilegedPermissions
@@ -114,12 +114,17 @@ function Convert-MultiplePermissionFiles {
     return $allPermissions
 }
 
-
 $apiReferencePath = Join-Path -Path $DocsPath -ChildPath "api-reference"
 [System.Collections.ArrayList]$allPermissions = @()
+
 foreach ($version in $Versions) {
-    $permissionFolderPath = Join-Path -Path $apiReferencePath -ChildPath "$version\includes\permissions"
-    $allPermissions.addrange($(Convert-MultiplePermissionFiles -FolderPath $permissionFolderPath))
+    $includePath = Join-Path -Path $apiReferencePath -ChildPath "$($version)\includes\permissions"
+    if (-not (Test-Path $includePath)) {
+        Write-Warning "Include path not found: $includePath"
+        continue
+    }
+    Write-Host "Processing permissions in: $includePath" -ForegroundColor Yellow
+    $allPermissions.addrange($(Convert-MultiplePermissionFiles -FolderPath $includePath))
 }
 
 
@@ -162,7 +167,8 @@ foreach ($permissionSet in $allPermissions) {
                 Continue  # Take only the first HTTP request found
             }
         }
-    } else {
+    }
+    else {
         # Fallback 1: Look for any code block that contains HTTP methods (without language specifier)
         $fallbackPattern = '```[^\r\n]*\r?\n(.*?)\r?\n```'
         $fallbackMatches = [regex]::Matches($apiData, $fallbackPattern, [System.Text.RegularExpressions.RegexOptions]::Singleline)
@@ -236,4 +242,4 @@ foreach ($permissionSet in $allPermissions) {
 }
 
 
-$allPermissions | select path, version, method, parameters, application_Least, delegatedWork_Least, delegatedPersonal_Least | ConvertTo-Json | Out-File -FilePath $JsonOutputPath -Encoding utf8
+$allPermissions | Select-Object path, version, method, parameters, application_Least, delegatedWork_Least, delegatedPersonal_Least | ConvertTo-Json | Out-File -FilePath ".\permissions-summary.json" -Encoding utf8

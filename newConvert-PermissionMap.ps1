@@ -269,4 +269,4 @@ foreach ($permissionSet in $allPermissions) {
 }
 
 
-$allPermissions | Select-Object path, version, method, parameters, application_Least, delegatedWork_Least, delegatedPersonal_Least | ConvertTo-Json | Out-File -FilePath ".\permissions-summary.json" -Encoding utf8
+$allPermissions | Select-Object path, version, method, parameters, application_Least, delegatedWork_Least, delegatedPersonal_Least | ConvertTo-Json | Out-File -FilePath $JsonOutputPath -Encoding utf8 -NoNewline

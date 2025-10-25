@@ -113,12 +113,13 @@ function Convert-MultiplePermissionFiles {
     
     return $allPermissions
 }
-Set-Location $DocsPath
+
+$refApiPath = Join-Path -Path $DocsPath -ChildPath "api-reference"
 
 [System.Collections.ArrayList]$allPermissions = @()
 
 foreach ($version in $Versions) {
-    $includePath = Join-Path -Path "api-reference" -ChildPath "$($version)\includes\permissions"
+    $includePath = Join-Path -Path $refApiPath -ChildPath "$($version)\includes\permissions"
     if (-not (Test-Path $includePath)) {
         Write-Warning "Include path not found: $includePath"
         continue

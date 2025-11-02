@@ -355,7 +355,7 @@
     "version": "v1.0",
     "method": "POST",
     "parameters": "catalogId",
-    "application_Least": "EntitlementManagement.Read.All EntitlementManagement.ReadWrite.All",
+    "application_Least": "EntitlementManagement.ReadWrite.All",
     "delegatedWork_Least": "EntitlementManagement.ReadWrite.All",
     "delegatedPersonal_Least": "Not supported."
   },
@@ -22639,7 +22639,7 @@
     "version": "beta",
     "method": "POST",
     "parameters": "catalogId",
-    "application_Least": "EntitlementManagement.Read.All",
+    "application_Least": "EntitlementManagement.ReadWrite.All",
     "delegatedWork_Least": "EntitlementManagement.ReadWrite.All",
     "delegatedPersonal_Least": "Not supported."
   },

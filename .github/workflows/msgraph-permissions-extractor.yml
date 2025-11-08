@@ -40,7 +40,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -100,19 +102,19 @@ jobs:
         CONCURRENT_REQUESTS: '50'
         MAX_CONCURRENT_BATCHES: '5'
       
-    - name: Create output directory
-      run: mkdir -p output
-      
-    - name: Move output files
+    - name: Create output directory and move files
       run: |
+        mkdir -p data
+        
         if [ -f permissions-v1.0.json ]; then
-          mv permissions-v1.0.json output/
+          mv permissions-v1.0.json data/
           echo "Moved v1.0 permissions file"
         else
           echo "Warning: permissions-v1.0.json not found"
         fi
+        
         if [ -f permissions-beta.json ]; then
-          mv permissions-beta.json output/
+          mv permissions-beta.json data/
           echo "Moved beta permissions file"
         else
           echo "Warning: permissions-beta.json not found"
@@ -120,40 +122,62 @@ jobs:
         
     - name: Generate summary report
       run: |
-        echo "# Microsoft Graph Permissions Extraction Report" > output/extraction-summary.md
-        echo "Generated on: $(date)" >> output/extraction-summary.md
-        echo "" >> output/extraction-summary.md
+        echo "# Microsoft Graph Permissions Extraction Report" > data/extraction-summary.md
+        echo "Generated on: $(date)" >> data/extraction-summary.md
+        echo "" >> data/extraction-summary.md
         
-        if [ -f output/permissions-v1.0.json ]; then
-          v10_endpoints=$(jq length output/permissions-v1.0.json)
-          v10_methods=$(jq '[.[].Method | keys | length] | add' output/permissions-v1.0.json)
-          echo "## v1.0 Results" >> output/extraction-summary.md
-          echo "- Endpoints: $v10_endpoints" >> output/extraction-summary.md
-          echo "- Total Methods: $v10_methods" >> output/extraction-summary.md
-          echo "" >> output/extraction-summary.md
+        if [ -f data/permissions-v1.0.json ]; then
+          v10_endpoints=$(jq length data/permissions-v1.0.json)
+          v10_methods=$(jq '[.[].Method | keys | length] | add' data/permissions-v1.0.json)
+          echo "## v1.0 Results" >> data/extraction-summary.md
+          echo "- Endpoints: $v10_endpoints" >> data/extraction-summary.md
+          echo "- Total Methods: $v10_methods" >> data/extraction-summary.md
+          echo "" >> data/extraction-summary.md
         fi
         
-        if [ -f output/permissions-beta.json ]; then
-          beta_endpoints=$(jq length output/permissions-beta.json)
-          beta_methods=$(jq '[.[].Method | keys | length] | add' output/permissions-beta.json)
-          echo "## Beta Results" >> output/extraction-summary.md
-          echo "- Endpoints: $beta_endpoints" >> output/extraction-summary.md
-          echo "- Total Methods: $beta_methods" >> output/extraction-summary.md
+        if [ -f data/permissions-beta.json ]; then
+          beta_endpoints=$(jq length data/permissions-beta.json)
+          beta_methods=$(jq '[.[].Method | keys | length] | add' data/permissions-beta.json)
+          echo "## Beta Results" >> data/extraction-summary.md
+          echo "- Endpoints: $beta_endpoints" >> data/extraction-summary.md
+          echo "- Total Methods: $beta_methods" >> data/extraction-summary.md
         fi
         
-    - name: Upload permissions artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: msgraph-permissions-data
-        path: output/
-        retention-days: 90
+    - name: Check for changes
+      id: changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add the files
+        git add data/
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "No changes detected"
+        else
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected"
+        fi
         
     - name: Display summary
       run: |
         echo "## Extraction Summary"
-        if [ -f output/extraction-summary.md ]; then
-          cat output/extraction-summary.md
+        if [ -f data/extraction-summary.md ]; then
+          cat data/extraction-summary.md
         fi
+        
+    - name: Commit and Push Changes
+      if: steps.changes.outputs.has_changes == 'true'
+      run: |
+        git commit -m "Update Microsoft Graph permissions data [skip ci]
+        
+        - Updated $(date '+%Y-%m-%d %H:%M:%S UTC')
+        - Extraction mode: ${{ github.event.inputs.test_mode == 'true' && 'Test' || 'Production' }}
+        - Files updated: $(ls -1 data/*.json | wc -l) permission files"
+        
+        git push
         
     - name: Debug information
       if: failure()
@@ -162,8 +186,8 @@ jobs:
         echo "Current directory contents:"
         ls -la
         echo ""
-        echo "OpenAPI directory structure:"
-        find openapi -type f 2>/dev/null || echo "No openapi directory found"
+        echo "Data directory contents:"
+        ls -la data/ 2>/dev/null || echo "No data directory found"
         echo ""
-        echo "Output directory contents:"
-        ls -la output/ 2>/dev/null || echo "No output directory found"
+        echo "Git status:"
+        git status

@@ -1404,5 +1404,40 @@
     "Method": {
       "POST": []
     }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/microsoft.graph.windowsUpdates.enrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
   }
 ]

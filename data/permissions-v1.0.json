@@ -4333,5 +4333,126 @@
         }
       ]
     }
+  },
+  {
+    "Endpoint": "/communications/calls/{call-id}/participants/{participant-id}/mute",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Calls.JoinGroupCall.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Calls.JoinGroupCallasGuest.All",
+          "scopeType": "Application",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/communications/calls/{call-id}/participants/{participant-id}/startHoldMusic",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Calls.JoinGroupCall.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Calls.JoinGroupCallasGuest.All",
+          "scopeType": "Application",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/communications/calls/{call-id}/participants/{participant-id}/stopHoldMusic",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Calls.JoinGroupCall.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Calls.JoinGroupCallasGuest.All",
+          "scopeType": "Application",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/communications/calls/{call-id}/participants/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Calls.AccessMedia.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Calls.Initiate.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/communications/calls/{call-id}/participants/invite",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Calls.InitiateGroupCall.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
   }
 ]

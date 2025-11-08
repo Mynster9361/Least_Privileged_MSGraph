@@ -1,10 +1,10 @@
 # Microsoft Graph Permissions Extraction Report
-Generated on: Sat Nov  8 21:09:37 UTC 2025
+Generated on: Sat Nov  8 21:16:29 UTC 2025
 
 ## v1.0 Results
-- Endpoints: 100
-- Total Methods: 165
+- Endpoints: 105
+- Total Methods: 170
 
 ## Beta Results
-- Endpoints: 100
-- Total Methods: 160
+- Endpoints: 105
+- Total Methods: 165

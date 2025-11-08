@@ -1,0 +1,113 @@
+name: Microsoft Graph Permissions Extractor
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_delay:
+        description: 'Delay between API calls (ms)'
+        required: false
+        default: '100'
+        type: string
+      test_mode:
+        description: 'Enable test mode'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+        - 'false'
+        - 'true'
+      skip_count:
+        description: 'Skip first N endpoints (test mode only)'
+        required: false
+        default: '0'
+        type: string
+      limit_count:
+        description: 'Limit to N endpoints (test mode only)'
+        required: false
+        default: '0'
+        type: string
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  extract-permissions:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install js-yaml axios
+        
+    - name: Extract permissions data (Ultra-Fast Mode)
+      run: node tools/run-production.js
+      if: ${{ github.event.inputs.test_mode != 'true' }}
+      
+    - name: Extract permissions data (Test Mode)
+      run: node tools/permissions-extractor.js
+      if: ${{ github.event.inputs.test_mode == 'true' }}
+      env:
+        API_DELAY: ${{ github.event.inputs.api_delay || '10' }}
+        TEST_MODE: 'true'
+        SKIP_COUNT: ${{ github.event.inputs.skip_count || '0' }}
+        LIMIT_COUNT: ${{ github.event.inputs.limit_count || '0' }}
+        CONCURRENT_REQUESTS: '50'
+        MAX_CONCURRENT_BATCHES: '5'
+      
+    - name: Create output directory
+      run: mkdir -p output
+      
+    - name: Move output files
+      run: |
+        if [ -f permissions-v1.0.json ]; then
+          mv permissions-v1.0.json output/
+        fi
+        if [ -f permissions-beta.json ]; then
+          mv permissions-beta.json output/
+        fi
+        
+    - name: Generate summary report
+      run: |
+        echo "# Microsoft Graph Permissions Extraction Report" > output/extraction-summary.md
+        echo "Generated on: $(date)" >> output/extraction-summary.md
+        echo "" >> output/extraction-summary.md
+        
+        if [ -f output/permissions-v1.0.json ]; then
+          v10_endpoints=$(jq length output/permissions-v1.0.json)
+          v10_methods=$(jq '[.[].Method | keys | length] | add' output/permissions-v1.0.json)
+          echo "## v1.0 Results" >> output/extraction-summary.md
+          echo "- Endpoints: $v10_endpoints" >> output/extraction-summary.md
+          echo "- Total Methods: $v10_methods" >> output/extraction-summary.md
+          echo "" >> output/extraction-summary.md
+        fi
+        
+        if [ -f output/permissions-beta.json ]; then
+          beta_endpoints=$(jq length output/permissions-beta.json)
+          beta_methods=$(jq '[.[].Method | keys | length] | add' output/permissions-beta.json)
+          echo "## Beta Results" >> output/extraction-summary.md
+          echo "- Endpoints: $beta_endpoints" >> output/extraction-summary.md
+          echo "- Total Methods: $beta_methods" >> output/extraction-summary.md
+        fi
+        
+    - name: Upload permissions artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: msgraph-permissions-data
+        path: output/
+        retention-days: 90
+        
+    - name: Display summary
+      run: |
+        echo "## Extraction Summary"
+        if [ -f output/extraction-summary.md ]; then
+          cat output/extraction-summary.md
+        fi

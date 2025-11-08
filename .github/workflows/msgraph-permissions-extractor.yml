@@ -39,10 +39,10 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
         
@@ -50,6 +50,40 @@ jobs:
       run: |
         npm init -y
         npm install js-yaml axios
+        
+    - name: Download Microsoft Graph metadata
+      run: |
+        echo "Downloading Microsoft Graph metadata repository..."
+        git clone --depth=1 https://github.com/microsoftgraph/msgraph-metadata.git temp-metadata
+        
+        # Create openapi directory structure
+        mkdir -p openapi/v1.0
+        mkdir -p openapi/beta
+        
+        # Copy the OpenAPI files
+        if [ -f temp-metadata/openapi/v1.0/openapi.yaml ]; then
+          cp temp-metadata/openapi/v1.0/openapi.yaml openapi/v1.0/
+          echo "Copied v1.0 OpenAPI file"
+        else
+          echo "Warning: v1.0 OpenAPI file not found"
+          ls -la temp-metadata/openapi/ || echo "openapi directory not found"
+        fi
+        
+        if [ -f temp-metadata/openapi/beta/openapi.yaml ]; then
+          cp temp-metadata/openapi/beta/openapi.yaml openapi/beta/
+          echo "Copied beta OpenAPI file"
+        else
+          echo "Warning: beta OpenAPI file not found"
+          ls -la temp-metadata/openapi/ || echo "openapi directory not found"
+        fi
+        
+        # Clean up temporary directory
+        rm -rf temp-metadata
+        
+        # Verify files exist
+        echo "Verifying OpenAPI files:"
+        ls -la openapi/v1.0/ || echo "v1.0 directory empty"
+        ls -la openapi/beta/ || echo "beta directory empty"
         
     - name: Extract permissions data (Ultra-Fast Mode)
       run: node tools/run-production.js
@@ -73,9 +107,15 @@ jobs:
       run: |
         if [ -f permissions-v1.0.json ]; then
           mv permissions-v1.0.json output/
+          echo "Moved v1.0 permissions file"
+        else
+          echo "Warning: permissions-v1.0.json not found"
         fi
         if [ -f permissions-beta.json ]; then
           mv permissions-beta.json output/
+          echo "Moved beta permissions file"
+        else
+          echo "Warning: permissions-beta.json not found"
         fi
         
     - name: Generate summary report
@@ -114,3 +154,16 @@ jobs:
         if [ -f output/extraction-summary.md ]; then
           cat output/extraction-summary.md
         fi
+        
+    - name: Debug information
+      if: failure()
+      run: |
+        echo "=== Debug Information ==="
+        echo "Current directory contents:"
+        ls -la
+        echo ""
+        echo "OpenAPI directory structure:"
+        find openapi -type f 2>/dev/null || echo "No openapi directory found"
+        echo ""
+        echo "Output directory contents:"
+        ls -la output/ 2>/dev/null || echo "No output directory found"

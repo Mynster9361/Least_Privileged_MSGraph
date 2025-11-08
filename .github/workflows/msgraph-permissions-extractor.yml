@@ -178,6 +178,96 @@ jobs:
         - Files updated: $(ls -1 data/*.json | wc -l) permission files"
         
         git push
+
+    - name: Send Discord Notification
+      if: steps.changes.outputs.has_changes == 'true'
+      shell: pwsh
+      run: |
+        $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
+        
+        # Read the summary data
+        $v10Exists = Test-Path "data/permissions-v1.0.json"
+        $betaExists = Test-Path "data/permissions-beta.json"
+        
+        if ($v10Exists) {
+          $v10Data = Get-Content "data/permissions-v1.0.json" | ConvertFrom-Json
+          $v10Endpoints = $v10Data.Count
+          $v10Methods = ($v10Data | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
+        } else {
+          $v10Endpoints = 0
+          $v10Methods = 0
+        }
+        
+        if ($betaExists) {
+          $betaData = Get-Content "data/permissions-beta.json" | ConvertFrom-Json
+          $betaEndpoints = $betaData.Count
+          $betaMethods = ($betaData | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
+        } else {
+          $betaEndpoints = 0
+          $betaMethods = 0
+        }
+        
+        $extractionMode = if ("${{ github.event.inputs.test_mode }}" -eq "true") { "Test Mode" } else { "Production Mode" }
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
+        $repositoryUrl = "${{ github.server_url }}/${{ github.repository }}"
+        $commitUrl = "$repositoryUrl/commit/${{ github.sha }}"
+        
+        # Create Discord embed
+        $embed = @{
+          title = "🔄 Microsoft Graph Permissions Updated"
+          description = "New permissions data has been extracted and committed to the repository."
+          color = 3066993  # Green color
+          fields = @(
+            @{
+              name = "📊 v1.0 API"
+              value = "**Endpoints:** $v10Endpoints`n**Methods:** $v10Methods"
+              inline = $true
+            },
+            @{
+              name = "🧪 Beta API"
+              value = "**Endpoints:** $betaEndpoints`n**Methods:** $betaMethods"
+              inline = $true
+            },
+            @{
+              name = "⚙️ Extraction Info"
+              value = "**Mode:** $extractionMode`n**Updated:** $timestamp"
+              inline = $false
+            }
+          )
+          footer = @{
+            text = "Least Privileged MSGraph"
+          }
+          timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+        }
+        
+        # Add links if not in test mode
+        if ("${{ github.event.inputs.test_mode }}" -ne "true") {
+          $embed.fields += @{
+            name = "🔗 Links"
+            value = "[📁 Repository]($repositoryUrl) • [📝 Latest Commit]($commitUrl)"
+            inline = $false
+          }
+        }
+        
+        $payload = @{
+          username = "Graph Permissions Bot"
+          avatar_url = "https://github.com/microsoft.png"
+          embeds = @($embed)
+        } | ConvertTo-Json -Depth 10
+        
+        # Send webhook
+        try {
+          $headers = @{
+            "Content-Type" = "application/json"
+          }
+          
+          Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $payload -Headers $headers
+          Write-Output "✅ Discord notification sent successfully"
+        }
+        catch {
+          Write-Output "❌ Failed to send Discord notification: $($_.Exception.Message)"
+          Write-Output "Payload was: $payload"
+        }
         
     - name: Debug information
       if: failure()

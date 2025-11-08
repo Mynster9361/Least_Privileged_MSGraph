@@ -423,7 +423,7 @@ jobs:
         # Add links
         $fields += @{
           name = "🔗 Links"
-          value = "[📁 Repository]($repositoryUrl) • [📝 View Commit]($commitUrl) • [📋 Compare Changes]($repositoryUrl/compare)"
+          value = "[📁 Repository]($repositoryUrl) • [📝 View Commit]($commitUrl)"
           inline = $false
         }
         

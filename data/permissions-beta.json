@@ -1,23 +1,87 @@
 [
   {
-    "Endpoint": "/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/$count",
     "Version": "beta",
     "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
     }
   },
   {
-    "Endpoint": "/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}/events",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/microsoft.graph.windowsUpdates.enrollAssets",
     "Version": "beta",
     "Method": {
-      "GET": [],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}/events/{messageEvent-id}",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/microsoft.graph.windowsUpdates.enrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/microsoft.graph.windowsUpdates.unenrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/microsoft.graph.windowsUpdates.unenrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/{updatableAsset-id}",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -26,33 +90,40 @@
     }
   },
   {
-    "Endpoint": "/admin/exchange/messageTraces/{messageTrace-id}/recipients/{messageRecipient-id}/events/$count",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
     "Version": "beta",
     "Method": {
-      "GET": []
+      "POST": []
     }
   },
   {
-    "Endpoint": "/admin/exchange/messageTraces/{messageTrace-id}/recipients/$count",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
     "Version": "beta",
     "Method": {
-      "GET": []
+      "POST": []
     }
   },
   {
-    "Endpoint": "/admin/exchange/messageTraces/$count",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
     "Version": "beta",
     "Method": {
-      "GET": []
+      "POST": []
     }
   },
   {
-    "Endpoint": "/admin/forms",
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/$count",
     "Version": "beta",
     "Method": {
       "GET": [
         {
-          "value": "OrgSettings-Forms.Read.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "Application",
           "consentDisplayName": null,
           "consentDescription": null,
@@ -61,36 +132,158 @@
           "isHidden": false
         },
         {
-          "value": "OrgSettings-Forms.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/microsoft.graph.windowsUpdates.enrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/microsoft.graph.windowsUpdates.enrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/microsoft.graph.windowsUpdates.unenrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/members/microsoft.graph.windowsUpdates.unenrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/microsoft.graph.windowsUpdates.updateAudience",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/microsoft.graph.windowsUpdates.updateAudienceById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deploymentAudiences/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "Application",
           "consentDisplayName": null,
           "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Forms.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read organization-wide Microsoft Forms settings",
-          "consentDescription": "Allows the app to read organization-wide Microsoft Forms settings on your behalf.",
           "isAdmin": true,
           "isLeastPrivilege": true,
           "isHidden": false
         },
         {
-          "value": "OrgSettings-Forms.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write organization-wide Microsoft Forms settings",
-          "consentDescription": "Allows the app to read and write organization-wide Microsoft Forms settings on your behalf.",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
           "isAdmin": true,
-          "isLeastPrivilege": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
           "isHidden": false
         }
       ],
       "PATCH": [
         {
-          "value": "OrgSettings-Forms.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "Application",
           "consentDisplayName": null,
           "consentDescription": null,
@@ -99,361 +292,10 @@
           "isHidden": false
         },
         {
-          "value": "OrgSettings-Forms.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write organization-wide Microsoft Forms settings",
-          "consentDescription": "Allows the app to read and write organization-wide Microsoft Forms settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/microsoft365Apps",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/microsoft365Apps/installationOptions",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "OrgSettings-Microsoft365Install.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Microsoft365Install.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Microsoft365Install.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Microsoft365Install.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "OrgSettings-Microsoft365Install.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Microsoft365Install.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people/itemInsights",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "User.Read",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Sign you in and read your profile",
-          "consentDescription": "Allows you to sign in to the app with your organizational account and let the app read your profile. It also allows the app to read basic company information.",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "User.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read all users' full profiles and company properties",
-          "consentDescription": "Allows the app to read the full set of user properties of all users in the organization and read company properties, on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "User.ReadWrite",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and update your profile",
-          "consentDescription": "Allows the app to read your profile and basic company information, and discover your group membership, reports and manager. It also allows the app to update your profile information on your behalf.",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "User.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write all users' full profiles",
-          "consentDescription": "Allows the app to read and write the full set of profile properties, reports, and managers of other users in your organization, and read basic company properties, on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people/namePronunciation",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people/photoUpdateSettings",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
           "isAdmin": true,
           "isLeastPrivilege": true,
           "isHidden": false
@@ -461,7 +303,7 @@
       ],
       "DELETE": [
         {
-          "value": "PeopleSettings.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "Application",
           "consentDisplayName": null,
           "consentDescription": null,
@@ -470,10 +312,10 @@
           "isHidden": false
         },
         {
-          "value": "PeopleSettings.ReadWrite.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
           "isAdmin": true,
           "isLeastPrivilege": true,
           "isHidden": false
@@ -482,52 +324,7 @@
     }
   },
   {
-    "Endpoint": "/admin/people/profileCardProperties",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profileCardProperties/{profileCardProperty-id}",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -536,694 +333,7 @@
     }
   },
   {
-    "Endpoint": "/admin/people/profileCardProperties/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profilePropertySettings",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "POST": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profilePropertySettings/{profilePropertySetting-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profilePropertySettings/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profileSources",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "POST": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profileSources/{profileSource-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profileSources(sourceId='{sourceId}')",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/people/profileSources/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/people/pronouns",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read tenant-wide people settings",
-          "consentDescription": "Allows the application to read tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "PeopleSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write tenant-wide people settings",
-          "consentDescription": "Allows the application to read and write tenant-wide people settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/reportSettings",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ReportSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ReportSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "ReportSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read admin report settings",
-          "consentDescription": "Allows the app to read admin report settings, such as whether to display concealed information in reports, on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ReportSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write admin report settings",
-          "consentDescription": "Allows the app to read and update admin report settings, such as whether to display concealed information in reports, on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "ReportSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ReportSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write admin report settings",
-          "consentDescription": "Allows the app to read and update admin report settings, such as whether to display concealed information in reports, on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/{serviceHealth-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/{serviceHealth-id}/issues",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -1231,7 +341,7 @@
     }
   },
   {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/{serviceHealth-id}/issues/{serviceHealthIssue-id}",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/{applicableContent-catalogEntryId}",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -1240,535 +350,45 @@
     }
   },
   {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/{serviceHealth-id}/issues/{serviceHealthIssue-id}/incidentReport()",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/{applicableContent-catalogEntryId}/catalogEntry",
     "Version": "beta",
     "Method": {
       "GET": []
     }
   },
   {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/{serviceHealth-id}/issues/$count",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/{applicableContentDeviceMatch-deviceId}",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/$count",
     "Version": "beta",
     "Method": {
       "GET": []
     }
   },
   {
-    "Endpoint": "/admin/serviceAnnouncement/healthOverviews/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/issues",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/issues/{serviceHealthIssue-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/issues/{serviceHealthIssue-id}/incidentReport()",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/issues/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceHealth.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service health",
-          "consentDescription": "Allows the app to read your tenant's service health information on your behalf. Health information may include service issues or service health overviews.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/{serviceAnnouncementAttachment-id}/content",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PUT": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachments/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/{serviceUpdateMessage-id}/attachmentsArchive",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PUT": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "ServiceMessage.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read service messages",
-          "consentDescription": "Allows the app to read your tenant's service announcement messages on your behalf. Messages may include information about new or changed features.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/archive",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/favorite",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/markRead",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/markUnread",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/unarchive",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/serviceAnnouncement/messages/unfavorite",
-    "Version": "beta",
-    "Method": {
-      "POST": [
-        {
-          "value": "ServiceMessageViewpoint.Write",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Update your user status on service announcement messages",
-          "consentDescription": "Allows the app to update service announcement messages' status on your behalf. Your status for messages can be marked as read, archive, or favorite.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/sharepoint",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/sharepoint/settings",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "SharePointTenantSettings.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "SharePointTenantSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "SharePointTenantSettings.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read SharePoint and OneDrive tenant settings",
-          "consentDescription": "Allows the application to read the tenant-level settings in SharePoint and OneDrive on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "SharePointTenantSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and change SharePoint and OneDrive tenant settings",
-          "consentDescription": "Allows the application to read and change the tenant-level settings of SharePoint and OneDrive on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "SharePointTenantSettings.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "SharePointTenantSettings.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and change SharePoint and OneDrive tenant settings",
-          "consentDescription": "Allows the application to read and change the tenant-level settings of SharePoint and OneDrive on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/policy",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/policy/microsoft.graph.teamsAdministration.getPolicyId(type='{type}',name='{name}')",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/applicableContent/$count",
     "Version": "beta",
     "Method": {
       "GET": []
     }
   },
   {
-    "Endpoint": "/admin/teams/policy/userAssignments",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -1776,7 +396,7 @@
     }
   },
   {
-    "Endpoint": "/admin/teams/policy/userAssignments/{teamsPolicyUserAssignment-id}",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/{updatableAsset-id}",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -1785,28 +405,78 @@
     }
   },
   {
-    "Endpoint": "/admin/teams/policy/userAssignments/$count",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/$count",
     "Version": "beta",
     "Method": {
       "GET": []
     }
   },
   {
-    "Endpoint": "/admin/teams/policy/userAssignments/microsoft.graph.teamsAdministration.assign",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/microsoft.graph.windowsUpdates.enrollAssets",
     "Version": "beta",
     "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/policy/userAssignments/microsoft.graph.teamsAdministration.unassign",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/microsoft.graph.windowsUpdates.enrollAssetsById",
     "Version": "beta",
     "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/microsoft.graph.windowsUpdates.unenrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/exclusions/microsoft.graph.windowsUpdates.unenrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/{updatableAsset-id}",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -1815,284 +485,89 @@
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments/{numberAssignment-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments/microsoft.graph.teamsAdministration.assignNumber",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
     "Version": "beta",
     "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments/microsoft.graph.teamsAdministration.unassignNumber",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
     "Version": "beta",
     "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/numberAssignments/microsoft.graph.teamsAdministration.updateNumber",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
     "Version": "beta",
     "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/operations",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
     "Version": "beta",
     "Method": {
-      "GET": [],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/operations/{telephoneNumberLongRunningOperation-id}",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsTelephoneNumber.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Consent name unavailable",
-          "consentDescription": "Consent description unavailable",
-          "isAdmin": false,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/telephoneNumberManagement/operations/$count",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/$count",
     "Version": "beta",
     "Method": {
       "GET": []
     }
   },
   {
-    "Endpoint": "/admin/teams/userConfigurations",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/microsoft.graph.windowsUpdates.enrollAssets",
     "Version": "beta",
     "Method": {
-      "GET": [
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read Teams user configurations",
-          "consentDescription": "Allows the app to read your tenant's user configurations on behalf of the signed-in admin user. User configuration may include attributes related to user, such as telephone number, assigned policies, etc.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/userConfigurations/{teamsUserConfiguration-id}",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/microsoft.graph.windowsUpdates.enrollAssetsById",
     "Version": "beta",
     "Method": {
-      "GET": [
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read Teams user configurations",
-          "consentDescription": "Allows the app to read your tenant's user configurations on behalf of the signed-in admin user. User configuration may include attributes related to user, such as telephone number, assigned policies, etc.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [],
-      "DELETE": []
+      "POST": []
     }
   },
   {
-    "Endpoint": "/admin/teams/userConfigurations/{teamsUserConfiguration-id}/user",
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/microsoft.graph.windowsUpdates.unenrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/members/microsoft.graph.windowsUpdates.unenrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/microsoft.graph.windowsUpdates.updateAudience",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/{deployment-id}/audience/microsoft.graph.windowsUpdates.updateAudienceById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/deployments/$count",
     "Version": "beta",
     "Method": {
       "GET": [
         {
-          "value": "TeamsUserConfiguration.Read.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "Application",
           "consentDisplayName": null,
           "consentDescription": null,
@@ -2101,10 +576,10 @@
           "isHidden": false
         },
         {
-          "value": "TeamsUserConfiguration.Read.All",
+          "value": "WindowsUpdates.ReadWrite.All",
           "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read Teams user configurations",
-          "consentDescription": "Allows the app to read your tenant's user configurations on behalf of the signed-in admin user. User configuration may include attributes related to user, such as telephone number, assigned policies, etc.",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
           "isAdmin": true,
           "isLeastPrivilege": true,
           "isHidden": false
@@ -2113,147 +588,7 @@
     }
   },
   {
-    "Endpoint": "/admin/teams/userConfigurations/{teamsUserConfiguration-id}/user/mailboxSettings",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/userConfigurations/{teamsUserConfiguration-id}/user/serviceProvisioningErrors",
-    "Version": "beta",
-    "Method": {
-      "GET": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/userConfigurations/{teamsUserConfiguration-id}/user/serviceProvisioningErrors/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": []
-    }
-  },
-  {
-    "Endpoint": "/admin/teams/userConfigurations/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "TeamsUserConfiguration.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read Teams user configurations",
-          "consentDescription": "Allows the app to read your tenant's user configurations on behalf of the signed-in admin user. User configuration may include attributes related to user, such as telephone number, assigned policies, etc.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ]
-    }
-  },
-  {
-    "Endpoint": "/admin/todo",
-    "Version": "beta",
-    "Method": {
-      "GET": [
-        {
-          "value": "OrgSettings-Todo.Read.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Todo.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Todo.Read.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read organization-wide Microsoft To Do settings",
-          "consentDescription": "Allows the app to read organization-wide Microsoft To Do settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Todo.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write organization-wide Microsoft To Do settings",
-          "consentDescription": "Allows the app to read and write organization-wide Microsoft To Do settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": false,
-          "isHidden": false
-        }
-      ],
-      "PATCH": [
-        {
-          "value": "OrgSettings-Todo.ReadWrite.All",
-          "scopeType": "Application",
-          "consentDisplayName": null,
-          "consentDescription": null,
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        },
-        {
-          "value": "OrgSettings-Todo.ReadWrite.All",
-          "scopeType": "DelegatedWork",
-          "consentDisplayName": "Read and write organization-wide Microsoft To Do settings",
-          "consentDescription": "Allows the app to read and write organization-wide Microsoft To Do settings on your behalf.",
-          "isAdmin": true,
-          "isLeastPrivilege": true,
-          "isHidden": false
-        }
-      ],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/catalog",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/catalog/entries",
+    "Endpoint": "/admin/windows/updates/products",
     "Version": "beta",
     "Method": {
       "GET": [
@@ -2280,7 +615,62 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/catalog/entries/{catalogEntry-id}",
+    "Endpoint": "/admin/windows/updates/products/{product-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/editions",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/editions/{edition-id}",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -2289,7 +679,7 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/catalog/entries/$count",
+    "Endpoint": "/admin/windows/updates/products/{product-id}/editions/$count",
     "Version": "beta",
     "Method": {
       "GET": [
@@ -2315,7 +705,214 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences",
+    "Endpoint": "/admin/windows/updates/products/{product-id}/knownIssues",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/knownIssues/{knownIssue-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/knownIssues/{knownIssue-id}/originatingKnowledgeBaseArticle",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/knownIssues/{knownIssue-id}/resolvingKnowledgeBaseArticle",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/knownIssues/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/microsoft.graph.windowsUpdates.getKnownIssuesByTimeRange(daysInPast={daysInPast},includeAllActive=@includeAllActive)",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/revisions",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}/catalogEntry",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/revisions/{productRevision-id}/knowledgeBaseArticle",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/{product-id}/revisions/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/microsoft.graph.windowsUpdates.findByCatalogId(catalogID='{catalogID}')",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/products/microsoft.graph.windowsUpdates.findByKbNumber(kbNumber={kbNumber})",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/resourceConnections",
     "Version": "beta",
     "Method": {
       "GET": [
@@ -2361,7 +958,7 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}",
+    "Endpoint": "/admin/windows/updates/resourceConnections/{resourceConnection-id}",
     "Version": "beta",
     "Method": {
       "GET": [
@@ -2408,62 +1005,33 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent",
+    "Endpoint": "/admin/windows/updates/resourceConnections/$count",
     "Version": "beta",
     "Method": {
-      "GET": [],
-      "POST": []
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}/catalogEntry",
-    "Version": "beta",
-    "Method": {
-      "GET": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}/matchedDevices",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "POST": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/{applicableContentDeviceMatch-deviceId}",
-    "Version": "beta",
-    "Method": {
-      "GET": [],
-      "PATCH": [],
-      "DELETE": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/applicableContent/$count",
-    "Version": "beta",
-    "Method": {
-      "GET": []
-    }
-  },
-  {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions",
+    "Endpoint": "/admin/windows/updates/updatableAssets",
     "Version": "beta",
     "Method": {
       "GET": [
@@ -2486,11 +1054,271 @@
           "isHidden": false
         }
       ],
+      "POST": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/{updatableAsset-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
+    "Version": "beta",
+    "Method": {
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/{updatableAsset-id}",
+    "Endpoint": "/admin/windows/updates/updatableAssets/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/microsoft.graph.windowsUpdates.enrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/microsoft.graph.windowsUpdates.enrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/microsoft.graph.windowsUpdates.unenrollAssets",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatableAssets/microsoft.graph.windowsUpdates.unenrollAssetsById",
+    "Version": "beta",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "DELETE": [
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "WindowsUpdates.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Windows update deployment settings",
+          "consentDescription": "Allows the app to read and write all Windows update deployment settings for the organization on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience",
     "Version": "beta",
     "Method": {
       "GET": [],
@@ -2499,28 +1327,79 @@
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent",
     "Version": "beta",
     "Method": {
+      "GET": [],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembersById",
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/{applicableContent-catalogEntryId}",
     "Version": "beta",
     "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/{applicableContent-catalogEntryId}/catalogEntry",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembers",
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/{applicableContentDeviceMatch-deviceId}",
     "Version": "beta",
     "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/{applicableContent-catalogEntryId}/matchedDevices/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/applicableContent/$count",
+    "Version": "beta",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
       "POST": []
     }
   },
   {
-    "Endpoint": "/admin/windows/updates/deploymentAudiences/{deploymentAudience-id}/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.removeMembersById",
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/{updatableAsset-id}",
+    "Version": "beta",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/admin/windows/updates/updatePolicies/{updatePolicy-id}/audience/exclusions/{updatableAsset-id}/microsoft.graph.windowsUpdates.addMembers",
     "Version": "beta",
     "Method": {
       "POST": []

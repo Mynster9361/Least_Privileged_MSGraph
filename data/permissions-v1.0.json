@@ -1,0 +1,3096 @@
+[
+  {
+    "Endpoint": "/applications/{application-id}/getMemberGroups",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/getMemberObjects",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/removeKey",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/removePassword",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/restore",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/setVerifiedPublisher",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/unsetVerifiedPublisher",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/{directoryObject-id}/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "DELETE": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/{directoryObject-id}/graph.appRoleAssignment",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/{directoryObject-id}/graph.endpoint",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/{directoryObject-id}/graph.servicePrincipal",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/{directoryObject-id}/graph.user",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.appRoleAssignment",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.appRoleAssignment/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.endpoint",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.endpoint/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.servicePrincipal",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.servicePrincipal/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.user",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/owners/graph.user/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PUT": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/bulkUpload",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/bulkUpload/$value",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PUT": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/pause",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/provisionOnDemand",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/restart",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/start",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/validateCredentials",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/directories",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/directories/{directoryDefinition-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/directories/{directoryDefinition-id}/discover",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/directories/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/filterOperators()",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/functions()",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/{synchronizationJob-id}/schema/parseExpression",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/jobs/validateCredentials",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/acquireAccessToken",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/secrets",
+    "Version": "v1.0",
+    "Method": {
+      "PUT": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/secrets/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read all Azure AD synchronization data",
+          "consentDescription": "Allows the app to read Azure AD synchronization information, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read all Azure AD synchronization data",
+          "consentDescription": "Allows the app to read Azure AD synchronization information, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read all Azure AD synchronization data",
+          "consentDescription": "Allows the app to read Azure AD synchronization information, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/directories",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/directories/{directoryDefinition-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/directories/{directoryDefinition-id}/discover",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/directories/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/filterOperators()",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/functions()",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/{synchronizationTemplate-id}/schema/parseExpression",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/synchronization/templates/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read all Azure AD synchronization data",
+          "consentDescription": "Allows the app to read Azure AD synchronization information, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Synchronization.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write all Azure AD synchronization data",
+          "consentDescription": "Allows the app to configure the Azure AD synchronization service, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenIssuancePolicies",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenIssuancePolicies/{tokenIssuancePolicy-id}/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "DELETE": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenIssuancePolicies/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenIssuancePolicies/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenLifetimePolicies",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenLifetimePolicies/{tokenLifetimePolicy-id}/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "DELETE": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenLifetimePolicies/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/{application-id}/tokenLifetimePolicies/$ref",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your organization's policies",
+          "consentDescription": "Allows the app to read your organization's policies on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Policy.ReadWrite.ApplicationConfiguration",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your organization's application configuration policies",
+          "consentDescription": "Allows the app to read and write your organization's application configuration policies on your behalf.  This includes policies such as activityBasedTimeoutPolicy, claimsMappingPolicy, homeRealmDiscoveryPolicy, tokenIssuancePolicy  and tokenLifetimePolicy.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications(appId='{appId}')",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "User.Read",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Sign you in and read your profile",
+          "consentDescription": "Allows you to sign in to the app with your organizational account and let the app read your profile. It also allows the app to read basic company information.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications(uniqueName='{uniqueName}')",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "User.Read",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Sign you in and read your profile",
+          "consentDescription": "Allows you to sign in to the app with your organizational account and let the app read your profile. It also allows the app to read basic company information.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/applications/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "User.Read",
+          "scopeType": "DelegatedPersonal",
+          "consentDisplayName": "Sign you in and read your profile",
+          "consentDescription": "Allows you to sign in to the app with your organizational account and let the app read your profile. It also allows the app to read basic company information.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/delta()",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Application.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read applications",
+          "consentDescription": "Allows the app to read applications and service principals on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applications/getAvailableExtensionProperties",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/getByIds",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applications/validateProperties",
+    "Version": "v1.0",
+    "Method": {
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/applicationTemplates",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applicationTemplates/{applicationTemplate-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/applicationTemplates/{applicationTemplate-id}/instantiate",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.OwnedBy",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Application.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write applications",
+          "consentDescription": "Allows the app to create, read, update and delete applications and service principals on your behalf. Does not allow management of consent grants.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write directory data",
+          "consentDescription": "Allows the app to read and write data in your organization's directory, such as other users, groups.  It does not allow the app to delete users or groups, or reset user passwords.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/applicationTemplates/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/directoryAudits",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/directoryAudits/{directoryAudit-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/directoryAudits/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/provisioning",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "ProvisioningLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "ProvisioningLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/provisioning/{provisioningObjectSummary-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/provisioning/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "ProvisioningLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "ProvisioningLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Consent name unavailable",
+          "consentDescription": "Consent description unavailable",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns/{signIn-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "AuditLog.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read audit log data",
+          "consentDescription": "Allows the app to read and query your audit log activities, on your behalf.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Directory.Read.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read directory data",
+          "consentDescription": "Allows the app to read data in your organization's directory.",
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns/confirmCompromised",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "IdentityRiskEvent.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "IdentityRiskyUser.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write identity risky user information",
+          "consentDescription": "Allows the app to read and update identity risky user information for all users in your organization on your behalf. Update operations include dismissing risky users.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns/confirmSafe",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "IdentityRiskEvent.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "IdentityRiskyUser.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write identity risky user information",
+          "consentDescription": "Allows the app to read and update identity risky user information for all users in your organization on your behalf. Update operations include dismissing risky users.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/auditLogs/signIns/dismiss",
+    "Version": "v1.0",
+    "Method": {
+      "POST": [
+        {
+          "value": "IdentityRiskEvent.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "IdentityRiskyUser.ReadWrite.All",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write identity risky user information",
+          "consentDescription": "Allows the app to read and update identity risky user information for all users in your organization on your behalf. Update operations include dismissing risky users.",
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        }
+      ]
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodConfigurations",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodConfigurations/{authenticationMethodConfiguration-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodConfigurations/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodsPolicy",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodsPolicy/authenticationMethodConfigurations",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodsPolicy/authenticationMethodConfigurations/{authenticationMethodConfiguration-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/authenticationMethodsPolicy/authenticationMethodConfigurations/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/certificateBasedAuthConfiguration",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "POST": []
+    }
+  },
+  {
+    "Endpoint": "/certificateBasedAuthConfiguration/{certificateBasedAuthConfiguration-id}",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [],
+      "PATCH": [],
+      "DELETE": []
+    }
+  },
+  {
+    "Endpoint": "/certificateBasedAuthConfiguration/$count",
+    "Version": "v1.0",
+    "Method": {
+      "GET": []
+    }
+  },
+  {
+    "Endpoint": "/chats",
+    "Version": "v1.0",
+    "Method": {
+      "GET": [
+        {
+          "value": "Chat.Read",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read your chat messages",
+          "consentDescription": "Allows an app to read your 1 on 1 or group chat messages in Microsoft Teams, on your behalf.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.ReadBasic",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read names and members of your chat threads",
+          "consentDescription": "Allows an app to read the members and descriptions of one-to-one and group chat threads, on your behalf.",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.ReadWrite",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your chat messages",
+          "consentDescription": "Allows an app to read and write your 1 on 1 or group chat messages in Microsoft Teams, on your behalf.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.Read.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.ReadBasic.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.ReadWrite.All",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ],
+      "POST": [
+        {
+          "value": "Chat.Create",
+          "scopeType": "Application",
+          "consentDisplayName": null,
+          "consentDescription": null,
+          "isAdmin": true,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.Create",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Create chats",
+          "consentDescription": "Allows the app to create chats on your behalf. ",
+          "isAdmin": false,
+          "isLeastPrivilege": true,
+          "isHidden": false
+        },
+        {
+          "value": "Chat.ReadWrite",
+          "scopeType": "DelegatedWork",
+          "consentDisplayName": "Read and write your chat messages",
+          "consentDescription": "Allows an app to read and write your 1 on 1 or group chat messages in Microsoft Teams, on your behalf.",
+          "isAdmin": false,
+          "isLeastPrivilege": false,
+          "isHidden": false
+        }
+      ]
+    }
+  }
+]

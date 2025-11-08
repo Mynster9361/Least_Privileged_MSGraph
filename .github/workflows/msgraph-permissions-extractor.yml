@@ -30,6 +30,9 @@ on:
     # Run daily at 2 AM UTC
     - cron: '0 2 * * *'
 
+permissions:
+  contents: write
+
 jobs:
   extract-permissions:
     runs-on: ubuntu-latest
@@ -99,7 +102,7 @@ jobs:
         fi
         
     - name: Upload permissions artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: msgraph-permissions-data
         path: output/

@@ -613,8 +613,8 @@ function Get-OptimalPermissionSet {
 
 # Load permission maps once at the start
 Write-Host "Loading permission maps..." -ForegroundColor Cyan
-$permissionMapv1 = Get-Content -Path ".\data\permissions-v1.0.json" -Raw | ConvertFrom-Json
-$permissionMapbeta = Get-Content -Path ".\data\permissions-beta.json" -Raw | ConvertFrom-Json
+$permissionMapv1 = Get-Content -Path ".\data\sample\permissions-v1.0.json" -Raw | ConvertFrom-Json
+$permissionMapbeta = Get-Content -Path ".\data\sample\permissions-beta.json" -Raw | ConvertFrom-Json
 
 # Process each app
 $lightweightGroups | ForEach-Object {

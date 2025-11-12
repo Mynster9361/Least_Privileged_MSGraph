@@ -10,9 +10,9 @@ function Get-OptimalPermissionSet {
   $matchedActivities = $activityPermissions | Where-Object { $_.IsMatched }
 
   if ($unmatchedActivities.Count -gt 0) {
-    Write-Warning "Found $($unmatchedActivities.Count) activities without matches in permission map:"
+    Write-Debug "Found $($unmatchedActivities.Count) activities without matches in permission map:"
     $unmatchedActivities | ForEach-Object {
-      Write-Warning "  $($_.Method) $($_.Version)$($_.Path)"
+      Write-Debug "  $($_.Method) $($_.Version)$($_.Path)"
     }
   }
 

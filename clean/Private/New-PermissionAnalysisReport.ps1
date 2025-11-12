@@ -1,6 +1,6 @@
 function New-PermissionAnalysisReport {
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
 
         [Parameter(Mandatory = $false)]
@@ -10,13 +10,20 @@ function New-PermissionAnalysisReport {
         [string]$ReportTitle = "Microsoft Graph Permission Analysis Report"
     )
 
-    # Convert data to JSON for embedding
-    $jsonData = $AppData | ConvertTo-Json -Depth 10 -Compress
+    begin {
+        $allAppData = @()
+    }
+    process {
+        $allAppData += $AppData
+    }
+    end {
+        # Convert data to JSON for embedding
+        $jsonData = $allAppData | ConvertTo-Json -Depth 10 -Compress
 
-    # Properly escape for JavaScript - need to escape backslashes and quotes
-    $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')
+        # Properly escape for JavaScript - need to escape backslashes and quotes
+        $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')
 
-    $html = @"
+        $html = @"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -438,8 +445,9 @@ function New-PermissionAnalysisReport {
 </html>
 "@
 
-    # Write the HTML to file
-    $html | Out-File -FilePath $OutputPath -Encoding UTF8
+        # Write the HTML to file
+        $html | Out-File -FilePath $OutputPath -Encoding UTF8
 
-    Write-Host "Report generated successfully: $OutputPath" -ForegroundColor Green
+        return "Report generated successfully: $OutputPath"
+    }
 }

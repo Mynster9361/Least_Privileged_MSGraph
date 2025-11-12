@@ -61,6 +61,18 @@ function extractHttpMethods(pathObject) {
 }
 
 /**
+ * Normalizes endpoint paths by replacing parameter placeholders with {id}
+ * Examples:
+ *   /users/{user-id} -> /users/{id}
+ *   /groups/{group-id}/members/{member-id} -> /groups/{id}/members/{id}
+ *   /devices/{device-id} -> /devices/{id}
+ */
+function normalizeEndpoint(endpoint) {
+  // Replace all parameter placeholders (anything between {}) with {id}
+  return endpoint.replace(/\{[^}]+\}/g, '{id}');
+}
+
+/**
  * Extracts endpoints and their HTTP methods from OpenAPI document
  */
 function extractEndpointsFromOpenAPI(openApiDoc) {
@@ -85,8 +97,12 @@ function extractEndpointsFromOpenAPI(openApiDoc) {
     const methods = extractHttpMethods(pathObject);
 
     if (methods.length > 0) {
+      // Normalize the endpoint path
+      const normalizedEndpoint = normalizeEndpoint(pathUrl);
+      
       endpoints.push({
-        endpoint: pathUrl,
+        endpoint: normalizedEndpoint,
+        originalEndpoint: pathUrl, // Keep original for reference if needed
         methods: methods
       });
     }

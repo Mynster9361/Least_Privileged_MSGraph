@@ -87,7 +87,7 @@ SEQUENTIAL_MODE=true node permissions-extractor.js
 
 ### Local Installation
 
-1. Ensure Node.js 18+ is installed
+1. Ensure Node.js 22+ is installed
 2. Install dependencies:
    ```bash
    npm install js-yaml axios

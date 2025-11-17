@@ -6,12 +6,10 @@ function Get-PermissionAnalysis {
     )
     
     begin {
-        # Get the module root directory (goes up from Public folder)
-        if ([string]::IsNullOrWhiteSpace($PSScriptRoot)) {
-            $moduleRoot = "."
-        } else {
-            $moduleRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-        }
+        $moduleRoot = "."
+        #TODO: fix for module use
+        #$moduleRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+
         
         # Construct paths to permission map files in the module root data folder
         $PermissionMapV1Path = Join-Path -Path $moduleRoot -ChildPath "data\permissions-v1.0.json"

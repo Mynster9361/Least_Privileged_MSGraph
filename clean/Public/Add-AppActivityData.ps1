@@ -1,23 +1,3 @@
-<#
-.SYNOPSIS
-    Enriches application data with activity logs from Log Analytics workspace.
-
-.DESCRIPTION
-    Queries Log Analytics for API activity for each application and adds the activity
-    data to the application objects.
-
-.PARAMETER AppData
-    Array of application objects with PrincipalId property.
-
-.PARAMETER WorkspaceId
-    Log Analytics workspace ID to query.
-
-.PARAMETER Days
-    Number of days to look back for activity data.
-
-.EXAMPLE
-    $lightweightGroups | Add-AppActivityData -WorkspaceId "de2847546-662b-856a-a917-ab0f956d0fa1" -Days 30
-#>
 function Add-AppActivityData {
     [CmdletBinding()]
     param(
@@ -33,13 +13,40 @@ function Add-AppActivityData {
     
     begin {
         Write-Debug "Starting to add app activity data from Log Analytics..."
+        $allIncomingApps = [System.Collections.ArrayList]::new()
         $allProcessedApps = [System.Collections.ArrayList]::new()
     }
     
     process {
+        # First collect all incoming apps to get total count
         foreach ($app in $AppData) {
+            [void]$allIncomingApps.Add($app)
+        }
+    }
+    
+    end {
+        $totalCount = $allIncomingApps.Count
+        $currentIndex = 0
+        
+        Write-Verbose "Processing $totalCount applications..."
+        
+        foreach ($app in $allIncomingApps) {
+            $currentIndex++
             $spId = $app.PrincipalId
-            Write-Debug "Querying activity for $($app.PrincipalName) ($spId)..."
+            
+            # Calculate percentage
+            $percentComplete = [math]::Round(($currentIndex / $totalCount) * 100, 2)
+            
+            # Update progress bar
+            $progressParams = @{
+                Activity         = "Querying Log Analytics for Application Activity"
+                Status           = "Processing $currentIndex of $totalCount applications"
+                CurrentOperation = "$($app.PrincipalName) (ID: $spId)"
+                PercentComplete  = $percentComplete
+            }
+            Write-Progress @progressParams
+            
+            Write-Debug "[$currentIndex/$totalCount] Querying activity for $($app.PrincipalName) ($spId)..."
             
             try {
                 $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $spId
@@ -54,17 +61,19 @@ function Add-AppActivityData {
                 }
             }
             catch {
-                Write-Debug "Error retrieving activity for $($app.PrincipalName): $_"
+                Write-Warning "Error retrieving activity for $($app.PrincipalName): $_"
                 $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
             }
             
-            # Add to collection - use void to suppress output
+            # Add to collection
             [void]$allProcessedApps.Add($app)
         }
-    }
-    
-    end {
-        Write-Debug "Processed $($allProcessedApps.Count) apps total."
+        
+        # Complete the progress bar
+        Write-Progress -Activity "Querying Log Analytics for Application Activity" -Completed
+        
+        Write-Host "Successfully processed $($allProcessedApps.Count) applications." -ForegroundColor Green
+        
         return $allProcessedApps
     }
 }

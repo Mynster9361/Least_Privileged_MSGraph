@@ -1,4 +1,55 @@
 function ConvertTo-TokenizeIds {
+  <#
+.SYNOPSIS
+    Tokenizes ID values in a URI by replacing them with {id} placeholders.
+
+.DESCRIPTION
+    This function processes a URI and replaces numeric ID segments with {id} tokens to create a
+    standardized URI pattern. This is useful for grouping similar API calls that differ only by
+    the resource IDs, enabling pattern matching for permission analysis and activity mapping.
+    
+    The function preserves API version segments (v1.0/beta) and only tokenizes segments that
+    contain numeric IDs. Special handling is applied to the last segment if it contains patterns
+    like '(.*?)' commonly used in OData filters.
+
+.PARAMETER UriString
+    The complete URI string to tokenize. Must be a valid URI with scheme and host.
+    Example: 'https://graph.microsoft.com/v1.0/users/289ee2a5-9450-4837-aa87-6bd8d8e72891/messages'
+
+.OUTPUTS
+    String
+    Returns the tokenized URI with ID segments replaced by {id} placeholders.
+    Example: 'https://graph.microsoft.com/v1.0/users/{id}/messages'
+
+.EXAMPLE
+    ConvertTo-TokenizeIds -UriString "https://graph.microsoft.com/v1.0/users/289ee2a5-9450-4837-aa87-6bd8d8e72891/messages"
+    
+    Returns:
+    https://graph.microsoft.com/v1.0/users/{id}/messages
+
+.EXAMPLE
+    ConvertTo-TokenizeIds -UriString "https://graph.microsoft.com/v1.0/groups/12345/members"
+    
+    Returns:
+    https://graph.microsoft.com/v1.0/groups/{id}/members
+
+.EXAMPLE
+    ConvertTo-TokenizeIds -UriString "https://graph.microsoft.com/v1.0/users/user@domain.com/messages(filter='isRead eq false')"
+    
+    Returns:
+    https://graph.microsoft.com/v1.0/users/{id}/messages/{id}
+    
+    Note: The last segment with '(.*?)' pattern is replaced with {id}
+
+.NOTES
+    Tokenization rules:
+    - Segments containing digits (except 'v1.0' or 'beta') are replaced with {id}
+    - The last segment with '(.*?)' pattern gets special handling
+    - API version segments (v1.0/beta) are preserved
+    - Trailing slashes are removed from the final result
+    
+    This function uses Write-Debug extensively, so run with -Debug to see detailed processing steps.
+#>
   param(
     [Parameter(Mandatory = $true, Position = 0)]
     [string]$UriString

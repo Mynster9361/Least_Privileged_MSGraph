@@ -55,19 +55,19 @@ LeastPrivilegedMSGraph is a PowerShell module designed to help getting a better 
 To show an example of what the report could look like here is a bit of visual aid so to speak.
 
 #### Front Page
-![Front Page](data\MSGraph_Report_FrontPage.png "Front Page")
+![Front Page](data/MSGraph_Report_FrontPage.png "Front Page")
 
 #### Details Modal - Top
-![Modal Top](data\MSGraph_Report_Modal_Top.png "Modal Top")
+![Modal Top](data/MSGraph_Report_Modal_Top.png "Modal Top")
 
 #### Details Modal - Bottom
-![Modal Bottom](data\MSGraph_Report_Modal_Bottom.png "Modal Bottom")
+![Modal Bottom](data/MSGraph_Report_Modal_Bottom.png "Modal Bottom")
 
 #### Sample report
 
 You are more than welcome to go and download the anonymized html report that can be found here
 
-[sample_report.html](data\report_anonymized.html)
+[sample_report.html](data/report_anonymized.html)
 
 To play arround with an already generated report with 50 diffrent app registrations.
 

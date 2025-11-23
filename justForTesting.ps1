@@ -7,6 +7,7 @@ param(
   [int]$daysToQuery = 30
 )
 
+
 #region temp implementation to load in all functions in the clean folder
 $scriptDir = (get-location).Path
 $cleanDir = Join-Path -Path $scriptDir -ChildPath "clean"
@@ -24,11 +25,11 @@ Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clie
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
 
 #region the good stuff
-$lightweightGroups = Get-AppRoleAssignments | select -First 50
+$lightweightGroups = Get-AppRoleAssignments | select -First 5
 
-$lightweightGroups | Add-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$lightweightGroups | Add-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
 $lightweightGroups | Get-PermissionAnalysis
 
@@ -41,10 +42,10 @@ New-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report.h
 # PIPE EVERYTHING!!!!
 Get-AppRoleAssignments | 
     select -First 50 | 
-    Add-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
-    Add-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+    Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+    Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
     Get-PermissionAnalysis |
-    New-PermissionAnalysisReport -OutputPath ".\report.html"
+    New-PermissionAnalysisReport -OutputPath ".\report50.html"
 
 
 #endregion full pipeline

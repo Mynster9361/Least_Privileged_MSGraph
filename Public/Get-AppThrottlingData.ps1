@@ -1,18 +1,18 @@
-function Add-AppThrottlingData {
+function Get-AppThrottlingData {
 <#
 .SYNOPSIS
     Enriches application data with throttling statistics from Azure Log Analytics.
 
 .DESCRIPTION
     This function queries Azure Log Analytics to retrieve Microsoft Graph API throttling statistics
-    for each application over a specified time period. It adds comprehensive throttling metrics as
+    for each application over a specified time period. It gets comprehensive throttling metrics as
     a new property to each application object, enabling analysis of API rate limiting impacts.
     
     The function processes all applications efficiently by:
     1. Fetching all throttling statistics in a single batch query
     2. Creating an indexed lookup table for fast matching
     3. Matching applications to their statistics using ServicePrincipalId
-    4. Adding zeroed statistics for applications without activity
+    4. Getting zeroed statistics for applications without activity
     
     Throttling metrics include:
     - Total requests and success/error counts
@@ -68,19 +68,19 @@ function Add-AppThrottlingData {
 
 .EXAMPLE
     $apps = Get-MgServicePrincipal -Filter "appId eq '00000000-0000-0000-0000-000000000000'"
-    $enrichedApps = $apps | Add-AppThrottlingData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
+    $enrichedApps = $apps | Get-AppThrottlingData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
     
     Retrieves throttling statistics for a specific application over the default 30-day period.
 
 .EXAMPLE
     $allApps = Get-MgServicePrincipal -All
-    $appsWithThrottling = $allApps | Add-AppThrottlingData -WorkspaceId $workspaceId -Days 90
+    $appsWithThrottling = $allApps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 90
     $criticalApps = $appsWithThrottling | Where-Object { $_.ThrottlingStats.ThrottlingSeverity -ge 3 }
     
     Analyzes 90 days of data and identifies applications with Warning or Critical throttling severity.
 
 .EXAMPLE
-    $apps | Add-AppThrottlingData -WorkspaceId $workspaceId -Days 7 -Verbose |
+    $apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 7 -Verbose |
         Where-Object { $_.ThrottlingStats.Total429Errors -gt 100 } |
         Select-Object PrincipalName, @{N='429 Errors';E={$_.ThrottlingStats.Total429Errors}}, 
                       @{N='Throttle Rate';E={$_.ThrottlingStats.ThrottleRate}}
@@ -88,7 +88,7 @@ function Add-AppThrottlingData {
     Finds applications with more than 100 throttling errors in the last 7 days and displays key metrics.
 
 .EXAMPLE
-    $results = $apps | Add-AppThrottlingData -WorkspaceId $workspaceId -Days 30
+    $results = $apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 30
     $results | Where-Object { $_.ThrottlingStats.ThrottlingStatus -ne 'No Activity' } |
         Export-Csv -Path "throttling-report.csv" -NoTypeInformation
     
@@ -170,7 +170,7 @@ function Add-AppThrottlingData {
             $spId = $app.PrincipalId
             
             # Update progress bar
-            Write-Progress -Activity "Adding Throttling Statistics" `
+            Write-Progress -Activity "Getting Throttling Statistics" `
                           -Status "Processing $currentIndex applications" `
                           -CurrentOperation $app.PrincipalName `
                           -PercentComplete 0
@@ -197,7 +197,7 @@ function Add-AppThrottlingData {
                 }
             }
             
-            # Always add ThrottlingStats - either real data or zeroed out values
+            # Always get ThrottlingStats - either real data or zeroed out values
             if ($throttlingData) {
                 $app | Add-Member -MemberType NoteProperty -Name "ThrottlingStats" -Value ([PSCustomObject]@{
                     TotalRequests           = $throttlingData.TotalRequests
@@ -214,10 +214,10 @@ function Add-AppThrottlingData {
                     LastOccurrence          = $throttlingData.LastOccurrence
                 }) -Force
                 
-                Write-Debug "Added throttling stats for $($app.PrincipalName): Severity=$($throttlingData.ThrottlingSeverity), Status=$($throttlingData.ThrottlingStatus)"
+                Write-Debug "Got throttling stats for $($app.PrincipalName): Severity=$($throttlingData.ThrottlingSeverity), Status=$($throttlingData.ThrottlingStatus)"
             }
             else {
-                # No activity found - add zeroed stats
+                # No activity found - get zeroed stats
                 $app | Add-Member -MemberType NoteProperty -Name "ThrottlingStats" -Value ([PSCustomObject]@{
                     TotalRequests           = 0
                     SuccessfulRequests      = 0
@@ -233,7 +233,7 @@ function Add-AppThrottlingData {
                     LastOccurrence          = $null
                 }) -Force
                 
-                Write-Debug "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId) - added zero stats"
+                Write-Debug "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId) - got zero stats"
             }
             
             [void]$allProcessedApps.Add($app)
@@ -241,7 +241,7 @@ function Add-AppThrottlingData {
     }
     
     end {
-        Write-Progress -Activity "Adding Throttling Statistics" -Completed
+        Write-Progress -Activity "Getting Throttling Statistics" -Completed
         
         $matchedCount = ($allProcessedApps | Where-Object { 
             $_.ThrottlingStats -and $_.ThrottlingStats.TotalRequests -gt 0 

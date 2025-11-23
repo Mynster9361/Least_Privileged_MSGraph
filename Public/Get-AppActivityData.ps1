@@ -1,11 +1,11 @@
-function Add-AppActivityData {
+function Get-AppActivityData {
 <#
 .SYNOPSIS
     Enriches application data with API activity information from Azure Log Analytics.
 
 .DESCRIPTION
     This function queries Azure Log Analytics workspace to retrieve Microsoft Graph API activity
-    for each application over a specified time period. It adds the activity data as a new property
+    for each application over a specified time period. It gets the activity data as a new property
     to each application object, enabling analysis of what API calls each application has made.
     
     The function processes applications in batches, displaying progress information, and handles
@@ -52,27 +52,27 @@ function Add-AppActivityData {
 
 .EXAMPLE
     $apps = Get-MgServicePrincipal -Filter "appId eq '00000000-0000-0000-0000-000000000000'"
-    $enrichedApps = $apps | Add-AppActivityData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
+    $enrichedApps = $apps | Get-AppActivityData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
     
     Retrieves activity for a specific application over the default 30-day period.
 
 .EXAMPLE
     $allApps = Get-MgServicePrincipal -All
-    $appsWithActivity = $allApps | Add-AppActivityData -WorkspaceId $workspaceId -Days 90
+    $appsWithActivity = $allApps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90
     $activeApps = $appsWithActivity | Where-Object { $_.Activity.Count -gt 0 }
     
     Analyzes 90 days of activity for all service principals and filters to only those with activity.
 
 .EXAMPLE
     $apps = Get-Content .\apps.json | ConvertFrom-Json
-    $results = Add-AppActivityData -AppData $apps -WorkspaceId $workspaceId -Days 7 -Verbose
+    $results = Get-AppActivityData -AppData $apps -WorkspaceId $workspaceId -Days 7 -Verbose
     $results | Export-Clixml .\enriched-apps.xml
     
-    Loads applications from JSON, adds 7 days of activity with verbose output, and saves results.
+    Loads applications from JSON, gets 7 days of activity with verbose output, and saves results.
 
 .EXAMPLE
     $criticalApps = Get-MgServicePrincipal -Filter "tags/any(t:t eq 'Critical')"
-    $criticalApps | Add-AppActivityData -WorkspaceId $workspaceId -Days 30 | 
+    $criticalApps | Get-AppActivityData -WorkspaceId $workspaceId -Days 30 | 
         ForEach-Object {
             if ($_.Activity.Count -eq 0) {
                 Write-Warning "$($_.PrincipalName) has no recent activity!"
@@ -114,7 +114,7 @@ function Add-AppActivityData {
     )
     
     begin {
-        Write-Debug "Starting to add app activity data from Log Analytics..."
+        Write-Debug "Starting to get app activity data from Log Analytics..."
         $allIncomingApps = [System.Collections.ArrayList]::new()
         $allProcessedApps = [System.Collections.ArrayList]::new()
     }

@@ -1,0 +1,34 @@
+mode: ContinuousDelivery
+next-version: 0.0.1
+major-version-bump-message: '(breaking\schange|breaking|major)\b'
+minor-version-bump-message: '(adds?|features?|minor)\b'
+patch-version-bump-message: '\s?(fix|patch)'
+no-bump-message: '\+semver:\s?(none|skip)'
+assembly-informational-format: '{NuGetVersionV2}+Sha.{Sha}.Date.{CommitDate}'
+branches:
+  main:
+    regex: ^main$
+    mode: ContinuousDelivery
+    increment: Patch
+    label: preview
+  master:
+    regex: ^master$
+    mode: ContinuousDelivery
+    increment: Patch
+    label: preview
+  pull-request:
+    label: PR
+  feature:
+    label: useBranchName
+    increment: Minor
+    regex: f(eature(s)?)?[\/-]
+    source-branches: ['master', 'main']
+  hotfix:
+    label: fix
+    increment: Patch
+    regex: (hot)?fix(es)?[\/-]
+    source-branches: ['master', 'main']
+
+ignore:
+  sha: []
+merge-message-formats: {}

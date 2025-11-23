@@ -1,0 +1,151 @@
+{
+    //
+    // General settings
+    //
+    // Sets the default language mode for new files.
+    "files.defaultLanguage": "powershell",
+    // Example: New files will default to PowerShell language mode.
+    // New-File.ps1
+    // Trims any final newlines at the end of files.
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    // Example: Ensures no extra newlines at the end of the file.
+    // Write-Output "Hello, World!"
+    // Formats the document when saving.
+    "editor.formatOnSave": true,
+    // Example: Automatically formats the document when saving.
+    // if($true){Write-Output "Hello, World!"}
+    "[powershell]": {
+        // Trims trailing whitespace in PowerShell files.
+        "files.trimTrailingWhitespace": true
+        // Example: Removes trailing whitespace.
+        // Write-Output "Hello, World!"
+    },
+    //
+    // Code formatting settings
+    //
+    // Sets the code formatting options to follow the given indent style in a way that is compatible with PowerShell syntax.
+    "powershell.codeFormatting.preset": "Stroustrup",
+    // Example: Uses Stroustrup style for formatting.
+    // if ($true) {
+    //     Write-Output "Hello, World!"
+    // }
+    // else {
+    //     Write-Output "Goodbye, World!"
+    // }
+    //
+    // Whitespace settings
+    //
+    // Adds a space between a keyword and its associated scriptblock expression.
+    "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+    // Example: Adds space before open brace.
+    // if ($true) {
+    //     Write-Output "Hello, World!"
+    // }
+    // Adds a space between a keyword (if, elseif, while, switch, etc) and its associated conditional expression.
+    "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+    // Example: Adds space before open parenthesis.
+    // if ($true) {
+    //     Write-Output "Hello, World!"
+    // }
+    // Adds spaces before and after an operator ('=', '+', '-', etc.).
+    "powershell.codeFormatting.whitespaceAroundOperator": true,
+    // Example: Adds spaces around operators.
+    // $a = 1 + 2
+    // Adds a space after a separator (',' and ';').
+    "powershell.codeFormatting.whitespaceAfterSeparator": true,
+    // Example: Adds space after separators.
+    // Write-Output "Hello", "World"
+    // Does not add whitespace between parameters.
+    "powershell.codeFormatting.whitespaceBetweenParameters": false,
+    // Example: No whitespace between parameters.
+    // Write-Output "Hello, World!"
+    // Adds whitespace inside braces.
+    "powershell.codeFormatting.whitespaceInsideBrace": true,
+    // Example: Adds whitespace inside braces.
+    // $hashTable = { Name = "John"; Age = 30; Email = "john@example.com" }
+    // Adds whitespace around the pipe ('|') character.
+    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
+    // Example: Adds whitespace around pipe.
+    // Get-Process | Where-Object { $_.CPU -gt 100 }
+    // Automatically corrects aliases to their full cmdlet names.
+    "powershell.codeFormatting.autoCorrectAliases": true,
+    // Example: Corrects aliases to full cmdlet names.
+    // Get-Process | Where-Object { $_.CPU -gt 100 }
+    // Uses correct casing for cmdlet names.
+    "powershell.codeFormatting.useCorrectCasing": true,
+    // Example: Uses correct casing for cmdlet names.
+    // Get-Process
+    //
+    // Brace settings
+    //
+    // Does not add a new line after a closing brace.
+    "powershell.codeFormatting.newLineAfterCloseBrace": false,
+    // Example: No new line after closing brace.
+    // if ($true) { Write-Output "Hello, World!" }
+    // Adds a new line after an opening brace.
+    "powershell.codeFormatting.newLineAfterOpenBrace": true,
+    // Example: Adds new line after opening brace.
+    // if ($true) {
+    //     Write-Output "Hello, World!"
+    // }
+    // Places the opening brace on the same line as the statement.
+    "powershell.codeFormatting.openBraceOnSameLine": true,
+    // Example: Opening brace on same line.
+    // if ($true) {
+    //     Write-Output "Hello, World!"
+    // }
+    // Pipeline indentation style
+    "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
+    // Example: Increases indentation after every pipeline.
+    // Get-Process |
+    //     Where-Object { $_.CPU -gt 100 } |
+    //         Sort-Object CPU
+    // Does not ignore one line blocks for formatting.
+    "powershell.codeFormatting.ignoreOneLineBlock": false,
+    //
+    // Alignment settings
+    //
+    // Aligns property value pairs.
+    "powershell.codeFormatting.alignPropertyValuePairs": true,
+    // Example: Aligns property value pairs.
+    // $hashTable = @{
+    //     Name  = "John"
+    //     Age   = 30
+    //     Email = "john@example.com"
+    // }
+    //
+    // Project-specific settings
+    //
+    // Sets the bundled modules path for this project
+    "powershell.developer.bundledModulesPath": "${cwd}/output/RequiredModules",
+    // Points to the PSScriptAnalyzer settings file
+    "powershell.scriptAnalysis.settingsPath": ".vscode\\analyzersettings.psd1",
+    // Enables PSScriptAnalyzer
+    "powershell.scriptAnalysis.enable": true,
+    // File associations
+    "files.associations": {
+        "*.ps1xml": "xml"
+    },
+    // Custom spell check words for this project
+    "cSpell.words": [
+        "COMPANYNAME",
+        "ICONURI",
+        "LICENSEURI",
+        "PROJECTURI",
+        "RELEASENOTES",
+        "buildhelpers",
+        "endregion",
+        "gitversion",
+        "icontains",
+        "keepachangelog",
+        "notin",
+        "pscmdlet",
+        "steppable"
+    ],
+    // Markdown-specific settings
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false,
+        "files.encoding": "utf8"
+    }
+}

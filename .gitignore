@@ -1,0 +1,71 @@
+# Build output
+/output/*
+!/output/docs/
+!/output/docs
+!/output/docs/*.md
+
+# Backup files
+**.bak
+*.local.*
+!**/README.md
+
+# Kitchen/Test Kitchen
+.kitchen/
+
+# Package files
+*.nupkg
+
+# Visual Studio files
+*.suo
+*.user
+*.coverage
+.vs
+.psproj
+.sln
+
+# Documentation and analysis
+markdownissues.txt
+
+
+# Node.js (if used for docs)
+node_modules/
+package-lock.json
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+coverage.xml
+JaCoCo_*.xml
+
+# PowerShell specific
+*.ps1xml
+
+# GitHub Actions artifacts
+artifacts/
+
+# Temporary files
+*.tmp
+*.temp
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# IDE files
+.vscode/settings.json.user
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Azure Pipelines (legacy - no longer used)
+azure-pipelines*.yml

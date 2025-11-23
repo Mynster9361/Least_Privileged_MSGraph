@@ -56,12 +56,12 @@ jobs:
     - name: Backup existing files for comparison
       run: |
         mkdir -p backup
-        if [ -f data/permissions-v1.0.json ]; then
-          cp data/permissions-v1.0.json backup/permissions-v1.0-old.json
+        if [ -f source/data/permissions-v1.0.json ]; then
+          cp source/data/permissions-v1.0.json backup/permissions-v1.0-old.json
           echo "Backed up existing v1.0 file"
         fi
-        if [ -f data/permissions-beta.json ]; then
-          cp data/permissions-beta.json backup/permissions-beta-old.json
+        if [ -f source/data/permissions-beta.json ]; then
+          cp source/data/permissions-beta.json backup/permissions-beta-old.json
           echo "Backed up existing beta file"
         fi
         
@@ -116,18 +116,18 @@ jobs:
       
     - name: Create output directory and move files
       run: |
-        mkdir -p data
+        mkdir -p source/data
         
         if [ -f permissions-v1.0.json ]; then
-          mv permissions-v1.0.json data/
-          echo "Moved v1.0 permissions file"
+          mv permissions-v1.0.json source/data/
+          echo "Moved v1.0 permissions file to source/data/"
         else
           echo "Warning: permissions-v1.0.json not found"
         fi
         
         if [ -f permissions-beta.json ]; then
-          mv permissions-beta.json data/
-          echo "Moved beta permissions file"
+          mv permissions-beta.json source/data/
+          echo "Moved beta permissions file to source/data/"
         else
           echo "Warning: permissions-beta.json not found"
         fi
@@ -213,10 +213,10 @@ jobs:
         }
         
         # Analyze v1.0 changes
-        $v10Changes = Compare-PermissionFiles "backup/permissions-v1.0-old.json" "data/permissions-v1.0.json" "v1.0"
+        $v10Changes = Compare-PermissionFiles "backup/permissions-v1.0-old.json" "source/data/permissions-v1.0.json" "v1.0"
         
         # Analyze beta changes
-        $betaChanges = Compare-PermissionFiles "backup/permissions-beta-old.json" "data/permissions-beta.json" "beta"
+        $betaChanges = Compare-PermissionFiles "backup/permissions-beta-old.json" "source/data/permissions-beta.json" "beta"
         
         # Store results for later use
         $v10Changes | ConvertTo-Json -Depth 10 | Out-File "changes-v10.json"
@@ -235,25 +235,25 @@ jobs:
         
     - name: Generate summary report
       run: |
-        echo "# Microsoft Graph Permissions Extraction Report" > data/extraction-summary.md
-        echo "Generated on: $(date)" >> data/extraction-summary.md
-        echo "" >> data/extraction-summary.md
+        echo "# Microsoft Graph Permissions Extraction Report" > source/data/extraction-summary.md
+        echo "Generated on: $(date)" >> source/data/extraction-summary.md
+        echo "" >> source/data/extraction-summary.md
         
-        if [ -f data/permissions-v1.0.json ]; then
-          v10_endpoints=$(jq length data/permissions-v1.0.json)
-          v10_methods=$(jq '[.[].Method | keys | length] | add' data/permissions-v1.0.json)
-          echo "## v1.0 Results" >> data/extraction-summary.md
-          echo "- Endpoints: $v10_endpoints" >> data/extraction-summary.md
-          echo "- Total Methods: $v10_methods" >> data/extraction-summary.md
-          echo "" >> data/extraction-summary.md
+        if [ -f source/data/permissions-v1.0.json ]; then
+          v10_endpoints=$(jq length source/data/permissions-v1.0.json)
+          v10_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-v1.0.json)
+          echo "## v1.0 Results" >> source/data/extraction-summary.md
+          echo "- Endpoints: $v10_endpoints" >> source/data/extraction-summary.md
+          echo "- Total Methods: $v10_methods" >> source/data/extraction-summary.md
+          echo "" >> source/data/extraction-summary.md
         fi
         
-        if [ -f data/permissions-beta.json ]; then
-          beta_endpoints=$(jq length data/permissions-beta.json)
-          beta_methods=$(jq '[.[].Method | keys | length] | add' data/permissions-beta.json)
-          echo "## Beta Results" >> data/extraction-summary.md
-          echo "- Endpoints: $beta_endpoints" >> data/extraction-summary.md
-          echo "- Total Methods: $beta_methods" >> data/extraction-summary.md
+        if [ -f source/data/permissions-beta.json ]; then
+          beta_endpoints=$(jq length source/data/permissions-beta.json)
+          beta_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-beta.json)
+          echo "## Beta Results" >> source/data/extraction-summary.md
+          echo "- Endpoints: $beta_endpoints" >> source/data/extraction-summary.md
+          echo "- Total Methods: $beta_methods" >> source/data/extraction-summary.md
         fi
         
     - name: Check for changes
@@ -262,8 +262,8 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # Add the files
-        git add data/
+        # Add the files from source/data
+        git add source/data/
         
         # Check if there are changes to commit
         if git diff --staged --quiet; then
@@ -277,8 +277,8 @@ jobs:
     - name: Display summary
       run: |
         echo "## Extraction Summary"
-        if [ -f data/extraction-summary.md ]; then
-          cat data/extraction-summary.md
+        if [ -f source/data/extraction-summary.md ]; then
+          cat source/data/extraction-summary.md
         fi
         
     - name: Commit and Push Changes
@@ -289,7 +289,7 @@ jobs:
         
         - Updated $(date '+%Y-%m-%d %H:%M:%S UTC')
         - Extraction mode: ${{ github.event.inputs.test_mode == 'true' && 'Test' || 'Production' }}
-        - Files updated: $(ls -1 data/*.json | wc -l) permission files"
+        - Files updated: $(ls -1 source/data/*.json | wc -l) permission files"
         
         git push
         
@@ -304,11 +304,11 @@ jobs:
         $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
         
         # Read the summary data
-        $v10Exists = Test-Path "data/permissions-v1.0.json"
-        $betaExists = Test-Path "data/permissions-beta.json"
+        $v10Exists = Test-Path "source/data/permissions-v1.0.json"
+        $betaExists = Test-Path "source/data/permissions-beta.json"
         
         if ($v10Exists) {
-          $v10Data = Get-Content "data/permissions-v1.0.json" | ConvertFrom-Json
+          $v10Data = Get-Content "source/data/permissions-v1.0.json" | ConvertFrom-Json
           $v10Endpoints = $v10Data.Count
           $v10Methods = ($v10Data | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
         } else {
@@ -317,7 +317,7 @@ jobs:
         }
         
         if ($betaExists) {
-          $betaData = Get-Content "data/permissions-beta.json" | ConvertFrom-Json
+          $betaData = Get-Content "source/data/permissions-beta.json" | ConvertFrom-Json
           $betaEndpoints = $betaData.Count
           $betaMethods = ($betaData | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
         } else {
@@ -470,8 +470,8 @@ jobs:
         echo "Current directory contents:"
         ls -la
         echo ""
-        echo "Data directory contents:"
-        ls -la data/ 2>/dev/null || echo "No data directory found"
+        echo "Source data directory contents:"
+        ls -la source/data/ 2>/dev/null || echo "No source/data directory found"
         echo ""
         echo "Git status:"
         git status

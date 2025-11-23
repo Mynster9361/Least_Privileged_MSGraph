@@ -1,0 +1,241 @@
+name: CI/CD Pipeline
+# Handles: build, test on multiple platforms, deploy to PowerShell Gallery
+# Triggers: push to master, tags, manual dispatch
+
+on:
+  push:
+    branches:
+      - master  # Updated to match your default branch
+    paths-ignore:
+      - 'CHANGELOG.md'
+    tags:
+      - 'v*'
+      - '!*-*'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run the workflow on'
+        required: false
+        default: 'master'
+        type: string
+      skip_deploy:
+        description: 'Skip deployment step'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  buildFolderName: output
+  buildArtifactName: output
+  testResultFolderName: testResults
+  defaultBranch: master  # Updated to match your default branch
+
+jobs:
+  build:
+    name: Build & Package Module
+    runs-on: ubuntu-latest
+    env:
+      MANUAL_VERSION: 0.1.0-preview${{ github.run_number }}
+    outputs:
+      moduleVersion: 0.1.0-preview${{ github.run_number }}
+      fullSemVer: 0.1.0-preview${{ github.run_number }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
+          Import-Module -Name PowerShellGet -Force
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+      - name: Build & Package Module
+        shell: pwsh
+        run: |
+          ./build.ps1 -ResolveDependency -tasks pack
+        env:
+          ModuleVersion: ${{ env.MANUAL_VERSION }}
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.buildArtifactName }}
+          path: ${{ env.buildFolderName }}/
+          retention-days: 30
+
+  test:
+    name: Test
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: Linux
+            pwsh: true
+            coverage-name: CodeCoverageLinux
+          - os: windows-latest
+            name: Windows (PowerShell)
+            pwsh: true
+            coverage-name: CodeCoverageWinPS7
+          - os: windows-latest
+            name: Windows (Windows PowerShell)
+            pwsh: false
+            coverage-name: CodeCoverageWinPS51
+          - os: macos-latest
+            name: macOS
+            pwsh: true
+            coverage-name: CodeCoverageMacOS
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell (if needed)
+        if: matrix.pwsh == true && runner.os != 'Windows'
+        shell: pwsh
+        run: |
+          Write-Host "PowerShell Core version: $($PSVersionTable.PSVersion)"
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.buildArtifactName }}
+          path: ${{ env.buildFolderName }}
+
+      - name: Run Tests (PowerShell Core)
+        if: matrix.pwsh == true
+        shell: pwsh
+        run: |
+          ./build.ps1 -tasks test
+
+      - name: Run Tests (Windows PowerShell)
+        if: matrix.pwsh == false
+        shell: powershell
+        run: |
+          ./build.ps1 -tasks test
+
+      - name: Upload Test Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.coverage-name }}
+          path: ${{ env.buildFolderName }}/${{ env.testResultFolderName }}/
+          retention-days: 30
+
+  publish-test-results:
+    name: "Publish Test Results"
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download Test Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: test-artifacts
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: test-artifacts/**/NUnit*.xml
+          check_name: "CI/CD Test Results"
+          action_fail: false
+        continue-on-error: true
+
+  code-coverage:
+    name: Publish Code Coverage
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.buildArtifactName }}
+          path: ${{ env.buildFolderName }}
+
+      - name: Download Test Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: coverage-artifacts
+
+      - name: Copy Coverage Files
+        shell: pwsh
+        run: |
+          $coverageFiles = @(
+            'CodeCoverageLinux',
+            'CodeCoverageWinPS7',
+            'CodeCoverageWinPS51',
+            'CodeCoverageMacOS'
+          )
+
+          foreach ($coverageFile in $coverageFiles) {
+            $sourcePath = "coverage-artifacts/$coverageFile"
+            $destPath = "${{ env.buildFolderName }}/${{ env.testResultFolderName }}"
+
+            if (Test-Path $sourcePath) {
+              Write-Host "Copying $sourcePath to $destPath"
+              Copy-Item -Path "$sourcePath/*" -Destination $destPath -Recurse -Force
+            } else {
+              Write-Warning "Coverage artifact $coverageFile not found"
+            }
+          }
+
+      # Uncomment these steps if you want to merge code coverage and publish to services
+      # - name: Merge Code Coverage Files
+      #   shell: pwsh
+      #   run: |
+      #     ./build.ps1 -tasks merge
+
+
+  deploy:
+    name: Deploy Module
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    if: |
+      always() &&
+      needs.test.result == 'success' &&
+      github.event.inputs.skip_deploy != 'true' &&
+      (
+        github.ref == 'refs/heads/master' ||
+        startsWith(github.ref, 'refs/tags/') ||
+        github.event_name == 'workflow_dispatch'
+      )
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.buildArtifactName }}
+          path: ${{ env.buildFolderName }}
+
+      - name: Publish Release
+        shell: pwsh
+        run: |
+          Write-Host "Publish step skipped - publish task not configured in build.yaml"
+          # ./build.ps1 -tasks publish
+        env:
+          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
+          ReleaseBranch: ${{ env.defaultBranch }}
+          MainGitBranch: ${{ env.defaultBranch }}
+
+      - name: Send Changelog PR
+        shell: pwsh
+        run: |
+          Write-Host "Changelog PR step skipped - publish task not configured in build.yaml"
+          # ./build.ps1 -tasks Create_ChangeLog_GitHub_PR
+        env:
+          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          ReleaseBranch: ${{ env.defaultBranch }}
+          MainGitBranch: ${{ env.defaultBranch }}

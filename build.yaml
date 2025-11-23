@@ -1,0 +1,88 @@
+---
+####################################################
+#          ModuleBuilder Configuration             #
+####################################################
+BuiltModuleSubdirectory: module
+CopyPaths:
+  - en-US
+  - data
+Encoding: UTF8
+# Force manual version - bypass GitVersion completely
+SemVer: '0.1.0-preview1'
+VersionedOutputDirectory: true
+IgnoreGitVersion: true
+
+####################################################
+#       Sampler Pipeline Configuration             #
+####################################################
+BuildWorkflow:
+  '.':
+    - build
+    - test
+
+  build:
+    - Clean
+    - Build_Module_ModuleBuilder
+    - Build_NestedModules_ModuleBuilder
+    - Create_changelog_release_output
+
+  pack:
+    - build
+    - package_module_nupkg
+
+  test:
+    - Pester_Tests_Stop_On_Fail
+    - Convert_Pester_Coverage
+    - Pester_if_Code_Coverage_Under_Threshold
+
+  docs:
+    - Generate_Conceptual_Help
+    - Generate_External_Help_File_For_Public_Commands
+
+  merge:
+    - Merge_CodeCoverage_Files
+
+  # publish:
+  #   - publish_module_to_gallery
+
+####################################################
+#     Pester Configuration                         #
+####################################################
+Pester:
+  OutputFormat: NUnitXML
+  ExcludeFromCodeCoverage:
+    - Modules/DscResource.Common
+  Script:
+    - tests/Unit
+    - tests/Integration
+    - tests/QA/module.tests.ps1
+  ExcludeTag: []
+  Tag: []
+  CodeCoverageThreshold: 80
+  CodeCoverageOutputFile: JaCoCo_coverage.xml
+  CodeCoverageOutputFileEncoding: ascii
+
+ModuleBuildTasks:
+  Sampler:
+    - '*.build.Sampler.ib.tasks'
+
+TaskHeader: |
+  param($Path)
+  ""
+  "=" * 79
+  Write-Build Cyan "`t`t`t$($Task.Name.replace("_"," ").ToUpper())"
+  Write-Build DarkGray  "$(Get-BuildSynopsis $Task)"
+  "-" * 79
+  Write-Build DarkGray "  $Path"
+  Write-Build DarkGray "  $($Task.InvocationInfo.ScriptName):$($Task.InvocationInfo.ScriptLineNumber)"
+  ""
+
+PlatyPS:
+  Path: './docs'
+  ModulePage: 'LeastPrivilegedMSGraph.md'
+  OutputFolder: './output/docs'
+  Encoding: 'UTF8'
+
+# Force version configuration
+GitVersion:
+  Enable: false

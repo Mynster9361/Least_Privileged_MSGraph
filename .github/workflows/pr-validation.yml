@@ -4,7 +4,7 @@ name: Pull Request Validation
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened, synchronize, reopened]
     paths-ignore:
       - '**.md'
@@ -15,7 +15,7 @@ on:
       branch:
         description: 'Branch to validate'
         required: false
-        default: 'master'
+        default: 'main'
         type: string
 
 env:

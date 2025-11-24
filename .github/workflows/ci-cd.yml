@@ -1,11 +1,11 @@
 name: CI/CD Pipeline
 # Handles: build, test on multiple platforms, deploy to PowerShell Gallery
-# Triggers: push to master, tags, manual dispatch
+# Triggers: push to main, tags, manual dispatch
 
 on:
   push:
     branches:
-      - master  # Updated to match your default branch
+      - main  # Updated to match your default branch
     paths-ignore:
       - 'CHANGELOG.md'
     tags:
@@ -16,7 +16,7 @@ on:
       branch:
         description: 'Branch to run the workflow on'
         required: false
-        default: 'master'
+        default: 'main'
         type: string
       skip_deploy:
         description: 'Skip deployment step'
@@ -28,7 +28,7 @@ env:
   buildFolderName: output
   buildArtifactName: output
   testResultFolderName: testResults
-  defaultBranch: master  # Updated to match your default branch
+  defaultBranch: main  # Updated to match your default branch
 
 jobs:
   build:
@@ -205,7 +205,7 @@ jobs:
       needs.test.result == 'success' &&
       github.event.inputs.skip_deploy != 'true' &&
       (
-        github.ref == 'refs/heads/master' ||
+        github.ref == 'refs/heads/main' ||
         startsWith(github.ref, 'refs/tags/') ||
         github.event_name == 'workflow_dispatch'
       )

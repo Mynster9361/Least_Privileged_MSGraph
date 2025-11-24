@@ -21,6 +21,37 @@ BeforeAll {
             throw "Could not find Get-AppRoleAssignments.ps1"
         }
     }
+
+    # Create global mocks that work across module boundaries
+    Mock -CommandName Invoke-EntraRequest -ModuleName $script:moduleName -MockWith {
+        return @{
+            value = @(
+                @{
+                    id                 = 'sp-00000000-0000-0000-0000-000000000001'
+                    displayName        = 'Test Application 1'
+                    appRoleAssignments = @(
+                        @{
+                            id                  = 'assignment-1'
+                            appRoleId           = '7ab1d382-f21e-4acd-a863-ba3e13f7da61'
+                            resourceId          = 'resource-1'
+                            resourceDisplayName = 'Microsoft Graph'
+                        }
+                    )
+                }
+            )
+        }
+    }
+
+    Mock -CommandName Get-MgServicePrincipal -ModuleName $script:moduleName -MockWith {
+        return @{
+            AppRoles = @(
+                @{
+                    Id    = '7ab1d382-f21e-4acd-a863-ba3e13f7da61'
+                    Value = 'Directory.Read.All'
+                }
+            )
+        }
+    }
 }
 
 AfterAll {
@@ -42,56 +73,6 @@ Describe 'Get-AppRoleAssignments' {
     }
 
     Context 'Functionality' {
-        BeforeAll {
-            # Mock Invoke-EntraRequest to avoid actual API calls
-            Mock -CommandName Invoke-EntraRequest -MockWith {
-                return @{
-                    value = @(
-                        @{
-                            id                 = 'sp-00000000-0000-0000-0000-000000000001'
-                            displayName        = 'Test Application 1'
-                            appRoleAssignments = @(
-                                @{
-                                    id                  = 'assignment-1'
-                                    appRoleId           = '7ab1d382-f21e-4acd-a863-ba3e13f7da61'
-                                    resourceId          = 'resource-1'
-                                    resourceDisplayName = 'Microsoft Graph'
-                                }
-                            )
-                        },
-                        @{
-                            id                 = 'sp-00000000-0000-0000-0000-000000000002'
-                            displayName        = 'Test Application 2'
-                            appRoleAssignments = @(
-                                @{
-                                    id                  = 'assignment-2'
-                                    appRoleId           = 'df021288-bdef-4463-88db-98f22de89214'
-                                    resourceId          = 'resource-1'
-                                    resourceDisplayName = 'Microsoft Graph'
-                                }
-                            )
-                        }
-                    )
-                }
-            }
-
-            # Mock Get-MgServicePrincipal for app role lookups
-            Mock -CommandName Get-MgServicePrincipal -MockWith {
-                return @{
-                    AppRoles = @(
-                        @{
-                            Id    = '7ab1d382-f21e-4acd-a863-ba3e13f7da61'
-                            Value = 'Directory.Read.All'
-                        },
-                        @{
-                            Id    = 'df021288-bdef-4463-88db-98f22de89214'
-                            Value = 'User.Read.All'
-                        }
-                    )
-                }
-            }
-        }
-
         It 'Should return application role assignments' {
             $result = Get-AppRoleAssignments
             $result | Should -Not -BeNullOrEmpty
@@ -124,7 +105,7 @@ Describe 'Get-AppRoleAssignments' {
 
         It 'Should call Invoke-EntraRequest with correct parameters' {
             Get-AppRoleAssignments
-            Should -Invoke -CommandName Invoke-EntraRequest -Times 1 -Exactly
+            Should -Invoke -CommandName Invoke-EntraRequest -ModuleName $script:moduleName -Times 1 -Exactly
         }
     }
 }

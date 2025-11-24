@@ -9,6 +9,7 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the function directly for testing
@@ -16,6 +17,7 @@ BeforeAll {
 
         if ($privateFunction) {
             . $privateFunction.FullName
+            $script:moduleLoaded = $false
         }
         else {
             throw "Could not find Get-AppActivityFromLogs.ps1"
@@ -48,16 +50,32 @@ Describe 'Get-AppActivityFromLogs' {
     Context 'Functionality' {
         BeforeAll {
             # Mock Invoke-EntraRequest
-            Mock -CommandName Invoke-EntraRequest -MockWith {
-                return @{
-                    tables = @(
-                        @{
-                            rows = @(
-                                @('GET', 'https://graph.microsoft.com/v1.0/users', 50),
-                                @('POST', 'https://graph.microsoft.com/v1.0/groups', 25)
-                            )
-                        }
-                    )
+            if ($script:moduleLoaded) {
+                Mock -CommandName Invoke-EntraRequest -ModuleName $script:moduleName -MockWith {
+                    return @{
+                        tables = @(
+                            @{
+                                rows = @(
+                                    @('GET', 'https://graph.microsoft.com/v1.0/users', 50),
+                                    @('POST', 'https://graph.microsoft.com/v1.0/groups', 25)
+                                )
+                            }
+                        )
+                    }
+                }
+            }
+            else {
+                Mock -CommandName Invoke-EntraRequest -MockWith {
+                    return @{
+                        tables = @(
+                            @{
+                                rows = @(
+                                    @('GET', 'https://graph.microsoft.com/v1.0/users', 50),
+                                    @('POST', 'https://graph.microsoft.com/v1.0/groups', 25)
+                                )
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -79,7 +97,12 @@ Describe 'Get-AppActivityFromLogs' {
 
         It 'Should call Invoke-EntraRequest' {
             Get-AppActivityFromLogs -WorkspaceId 'test-workspace-id' -PrincipalId 'test-principal-id' -Days 30
-            Should -Invoke -CommandName Invoke-EntraRequest -Times 1 -Exactly
+            if ($script:moduleLoaded) {
+                Should -Invoke -CommandName Invoke-EntraRequest -ModuleName $script:moduleName -Times 1 -Exactly
+            }
+            else {
+                Should -Invoke -CommandName Invoke-EntraRequest -Times 1 -Exactly
+            }
         }
     }
 }

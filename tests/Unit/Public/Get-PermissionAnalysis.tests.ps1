@@ -9,18 +9,21 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the functions directly for testing
+        # Load all private functions first
         $privateFunctions = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "*.ps1" -ErrorAction SilentlyContinue
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-PermissionAnalysis.ps1" -ErrorAction SilentlyContinue
-
         foreach ($func in $privateFunctions) {
             . $func.FullName
         }
 
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-PermissionAnalysis.ps1" -ErrorAction SilentlyContinue
+
         if ($publicFunction) {
             . $publicFunction.FullName
+            $script:moduleLoaded = $false
         }
         else {
             throw "Could not find Get-PermissionAnalysis.ps1"
@@ -51,7 +54,73 @@ Describe 'Get-PermissionAnalysis' {
     }
 
     Context 'Functionality' {
-        It 'Should load permission map files without error' {
+        BeforeAll {
+            # Mock the helper functions
+            if ($script:moduleLoaded) {
+                Mock -CommandName Find-LeastPrivilegedPermissions -ModuleName $script:moduleName -MockWith {
+                    return @{
+                        Endpoint    = $Uri
+                        Method      = $Method
+                        Permissions = @(
+                            @{
+                                Permission       = 'User.Read.All'
+                                ScopeType        = 'Application'
+                                IsLeastPrivilege = $false
+                            },
+                            @{
+                                Permission       = 'User.ReadBasic.All'
+                                ScopeType        = 'Application'
+                                IsLeastPrivilege = $true
+                            }
+                        )
+                    }
+                }
+
+                Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
+                    return @(
+                        @{
+                            Permission        = 'User.ReadBasic.All'
+                            ScopeType         = 'Application'
+                            IsLeastPrivilege  = $true
+                            ActivitiesCovered = 1
+                        }
+                    )
+                }
+            }
+            else {
+                Mock -CommandName Find-LeastPrivilegedPermissions -MockWith {
+                    return @{
+                        Endpoint    = $Uri
+                        Method      = $Method
+                        Permissions = @(
+                            @{
+                                Permission       = 'User.Read.All'
+                                ScopeType        = 'Application'
+                                IsLeastPrivilege = $false
+                            },
+                            @{
+                                Permission       = 'User.ReadBasic.All'
+                                ScopeType        = 'Application'
+                                IsLeastPrivilege = $true
+                            }
+                        )
+                    }
+                }
+
+                Mock -CommandName Get-OptimalPermissionSet -MockWith {
+                    return @(
+                        @{
+                            Permission        = 'User.ReadBasic.All'
+                            ScopeType         = 'Application'
+                            IsLeastPrivilege  = $true
+                            ActivitiesCovered = 1
+                        }
+                    )
+                }
+            }
+        }
+
+        It 'Should process application data and add analysis properties' {
             $app = [PSCustomObject]@{
                 PrincipalId   = 'test-id-001'
                 PrincipalName = 'Test Application'
@@ -67,7 +136,8 @@ Describe 'Get-PermissionAnalysis' {
                 )
             }
 
-            { $app | Get-PermissionAnalysis } | Should -Not -Throw
+            $result = $app | Get-PermissionAnalysis
+            $result | Should -Not -BeNullOrEmpty
         }
 
         It 'Should add ActivityPermissions property to output' {

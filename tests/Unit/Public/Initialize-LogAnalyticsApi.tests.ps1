@@ -9,6 +9,7 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the functions directly for testing
@@ -16,6 +17,7 @@ BeforeAll {
 
         if ($publicFunction) {
             . $publicFunction.FullName
+            $script:moduleLoaded = $false
         }
         else {
             throw "Could not find Initialize-LogAnalyticsApi.ps1"
@@ -44,11 +46,22 @@ Describe 'Initialize-LogAnalyticsApi' {
     Context 'Functionality' {
         BeforeAll {
             # Mock Register-EntraService
-            Mock -CommandName Register-EntraService -MockWith {
-                return [PSCustomObject]@{
-                    ServiceName       = 'LogAnalytics'
-                    AlreadyRegistered = $false
-                    Status            = 'NewlyRegistered'
+            if ($script:moduleLoaded) {
+                Mock -CommandName Register-EntraService -ModuleName $script:moduleName -MockWith {
+                    return [PSCustomObject]@{
+                        ServiceName       = 'LogAnalytics'
+                        AlreadyRegistered = $false
+                        Status            = 'NewlyRegistered'
+                    }
+                }
+            }
+            else {
+                Mock -CommandName Register-EntraService -MockWith {
+                    return [PSCustomObject]@{
+                        ServiceName       = 'LogAnalytics'
+                        AlreadyRegistered = $false
+                        Status            = 'NewlyRegistered'
+                    }
                 }
             }
         }
@@ -65,7 +78,12 @@ Describe 'Initialize-LogAnalyticsApi' {
 
         It 'Should call Register-EntraService' {
             Initialize-LogAnalyticsApi
-            Should -Invoke -CommandName Register-EntraService -Times 1 -Exactly
+            if ($script:moduleLoaded) {
+                Should -Invoke -CommandName Register-EntraService -ModuleName $script:moduleName -Times 1 -Exactly
+            }
+            else {
+                Should -Invoke -CommandName Register-EntraService -Times 1 -Exactly
+            }
         }
     }
 }

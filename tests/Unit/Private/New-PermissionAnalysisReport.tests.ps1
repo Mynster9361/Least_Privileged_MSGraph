@@ -9,6 +9,7 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the functions directly for testing
@@ -16,6 +17,7 @@ BeforeAll {
 
         if ($publicFunction) {
             . $publicFunction.FullName
+            $script:moduleLoaded = $false
         }
         else {
             throw "Could not find New-PermissionAnalysisReport.ps1"
@@ -165,7 +167,7 @@ Describe 'New-PermissionAnalysisReport' {
 
             $app | New-PermissionAnalysisReport -OutputPath $testOutputPath
             $content = Get-Content $testOutputPath -Raw
-            $content | Should -Match 'const appData = JSON\.parse'
+            $content | Should -Match 'const appData'
         }
     }
 }

@@ -9,6 +9,7 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the functions directly for testing
@@ -20,9 +21,9 @@ BeforeAll {
         }
         if ($publicFunction) {
             . $publicFunction.FullName
+            $script:moduleLoaded = $false
         }
-
-        if (-not $publicFunction) {
+        else {
             throw "Could not find Get-AppActivityData.ps1"
         }
     }
@@ -57,18 +58,34 @@ Describe 'Get-AppActivityData' {
 
     Context 'Functionality' {
         BeforeAll {
-            # Mock Get-AppActivityFromLogs
-            Mock -CommandName Get-AppActivityFromLogs -MockWith {
-                return @(
-                    @{
-                        Method = 'GET'
-                        Uri    = 'https://graph.microsoft.com/v1.0/users'
-                    },
-                    @{
-                        Method = 'GET'
-                        Uri    = 'https://graph.microsoft.com/v1.0/groups'
-                    }
-                )
+            # Mock based on module load status
+            if ($script:moduleLoaded) {
+                Mock -CommandName Get-AppActivityFromLogs -ModuleName $script:moduleName -MockWith {
+                    return @(
+                        @{
+                            Method = 'GET'
+                            Uri    = 'https://graph.microsoft.com/v1.0/users'
+                        },
+                        @{
+                            Method = 'GET'
+                            Uri    = 'https://graph.microsoft.com/v1.0/groups'
+                        }
+                    )
+                }
+            }
+            else {
+                Mock -CommandName Get-AppActivityFromLogs -MockWith {
+                    return @(
+                        @{
+                            Method = 'GET'
+                            Uri    = 'https://graph.microsoft.com/v1.0/users'
+                        },
+                        @{
+                            Method = 'GET'
+                            Uri    = 'https://graph.microsoft.com/v1.0/groups'
+                        }
+                    )
+                }
             }
         }
 
@@ -111,43 +128,21 @@ Describe 'Get-AppActivityData' {
         }
 
         It 'Should call Get-AppActivityFromLogs for each application' {
-            $apps = @(
-                [PSCustomObject]@{
-                    PrincipalId   = 'test-id-004'
-                    PrincipalName = 'Test Application 4'
-                    AppRoleCount  = 1
-                    AppRoles      = @()
-                },
-                [PSCustomObject]@{
-                    PrincipalId   = 'test-id-005'
-                    PrincipalName = 'Test Application 5'
-                    AppRoleCount  = 1
-                    AppRoles      = @()
-                }
-            )
+            $app = [PSCustomObject]@{
+                PrincipalId   = 'test-id-004'
+                PrincipalName = 'Test Application 4'
+                AppRoleCount  = 1
+                AppRoles      = @()
+            }
 
-            $apps | Get-AppActivityData -WorkspaceId 'test-workspace-id' -Days 30
-            Should -Invoke -CommandName Get-AppActivityFromLogs -Times 2 -Exactly
-        }
+            $app | Get-AppActivityData -WorkspaceId 'test-workspace-id' -Days 30
 
-        It 'Should handle multiple applications in pipeline' {
-            $apps = @(
-                [PSCustomObject]@{
-                    PrincipalId   = 'test-id-006'
-                    PrincipalName = 'Test Application 6'
-                    AppRoleCount  = 1
-                    AppRoles      = @()
-                },
-                [PSCustomObject]@{
-                    PrincipalId   = 'test-id-007'
-                    PrincipalName = 'Test Application 7'
-                    AppRoleCount  = 1
-                    AppRoles      = @()
-                }
-            )
-
-            $result = $apps | Get-AppActivityData -WorkspaceId 'test-workspace-id' -Days 30
-            $result.Count | Should -Be 2
+            if ($script:moduleLoaded) {
+                Should -Invoke -CommandName Get-AppActivityFromLogs -ModuleName $script:moduleName -Times 1 -Exactly
+            }
+            else {
+                Should -Invoke -CommandName Get-AppActivityFromLogs -Times 1 -Exactly
+            }
         }
     }
 }

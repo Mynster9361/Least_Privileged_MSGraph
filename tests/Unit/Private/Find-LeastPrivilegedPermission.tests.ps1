@@ -129,7 +129,7 @@ Describe 'Find-LeastPrivilegedPermission' {
 
             # The function should return User.ReadBasic.All as the least privileged permission
             $result[0].LeastPrivilegedPermissions | Should -Not -BeNullOrEmpty
-            $result[0].LeastPrivilegedPermissions.Count | Should -BeGreaterThan 0
+            $result[0].Count | Should -BeGreaterThan 0
 
             # Check if User.ReadBasic.All is in the results
             $hasLeastPriv = $result[0].LeastPrivilegedPermissions | Where-Object { $_.Permission -eq 'User.ReadBasic.All' }

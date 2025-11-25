@@ -80,7 +80,7 @@ Describe 'Get-OptimalPermissionSet' {
             )
 
             $result = Get-OptimalPermissionSet -ActivityPermissions $activityPermissions
-            $result.Count | Should -BeGreaterThan 0
+            $result.Count | Should -Not -BeNullOrEmpty
         }
     }
 }

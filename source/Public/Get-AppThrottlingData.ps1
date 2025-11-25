@@ -139,7 +139,7 @@ function Get-AppThrottlingData {
         Write-Verbose "Fetching throttling statistics for all applications..."
         $throttlingStats = Get-AppThrottlingStats -WorkspaceId $WorkspaceId -Days $Days
 
-        "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
+        Write-Debug "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
 
         if ($throttlingStats.Count -gt 0) {
             Write-Verbose "Sample ServicePrincipalIds from Log Analytics:"
@@ -249,9 +249,9 @@ function Get-AppThrottlingData {
                 $_.ThrottlingStats -and $_.ThrottlingStats.TotalRequests -gt 0
             }).Count
 
-        "Successfully processed $($allProcessedApps.Count) applications."
-        "  - Found throttling data for: $matchedCount applications"
-        "  - No activity for: $($allProcessedApps.Count - $matchedCount) applications"
+        Write-Debug "Successfully processed $($allProcessedApps.Count) applications."
+        Write-Debug "  - Found throttling data for: $matchedCount applications"
+        Write-Debug "  - No activity for: $($allProcessedApps.Count - $matchedCount) applications"
 
         return $allProcessedApps
     }

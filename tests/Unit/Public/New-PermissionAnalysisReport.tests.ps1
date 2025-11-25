@@ -38,10 +38,10 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "New-PermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "New-PermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
 
-        if ($privateFunction) {
-            . $privateFunction.FullName
+        if ($publicFunction) {
+            . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {

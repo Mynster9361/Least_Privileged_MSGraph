@@ -75,25 +75,55 @@ function Get-OptimalPermissionSet {
 
     This function uses Write-Debug for detailed processing information.
 #>
+  [CmdletBinding()]
+  [OutputType([PSCustomObject])]
   param(
     [Parameter(Mandatory = $true)]
+    [AllowNull()]
     [array]$activityPermissions
   )
 
   Write-Debug "Calculating optimal permission set..."
 
+  # Handle null or empty input
+  if ($null -eq $activityPermissions -or $activityPermissions.Count -eq 0) {
+    Write-Debug "No activity permissions provided"
+    return [PSCustomObject]@{
+      OptimalPermissions  = @()
+      UnmatchedActivities = @()
+      TotalActivities     = 0
+      MatchedActivities   = 0
+    }
+  }
+
   # Check for unmatched activities
   $unmatchedActivities = $activityPermissions | Where-Object { -not $_.IsMatched }
   $matchedActivities = $activityPermissions | Where-Object { $_.IsMatched }
 
+  # Filter out activities with null or empty permission arrays
+  $activitiesWithPermissions = $matchedActivities | Where-Object {
+    $null -ne $_.LeastPrivilegedPermissions -and $_.LeastPrivilegedPermissions.Count -gt 0
+  }
+
+  # Add activities without permissions to unmatched
+  $activitiesWithoutPermissions = $matchedActivities | Where-Object {
+    $null -eq $_.LeastPrivilegedPermissions -or $_.LeastPrivilegedPermissions.Count -eq 0
+  }
+
+  if ($activitiesWithoutPermissions.Count -gt 0) {
+    Write-Debug "Found $($activitiesWithoutPermissions.Count) matched activities without permission mappings"
+    $unmatchedActivities = @($unmatchedActivities) + @($activitiesWithoutPermissions)
+  }
+
   if ($unmatchedActivities.Count -gt 0) {
-    Write-Debug "Found $($unmatchedActivities.Count) activities without matches in permission map:"
+    Write-Debug "Found $($unmatchedActivities.Count) activities without complete matches:"
     $unmatchedActivities | ForEach-Object {
       Write-Debug "  $($_.Method) $($_.Version)$($_.Path)"
     }
   }
 
-  if ($matchedActivities.Count -eq 0) {
+  if ($activitiesWithPermissions.Count -eq 0) {
+    Write-Debug "No activities with valid permission mappings found"
     return [PSCustomObject]@{
       OptimalPermissions  = @()
       UnmatchedActivities = $unmatchedActivities
@@ -105,8 +135,13 @@ function Get-OptimalPermissionSet {
   # Collect all unique permissions across all activities
   $allPermissions = @{}
 
-  foreach ($activity in $matchedActivities) {
+  foreach ($activity in $activitiesWithPermissions) {
     foreach ($perm in $activity.LeastPrivilegedPermissions) {
+      # Skip null permissions
+      if ($null -eq $perm -or [string]::IsNullOrEmpty($perm.Permission)) {
+        continue
+      }
+
       $key = "$($perm.Permission)|$($perm.ScopeType)"
 
       if (-not $allPermissions.ContainsKey($key)) {
@@ -122,6 +157,17 @@ function Get-OptimalPermissionSet {
       if ($allPermissions[$key].Activities -notcontains $activityId) {
         [void]$allPermissions[$key].Activities.Add($activityId)
       }
+    }
+  }
+
+  # Check if we found any permissions
+  if ($allPermissions.Count -eq 0) {
+    Write-Debug "No valid permissions found in activities"
+    return [PSCustomObject]@{
+      OptimalPermissions  = @()
+      UnmatchedActivities = $unmatchedActivities
+      TotalActivities     = $activityPermissions.Count
+      MatchedActivities   = 0
     }
   }
 
@@ -157,15 +203,17 @@ function Get-OptimalPermissionSet {
     }
 
     # Stop if all activities are covered
-    if ($coveredActivities.Count -eq $matchedActivities.Count) {
+    if ($coveredActivities.Count -eq $activitiesWithPermissions.Count) {
       break
     }
   }
+
+  Write-Debug "Selected $($selectedPermissions.Count) optimal permissions covering $($coveredActivities.Count) activities"
 
   return [PSCustomObject]@{
     OptimalPermissions  = $selectedPermissions
     UnmatchedActivities = $unmatchedActivities
     TotalActivities     = $activityPermissions.Count
-    MatchedActivities   = $matchedActivities.Count
+    MatchedActivities   = $activitiesWithPermissions.Count
   }
 }

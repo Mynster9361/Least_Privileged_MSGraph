@@ -128,8 +128,10 @@ function Get-PermissionAnalysis {
     Find-LeastPrivilegedPermissions and Get-OptimalPermissionSet helper functions.
 #>
     [CmdletBinding()]
+    [OutputType([PSCustomObject[]])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [AllowNull()]
         [array]$AppData
     )
 
@@ -156,15 +158,55 @@ function Get-PermissionAnalysis {
         $permissionMapbeta = Get-Content -Path $PermissionMapBetaPath -Raw | ConvertFrom-Json
 
         Write-Debug "Permission maps loaded successfully"
-
-        # Initialize collection for all processed apps
-        $allProcessedApps = @()
     }
 
-
     process {
+        # Handle null or empty input
+        if ($null -eq $AppData -or $AppData.Count -eq 0) {
+            Write-Debug "No app data provided in this pipeline iteration"
+            return
+        }
+
         foreach ($app in $AppData) {
+            # Skip null or invalid entries
+            if ($null -eq $app) {
+                Write-Debug "Skipping null app entry"
+                continue
+            }
+
+            # Validate required properties
+            if (-not $app.PrincipalName) {
+                Write-Warning "Skipping app without PrincipalName property"
+                continue
+            }
+
             Write-Debug "`nAnalyzing: $($app.PrincipalName)"
+
+            # Handle apps without activity
+            if ($null -eq $app.Activity -or $app.Activity.Count -eq 0) {
+                Write-Debug "  No activity found for $($app.PrincipalName)"
+
+                # Add empty analysis properties
+                $app | Add-Member -MemberType NoteProperty -Name "ActivityPermissions" -Value @() -Force
+                $app | Add-Member -MemberType NoteProperty -Name "OptimalPermissions" -Value @() -Force
+                $app | Add-Member -MemberType NoteProperty -Name "UnmatchedActivities" -Value @() -Force
+
+                $currentPermissions = if ($app.AppRoles) {
+                    $app.AppRoles | Select-Object -ExpandProperty FriendlyName | Where-Object { $_ -ne $null }
+                }
+                else {
+                    @()
+                }
+
+                $app | Add-Member -MemberType NoteProperty -Name "CurrentPermissions" -Value $currentPermissions -Force
+                $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value @() -Force
+                $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value @() -Force
+                $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $true -Force
+
+                # Output the app immediately
+                Write-Output $app
+                continue
+            }
 
             # Find least privileged permissions for each activity
             $splatLeastPrivileged = @{
@@ -183,7 +225,13 @@ function Get-PermissionAnalysis {
             $app | Add-Member -MemberType NoteProperty -Name "UnmatchedActivities" -Value $optimalSet.UnmatchedActivities -Force
 
             # Compare with current permissions
-            $currentPermissions = $app.AppRoles | Select-Object -ExpandProperty FriendlyName | Where-Object { $_ -ne $null }
+            $currentPermissions = if ($app.AppRoles) {
+                $app.AppRoles | Select-Object -ExpandProperty FriendlyName | Where-Object { $_ -ne $null }
+            }
+            else {
+                @()
+            }
+
             $optimalPermissionNames = $optimalSet.OptimalPermissions | Select-Object -ExpandProperty Permission -Unique
 
             $excessPermissions = $currentPermissions | Where-Object { $optimalPermissionNames -notcontains $_ }
@@ -193,11 +241,11 @@ function Get-PermissionAnalysis {
             $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $excessPermissions -Force
             $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value $missingPermissions -Force
 
-            if ($optimalSet.UnmatchedActivities) {
-                $matchedAllActivity = $false
+            $matchedAllActivity = if ($optimalSet.UnmatchedActivities -and $optimalSet.UnmatchedActivities.Count -gt 0) {
+                $false
             }
             else {
-                $matchedAllActivity = $true
+                $true
             }
             $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $matchedAllActivity -Force
 
@@ -207,11 +255,8 @@ function Get-PermissionAnalysis {
             Write-Debug "  Current Permissions: $($currentPermissions.Count)"
             Write-Debug "  Excess Permissions: $($excessPermissions.Count)"
 
-            $allProcessedApps += $app
+            # Output the app immediately to the pipeline
+            Write-Output $app
         }
-    }
-
-    end {
-        return $allProcessedApps
     }
 }

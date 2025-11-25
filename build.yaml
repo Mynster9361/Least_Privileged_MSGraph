@@ -8,7 +8,7 @@ CopyPaths:
   - data
 Encoding: UTF8
 # Force manual version - bypass GitVersion completely
-SemVer: '0.1.0-preview1'
+SemVer: '0.1.0-preview2'
 VersionedOutputDirectory: true
 IgnoreGitVersion: true
 

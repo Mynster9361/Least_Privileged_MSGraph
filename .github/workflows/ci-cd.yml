@@ -222,8 +222,8 @@ jobs:
       - name: Publish Release
         shell: pwsh
         run: |
-          #Write-Host "Publish step skipped - publish task not configured in build.yaml"
           Write-Host "Publishing module to PowerShell Gallery"
+          #Write-Host "Publish step skipped - publish task not configured in build.yaml"
           ./build.ps1 -tasks publish
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -234,9 +234,9 @@ jobs:
       - name: Send Changelog PR
         shell: pwsh
         run: |
-          #Write-Host "Changelog PR step skipped - publish task not configured in build.yaml"
           Write-Host "Creating changelog GitHub PR"
-          ./build.ps1 -tasks Create_ChangeLog_GitHub_PR
+          #Write-Host "Changelog PR step skipped - publish task not configured in build.yaml"
+          ./build.ps1 -tasks Create_Changelog_Branch
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
           ReleaseBranch: ${{ env.defaultBranch }}

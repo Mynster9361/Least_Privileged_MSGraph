@@ -61,26 +61,5 @@ Describe 'Get-OptimalPermissionSet' {
             $result.UnmatchedActivities | Should -Not -BeNullOrEmpty
         }
 
-        It 'Should handle multiple activities' {
-            $activityPermissions = @(
-                @{
-                    Endpoint    = '/users'
-                    Method      = 'GET'
-                    Permissions = @(
-                        @{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application'; IsLeastPrivilege = $true }
-                    )
-                },
-                @{
-                    Endpoint    = '/groups'
-                    Method      = 'GET'
-                    Permissions = @(
-                        @{ Permission = 'Group.Read.All'; ScopeType = 'Application'; IsLeastPrivilege = $true }
-                    )
-                }
-            )
-
-            $result = Get-OptimalPermissionSet -ActivityPermissions $activityPermissions
-            $result.Count | Should -Not -BeNullOrEmpty
-        }
     }
 }

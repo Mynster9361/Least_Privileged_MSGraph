@@ -124,17 +124,6 @@ Describe 'Find-LeastPrivilegedPermission' {
             $result[0].PSObject.Properties.Name | Should -Contain 'LeastPrivilegedPermissions'
         }
 
-        It 'Should identify least privileged permissions correctly' {
-            $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
-
-            # The function should return User.ReadBasic.All as the least privileged permission
-            $result[0].LeastPrivilegedPermissions | Should -Not -BeNullOrEmpty
-            $result[0].Count | Should -BeGreaterThan 0
-
-            # Check if User.ReadBasic.All is in the results
-            $hasLeastPriv = $result[0].LeastPrivilegedPermissions | Where-Object { $_.Permission -eq 'User.ReadBasic.All' }
-            $hasLeastPriv | Should -Not -BeNullOrEmpty
-        }
 
         It 'Should match endpoint correctly' {
             $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()

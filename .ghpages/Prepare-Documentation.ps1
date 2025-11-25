@@ -1,22 +1,6 @@
 <#
 .SYNOPSIS
-    Prepares documentation for GitHub Pages deployment.
-
-.DESCRIPTION
-    Consolidates documentation from build output and repository root into a single directory
-    for deployment to GitHub Pages. Creates an index.html if one doesn't exist.
-
-.PARAMETER BuildOutputPath
-    Path to the build output directory containing generated documentation.
-
-.PARAMETER RepositoryDocsPath
-    Path to the repository's docs directory.
-
-.PARAMETER OutputPath
-    Path where the consolidated documentation should be created.
-
-.EXAMPLE
-    .\build\Prepare-Documentation.ps1 -BuildOutputPath "./output" -OutputPath "./gh-pages-docs"
+    Prepares documentation for GitHub Pages deployment with Docsy Jekyll theme.
 #>
 
 [CmdletBinding()]
@@ -33,135 +17,129 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-Write-Host "=== Preparing Documentation for GitHub Pages ===" -ForegroundColor Cyan
+Write-Host "=== Preparing Documentation for GitHub Pages (Docsy Jekyll) ===" -ForegroundColor Cyan
 
-# Create the output directory
-Write-Host "Creating output directory: $OutputPath" -ForegroundColor Yellow
+# Create the output directory structure
+Write-Host "Creating output directory structure" -ForegroundColor Yellow
 New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
+New-Item -ItemType Directory -Path "$OutputPath/_commands" -Force | Out-Null
 
-# Copy generated docs from build output if they exist
+# Copy Jekyll configuration files
+Write-Host "Copying Jekyll configuration files" -ForegroundColor Green
+$configFiles = @('_config.yml', 'index.md', 'getting-started.md', 'commands.md', 'examples.md')
+foreach ($file in $configFiles) {
+    $sourcePath = "./.ghpages/$file"
+    if (Test-Path $sourcePath) {
+        Copy-Item -Path $sourcePath -Destination $OutputPath -Force
+        Write-Host "  ✓ Copied: $file" -ForegroundColor Gray
+    }
+    else {
+        Write-Warning "Configuration file not found: $sourcePath"
+    }
+}
+
+# Copy generated command docs from build output
 $buildDocsPath = Join-Path $BuildOutputPath "docs"
 if (Test-Path $buildDocsPath) {
-    Write-Host "Copying documentation from build output: $buildDocsPath" -ForegroundColor Green
-    Copy-Item -Path "$buildDocsPath/*" -Destination $OutputPath -Recurse -Force
-    Get-ChildItem $buildDocsPath | ForEach-Object {
-        Write-Host "  ✓ Copied: $($_.Name)" -ForegroundColor Gray
+    Write-Host "Processing command documentation from build output" -ForegroundColor Green
+
+    Get-ChildItem $buildDocsPath -Filter "*.md" -File | ForEach-Object {
+        $fileName = $_.Name
+        $baseName = $_.BaseName
+        $destPath = Join-Path "$OutputPath/_commands" $fileName
+
+        # Read the content
+        $content = Get-Content -Path $_.FullName -Raw
+
+        # Extract synopsis from markdown if available
+        $synopsis = ""
+        if ($content -match '##\s+SYNOPSIS\s+(.+?)(?=##|\z)') {
+            $synopsis = $matches[1].Trim()
+        }
+
+        # Create front matter for Jekyll/Docsy
+        $frontMatter = @"
+---
+layout: page
+title: $baseName
+permalink: /commands/$baseName
+parent: Command Reference
+---
+
+"@
+
+        # Combine front matter with content
+        $fullContent = $frontMatter + $content
+
+        # Save to destination
+        Set-Content -Path $destPath -Value $fullContent -NoNewline
+
+        Write-Host "  ✓ Processed: $fileName" -ForegroundColor Gray
     }
 }
 else {
     Write-Warning "Build documentation not found at: $buildDocsPath"
 }
 
-# Copy any docs from repository root if they exist
+# Copy README.md from repository root if it exists
+$readmePath = "./README.md"
+if (Test-Path $readmePath) {
+    Write-Host "Processing README.md" -ForegroundColor Green
+    $readmeContent = Get-Content -Path $readmePath -Raw
+
+    # Check if getting-started.md already exists (from .ghpages folder)
+    $gettingStartedPath = Join-Path $OutputPath "getting-started.md"
+    if (-not (Test-Path $gettingStartedPath)) {
+        # Add front matter to README and save as getting-started
+        $frontMatter = @"
+---
+layout: page
+title: Getting Started
+permalink: /getting-started
+---
+
+"@
+
+        $fullContent = $frontMatter + $readmeContent
+        Set-Content -Path $gettingStartedPath -Value $fullContent
+        Write-Host "  ✓ Created getting-started.md from README" -ForegroundColor Gray
+    }
+}
+
+# Copy any additional docs from repository docs folder
 if (Test-Path $RepositoryDocsPath) {
-    Write-Host "Copying documentation from repository: $RepositoryDocsPath" -ForegroundColor Green
-    Copy-Item -Path "$RepositoryDocsPath/*" -Destination $OutputPath -Recurse -Force
-    Get-ChildItem $RepositoryDocsPath | ForEach-Object {
+    Write-Host "Copying additional documentation from repository" -ForegroundColor Green
+    Get-ChildItem $RepositoryDocsPath -Filter "*.md" -File | ForEach-Object {
+        $content = Get-Content -Path $_.FullName -Raw
+
+        # Add front matter if not present
+        if ($content -notmatch '^---\s*\n') {
+            $frontMatter = @"
+---
+layout: page
+title: $($_.BaseName)
+---
+
+"@
+            $content = $frontMatter + $content
+        }
+
+        $destPath = Join-Path $OutputPath $_.Name
+        Set-Content -Path $destPath -Value $content
         Write-Host "  ✓ Copied: $($_.Name)" -ForegroundColor Gray
     }
 }
-else {
-    Write-Warning "Repository documentation not found at: $RepositoryDocsPath"
-}
 
-# Copy README.md if it exists
-$readmePath = "./README.md"
-if (Test-Path $readmePath) {
-    Write-Host "Copying README.md" -ForegroundColor Green
-    Copy-Item -Path $readmePath -Destination $OutputPath -Force
-}
-
-# Create an index.html if it doesn't exist
-$indexPath = Join-Path $OutputPath "index.html"
-if (-not (Test-Path $indexPath)) {
-    Write-Host "Creating index.html" -ForegroundColor Green
-
-    # Get list of markdown files for the index
-    $markdownFiles = Get-ChildItem -Path $OutputPath -Filter "*.md" -File | Sort-Object Name
-
-    $fileLinks = $markdownFiles | ForEach-Object {
-        "        <li><a href=`"$($_.Name)`">$($_.BaseName)</a></li>"
-    }
-
-    $fileLinksHtml = if ($fileLinks) {
-        $fileLinks -join "`n"
-    }
-    else {
-        "        <li>No documentation files found</li>"
-    }
-
-    $indexHtml = @"
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeastPrivilegedMSGraph Documentation</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            color: #0066cc;
-            border-bottom: 2px solid #0066cc;
-            padding-bottom: 10px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin: 10px 0;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-left: 3px solid #0066cc;
-            display: inline-block;
-        }
-        a:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
-</head>
-<body>
-    <h1>LeastPrivilegedMSGraph Documentation</h1>
-    <p>PowerShell module for analyzing and determining least privileged permissions for Microsoft Graph applications.</p>
-
-    <h2>Available Documentation</h2>
-    <ul>
-$fileLinksHtml
-    </ul>
-
-    <h2>Quick Links</h2>
-    <ul>
-        <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph">GitHub Repository</a></li>
-        <li><a href="https://www.powershellgallery.com/packages/LeastPrivilegedMSGraph">PowerShell Gallery</a></li>
-    </ul>
-</body>
-</html>
-"@
-
-    $indexHtml | Out-File -FilePath $indexPath -Encoding UTF8
-    Write-Host "  ✓ Created index.html with $($markdownFiles.Count) documentation files" -ForegroundColor Gray
-}
-else {
-    Write-Host "index.html already exists, skipping creation" -ForegroundColor Yellow
-}
+# DO NOT create .nojekyll - we want Jekyll to process with Docsy theme
+Write-Host "`nJekyll (Docsy theme) will process the documentation" -ForegroundColor Yellow
 
 # Display summary
 Write-Host "`n=== Documentation Preparation Complete ===" -ForegroundColor Cyan
 Write-Host "Output directory: $OutputPath" -ForegroundColor Green
 Write-Host "`nContents:" -ForegroundColor Yellow
-Get-ChildItem $OutputPath -Recurse | ForEach-Object {
-    $relativePath = $_.FullName.Replace("$(Resolve-Path $OutputPath)\", "")
+Get-ChildItem $OutputPath -Recurse -File | ForEach-Object {
+    $relativePath = $_.FullName.Replace("$(Resolve-Path $OutputPath)\", "").Replace("$(Resolve-Path $OutputPath)/", "")
     Write-Host "  - $relativePath" -ForegroundColor Gray
 }
 
-Write-Host "`n✓ Documentation ready for deployment" -ForegroundColor Green
+Write-Host "`n✓ Documentation ready for Jekyll (Docsy) deployment" -ForegroundColor Green

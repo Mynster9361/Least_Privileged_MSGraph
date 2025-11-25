@@ -1,0 +1,108 @@
+# Jekyll Docsy Configuration for LeastPrivilegedMSGraph
+
+# Site settings
+title: LeastPrivilegedMSGraph
+description: PowerShell module for analyzing and determining least privileged permissions for Microsoft Graph applications
+author: Mynster9361
+email: mortenmynster@hotmail.com
+baseurl: "/Least_Privileged_MSGraph"
+url: "https://mynster9361.github.io"
+
+# Theme
+remote_theme: vsoch/docsy-jekyll
+
+# Repository information
+github_user: Mynster9361
+github_repo: Least_Privileged_MSGraph
+github_branch: main
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Getting Started
+    url: /getting-started
+  - title: Commands
+    url: /commands
+  - title: Examples
+    url: /examples
+  - title: GitHub
+    url: https://github.com/Mynster9361/Least_Privileged_MSGraph
+    external: true
+  - title: PowerShell Gallery
+    url: https://www.powershellgallery.com/packages/LeastPrivilegedMSGraph
+    external: true
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Social links (optional)
+social:
+  github: Mynster9361
+  twitter: 
+  linkedin: https://www.linkedin.com/in/mortenmynster/
+
+# Search
+search_enabled: true
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    default_lang: powershell
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Collections for organizing documentation
+collections:
+  commands:
+    output: true
+    permalink: /commands/:name
+  docs:
+    output: true
+    permalink: /docs/:name
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "commands"
+    values:
+      layout: page
+      toc: true
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: page
+      toc: true
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+
+# SEO
+twitter:
+  username: 
+  card: summary
+
+# Logo (optional - you can add later)
+# logo: /assets/images/logo.png

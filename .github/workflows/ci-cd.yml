@@ -240,9 +240,8 @@ jobs:
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"
           
-          # Create .nojekyll to disable Jekyll processing
-          New-Item -Path "./gh-pages-docs/.nojekyll" -ItemType File -Force | Out-Null
-          Write-Host "Created .nojekyll file to disable Jekyll"
+          # DO NOT create .nojekyll - Docsy theme requires Jekyll processing
+          Write-Host "Documentation prepared for Docsy Jekyll theme"
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
@@ -272,25 +271,3 @@ jobs:
           GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
           ReleaseBranch: ${{ env.defaultBranch }}
           MainGitBranch: ${{ env.defaultBranch }}
-
-      - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            ${{ env.buildFolderName }}/module/**/*.nupkg
-            ${{ env.buildFolderName }}/docs/**/*.md
-          body: |
-            ## Release ${{ needs.build.outputs.moduleVersion }}
-            
-            ### Installation
-            ```powershell
-            Install-Module -Name LeastPrivilegedMSGraph -RequiredVersion ${{ needs.build.outputs.moduleVersion }}
-            ```
-            
-            ### Documentation
-            Documentation is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
-          draft: false
-          prerelease: ${{ contains(needs.build.outputs.moduleVersion, 'preview') || contains(needs.build.outputs.moduleVersion, 'alpha') || contains(needs.build.outputs.moduleVersion, 'beta') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

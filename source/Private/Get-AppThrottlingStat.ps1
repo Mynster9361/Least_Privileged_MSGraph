@@ -1,4 +1,4 @@
-function Get-AppThrottlingStats {
+function Get-AppThrottlingStat {
     <#
 .SYNOPSIS
     Retrieves throttling statistics for applications from Azure Log Analytics.
@@ -68,13 +68,13 @@ function Get-AppThrottlingStats {
     Returns an empty array if no data is found or if the query fails.
 
 .EXAMPLE
-    $stats = Get-AppThrottlingStats -WorkspaceId "12345-workspace-id" -Days 30
+    $stats = Get-AppThrottlingStat -WorkspaceId "12345-workspace-id" -Days 30
     $stats | Where-Object { $_.ThrottlingSeverity -ge 3 } | Format-Table ServicePrincipalId, ThrottlingStatus, ThrottleRate
 
     Retrieves 30 days of throttling data for all applications and displays those with Warning or Critical severity.
 
 .EXAMPLE
-    $singleAppStats = Get-AppThrottlingStats -WorkspaceId $workspaceId -Days 7 -ServicePrincipalId "app-sp-id"
+    $singleAppStats = Get-AppThrottlingStat -WorkspaceId $workspaceId -Days 7 -ServicePrincipalId "app-sp-id"
 
     if ($singleAppStats -and $singleAppStats.Total429Errors -gt 0) {
         Write-Warning "Application has $($singleAppStats.Total429Errors) throttling errors (Rate: $($singleAppStats.ThrottleRate)%)"
@@ -83,14 +83,14 @@ function Get-AppThrottlingStats {
     Retrieves throttling data for a specific application and checks for issues.
 
 .EXAMPLE
-    $allStats = Get-AppThrottlingStats -WorkspaceId $workspaceId -Days 90 -Verbose
+    $allStats = Get-AppThrottlingStat -WorkspaceId $workspaceId -Days 90 -Verbose
     $topThrottled = $allStats | Sort-Object Total429Errors -Descending | Select-Object -First 10
     $topThrottled | Export-Csv -Path "top-throttled-apps.csv" -NoTypeInformation
 
     Analyzes 90 days of data, identifies the 10 most throttled applications, and exports to CSV.
 
 .EXAMPLE
-    $stats = Get-AppThrottlingStats -WorkspaceId $workspaceId -Days 30
+    $stats = Get-AppThrottlingStat -WorkspaceId $workspaceId -Days 30
     $summary = $stats | Group-Object ThrottlingStatus | Select-Object Name, Count
     $summary | Format-Table -AutoSize
 
@@ -138,10 +138,10 @@ function Get-AppThrottlingStats {
     Write-Debug "Querying throttling statistics for last $Days days..."
 
     $spIdFilter = if ($ServicePrincipalId) {
-        "| where ServicePrincipalId == '$ServicePrincipalId'" 
+        "| where ServicePrincipalId == '$ServicePrincipalId'"
     }
     else {
-        "" 
+        ""
     }
 
     # Query groups by ServicePrincipalId instead of AppId

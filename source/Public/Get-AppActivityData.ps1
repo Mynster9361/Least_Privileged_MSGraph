@@ -85,7 +85,7 @@ function Get-AppActivityData {
     Prerequisites:
     - Azure Log Analytics workspace with MicrosoftGraphActivityLogs enabled
     - Appropriate permissions to query the Log Analytics workspace
-    - Get-AppActivityFromLogs function must be available
+    - Get-AppActivityFromLog function must be available
 
     Performance Considerations:
     - Processing time scales linearly with the number of applications
@@ -153,7 +153,7 @@ function Get-AppActivityData {
             Write-Debug "[$currentIndex/$totalCount] Querying activity for $($app.PrincipalName) ($spId)..."
 
             try {
-                $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $spId
+                $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $spId
 
                 if ($null -ne $activity) {
                     $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value $activity -Force

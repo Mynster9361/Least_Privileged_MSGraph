@@ -56,7 +56,7 @@ function Initialize-LogAnalyticsApi {
     # Typical workflow
     Initialize-LogAnalyticsApi
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $secret -ServiceName 'LogAnalytics'
-    $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId
+    $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId
 
     Complete authentication and service setup workflow before querying Log Analytics.
 

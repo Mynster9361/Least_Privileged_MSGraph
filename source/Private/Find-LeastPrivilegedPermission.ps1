@@ -1,4 +1,4 @@
-function Find-LeastPrivilegedPermissions {
+function Find-LeastPrivilegedPermission {
   <#
 .SYNOPSIS
     Identifies the least privileged Microsoft Graph permissions required for specific API activities.
@@ -42,18 +42,18 @@ function Find-LeastPrivilegedPermissions {
         @{Method='GET'; Uri='https://graph.microsoft.com/v1.0/users/me/messages'},
         @{Method='POST'; Uri='https://graph.microsoft.com/v1.0/users/me/sendMail'}
     )
-    $results = Find-LeastPrivilegedPermissions -userActivity $activities -permissionMapv1 $v1Map -permissionMapbeta $betaMap
+    $results = Find-LeastPrivilegedPermission -userActivity $activities -permissionMapv1 $v1Map -permissionMapbeta $betaMap
 
     Analyzes the activities and returns the least privileged permissions needed for reading messages and sending mail.
 
 .EXAMPLE
-    $results = Find-LeastPrivilegedPermissions -userActivity $appActivity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
+    $results = Find-LeastPrivilegedPermission -userActivity $appActivity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $unmatchedActivities = $results | Where-Object { -not $_.IsMatched }
 
     Finds all activities that couldn't be matched to known endpoints, useful for identifying unsupported or custom APIs.
 
 .EXAMPLE
-    $results = Find-LeastPrivilegedPermissions -userActivity $activity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
+    $results = Find-LeastPrivilegedPermission -userActivity $activity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $requiredPerms = $results.LeastPrivilegedPermissions.Permission | Select-Object -Unique
 
     Extracts a unique list of all permissions required across all activities.
@@ -97,7 +97,7 @@ function Find-LeastPrivilegedPermissions {
 
     $path = ($uri -split "https://graph.microsoft.com/$version")[1]
     if (-not $path) {
-      continue 
+      continue
     }
 
     # Ensure path starts with /
@@ -107,10 +107,10 @@ function Find-LeastPrivilegedPermissions {
 
     # Choose correct permission map
     $permissionMap = if ($version -eq "v1.0") {
-      $permissionMapv1 
+      $permissionMapv1
     }
     else {
-      $permissionMapbeta 
+      $permissionMapbeta
     }
 
     # Find matching endpoint
@@ -154,10 +154,10 @@ function Find-LeastPrivilegedPermissions {
       Path                       = $path
       OriginalUri                = $uri
       MatchedEndpoint            = if ($matchedEndpoint) {
-        $matchedEndpoint.Endpoint 
+        $matchedEndpoint.Endpoint
       }
       else {
-        $null 
+        $null
       }
       LeastPrivilegedPermissions = $leastPrivilegedPerms
       IsMatched                  = $null -ne $matchedEndpoint

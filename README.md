@@ -145,7 +145,7 @@ Import-Module LeastPrivilegedMSGraph
 Get-Command -Module LeastPrivilegedMSGraph
 
 # Get help for a specific function
-Get-Help Get-AppRoleAssignments -Full
+Get-Help Get-AppRoleAssignment -Full
 
 #region Sample params needed to run below
 
@@ -165,7 +165,7 @@ Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clie
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
 
 #region the good stuff Getting a full report of your app role assignments
-$appRoleAssignments = Get-AppRoleAssignments | select -First 5
+$appRoleAssignments = Get-AppRoleAssignment | select -First 5
 
 $appRoleAssignments | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
@@ -173,7 +173,7 @@ $appRoleAssignments | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceI
 
 $appRoleAssignments | Get-PermissionAnalysis
 
-New-PermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\report.html"
+Export-PermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\report.html"
 
 #endregion the good stuff Getting a full report of your app role assignments
 ```
@@ -181,12 +181,12 @@ New-PermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\report.
 ### Pipe everything
 ```powershell
 # You could also just pipe it all together
-Get-AppRoleAssignments | 
+Get-AppRoleAssignment | 
     select -First 50 | 
     Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
     Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
     Get-PermissionAnalysis |
-    New-PermissionAnalysisReport -OutputPath ".\report50.html"
+    Export-PermissionAnalysisReport -OutputPath ".\report50.html"
 ```
 
 ## Development Guide

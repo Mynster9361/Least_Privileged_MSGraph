@@ -1,4 +1,4 @@
-function New-PermissionAnalysisReport {
+function Export-PermissionAnalysisReport {
     <#
 .SYNOPSIS
     Generates an interactive HTML report for Microsoft Graph permission analysis.
@@ -49,24 +49,24 @@ function New-PermissionAnalysisReport {
     Returns the full path to the generated HTML report file.
 
 .EXAMPLE
-    $results | New-PermissionAnalysisReport -OutputPath "C:\Reports\GraphPermissions.html"
+    $results | Export-PermissionAnalysisReport -OutputPath "C:\Reports\GraphPermissions.html"
 
     Generates a report from pipeline input and saves it to the specified location.
 
 .EXAMPLE
-    New-PermissionAnalysisReport -AppData $analysisResults -ReportTitle "Production Apps - Q4 2024"
+    Export-PermissionAnalysisReport -AppData $analysisResults -ReportTitle "Production Apps - Q4 2024"
 
     Creates a report with a custom title using the default output path.
 
 .EXAMPLE
     Get-MgServicePrincipal | Where-Object { $_.AppId -in $targetApps } |
         ForEach-Object { Analyze-AppPermissions $_ } |
-        New-PermissionAnalysisReport -OutputPath ".\Reports\$(Get-Date -Format 'yyyyMMdd')_Report.html"
+        Export-PermissionAnalysisReport -OutputPath ".\Reports\$(Get-Date -Format 'yyyyMMdd')_Report.html"
 
     Pipelines multiple applications through analysis and generates a timestamped report.
 
 .EXAMPLE
-    $report = New-PermissionAnalysisReport -AppData $data -OutputPath "report.html"
+    $report = Export-PermissionAnalysisReport -AppData $data -OutputPath "report.html"
     Start-Process $report
 
     Generates the report and immediately opens it in the default browser.

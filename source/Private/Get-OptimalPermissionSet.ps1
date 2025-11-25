@@ -19,7 +19,7 @@ function Get-OptimalPermissionSet {
     4. Continuing until all matched activities are covered
 
 .PARAMETER activityPermissions
-    An array of activity objects returned from Find-LeastPrivilegedPermissions.
+    An array of activity objects returned from Find-LeastPrivilegedPermission.
     Each object should contain:
     - IsMatched: Boolean indicating if the activity matched an endpoint
     - LeastPrivilegedPermissions: Array of permission objects
@@ -35,7 +35,7 @@ function Get-OptimalPermissionSet {
     - MatchedActivities: Count of activities that were successfully matched
 
 .EXAMPLE
-    $activities = Find-LeastPrivilegedPermissions -userActivity $signInLogs -permissionMapv1 $v1Map -permissionMapbeta $betaMap
+    $activities = Find-LeastPrivilegedPermission -userActivity $signInLogs -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
 
     "Optimal permissions needed: $($optimal.OptimalPermissions.Count)"

@@ -1,5 +1,5 @@
-function Get-AppActivityFromLogs {
-<#
+function Get-AppActivityFromLog {
+  <#
 .SYNOPSIS
     Retrieves Microsoft Graph API activity for a specific service principal from Azure Log Analytics.
 
@@ -7,44 +7,44 @@ function Get-AppActivityFromLogs {
     This function queries Azure Log Analytics to extract API activity patterns for a given service
     principal over a specified time period. It retrieves successful API calls (HTTP 200 responses),
     cleans and normalizes the URIs, and optionally tokenizes them for permission mapping.
-    
+
     The function performs the following operations:
     1. Queries MicrosoftGraphActivityLogs for the specified service principal
     2. Filters for successful requests (200 status code) with valid data
     3. Cleans URIs by removing query parameters and normalizing path separators
     4. Removes duplicate method/URI combinations
     5. Optionally tokenizes URIs by replacing IDs with {id} placeholders
-    
+
     URI cleaning includes:
     - Removing query string parameters (everything after ?)
     - Normalizing multiple consecutive slashes to single slashes
     - Preserving the https:// scheme correctly
-    
+
     The tokenization process (default behavior) replaces dynamic segments like user IDs, GUIDs,
     and email addresses with {id} tokens, making URIs suitable for permission mapping.
 
 .PARAMETER logAnalyticsWorkspace
     The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
     This workspace must contain the MicrosoftGraphActivityLogs table.
-    
+
     Example: "12345678-1234-1234-1234-123456789012"
 
 .PARAMETER days
     The number of days of historical activity to retrieve, counting back from the current date.
     Used to construct the KQL query timespan parameter.
-    
+
     Example: 30 (retrieves last 30 days of activity)
 
 .PARAMETER spId
     The service principal ID (object ID) of the application to query activity for.
     This is used to filter the MicrosoftGraphActivityLogs table.
-    
+
     Example: "87654321-4321-4321-4321-210987654321"
 
 .PARAMETER retainRawUri
     Optional switch parameter. When specified, returns URIs in their cleaned but non-tokenized form.
     By default, URIs are tokenized (IDs replaced with {id} placeholders) for permission mapping.
-    
+
     Use this switch when you need to see the actual URIs called rather than the generalized patterns.
 
 .OUTPUTS
@@ -52,13 +52,13 @@ function Get-AppActivityFromLogs {
     Returns an array of activity objects, each containing:
     - Method: The HTTP method used (GET, POST, PUT, PATCH, DELETE)
     - Uri: The API endpoint called (tokenized by default, raw if -retainRawUri is used)
-    
+
     Returns an empty array (@()) if no activity is found.
     Returns $null if the query fails due to an error.
 
 .EXAMPLE
-    $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace "12345-workspace-id" -days 30 -spId "app-principal-id"
-    
+    $activity = Get-AppActivityFromLog -logAnalyticsWorkspace "12345-workspace-id" -days 30 -spId "app-principal-id"
+
     Retrieves 30 days of tokenized activity for the specified service principal.
     Output example:
     Method Uri
@@ -67,8 +67,8 @@ function Get-AppActivityFromLogs {
     POST   https://graph.microsoft.com/v1.0/users/{id}/sendMail
 
 .EXAMPLE
-    $rawActivity = Get-AppActivityFromLogs -logAnalyticsWorkspace $workspaceId -days 7 -spId $spId -retainRawUri
-    
+    $rawActivity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 7 -spId $spId -retainRawUri
+
     Retrieves 7 days of activity with actual URIs (not tokenized), useful for debugging or auditing.
     Output example:
     Method Uri
@@ -78,7 +78,7 @@ function Get-AppActivityFromLogs {
 
 .EXAMPLE
     $servicePrincipals | ForEach-Object {
-        $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace $workspaceId -days 90 -spId $_.Id
+        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 90 -spId $_.Id
         if ($activity.Count -gt 0) {
             [PSCustomObject]@{
                 AppName = $_.DisplayName
@@ -87,37 +87,37 @@ function Get-AppActivityFromLogs {
             }
         }
     }
-    
+
     Analyzes 90 days of activity for multiple applications and summarizes their API usage.
 
 .EXAMPLE
-    $activity = Get-AppActivityFromLogs -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId -Debug
+    $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId -Debug
     $activity | Group-Object Method | Select-Object Name, Count
-    
+
     Retrieves activity with debug output and groups by HTTP method to see usage patterns.
 
 .NOTES
     Prerequisites:
     - Azure Log Analytics workspace with MicrosoftGraphActivityLogs enabled
     - Appropriate permissions to query the workspace via Invoke-EntraRequest
-    - Convert-RelativeUriToAbsoluteUri and ConvertTo-TokenizeIds functions must be available
-    
+    - Convert-RelativeUriToAbsoluteUri and ConvertTo-TokenizeId functions must be available
+
     Query Filtering:
     - Only includes responses with status code 200 (successful requests)
     - Excludes batch requests ($batch endpoints)
     - Requires AppId, RequestUri, and RequestMethod to be non-empty
     - Removes duplicates at the query level using distinct
-    
+
     Performance Considerations:
     - Query uses KQL summarization for efficiency
     - Result set limited to 30000 rows maximum (maxRows parameter)
     - Truncation limit set to 64MB (truncationMaxSize parameter)
-    
+
     Error Handling:
     - Returns $null if the Log Analytics query fails
     - Returns empty array if no activity is found
     - Uses Write-Debug for detailed processing information
-    
+
     This function uses Invoke-EntraRequest to communicate with Log Analytics and requires
     the EntraService module or equivalent authentication mechanism.
 #>
@@ -175,7 +175,7 @@ function Get-AppActivityFromLogs {
       $activity = @()
       foreach ($entry in $data) {
         $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
-        $tokenizedUri = ConvertTo-TokenizeIds -UriString $processedUriObject.Uri
+        $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
         $activity += [PSCustomObject]@{
           Method = $entry.Method
           Uri    = $tokenizedUri

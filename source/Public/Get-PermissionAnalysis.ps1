@@ -99,7 +99,7 @@ function Get-PermissionAnalysis {
       * data\permissions-v1.0.json
       * data\permissions-beta.json
     - Input applications must have Activity property populated (use Add-AppActivityData)
-    - Input applications must have AppRoles property populated (use Get-AppRoleAssignments)
+    - Input applications must have AppRoles property populated (use Get-AppRoleAssignment)
 
     Permission Maps:
     - Contains endpoint-to-permission mappings for Microsoft Graph APIs
@@ -125,7 +125,7 @@ function Get-PermissionAnalysis {
     - Use -Force to overwrite existing properties
 
     This function uses Write-Debug for detailed processing information and requires
-    Find-LeastPrivilegedPermissions and Get-OptimalPermissionSet helper functions.
+    Find-LeastPrivilegedPermission and Get-OptimalPermissionSet helper functions.
 #>
     [CmdletBinding()]
     [OutputType([PSCustomObject[]])]
@@ -214,7 +214,7 @@ function Get-PermissionAnalysis {
                 permissionMapv1   = $permissionMapv1
                 permissionMapbeta = $permissionMapbeta
             }
-            $activityPermissions = Find-LeastPrivilegedPermissions @splatLeastPrivileged
+            $activityPermissions = Find-LeastPrivilegedPermission @splatLeastPrivileged
 
             # Get optimal permission set
             $optimalSet = Get-OptimalPermissionSet -activityPermissions $activityPermissions

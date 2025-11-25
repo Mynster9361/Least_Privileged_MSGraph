@@ -13,28 +13,28 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppRoleAssignments.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppRoleAssignment.ps1" -ErrorAction SilentlyContinue
 
         if ($publicFunction) {
             . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Get-AppRoleAssignments.ps1"
+            throw "Could not find Get-AppRoleAssignment.ps1"
         }
     }
 }
 
-Describe 'Get-AppRoleAssignments' {
+Describe 'Get-AppRoleAssignment' {
     Context 'Parameter Validation' {
         It 'Should have no mandatory parameters' {
-            $command = Get-Command -Name Get-AppRoleAssignments
+            $command = Get-Command -Name Get-AppRoleAssignment
             $mandatoryParams = $command.Parameters.Values | Where-Object { $_.Attributes.Mandatory -eq $true }
             $mandatoryParams | Should -BeNullOrEmpty
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name Get-AppRoleAssignments
+            $command = Get-Command -Name Get-AppRoleAssignment
             $command.CmdletBinding | Should -Be $true
         }
     }

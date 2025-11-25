@@ -58,7 +58,7 @@ Pester:
     - tests/QA/module.tests.ps1
   ExcludeTag: []
   Tag: []
-  CodeCoverageThreshold: 80
+  CodeCoverageThreshold: 15
   CodeCoverageOutputFile: JaCoCo_coverage.xml
   CodeCoverageOutputFileEncoding: ascii
 

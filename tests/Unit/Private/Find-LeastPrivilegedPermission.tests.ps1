@@ -1,26 +1,33 @@
 BeforeAll {
     $script:moduleName = 'LeastPrivilegedMSGraph'
 
-    # Remove any existing module
+    # Remove any existing module instances
     Get-Module $script:moduleName -All | Remove-Module -Force -ErrorAction SilentlyContinue
 
-    # Try to import the module
-    $moduleInfo = Get-Module -Name $script:moduleName -ListAvailable | Select-Object -First 1
+    # Import from the build output directory
+    $moduleManifestPath = "$PSScriptRoot\..\..\..\output\module\$script:moduleName\*\$script:moduleName.psd1"
+    $manifestPath = Get-Item $moduleManifestPath -ErrorAction SilentlyContinue | Select-Object -First 1
 
-    if ($moduleInfo) {
-        Import-Module -Name $script:moduleName -Force -ErrorAction Stop
-        $script:moduleLoaded = $true
-    }
-    else {
-        # Fallback: dot source the function directly for testing
-        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Find-LeastPrivilegedPermissions.ps1" -ErrorAction SilentlyContinue
+    if ($manifestPath) {
+        # Import the built module
+        Import-Module $manifestPath.FullName -Force -ErrorAction Stop
+
+        # Dot-source the private function to make it available in tests
+        $privateFunction = Get-ChildItem -Path "$PSScriptRoot\..\..\..\source\Private" -Filter "Find-LeastPrivilegedPermission.ps1" -ErrorAction SilentlyContinue
 
         if ($privateFunction) {
             . $privateFunction.FullName
-            $script:moduleLoaded = $false
+        }
+    }
+    else {
+        # Fallback for manual testing (dot source directly)
+        $privateFunction = Get-ChildItem -Path "$PSScriptRoot\..\..\..\source\Private" -Filter "Find-LeastPrivilegedPermission.ps1" -ErrorAction SilentlyContinue
+
+        if ($privateFunction) {
+            . $privateFunction.FullName
         }
         else {
-            throw "Could not find Find-LeastPrivilegedPermissions.ps1"
+            throw "Could not find Find-LeastPrivilegedPermission.ps1 and module is not built"
         }
     }
 }
@@ -29,16 +36,16 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'Find-LeastPrivilegedPermissions' {
+Describe 'Find-LeastPrivilegedPermission' {
     Context 'Parameter Validation' {
-        It 'Should have mandatory userActivity parameter' {
-            $command = Get-Command -Name Find-LeastPrivilegedPermissions
-            $command.Parameters['userActivity'].Attributes.Mandatory | Should -Be $true
+        It 'Should not have mandatory userActivity parameter' {
+            $command = Get-Command -Name Find-LeastPrivilegedPermission
+            $command.Parameters['userActivity'].Attributes.Mandatory | Should -Be $false
         }
 
-        It 'Should have mandatory permissionMapv1 parameter' {
-            $command = Get-Command -Name Find-LeastPrivilegedPermissions
-            $command.Parameters['permissionMapv1'].Attributes.Mandatory | Should -Be $true
+        It 'Should not have mandatory permissionMapv1 parameter' {
+            $command = Get-Command -Name Find-LeastPrivilegedPermission
+            $command.Parameters['permissionMapv1'].Attributes.Mandatory | Should -Be $false
         }
     }
 
@@ -108,17 +115,17 @@ Describe 'Find-LeastPrivilegedPermissions' {
         }
 
         It 'Should find permissions for endpoint' {
-            $result = Find-LeastPrivilegedPermissions -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
+            $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
             $result | Should -Not -BeNullOrEmpty
         }
 
         It 'Should return objects with LeastPrivilegedPermissions property' {
-            $result = Find-LeastPrivilegedPermissions -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
+            $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
             $result[0].PSObject.Properties.Name | Should -Contain 'LeastPrivilegedPermissions'
         }
 
         It 'Should identify least privileged permissions correctly' {
-            $result = Find-LeastPrivilegedPermissions -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
+            $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
 
             # The function should return User.ReadBasic.All as the least privileged permission
             $result[0].LeastPrivilegedPermissions | Should -Not -BeNullOrEmpty
@@ -130,7 +137,7 @@ Describe 'Find-LeastPrivilegedPermissions' {
         }
 
         It 'Should match endpoint correctly' {
-            $result = Find-LeastPrivilegedPermissions -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
+            $result = Find-LeastPrivilegedPermission -userActivity $mockUserActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
             $result[0].IsMatched | Should -Be $true
             $result[0].MatchedEndpoint | Should -Be '/users'
         }
@@ -143,7 +150,7 @@ Describe 'Find-LeastPrivilegedPermissions' {
                 }
             )
 
-            $result = Find-LeastPrivilegedPermissions -userActivity $postActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
+            $result = Find-LeastPrivilegedPermission -userActivity $postActivity -permissionMapv1 $mockPermissionMap -permissionMapbeta @()
             $result | Should -Not -BeNullOrEmpty
             $result[0].Method | Should -Be 'POST'
             $result[0].LeastPrivilegedPermissions | Should -Not -BeNullOrEmpty

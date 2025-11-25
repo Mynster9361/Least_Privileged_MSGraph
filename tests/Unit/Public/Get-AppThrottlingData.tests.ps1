@@ -13,7 +13,7 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppThrottlingStats.ps1" -ErrorAction SilentlyContinue
+        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppThrottlingStat.ps1" -ErrorAction SilentlyContinue
         $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppThrottlingData.ps1" -ErrorAction SilentlyContinue
 
         if ($privateFunction) {
@@ -60,7 +60,7 @@ Describe 'Get-AppThrottlingData' {
         BeforeAll {
             # Mock based on module load status
             if ($script:moduleLoaded) {
-                Mock -CommandName Get-AppThrottlingStats -ModuleName $script:moduleName -MockWith {
+                Mock -CommandName Get-AppThrottlingStat -ModuleName $script:moduleName -MockWith {
                     return @{
                         'test-id-001' = @{
                             TotalRequests      = 1000
@@ -80,7 +80,7 @@ Describe 'Get-AppThrottlingData' {
                 }
             }
             else {
-                Mock -CommandName Get-AppThrottlingStats -MockWith {
+                Mock -CommandName Get-AppThrottlingStat -MockWith {
                     return @{
                         'test-id-001' = @{
                             TotalRequests      = 1000
@@ -143,7 +143,7 @@ Describe 'Get-AppThrottlingData' {
             $result.Activity | Should -Not -BeNullOrEmpty
         }
 
-        It 'Should call Get-AppThrottlingStats for workspace' {
+        It 'Should call Get-AppThrottlingStat for workspace' {
             $app = [PSCustomObject]@{
                 PrincipalId   = 'test-id-001'
                 PrincipalName = 'Test Application 4'
@@ -155,10 +155,10 @@ Describe 'Get-AppThrottlingData' {
             $app | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             if ($script:moduleLoaded) {
-                Should -Invoke -CommandName Get-AppThrottlingStats -ModuleName $script:moduleName -Times 1 -Exactly
+                Should -Invoke -CommandName Get-AppThrottlingStat -ModuleName $script:moduleName -Times 1 -Exactly
             }
             else {
-                Should -Invoke -CommandName Get-AppThrottlingStats -Times 1 -Exactly
+                Should -Invoke -CommandName Get-AppThrottlingStat -Times 1 -Exactly
             }
         }
     }

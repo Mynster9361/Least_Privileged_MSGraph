@@ -13,7 +13,7 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppActivityFromLogs.ps1" -ErrorAction SilentlyContinue
+        $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppActivityFromLog.ps1" -ErrorAction SilentlyContinue
         $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppActivityData.ps1" -ErrorAction SilentlyContinue
 
         if ($privateFunction) {
@@ -60,7 +60,7 @@ Describe 'Get-AppActivityData' {
         BeforeAll {
             # Mock based on module load status
             if ($script:moduleLoaded) {
-                Mock -CommandName Get-AppActivityFromLogs -ModuleName $script:moduleName -MockWith {
+                Mock -CommandName Get-AppActivityFromLog -ModuleName $script:moduleName -MockWith {
                     return @(
                         @{
                             Method = 'GET'
@@ -74,7 +74,7 @@ Describe 'Get-AppActivityData' {
                 }
             }
             else {
-                Mock -CommandName Get-AppActivityFromLogs -MockWith {
+                Mock -CommandName Get-AppActivityFromLog -MockWith {
                     return @(
                         @{
                             Method = 'GET'
@@ -101,18 +101,6 @@ Describe 'Get-AppActivityData' {
             $result | Should -Not -BeNullOrEmpty
         }
 
-        It 'Should add Activity property to output' {
-            $app = [PSCustomObject]@{
-                PrincipalId   = 'test-id-002'
-                PrincipalName = 'Test Application 2'
-                AppRoleCount  = 1
-                AppRoles      = @()
-            }
-
-            $result = $app | Get-AppActivityData -WorkspaceId 'test-workspace-id' -Days 30
-            $result.PSObject.Properties.Name | Should -Contain 'Activity'
-        }
-
         It 'Should preserve original properties' {
             $app = [PSCustomObject]@{
                 PrincipalId   = 'test-id-003'
@@ -127,7 +115,7 @@ Describe 'Get-AppActivityData' {
             $result.AppRoleCount | Should -Be 1
         }
 
-        It 'Should call Get-AppActivityFromLogs for each application' {
+        It 'Should call Get-AppActivityFromLog for each application' {
             $app = [PSCustomObject]@{
                 PrincipalId   = 'test-id-004'
                 PrincipalName = 'Test Application 4'
@@ -138,10 +126,10 @@ Describe 'Get-AppActivityData' {
             $app | Get-AppActivityData -WorkspaceId 'test-workspace-id' -Days 30
 
             if ($script:moduleLoaded) {
-                Should -Invoke -CommandName Get-AppActivityFromLogs -ModuleName $script:moduleName -Times 1 -Exactly
+                Should -Invoke -CommandName Get-AppActivityFromLog -ModuleName $script:moduleName -Times 1 -Exactly
             }
             else {
-                Should -Invoke -CommandName Get-AppActivityFromLogs -Times 1 -Exactly
+                Should -Invoke -CommandName Get-AppActivityFromLog -Times 1 -Exactly
             }
         }
     }

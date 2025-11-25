@@ -98,7 +98,7 @@ function Get-AppThrottlingData {
     Prerequisites:
     - Azure Log Analytics workspace with MicrosoftGraphActivityLogs enabled
     - Appropriate permissions to query the Log Analytics workspace
-    - Get-AppThrottlingStats function must be available
+    - Get-AppThrottlingStat function must be available
 
     Performance Considerations:
     - Uses bulk query approach for better performance
@@ -137,7 +137,7 @@ function Get-AppThrottlingData {
 
     begin {
         Write-Verbose "Fetching throttling statistics for all applications..."
-        $throttlingStats = Get-AppThrottlingStats -WorkspaceId $WorkspaceId -Days $Days
+        $throttlingStats = Get-AppThrottlingStat -WorkspaceId $WorkspaceId -Days $Days
 
         Write-Debug "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
 
@@ -184,10 +184,10 @@ function Get-AppThrottlingData {
 
                 if ($throttlingBySpId.ContainsKey($normalizedLookupSpId)) {
                     $throttlingData = $throttlingBySpId[$normalizedLookupSpId]
-                    Write-Verbose "✓ Matched throttling data for $($app.PrincipalName) (ServicePrincipalId: $spId)"
+                    Write-Verbose "Matched throttling data for $($app.PrincipalName) (ServicePrincipalId: $spId)"
                 }
                 else {
-                    Write-Verbose "✗ No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId)"
+                    Write-Verbose "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId)"
 
                     # Debug: Show what ServicePrincipalIds ARE in the lookup
                     if ($throttlingBySpId.Count -gt 0 -and $currentIndex -eq 1) {

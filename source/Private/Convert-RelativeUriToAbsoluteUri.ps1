@@ -22,7 +22,7 @@ function Convert-RelativeUriToAbsoluteUri {
 
 .EXAMPLE
     Convert-RelativeUriToAbsoluteUri -Uri "/me/messages"
-    
+
     Returns:
     Uri     : https://graph.microsoft.com/v1.0/users/{id}/messages
     Path    : /users/{id}/messages
@@ -30,7 +30,7 @@ function Convert-RelativeUriToAbsoluteUri {
 
 .EXAMPLE
     Convert-RelativeUriToAbsoluteUri -Uri "/users/user@contoso.com/mailFolders"
-    
+
     Returns:
     Uri     : https://graph.microsoft.com/v1.0/users/{id}/mailFolders
     Path    : /users/{id}/mailFolders
@@ -96,7 +96,15 @@ function Convert-RelativeUriToAbsoluteUri {
   $returnObject = [PSCustomObject]@{
     Uri     = $ProcessedUri
     Path    = $ProcessedUri -replace "https://graph.microsoft.com/(v1.0|beta)", ""
-    Version = if ($ProcessedUri -like "*https://graph.microsoft.com/v1.0*") { "v1.0" } elseif ($ProcessedUri -like "*https://graph.microsoft.com/beta*") { "beta" } else { "" }
+    Version = if ($ProcessedUri -like "*https://graph.microsoft.com/v1.0*") {
+      "v1.0"
+    }
+    elseif ($ProcessedUri -like "*https://graph.microsoft.com/beta*") {
+      "beta"
+    }
+    else {
+      ""
+    }
   }
 
   return $returnObject

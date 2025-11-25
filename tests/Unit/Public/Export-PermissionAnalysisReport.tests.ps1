@@ -38,14 +38,14 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "New-PermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Export-PermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
 
         if ($publicFunction) {
             . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find New-PermissionAnalysisReport.ps1"
+            throw "Could not find Export-PermissionAnalysisReport.ps1"
         }
     }
 }
@@ -54,30 +54,30 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'New-PermissionAnalysisReport' {
+Describe 'Export-PermissionAnalysisReport' {
     Context 'Parameter Validation' {
         It 'Should have mandatory AppData parameter' {
-            $command = Get-Command -Name New-PermissionAnalysisReport
+            $command = Get-Command -Name Export-PermissionAnalysisReport
             $command.Parameters['AppData'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should not have mandatory OutputPath parameter' {
-            $command = Get-Command -Name New-PermissionAnalysisReport
+            $command = Get-Command -Name Export-PermissionAnalysisReport
             $command.Parameters['OutputPath'].Attributes.Mandatory | Should -Be $false
         }
 
         It 'Should not have mandatory ReportTitle parameter' {
-            $command = Get-Command -Name New-PermissionAnalysisReport
+            $command = Get-Command -Name Export-PermissionAnalysisReport
             $command.Parameters['ReportTitle'].Attributes.Mandatory | Should -Be $false
         }
 
         It 'Should accept pipeline input for AppData' {
-            $command = Get-Command -Name New-PermissionAnalysisReport
+            $command = Get-Command -Name Export-PermissionAnalysisReport
             $command.Parameters['AppData'].Attributes.ValueFromPipeline | Should -Be $true
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name New-PermissionAnalysisReport
+            $command = Get-Command -Name Export-PermissionAnalysisReport
             $command.CmdletBinding | Should -Be $true
         }
     }

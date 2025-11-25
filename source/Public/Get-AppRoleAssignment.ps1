@@ -1,4 +1,4 @@
-function Get-AppRoleAssignments {
+function Get-AppRoleAssignment {
   <#
 .SYNOPSIS
     Retrieves Microsoft Graph app role assignments for all applications.
@@ -41,13 +41,13 @@ function Get-AppRoleAssignments {
 
 .EXAMPLE
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "GraphBeta"
-    $assignments = Get-AppRoleAssignments
+    $assignments = Get-AppRoleAssignment
 
     Retrieves all app role assignments for Microsoft Graph after authenticating.
     Output shows all applications and their assigned permissions.
 
 .EXAMPLE
-    $assignments = Get-AppRoleAssignments -Verbose
+    $assignments = Get-AppRoleAssignment -Verbose
     $overPrivilegedApps = $assignments | Where-Object { $_.AppRoleCount -gt 50 }
     $overPrivilegedApps | Format-Table PrincipalName, AppRoleCount
 
@@ -55,7 +55,7 @@ function Get-AppRoleAssignments {
     using verbose output to track progress.
 
 .EXAMPLE
-    $assignments = Get-AppRoleAssignments
+    $assignments = Get-AppRoleAssignment
     $appPerms = $assignments | ForEach-Object {
         $app = $_
         $app.AppRoles | Where-Object { $_.PermissionType -eq 'Application' } | ForEach-Object {
@@ -70,7 +70,7 @@ function Get-AppRoleAssignments {
     Extracts all application-scoped permissions across all apps and exports to CSV.
 
 .EXAMPLE
-    $assignments = Get-AppRoleAssignments
+    $assignments = Get-AppRoleAssignment
     $criticalPerms = @('Directory.ReadWrite.All', 'RoleManagement.ReadWrite.Directory', 'Application.ReadWrite.All')
     $assignments | Where-Object {
         ($_.AppRoles.FriendlyName | Where-Object { $_ -in $criticalPerms }).Count -gt 0

@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release of LeastPrivilegedMSGraph module
 - **Core Cmdlets:**
-  - `Get-AppRoleAssignments` - Retrieves all Enterprise Applications with their assigned Microsoft Graph permissions
+  - `Get-AppRoleAssignment` - Retrieves all Enterprise Applications with their assigned Microsoft Graph permissions
   - `Get-AppActivityData` - Analyzes application activity from Azure Log Analytics workspace logs
   - `Get-AppThrottlingData` - Collects throttling statistics and error rates from Log Analytics
   - `Get-PermissionAnalysis` - Analyzes application permissions against actual API usage to identify least privileged permissions
-  - `New-PermissionAnalysisReport` - Generates comprehensive HTML reports with interactive visualizations
+  - `Export-PermissionAnalysisReport` - Generates comprehensive HTML reports with interactive visualizations
   - `Initialize-LogAnalyticsApi` - Registers the Log Analytics service for API queries
 - **Permission Analysis Features:**
   - Automatic mapping of Graph API endpoints to least privileged permissions

@@ -23,10 +23,11 @@ Write-Host "=== Preparing Documentation for GitHub Pages (Docsy Jekyll) ===" -Fo
 Write-Host "Creating output directory structure" -ForegroundColor Yellow
 New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
 New-Item -ItemType Directory -Path "$OutputPath/commands" -Force | Out-Null
+New-Item -ItemType Directory -Path "$OutputPath/_data" -Force | Out-Null
 
-# Copy Jekyll configuration files
+# Copy Jekyll configuration and navigation files
 Write-Host "Copying Jekyll configuration files" -ForegroundColor Green
-$configFiles = @('_config.yml', 'index.md', 'getting-started.md', 'examples.md')
+$configFiles = @('_config.yml', 'index.md', 'getting-started.md', 'commands.md', 'examples.md')
 foreach ($file in $configFiles) {
     $sourcePath = "./.ghpages/$file"
     if (Test-Path $sourcePath) {
@@ -38,13 +39,17 @@ foreach ($file in $configFiles) {
     }
 }
 
+# Copy _data folder (navigation and toc)
+Write-Host "Copying navigation configuration" -ForegroundColor Green
+if (Test-Path "./.ghpages/_data") {
+    Copy-Item -Path "./.ghpages/_data/*" -Destination "$OutputPath/_data/" -Force -Recurse
+    Write-Host "  ✓ Copied navigation files" -ForegroundColor Gray
+}
+
 # Copy generated command docs from build output
 $buildDocsPath = Join-Path $BuildOutputPath "docs"
 if (Test-Path $buildDocsPath) {
     Write-Host "Processing command documentation from build output" -ForegroundColor Green
-
-    # Create a list for the commands index
-    $commandsList = @()
 
     Get-ChildItem $buildDocsPath -Filter "*.md" -File | ForEach-Object {
         $fileName = $_.Name
@@ -79,63 +84,7 @@ description: $synopsis
         Set-Content -Path $destPath -Value $fullContent -NoNewline
 
         Write-Host "  ✓ Processed: $fileName" -ForegroundColor Gray
-
-        # Add to commands list
-        $commandsList += [PSCustomObject]@{
-            Name     = $baseName
-            Synopsis = $synopsis
-            FileName = $fileName
-        }
     }
-
-    # Create commands index page
-    Write-Host "Creating commands index page" -ForegroundColor Green
-    $commandsIndex = @"
----
-title: Command Reference
-tags:
- - documentation
- - reference
-description: Complete reference for all cmdlets in the LeastPrivilegedMSGraph module
----
-
-# Command Reference
-
-Complete reference documentation for all cmdlets in the LeastPrivilegedMSGraph module.
-
-## Available Commands
-
-"@
-
-    # Add table of commands
-    $commandsIndex += "`n| Command | Description |`n"
-    $commandsIndex += "|---------|-------------|`n"
-    foreach ($cmd in ($commandsList | Sort-Object Name)) {
-        $commandsIndex += "| [``$($cmd.Name)``](commands/$($cmd.FileName)) | $($cmd.Synopsis) |`n"
-    }
-
-    $commandsIndex += @"
-
-## Quick Reference by Category
-
-### Permission Analysis
-- [Get-PermissionAnalysis](commands/Get-PermissionAnalysis.md) - Analyze application permissions
-- [Export-PermissionAnalysisReport](commands/Export-PermissionAnalysisReport.md) - Export analysis reports
-
-### Application Monitoring
-- [Get-AppActivityData](commands/Get-AppActivityData.md) - Retrieve API usage data
-- [Get-AppRoleAssignment](commands/Get-AppRoleAssignment.md) - List role assignments
-- [Get-AppThrottlingData](commands/Get-AppThrottlingData.md) - Check throttling status
-
-### Configuration
-- [Initialize-LogAnalyticsApi](commands/Initialize-LogAnalyticsApi.md) - Setup Log Analytics connection
-
----
-
-Browse individual command documentation using the table above.
-"@
-
-    Set-Content -Path "$OutputPath/commands.md" -Value $commandsIndex
 }
 else {
     Write-Warning "Build documentation not found at: $buildDocsPath"
@@ -150,7 +99,6 @@ if (Test-Path $readmePath) {
     # Check if getting-started.md already exists (from .ghpages folder)
     $gettingStartedPath = Join-Path $OutputPath "getting-started.md"
     if (-not (Test-Path $gettingStartedPath)) {
-        # Add front matter to README and save as getting-started
         $frontMatter = @"
 ---
 title: Getting Started

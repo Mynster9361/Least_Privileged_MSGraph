@@ -4,36 +4,56 @@
 title: LeastPrivilegedMSGraph
 description: PowerShell module for analyzing and determining least privileged permissions for Microsoft Graph applications
 author: Mynster9361
-email: mortenmynster@hotmail.com
-baseurl: "/Least_Privileged_MSGraph"
+email: mortenmynster@hotmil.com
 url: "https://mynster9361.github.io"
+baseurl: "/Least_Privileged_MSGraph"
 
 # Theme
 remote_theme: vsoch/docsy-jekyll
 
 # Repository information
-github_user: Mynster9361
 github_repo: Least_Privileged_MSGraph
-github_branch: main
+github_user: Mynster9361
+
+# Color scheme
+color_scheme: blue
 
 # Google Analytics (optional)
-# google_analytics: UA-XXXXXXXXX-X
+# google_analytics: 
 
-# Markdown settings
+# Heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "LeastPrivilegedMSGraph on GitHub":
+    - "https://github.com/Mynster9361/Least_Privileged_MSGraph"
+
+# Footer last edit timestamp
+last_edit_timestamp: true
+last_edit_time_format: "%b %e %Y at %I:%M %p"
+
+# Footer "Edit this page on GitHub" link
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/Mynster9361/Least_Privileged_MSGraph"
+gh_edit_branch: "main"
+gh_edit_view_mode: "tree"
+
+# Markdown and syntax highlighting
 markdown: kramdown
+highlighter: rouge
+
 kramdown:
   input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
     default_lang: powershell
-    span:
-      line_numbers: false
     block:
       line_numbers: false
-      start_line: 1
 
-# Exclude files
+# Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -41,9 +61,7 @@ exclude:
   - vendor/
   - .sass-cache/
   - .jekyll-cache/
-  - gemfiles/
   - README.md
-  - LICENSE
 
 # Plugins
 plugins:
@@ -52,8 +70,12 @@ plugins:
   - jekyll-seo-tag
   - jekyll-github-metadata
   - jekyll-include-cache
+  - jekyll-avatar
+  - jekyll-mentions
 
-# SEO
-twitter:
-  username: 
-  card: summary
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page

@@ -1,0 +1,37 @@
+# Documentation table of contents
+- title: Documentation
+  url: docs
+  links:
+    - title: "Getting Started"
+      url: "getting-started"
+      children:
+        - title: Installation
+          url: "getting-started#installation"
+        - title: Configuration
+          url: "getting-started#configuration"
+        - title: Basic Usage
+          url: "getting-started#basic-usage"
+    - title: "Command Reference"
+      url: "commands"
+      children:
+        - title: Get-PermissionAnalysis
+          url: "commands/Get-PermissionAnalysis"
+        - title: Export-PermissionAnalysisReport
+          url: "commands/Export-PermissionAnalysisReport"
+        - title: Get-AppActivityData
+          url: "commands/Get-AppActivityData"
+        - title: Get-AppRoleAssignment
+          url: "commands/Get-AppRoleAssignment"
+        - title: Get-AppThrottlingData
+          url: "commands/Get-AppThrottlingData"
+        - title: Initialize-LogAnalyticsApi
+          url: "commands/Initialize-LogAnalyticsApi"
+    - title: "Examples"
+      url: "examples"
+      children:
+        - title: Basic Analysis
+          url: "examples#example-1-basic-permission-analysis"
+        - title: Batch Processing
+          url: "examples#example-2-batch-analysis-with-reporting"
+        - title: Health Monitoring
+          url: "examples#example-3-monitoring-application-health"

@@ -1,0 +1,14 @@
+# Top navigation bar
+main:
+  - title: "Documentation"
+    url: /docs/
+  - title: "Commands"
+    url: /commands
+  - title: "Examples"
+    url: /examples
+  - title: "GitHub"
+    url: https://github.com/Mynster9361/Least_Privileged_MSGraph
+    external: true
+  - title: "PowerShell Gallery"
+    url: https://www.powershellgallery.com/packages/LeastPrivilegedMSGraph
+    external: true

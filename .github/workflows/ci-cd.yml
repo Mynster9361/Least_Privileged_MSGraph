@@ -235,7 +235,7 @@ jobs:
       - name: Prepare Documentation Directory
         shell: pwsh
         run: |
-          ./build/Prepare-Documentation.ps1 `
+          ./ghpages/Prepare-Documentation.ps1 `
             -BuildOutputPath "${{ env.buildFolderName }}" `
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"

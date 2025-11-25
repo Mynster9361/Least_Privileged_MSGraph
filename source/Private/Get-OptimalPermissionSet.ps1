@@ -38,8 +38,8 @@ function Get-OptimalPermissionSet {
     $activities = Find-LeastPrivilegedPermissions -userActivity $signInLogs -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
 
-    Write-Host "Optimal permissions needed: $($optimal.OptimalPermissions.Count)"
-    Write-Host "Activities covered: $($optimal.MatchedActivities) of $($optimal.TotalActivities)"
+    "Optimal permissions needed: $($optimal.OptimalPermissions.Count)"
+    "Activities covered: $($optimal.MatchedActivities) of $($optimal.TotalActivities)"
     $optimal.OptimalPermissions | Format-Table Permission, ActivitiesCovered
 
 .EXAMPLE
@@ -49,7 +49,7 @@ function Get-OptimalPermissionSet {
     if ($optimal.UnmatchedActivities.Count -gt 0) {
         Write-Warning "Found $($optimal.UnmatchedActivities.Count) unmatched activities"
         $optimal.UnmatchedActivities | ForEach-Object {
-            Write-Host "  $($_.Method) $($_.Version)$($_.Path)"
+            "  $($_.Method) $($_.Version)$($_.Path)"
         }
     }
 

@@ -1,5 +1,5 @@
 function Get-AppRoleAssignments {
-<#
+  <#
 .SYNOPSIS
     Retrieves Microsoft Graph app role assignments for all applications.
 
@@ -7,7 +7,7 @@ function Get-AppRoleAssignments {
     This function queries Microsoft Graph to get all app role assignments for Microsoft Graph API permissions.
     It retrieves the assignments, translates permission IDs to friendly names, and groups them by principal
     (service principal/application).
-    
+
     The function performs the following operations:
     1. Retrieves the Microsoft Graph service principal information
     2. Fetches all app role assignments with automatic pagination
@@ -15,12 +15,12 @@ function Get-AppRoleAssignments {
     4. Enriches assignments with permission names and types (Application/Delegated)
     5. Groups assignments by principal for easy analysis
     6. Returns streamlined objects with essential information
-    
+
     Permission types included:
     - Application permissions (appRoles)
     - Resource-specific application permissions
     - Delegated work permissions (publishedPermissionScopes)
-    
+
     The function uses memory optimization techniques including explicit garbage collection
     to handle large result sets efficiently.
 
@@ -42,7 +42,7 @@ function Get-AppRoleAssignments {
 .EXAMPLE
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "GraphBeta"
     $assignments = Get-AppRoleAssignments
-    
+
     Retrieves all app role assignments for Microsoft Graph after authenticating.
     Output shows all applications and their assigned permissions.
 
@@ -50,7 +50,7 @@ function Get-AppRoleAssignments {
     $assignments = Get-AppRoleAssignments -Verbose
     $overPrivilegedApps = $assignments | Where-Object { $_.AppRoleCount -gt 50 }
     $overPrivilegedApps | Format-Table PrincipalName, AppRoleCount
-    
+
     Finds applications with more than 50 assigned permissions and displays them,
     using verbose output to track progress.
 
@@ -66,18 +66,18 @@ function Get-AppRoleAssignments {
         }
     }
     $appPerms | Export-Csv -Path "application-permissions.csv" -NoTypeInformation
-    
+
     Extracts all application-scoped permissions across all apps and exports to CSV.
 
 .EXAMPLE
     $assignments = Get-AppRoleAssignments
     $criticalPerms = @('Directory.ReadWrite.All', 'RoleManagement.ReadWrite.Directory', 'Application.ReadWrite.All')
-    $assignments | Where-Object { 
-        ($_.AppRoles.FriendlyName | Where-Object { $_ -in $criticalPerms }).Count -gt 0 
+    $assignments | Where-Object {
+        ($_.AppRoles.FriendlyName | Where-Object { $_ -in $criticalPerms }).Count -gt 0
     } | Select-Object PrincipalName, @{N='CriticalPerms';E={
         ($_.AppRoles | Where-Object { $_.FriendlyName -in $criticalPerms }).FriendlyName -join ', '
     }}
-    
+
     Identifies applications with high-privilege permissions and shows which ones they have.
 
 .NOTES
@@ -85,23 +85,23 @@ function Get-AppRoleAssignments {
     - Must be connected to Microsoft Graph using Connect-EntraService
     - Requires permission to read service principals and app role assignments
     - Beta endpoint access required (uses GraphBeta service)
-    
+
     Performance Considerations:
     - Uses automatic pagination via Invoke-EntraRequest
     - Implements memory optimization with explicit garbage collection
     - Can handle thousands of assignments efficiently
     - Processing time scales with number of principals and assignments
-    
+
     Memory Management:
     - Explicitly nulls large objects after use
     - Calls System.GC.Collect() to free memory between operations
     - Recommended for environments with many applications
-    
+
     Permission Type Classification:
     - Application: App-only permissions (no user context)
     - DelegatedWork: Permissions that require user context
     - Unknown: Could not determine type from lookup
-    
+
     This function uses Write-Verbose for progress updates and Write-Error for exception handling.
     All Graph API calls use Invoke-EntraRequest which handles authentication and retry logic.
 #>
@@ -177,8 +177,8 @@ function Get-AppRoleAssignments {
     # Consolidate duplicate entries and combine app/delegated identifiers
     Write-Verbose "Consolidating permission lookup table"
     $lookup = $lookup | Group-Object -Property Role_Name | ForEach-Object {
-      $appId = ($_.Group | Where-Object { $_.Application_Identifier -ne $null } | Select-Object -First 1).Application_Identifier
-      $delegatedId = ($_.Group | Where-Object { $_.DelegatedWork_Identifier -ne $null } | Select-Object -First 1).DelegatedWork_Identifier
+      $appId = ($_.Group | Where-Object { $null -ne $_.Application_Identifier } | Select-Object -First 1).Application_Identifier
+      $delegatedId = ($_.Group | Where-Object { $null -ne $_.DelegatedWork_Identifier } | Select-Object -First 1).DelegatedWork_Identifier
       [PSCustomObject]@{
         Role_Name                = $_.Name
         Application_Identifier   = $appId

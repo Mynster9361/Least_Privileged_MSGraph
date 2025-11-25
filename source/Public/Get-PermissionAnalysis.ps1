@@ -62,9 +62,9 @@ function Get-PermissionAnalysis {
     $unmatched = $analysis | Where-Object { -not $_.MatchedAllActivity }
 
     foreach ($app in $unmatched) {
-        Write-Host "`n$($app.PrincipalName) has unmatched activities:" -ForegroundColor Yellow
+        "`n$($app.PrincipalName) has unmatched activities:" -ForegroundColor Yellow
         $app.UnmatchedActivities | ForEach-Object {
-            Write-Host "  $($_.Method) $($_.Path)" -ForegroundColor Gray
+            "  $($_.Method) $($_.Path)" -ForegroundColor Gray
         }
     }
 

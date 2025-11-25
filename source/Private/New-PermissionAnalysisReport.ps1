@@ -86,9 +86,10 @@ function New-PermissionAnalysisReport {
     - JavaScript must be enabled for full functionality
     - Works offline once generated
 
-    This function uses Write-Debug for processing information and Write-Host for success messages.
+    This function uses Write-Debug for processing information and for success messages.
 #>
     [CmdletBinding()]
+    [OutputType([System.String])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
@@ -138,8 +139,8 @@ function New-PermissionAnalysisReport {
         # Write the HTML to file
         $html | Out-File -FilePath $OutputPath -Encoding UTF8
 
-        Write-Host "Report generated successfully: $OutputPath" -ForegroundColor Green
-        Write-Host "Total applications in report: $($allAppData.Count)" -ForegroundColor Cyan
+        "Report generated successfully: $OutputPath"
+        "Total applications in report: $($allAppData.Count)"
 
         return $OutputPath
     }

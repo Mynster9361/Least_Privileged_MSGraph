@@ -7,7 +7,7 @@ function Find-LeastPrivilegedPermissions {
     This function analyzes user API activity against Microsoft Graph permission maps to determine
     the minimum set of permissions required. It matches API calls to their corresponding endpoints
     and extracts the least privileged application permissions needed for each activity.
-    
+
     The function supports both v1.0 and beta API versions and normalizes URIs to handle dynamic
     segments like user IDs and email addresses. It prioritizes permissions explicitly marked as
     "least privileged" in the permission maps, falling back to all application-scoped permissions
@@ -43,19 +43,19 @@ function Find-LeastPrivilegedPermissions {
         @{Method='POST'; Uri='https://graph.microsoft.com/v1.0/users/me/sendMail'}
     )
     $results = Find-LeastPrivilegedPermissions -userActivity $activities -permissionMapv1 $v1Map -permissionMapbeta $betaMap
-    
+
     Analyzes the activities and returns the least privileged permissions needed for reading messages and sending mail.
 
 .EXAMPLE
     $results = Find-LeastPrivilegedPermissions -userActivity $appActivity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $unmatchedActivities = $results | Where-Object { -not $_.IsMatched }
-    
+
     Finds all activities that couldn't be matched to known endpoints, useful for identifying unsupported or custom APIs.
 
 .EXAMPLE
     $results = Find-LeastPrivilegedPermissions -userActivity $activity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $requiredPerms = $results.LeastPrivilegedPermissions.Permission | Select-Object -Unique
-    
+
     Extracts a unique list of all permissions required across all activities.
 
 .NOTES
@@ -63,11 +63,11 @@ function Find-LeastPrivilegedPermissions {
     - GUIDs are replaced with {id} tokens for matching
     - Email addresses are replaced with {id} tokens
     - Paths are normalized to start with /
-    
+
     Permission selection priority:
     1. Permissions marked with isLeastPrivilege = true and scopeType = Application
     2. All permissions with scopeType = Application (if no least privileged marked)
-    
+
     This function uses Write-Debug for detailed processing information.
 #>
   param(
@@ -96,7 +96,9 @@ function Find-LeastPrivilegedPermissions {
     }
 
     $path = ($uri -split "https://graph.microsoft.com/$version")[1]
-    if (-not $path) { continue }
+    if (-not $path) {
+      continue 
+    }
 
     # Ensure path starts with /
     if (-not $path.StartsWith('/')) {
@@ -104,10 +106,15 @@ function Find-LeastPrivilegedPermissions {
     }
 
     # Choose correct permission map
-    $permissionMap = if ($version -eq "v1.0") { $permissionMapv1 } else { $permissionMapbeta }
+    $permissionMap = if ($version -eq "v1.0") {
+      $permissionMapv1 
+    }
+    else {
+      $permissionMapbeta 
+    }
 
     # Find matching endpoint
-    $matchedEndpoint = $null
+    $null = $matchedEndpoint
     foreach ($endpoint in $permissionMap) {
       # Normalize paths for comparison
       $normalizedEndpoint = $endpoint.Endpoint -replace '\{[^}]+\}', '{id}'
@@ -146,7 +153,12 @@ function Find-LeastPrivilegedPermissions {
       Version                    = $version
       Path                       = $path
       OriginalUri                = $uri
-      MatchedEndpoint            = if ($matchedEndpoint) { $matchedEndpoint.Endpoint } else { $null }
+      MatchedEndpoint            = if ($matchedEndpoint) {
+        $matchedEndpoint.Endpoint 
+      }
+      else {
+        $null 
+      }
       LeastPrivilegedPermissions = $leastPrivilegedPerms
       IsMatched                  = $null -ne $matchedEndpoint
     }

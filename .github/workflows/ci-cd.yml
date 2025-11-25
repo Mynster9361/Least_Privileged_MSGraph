@@ -196,127 +196,91 @@ jobs:
       #     ./build.ps1 -tasks merge
 
 
-deploy:
-  name: Deploy Module
-  needs: [build, test]
-  runs-on: ubuntu-latest
-  permissions:
-    contents: write
-    pages: write
-    id-token: write
-  if: |
-    always() &&
-    needs.test.result == 'success' &&
-    github.event.inputs.skip_deploy != 'true' &&
-    (
-      github.ref == 'refs/heads/main' ||
-      startsWith(github.ref, 'refs/tags/') ||
-      github.event_name == 'workflow_dispatch'
-    )
-  steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+  deploy:
+    name: Deploy Module
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    if: |
+      always() &&
+      needs.test.result == 'success' &&
+      github.event.inputs.skip_deploy != 'true' &&
+      (
+        github.ref == 'refs/heads/main' ||
+        startsWith(github.ref, 'refs/tags/') ||
+        github.event_name == 'workflow_dispatch'
+      )
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Download Build Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: ${{ env.buildArtifactName }}
-        path: ${{ env.buildFolderName }}
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.buildArtifactName }}
+          path: ${{ env.buildFolderName }}
 
-    - name: Generate Documentation
-      shell: pwsh
-      run: |
-        Write-Host "Generating module documentation"
-        ./build.ps1 -tasks docs
-      continue-on-error: false
+      - name: Generate Documentation
+        shell: pwsh
+        run: |
+          Write-Host "Generating module documentation"
+          ./build.ps1 -tasks docs
+        continue-on-error: false
 
-    - name: Prepare Documentation Directory
-      shell: pwsh
-      run: |
-        # Create a consolidated docs directory for GitHub Pages
-        $docsRoot = "gh-pages-docs"
-        New-Item -ItemType Directory -Path $docsRoot -Force
-        
-        # Copy generated docs if they exist
-        if (Test-Path "${{ env.buildFolderName }}/docs") {
-          Copy-Item -Path "${{ env.buildFolderName }}/docs/*" -Destination $docsRoot -Recurse -Force
-          Write-Host "Copied documentation from build output"
-        }
-        
-        # Copy any docs from repository root
-        if (Test-Path "docs") {
-          Copy-Item -Path "docs/*" -Destination $docsRoot -Recurse -Force
-          Write-Host "Copied documentation from repository root"
-        }
-        
-        # Create an index.html if it doesn't exist
-        $indexPath = Join-Path $docsRoot "index.html"
-        if (-not (Test-Path $indexPath)) {
-          @"
-<!DOCTYPE html>
-<html>
-<head>
-    <title>LeastPrivilegedMSGraph Documentation</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <h1>LeastPrivilegedMSGraph Documentation</h1>
-    <p>Module documentation for LeastPrivilegedMSGraph</p>
-    <ul>
-        <li><a href="README.md">README</a></li>
-    </ul>
-</body>
-</html>
-"@ | Out-File -FilePath $indexPath -Encoding UTF8
-          Write-Host "Created index.html"
-        }
-        
-        Write-Host "Documentation prepared in $docsRoot"
-        Get-ChildItem $docsRoot -Recurse | ForEach-Object { Write-Host "  - $($_.FullName)" }
+      - name: Prepare Documentation Directory
+        shell: pwsh
+        run: |
+          ./build/Prepare-Documentation.ps1 `
+            -BuildOutputPath "${{ env.buildFolderName }}" `
+            -RepositoryDocsPath "./docs" `
+            -OutputPath "./gh-pages-docs"
 
-    - name: Deploy Documentation to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./gh-pages-docs
-        destination_dir: docs
-        enable_jekyll: false
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'docs: update documentation for version ${{ needs.build.outputs.moduleVersion }}'
+      - name: Deploy Documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-pages-docs
+          destination_dir: docs
+          enable_jekyll: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'docs: update documentation for version ${{ needs.build.outputs.moduleVersion }}'
 
-    - name: Publish Release
-      shell: pwsh
-      run: |
-        Write-Host "Publishing module to PowerShell Gallery"
-        ./build.ps1 -tasks publish
-      env:
-        GitHubToken: ${{ secrets.GITHUB_TOKEN }}
-        GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
-        ReleaseBranch: ${{ env.defaultBranch }}
-        MainGitBranch: ${{ env.defaultBranch }}
+      - name: Publish Release
+        shell: pwsh
+        run: |
+          Write-Host "Publishing module to PowerShell Gallery"
+          ./build.ps1 -tasks publish
+        env:
+          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
+          ReleaseBranch: ${{ env.defaultBranch }}
+          MainGitBranch: ${{ env.defaultBranch }}
 
-    - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          ${{ env.buildFolderName }}/module/**/*.nupkg
-          ${{ env.buildFolderName }}/docs/**/*.md
-        body: |
-          ## Release ${{ needs.build.outputs.moduleVersion }}
-          
-          ### Installation
-          ```powershell
-          Install-Module -Name LeastPrivilegedMSGraph -RequiredVersion ${{ needs.build.outputs.moduleVersion }}
-          ```
-          
-          ### Documentation
-          Documentation is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/docs/
-        draft: false
-        prerelease: ${{ contains(needs.build.outputs.moduleVersion, 'preview') || contains(needs.build.outputs.moduleVersion, 'alpha') || contains(needs.build.outputs.moduleVersion, 'beta') }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ env.buildFolderName }}/module/**/*.nupkg
+            ${{ env.buildFolderName }}/docs/**/*.md
+          body: |
+            ## Release ${{ needs.build.outputs.moduleVersion }}
+            
+            ### Installation
+            ```powershell
+            Install-Module -Name LeastPrivilegedMSGraph -RequiredVersion ${{ needs.build.outputs.moduleVersion }}
+            ```
+            
+            ### Documentation
+            Documentation is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/docs/
+          draft: false
+          prerelease: ${{ contains(needs.build.outputs.moduleVersion, 'preview') || contains(needs.build.outputs.moduleVersion, 'alpha') || contains(needs.build.outputs.moduleVersion, 'beta') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

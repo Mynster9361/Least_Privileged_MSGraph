@@ -239,17 +239,28 @@ jobs:
             -BuildOutputPath "${{ env.buildFolderName }}" `
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"
+          
+          # Create .nojekyll to disable Jekyll processing
+          New-Item -Path "./gh-pages-docs/.nojekyll" -ItemType File -Force | Out-Null
+          Write-Host "Created .nojekyll file to disable Jekyll"
 
-      - name: Deploy Documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./gh-pages-docs
-          destination_dir: docs
-          enable_jekyll: false
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'docs: update documentation for version ${{ needs.build.outputs.moduleVersion }}'
+          path: ./gh-pages-docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Display Pages URL
+        shell: pwsh
+        run: |
+          Write-Host "✅ GitHub Pages deployed successfully!" -ForegroundColor Green
+          Write-Host "📚 Documentation URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" -ForegroundColor Cyan
 
       - name: Publish Release
         shell: pwsh
@@ -264,7 +275,7 @@ jobs:
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             ${{ env.buildFolderName }}/module/**/*.nupkg
@@ -278,7 +289,7 @@ jobs:
             ```
             
             ### Documentation
-            Documentation is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/docs/
+            Documentation is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           draft: false
           prerelease: ${{ contains(needs.build.outputs.moduleVersion, 'preview') || contains(needs.build.outputs.moduleVersion, 'alpha') || contains(needs.build.outputs.moduleVersion, 'beta') }}
         env:

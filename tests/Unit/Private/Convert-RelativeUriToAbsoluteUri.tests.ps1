@@ -9,6 +9,7 @@ BeforeAll {
 
     if ($moduleInfo) {
         Import-Module -Name $script:moduleName -Force -ErrorAction Stop
+        $script:moduleLoaded = $true
     }
     else {
         # Fallback: dot source the function directly for testing
@@ -16,6 +17,7 @@ BeforeAll {
 
         if ($privateFunction) {
             . $privateFunction.FullName
+            $script:moduleLoaded = $false
         }
         else {
             throw "Could not find Convert-RelativeUriToAbsoluteUri.ps1"

@@ -1,16 +1,22 @@
 ---
-layout: page
 title: LeastPrivilegedMSGraph
-permalink: /
+tags: 
+ - home
+ - powershell
+ - microsoft-graph
+description: PowerShell module for analyzing and determining least privileged permissions for Microsoft Graph applications
 ---
 
 # LeastPrivilegedMSGraph
 
 PowerShell module for analyzing and determining least privileged permissions for Microsoft Graph applications.
 
-{% include alert.html type="info" title="Current Version" content="Version 0.1.0-preview - Available on PowerShell Gallery" %}
+<div class="alert alert-primary" role="alert">
+  <h4 class="alert-heading">Current Version</h4>
+  Version 0.1.0-preview - Available on PowerShell Gallery
+</div>
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -34,37 +40,53 @@ Get-PermissionAnalysis -ApplicationId "your-application-id"
 Export-PermissionAnalysisReport -ApplicationId "your-app-id" -OutputPath "./reports"
 ```
 
-## ✨ Features
+## Features
 
 <div class="row">
-  <div class="col-md-6">
-    <h3>🔍 Permission Analysis</h3>
-    <p>Analyze application permissions and determine least privileged access requirements based on actual API usage.</p>
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">🔍 Permission Analysis</h3>
+        <p class="card-text">Analyze application permissions and determine least privileged access requirements based on actual API usage.</p>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3>📊 Activity Monitoring</h3>
-    <p>Track application API usage patterns and identify throttling issues across your Microsoft Graph applications.</p>
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">📊 Activity Monitoring</h3>
+        <p class="card-text">Track application API usage patterns and identify throttling issues across your Microsoft Graph applications.</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <h3>📈 Comprehensive Reporting</h3>
-    <p>Generate detailed permission analysis reports with recommendations for optimal security configuration.</p>
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">📈 Comprehensive Reporting</h3>
+        <p class="card-text">Generate detailed permission analysis reports with recommendations for optimal security configuration.</p>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3>🔐 Security First</h3>
-    <p>Identify over-privileged applications and get actionable recommendations for minimal required permissions.</p>
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h3 class="card-title">🔐 Security First</h3>
+        <p class="card-text">Identify over-privileged applications and get actionable recommendations for minimal required permissions.</p>
+      </div>
+    </div>
   </div>
 </div>
 
-## 📚 Documentation
+## Documentation
 
 - **[Getting Started](getting-started)** - Installation and initial setup
 - **[Command Reference](commands)** - Complete cmdlet documentation
 - **[Examples](examples)** - Common usage scenarios and code samples
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -74,11 +96,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/LICENSE) file for details.
 
-## 🔗 Links
+## Links
 
 - [GitHub Repository](https://github.com/Mynster9361/Least_Privileged_MSGraph)
 - [PowerShell Gallery](https://www.powershellgallery.com/packages/LeastPrivilegedMSGraph)

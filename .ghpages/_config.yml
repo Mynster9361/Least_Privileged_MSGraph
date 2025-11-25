@@ -16,34 +16,8 @@ github_user: Mynster9361
 github_repo: Least_Privileged_MSGraph
 github_branch: main
 
-# Navigation
-navigation:
-  - title: Home
-    url: /
-  - title: Getting Started
-    url: /getting-started
-  - title: Commands
-    url: /commands
-  - title: Examples
-    url: /examples
-  - title: GitHub
-    url: https://github.com/Mynster9361/Least_Privileged_MSGraph
-    external: true
-  - title: PowerShell Gallery
-    url: https://www.powershellgallery.com/packages/LeastPrivilegedMSGraph
-    external: true
-
 # Google Analytics (optional)
 # google_analytics: UA-XXXXXXXXX-X
-
-# Social links (optional)
-social:
-  github: Mynster9361
-  twitter: 
-  linkedin: https://www.linkedin.com/in/mortenmynster/
-
-# Search
-search_enabled: true
 
 # Markdown settings
 markdown: kramdown
@@ -57,30 +31,7 @@ kramdown:
       line_numbers: false
     block:
       line_numbers: false
-
-# Collections for organizing documentation
-collections:
-  commands:
-    output: true
-    permalink: /commands/:name
-  docs:
-    output: true
-    permalink: /docs/:name
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "commands"
-    values:
-      layout: page
-      toc: true
-  - scope:
-      path: ""
-      type: "docs"
-    values:
-      layout: page
-      toc: true
+      start_line: 1
 
 # Exclude files
 exclude:
@@ -91,6 +42,8 @@ exclude:
   - .sass-cache/
   - .jekyll-cache/
   - gemfiles/
+  - README.md
+  - LICENSE
 
 # Plugins
 plugins:
@@ -98,11 +51,9 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-github-metadata
+  - jekyll-include-cache
 
 # SEO
 twitter:
   username: 
   card: summary
-
-# Logo (optional - you can add later)
-# logo: /assets/images/logo.png

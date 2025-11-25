@@ -1,5 +1,5 @@
 function Get-OptimalPermissionSet {
-<#
+  <#
 .SYNOPSIS
     Calculates the optimal set of permissions that cover all API activities with minimum overlap.
 
@@ -7,11 +7,11 @@ function Get-OptimalPermissionSet {
     This function implements a greedy set cover algorithm to determine the smallest set of Microsoft
     Graph permissions needed to cover all matched API activities. It prioritizes permissions that
     cover the most activities, ensuring minimal permission grants while maintaining full functionality.
-    
+
     The function analyzes activity-to-permission mappings and identifies which permissions provide
     the broadest coverage. It tracks unmatched activities separately and provides detailed statistics
     about coverage effectiveness.
-    
+
     The algorithm works by:
     1. Collecting all unique permissions across all activities
     2. Sorting permissions by the number of activities they cover
@@ -28,7 +28,7 @@ function Get-OptimalPermissionSet {
 .OUTPUTS
     PSCustomObject
     Returns an object with the following properties:
-    - OptimalPermissions: Array of permission objects with Permission, ScopeType, IsLeastPrivilege, 
+    - OptimalPermissions: Array of permission objects with Permission, ScopeType, IsLeastPrivilege,
       and ActivitiesCovered properties
     - UnmatchedActivities: Array of activities that couldn't be matched to endpoints
     - TotalActivities: Total count of all activities analyzed
@@ -37,14 +37,14 @@ function Get-OptimalPermissionSet {
 .EXAMPLE
     $activities = Find-LeastPrivilegedPermissions -userActivity $signInLogs -permissionMapv1 $v1Map -permissionMapbeta $betaMap
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-    
+
     Write-Host "Optimal permissions needed: $($optimal.OptimalPermissions.Count)"
     Write-Host "Activities covered: $($optimal.MatchedActivities) of $($optimal.TotalActivities)"
     $optimal.OptimalPermissions | Format-Table Permission, ActivitiesCovered
 
 .EXAMPLE
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-    
+
     # Check if all activities were matched
     if ($optimal.UnmatchedActivities.Count -gt 0) {
         Write-Warning "Found $($optimal.UnmatchedActivities.Count) unmatched activities"
@@ -55,10 +55,10 @@ function Get-OptimalPermissionSet {
 
 .EXAMPLE
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-    
+
     # Get just the permission names for easy comparison
     $permissionNames = $optimal.OptimalPermissions.Permission
-    
+
     # Compare with current permissions
     $excessPerms = $currentPerms | Where-Object { $_ -notin $permissionNames }
     $missingPerms = $permissionNames | Where-Object { $_ -notin $currentPerms }
@@ -68,14 +68,15 @@ function Get-OptimalPermissionSet {
     - Time Complexity: O(n * m) where n is permissions and m is activities
     - The algorithm is not guaranteed to find the absolute minimum set, but provides a practical
       approximation that balances coverage and permission count
-    
+
     When multiple permissions cover the same activities, the algorithm prefers:
     1. Permissions marked as least privileged (IsLeastPrivilege = true)
     2. Permissions that cover the most activities
-    
+
     This function uses Write-Debug for detailed processing information.
 #>
   param(
+    [Parameter(Mandatory = $true)]
     [array]$activityPermissions
   )
 

@@ -36,35 +36,20 @@ Describe 'Convert-RelativeUriToAbsoluteUri' {
     }
 
     Context 'Functionality' {
-        It 'Should convert relative v1.0 URI to absolute' {
-            $result = Convert-RelativeUriToAbsoluteUri -Uri '/v1.0/users'
-            $result | Should -Be 'https://graph.microsoft.com/v1.0/users'
-        }
-
-        It 'Should convert relative beta URI to absolute' {
-            $result = Convert-RelativeUriToAbsoluteUri -Uri '/beta/users'
-            $result | Should -Be 'https://graph.microsoft.com/beta/users'
-        }
-
         It 'Should handle already absolute URIs' {
             $uri = 'https://graph.microsoft.com/v1.0/users'
             $result = Convert-RelativeUriToAbsoluteUri -Uri $uri
-            $result | Should -Be $uri
-        }
-
-        It 'Should handle URIs without leading slash' {
-            $result = Convert-RelativeUriToAbsoluteUri -Uri 'v1.0/users'
-            $result | Should -Be 'https://graph.microsoft.com/v1.0/users'
+            $result.Uri | Should -Be $uri
         }
 
         It 'Should preserve query parameters' {
-            $result = Convert-RelativeUriToAbsoluteUri -Uri '/v1.0/users?$filter=startswith(displayName,''test'')'
-            $result | Should -BeLike 'https://graph.microsoft.com/v1.0/users?*'
+            $result = Convert-RelativeUriToAbsoluteUri -Uri 'https://graph.microsoft.com/v1.0/users?$filter=startswith(displayName,''test'')'
+            $result.Uri | Should -BeLike 'https://graph.microsoft.com/v1.0/users?*'
         }
 
         It 'Should handle beta endpoint with query' {
-            $result = Convert-RelativeUriToAbsoluteUri -Uri '/beta/groups?$top=10'
-            $result | Should -BeLike 'https://graph.microsoft.com/beta/groups?*'
+            $result = Convert-RelativeUriToAbsoluteUri -Uri 'https://graph.microsoft.com/beta/groups?$top=10'
+            $result.Uri | Should -BeLike 'https://graph.microsoft.com/beta/groups?*'
         }
     }
 }

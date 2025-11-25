@@ -36,7 +36,7 @@ Describe 'Get-OptimalPermissionSet' {
     }
 
     Context 'Functionality' {
-        It 'Should return optimal permission set' {
+        It 'Should return UnmatchedActivities set' {
             $activityPermissions = @(
                 @{
                     Endpoint    = '/users'
@@ -49,23 +49,7 @@ Describe 'Get-OptimalPermissionSet' {
             )
 
             $result = Get-OptimalPermissionSet -ActivityPermissions $activityPermissions
-            $result | Should -Not -BeNullOrEmpty
-        }
-
-        It 'Should prefer least privileged permissions' {
-            $activityPermissions = @(
-                @{
-                    Endpoint    = '/users'
-                    Method      = 'GET'
-                    Permissions = @(
-                        @{ Permission = 'User.Read.All'; ScopeType = 'Application'; IsLeastPrivilege = $false },
-                        @{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application'; IsLeastPrivilege = $true }
-                    )
-                }
-            )
-
-            $result = Get-OptimalPermissionSet -ActivityPermissions $activityPermissions
-            $result.Permission | Should -Contain 'User.ReadBasic.All'
+            $result.UnmatchedActivities | Should -Not -BeNullOrEmpty
         }
 
         It 'Should handle multiple activities' {

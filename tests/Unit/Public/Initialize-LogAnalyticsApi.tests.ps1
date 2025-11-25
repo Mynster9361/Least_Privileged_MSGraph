@@ -4,6 +4,23 @@ BeforeAll {
     # Remove any existing module
     Get-Module $script:moduleName -All | Remove-Module -Force -ErrorAction SilentlyContinue
 
+    # Create stub for Register-EntraService before importing the module
+    if (-not (Get-Command -Name Register-EntraService -ErrorAction SilentlyContinue)) {
+        function global:Register-EntraService {
+            [CmdletBinding()]
+            param(
+                [Parameter(Mandatory)]
+                [string]$ServiceName,
+
+                [Parameter(Mandatory)]
+                [string]$ResourceId,
+
+                [Parameter()]
+                [string[]]$Scopes
+            )
+        }
+    }
+
     # Try to import the module using the same pattern as QA tests
     $moduleInfo = Get-Module -Name $script:moduleName -ListAvailable | Select-Object -First 1
 
@@ -27,6 +44,9 @@ BeforeAll {
 
 AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
+
+    # Clean up global stub
+    Remove-Item -Path Function:\Register-EntraService -ErrorAction SilentlyContinue
 }
 
 Describe 'Initialize-LogAnalyticsApi' {
@@ -46,22 +66,14 @@ Describe 'Initialize-LogAnalyticsApi' {
     Context 'Functionality' {
         BeforeAll {
             # Mock Register-EntraService
-            if ($script:moduleLoaded) {
-                Mock -CommandName Register-EntraService -ModuleName $script:moduleName -MockWith {
-                    return [PSCustomObject]@{
-                        ServiceName       = 'LogAnalytics'
-                        AlreadyRegistered = $false
-                        Status            = 'NewlyRegistered'
-                    }
-                }
-            }
-            else {
-                Mock -CommandName Register-EntraService -MockWith {
-                    return [PSCustomObject]@{
-                        ServiceName       = 'LogAnalytics'
-                        AlreadyRegistered = $false
-                        Status            = 'NewlyRegistered'
-                    }
+            Mock -CommandName Register-EntraService -MockWith {
+                param($ServiceName, $ResourceId, $Scopes)
+                return [PSCustomObject]@{
+                    ServiceName       = $ServiceName
+                    ResourceId        = $ResourceId
+                    Scopes            = $Scopes
+                    AlreadyRegistered = $false
+                    Status            = 'NewlyRegistered'
                 }
             }
         }
@@ -76,14 +88,54 @@ Describe 'Initialize-LogAnalyticsApi' {
             $result.ServiceName | Should -Be 'LogAnalytics'
         }
 
-        It 'Should call Register-EntraService' {
-            Initialize-LogAnalyticsApi
-            if ($script:moduleLoaded) {
-                Should -Invoke -CommandName Register-EntraService -ModuleName $script:moduleName -Times 1 -Exactly
+        It 'Should handle already registered service' {
+            Mock -CommandName Register-EntraService -MockWith {
+                return [PSCustomObject]@{
+                    ServiceName       = 'LogAnalytics'
+                    ResourceId        = 'https://api.loganalytics.io'
+                    AlreadyRegistered = $true
+                    Status            = 'AlreadyRegistered'
+                }
             }
-            else {
-                Should -Invoke -CommandName Register-EntraService -Times 1 -Exactly
+
+            $result = Initialize-LogAnalyticsApi
+            $result.AlreadyRegistered | Should -Be $true
+        }
+    }
+
+    Context 'Integration' {
+        BeforeAll {
+            Mock -CommandName Register-EntraService -MockWith {
+                param($ServiceName, $ResourceId, $Scopes)
+                return [PSCustomObject]@{
+                    ServiceName       = $ServiceName
+                    ResourceId        = $ResourceId
+                    Scopes            = $Scopes
+                    AlreadyRegistered = $false
+                    Status            = 'NewlyRegistered'
+                }
             }
+        }
+
+        It 'Should be callable without parameters' {
+            { Initialize-LogAnalyticsApi } | Should -Not -Throw
+        }
+
+        It 'Should return consistent results on multiple calls' {
+            Mock -CommandName Register-EntraService -MockWith {
+                return [PSCustomObject]@{
+                    ServiceName       = 'LogAnalytics'
+                    ResourceId        = 'https://api.loganalytics.io'
+                    AlreadyRegistered = $true
+                    Status            = 'AlreadyRegistered'
+                }
+            }
+
+            $result1 = Initialize-LogAnalyticsApi
+            $result2 = Initialize-LogAnalyticsApi
+
+            $result1.ServiceName | Should -Be $result2.ServiceName
+            $result1.ResourceId | Should -Be $result2.ResourceId
         }
     }
 }

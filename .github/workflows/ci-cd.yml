@@ -200,6 +200,10 @@ jobs:
     name: Deploy Module
     needs: [build, test]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for pushing to gh-pages
+      pages: write     # Required for GitHub Pages
+      id-token: write  # Required for GitHub Pages deployment
     if: |
       always() &&
       needs.test.result == 'success' &&

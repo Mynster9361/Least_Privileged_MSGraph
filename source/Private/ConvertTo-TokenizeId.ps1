@@ -1,54 +1,55 @@
 function ConvertTo-TokenizeId {
   <#
 .SYNOPSIS
-    Tokenizes ID values in a URI by replacing them with {id} placeholders.
+    Internal function to tokenize ID values in URIs by replacing them with {id} placeholders.
 
 .DESCRIPTION
-    This function processes a URI and replaces numeric ID segments with {id} tokens to create a
-    standardized URI pattern. This is useful for grouping similar API calls that differ only by
-    the resource IDs, enabling pattern matching for permission analysis and activity mapping.
+    This private function processes URIs and replaces numeric ID segments with {id} tokens to create
+    standardized URI patterns. Used internally by Get-AppActivityFromLog for permission mapping.
 
-    The function preserves API version segments (v1.0/beta) and only tokenizes segments that
-    contain numeric IDs. Special handling is applied to the last segment if it contains patterns
-    like '(.*?)' commonly used in OData filters.
+    The function:
+    - Preserves API version segments (v1.0, beta)
+    - Replaces GUID identifiers with {id}
+    - Replaces numeric IDs with {id}
+    - Handles OData function parameters in the last segment
+    - Maintains scheme, host, and query parameters
+
+    Special handling: If the last segment contains '(' (OData functions like messages(filter='...')),
+    everything from '(' onwards is replaced with '/{id}'.
 
 .PARAMETER UriString
-    The complete URI string to tokenize. Must be a valid URI with scheme and host.
-    Example: 'https://graph.microsoft.com/v1.0/users/289ee2a5-9450-4837-aa87-6bd8d8e72891/messages'
+    Complete URI string to tokenize. Must be valid URI with scheme and host.
+    Example: 'https://graph.microsoft.com/v1.0/users/guid-here/messages'
 
 .OUTPUTS
     String
-    Returns the tokenized URI with ID segments replaced by {id} placeholders.
+    Tokenized URI with ID segments replaced by {id} placeholders.
     Example: 'https://graph.microsoft.com/v1.0/users/{id}/messages'
 
 .EXAMPLE
-    ConvertTo-TokenizeId -UriString "https://graph.microsoft.com/v1.0/users/289ee2a5-9450-4837-aa87-6bd8d8e72891/messages"
-
-    Returns:
-    https://graph.microsoft.com/v1.0/users/{id}/messages
+    # Used internally by Get-AppActivityFromLog
+    $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
 
 .EXAMPLE
-    ConvertTo-TokenizeId -UriString "https://graph.microsoft.com/v1.0/groups/12345/members"
-
-    Returns:
-    https://graph.microsoft.com/v1.0/groups/{id}/members
-
-.EXAMPLE
-    ConvertTo-TokenizeId -UriString "https://graph.microsoft.com/v1.0/users/user@domain.com/messages(filter='isRead eq false')"
-
-    Returns:
-    https://graph.microsoft.com/v1.0/users/{id}/messages/{id}
-
-    Note: The last segment with '(.*?)' pattern is replaced with {id}
+    ConvertTo-TokenizeId -UriString "https://graph.microsoft.com/v1.0/users/guid/messages"
+    # Returns: https://graph.microsoft.com/v1.0/users/{id}/messages
 
 .NOTES
-    Tokenization rules:
-    - Segments containing digits (except 'v1.0' or 'beta') are replaced with {id}
-    - The last segment with '(.*?)' pattern gets special handling
-    - API version segments (v1.0/beta) are preserved
-    - Trailing slashes are removed from the final result
+    This is a private module function not exported to users.
 
-    This function uses Write-Debug extensively, so run with -Debug to see detailed processing steps.
+    Tokenization Rules:
+    - Segments with digits (except 'v1.0' or 'beta') → {id}
+    - Last segment with '(.*?)' pattern → special handling
+    - API version segments always preserved
+    - Trailing slashes removed
+
+    Uses Write-Debug extensively. Run with -Debug to see segment processing details.
+
+.LINK
+    Get-AppActivityFromLog
+
+.LINK
+    Convert-RelativeUriToAbsoluteUri
 #>
   param(
     [Parameter(Mandatory = $true, Position = 0)]

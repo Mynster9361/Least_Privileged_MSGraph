@@ -1,74 +1,76 @@
 function Find-LeastPrivilegedPermission {
   <#
 .SYNOPSIS
-    Identifies the least privileged Microsoft Graph permissions required for specific API activities.
+    Internal function to identify least privileged Microsoft Graph permissions for API activities.
 
 .DESCRIPTION
-    This function analyzes user API activity against Microsoft Graph permission maps to determine
-    the minimum set of permissions required. It matches API calls to their corresponding endpoints
-    and extracts the least privileged application permissions needed for each activity.
+    This private function analyzes API activity against Microsoft Graph permission maps to determine
+    the minimum set of permissions required. Used internally by Get-PermissionAnalysis.
 
-    The function supports both v1.0 and beta API versions and normalizes URIs to handle dynamic
-    segments like user IDs and email addresses. It prioritizes permissions explicitly marked as
-    "least privileged" in the permission maps, falling back to all application-scoped permissions
-    if none are specifically marked.
+    The function:
+    1. Normalizes URIs by replacing GUIDs and emails with {id} tokens
+    2. Determines API version (v1.0 or beta) from URI
+    3. Matches normalized paths to endpoints in permission maps
+    4. Extracts permissions for the specific HTTP method
+    5. Prioritizes permissions marked as "least privileged"
+
+    Permission Selection Logic:
+    - First priority: isLeastPrivilege = true AND scopeType = Application
+    - Second priority: All Application scope permissions (if no least privileged marked)
+    - Delegated permissions are excluded
 
 .PARAMETER userActivity
-    An array of API activity objects containing Method and Uri properties.
-    Each activity represents an API call made by an application.
-    Example: @(@{Method='GET'; Uri='https://graph.microsoft.com/v1.0/users/me/messages'})
+    Array of activity objects with Method and Uri properties.
+    Example: @{Method='GET'; Uri='https://graph.microsoft.com/v1.0/users/me/messages'}
 
 .PARAMETER permissionMapv1
-    The permission mapping data for Microsoft Graph v1.0 API endpoints.
-    Should contain endpoint definitions with their required permissions organized by HTTP method.
+    Permission mapping data for v1.0 endpoints (array of endpoint objects with Method properties).
 
 .PARAMETER permissionMapbeta
-    The permission mapping data for Microsoft Graph beta API endpoints.
-    Should contain endpoint definitions with their required permissions organized by HTTP method.
+    Permission mapping data for beta endpoints (array of endpoint objects with Method properties).
 
 .OUTPUTS
     PSCustomObject[]
-    Returns an array of objects for each activity with the following properties:
-    - Method: The HTTP method used (GET, POST, PUT, PATCH, DELETE)
-    - Version: The API version (v1.0 or beta)
-    - Path: The normalized API path without the base URL
-    - OriginalUri: The original complete URI from the activity
-    - MatchedEndpoint: The matched endpoint pattern from the permission map (null if no match)
-    - LeastPrivilegedPermissions: Array of permission objects with Permission, ScopeType, and IsLeastPrivilege properties
-    - IsMatched: Boolean indicating whether a matching endpoint was found
+    Array with properties: Method, Version, Path, OriginalUri, MatchedEndpoint,
+    LeastPrivilegedPermissions, IsMatched
 
 .EXAMPLE
-    $activities = @(
-        @{Method='GET'; Uri='https://graph.microsoft.com/v1.0/users/me/messages'},
-        @{Method='POST'; Uri='https://graph.microsoft.com/v1.0/users/me/sendMail'}
-    )
-    $results = Find-LeastPrivilegedPermission -userActivity $activities -permissionMapv1 $v1Map -permissionMapbeta $betaMap
-
-    Analyzes the activities and returns the least privileged permissions needed for reading messages and sending mail.
-
-.EXAMPLE
-    $results = Find-LeastPrivilegedPermission -userActivity $appActivity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
-    $unmatchedActivities = $results | Where-Object { -not $_.IsMatched }
-
-    Finds all activities that couldn't be matched to known endpoints, useful for identifying unsupported or custom APIs.
-
-.EXAMPLE
+    # Used internally by Get-PermissionAnalysis
     $results = Find-LeastPrivilegedPermission -userActivity $activity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
-    $requiredPerms = $results.LeastPrivilegedPermissions.Permission | Select-Object -Unique
 
-    Extracts a unique list of all permissions required across all activities.
+.EXAMPLE
+    # Check for unmatched endpoints
+    $results = Find-LeastPrivilegedPermission -userActivity $activity -permissionMapv1 $v1Map -permissionMapbeta $betaMap
+    $unmatched = $results | Where-Object { -not $_.IsMatched }
 
 .NOTES
-    URI normalization rules:
-    - GUIDs are replaced with {id} tokens for matching
-    - Email addresses are replaced with {id} tokens
-    - Paths are normalized to start with /
+    This is a private module function not exported to users.
 
-    Permission selection priority:
-    1. Permissions marked with isLeastPrivilege = true and scopeType = Application
-    2. All permissions with scopeType = Application (if no least privileged marked)
+    Requirements:
+    - Permission maps must match expected structure (Endpoint, Method properties)
+    - Activity URIs must contain version segment (v1.0 or beta)
+    - HTTP method must exist in the endpoint's Method object for permission extraction
 
-    This function uses Write-Debug for detailed processing information.
+    Normalization:
+    - GUIDs (36-char) replaced with {id}
+    - Email addresses (containing @) replaced with {id}
+    - Paths normalized for exact matching (no fuzzy matching)
+
+    Limitations:
+    - Only returns Application scope permissions
+    - Requires accurate permission map data
+    - Custom/preview APIs may not be in permission maps
+
+    Use -Debug to see URI normalization and endpoint matching details.
+
+.LINK
+    Get-PermissionAnalysis
+
+.LINK
+    Convert-RelativeUriToAbsoluteUri
+
+.LINK
+    ConvertTo-TokenizeId
 #>
   param(
     [array]$userActivity,

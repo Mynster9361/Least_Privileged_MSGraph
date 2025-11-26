@@ -1,47 +1,62 @@
 function Convert-RelativeUriToAbsoluteUri {
   <#
 .SYNOPSIS
-    Converts a relative Microsoft Graph API URI to an absolute URI with normalized segments.
+    Internal function to convert relative Graph URIs to absolute URIs with normalized segments.
 
 .DESCRIPTION
-    This function takes a relative or partial Microsoft Graph API URI and converts it to a standardized
-    absolute URI. It normalizes the URI by replacing dynamic segments like '/me' with '/users/{id}' and
-    email addresses with '{id}' placeholders. This is useful for comparing API endpoints and mapping
-    permissions to activities.
+    This private function converts relative or partial Microsoft Graph API URIs to standardized
+    absolute URIs. Used internally by Get-AppActivityFromLog and other functions for URI normalization.
+
+    The function normalizes URIs by:
+    - Replacing '/me' segments with '/users/{id}'
+    - Replacing email addresses (containing '@') with '{id}'
+    - Unescaping URL-encoded characters
+    - Adding base URL if not present
+    - Extracting API version (v1.0 or beta)
+
+    This enables consistent URI patterns for permission mapping and activity aggregation.
 
 .PARAMETER Uri
-    The relative or partial URI to convert. Can be a Graph API endpoint path like '/me/messages' or
-    '/users/user@domain.com/mailFolders'.
+    The relative or partial URI to convert and normalize.
+    Example: '/me/messages' or 'https://graph.microsoft.com/v1.0/users/user@domain.com/calendar'
 
 .OUTPUTS
     PSCustomObject
-    Returns an object with three properties:
-    - Uri: The full absolute URI (e.g., 'https://graph.microsoft.com/v1.0/users/{id}/messages')
-    - Path: The API path without the base URL (e.g., '/users/{id}/messages')
-    - Version: The API version extracted from the URI ('v1.0', 'beta', or empty string)
+    Object with three properties:
+    - Uri: Full absolute URI with normalized segments
+    - Path: API path without base URL and version
+    - Version: 'v1.0', 'beta', or empty string
 
 .EXAMPLE
-    Convert-RelativeUriToAbsoluteUri -Uri "/me/messages"
-
-    Returns:
-    Uri     : https://graph.microsoft.com/v1.0/users/{id}/messages
-    Path    : /users/{id}/messages
-    Version : v1.0
+    # Used internally by Get-AppActivityFromLog
+    $processedUri = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
 
 .EXAMPLE
-    Convert-RelativeUriToAbsoluteUri -Uri "/users/user@contoso.com/mailFolders"
+    Convert-RelativeUriToAbsoluteUri -Uri "https://graph.microsoft.com/v1.0/me/messages"
+    # Returns: Uri='https://graph.microsoft.com/v1.0/users/{id}/messages', Path='/users/{id}/messages', Version='v1.0'
 
-    Returns:
-    Uri     : https://graph.microsoft.com/v1.0/users/{id}/mailFolders
-    Path    : /users/{id}/mailFolders
-    Version : v1.0
+.EXAMPLE
+    Convert-RelativeUriToAbsoluteUri -Uri "https://graph.microsoft.com/v1.0/users/john@contoso.com/mailFolders"
+    # Returns: Uri='https://graph.microsoft.com/v1.0/users/{id}/mailFolders', Path='/users/{id}/mailFolders', Version='v1.0'
 
 .NOTES
-    This function normalizes URIs by:
-    - Replacing '/me' segments with '/users/{id}'
-    - Replacing email addresses with '{id}' placeholders
-    - Unescaping URL-encoded characters
-    - Removing leading and trailing slashes
+    This is a private module function not exported to users.
+
+    Normalization Rules:
+    - '/me' segments → '/users/{id}'
+    - Email addresses (with '@') → '{id}'
+    - URL-encoded characters unescaped
+    - Leading/trailing slashes removed
+    - Base URL added if missing (https://graph.microsoft.com)
+    - Default version 'v1.0' if not specified
+
+    Uses Write-Debug for detailed processing steps. Run with -Debug to see normalization details.
+
+.LINK
+    Get-AppActivityFromLog
+
+.LINK
+    ConvertTo-TokenizeId
 #>
   param(
     [Parameter(Mandatory = $true, Position = 0)]

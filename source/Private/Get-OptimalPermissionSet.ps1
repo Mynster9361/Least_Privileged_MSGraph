@@ -1,79 +1,61 @@
 function Get-OptimalPermissionSet {
   <#
 .SYNOPSIS
-    Calculates the optimal set of permissions that cover all API activities with minimum overlap.
+    Internal function to calculate the optimal set of permissions covering all API activities.
 
 .DESCRIPTION
-    This function implements a greedy set cover algorithm to determine the smallest set of Microsoft
-    Graph permissions needed to cover all matched API activities. It prioritizes permissions that
-    cover the most activities, ensuring minimal permission grants while maintaining full functionality.
+    This private function implements a greedy set cover algorithm to determine the smallest set of
+    Microsoft Graph permissions needed to cover all matched API activities. Used internally by
+    Get-PermissionAnalysis and Export-PermissionAnalysisReport.
 
-    The function analyzes activity-to-permission mappings and identifies which permissions provide
-    the broadest coverage. It tracks unmatched activities separately and provides detailed statistics
-    about coverage effectiveness.
+    The algorithm:
+    1. Collects all unique permissions across activities
+    2. Sorts permissions by coverage (most activities covered first)
+    3. Greedily selects permissions that cover the most uncovered activities
+    4. Continues until all matched activities are covered
 
-    The algorithm works by:
-    1. Collecting all unique permissions across all activities
-    2. Sorting permissions by the number of activities they cover
-    3. Greedily selecting permissions that cover the most uncovered activities
-    4. Continuing until all matched activities are covered
+    Tracks unmatched activities separately and provides coverage statistics.
 
 .PARAMETER activityPermissions
-    An array of activity objects returned from Find-LeastPrivilegedPermission.
-    Each object should contain:
-    - IsMatched: Boolean indicating if the activity matched an endpoint
-    - LeastPrivilegedPermissions: Array of permission objects
-    - Method, Version, Path: Activity identification properties
+    Array of activity objects from Find-LeastPrivilegedPermission.
+    Expected properties: IsMatched, LeastPrivilegedPermissions, Method, Version, Path
 
 .OUTPUTS
     PSCustomObject
-    Returns an object with the following properties:
-    - OptimalPermissions: Array of permission objects with Permission, ScopeType, IsLeastPrivilege,
-      and ActivitiesCovered properties
-    - UnmatchedActivities: Array of activities that couldn't be matched to endpoints
-    - TotalActivities: Total count of all activities analyzed
-    - MatchedActivities: Count of activities that were successfully matched
+    Object with properties:
+    - OptimalPermissions: Array of permission objects with ActivitiesCovered count
+    - UnmatchedActivities: Array of activities without endpoint matches
+    - TotalActivities: Total count of analyzed activities
+    - MatchedActivities: Count of successfully matched activities
 
 .EXAMPLE
-    $activities = Find-LeastPrivilegedPermission -userActivity $signInLogs -permissionMapv1 $v1Map -permissionMapbeta $betaMap
-    $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-
-    "Optimal permissions needed: $($optimal.OptimalPermissions.Count)"
-    "Activities covered: $($optimal.MatchedActivities) of $($optimal.TotalActivities)"
-    $optimal.OptimalPermissions | Format-Table Permission, ActivitiesCovered
+    # Used internally by Get-PermissionAnalysis
+    $optimal = Get-OptimalPermissionSet -activityPermissions $activityPermissions
 
 .EXAMPLE
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-
-    # Check if all activities were matched
-    if ($optimal.UnmatchedActivities.Count -gt 0) {
-        Write-Warning "Found $($optimal.UnmatchedActivities.Count) unmatched activities"
-        $optimal.UnmatchedActivities | ForEach-Object {
-            "  $($_.Method) $($_.Version)$($_.Path)"
-        }
-    }
-
-.EXAMPLE
-    $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-
-    # Get just the permission names for easy comparison
-    $permissionNames = $optimal.OptimalPermissions.Permission
-
-    # Compare with current permissions
-    $excessPerms = $currentPerms | Where-Object { $_ -notin $permissionNames }
-    $missingPerms = $permissionNames | Where-Object { $_ -notin $currentPerms }
+    Write-Host "Selected $($optimal.OptimalPermissions.Count) permissions covering $($optimal.MatchedActivities) activities"
 
 .NOTES
+    This is a private module function not exported to users.
+
     Algorithm: Greedy Set Cover
-    - Time Complexity: O(n * m) where n is permissions and m is activities
-    - The algorithm is not guaranteed to find the absolute minimum set, but provides a practical
-      approximation that balances coverage and permission count
+    - Time Complexity: O(n * m) where n = permissions, m = activities
+    - Not guaranteed to find absolute minimum, but provides practical approximation
+    - Prefers permissions marked as least privileged when coverage is equal
 
-    When multiple permissions cover the same activities, the algorithm prefers:
-    1. Permissions marked as least privileged (IsLeastPrivilege = true)
-    2. Permissions that cover the most activities
+    Returns empty OptimalPermissions array if:
+    - Input is null or empty
+    - No activities have valid permission mappings
+    - All activities are unmatched
 
-    This function uses Write-Debug for detailed processing information.
+    Uses Write-Debug for processing details. Run with -Debug to see selection logic.
+
+.LINK
+    Get-PermissionAnalysis
+
+.LINK
+    Find-LeastPrivilegedPermission
 #>
   [CmdletBinding()]
   [OutputType([PSCustomObject])]

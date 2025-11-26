@@ -113,23 +113,6 @@ function Export-PermissionAnalysisReport {
     with a custom title, saved to a dedicated reports folder.
 
 .EXAMPLE
-    $timestamp = Get-Date -Format "yyyy-MM-dd"
-    $reportPath = "\\shared\reports\GraphPermissions_$timestamp.html"
-
-    $results = Get-MgServicePrincipal -All | Where-Object {
-        $_.AppId -and $_.AppRoles.Count -gt 0
-    } | ForEach-Object {
-        Get-PermissionAnalysis -ServicePrincipalId $_.Id -WorkspaceId $wsId -Days 7
-    }
-
-    $report = Export-PermissionAnalysisReport -AppData $results -OutputPath $reportPath -ReportTitle "Weekly Permission Review - $timestamp"
-    Send-MailMessage -To "security-team@contoso.com" -Subject "Weekly Graph Permissions Report" -Body "Report available at: $report"
-
-    Description:
-    Implements a weekly automated reporting workflow that analyzes all service principals,
-    generates a report on a network share, and emails the security team.
-
-.EXAMPLE
     # Compare current vs. previous month
     $thisMonth = Get-PermissionAnalysis -WorkspaceId $wsId -Days 30
     $lastMonth = Get-PermissionAnalysis -WorkspaceId $wsId -Days 60 | Where-Object {

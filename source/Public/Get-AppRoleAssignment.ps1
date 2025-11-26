@@ -77,7 +77,7 @@ function Get-AppRoleAssignment {
     $assignments = Get-AppRoleAssignment -Verbose
     $overPrivilegedApps = $assignments | Where-Object { $_.AppRoleCount -gt 50 }
 
-    Write-Host "Found $($overPrivilegedApps.Count) over-privileged applications:" -ForegroundColor Yellow
+    "Found $($overPrivilegedApps.Count) over-privileged applications:"
     $overPrivilegedApps | Sort-Object AppRoleCount -Descending |
         Select-Object PrincipalName, AppRoleCount |
         Format-Table -AutoSize
@@ -101,7 +101,7 @@ function Get-AppRoleAssignment {
     }
 
     $appOnlyPerms | Export-Csv -Path "application-only-permissions.csv" -NoTypeInformation
-    Write-Host "Exported $($appOnlyPerms.Count) application-only permissions to CSV"
+    "Exported $($appOnlyPerms.Count) application-only permissions to CSV"
 
     Description:
     Extracts all application-scoped (app-only) permissions across all applications
@@ -135,7 +135,7 @@ function Get-AppRoleAssignment {
         }
     }
 
-    Write-Host "`nApplications with High-Privilege Permissions:" -ForegroundColor Red
+    "`nApplications with High-Privilege Permissions:"
     $criticalApps | Sort-Object CriticalPermCount -Descending | Format-Table -AutoSize
 
     # Export for security review
@@ -156,7 +156,7 @@ function Get-AppRoleAssignment {
         Expression={$_.Group[0].PermissionType}
     } | Sort-Object Count -Descending
 
-    Write-Host "`nTop 10 Most Used Microsoft Graph Permissions:" -ForegroundColor Cyan
+    "`nTop 10 Most Used Microsoft Graph Permissions:"
     $permissionUsage | Select-Object -First 10 | Format-Table -AutoSize
 
     $permissionUsage | Export-Csv -Path "permission-usage-stats.csv" -NoTypeInformation
@@ -199,7 +199,7 @@ function Get-AppRoleAssignment {
 
     $summary | Export-Csv -Path "inventory-summary.csv" -NoTypeInformation
 
-    Write-Host "`nInventory Summary:" -ForegroundColor Green
+    "`nInventory Summary:"
     $summary | Format-List
 
     Description:
@@ -262,8 +262,8 @@ function Get-AppRoleAssignment {
         $allAppType -and $_.AppRoleCount -gt 0
     }
 
-    Write-Host "`nApplications Using Only Application Permissions (No Delegated):" -ForegroundColor Cyan
-    Write-Host "These are typically background services, daemons, or automation tools.`n"
+    "`nApplications Using Only Application Permissions (No Delegated):"
+    "These are typically background services, daemons, or automation tools.`n"
     $appOnlyApplications | Select-Object PrincipalName, AppRoleCount | Format-Table -AutoSize
 
     Description:

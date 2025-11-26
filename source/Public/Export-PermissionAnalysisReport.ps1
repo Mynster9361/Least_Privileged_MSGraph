@@ -157,9 +157,9 @@ function Export-PermissionAnalysisReport {
 
     if ($problematic.Count -gt 0) {
         $report = Export-PermissionAnalysisReport -AppData $problematic -OutputPath ".\ActionRequired.html" -ReportTitle "Applications Requiring Attention"
-        Write-Host "Found $($problematic.Count) applications requiring attention. Report: $report" -ForegroundColor Yellow
+        "Found $($problematic.Count) applications requiring attention. Report: $report"
     } else {
-        Write-Host "All applications are optimally configured!" -ForegroundColor Green
+        "All applications are optimally configured!"
     }
 
     Description:

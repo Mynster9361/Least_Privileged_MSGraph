@@ -121,7 +121,7 @@ function Get-AppActivityData {
     $appsWithActivity = $allApps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90
     $activeApps = $appsWithActivity | Where-Object { $_.Activity.Count -gt 0 }
 
-    Write-Host "Found $($activeApps.Count) applications with activity in the last 90 days"
+    "Found $($activeApps.Count) applications with activity in the last 90 days"
     $activeApps | Select-Object PrincipalName, @{N='ActivityCount';E={$_.Activity.Count}} | Format-Table
 
     Description:
@@ -133,7 +133,7 @@ function Get-AppActivityData {
     $results = Get-AppActivityData -AppData $apps -WorkspaceId $workspaceId -Days 7 -Verbose
     $results | Export-Clixml .\enriched-apps.xml
 
-    Write-Host "Saved enriched app data to enriched-apps.xml"
+    "Saved enriched app data to enriched-apps.xml"
 
     Description:
     Loads applications from JSON, gets 7 days of activity with verbose output,
@@ -146,7 +146,7 @@ function Get-AppActivityData {
             if ($_.Activity.Count -eq 0) {
                 Write-Warning "$($_.PrincipalName) has no recent activity - consider reviewing permissions"
             } else {
-                Write-Host "$($_.PrincipalName): $($_.Activity.Count) unique API patterns" -ForegroundColor Green
+                "$($_.PrincipalName): $($_.Activity.Count) unique API patterns"
             }
         }
 
@@ -162,7 +162,7 @@ function Get-AppActivityData {
 
     for ($i = 0; $i -lt $allApps.Count; $i += $chunkSize) {
         $chunk = $allApps[$i..([Math]::Min($i + $chunkSize - 1, $allApps.Count - 1))]
-        Write-Host "Processing chunk $([Math]::Floor($i/$chunkSize) + 1)..."
+        "Processing chunk $([Math]::Floor($i/$chunkSize) + 1)..."
 
         $chunkResults = $chunk | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
         $allResults += $chunkResults
@@ -185,9 +185,9 @@ function Get-AppActivityData {
     foreach ($app in $recent) {
         $extendedApp = $extended | Where-Object { $_.PrincipalId -eq $app.PrincipalId }
 
-        Write-Host "`n$($app.PrincipalName):"
-        Write-Host "  Last 7 days: $($app.Activity.Count) unique patterns"
-        Write-Host "  Last 90 days: $($extendedApp.Activity.Count) unique patterns"
+        "`n$($app.PrincipalName):"
+        "  Last 7 days: $($app.Activity.Count) unique patterns"
+        "  Last 90 days: $($extendedApp.Activity.Count) unique patterns"
 
         if ($extendedApp.Activity.Count -gt $app.Activity.Count * 2) {
             Write-Warning "  Application has irregular activity patterns - review needed"
@@ -215,7 +215,7 @@ function Get-AppActivityData {
     }
 
     $summary | Export-Csv -Path ".\app-activity-summary.csv" -NoTypeInformation
-    Write-Host "Activity summary exported to app-activity-summary.csv"
+    "Activity summary exported to app-activity-summary.csv"
 
     Description:
     Creates a comprehensive summary CSV report showing activity metrics for all applications,

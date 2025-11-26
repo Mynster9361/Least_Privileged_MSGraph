@@ -34,7 +34,7 @@ function Get-OptimalPermissionSet {
 
 .EXAMPLE
     $optimal = Get-OptimalPermissionSet -activityPermissions $activities
-    Write-Host "Selected $($optimal.OptimalPermissions.Count) permissions covering $($optimal.MatchedActivities) activities"
+    "Selected $($optimal.OptimalPermissions.Count) permissions covering $($optimal.MatchedActivities) activities"
 
 .NOTES
     This is a private module function not exported to users.

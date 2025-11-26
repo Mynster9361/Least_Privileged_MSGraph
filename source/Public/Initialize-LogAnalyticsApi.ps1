@@ -78,9 +78,9 @@ function Initialize-LogAnalyticsApi {
 .EXAMPLE
     $result = Initialize-LogAnalyticsApi
     if ($result.Status -eq 'NewlyRegistered') {
-        Write-Host "Log Analytics API is now ready for use" -ForegroundColor Green
+        "Log Analytics API is now ready for use"
     } else {
-        Write-Host "Log Analytics API was already initialized" -ForegroundColor Cyan
+        "Log Analytics API was already initialized"
     }
 
     Description:
@@ -133,9 +133,9 @@ function Initialize-LogAnalyticsApi {
     $service = Get-EntraService -Name 'LogAnalytics'
 
     if ($service) {
-        Write-Host "Service URL: $($service.ServiceUrl)" -ForegroundColor Green
-        Write-Host "OAuth Resource: $($service.Resource)" -ForegroundColor Green
-        Write-Host "Status: Ready for authentication" -ForegroundColor Green
+        "Service URL: $($service.ServiceUrl)"
+        "OAuth Resource: $($service.Resource)"
+        "Status: Ready for authentication"
     }
 
     Description:
@@ -146,10 +146,10 @@ function Initialize-LogAnalyticsApi {
     # Error handling in automation
     try {
         $init = Initialize-LogAnalyticsApi -ErrorAction Stop
-        Write-Host "Initialization $($init.Status): $($init.ServiceName)" -ForegroundColor Green
+        "Initialization $($init.Status): $($init.ServiceName)"
 
         Connect-EntraService -Service 'LogAnalytics' -ClientID $clientId -TenantID $tenantId -ClientSecret $secret -ErrorAction Stop
-        Write-Host "Authentication successful" -ForegroundColor Green
+        "Authentication successful"
     }
     catch {
         Write-Error "Failed to setup Log Analytics API: $_"
@@ -237,7 +237,7 @@ function Initialize-LogAnalyticsApi {
     ```powershell
     $result = Initialize-LogAnalyticsApi
     if (-not $result.AlreadyRegistered) {
-        Write-Host "Service newly registered - first use in this session"
+        "Service newly registered - first use in this session"
     }
     ```
 

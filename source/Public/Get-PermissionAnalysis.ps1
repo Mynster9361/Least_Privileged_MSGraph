@@ -175,7 +175,7 @@ function Get-PermissionAnalysis {
         $_.ThrottlingStats.ThrottlingSeverity -ge 3
     }
 
-    Write-Host "`nApplications Requiring Immediate Attention:" -ForegroundColor Red
+    "`nApplications Requiring Immediate Attention:"
     $criticalApps | Select-Object PrincipalName,
         @{N='Throttle Rate';E={"{0:N2}%" -f $_.ThrottlingStats.ThrottleRate}},
         @{N='429 Errors';E={$_.ThrottlingStats.Total429Errors}},
@@ -210,7 +210,7 @@ function Get-PermissionAnalysis {
             Expression={$_.Group.PrincipalName -join ', '}
         }
 
-    Write-Host "`nThrottling Status Summary:" -ForegroundColor Cyan
+    "`nThrottling Status Summary:"
     $statusSummary | Format-Table -AutoSize
 
     # Export detailed report
@@ -233,27 +233,19 @@ function Get-PermissionAnalysis {
 
     $stats = $throttling.ThrottlingStats
 
-    Write-Host "`nThrottling Report for: $($app.DisplayName)" -ForegroundColor Cyan
-    Write-Host "Analysis Period: Last 7 days" -ForegroundColor Gray
-    Write-Host "`nRequest Statistics:"
-    Write-Host "  Total Requests: $($stats.TotalRequests)"
-    Write-Host "  Successful: $($stats.SuccessfulRequests) ($($stats.SuccessRate)%)"
-    Write-Host "  Failed: $($stats.TotalClientErrors + $stats.TotalServerErrors) ($($stats.ErrorRate)%)"
-    Write-Host "`nThrottling Details:"
-    Write-Host "  429 Errors: $($stats.Total429Errors)"
-    Write-Host "  Throttle Rate: $($stats.ThrottleRate)%"
-    Write-Host "  Severity: $($stats.ThrottlingSeverity) - $($stats.ThrottlingStatus)" -ForegroundColor $(
-        switch ($stats.ThrottlingSeverity) {
-            0 { 'Green' }
-            1 { 'Green' }
-            2 { 'Yellow' }
-            3 { 'Yellow' }
-            4 { 'Red' }
-        }
-    )
-    Write-Host "`nTime Range:"
-    Write-Host "  First Request: $($stats.FirstOccurrence)"
-    Write-Host "  Last Request: $($stats.LastOccurrence)"
+    "`nThrottling Report for: $($app.DisplayName)"
+    "Analysis Period: Last 7 days"
+    "`nRequest Statistics:"
+    "  Total Requests: $($stats.TotalRequests)"
+    "  Successful: $($stats.SuccessfulRequests) ($($stats.SuccessRate)%)"
+    "  Failed: $($stats.TotalClientErrors + $stats.TotalServerErrors) ($($stats.ErrorRate)%)"
+    "`nThrottling Details:"
+    "  429 Errors: $($stats.Total429Errors)"
+    "  Throttle Rate: $($stats.ThrottleRate)%"
+    "  Severity: $($stats.ThrottlingSeverity) - $($stats.ThrottlingStatus)"
+    "`nTime Range:"
+    "  First Request: $($stats.FirstOccurrence)"
+    "  Last Request: $($stats.LastOccurrence)"
 
     if ($stats.ThrottlingSeverity -ge 3) {
         Write-Warning "`nRECOMMENDATION: Implement retry logic with exponential backoff and request batching"
@@ -341,10 +333,10 @@ Report generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
             -Subject "⚠️ Graph API Throttling Alert - $($alerts.Count) Apps Affected" `
             -Body $emailBody -SmtpServer "smtp.contoso.com"
 
-        Write-Host "Alert sent for $($alerts.Count) applications" -ForegroundColor Yellow
+        "Alert sent for $($alerts.Count) applications"
     }
     else {
-        Write-Host "All applications within normal throttling thresholds" -ForegroundColor Green
+        "All applications within normal throttling thresholds"
     }
 
     Description:
@@ -371,7 +363,7 @@ Report generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
         HealthyApps = ($data | Where-Object { $_.ThrottlingStats.ThrottlingSeverity -le 1 }).Count
     }
 
-    Write-Host "`n=== Microsoft Graph API Health Dashboard ===" -ForegroundColor Cyan
+    "`n=== Microsoft Graph API Health Dashboard ==="
     $dashboard | Format-List
 
     $dashboard | Export-Csv -Path "dashboard-$(Get-Date -Format 'yyyyMMdd').csv" -NoTypeInformation

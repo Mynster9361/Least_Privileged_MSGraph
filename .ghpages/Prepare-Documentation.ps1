@@ -843,13 +843,13 @@ if (Test-Path $buildDocsPath) {
         $content = $content -replace '(?m)^#### (.+)$', '<h4>$1</h4>'
 
         # Convert code blocks - PowerShell
-        $content = $content -replace '(?s)```powershell\s*\n(.+?)\n```', '<pre><code class="language-powershell">$1</code></pre>'
+        $content = $content -replace '(?s)```powershell\r?\n(.+?)\r?\n```', '<pre><code class="language-powershell">$1</code></pre>'
 
         # Convert code blocks - YAML (for parameter blocks)
-        $content = $content -replace '(?s)```yaml\s*\n(.+?)\n```', '<div class="param-block"><code>$1</code></div>'
+        $content = $content -replace '(?s)```yaml\r?\n(.+?)\r?\n```', '<div class="param-block"><code>$1</code></div>'
 
         # Convert generic code blocks
-        $content = $content -replace '(?s)```\s*\n(.+?)\n```', '<pre><code>$1</code></pre>'
+        $content = $content -replace '(?s)```\r?\n(.+?)\r?\n```', '<pre><code>$1</code></pre>'
 
         # Convert inline code
         $content = $content -replace '`([^`]+)`', '<code>$1</code>'
@@ -868,35 +868,44 @@ if (Test-Path $buildDocsPath) {
         # Clean up nested lists
         $content = $content -replace '</ul>\s*<ul>', ''
 
-        # Wrap in semantic sections
-        $sections = @{
-            'SYNOPSIS'      = 'synopsis'
-            'SYNTAX'        = 'syntax'
-            'DESCRIPTION'   = 'description'
-            'PARAMETERS'    = 'parameters'
-            'INPUTS'        = 'inputs'
-            'OUTPUTS'       = 'outputs'
-            'EXAMPLES'      = 'examples'
-            'NOTES'         = 'notes'
-            'RELATED LINKS' = 'related-links'
+        # Wrap in semantic sections - simplified approach
+        $sections = @(
+            @{Name = 'SYNOPSIS'; Class = 'synopsis' }
+            @{Name = 'SYNTAX'; Class = 'syntax' }
+            @{Name = 'DESCRIPTION'; Class = 'description' }
+            @{Name = 'PARAMETERS'; Class = 'parameters' }
+            @{Name = 'INPUTS'; Class = 'inputs' }
+            @{Name = 'OUTPUTS'; Class = 'outputs' }
+            @{Name = 'EXAMPLES'; Class = 'examples' }
+            @{Name = 'NOTES'; Class = 'notes' }
+            @{Name = 'RELATED LINKS'; Class = 'related-links' }
+        )
+
+        # Replace headers with section wrappers
+        foreach ($section in $sections) {
+            $headerPattern = [regex]::Escape("<h2 id=`"$($section.Name)`">$($section.Name)</h2>")
+            $replacement = "<div class='doc-section $($section.Class)'><h2 id=`"$($section.Name)`">$($section.Name)</h2>"
+            $content = $content -replace $headerPattern, $replacement
         }
 
-        foreach ($section in $sections.GetEnumerator()) {
-            $sectionClass = $section.Value
-            $content = $content -replace "<h2 id=`"$($section.Key)`">$($section.Key)</h2>",
-            "<div class='doc-section $sectionClass'><h2 id=`"$($section.Key)`">$($section.Key)</h2>"
+        # Close sections by finding the next section or end of content
+        $sectionMatches = [regex]::Matches($content, "<div class='doc-section")
+        if ($sectionMatches.Count -gt 0) {
+            # Process in reverse to avoid offset issues
+            for ($i = $sectionMatches.Count - 1; $i -ge 0; $i--) {
+                $currentPos = $sectionMatches[$i].Index
 
-            # Close previous section if exists
-            if ($content -match "<div class='doc-section") {
-                $content = $content -replace "(<div class='doc-section [^>]+>)", "</div>`$1"
+                # Find next section or end of content
+                if ($i -lt $sectionMatches.Count - 1) {
+                    $nextPos = $sectionMatches[$i + 1].Index
+                    $content = $content.Insert($nextPos, "</div>")
+                }
+                else {
+                    # Last section - close at end
+                    $content += "</div>"
+                }
             }
         }
-
-        # Close final section
-        $content += "</div>"
-
-        # Remove first closing div (artifact from replacement)
-        $content = $content -replace '^</div>', '', 1
 
         # Create command page with navigation
         $commandNav = @"
@@ -907,7 +916,7 @@ if (Test-Path $buildDocsPath) {
     <a href="#PARAMETERS">Parameters</a>
     <a href="#EXAMPLES">Examples</a>
     <a href="#NOTES">Notes</a>
-    <a href="#RELATED LINKS">Related Links</a>
+    <a href="#RELATED%20LINKS">Related Links</a>
 </div>
 "@
 
@@ -926,7 +935,7 @@ if (Test-Path $buildDocsPath) {
 
         # Extract synopsis for commands list
         $synopsis = ""
-        if ($content -match '<div class=.doc-section synopsis.>.*?<p>(.+?)</p>') {
+        if ($content -match '<div class=[''"]doc-section synopsis[''"]>.*?<p>(.+?)</p>') {
             $synopsis = $matches[1] -replace '<[^>]+>', '' # Strip HTML tags
         }
 

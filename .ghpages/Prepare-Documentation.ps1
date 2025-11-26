@@ -34,6 +34,7 @@ $css = @'
 :root {
     --primary: #0078d4;
     --primary-dark: #005a9e;
+    --primary-light: #4da6ff;
     --bg-dark: #1e1e1e;
     --bg-medium: #2d2d2d;
     --bg-light: #3a3a3a;
@@ -44,6 +45,10 @@ $css = @'
     --warning: #ff9800;
     --info: #2196f3;
     --code-bg: #2d2d2d;
+    --link-default: #4da6ff;
+    --link-visited: #b19cd9;
+    --link-hover: #80bfff;
+    --link-active: #66d9ff;
 }
 
 * {
@@ -57,6 +62,53 @@ body {
     background: var(--bg-dark);
     color: var(--text-primary);
     line-height: 1.6;
+}
+
+/* Link Styles - Improved for dark mode */
+a {
+    color: var(--link-default);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:visited {
+    color: var(--link-visited);
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+a:active {
+    color: var(--link-active);
+}
+
+/* Content area links - more prominent */
+.card a:not(.btn),
+.doc-section a {
+    color: var(--link-default);
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.card a:not(.btn):hover,
+.doc-section a:hover {
+    border-bottom-color: var(--link-hover);
+    text-decoration: none;
+}
+
+.card a:not(.btn):visited,
+.doc-section a:visited {
+    color: var(--link-visited);
+}
+
+/* External link indicator */
+a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.85em;
+    opacity: 0.7;
 }
 
 header {
@@ -101,18 +153,24 @@ nav ul {
     padding: 0 20px;
 }
 
+/* Navigation links - special styling */
 nav a {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: all 0.3s;
     padding: 0.5rem 1rem;
     border-radius: 4px;
 }
 
+nav a:visited {
+    color: var(--text-primary);
+}
+
 nav a:hover {
-    color: var(--primary);
-    background: var(--bg-light);
+    color: white;
+    background: var(--primary);
+    text-decoration: none;
 }
 
 .container {
@@ -166,13 +224,19 @@ nav a:hover {
     margin: 0 0 0.5rem 0;
 }
 
+/* Grid item links */
 .grid-item a {
-    color: var(--primary);
+    color: var(--link-default);
     text-decoration: none;
     font-weight: 500;
 }
 
+.grid-item a:visited {
+    color: var(--link-visited);
+}
+
 .grid-item a:hover {
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
@@ -200,20 +264,34 @@ pre code {
     font-size: 0.95em;
 }
 
+/* Button links - special styling */
 .btn {
     display: inline-block;
     background: var(--primary);
-    color: white;
+    color: white !important;
     padding: 0.75rem 1.5rem;
     text-decoration: none;
     border-radius: 5px;
     margin: 0.5rem 0.5rem 0.5rem 0;
-    transition: background 0.3s;
+    transition: all 0.3s;
     font-weight: 500;
+    border: 2px solid var(--primary);
+}
+
+.btn:visited {
+    color: white !important;
 }
 
 .btn:hover {
     background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,120,212,0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .badge {
@@ -237,6 +315,7 @@ li {
     margin: 0.5rem 0;
 }
 
+/* Command documentation specific styles */
 .command-header {
     border-left: 4px solid #667eea;
 }
@@ -256,19 +335,27 @@ li {
     border-top: 1px solid var(--border);
 }
 
+/* Command nav links */
 .command-nav a {
     background: var(--bg-light);
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     text-decoration: none;
     font-size: 0.9em;
     transition: all 0.3s;
+    border: 1px solid var(--border);
+}
+
+.command-nav a:visited {
+    color: var(--text-primary) !important;
 }
 
 .command-nav a:hover {
     background: var(--primary);
-    color: white;
+    color: white !important;
+    border-color: var(--primary);
+    text-decoration: none;
 }
 
 .command-content {
@@ -380,8 +467,14 @@ html {
 }
 
 @keyframes highlight {
-    0% { background: rgba(102, 126, 234, 0.3); }
-    100% { background: var(--bg-light); }
+    0% {
+        background: rgba(102, 126, 234, 0.3);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+    }
+    100% {
+        background: var(--bg-light);
+        box-shadow: none;
+    }
 }
 
 footer {
@@ -392,11 +485,42 @@ footer {
     color: var(--text-secondary);
 }
 
+footer a {
+    color: var(--link-default);
+}
+
+footer a:visited {
+    color: var(--link-visited);
+}
+
+footer a:hover {
+    color: var(--link-hover);
+}
+
+/* Focus styles for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: white;
+}
+
 @media (max-width: 768px) {
     header h1 { font-size: 2em; }
     header p { font-size: 1em; }
     nav ul { flex-direction: column; gap: 0.5rem; }
     .grid { grid-template-columns: 1fr; }
+    .command-nav { flex-direction: column; }
 }
 '@
 

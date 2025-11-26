@@ -838,9 +838,9 @@ if (Test-Path $buildDocsPath) {
         $content = $content -replace '(?s)^---.*?---\s*', ''
 
         # Convert markdown headers to HTML with IDs for navigation
-        $content = $content -replace '## (.+)', '<h2 id="$1">$1</h2>'
-        $content = $content -replace '### (.+)', '<h3>$1</h3>'
-        $content = $content -replace '#### (.+)', '<h4>$4</h4>'
+        $content = $content -replace '(?m)^## (.+)$', '<h2 id="$1">$1</h2>'
+        $content = $content -replace '(?m)^### (.+)$', '<h3>$1</h3>'
+        $content = $content -replace '(?m)^#### (.+)$', '<h4>$1</h4>'
 
         # Convert code blocks - PowerShell
         $content = $content -replace '(?s)```powershell\s*\n(.+?)\n```', '<pre><code class="language-powershell">$1</code></pre>'
@@ -933,10 +933,10 @@ if (Test-Path $buildDocsPath) {
         $commandsList += [PSCustomObject]@{
             Name     = $baseName
             Synopsis = if ($synopsis) {
-                $synopsis 
+                $synopsis
             }
             else {
-                "PowerShell command from LeastPrivilegedMSGraph module" 
+                "PowerShell command from LeastPrivilegedMSGraph module"
             }
         }
 

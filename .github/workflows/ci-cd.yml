@@ -258,6 +258,8 @@ jobs:
           gem "jekyll-seo-tag"
           gem "jekyll-github-metadata"
           gem "jekyll-include-cache"
+          gem "jekyll-avatar"
+          gem "jekyll-mentions"
           gem "webrick"
           EOF
 

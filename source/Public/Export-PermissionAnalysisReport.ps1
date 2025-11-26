@@ -113,7 +113,6 @@ function Export-PermissionAnalysisReport {
     with a custom title, saved to a dedicated reports folder.
 
 .EXAMPLE
-    # Generate weekly reports for all applications
     $timestamp = Get-Date -Format "yyyy-MM-dd"
     $reportPath = "\\shared\reports\GraphPermissions_$timestamp.html"
 
@@ -124,8 +123,6 @@ function Export-PermissionAnalysisReport {
     }
 
     $report = Export-PermissionAnalysisReport -AppData $results -OutputPath $reportPath -ReportTitle "Weekly Permission Review - $timestamp"
-
-    # Send notification
     Send-MailMessage -To "security-team@contoso.com" -Subject "Weekly Graph Permissions Report" -Body "Report available at: $report"
 
     Description:

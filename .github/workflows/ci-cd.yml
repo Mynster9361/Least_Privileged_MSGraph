@@ -239,28 +239,40 @@ jobs:
             -BuildOutputPath "${{ env.buildFolderName }}" `
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"
-          
-          Write-Host "`n=== Verifying prepared documentation ===" -ForegroundColor Cyan
-          Write-Host "Files in gh-pages-docs:" -ForegroundColor Yellow
-          Get-ChildItem ./gh-pages-docs -Recurse -File | ForEach-Object {
-            Write-Host "  $($_.FullName.Replace((Get-Location).Path, '.'))" -ForegroundColor Gray
-          }
-          
-          # Verify critical files exist
-          $criticalFiles = @(
-            './gh-pages-docs/_config.yml',
-            './gh-pages-docs/index.md',
-            './gh-pages-docs/_data/navigation.yml',
-            './gh-pages-docs/_data/toc.yml'
-          )
-          
-          foreach ($file in $criticalFiles) {
-            if (Test-Path $file) {
-              Write-Host "✓ Found: $file" -ForegroundColor Green
-            } else {
-              Write-Warning "✗ Missing: $file"
-            }
-          }
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Create Gemfile
+        run: |
+          cd gh-pages-docs
+          cat > Gemfile << 'EOF'
+          source "https://rubygems.org"
+          gem "jekyll", "~> 4.3"
+          gem "jekyll-remote-theme"
+          gem "jekyll-feed"
+          gem "jekyll-sitemap"
+          gem "jekyll-seo-tag"
+          gem "jekyll-github-metadata"
+          gem "jekyll-include-cache"
+          gem "webrick"
+          EOF
+
+      - name: Install Jekyll dependencies
+        run: |
+          cd gh-pages-docs
+          bundle install
+
+      - name: Build Jekyll site
+        run: |
+          cd gh-pages-docs
+          bundle exec jekyll build --verbose
+        env:
+          JEKYLL_ENV: production
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
@@ -268,7 +280,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./gh-pages-docs
+          path: ./gh-pages-docs/_site
 
       - name: Deploy to GitHub Pages
         id: deployment

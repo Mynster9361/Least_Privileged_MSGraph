@@ -237,6 +237,153 @@ li {
     margin: 0.5rem 0;
 }
 
+.command-header {
+    border-left: 4px solid #667eea;
+}
+
+.command-header h1 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 2em;
+}
+
+.command-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.command-nav a {
+    background: var(--bg-light);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.3s;
+}
+
+.command-nav a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.command-content {
+    border-left: 4px solid var(--info);
+}
+
+.doc-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+}
+
+.doc-section h2 {
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.doc-section.synopsis {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-left: 4px solid #667eea;
+}
+
+.doc-section.description {
+    border-left: 4px solid var(--info);
+}
+
+.doc-section.examples {
+    border-left: 4px solid var(--success);
+}
+
+.doc-section.parameters {
+    border-left: 4px solid var(--warning);
+}
+
+.doc-section.notes {
+    border-left: 4px solid var(--info);
+}
+
+.param-block {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    border-left: 3px solid var(--warning);
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85em;
+}
+
+.param-block code {
+    background: none;
+    padding: 0;
+    color: var(--text-secondary);
+}
+
+.command-card {
+    border-left: 3px solid var(--primary);
+}
+
+.command-card:hover {
+    border-left-color: #667eea;
+}
+
+.command-content h3 {
+    color: var(--primary);
+    margin: 1.5rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.command-content h4 {
+    color: var(--text-primary);
+    margin: 1rem 0 0.5rem;
+}
+
+.doc-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.doc-section ul li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin: 0.5rem 0;
+}
+
+.doc-section ul li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+.doc-section.examples pre {
+    background: #1a1a1a;
+    border-left-color: var(--success);
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Highlight target section when navigated to */
+.doc-section:target {
+    animation: highlight 2s ease-in-out;
+}
+
+@keyframes highlight {
+    0% { background: rgba(102, 126, 234, 0.3); }
+    100% { background: var(--bg-light); }
+}
+
 footer {
     text-align: center;
     padding: 3rem 0;
@@ -461,9 +608,7 @@ Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code
         <li><a href="getting-started.html">📚 Getting Started Tutorial</a> - Step-by-step guide with examples</li>
         <li><a href="commands.html">🔧 Complete Command Reference</a> - Detailed documentation for all cmdlets</li>
         <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/README.md" target="_blank">📖 Full README</a> - Comprehensive overview and architecture</li>
-        <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/docs/examples.md" target="_blank">💡 Advanced Examples</a> - Real-world scenarios and patterns</li>
         <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/issues" target="_blank">🐛 Report Issues</a> - Bug reports and feature requests</li>
-        <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/discussions" target="_blank">💬 Community Discussions</a> - Questions and best practices</li>
     </ul>
 </div>
 
@@ -471,7 +616,7 @@ Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code
     <h2>⚙️ Prerequisites</h2>
     <ul>
         <li>PowerShell 5.1 or later</li>
-        <li>Azure Log Analytics workspace with Microsoft Graph activity logs enabled</li>
+        <li>Azure Log Analytics workspace with Microsoft Graph activity logs enabled <a href="https://learn.microsoft.com/en-us/graph/microsoft-graph-activity-logs-overview" target="_blank">Learn more (MS DOCS)</a></li>
         <li>Azure AD App Registration with required permissions:
             <ul>
                 <li><code>Application.Read.All</code> - To read service principals</li>
@@ -479,7 +624,6 @@ Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code
                 <li><code>Log Analytics Reader</code> role on the workspace</li>
             </ul>
         </li>
-        <li>Microsoft Graph diagnostic settings configured to send logs to Log Analytics</li>
     </ul>
 </div>
 
@@ -513,7 +657,7 @@ Import-Module LeastPrivilegedMSGraph</code></pre>
     <h2>Prerequisites</h2>
     <ul>
         <li>PowerShell 5.1 or later</li>
-        <li>Azure Log Analytics workspace with Microsoft Graph activity logs enabled</li>
+        <li>Azure Log Analytics workspace with Microsoft Graph activity logs enabled <a href="https://learn.microsoft.com/en-us/graph/microsoft-graph-activity-logs-overview" target="_blank">Learn more (MS DOCS)</a></li>
         <li>Azure AD App Registration with:
             <ul>
                 <li><code>Application.Read.All</code> permission</li>
@@ -521,7 +665,6 @@ Import-Module LeastPrivilegedMSGraph</code></pre>
                 <li>Log Analytics Reader role on the workspace</li>
             </ul>
         </li>
-        <li>Microsoft Graph diagnostic settings configured to send logs to Log Analytics</li>
     </ul>
 </div>
 
@@ -540,20 +683,24 @@ $daysToAnalyze = 30</code></pre>
 Initialize-LogAnalyticsApi
 
 # Connect to both Microsoft Graph and Log Analytics
-Connect-EntraService -ClientID $clientId `
-                     -TenantID $tenantId `
-                     -ClientSecret $clientSecret `
-                     -Service "LogAnalytics", "GraphBeta"</code></pre>
+$connectSplat = @{
+    ClientID     = $clientId
+    TenantID     = $tenantId
+    ClientSecret = $clientSecret
+    Service      = "LogAnalytics", "GraphBeta"
+}
+Connect-EntraService @connectSplat
+</code></pre>
 
     <h3>3. Analyze Permissions</h3>
     <pre><code># Get all apps with Graph permissions
 $apps = Get-AppRoleAssignment
 
 # Add API activity data from Log Analytics
-$apps = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days $daysToAnalyze
+$apps | Get-AppActivityData -WorkspaceId $workspaceId -Days $daysToAnalyze
 
 # Add throttling statistics
-$apps = $apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days $daysToAnalyze
+$apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days $daysToAnalyze
 
 # Perform permission analysis
 $analysis = $apps | Get-PermissionAnalysis
@@ -585,7 +732,14 @@ $workspaceId = "abcdef00-1111-2222-3333-444444444444"
 # Setup
 Import-Module LeastPrivilegedMSGraph
 Initialize-LogAnalyticsApi
-Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics", "GraphBeta"
+$connectSplat = @{
+    ClientID     = $clientId
+    TenantID     = $tenantId
+    ClientSecret = $clientSecret
+    Service      = "LogAnalytics", "GraphBeta"
+}
+
+Connect-EntraService @connectSplat
 
 # Analysis pipeline
 $results = Get-AppRoleAssignment |
@@ -597,10 +751,11 @@ $results = Get-AppRoleAssignment |
 Export-PermissionAnalysisReport -AppData $results -OutputPath ".\analysis-$(Get-Date -Format 'yyyyMMdd').html"
 
 # Display summary
-Write-Host "`nAnalysis Complete!" -ForegroundColor Green
-Write-Host "Applications analyzed: $($results.Count)"
-Write-Host "Over-privileged apps: $(($results | Where-Object { $_.ExcessPermissions.Count -gt 0 }).Count)"
-Write-Host "Total excess permissions: $(($results.ExcessPermissions | Measure-Object).Count)"</code></pre>
+"`nAnalysis Complete!"
+"Applications analyzed: $($results.Count)"
+"Over-privileged apps: $(($results | Where-Object { $_.ExcessPermissions.Count -gt 0 }).Count)"
+"Total excess permissions: $(($results.ExcessPermissions | Measure-Object).Count)"
+</code></pre>
 </div>
 
 <div class="card">
@@ -660,7 +815,6 @@ Get-MgServicePrincipal -Filter "appId eq '$clientId'" |
     <ul>
         <li><a href="commands.html">📚 Explore all available commands</a></li>
         <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/README.md" target="_blank">📖 Read the full documentation</a></li>
-        <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/docs/examples.md" target="_blank">💡 View more examples</a></li>
         <li><a href="https://github.com/Mynster9361/Least_Privileged_MSGraph/issues" target="_blank">🐛 Report issues or request features</a></li>
     </ul>
 </div>
@@ -680,40 +834,120 @@ if (Test-Path $buildDocsPath) {
         $baseName = $_.BaseName
         $content = Get-Content -Path $_.FullName -Raw
 
-        # Convert markdown to HTML
-        $htmlContent = $content `
-            -replace '##\s+(.+)', '<h2>$1</h2>' `
-            -replace '###\s+(.+)', '<h3>$1</h3>' `
-            -replace '```powershell\s*\n(.+?)\n```', '<pre><code>$1</code></pre>' `
-            -replace '```\s*\n(.+?)\n```', '<pre><code>$1</code></pre>' `
-            -replace '`([^`]+)`', '<code>$1</code>' `
-            -replace '\*\*(.+?)\*\*', '<strong>$1</strong>' `
-            -replace '\*(.+?)\*', '<em>$1</em>'
+        # Remove YAML front matter
+        $content = $content -replace '(?s)^---.*?---\s*', ''
 
-        $pageContent = "<div class='card'>$htmlContent</div>"
+        # Convert markdown headers to HTML with IDs for navigation
+        $content = $content -replace '## (.+)', '<h2 id="$1">$1</h2>'
+        $content = $content -replace '### (.+)', '<h3>$1</h3>'
+        $content = $content -replace '#### (.+)', '<h4>$4</h4>'
+
+        # Convert code blocks - PowerShell
+        $content = $content -replace '(?s)```powershell\s*\n(.+?)\n```', '<pre><code class="language-powershell">$1</code></pre>'
+
+        # Convert code blocks - YAML (for parameter blocks)
+        $content = $content -replace '(?s)```yaml\s*\n(.+?)\n```', '<div class="param-block"><code>$1</code></div>'
+
+        # Convert generic code blocks
+        $content = $content -replace '(?s)```\s*\n(.+?)\n```', '<pre><code>$1</code></pre>'
+
+        # Convert inline code
+        $content = $content -replace '`([^`]+)`', '<code>$1</code>'
+
+        # Convert bold and italic
+        $content = $content -replace '\*\*(.+?)\*\*', '<strong>$1</strong>'
+        $content = $content -replace '\*(.+?)\*', '<em>$1</em>'
+
+        # Convert links
+        $content = $content -replace '\[([^\]]+)\]\(([^\)]+)\)', '<a href="$2" target="_blank">$1</a>'
+
+        # Convert bullet lists
+        $content = $content -replace '(?m)^- (.+)$', '<li>$1</li>'
+        $content = $content -replace '(?s)(<li>.*?</li>)', '<ul>$1</ul>'
+
+        # Clean up nested lists
+        $content = $content -replace '</ul>\s*<ul>', ''
+
+        # Wrap in semantic sections
+        $sections = @{
+            'SYNOPSIS'      = 'synopsis'
+            'SYNTAX'        = 'syntax'
+            'DESCRIPTION'   = 'description'
+            'PARAMETERS'    = 'parameters'
+            'INPUTS'        = 'inputs'
+            'OUTPUTS'       = 'outputs'
+            'EXAMPLES'      = 'examples'
+            'NOTES'         = 'notes'
+            'RELATED LINKS' = 'related-links'
+        }
+
+        foreach ($section in $sections.GetEnumerator()) {
+            $sectionClass = $section.Value
+            $content = $content -replace "<h2 id=`"$($section.Key)`">$($section.Key)</h2>",
+            "<div class='doc-section $sectionClass'><h2 id=`"$($section.Key)`">$($section.Key)</h2>"
+
+            # Close previous section if exists
+            if ($content -match "<div class='doc-section") {
+                $content = $content -replace "(<div class='doc-section [^>]+>)", "</div>`$1"
+            }
+        }
+
+        # Close final section
+        $content += "</div>"
+
+        # Remove first closing div (artifact from replacement)
+        $content = $content -replace '^</div>', '', 1
+
+        # Create command page with navigation
+        $commandNav = @"
+<div class="command-nav">
+    <a href="#SYNOPSIS">Synopsis</a>
+    <a href="#SYNTAX">Syntax</a>
+    <a href="#DESCRIPTION">Description</a>
+    <a href="#PARAMETERS">Parameters</a>
+    <a href="#EXAMPLES">Examples</a>
+    <a href="#NOTES">Notes</a>
+    <a href="#RELATED LINKS">Related Links</a>
+</div>
+"@
+
+        $pageContent = @"
+<div class="card command-header">
+    <h1>$baseName</h1>
+    $commandNav
+</div>
+<div class="card command-content">
+    $content
+</div>
+"@
+
         $page = New-HtmlPage -Title $baseName -Content $pageContent -RelativePath ".."
-
         Set-Content -Path "$OutputPath/commands/$baseName.html" -Value $page
 
         # Extract synopsis for commands list
         $synopsis = ""
-        if ($content -match '##\s+SYNOPSIS\s+(.+?)(?=##|\z)') {
-            $synopsis = $matches[1].Trim() -replace '\r?\n', ' '
+        if ($content -match '<div class=.doc-section synopsis.>.*?<p>(.+?)</p>') {
+            $synopsis = $matches[1] -replace '<[^>]+>', '' # Strip HTML tags
         }
 
         $commandsList += [PSCustomObject]@{
             Name     = $baseName
-            Synopsis = $synopsis
+            Synopsis = if ($synopsis) {
+                $synopsis 
+            }
+            else {
+                "PowerShell command from LeastPrivilegedMSGraph module" 
+            }
         }
 
         Write-Host "  ✓ $baseName.html" -ForegroundColor Gray
     }
 
-    # Create commands index
-    $commandsListHtml = $commandsList | ForEach-Object {
+    # Create commands index with better styling
+    $commandsListHtml = $commandsList | Sort-Object Name | ForEach-Object {
         @"
-<div class="grid-item">
-    <h3><a href="commands/$($_.Name).html">$($_.Name)</a></h3>
+<div class="grid-item command-card">
+    <h3><a href="commands/$($_.Name).html">📌 $($_.Name)</a></h3>
     <p>$($_.Synopsis)</p>
 </div>
 "@
@@ -721,9 +955,9 @@ if (Test-Path $buildDocsPath) {
 
     $commandsContent = @"
 <div class="card">
-    <h2>Command Reference</h2>
-    <p>Complete reference for all cmdlets in the LeastPrivilegedMSGraph module.</p>
-    <input type="text" id="search" placeholder="Search commands..." style="width: 100%; padding: 0.75rem; margin: 1rem 0; background: var(--bg-light); border: 1px solid var(--border); border-radius: 5px; color: var(--text-primary); font-size: 1em;">
+    <h2>📚 Command Reference</h2>
+    <p>Complete reference for all $($commandsList.Count) cmdlets in the LeastPrivilegedMSGraph module.</p>
+    <input type="text" id="search" placeholder="🔍 Search commands..." style="width: 100%; padding: 0.75rem; margin: 1rem 0; background: var(--bg-light); border: 1px solid var(--border); border-radius: 5px; color: var(--text-primary); font-size: 1em;">
 </div>
 
 <div class="grid">

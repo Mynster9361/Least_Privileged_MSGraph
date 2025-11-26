@@ -240,8 +240,27 @@ jobs:
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"
           
-          # DO NOT create .nojekyll - Docsy theme requires Jekyll processing
-          Write-Host "Documentation prepared for Docsy Jekyll theme"
+          Write-Host "`n=== Verifying prepared documentation ===" -ForegroundColor Cyan
+          Write-Host "Files in gh-pages-docs:" -ForegroundColor Yellow
+          Get-ChildItem ./gh-pages-docs -Recurse -File | ForEach-Object {
+            Write-Host "  $($_.FullName.Replace((Get-Location).Path, '.'))" -ForegroundColor Gray
+          }
+          
+          # Verify critical files exist
+          $criticalFiles = @(
+            './gh-pages-docs/_config.yml',
+            './gh-pages-docs/index.md',
+            './gh-pages-docs/_data/navigation.yml',
+            './gh-pages-docs/_data/toc.yml'
+          )
+          
+          foreach ($file in $criticalFiles) {
+            if (Test-Path $file) {
+              Write-Host "✓ Found: $file" -ForegroundColor Green
+            } else {
+              Write-Warning "✗ Missing: $file"
+            }
+          }
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
@@ -260,6 +279,9 @@ jobs:
         run: |
           Write-Host "✅ GitHub Pages deployed successfully!" -ForegroundColor Green
           Write-Host "📚 Documentation URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" -ForegroundColor Cyan
+          Write-Host "" 
+          Write-Host "⚠️  If you see a 404, wait 2-3 minutes for Jekyll to build the site." -ForegroundColor Yellow
+          Write-Host "Check build status at: https://github.com/${{ github.repository }}/actions" -ForegroundColor Yellow
 
       - name: Publish Release
         shell: pwsh

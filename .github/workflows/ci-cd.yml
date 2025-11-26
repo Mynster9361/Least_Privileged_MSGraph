@@ -240,49 +240,13 @@ jobs:
             -RepositoryDocsPath "./docs" `
             -OutputPath "./gh-pages-docs"
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-
-      - name: Create Gemfile
-        run: |
-          cd gh-pages-docs
-          cat > Gemfile << 'EOF'
-          source "https://rubygems.org"
-          gem "jekyll", "~> 4.3"
-          gem "jekyll-remote-theme"
-          gem "jekyll-feed"
-          gem "jekyll-sitemap"
-          gem "jekyll-seo-tag"
-          gem "jekyll-github-metadata"
-          gem "jekyll-include-cache"
-          gem "jekyll-avatar"
-          gem "jekyll-mentions"
-          gem "webrick"
-          EOF
-
-      - name: Install Jekyll dependencies
-        run: |
-          cd gh-pages-docs
-          bundle install
-
-      - name: Build Jekyll site
-        run: |
-          cd gh-pages-docs
-          bundle exec jekyll build --verbose
-        env:
-          JEKYLL_ENV: production
-          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./gh-pages-docs/_site
+          path: ./gh-pages-docs
 
       - name: Deploy to GitHub Pages
         id: deployment
@@ -293,17 +257,3 @@ jobs:
         run: |
           Write-Host "✅ GitHub Pages deployed successfully!" -ForegroundColor Green
           Write-Host "📚 Documentation URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" -ForegroundColor Cyan
-          Write-Host "" 
-          Write-Host "⚠️  If you see a 404, wait 2-3 minutes for Jekyll to build the site." -ForegroundColor Yellow
-          Write-Host "Check build status at: https://github.com/${{ github.repository }}/actions" -ForegroundColor Yellow
-
-      - name: Publish Release
-        shell: pwsh
-        run: |
-          Write-Host "Publishing module to PowerShell Gallery"
-          ./build.ps1 -tasks publish
-        env:
-          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
-          ReleaseBranch: ${{ env.defaultBranch }}
-          MainGitBranch: ${{ env.defaultBranch }}

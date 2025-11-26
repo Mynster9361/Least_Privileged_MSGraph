@@ -146,30 +146,6 @@ function Export-PermissionAnalysisReport {
     Filters analysis results to only applications with significant issues (excess permissions,
     missing permissions, or throttling), generating a focused action-required report.
 
-.EXAMPLE
-    # Archive historical reports with metadata
-    $date = Get-Date
-    $archivePath = "\\fileserver\ComplianceReports\GraphAPI\$($date.Year)\$($date.ToString('MM'))"
-    New-Item -Path $archivePath -ItemType Directory -Force | Out-Null
-
-    $results = Get-PermissionAnalysis -WorkspaceId $wsId -Days 30
-    $reportFile = "PermissionAnalysis_$($date.ToString('yyyy-MM-dd')).html"
-    $reportPath = Join-Path $archivePath $reportFile
-
-    Export-PermissionAnalysisReport -AppData $results -OutputPath $reportPath -ReportTitle "Monthly Compliance Report - $($date.ToString('MMMM yyyy'))"
-
-    # Create metadata file
-    @{
-        GeneratedDate = $date
-        ApplicationCount = $results.Count
-        TotalExcessPermissions = ($results.ExcessPermissions | Measure-Object).Count
-        CriticalIssues = ($results | Where-Object { $_.ThrottlingStats.ThrottlingSeverity -ge 4 }).Count
-    } | ConvertTo-Json | Out-File (Join-Path $archivePath "metadata.json")
-
-    Description:
-    Implements a compliance archival workflow with organized folder structure by year/month,
-    generates the report, and creates accompanying metadata for tracking purposes.
-
 .NOTES
     Prerequisites:
     - PowerShell 5.1 or later

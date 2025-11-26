@@ -330,7 +330,7 @@ Report generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 "@
 
         Send-MailMessage -To "ops-team@contoso.com" -From "monitoring@contoso.com" `
-            -Subject "⚠️ Graph API Throttling Alert - $($alerts.Count) Apps Affected" `
+            -Subject "Graph API Throttling Alert - $($alerts.Count) Apps Affected" `
             -Body $emailBody -SmtpServer "smtp.contoso.com"
 
         "Alert sent for $($alerts.Count) applications"

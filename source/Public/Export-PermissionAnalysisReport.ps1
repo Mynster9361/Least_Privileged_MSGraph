@@ -276,6 +276,9 @@ function Export-PermissionAnalysisReport {
     - Archive reports for compliance (typically 1-7 years retention)
 
 .LINK
+    https://learn.microsoft.com/en-us/graph/permissions-reference
+
+.LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Export-PermissionAnalysisReport.html
 #>
     [CmdletBinding()]

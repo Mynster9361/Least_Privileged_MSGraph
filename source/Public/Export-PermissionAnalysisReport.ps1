@@ -74,7 +74,7 @@ function Export-PermissionAnalysisReport {
 .NOTES
     Template Requirements:
     - The function requires a base HTML template file located at "Private\base.html"
-    - The template uses placeholder blocks: {% block app_data %}, {% block title %}, {% block generated_on %}
+    - The template uses placeholder blocks: [app_data], [title], [generated_on]
 
     JSON Processing:
     - Application data is converted to JSON with depth 10 to preserve nested structures

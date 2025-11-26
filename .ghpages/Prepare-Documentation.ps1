@@ -89,10 +89,19 @@ if (Test-Path $buildDocsPath) {
         # Read the content
         $content = Get-Content -Path $_.FullName -Raw
 
+        # CRITICAL FIX: Escape Liquid template tags that Jekyll will try to parse
+        # Replace {% and %} with their escaped versions
+        $content = $content -replace '\{%', '{% raw %}{%{% endraw %}'
+        $content = $content -replace '%\}', '{% raw %}%}{% endraw %}'
+
+        # Also escape {{ and }}
+        $content = $content -replace '\{\{', '{% raw %}{{{% endraw %}'
+        $content = $content -replace '\}\}', '{% raw %}}}{% endraw %}'
+
         # Extract synopsis
         $synopsis = ""
         if ($content -match '##\s+SYNOPSIS\s+(.+?)(?=##|\z)') {
-            $synopsis = $matches[1].Trim() -replace '\r?\n', ' '
+            $synopsis = $matches[1].Trim() -replace '\r?\n', ' ' -replace '{% raw %}|{% endraw %}', ''
         }
 
         # Create front matter

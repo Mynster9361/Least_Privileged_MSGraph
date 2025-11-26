@@ -200,16 +200,16 @@ function Export-PermissionAnalysisReport {
     - The function uses a Jinja2-style template with placeholder blocks
     - Template location: <module-root>\data\base.html
     - Placeholders replaced:
-      * {% block app_data %}{% endblock %} → JSON data
-      * {% block title %}{% endblock %} → Report title
-      * {% block generated_on %}{% endblock %} → Generation timestamp
+      * {% block app_data %}{% endblock %} -> JSON data
+      * {% block title %}{% endblock %} -> Report title
+      * {% block generated_on %}{% endblock %} -> Generation timestamp
 
     JSON Processing:
     - Application data converted to JSON with depth 10 (preserves nested structures)
     - Special characters properly escaped for JavaScript embedding:
-      * Backslashes: \ → \\
-      * Quotes: " → \"
-      * Newlines: \n → \\n
+      * Backslashes: \ -> \\
+      * Quotes: " -> \"
+      * Newlines: \n -> \\n
     - Data is compressed (no indentation) to reduce file size
 
     Report Size Considerations:

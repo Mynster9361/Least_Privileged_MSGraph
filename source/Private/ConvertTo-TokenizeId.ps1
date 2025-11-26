@@ -38,8 +38,8 @@ function ConvertTo-TokenizeId {
     This is a private module function not exported to users.
 
     Tokenization Rules:
-    - Segments with digits (except 'v1.0' or 'beta') → {id}
-    - Last segment with '(.*?)' pattern → special handling
+    - Segments with digits (except 'v1.0' or 'beta') -> {id}
+    - Last segment with '(.*?)' pattern -> special handling
     - API version segments always preserved
     - Trailing slashes removed
 

@@ -286,7 +286,7 @@ function Get-AppThrottlingData {
                     Change = $throttleChange
                     Trend = if ($throttleChange -gt 2) { "⬆ Worsening" }
                            elseif ($throttleChange -lt -2) { "⬇ Improving" }
-                           else { "→ Stable" }
+                           else { "-> Stable" }
                     PreviousStatus = $previous.ThrottlingStats.ThrottlingStatus
                     CurrentStatus = $current.ThrottlingStats.ThrottlingStatus
                 }

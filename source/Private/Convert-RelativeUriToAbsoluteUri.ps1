@@ -43,8 +43,8 @@ function Convert-RelativeUriToAbsoluteUri {
     This is a private module function not exported to users.
 
     Normalization Rules:
-    - '/me' segments → '/users/{id}'
-    - Email addresses (with '@') → '{id}'
+    - '/me' segments -> '/users/{id}'
+    - Email addresses (with '@') -> '{id}'
     - URL-encoded characters unescaped
     - Leading/trailing slashes removed
     - Base URL added if missing (https://graph.microsoft.com)

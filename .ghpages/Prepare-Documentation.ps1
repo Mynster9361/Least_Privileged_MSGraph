@@ -961,8 +961,13 @@ if (Test-Path $buildDocsPath) {
         # Remove YAML front matter
         $content = $content -replace '(?s)^---.*?---\s*', ''
 
-        # Convert markdown headers to HTML with IDs for navigation
-        $content = $content -replace '(?m)^## (.+)$', '<h2 id="$1">$1</h2>'
+        # Convert markdown headers to HTML with clean IDs for navigation
+        $content = $content -replace '(?m)^## (.+?)[\r\n]+', {
+            param($match)
+            $headerText = $match.Groups[1].Value.Trim()
+            $headerId = $headerText.ToLower() -replace '\s+', '-' -replace '[^a-z0-9-]', ''
+            "<h2 id=`"$headerId`">$headerText</h2>`n"
+        }
         $content = $content -replace '(?m)^### (.+)$', '<h3>$1</h3>'
         $content = $content -replace '(?m)^#### (.+)$', '<h4>$1</h4>'
 
@@ -992,23 +997,23 @@ if (Test-Path $buildDocsPath) {
         # Clean up nested lists
         $content = $content -replace '</ul>\s*<ul>', ''
 
-        # Wrap in semantic sections - simplified approach
+        # Wrap in semantic sections with clean IDs
         $sections = @(
-            @{Name = 'SYNOPSIS'; Class = 'synopsis' }
-            @{Name = 'SYNTAX'; Class = 'syntax' }
-            @{Name = 'DESCRIPTION'; Class = 'description' }
-            @{Name = 'PARAMETERS'; Class = 'parameters' }
-            @{Name = 'INPUTS'; Class = 'inputs' }
-            @{Name = 'OUTPUTS'; Class = 'outputs' }
-            @{Name = 'EXAMPLES'; Class = 'examples' }
-            @{Name = 'NOTES'; Class = 'notes' }
-            @{Name = 'RELATED LINKS'; Class = 'related-links' }
+            @{Name = 'SYNOPSIS'; Class = 'synopsis'; Id = 'synopsis' }
+            @{Name = 'SYNTAX'; Class = 'syntax'; Id = 'syntax' }
+            @{Name = 'DESCRIPTION'; Class = 'description'; Id = 'description' }
+            @{Name = 'PARAMETERS'; Class = 'parameters'; Id = 'parameters' }
+            @{Name = 'INPUTS'; Class = 'inputs'; Id = 'inputs' }
+            @{Name = 'OUTPUTS'; Class = 'outputs'; Id = 'outputs' }
+            @{Name = 'EXAMPLES'; Class = 'examples'; Id = 'examples' }
+            @{Name = 'NOTES'; Class = 'notes'; Id = 'notes' }
+            @{Name = 'RELATED LINKS'; Class = 'related-links'; Id = 'related-links' }
         )
 
         # Replace headers with section wrappers
         foreach ($section in $sections) {
-            $headerPattern = [regex]::Escape("<h2 id=`"$($section.Name)`">$($section.Name)</h2>")
-            $replacement = "<div class='doc-section $($section.Class)'><h2 id=`"$($section.Name)`">$($section.Name)</h2>"
+            $headerPattern = [regex]::Escape("<h2 id=`"$($section.Id)`">$($section.Name)</h2>")
+            $replacement = "<div class='doc-section $($section.Class)'><h2 id=`"$($section.Id)`">$($section.Name)</h2>"
             $content = $content -replace $headerPattern, $replacement
         }
 
@@ -1031,16 +1036,16 @@ if (Test-Path $buildDocsPath) {
             }
         }
 
-        # Create command page with navigation
+        # Create command page with navigation using clean anchor links
         $commandNav = @"
 <div class="command-nav">
-    <a href="#SYNOPSIS">Synopsis</a>
-    <a href="#SYNTAX">Syntax</a>
-    <a href="#DESCRIPTION">Description</a>
-    <a href="#PARAMETERS">Parameters</a>
-    <a href="#EXAMPLES">Examples</a>
-    <a href="#NOTES">Notes</a>
-    <a href="#RELATED%20LINKS">Related Links</a>
+    <a href="#synopsis">Synopsis</a>
+    <a href="#syntax">Syntax</a>
+    <a href="#description">Description</a>
+    <a href="#parameters">Parameters</a>
+    <a href="#examples">Examples</a>
+    <a href="#notes">Notes</a>
+    <a href="#related-links">Related Links</a>
 </div>
 "@
 

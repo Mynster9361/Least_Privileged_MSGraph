@@ -962,14 +962,25 @@ if (Test-Path $buildDocsPath) {
         $content = $content -replace '(?s)^---.*?---\s*', ''
 
         # Convert markdown headers to HTML with clean IDs for navigation
-        $content = $content -replace '(?m)^## (.+?)[\r\n]+', {
-            param($match)
-            $headerText = $match.Groups[1].Value.Trim()
-            $headerId = $headerText.ToLower() -replace '\s+', '-' -replace '[^a-z0-9-]', ''
-            "<h2 id=`"$headerId`">$headerText</h2>`n"
+        # Process each h2 header manually to avoid script block issues
+        $lines = $content -split "`r?`n"
+        $processedLines = foreach ($line in $lines) {
+            if ($line -match '^## (.+)$') {
+                $headerText = $matches[1].Trim()
+                $headerId = $headerText.ToLower() -replace '\s+', '-' -replace '[^a-z0-9-]', ''
+                "<h2 id=`"$headerId`">$headerText</h2>"
+            }
+            elseif ($line -match '^### (.+)$') {
+                "<h3>$($matches[1])</h3>"
+            }
+            elseif ($line -match '^#### (.+)$') {
+                "<h4>$($matches[1])</h4>"
+            }
+            else {
+                $line
+            }
         }
-        $content = $content -replace '(?m)^### (.+)$', '<h3>$1</h3>'
-        $content = $content -replace '(?m)^#### (.+)$', '<h4>$1</h4>'
+        $content = $processedLines -join "`n"
 
         # Convert code blocks - PowerShell
         $content = $content -replace '(?s)```powershell\r?\n(.+?)\r?\n```', '<pre><code class="language-powershell">$1</code></pre>'

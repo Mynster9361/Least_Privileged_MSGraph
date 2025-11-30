@@ -269,12 +269,12 @@ function Export-PermissionAnalysisReport {
         $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')
 
         # Get the module root directory (handles versioned paths correctly)
-        $moduleRoot = $MyInvocation.MyCommand.Module.ModuleBase
+        $script:moduleRoot = $PSScriptRoot
 
         # Load the HTML template
-        $templatePath = Join-Path -Path $moduleRoot -ChildPath "data\base.html"
+        $templatePath = Join-Path -Path $script:moduleRoot -ChildPath "data\base.html"
 
-        Write-Debug "Module root: $moduleRoot"
+        Write-Debug "Module root: $script:moduleRoot"
         Write-Debug "Template path: $templatePath"
 
         if (-not (Test-Path -Path $templatePath)) {

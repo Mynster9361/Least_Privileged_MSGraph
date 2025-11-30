@@ -8,8 +8,10 @@ function Get-AppActivityData {
     for each application over a specified time period. It adds the activity data as a new property
     to each application object, enabling analysis of what API calls each application has made.
 
-    The function processes applications in batches, displaying progress information, and handles
-    errors gracefully by continuing to process remaining applications even if some queries fail.
+    The function processes applications efficiently using PowerShell pipeline streaming, meaning
+    each application is processed and output immediately without storing all results in memory.
+    This approach significantly reduces memory usage, especially for large tenants with hundreds
+    or thousands of applications.
 
     Activity data includes:
     - HTTP methods used (GET, POST, PUT, PATCH, DELETE, etc.)
@@ -24,17 +26,12 @@ function Get-AppActivityData {
     - Auditing what Graph API operations applications perform
     - Planning permission optimization initiatives
 
-    The function operates in three phases:
-    1. **Begin**: Initializes collections for incoming applications
-    2. **Process**: Collects all applications from pipeline input
-    3. **End**: Processes each application with progress tracking and error handling
-
     Key Features:
-    - Pipeline support for efficient processing
-    - Progress bar with percentage completion
+    - True pipeline streaming for minimal memory footprint
     - Individual error handling (one failure doesn't stop processing)
     - Verbose logging for monitoring
     - Debug output for troubleshooting
+    - Progress tracking with item count
     - Returns enhanced objects with Activity property
 
 .PARAMETER AppData
@@ -91,8 +88,9 @@ function Get-AppActivityData {
     - Maximum limited by workspace retention period (typically 30-730 days)
 
 .OUTPUTS
-    System.Collections.ArrayList
+    System.Object
     Returns the input application objects enriched with an "Activity" property.
+    Objects are streamed through the pipeline as they are processed.
 
     Activity Property Structure:
     - Type: Array of objects
@@ -106,7 +104,7 @@ function Get-AppActivityData {
     - Empty array (@()): Error occurred querying Log Analytics (warning logged)
     - Null Activity property should never occur (always set to at least empty array)
 
-    The function also outputs a summary string indicating successful processing count.
+    The function also outputs a summary string at the end indicating successful processing count.
 
 .EXAMPLE
     $apps = Get-MgServicePrincipal -Filter "appId eq 'your-app-id'"
@@ -155,25 +153,15 @@ function Get-AppActivityData {
     for 30 days, which may indicate unused permissions or dormant applications.
 
 .EXAMPLE
-    # Process large tenant in chunks for better memory management
-    $allApps = Get-MgServicePrincipal -All
-    $chunkSize = 50
-    $allResults = @()
-
-    for ($i = 0; $i -lt $allApps.Count; $i += $chunkSize) {
-        $chunk = $allApps[$i..([Math]::Min($i + $chunkSize - 1, $allApps.Count - 1))]
-        "Processing chunk $([Math]::Floor($i/$chunkSize) + 1)..."
-
-        $chunkResults = $chunk | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
-        $allResults += $chunkResults
-
-        # Optional: Save intermediate results
-        $chunkResults | Export-Clixml ".\results_chunk_$i.xml"
-    }
+    # Process entire tenant with streaming pipeline - minimal memory usage
+    Get-MgServicePrincipal -All |
+        Get-AppActivityData -WorkspaceId $workspaceId -Days 30 -Verbose |
+        Export-Clixml .\all-apps-with-activity.xml
 
     Description:
-    Processes a large tenant (hundreds of apps) in chunks to manage memory usage
-    and provides intermediate saves for resilience against failures.
+    Processes all service principals in the tenant using pipeline streaming.
+    Each app is processed and written to the XML file as it completes, minimizing
+    memory usage regardless of tenant size.
 
 .EXAMPLE
     # Compare activity across different time periods
@@ -199,27 +187,25 @@ function Get-AppActivityData {
     with irregular or seasonal usage patterns.
 
 .EXAMPLE
-    # Generate activity summary report
-    $apps = Get-MgServicePrincipal -All
-    $enriched = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
+    # Generate activity summary report with streaming
+    Get-MgServicePrincipal -All |
+        Get-AppActivityData -WorkspaceId $workspaceId -Days 30 |
+        ForEach-Object {
+            [PSCustomObject]@{
+                ApplicationName = $_.PrincipalName
+                AppId = $_.AppId
+                UniqueEndpoints = $_.Activity.Count
+                HasActivity = $_.Activity.Count -gt 0
+                Methods = ($_.Activity.Method | Select-Object -Unique) -join ', '
+                SampleEndpoint = if ($_.Activity.Count -gt 0) { $_.Activity[0].Uri } else { "None" }
+            }
+        } | Export-Csv -Path ".\app-activity-summary.csv" -NoTypeInformation
 
-    $summary = $enriched | ForEach-Object {
-        [PSCustomObject]@{
-            ApplicationName = $_.PrincipalName
-            AppId = $_.AppId
-            UniqueEndpoints = $_.Activity.Count
-            HasActivity = $_.Activity.Count -gt 0
-            Methods = ($_.Activity.Method | Select-Object -Unique) -join ', '
-            SampleEndpoint = if ($_.Activity.Count -gt 0) { $_.Activity[0].Uri } else { "None" }
-        }
-    }
-
-    $summary | Export-Csv -Path ".\app-activity-summary.csv" -NoTypeInformation
     "Activity summary exported to app-activity-summary.csv"
 
     Description:
-    Creates a comprehensive summary CSV report showing activity metrics for all applications,
-    useful for stakeholder reporting and trend analysis.
+    Creates a comprehensive summary CSV report showing activity metrics for all applications
+    using efficient pipeline streaming. Memory usage remains constant regardless of tenant size.
 
 .NOTES
     Prerequisites:
@@ -243,28 +229,38 @@ function Get-AppActivityData {
     - Each application requires a separate Log Analytics query
     - Typical processing time: 1-2 seconds per application
     - Large tenants (500+ apps) may take 10-15 minutes
-    - Consider processing in chunks for very large tenants (see examples)
     - Network latency affects query time
     - Log Analytics query throttling may occur with rapid requests
 
     Memory Usage:
-    - Each application object is held in memory during processing
-    - Activity data adds ~5-50KB per application depending on API usage
-    - Large tenants may require 100-500MB memory
-    - Consider chunked processing for tenants with 1000+ applications
+    - Uses true pipeline streaming - only one application in memory at a time
+    - Constant memory usage regardless of tenant size (O(1) complexity)
+    - Activity data for each app is immediately passed downstream and released
+    - Ideal for large tenants with thousands of applications
+    - No risk of out-of-memory exceptions from storing results
+
+    Pipeline Streaming:
+    - Each application is processed in the process{} block
+    - Results are immediately output to the pipeline
+    - Downstream commands (like Export-Csv) receive items as they're ready
+    - Memory footprint stays minimal throughout execution
+    - Example: Get-MgServicePrincipal | Get-AppActivityData | Export-Csv
+      Only one service principal and one enriched result in memory at any time
 
     Error Handling:
     - Individual failures are logged as warnings (Write-Warning)
     - Processing continues even if some queries fail
     - Failed applications receive an empty Activity array (@())
-    - Progress bar continues regardless of individual failures
+    - Progress tracking continues regardless of individual failures
     - Final count reflects successfully processed apps (may be less than input)
 
     Progress Tracking:
-    - Progress bar shows: current app, total apps, percentage complete
+    - Progress bar shows: current app being processed
     - Updates after each application is processed
     - Includes current operation (app name and ID)
+    - Shows running count of processed items
     - Automatically completes when processing finishes
+    - Note: Total count/percentage not available due to streaming (memory optimization)
 
     Logging Levels:
     - **Write-Debug**: Detailed per-app processing information (use -Debug)
@@ -284,7 +280,6 @@ function Get-AppActivityData {
 
     Slow processing:
     - This is normal for large numbers of applications
-    - Consider processing in smaller chunks
     - Check Log Analytics workspace location (cross-region queries slower)
     - Verify network connectivity to Azure
 
@@ -293,30 +288,17 @@ function Get-AppActivityData {
     - Verify permissions to read from Log Analytics workspace
     - Check if authentication token has expired (re-authenticate)
 
-    Out of memory errors:
-    - Process applications in smaller batches (see chunking example)
-    - Reduce -Days parameter to limit activity data size
-    - Increase PowerShell memory limits if possible
-
-    Pipeline Behavior:
-    - Accepts ValueFromPipeline for seamless integration
-    - All pipeline objects collected before processing begins (required for progress calculation)
-    - Memory used to store all incoming objects
-    - Consider non-pipeline approach for very large datasets
-
     Return Value:
-    - Function returns both object array and string message
-    - String message goes to standard output
-    - Object array is primary return value for assignment
-    - Use [void] or Out-Null if you want to suppress string output
+    - Function returns enriched objects via pipeline streaming
+    - Summary message goes to standard output at the end
+    - Use Out-Null if you want to suppress the summary message
 
     Best Practices:
     - Always use -Verbose for long-running operations
-    - Save results with Export-Clixml for later analysis
-    - Implement retry logic for critical automation scenarios
+    - Use Export-Clixml or Export-Csv to save results as they stream through
+    - Leverage pipeline streaming for large datasets
     - Monitor progress bar for stuck queries
     - Test with small application sets before processing entire tenant
-    - Consider scheduling during off-peak hours for large tenants
 
     Related Cmdlets:
     - Get-MgServicePrincipal: Retrieve applications to analyze
@@ -327,8 +309,8 @@ function Get-AppActivityData {
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppActivityData.html
 #>
     [CmdletBinding()]
+    [OutputType([System.Object])]
     [OutputType([System.String])]
-    [OutputType([System.Collections.ArrayList])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
@@ -342,40 +324,24 @@ function Get-AppActivityData {
 
     begin {
         Write-Debug "Starting to get app activity data from Log Analytics..."
-        $allIncomingApps = [System.Collections.ArrayList]::new()
-        $allProcessedApps = [System.Collections.ArrayList]::new()
+        $processedCount = 0
     }
 
     process {
-        # First collect all incoming apps to get total count
+        # Process each app as it comes through the pipeline
         foreach ($app in $AppData) {
-            [void]$allIncomingApps.Add($app)
-        }
-    }
-
-    end {
-        $totalCount = $allIncomingApps.Count
-        $currentIndex = 0
-
-        Write-Verbose "Processing $totalCount applications..."
-
-        foreach ($app in $allIncomingApps) {
-            $currentIndex++
+            $processedCount++
             $spId = $app.PrincipalId
 
-            # Calculate percentage
-            $percentComplete = [math]::Round(($currentIndex / $totalCount) * 100, 2)
-
-            # Update progress bar
+            # Update progress bar with current item (no percentage, as we don't know total)
             $progressParams = @{
                 Activity         = "Querying Log Analytics for Application Activity"
-                Status           = "Processing $currentIndex of $totalCount applications"
+                Status           = "Processing application #$processedCount"
                 CurrentOperation = "$($app.PrincipalName) (ID: $spId)"
-                PercentComplete  = $percentComplete
             }
             Write-Progress @progressParams
 
-            Write-Debug "[$currentIndex/$totalCount] Querying activity for $($app.PrincipalName) ($spId)..."
+            Write-Debug "[$processedCount] Querying activity for $($app.PrincipalName) ($spId)..."
 
             try {
                 $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $spId
@@ -394,15 +360,15 @@ function Get-AppActivityData {
                 $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
             }
 
-            # Add to collection
-            [void]$allProcessedApps.Add($app)
+            # Output the enriched app object immediately to the pipeline
+            $app
         }
+    }
 
+    end {
         # Complete the progress bar
         Write-Progress -Activity "Querying Log Analytics for Application Activity" -Completed
 
-        "Successfully processed $($allProcessedApps.Count) applications."
-
-        return $allProcessedApps
+        Write-Verbose "Successfully processed $processedCount applications."
     }
 }

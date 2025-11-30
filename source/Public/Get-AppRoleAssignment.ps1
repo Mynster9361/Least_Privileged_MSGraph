@@ -10,7 +10,7 @@ function Get-AppRoleAssignment {
 
     The function performs the following operations:
     1. Retrieves the Microsoft Graph service principal information (appId: 00000003-0000-0000-c000-000000000000)
-    2. Fetches all app role assignments using automatic pagination
+    2. Fetches all app role assignments using automatic pagination with optimized $select query
     3. Builds a comprehensive lookup table mapping permission IDs to friendly names
     4. Enriches assignments with human-readable permission names and types
     5. Groups assignments by principal (service principal/application)
@@ -22,8 +22,8 @@ function Get-AppRoleAssignment {
     - **Delegated Work Permissions** (publishedPermissionScopes): Permissions requiring user context
 
     The function uses memory optimization techniques including explicit garbage collection
-    to handle large result sets efficiently, making it suitable for enterprise tenants with
-    thousands of applications.
+    and optimized Graph API queries with $select to reduce payload size, making it suitable
+    for enterprise tenants with thousands of applications.
 
     Use Cases:
     - Security audits: Review all Graph API permissions across the tenant
@@ -127,13 +127,13 @@ function Get-AppRoleAssignment {
 
     Performance Considerations:
     - Uses automatic pagination via Invoke-EntraRequest (handles large result sets)
-    - Implements explicit memory management with garbage collection
+    - Uses explicit memory management with garbage collection
     - Processing time scales with number of service principals (typically 30-120 seconds for large tenants)
     - Can efficiently handle thousands of assignments
-    - Memory usage peaks at ~100-500MB for large tenants
 
     Memory Management:
     The function implements several memory optimization techniques:
+    - Uses $select to only retrieve needed properties from Graph API
     - Explicitly nulls large objects after use ($graphServicePrincipal = $null)
     - Calls [System.GC]::Collect() at strategic points to free memory
     - Consolidates lookup tables to reduce duplication
@@ -155,10 +155,10 @@ function Get-AppRoleAssignment {
     - Does not include assignments to other resource providers (e.g., SharePoint, Exchange)
 
     API Calls Made:
-    1. GET /servicePrincipals(appId='00000003-0000-0000-c000-000000000000')
+    1. GET /servicePrincipals(appId='00000003-0000-0000-c000-000000000000')?$select=appRoles,publishedPermissionScopes,resourceSpecificApplicationPermissions
        - Retrieves Graph service principal with all permission definitions
-    2. GET /servicePrincipals(appId='00000003-0000-0000-c000-000000000000')/appRoleAssignedTo
-       - Retrieves all app role assignments (automatically paginated)
+    2. GET /servicePrincipals(appId='00000003-0000-0000-c000-000000000000')/appRoleAssignedTo?$select=appRoleId,principalId,principalDisplayName,resourceDisplayName
+       - Retrieves all app role assignments with optimized query (automatically paginated)
 
     Output Optimization:
     The function returns streamlined objects containing only essential information:
@@ -240,15 +240,32 @@ function Get-AppRoleAssignment {
     # region get Microsoft Graph service principal information
     Write-Verbose "Retrieving Microsoft Graph service principal information"
 
-    $graphServicePrincipal = Invoke-EntraRequest -Service "GraphBeta" -Method GET -Path "/servicePrincipals(appId='00000003-0000-0000-c000-000000000000')"
+    $splatEntraRequest = @{
+      Service = "GraphBeta"
+      Method  = "GET"
+      Path    = "/servicePrincipals(appId='00000003-0000-0000-c000-000000000000')"
+      Query   = @{
+        '$select' = 'appRoles,publishedPermissionScopes,resourceSpecificApplicationPermissions'
+      }
+    }
+
+    $graphServicePrincipal = Invoke-EntraRequest @splatEntraRequest
 
     # endregion
 
     # region get all app role assignments
     Write-Verbose "Retrieving app role assignments (with automatic pagination)"
-
+    $splatEntraRequest = @{
+      Service = "GraphBeta"
+      Method  = "GET"
+      Path    = "/servicePrincipals(appId='00000003-0000-0000-c000-000000000000')/appRoleAssignedTo"
+      Header  = @{ "ConsistencyLevel" = "eventual" }
+      Query   = @{
+        '$select' = 'appRoleId,principalId,principalDisplayName,resourceDisplayName'
+      }
+    }
     # Invoke-EntraRequest automatically handles pagination, so we just need one call
-    $allAppRoleAssignments = Invoke-EntraRequest -Service "GraphBeta" -Method GET -Path "/servicePrincipals(appId='00000003-0000-0000-c000-000000000000')/appRoleAssignedTo" -Header @{ "ConsistencyLevel" = "eventual" }
+    $allAppRoleAssignments = Invoke-EntraRequest @splatEntraRequest
 
     Write-Verbose "Retrieved $($allAppRoleAssignments.Count) total app role assignments"
     # endregion

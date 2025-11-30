@@ -143,33 +143,37 @@ $spIdFilter
     }
 
     try {
-        $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST `
-            -Path "/v1/workspaces/$WorkspaceId/query?timespan=P$($Days)D" `
-            -Body ($body | ConvertTo-Json -Depth 10)
-
-        if ($response.tables -and $response.tables.Count -gt 0 -and $response.tables[0].rows) {
-            $columns = $response.tables[0].columns.name
-            $results = @()
-
-            foreach ($row in $response.tables[0].rows) {
-                $obj = [PSCustomObject]@{}
-                for ($i = 0; $i -lt $columns.Count; $i++) {
-                    $obj | Add-Member -MemberType NoteProperty -Name $columns[$i] -Value $row[$i]
-                }
-                $results += $obj
-            }
-
-            Write-Debug "Retrieved throttling stats for $($results.Count) service principals."
-            return $results
+        $splatEntraRequest = @{
+            Service = "LogAnalytics"
+            Method  = "POST"
+            Path    = "/v1/workspaces/$WorkspaceId/query"
+            Query   = @{ timespan = "P$($Days)D" }
+            Body    = $body
         }
-        else {
-            Write-Debug "No throttling data found."
-            return @()
-        }
+
+        $response = Invoke-EntraRequest @splatEntraRequest
     }
     catch {
         Write-Warning "Failed to query throttling statistics. Error: $_"
         Write-Debug $_.Exception.Message
-        return @()
+        return
+    }
+
+    if ($response.tables -and $response.tables.Count -gt 0 -and $response.tables[0].rows) {
+        $columns = $response.tables[0].columns.name
+        foreach ($row in $response.tables[0].rows) {
+            $obj = [PSCustomObject]@{}
+            for ($i = 0; $i -lt $columns.Count; $i++) {
+                $obj | Add-Member -MemberType NoteProperty -Name $columns[$i] -Value $row[$i]
+            }
+            [PSCustomObject]$obj
+        }
+
+        Write-Debug "Retrieved throttling stats for $(@($response.tables[0].rows).Count) service principals."
+        return
+    }
+    else {
+        Write-Debug "No throttling data found."
+        return
     }
 }

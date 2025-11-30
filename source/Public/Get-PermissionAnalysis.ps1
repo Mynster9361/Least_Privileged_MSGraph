@@ -328,12 +328,12 @@ function Get-PermissionAnalysis {
     )
 
     begin {
-        $moduleRoot = $MyInvocation.MyCommand.Module.ModuleBase
+        $script:moduleRoot = $PSScriptRoot
 
-        $PermissionMapV1Path = Join-Path -Path $moduleRoot -ChildPath "data\permissions-v1.0.json"
-        $PermissionMapBetaPath = Join-Path -Path $moduleRoot -ChildPath "data\permissions-beta.json"
+        $PermissionMapV1Path = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-v1.0.json"
+        $PermissionMapBetaPath = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-beta.json"
 
-        Write-Debug "Module root: $moduleRoot"
+        Write-Debug "Module root: $script:moduleRoot"
         Write-Debug "Loading permission maps..."
         Write-Debug "V1 Path: $PermissionMapV1Path"
         Write-Debug "Beta Path: $PermissionMapBetaPath"
@@ -433,12 +433,8 @@ function Get-PermissionAnalysis {
             $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $excessPermissions -Force
             $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value $missingPermissions -Force
 
-            $matchedAllActivity = if ($optimalSet.UnmatchedActivities -and $optimalSet.UnmatchedActivities.Count -gt 0) {
-                $false
-            }
-            else {
-                $true
-            }
+            $matchedAllActivity = $null -eq $optimalSet.UnmatchedActivities -and $optimalSet.UnmatchedActivities.Count -eq 0
+            Write-Debug "  Matched all activity: $matchedAllActivity"
             $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $matchedAllActivity -Force
 
             # Display summary

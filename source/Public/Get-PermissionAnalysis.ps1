@@ -391,7 +391,7 @@ function Get-PermissionAnalysis {
                 }
 
                 $app | Add-Member -MemberType NoteProperty -Name "CurrentPermissions" -Value $currentPermissions -Force
-                $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value @() -Force
+                $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $currentPermissions -Force
                 $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value @() -Force
                 $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $true -Force
 
@@ -424,7 +424,12 @@ function Get-PermissionAnalysis {
                 @()
             }
 
-            $optimalPermissionNames = $optimalSet.OptimalPermissions | Select-Object -ExpandProperty Permission -Unique
+            $optimalPermissionNames = if ($optimalSet.OptimalPermissions.Count -gt 0) {
+                $optimalSet.OptimalPermissions | Select-Object -ExpandProperty Permission -Unique
+            }
+            else {
+                @()
+            }
 
             $excessPermissions = $currentPermissions | Where-Object { $optimalPermissionNames -notcontains $_ }
             $missingPermissions = $optimalPermissionNames | Where-Object { $currentPermissions -notcontains $_ }
@@ -433,7 +438,7 @@ function Get-PermissionAnalysis {
             $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $excessPermissions -Force
             $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value $missingPermissions -Force
 
-            $matchedAllActivity = $null -eq $optimalSet.UnmatchedActivities -and $optimalSet.UnmatchedActivities.Count -eq 0
+            $matchedAllActivity = ($null -eq $app.Activity -or $app.Activity.Count -eq 0) -or ($null -eq $optimalSet.UnmatchedActivities -or $optimalSet.UnmatchedActivities.Count -eq 0)
             Write-Debug "  Matched all activity: $matchedAllActivity"
             $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $matchedAllActivity -Force
 

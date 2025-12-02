@@ -245,8 +245,8 @@ function Get-AppThrottlingData {
     - Use -Verbose for detailed match status
 
     Logging Levels:
-    - **Write-Debug**: Detailed per-app processing and matching logic
-    - **Write-Verbose**: Match results, sample data, and lookup table size
+    - **Write-PSFMessage -Level Debug -Message **: Detailed per-app processing and matching logic
+    - **Write-PSFMessage -Level Verbose -Message **: Match results, sample data, and lookup table size
     - **Write-Progress**: Visual progress bar for user feedback
     - **Standard Output**: Final application objects with ThrottlingStats
 
@@ -335,15 +335,15 @@ function Get-AppThrottlingData {
     )
 
     begin {
-        Write-Verbose "Fetching throttling statistics for all applications..."
+        Write-PSFMessage -Level Verbose -Message  "Fetching throttling statistics for all applications..."
         $throttlingStats = Get-AppThrottlingStat -WorkspaceId $WorkspaceId -Days $Days
 
-        Write-Debug "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
+        Write-PSFMessage -Level Debug -Message  "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
 
         if ($throttlingStats.Count -gt 0) {
-            Write-Verbose "Sample ServicePrincipalIds from Log Analytics:"
+            Write-PSFMessage -Level Verbose -Message  "Sample ServicePrincipalIds from Log Analytics:"
             $throttlingStats | Select-Object -First 3 | ForEach-Object {
-                Write-Verbose "  - ServicePrincipalId: $($_.ServicePrincipalId), AppId: $($_.AppId), Requests: $($_.TotalRequests)"
+                Write-PSFMessage -Level Verbose -Message  "  - ServicePrincipalId: $($_.ServicePrincipalId), AppId: $($_.AppId), Requests: $($_.TotalRequests)"
             }
         }
 
@@ -355,11 +355,11 @@ function Get-AppThrottlingData {
                 # Normalize to lowercase for case-insensitive matching
                 $normalizedSpId = $stat.ServicePrincipalId.ToString().ToLower()
                 $throttlingBySpId[$normalizedSpId] = $stat
-                Write-Debug "Indexed throttling data for ServicePrincipalId: $normalizedSpId"
+                Write-PSFMessage -Level Debug -Message  "Indexed throttling data for ServicePrincipalId: $normalizedSpId"
             }
         }
 
-        Write-Verbose "Created lookup table with $($throttlingBySpId.Count) entries"
+        Write-PSFMessage -Level Verbose -Message  "Created lookup table with $($throttlingBySpId.Count) entries"
 
         $allProcessedApps = [System.Collections.ArrayList]::new()
         $currentIndex = 0
@@ -383,16 +383,16 @@ function Get-AppThrottlingData {
 
                 if ($throttlingBySpId.ContainsKey($normalizedLookupSpId)) {
                     $throttlingData = $throttlingBySpId[$normalizedLookupSpId]
-                    Write-Verbose "Matched throttling data for $($app.PrincipalName) (ServicePrincipalId: $spId)"
+                    Write-PSFMessage -Level Verbose -Message  "Matched throttling data for $($app.PrincipalName) (ServicePrincipalId: $spId)"
                 }
                 else {
-                    Write-Verbose "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId)"
+                    Write-PSFMessage -Level Verbose -Message  "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId)"
 
                     # Debug: Show what ServicePrincipalIds ARE in the lookup
                     if ($throttlingBySpId.Count -gt 0 -and $currentIndex -eq 1) {
-                        Write-Verbose "Available ServicePrincipalIds in lookup (first 5):"
+                        Write-PSFMessage -Level Verbose -Message  "Available ServicePrincipalIds in lookup (first 5):"
                         $throttlingBySpId.Keys | Select-Object -First 5 | ForEach-Object {
-                            Write-Verbose "  - $_"
+                            Write-PSFMessage -Level Verbose -Message  "  - $_"
                         }
                     }
                 }
@@ -415,7 +415,7 @@ function Get-AppThrottlingData {
                         LastOccurrence     = $throttlingData.LastOccurrence
                     }) -Force
 
-                Write-Debug "Got throttling stats for $($app.PrincipalName): Severity=$($throttlingData.ThrottlingSeverity), Status=$($throttlingData.ThrottlingStatus)"
+                Write-PSFMessage -Level Debug -Message  "Got throttling stats for $($app.PrincipalName): Severity=$($throttlingData.ThrottlingSeverity), Status=$($throttlingData.ThrottlingStatus)"
             }
             else {
                 # No activity found - get zeroed stats
@@ -434,7 +434,7 @@ function Get-AppThrottlingData {
                         LastOccurrence     = $null
                     }) -Force
 
-                Write-Debug "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId) - got zero stats"
+                Write-PSFMessage -Level Debug -Message  "No throttling data found for $($app.PrincipalName) (ServicePrincipalId: $spId) - got zero stats"
             }
 
             [void]$allProcessedApps.Add($app)
@@ -448,9 +448,9 @@ function Get-AppThrottlingData {
                 $_.ThrottlingStats -and $_.ThrottlingStats.TotalRequests -gt 0
             }).Count
 
-        Write-Debug "Successfully processed $($allProcessedApps.Count) applications."
-        Write-Debug "  - Found throttling data for: $matchedCount applications"
-        Write-Debug "  - No activity for: $($allProcessedApps.Count - $matchedCount) applications"
+        Write-PSFMessage -Level Debug -Message  "Successfully processed $($allProcessedApps.Count) applications."
+        Write-PSFMessage -Level Debug -Message  "  - Found throttling data for: $matchedCount applications"
+        Write-PSFMessage -Level Debug -Message  "  - No activity for: $($allProcessedApps.Count - $matchedCount) applications"
 
         return $allProcessedApps
     }

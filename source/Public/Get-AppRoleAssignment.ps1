@@ -238,7 +238,7 @@ function Get-AppRoleAssignment {
 
   try {
     # region get Microsoft Graph service principal information
-    Write-Verbose "Retrieving Microsoft Graph service principal information"
+    Write-PSFMessage -Level Verbose -Message  "Retrieving Microsoft Graph service principal information"
 
     $splatEntraRequest = @{
       Service = "GraphBeta"
@@ -254,7 +254,7 @@ function Get-AppRoleAssignment {
     # endregion
 
     # region get all app role assignments
-    Write-Verbose "Retrieving app role assignments (with automatic pagination)"
+    Write-PSFMessage -Level Verbose -Message  "Retrieving app role assignments (with automatic pagination)"
     $splatEntraRequest = @{
       Service = "GraphBeta"
       Method  = "GET"
@@ -267,11 +267,11 @@ function Get-AppRoleAssignment {
     # Invoke-EntraRequest automatically handles pagination, so we just need one call
     $allAppRoleAssignments = Invoke-EntraRequest @splatEntraRequest
 
-    Write-Verbose "Retrieved $($allAppRoleAssignments.Count) total app role assignments"
+    Write-PSFMessage -Level Verbose -Message  "Retrieved $($allAppRoleAssignments.Count) total app role assignments"
     # endregion
 
     # region translate app role ids to permission names
-    Write-Verbose "Building permission lookup table"
+    Write-PSFMessage -Level Verbose -Message  "Building permission lookup table"
 
     [System.Collections.Generic.List[System.Object]] $lookup = @()
 
@@ -319,7 +319,7 @@ function Get-AppRoleAssignment {
     [System.GC]::Collect()
 
     # Consolidate duplicate entries and combine app/delegated identifiers
-    Write-Verbose "Consolidating permission lookup table"
+    Write-PSFMessage -Level Verbose -Message  "Consolidating permission lookup table"
     $lookup = $lookup | Group-Object -Property Role_Name | ForEach-Object {
       $appId = ($_.Group | Where-Object { $null -ne $_.Application_Identifier } | Select-Object -First 1).Application_Identifier
       $delegatedId = ($_.Group | Where-Object { $null -ne $_.DelegatedWork_Identifier } | Select-Object -First 1).DelegatedWork_Identifier
@@ -331,7 +331,7 @@ function Get-AppRoleAssignment {
     }
 
     # Add friendly names and permission types to app role assignments
-    Write-Verbose "Adding friendly names to app role assignments"
+    Write-PSFMessage -Level Verbose -Message  "Adding friendly names to app role assignments"
     $allAppRoleAssignments | ForEach-Object {
       $appRoleId = $_.appRoleId
       $lookupResult = $lookup | Where-Object {
@@ -362,7 +362,7 @@ function Get-AppRoleAssignment {
     [System.GC]::Collect()
 
     # Group assignments by principal and create streamlined output
-    Write-Verbose "Grouping assignments by principal"
+    Write-PSFMessage -Level Verbose -Message  "Grouping assignments by principal"
     $groupedAppRoleAssignments = $allAppRoleAssignments | Group-Object -Property principalId
 
     $allAppRoleAssignments = $null
@@ -382,7 +382,7 @@ function Get-AppRoleAssignment {
     [System.GC]::Collect()
     # endregion
 
-    Write-Verbose "Successfully retrieved $($lightweightGroups.Count) principals with app role assignments"
+    Write-PSFMessage -Level Verbose -Message  "Successfully retrieved $($lightweightGroups.Count) principals with app role assignments"
     return $lightweightGroups
   }
   catch {

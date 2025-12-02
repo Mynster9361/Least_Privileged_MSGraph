@@ -72,7 +72,7 @@ function Get-AppThrottlingStat {
         [string]$ServicePrincipalId
     )
 
-    Write-Debug "Querying throttling statistics for last $Days days..."
+    Write-PSFMessage -Level Debug -Message  "Querying throttling statistics for last $Days days..."
 
     $spIdFilter = if ($ServicePrincipalId) {
         "| where ServicePrincipalId == '$ServicePrincipalId'"
@@ -155,7 +155,7 @@ $spIdFilter
     }
     catch {
         Write-Warning "Failed to query throttling statistics. Error: $_"
-        Write-Debug $_.Exception.Message
+        Write-PSFMessage -Level Debug -Message  $_.Exception.Message
         return
     }
 
@@ -169,11 +169,11 @@ $spIdFilter
             [PSCustomObject]$obj
         }
 
-        Write-Debug "Retrieved throttling stats for $(@($response.tables[0].rows).Count) service principals."
+        Write-PSFMessage -Level Debug -Message  "Retrieved throttling stats for $(@($response.tables[0].rows).Count) service principals."
         return
     }
     else {
-        Write-Debug "No throttling data found."
+        Write-PSFMessage -Level Debug -Message  "No throttling data found."
         return
     }
 }

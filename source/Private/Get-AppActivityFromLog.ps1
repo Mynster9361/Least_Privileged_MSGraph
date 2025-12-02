@@ -68,7 +68,7 @@ function Get-AppActivityFromLog {
     [switch]$retainRawUri
   )
 
-  Write-Debug "Querying Log Analytics for app activity in the last $days days for service principal $spId..."
+  Write-PSFMessage -Level Debug -Message  "Querying Log Analytics for app activity in the last $days days for service principal $spId..."
 
   $body = @{
     query            = 'MicrosoftGraphActivityLogs
@@ -99,14 +99,18 @@ function Get-AppActivityFromLog {
     if ($response.tables -and $response.tables.Count -gt 0 -and $response.tables[0].rows -and $response.tables[0].rows.Count -gt 0) {
       $data = $response.tables[0].rows[0][1] | ConvertFrom-Json
       $activity = $data
-      Write-Debug "Found $($activity.Count) API calls for service principal $spId."
+      Write-PSFMessage -Level Debug -Message "Raw activity data retrieved: $($data | ConvertTo-Json -Depth 5)"
+      Write-PSFMessage -Level Debug -Message  "Found $($activity.Count) API calls for service principal $spId."
+      Write-PSFMessage -Level Debug -Message "Found $($activity.Count) API calls for service principal $spId."
 
       if ($retainRawUri) {
+        Write-PSFMessage -Level Debug -Message "Returning raw activity data with unprocessed URIs."
         return $activity
       }
 
       $activity = @()
       foreach ($entry in $data) {
+        Write-PSFMessage -Level Debug -Message "Processing entry: $($entry | ConvertTo-Json -Depth 5)"
         $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
         $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
         $activity += [PSCustomObject]@{
@@ -115,15 +119,16 @@ function Get-AppActivityFromLog {
         }
       }
 
+      Write-PSFMessage -Level Debug -Message "Processed activity data: $($activity | ConvertTo-Json -Depth 5)"
       return $activity | Select-Object -Unique Method, Uri
     }
     else {
-      Write-Debug "No activity data found for service principal $spId."
+      Write-PSFMessage -Level Debug -Message "No activity data found for service principal $spId."
       return @()
     }
   }
   catch {
-    Write-Debug "Failed to query Log Analytics workspace. Error: $_"
+    Write-PSFMessage -Level Debug -Message "Failed to query Log Analytics workspace. Error: $_"
     return $null
   }
 }

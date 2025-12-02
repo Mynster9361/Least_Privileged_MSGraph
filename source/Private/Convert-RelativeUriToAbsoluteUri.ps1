@@ -50,7 +50,7 @@ function Convert-RelativeUriToAbsoluteUri {
     - Base URL added if missing (https://graph.microsoft.com)
     - Default version 'v1.0' if not specified
 
-    Uses Write-Debug for detailed processing steps. Run with -Debug to see normalization details.
+    Uses Write-PSFMessage -Level Debug -Message  for detailed processing steps. Run with -Debug to see normalization details.
 
 .LINK
     Get-AppActivityFromLog
@@ -63,7 +63,7 @@ function Convert-RelativeUriToAbsoluteUri {
     [string]$Uri
   )
 
-  Write-Debug "Original URI: $Uri"
+  Write-PSFMessage -Level Debug -Message  "Original URI: $Uri"
 
   $Value = $Uri.TrimStart("/", "\").TrimEnd("/", "\")
   $Value = [System.Uri]::UnescapeDataString($Value)
@@ -76,7 +76,7 @@ function Convert-RelativeUriToAbsoluteUri {
     $segmentName = $s.TrimEnd('/')
     if ($segmentName -eq "me") {
       $ContainsMeSegment = $True
-      Write-Debug "Found /me segment: $s"
+      Write-PSFMessage -Level Debug -Message  "Found /me segment: $s"
       break
     }
   }
@@ -84,29 +84,29 @@ function Convert-RelativeUriToAbsoluteUri {
   $ProcessedUri = $UriBuilder.Uri.AbsoluteUri
 
   if ($ContainsMeSegment) {
-    Write-Debug "Replacing /me/ with /users/{id}/"
+    Write-PSFMessage -Level Debug -Message  "Replacing /me/ with /users/{id}/"
     $ProcessedUri = $ProcessedUri.Replace("/me/", "/users/{id}/")
     $ProcessedUri = $ProcessedUri -replace "/me$", "/users/{id}"
-    Write-Debug "After /me replacement: $ProcessedUri"
+    Write-PSFMessage -Level Debug -Message  "After /me replacement: $ProcessedUri"
   }
 
   # Handle email segment replacement
   $ContainsAtEmailSegment = $False
   foreach ($s in $Segments) {
     if ($s.Contains("@")) {
-      Write-Debug "Found email segment: $s"
+      Write-PSFMessage -Level Debug -Message  "Found email segment: $s"
       $ContainsAtEmailSegment = $True
       break
     }
   }
 
   if ($ContainsAtEmailSegment) {
-    Write-Debug "Replacing email segment in URI: $ProcessedUri"
+    Write-PSFMessage -Level Debug -Message  "Replacing email segment in URI: $ProcessedUri"
     $ProcessedUri = $ProcessedUri -replace "/[^/]+@[^/]+", "/{id}"
-    Write-Debug "After email replacement: $ProcessedUri"
+    Write-PSFMessage -Level Debug -Message  "After email replacement: $ProcessedUri"
   }
 
-  Write-Debug "Final processed URI: $ProcessedUri"
+  Write-PSFMessage -Level Debug -Message  "Final processed URI: $ProcessedUri"
 
   $returnObject = [PSCustomObject]@{
     Uri     = $ProcessedUri

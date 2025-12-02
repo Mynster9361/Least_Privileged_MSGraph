@@ -244,8 +244,8 @@ function Get-PermissionAnalysis {
     - Use -Verbose for detailed match status
 
     Logging Levels:
-    - **Write-Debug**: Detailed per-app processing and matching logic
-    - **Write-Verbose**: Match results, sample data, and lookup table size
+    - **Write-PSFMessage -Level Debug -Message **: Detailed per-app processing and matching logic
+    - **Write-PSFMessage -Level Verbose -Message **: Match results, sample data, and lookup table size
     - **Write-Progress**: Visual progress bar for user feedback
     - **Standard Output**: Final application objects with ThrottlingStats
 
@@ -333,10 +333,10 @@ function Get-PermissionAnalysis {
         $PermissionMapV1Path = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-v1.0.json"
         $PermissionMapBetaPath = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-beta.json"
 
-        Write-Debug "Module root: $script:moduleRoot"
-        Write-Debug "Loading permission maps..."
-        Write-Debug "V1 Path: $PermissionMapV1Path"
-        Write-Debug "Beta Path: $PermissionMapBetaPath"
+        Write-PSFMessage -Level Debug -Message  "Module root: $script:moduleRoot"
+        Write-PSFMessage -Level Debug -Message  "Loading permission maps..."
+        Write-PSFMessage -Level Debug -Message  "V1 Path: $PermissionMapV1Path"
+        Write-PSFMessage -Level Debug -Message  "Beta Path: $PermissionMapBetaPath"
 
         # Validate files exist
         if (-not (Test-Path -Path $PermissionMapV1Path)) {
@@ -349,20 +349,20 @@ function Get-PermissionAnalysis {
         $permissionMapv1 = Get-Content -Path $PermissionMapV1Path -Raw | ConvertFrom-Json
         $permissionMapbeta = Get-Content -Path $PermissionMapBetaPath -Raw | ConvertFrom-Json
 
-        Write-Debug "Permission maps loaded successfully"
+        Write-PSFMessage -Level Debug -Message  "Permission maps loaded successfully"
     }
 
     process {
         # Handle null or empty input
         if ($null -eq $AppData -or $AppData.Count -eq 0) {
-            Write-Debug "No app data provided in this pipeline iteration"
+            Write-PSFMessage -Level Debug -Message  "No app data provided in this pipeline iteration"
             return
         }
 
         foreach ($app in $AppData) {
             # Skip null or invalid entries
             if ($null -eq $app) {
-                Write-Debug "Skipping null app entry"
+                Write-PSFMessage -Level Debug -Message  "Skipping null app entry"
                 continue
             }
 
@@ -372,11 +372,11 @@ function Get-PermissionAnalysis {
                 continue
             }
 
-            Write-Debug "`nAnalyzing: $($app.PrincipalName)"
+            Write-PSFMessage -Level Debug -Message  "`nAnalyzing: $($app.PrincipalName)"
 
             # Handle apps without activity
             if ($null -eq $app.Activity -or $app.Activity.Count -eq 0) {
-                Write-Debug "  No activity found for $($app.PrincipalName)"
+                Write-PSFMessage -Level Debug -Message  "  No activity found for $($app.PrincipalName)"
 
                 # Add empty analysis properties
                 $app | Add-Member -MemberType NoteProperty -Name "ActivityPermissions" -Value @() -Force
@@ -439,14 +439,14 @@ function Get-PermissionAnalysis {
             $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value $missingPermissions -Force
 
             $matchedAllActivity = ($null -eq $app.Activity -or $app.Activity.Count -eq 0) -or ($null -eq $optimalSet.UnmatchedActivities -or $optimalSet.UnmatchedActivities.Count -eq 0)
-            Write-Debug "  Matched all activity: $matchedAllActivity"
+            Write-PSFMessage -Level Debug -Message  "  Matched all activity: $matchedAllActivity"
             $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $matchedAllActivity -Force
 
             # Display summary
-            Write-Debug "  Matched Activities: $($optimalSet.MatchedActivities)/$($optimalSet.TotalActivities)"
-            Write-Debug "  Optimal Permissions: $($optimalSet.OptimalPermissions.Count)"
-            Write-Debug "  Current Permissions: $($currentPermissions.Count)"
-            Write-Debug "  Excess Permissions: $($excessPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message  "  Matched Activities: $($optimalSet.MatchedActivities)/$($optimalSet.TotalActivities)"
+            Write-PSFMessage -Level Debug -Message  "  Optimal Permissions: $($optimalSet.OptimalPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message  "  Current Permissions: $($currentPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message  "  Excess Permissions: $($excessPermissions.Count)"
 
             # Output the app immediately to the pipeline
             Write-Output $app

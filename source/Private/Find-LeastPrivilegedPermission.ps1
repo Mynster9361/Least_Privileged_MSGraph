@@ -78,7 +78,7 @@ function Find-LeastPrivilegedPermission {
     [array]$permissionMapbeta
   )
 
-  Write-Debug "Finding least privileged permissions for activities..."
+  Write-PSFMessage -Level Debug -Message  "Finding least privileged permissions for activities..."
 
   $results = @()
 

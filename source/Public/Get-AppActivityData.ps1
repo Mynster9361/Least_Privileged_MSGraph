@@ -87,11 +87,6 @@ function Get-AppActivityData {
     - Azure Log Analytics workspace with MicrosoftGraphActivityLogs table enabled
     - Must be authenticated via Connect-EntraService before calling this function
 
-    Performance:
-    - Parallel processing: 5-10x faster than sequential
-    - Typical: ~0.1-0.2 seconds per application with parallelization
-    - Large tenants: 500 apps in ~1-2 minutes (vs 8-15 minutes sequential)
-
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppActivityData.html
 #>
@@ -130,15 +125,16 @@ function Get-AppActivityData {
         $workflowName = "AppActivityWorkflow_$([guid]::NewGuid().ToString('N').Substring(0,8))"
         $workflow = New-PSFRunspaceWorkflow -Name $workflowName
 
-        # Get function definitions to pass to runspaces
-        $functions = @{
-            'Get-AppActivityFromLog'           = (Get-Command Get-AppActivityFromLog).Definition
-            'Convert-RelativeUriToAbsoluteUri' = (Get-Command Convert-RelativeUriToAbsoluteUri).Definition
-            'ConvertTo-TokenizeId'             = (Get-Command ConvertTo-TokenizeId).Definition
-            'Initialize-LogAnalyticsApi'       = (Get-Command Initialize-LogAnalyticsApi).Definition
+        # Get function definitions and strip out Write-PSFMessage calls to avoid module conflicts
+        $getFunctionDefinition = { param($name)
+            (Get-Command $name).Definition -replace 'Write-PSFMessage[^\r\n]+', ''
         }
 
-
+        $functions = @{
+            'Get-AppActivityFromLog'           = & $getFunctionDefinition 'Get-AppActivityFromLog'
+            'Convert-RelativeUriToAbsoluteUri' = & $getFunctionDefinition 'Convert-RelativeUriToAbsoluteUri'
+            'ConvertTo-TokenizeId'             = & $getFunctionDefinition 'ConvertTo-TokenizeId'
+        }
 
         # Variables to pass to runspaces
         $variables = @{
@@ -159,27 +155,60 @@ function Get-AppActivityData {
             ScriptBlock = {
                 param($AppObject)
 
+                # Wrap everything in try-catch to ensure object is always returned
                 try {
                     # Re-import token in runspace
-                    Import-EntraToken -Token $logAnalyticsToken -NoRenew
-                    Write-PSFMessage -Level Verbose -Message "Successfully imported Log Analytics token in runspace for app: $($AppObject.PrincipalName)"
+                    try {
+                        Import-EntraToken -Token $logAnalyticsToken -NoRenew
+                    }
+                    catch {
+                        # Use PSFramework's faster property addition (works in runspaces without loading PSFramework module)
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Auth failed: $($_.Exception.Message)")
+                        }
+                        catch {
+                            # Fallback to Add-Member if PSFramework not available in runspace
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Auth failed: $($_.Exception.Message)" -Force
+                        }
+                        return $AppObject
+                    }
+
+                    # Get activity data
+                    try {
+                        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId
+
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', $activity)
+                        }
+                        catch {
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value $activity -Force
+                        }
+                    }
+                    catch {
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Query failed: $($_.Exception.Message)")
+                        }
+                        catch {
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Query failed: $($_.Exception.Message)" -Force
+                        }
+                    }
                 }
                 catch {
-                    Write-PSFMessage -Level Warning -Message "Failed to authenticate in runspace: $_"
-                    throw $_
+                    try {
+                        [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                        [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Unexpected error: $($_.Exception.Message)")
+                    }
+                    catch {
+                        $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                        $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Unexpected error: $($_.Exception.Message)" -Force
+                    }
                 }
 
-                try {
-                    $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId
-                    Write-PSFMessage -Level Verbose -Message "Retrieved $($activity.Count) activity records for app: $($AppObject.PrincipalName)"
-                    $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value $activity -Force
-                }
-                catch {
-                    Write-PSFMessage -Level Warning -Message "Error retrieving activity for $($AppObject.PrincipalName): $_"
-                    $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
-                    $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value $_.Exception.Message -Force
-                }
-
+                # Always return the object
                 return $AppObject
             }
         }
@@ -198,50 +227,67 @@ function Get-AppActivityData {
     end {
         Write-PSFMessage -Level Verbose -Message "Processing $($allApps.Count) applications with $ThrottleLimit concurrent runspaces..."
 
-        $workflow | Start-PSFRunspaceWorkflow
-        $workflow | Write-PSFRunspaceQueue -Name 'Input' -BulkValues $allApps -Close
+        try {
+            $workflow | Start-PSFRunspaceWorkflow
 
-        # Collect results as they become available
-        <#
-        Reason for below implementation is because for some reason i kept running into issues where the workflow would not return all results
-        or just hang indefinitely. This implementation reads from the output queue until all expected results are received
-        #>
-        $results = [System.Collections.Generic.List[object]]::new()
-        $lastProgressUpdate = [datetime]::Now
-        # Only timeout if NO progress for 10 minutes
-        $noProgressTimeout = [timespan]::FromMinutes(10)
+            $workflow | Write-PSFRunspaceQueue -Name 'Input' -BulkValues $allApps -Close
 
-        while ($results.Count -lt $allApps.Count) {
-            # Read any available results
-            $batch = $workflow | Read-PSFRunspaceQueue -Name 'Output'
-            if ($batch) {
-                $previousCount = $results.Count
-                foreach ($item in $batch) {
-                    $results.Add($item)
+            # Collect results as they become available
+            $results = [System.Collections.Generic.List[object]]::new()
+            $lastProgressUpdate = [datetime]::Now
+            $lastResultCount = 0
+            $noProgressTimeout = [timespan]::FromMinutes(5)
+
+            while ($results.Count -lt $allApps.Count) {
+                # Read any available results
+                $batch = $workflow | Read-PSFRunspaceQueue -Name 'Output'
+                if ($batch) {
+                    foreach ($item in $batch) {
+                        $results.Add($item)
+                    }
+
+                    # If we get new results, reset the progress timer and show progress
+                    if ($results.Count -gt $lastResultCount) {
+                        $lastProgressUpdate = [datetime]::Now
+                        $lastResultCount = $results.Count
+                        Write-PSFMessage -Level Verbose -Message "Progress: $($results.Count)/$($allApps.Count) applications processed"
+                    }
                 }
 
-                # If we get new results, reset the progress timer
-                if ($results.Count -gt $previousCount) {
-                    $lastProgressUpdate = [datetime]::Now
-                    Write-PSFMessage -Level Verbose -Message "Progress: $($results.Count)/$($allApps.Count) applications processed"
+                # Timeout check - only if truly no progress
+                if (([datetime]::Now - $lastProgressUpdate) -gt $noProgressTimeout) {
+                    Write-PSFMessage -Level Warning -Message "No progress for $($noProgressTimeout.TotalMinutes) minutes. Stopping workflow. Processed $($results.Count)/$($allApps.Count) applications."
+                    break
                 }
-            }
 
-            # Timeout check
-            if (([datetime]::Now - $lastProgressUpdate) -gt $noProgressTimeout) {
-                Write-PSFMessage -Level Warning -Message "No progress for $($noProgressTimeout.TotalMinutes) minutes. Stopping workflow. Processed $($results.Count)/$($allApps.Count) applications."
-                break
+                Start-Sleep -Milliseconds 100
             }
-
-            Start-Sleep -Milliseconds 10
+        }
+        finally {
+            # Ensure cleanup happens
+            try {
+                $workflow | Stop-PSFRunspaceWorkflow
+                $workflow | Remove-PSFRunspaceWorkflow
+            }
+            catch {
+                Write-PSFMessage -Level Warning -Message "Error during workflow cleanup: $_"
+            }
         }
 
-        $workflow | Stop-PSFRunspaceWorkflow
-        $workflow | Remove-PSFRunspaceWorkflow
-
-        Write-PSFMessage -Level Verbose -Message "Processed $($results.Count) applications."
+        Write-PSFMessage -Level Verbose -Message "Completed processing: $($results.Count)/$($allApps.Count) applications."
         $enrichedCount = ($results | Where-Object { $_.Activity -and $_.Activity.Count -gt 0 }).Count
+        $errorCount = ($results | Where-Object { $_.ErrorMessage }).Count
+
+        if ($errorCount -gt 0) {
+            Write-PSFMessage -Level Warning -Message "$errorCount applications had errors. Check objects with ErrorMessage property."
+            # Show first few errors as examples
+            $results | Where-Object { $_.ErrorMessage } | Select-Object -First 3 | ForEach-Object {
+                Write-PSFMessage -Level Warning -Message "Example error - $($_.PrincipalName): $($_.ErrorMessage)"
+            }
+        }
+
         Write-PSFMessage -Level Verbose -Message "Successfully enriched $enrichedCount applications with activity data."
+
         $results
     }
 }

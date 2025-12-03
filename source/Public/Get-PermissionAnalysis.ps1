@@ -244,8 +244,8 @@ function Get-PermissionAnalysis {
     - Use -Verbose for detailed match status
 
     Logging Levels:
-    - **Write-PSFMessage -Level Debug -Message **: Detailed per-app processing and matching logic
-    - **Write-PSFMessage -Level Verbose -Message **: Match results, sample data, and lookup table size
+    - **Write-PSFMessage -Level Debug**: Detailed per-app processing and matching logic
+    - **Write-PSFMessage -Level Verbose**: Match results, sample data, and lookup table size
     - **Write-Progress**: Visual progress bar for user feedback
     - **Standard Output**: Final application objects with ThrottlingStats
 
@@ -333,10 +333,10 @@ function Get-PermissionAnalysis {
         $PermissionMapV1Path = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-v1.0.json"
         $PermissionMapBetaPath = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-beta.json"
 
-        Write-PSFMessage -Level Debug -Message  "Module root: $script:moduleRoot"
-        Write-PSFMessage -Level Debug -Message  "Loading permission maps..."
-        Write-PSFMessage -Level Debug -Message  "V1 Path: $PermissionMapV1Path"
-        Write-PSFMessage -Level Debug -Message  "Beta Path: $PermissionMapBetaPath"
+        Write-PSFMessage -Level Debug -Message "Module root: $script:moduleRoot"
+        Write-PSFMessage -Level Debug -Message "Loading permission maps..."
+        Write-PSFMessage -Level Debug -Message "V1 Path: $PermissionMapV1Path"
+        Write-PSFMessage -Level Debug -Message "Beta Path: $PermissionMapBetaPath"
 
         # Validate files exist
         if (-not (Test-Path -Path $PermissionMapV1Path)) {
@@ -349,20 +349,20 @@ function Get-PermissionAnalysis {
         $permissionMapv1 = Get-Content -Path $PermissionMapV1Path -Raw | ConvertFrom-Json
         $permissionMapbeta = Get-Content -Path $PermissionMapBetaPath -Raw | ConvertFrom-Json
 
-        Write-PSFMessage -Level Debug -Message  "Permission maps loaded successfully"
+        Write-PSFMessage -Level Debug -Message "Permission maps loaded successfully"
     }
 
     process {
         # Handle null or empty input
         if ($null -eq $AppData -or $AppData.Count -eq 0) {
-            Write-PSFMessage -Level Debug -Message  "No app data provided in this pipeline iteration"
+            Write-PSFMessage -Level Debug -Message "No app data provided in this pipeline iteration"
             return
         }
 
         foreach ($app in $AppData) {
             # Skip null or invalid entries
             if ($null -eq $app) {
-                Write-PSFMessage -Level Debug -Message  "Skipping null app entry"
+                Write-PSFMessage -Level Debug -Message "Skipping null app entry"
                 continue
             }
 
@@ -372,16 +372,11 @@ function Get-PermissionAnalysis {
                 continue
             }
 
-            Write-PSFMessage -Level Debug -Message  "`nAnalyzing: $($app.PrincipalName)"
+            Write-PSFMessage -Level Debug -Message "`nAnalyzing: $($app.PrincipalName)"
 
             # Handle apps without activity
             if ($null -eq $app.Activity -or $app.Activity.Count -eq 0) {
-                Write-PSFMessage -Level Debug -Message  "  No activity found for $($app.PrincipalName)"
-
-                # Add empty analysis properties
-                $app | Add-Member -MemberType NoteProperty -Name "ActivityPermissions" -Value @() -Force
-                $app | Add-Member -MemberType NoteProperty -Name "OptimalPermissions" -Value @() -Force
-                $app | Add-Member -MemberType NoteProperty -Name "UnmatchedActivities" -Value @() -Force
+                Write-PSFMessage -Level Debug -Message "  No activity found for $($app.PrincipalName)"
 
                 $currentPermissions = if ($app.AppRoles) {
                     $app.AppRoles | Select-Object -ExpandProperty FriendlyName | Where-Object { $_ -ne $null }
@@ -390,10 +385,14 @@ function Get-PermissionAnalysis {
                     @()
                 }
 
-                $app | Add-Member -MemberType NoteProperty -Name "CurrentPermissions" -Value $currentPermissions -Force
-                $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $currentPermissions -Force
-                $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value @() -Force
-                $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $true -Force
+                # Use individual AddNoteProperty for better compatibility
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'ActivityPermissions', @())
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'OptimalPermissions', @())
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'UnmatchedActivities', @())
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'CurrentPermissions', $currentPermissions)
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'ExcessPermissions', $currentPermissions)
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'RequiredPermissions', @())
+                [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'MatchedAllActivity', $true)
 
                 # Output the app immediately
                 Write-Output $app
@@ -410,11 +409,6 @@ function Get-PermissionAnalysis {
 
             # Get optimal permission set
             $optimalSet = Get-OptimalPermissionSet -activityPermissions $activityPermissions
-
-            # Add results to app object
-            $app | Add-Member -MemberType NoteProperty -Name "ActivityPermissions" -Value $activityPermissions -Force
-            $app | Add-Member -MemberType NoteProperty -Name "OptimalPermissions" -Value $optimalSet.OptimalPermissions -Force
-            $app | Add-Member -MemberType NoteProperty -Name "UnmatchedActivities" -Value $optimalSet.UnmatchedActivities -Force
 
             # Compare with current permissions
             $currentPermissions = if ($app.AppRoles) {
@@ -434,19 +428,25 @@ function Get-PermissionAnalysis {
             $excessPermissions = $currentPermissions | Where-Object { $optimalPermissionNames -notcontains $_ }
             $missingPermissions = $optimalPermissionNames | Where-Object { $currentPermissions -notcontains $_ }
 
-            $app | Add-Member -MemberType NoteProperty -Name "CurrentPermissions" -Value $currentPermissions -Force
-            $app | Add-Member -MemberType NoteProperty -Name "ExcessPermissions" -Value $excessPermissions -Force
-            $app | Add-Member -MemberType NoteProperty -Name "RequiredPermissions" -Value $missingPermissions -Force
+            $matchedAllActivity = ($null -eq $app.Activity -or $app.Activity.Count -eq 0) -or
+            ($null -eq $optimalSet.UnmatchedActivities -or $optimalSet.UnmatchedActivities.Count -eq 0)
 
-            $matchedAllActivity = ($null -eq $app.Activity -or $app.Activity.Count -eq 0) -or ($null -eq $optimalSet.UnmatchedActivities -or $optimalSet.UnmatchedActivities.Count -eq 0)
-            Write-PSFMessage -Level Debug -Message  "  Matched all activity: $matchedAllActivity"
-            $app | Add-Member -MemberType NoteProperty -Name "MatchedAllActivity" -Value $matchedAllActivity -Force
+            Write-PSFMessage -Level Debug -Message "  Matched all activity: $matchedAllActivity"
+
+            # Use individual AddNoteProperty calls - still faster than Add-Member
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'ActivityPermissions', $activityPermissions)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'OptimalPermissions', $optimalSet.OptimalPermissions)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'UnmatchedActivities', $optimalSet.UnmatchedActivities)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'CurrentPermissions', $currentPermissions)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'ExcessPermissions', $excessPermissions)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'RequiredPermissions', $missingPermissions)
+            [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'MatchedAllActivity', $matchedAllActivity)
 
             # Display summary
-            Write-PSFMessage -Level Debug -Message  "  Matched Activities: $($optimalSet.MatchedActivities)/$($optimalSet.TotalActivities)"
-            Write-PSFMessage -Level Debug -Message  "  Optimal Permissions: $($optimalSet.OptimalPermissions.Count)"
-            Write-PSFMessage -Level Debug -Message  "  Current Permissions: $($currentPermissions.Count)"
-            Write-PSFMessage -Level Debug -Message  "  Excess Permissions: $($excessPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message "  Matched Activities: $($optimalSet.MatchedActivities)/$($optimalSet.TotalActivities)"
+            Write-PSFMessage -Level Debug -Message "  Optimal Permissions: $($optimalSet.OptimalPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message "  Current Permissions: $($currentPermissions.Count)"
+            Write-PSFMessage -Level Debug -Message "  Excess Permissions: $($excessPermissions.Count)"
 
             # Output the app immediately to the pipeline
             Write-Output $app

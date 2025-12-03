@@ -54,6 +54,7 @@ function Get-AppActivityFromLog {
     Query limits: 30,000 rows max, 64MB truncation size.
     Uses KQL summarization for efficiency and deduplicates at query level.
 #>
+  [CmdletBinding()]
   param(
     [Parameter(Mandatory = $true)]
     [string]$logAnalyticsWorkspace,
@@ -68,12 +69,13 @@ function Get-AppActivityFromLog {
     [switch]$retainRawUri
   )
 
-  Write-PSFMessage -Level Debug -Message  "Querying Log Analytics for app activity in the last $days days for service principal $spId..."
+  Write-PSFMessage -Level Verbose -Message "Querying Log Analytics for app activity in the last $days days for service principal $spId"
 
-  $body = @{
-    query            = 'MicrosoftGraphActivityLogs
-| where ServicePrincipalId == "' + $spId + '"
-| where RequestUri !in("https://graph.microsoft.com/beta/$batch","https://graph.microsoft.com/v1.0/$batch")
+  # Use the actual spId parameter instead of hardcoded value
+  $kqlQuery = @"
+MicrosoftGraphActivityLogs
+| where ServicePrincipalId == "$spId"
+| where RequestUri !in("https://graph.microsoft.com/beta/`$batch","https://graph.microsoft.com/v1.0/`$batch")
 | where ResponseStatusCode == "200"
 | where isnotempty(AppId) and isnotempty(RequestUri) and isnotempty(RequestMethod)
 | extend CleanedRequestUri = iff(indexof(RequestUri, "?") != -1, substring(RequestUri, 0, indexof(RequestUri, "?")), RequestUri)
@@ -82,7 +84,11 @@ function Get-AppActivityFromLog {
 | extend CleanedRequestUri = replace_string(CleanedRequestUri, "HTTPSPLACEHOLDER:/", "https://")
 | project AppId, RequestMethod, CleanedRequestUri
 | distinct AppId, RequestMethod, CleanedRequestUri
-| summarize Activity = make_set(pack("Method", RequestMethod, "Uri", CleanedRequestUri)) by AppId'
+| summarize Activity = make_set(pack("Method", RequestMethod, "Uri", CleanedRequestUri)) by AppId
+"@
+
+  $body = @{
+    query            = $kqlQuery
     options          = @{
       truncationMaxSize = 67108864
     }
@@ -93,42 +99,53 @@ function Get-AppActivityFromLog {
   }
 
   try {
-    # Use EntraService to make the request
     $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query?timespan=P$($days)D" -Body ($body | ConvertTo-Json -Depth 10)
 
-    if ($response.tables -and $response.tables.Count -gt 0 -and $response.tables[0].rows -and $response.tables[0].rows.Count -gt 0) {
-      $data = $response.tables[0].rows[0][1] | ConvertFrom-Json
-      $activity = $data
-      Write-PSFMessage -Level Debug -Message "Raw activity data retrieved: $($data | ConvertTo-Json -Depth 5)"
-      Write-PSFMessage -Level Debug -Message  "Found $($activity.Count) API calls for service principal $spId."
-      Write-PSFMessage -Level Debug -Message "Found $($activity.Count) API calls for service principal $spId."
-
-      if ($retainRawUri) {
-        Write-PSFMessage -Level Debug -Message "Returning raw activity data with unprocessed URIs."
-        return $activity
-      }
-
-      $activity = @()
-      foreach ($entry in $data) {
-        Write-PSFMessage -Level Debug -Message "Processing entry: $($entry | ConvertTo-Json -Depth 5)"
-        $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
-        $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
-        $activity += [PSCustomObject]@{
-          Method = $entry.Method
-          Uri    = $tokenizedUri
-        }
-      }
-
-      Write-PSFMessage -Level Debug -Message "Processed activity data: $($activity | ConvertTo-Json -Depth 5)"
-      return $activity | Select-Object -Unique Method, Uri
-    }
-    else {
-      Write-PSFMessage -Level Debug -Message "No activity data found for service principal $spId."
+    # Check for valid response structure
+    if (-not $response.tables -or $response.tables.Count -eq 0) {
+      Write-PSFMessage -Level Verbose -Message "No activity data found for service principal $spId"
       return @()
     }
+
+    $firstTable = $response.tables[0]
+    if (-not $firstTable.rows -or $firstTable.rows.Count -eq 0) {
+      Write-PSFMessage -Level Verbose -Message "No activity data found for service principal $spId"
+      return @()
+    }
+
+    # Parse the activity data from the first row's second column
+    $rawActivityJson = $firstTable.rows[0][1]
+    $activityData = $rawActivityJson | ConvertFrom-Json
+
+    Write-PSFMessage -Level Debug -Message "Found $($activityData.Count) unique API call(s) for service principal $spId"
+
+    # Return raw URIs if requested
+    if ($retainRawUri) {
+      Write-PSFMessage -Level Debug -Message "Returning raw activity data with unprocessed URIs"
+      return $activityData
+    }
+
+    # Process and tokenize URIs
+    $processedActivity = foreach ($entry in $activityData) {
+      Write-PSFMessage -Level Debug -Message "Processing: $($entry.Method) $($entry.Uri)"
+
+      $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
+      $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
+
+      [PSCustomObject]@{
+        Method = $entry.Method
+        Uri    = $tokenizedUri
+      }
+    }
+
+    # Return unique entries
+    $uniqueActivity = $processedActivity | Sort-Object Method, Uri -Unique
+    Write-PSFMessage -Level Verbose -Message "Processed and deduplicated to $($uniqueActivity.Count) unique pattern(s)"
+
+    return $uniqueActivity
   }
   catch {
-    Write-PSFMessage -Level Debug -Message "Failed to query Log Analytics workspace. Error: $_"
+    Write-PSFMessage -Level Error -Message "Failed to query Log Analytics workspace" -Exception $_.Exception
     return $null
   }
 }

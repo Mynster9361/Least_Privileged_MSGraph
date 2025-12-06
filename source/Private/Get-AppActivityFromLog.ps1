@@ -74,6 +74,7 @@ function Get-AppActivityFromLog {
     - Combines results and deduplicates across windows
 #>
   [CmdletBinding()]
+  [OutputType([System.Object[]])]
   param(
     [Parameter(Mandatory = $true)]
     [string]$logAnalyticsWorkspace,

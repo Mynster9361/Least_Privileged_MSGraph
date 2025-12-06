@@ -125,15 +125,10 @@ function Get-AppActivityData {
         $workflowName = "AppActivityWorkflow_$([guid]::NewGuid().ToString('N').Substring(0,8))"
         $workflow = New-PSFRunspaceWorkflow -Name $workflowName
 
-        # Get function definitions and strip out Write-PSFMessage calls to avoid module conflicts
-        $getFunctionDefinition = { param($name)
-            (Get-Command $name).Definition -replace 'Write-PSFMessage[^\r\n]+', ''
-        }
-
         $functions = @{
-            'Get-AppActivityFromLog'           = & $getFunctionDefinition 'Get-AppActivityFromLog'
-            'Convert-RelativeUriToAbsoluteUri' = & $getFunctionDefinition 'Convert-RelativeUriToAbsoluteUri'
-            'ConvertTo-TokenizeId'             = & $getFunctionDefinition 'ConvertTo-TokenizeId'
+            'Get-AppActivityFromLog'           = (get-command 'Get-AppActivityFromLog').Definition
+            'Convert-RelativeUriToAbsoluteUri' = (get-command 'Convert-RelativeUriToAbsoluteUri').Definition
+            'ConvertTo-TokenizeId'             = (get-command 'ConvertTo-TokenizeId').Definition
         }
 
         # Variables to pass to runspaces
@@ -151,7 +146,7 @@ function Get-AppActivityData {
             Count       = $ThrottleLimit
             Variables   = $variables
             Functions   = $functions
-            Modules     = 'EntraAuth'
+            Modules     = 'EntraAuth', 'PSFramework'
             ScriptBlock = {
                 param($AppObject)
 
@@ -213,7 +208,7 @@ function Get-AppActivityData {
             }
         }
 
-        $workflow | Add-PSFRunspaceWorker @splatWorkflow
+        $workflow | Add-PSFRunspaceWorker @splatWorkflow | Out-Null
 
         $allApps = [System.Collections.Generic.List[object]]::new()
     }

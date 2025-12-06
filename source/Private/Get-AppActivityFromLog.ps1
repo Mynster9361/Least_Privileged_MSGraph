@@ -12,9 +12,16 @@ function Get-AppActivityFromLog {
     - Cleans URIs (removes query params, normalizes slashes)
     - Optionally tokenizes URIs (replaces IDs with {id} tokens)
     - Returns deduplicated Method/Uri combinations
+    - Implements retry logic with progressive time window reduction for large responses
 
     By default, URIs are tokenized for permission mapping. Use -retainRawUri to keep actual
     resource identifiers for auditing/debugging.
+
+    If the response exceeds Log Analytics size limits (100MB), the function automatically:
+    1. Splits the time range in half
+    2. Queries each half separately
+    3. Combines and deduplicates results
+    4. Recursively splits further if needed
 
 .PARAMETER logAnalyticsWorkspace
     Log Analytics workspace ID (GUID) containing MicrosoftGraphActivityLogs table.
@@ -28,6 +35,12 @@ function Get-AppActivityFromLog {
 .PARAMETER retainRawUri
     Optional switch. Returns cleaned but non-tokenized URIs when specified.
     Default behavior tokenizes URIs by replacing IDs with {id} placeholders.
+
+.PARAMETER startDate
+    Internal parameter for recursive calls. Starting date for the query window.
+
+.PARAMETER endDate
+    Internal parameter for recursive calls. Ending date for the query window.
 
 .OUTPUTS
     Array of PSCustomObject with Method and Uri properties.
@@ -51,8 +64,14 @@ function Get-AppActivityFromLog {
     - Appropriate Log Analytics permissions
     - MicrosoftGraphActivityLogs table with diagnostic logging enabled
 
-    Query limits: 30,000 rows max, 64MB truncation size.
+    Query limits: 30,000 rows max, 100MB response size.
     Uses KQL summarization for efficiency and deduplicates at query level.
+
+    Response Size Handling:
+    - If response exceeds 100MB, automatically splits time range
+    - Recursively queries smaller windows until data fits
+    - Minimum split window: 1 day
+    - Combines results and deduplicates across windows
 #>
   [CmdletBinding()]
   param(
@@ -66,14 +85,32 @@ function Get-AppActivityFromLog {
     [string]$spId,
 
     [Parameter(Mandatory = $false)]
-    [switch]$retainRawUri
+    [switch]$retainRawUri,
+
+    [Parameter(Mandatory = $false)]
+    [datetime]$startDate,
+
+    [Parameter(Mandatory = $false)]
+    [datetime]$endDate
   )
 
-  Write-PSFMessage -Level Verbose -Message "Querying Log Analytics for app activity in the last $days days for service principal $spId"
+  # Calculate date range if not provided (initial call)
+  if (-not $startDate) {
+    $endDate = [datetime]::UtcNow
+    $startDate = $endDate.AddDays(-$days)
+    Write-PSFMessage -Level Verbose -Message "Querying Log Analytics for app activity from $($startDate.ToString('yyyy-MM-dd')) to $($endDate.ToString('yyyy-MM-dd')) for service principal $spId"
+  }
+  else {
+    Write-PSFMessage -Level Debug -Message "Querying window: $($startDate.ToString('yyyy-MM-dd')) to $($endDate.ToString('yyyy-MM-dd'))"
+  }
 
-  # Use the actual spId parameter instead of hardcoded value
+  # Build KQL query with date range filter
+  $startDateStr = $startDate.ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
+  $endDateStr = $endDate.ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
+
   $kqlQuery = @"
 MicrosoftGraphActivityLogs
+| where TimeGenerated >= datetime($startDateStr) and TimeGenerated <= datetime($endDateStr)
 | where ServicePrincipalId == "$spId"
 | where RequestUri !in("https://graph.microsoft.com/beta/`$batch","https://graph.microsoft.com/v1.0/`$batch")
 | where ResponseStatusCode == "200"
@@ -99,17 +136,17 @@ MicrosoftGraphActivityLogs
   }
 
   try {
-    $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query?timespan=P$($days)D" -Body ($body | ConvertTo-Json -Depth 10)
+    $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query" -Body ($body | ConvertTo-Json -Depth 10)
 
     # Check for valid response structure
     if (-not $response.tables -or $response.tables.Count -eq 0) {
-      Write-PSFMessage -Level Verbose -Message "No activity data found for service principal $spId"
+      Write-PSFMessage -Level Debug -Message "No activity data found for service principal $spId in this time window"
       return @()
     }
 
     $firstTable = $response.tables[0]
     if (-not $firstTable.rows -or $firstTable.rows.Count -eq 0) {
-      Write-PSFMessage -Level Verbose -Message "No activity data found for service principal $spId"
+      Write-PSFMessage -Level Debug -Message "No activity data found for service principal $spId in this time window"
       return @()
     }
 
@@ -117,7 +154,7 @@ MicrosoftGraphActivityLogs
     $rawActivityJson = $firstTable.rows[0][1]
     $activityData = $rawActivityJson | ConvertFrom-Json
 
-    Write-PSFMessage -Level Debug -Message "Found $($activityData.Count) unique API call(s) for service principal $spId"
+    Write-PSFMessage -Level Debug -Message "Found $($activityData.Count) unique API call(s) for service principal $spId in this window"
 
     # Return raw URIs if requested
     if ($retainRawUri) {
@@ -127,8 +164,6 @@ MicrosoftGraphActivityLogs
 
     # Process and tokenize URIs
     $processedActivity = foreach ($entry in $activityData) {
-      Write-PSFMessage -Level Debug -Message "Processing: $($entry.Method) $($entry.Uri)"
-
       $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
       $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
 
@@ -140,12 +175,63 @@ MicrosoftGraphActivityLogs
 
     # Return unique entries
     $uniqueActivity = $processedActivity | Sort-Object Method, Uri -Unique
-    Write-PSFMessage -Level Verbose -Message "Processed and deduplicated to $($uniqueActivity.Count) unique pattern(s)"
+    Write-PSFMessage -Level Debug -Message "Processed and deduplicated to $($uniqueActivity.Count) unique pattern(s) in this window"
 
     return $uniqueActivity
   }
   catch {
-    Write-PSFMessage -Level Error -Message "Failed to query Log Analytics workspace" -Exception $_.Exception
+    # Check if error is due to response size
+    $errorDetails = $null
+    if ($_.ErrorDetails.Message) {
+      try {
+        $errorDetails = ($_.ErrorDetails.Message | ConvertFrom-Json).error
+      }
+      catch {
+        # If we can't parse error details, treat as generic error
+        Write-PSFMessage -Level Warning -Message "Error querying Log Analytics: $_"
+        return $null
+      }
+    }
+
+    # Handle ResponseSizeError by splitting the time range
+    if ($errorDetails.code -eq 'ResponseSizeError') {
+      $timeSpan = $endDate - $startDate
+
+      # Don't split if we're already at 1 day or less
+      if ($timeSpan.TotalDays -le 1) {
+        Write-PSFMessage -Level Warning -Message "Response too large even for 1-day window. Service principal $spId has excessive activity. Actual size: $($errorDetails.message)"
+        return @()
+      }
+
+      # Split the time range in half
+      $midPoint = $startDate.AddDays($timeSpan.TotalDays / 2)
+      Write-PSFMessage -Level Warning -Message "Response size exceeded ($($errorDetails.message)). Splitting query into two windows."
+      Write-PSFMessage -Level Verbose -Message "Window 1: $($startDate.ToString('yyyy-MM-dd')) to $($midPoint.ToString('yyyy-MM-dd'))"
+      Write-PSFMessage -Level Verbose -Message "Window 2: $($midPoint.ToString('yyyy-MM-dd')) to $($endDate.ToString('yyyy-MM-dd'))"
+
+      # Query each half recursively
+      $firstHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -startDate $startDate -endDate $midPoint
+      $secondHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -startDate $midPoint -endDate $endDate
+
+      # Combine results
+      $combinedActivity = @($firstHalf) + @($secondHalf)
+
+      if ($combinedActivity.Count -eq 0) {
+        return @()
+      }
+
+      # Deduplicate combined results
+      $uniqueCombined = $combinedActivity | Sort-Object Method, Uri -Unique
+      Write-PSFMessage -Level Verbose -Message "Combined and deduplicated to $($uniqueCombined.Count) unique pattern(s) across split windows"
+
+      return $uniqueCombined
+    }
+
+    # For other errors, log and return null
+    Write-PSFMessage -Level Warning -Message "Error querying Log Analytics for service principal $spId`: $($errorDetails.code) - $($errorDetails.message)"
+    if ($errorDetails.innererror) {
+      Write-PSFMessage -Level Debug -Message "Inner error: $($errorDetails.innererror | ConvertTo-Json -Depth 5)"
+    }
     return $null
   }
 }

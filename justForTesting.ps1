@@ -34,12 +34,12 @@ Measure-Command {
   Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report.html"
 }
 
-$t = $lightweightGroups | where-object {$_.PrincipalName -eq "OF-Set-IntuneAutopilotDeviceTag-MI"}
+$t = $lightweightGroups | where-object {$_.PrincipalName -eq ""}
 $t | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 $t | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 $t | Get-PermissionAnalysis
 
-Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspaceId -days 30 -spId "aaa067f5-4f3b-4995-9407-8086d0bd39d4" -Debug -Verbose
+Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspaceId -days 30 -spId "" -Debug -Verbose
 <# Before Freds suggestions
 Days              : 0
 Hours             : 0

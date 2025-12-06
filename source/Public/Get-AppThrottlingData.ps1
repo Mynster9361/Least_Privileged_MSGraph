@@ -245,8 +245,8 @@ function Get-AppThrottlingData {
     - Use -Verbose for detailed match status
 
     Logging Levels:
-    - **Write-PSFMessage -Level Debug -Message **: Detailed per-app processing and matching logic
-    - **Write-PSFMessage -Level Verbose -Message **: Match results, sample data, and lookup table size
+    - **Write-PSFMessage -Level Debug -Message <message>**: Detailed per-app processing and matching logic
+    - **Write-PSFMessage -Level Verbose -Message <message>**: Match results, sample data, and lookup table size
     - **Write-Progress**: Visual progress bar for user feedback
     - **Standard Output**: Final application objects with ThrottlingStats
 

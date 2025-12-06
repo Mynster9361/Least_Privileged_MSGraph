@@ -43,7 +43,7 @@ function ConvertTo-TokenizeId {
     - API version segments always preserved
     - Trailing slashes removed
 
-    Uses Write-PSFMessage -Level Debug -Message  extensively. Run with -Debug to see segment processing details.
+    Uses Write-PSFMessage -Level Debug -Message extensively. Run with -Debug to see segment processing details.
 
 .LINK
     Get-AppActivityFromLog

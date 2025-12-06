@@ -50,7 +50,7 @@ function Convert-RelativeUriToAbsoluteUri {
     - Base URL added if missing (https://graph.microsoft.com)
     - Default version 'v1.0' if not specified
 
-    Uses Write-PSFMessage -Level Debug -Message  for detailed processing steps. Run with -Debug to see normalization details.
+    Uses Write-PSFMessage -Level Debug -Message for detailed processing steps. Run with -Debug to see normalization details.
 
 .LINK
     Get-AppActivityFromLog

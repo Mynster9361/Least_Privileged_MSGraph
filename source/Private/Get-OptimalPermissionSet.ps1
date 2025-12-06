@@ -49,7 +49,7 @@ function Get-OptimalPermissionSet {
     - No activities have valid permission mappings
     - All activities are unmatched
 
-    Uses Write-PSFMessage -Level Debug -Message  for processing details. Run with -Debug to see selection logic.
+    Uses Write-PSFMessage -Level Debug -Message for processing details. Run with -Debug to see selection logic.
 
 .LINK
     Get-PermissionAnalysis

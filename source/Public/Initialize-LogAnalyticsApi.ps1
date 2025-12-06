@@ -208,11 +208,11 @@ function Initialize-LogAnalyticsApi {
     - Error messages include full exception details
 
     Logging Levels:
-    - **Write-PSFMessage -Level Debug -Message **: Detailed processing steps (use -Debug switch)
+    - **Write-PSFMessage -Level Debug -Message**: Detailed processing steps (use -Debug switch)
       * Service registration check
       * Registration success confirmation
       * Status determination
-    - **Write-PSFMessage -Level Verbose -Message **: Key status messages (use -Verbose switch)
+    - **Write-PSFMessage -Level Verbose -Message "Your message here"**: Key status messages (use -Verbose switch)
       * Already registered notification
       * New registration notification
     - **Write-Error**: Registration failures

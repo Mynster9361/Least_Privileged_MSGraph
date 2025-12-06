@@ -59,13 +59,10 @@ function ConvertTo-TokenizeId {
   $Uri = [System.Uri]::new($UriString)
 
   $TokenizedUri = $Uri.GetComponents([System.UriComponents]::SchemeAndServer, [System.UriFormat]::SafeUnescaped)
-  Write-PSFMessage -Level Debug -Message  "Base URI: $TokenizedUri"
   $LastSegmentIndex = $Uri.Segments.length - 1
-  Write-PSFMessage -Level Debug -Message  "Last Segment Index: $LastSegmentIndex"
   $LastSegment = $Uri.Segments[$LastSegmentIndex]
   Write-PSFMessage -Level Debug -Message  "Last Segment: $LastSegment"
   $UnescapedUri = $Uri.ToString()
-  Write-PSFMessage -Level Debug -Message  "Unescaped URI: $UnescapedUri"
   for ($i = 0 ; $i -lt $Uri.Segments.length; $i++) {
     Write-PSFMessage -Level Debug -Message  "Processing Segment [$i]: $($Uri.Segments[$i])"
     # Segment contains an integer/id and is not API version.

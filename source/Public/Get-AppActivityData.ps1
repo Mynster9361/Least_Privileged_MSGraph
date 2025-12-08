@@ -69,14 +69,6 @@ function Get-AppActivityData {
     Returns the input application objects enriched with an "Activity" property.
 
 .EXAMPLE
-    # First authenticate
-    Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics"
-
-    # Then get activity data
-    $apps = Get-MgServicePrincipal -Filter "appId eq 'your-app-id'"
-    $enrichedApps = $apps | Get-AppActivityData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
-
-.EXAMPLE
     $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
 
 .NOTES
@@ -126,9 +118,9 @@ function Get-AppActivityData {
         $workflow = New-PSFRunspaceWorkflow -Name $workflowName
 
         $functions = @{
-            'Get-AppActivityFromLog'           = (get-command 'Get-AppActivityFromLog').Definition
-            'Convert-RelativeUriToAbsoluteUri' = (get-command 'Convert-RelativeUriToAbsoluteUri').Definition
-            'ConvertTo-TokenizeId'             = (get-command 'ConvertTo-TokenizeId').Definition
+            'Get-AppActivityFromLog'           = (Get-Command 'Get-AppActivityFromLog').Definition
+            'Convert-RelativeUriToAbsoluteUri' = (Get-Command 'Convert-RelativeUriToAbsoluteUri').Definition
+            'ConvertTo-TokenizeId'             = (Get-Command 'ConvertTo-TokenizeId').Definition
         }
 
         # Variables to pass to runspaces

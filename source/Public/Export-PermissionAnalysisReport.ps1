@@ -260,7 +260,7 @@ function Export-PermissionAnalysisReport {
     }
 
     end {
-        Write-Debug "Total apps received: $($allAppData.Count)"
+        Write-PSFMessage -Level Debug -Message  "Total apps received: $($allAppData.Count)"
 
         # Convert accumulated data to JSON for embedding
         $jsonData = $allAppData | ConvertTo-Json -Depth 10 -Compress
@@ -269,13 +269,13 @@ function Export-PermissionAnalysisReport {
         $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')
 
         # Get the module root directory (handles versioned paths correctly)
-        $moduleRoot = $MyInvocation.MyCommand.Module.ModuleBase
+        $script:moduleRoot = $PSScriptRoot
 
         # Load the HTML template
-        $templatePath = Join-Path -Path $moduleRoot -ChildPath "data\base.html"
+        $templatePath = Join-Path -Path $script:moduleRoot -ChildPath "data\base.html"
 
-        Write-Debug "Module root: $moduleRoot"
-        Write-Debug "Template path: $templatePath"
+        Write-PSFMessage -Level Debug -Message  "Module root: $script:moduleRoot"
+        Write-PSFMessage -Level Debug -Message  "Template path: $templatePath"
 
         if (-not (Test-Path -Path $templatePath)) {
             throw "Template file not found: $templatePath"

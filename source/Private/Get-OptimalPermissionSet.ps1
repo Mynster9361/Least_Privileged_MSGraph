@@ -49,7 +49,7 @@ function Get-OptimalPermissionSet {
     - No activities have valid permission mappings
     - All activities are unmatched
 
-    Uses Write-Debug for processing details. Run with -Debug to see selection logic.
+    Uses Write-PSFMessage -Level Debug -Message for processing details. Run with -Debug to see selection logic.
 
 .LINK
     Get-PermissionAnalysis
@@ -65,11 +65,11 @@ function Get-OptimalPermissionSet {
     [array]$activityPermissions
   )
 
-  Write-Debug "Calculating optimal permission set..."
+  Write-PSFMessage -Level Debug -Message  "Calculating optimal permission set..."
 
   # Handle null or empty input
   if ($null -eq $activityPermissions -or $activityPermissions.Count -eq 0) {
-    Write-Debug "No activity permissions provided"
+    Write-PSFMessage -Level Debug -Message  "No activity permissions provided"
     return [PSCustomObject]@{
       OptimalPermissions  = @()
       UnmatchedActivities = @()
@@ -93,19 +93,19 @@ function Get-OptimalPermissionSet {
   }
 
   if ($activitiesWithoutPermissions.Count -gt 0) {
-    Write-Debug "Found $($activitiesWithoutPermissions.Count) matched activities without permission mappings"
+    Write-PSFMessage -Level Debug -Message  "Found $($activitiesWithoutPermissions.Count) matched activities without permission mappings"
     $unmatchedActivities = @($unmatchedActivities) + @($activitiesWithoutPermissions)
   }
 
   if ($unmatchedActivities.Count -gt 0) {
-    Write-Debug "Found $($unmatchedActivities.Count) activities without complete matches:"
+    Write-PSFMessage -Level Debug -Message  "Found $($unmatchedActivities.Count) activities without complete matches:"
     $unmatchedActivities | ForEach-Object {
-      Write-Debug "  $($_.Method) $($_.Version)$($_.Path)"
+      Write-PSFMessage -Level Debug -Message  "  $($_.Method) $($_.Version)$($_.Path)"
     }
   }
 
   if ($activitiesWithPermissions.Count -eq 0) {
-    Write-Debug "No activities with valid permission mappings found"
+    Write-PSFMessage -Level Debug -Message  "No activities with valid permission mappings found"
     return [PSCustomObject]@{
       OptimalPermissions  = @()
       UnmatchedActivities = $unmatchedActivities
@@ -144,7 +144,7 @@ function Get-OptimalPermissionSet {
 
   # Check if we found any permissions
   if ($allPermissions.Count -eq 0) {
-    Write-Debug "No valid permissions found in activities"
+    Write-PSFMessage -Level Debug -Message  "No valid permissions found in activities"
     return [PSCustomObject]@{
       OptimalPermissions  = @()
       UnmatchedActivities = $unmatchedActivities
@@ -190,7 +190,7 @@ function Get-OptimalPermissionSet {
     }
   }
 
-  Write-Debug "Selected $($selectedPermissions.Count) optimal permissions covering $($coveredActivities.Count) activities"
+  Write-PSFMessage -Level Debug -Message  "Selected $($selectedPermissions.Count) optimal permissions covering $($coveredActivities.Count) activities"
 
   return [PSCustomObject]@{
     OptimalPermissions  = $selectedPermissions

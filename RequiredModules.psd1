@@ -20,4 +20,5 @@
     Sampler             = 'latest'
     PlatyPS             = 'latest'
     EntraAuth           = 'latest'
+    PSFramework         = 'latest'
 }

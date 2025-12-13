@@ -208,11 +208,11 @@ function Initialize-LogAnalyticsApi {
     - Error messages include full exception details
 
     Logging Levels:
-    - **Write-Debug**: Detailed processing steps (use -Debug switch)
+    - **Write-PSFMessage -Level Debug -Message**: Detailed processing steps (use -Debug switch)
       * Service registration check
       * Registration success confirmation
       * Status determination
-    - **Write-Verbose**: Key status messages (use -Verbose switch)
+    - **Write-PSFMessage -Level Verbose -Message "Your message here"**: Key status messages (use -Verbose switch)
       * Already registered notification
       * New registration notification
     - **Write-Error**: Registration failures
@@ -307,11 +307,11 @@ function Initialize-LogAnalyticsApi {
     param ()
 
     begin {
-        Write-Debug "Checking if LogAnalytics service is already registered..."
+        Write-PSFMessage -Level Debug -Message  "Checking if LogAnalytics service is already registered..."
 
         $verifyRegistration = Get-EntraService -Name 'LogAnalytics' -ErrorAction SilentlyContinue
         if ($null -ne $verifyRegistration) {
-            Write-Debug "LogAnalytics service is already registered."
+            Write-PSFMessage -Level Debug -Message  "LogAnalytics service is already registered."
             $alreadyRegistered = $true
         }
         else {
@@ -322,11 +322,11 @@ function Initialize-LogAnalyticsApi {
     process {
         # Skip registration if already registered
         if ($alreadyRegistered) {
-            Write-Verbose "LogAnalytics service was already registered. Skipping initialization."
+            Write-PSFMessage -Level Verbose -Message  "LogAnalytics service was already registered. Skipping initialization."
             return
         }
 
-        Write-Verbose "Registering LogAnalytics service..."
+        Write-PSFMessage -Level Verbose -Message  "Registering LogAnalytics service..."
 
         $LogAnalyticsCfg = @{
             Name          = 'LogAnalytics'
@@ -342,7 +342,7 @@ function Initialize-LogAnalyticsApi {
 
         try {
             Register-EntraService @LogAnalyticsCfg
-            Write-Debug "LogAnalytics service registered successfully."
+            Write-PSFMessage -Level Debug -Message  "LogAnalytics service registered successfully."
         }
         catch {
             Write-Error "Failed to register LogAnalytics service: $_"
@@ -358,7 +358,7 @@ function Initialize-LogAnalyticsApi {
             "NewlyRegistered"
         }
 
-        Write-Debug "LogAnalytics service initialization completed. Status: $statusMessage"
+        Write-PSFMessage -Level Debug -Message  "LogAnalytics service initialization completed. Status: $statusMessage"
 
         # Return structured object with clear status
         return [PSCustomObject]@{

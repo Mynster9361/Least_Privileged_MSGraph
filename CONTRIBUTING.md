@@ -206,14 +206,14 @@ function Verb-Noun {
     )
 
     begin {
-        Write-Verbose "Starting $($MyInvocation.MyCommand)"
+        Write-PSFMessage -Level Verbose -Message  "Starting $($MyInvocation.MyCommand)"
     }
 
     process {
         if ($PSCmdlet.ShouldProcess($ParameterName, 'Process Item')) {
             try {
                 # Implementation here
-                Write-Verbose "Processing: $ParameterName"
+                Write-PSFMessage -Level Verbose -Message  "Processing: $ParameterName"
                 
                 # Return result
                 [PSCustomObject]@{
@@ -229,7 +229,7 @@ function Verb-Noun {
     }
 
     end {
-        Write-Verbose "Completed $($MyInvocation.MyCommand)"
+        Write-PSFMessage -Level Verbose -Message  "Completed $($MyInvocation.MyCommand)"
     }
 }
 ```

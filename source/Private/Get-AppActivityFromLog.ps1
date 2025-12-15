@@ -36,6 +36,15 @@ function Get-AppActivityFromLog {
     Optional switch. Returns cleaned but non-tokenized URIs when specified.
     Default behavior tokenizes URIs by replacing IDs with {id} placeholders.
 
+.PARAMETER MaxActivityEntries
+    The maximum number of activity entries to retrieve per application from Log Analytics.
+    This limits the result set size to prevent excessive data retrieval and memory consumption.
+    Default: 100000
+
+    Recommended values:
+    - **30000**: Conservative, faster queries
+    - **100000**: Balanced (default)
+
 .PARAMETER startDate
     Internal parameter for recursive calls. Starting date for the query window.
 
@@ -64,8 +73,9 @@ function Get-AppActivityFromLog {
     - Appropriate Log Analytics permissions
     - MicrosoftGraphActivityLogs table with diagnostic logging enabled
 
-    Query limits: 30,000 rows max, 100MB response size.
+    Query limits: Configurable via maxActivityEntries parameter (default 100,000), 100MB response size.
     Uses KQL summarization for efficiency and deduplicates at query level.
+    Maximum supported by Log Analytics: 500,000 rows per query.
 
     Response Size Handling:
     - If response exceeds 100MB, automatically splits time range
@@ -87,6 +97,9 @@ function Get-AppActivityFromLog {
 
     [Parameter(Mandatory = $false)]
     [switch]$retainRawUri,
+
+    [Parameter(Mandatory = $false)]
+    [int]$maxActivityEntries = 100000,
 
     [Parameter(Mandatory = $false)]
     [datetime]$startDate,
@@ -122,6 +135,7 @@ MicrosoftGraphActivityLogs
 | extend CleanedRequestUri = replace_string(CleanedRequestUri, "HTTPSPLACEHOLDER:/", "https://")
 | project AppId, RequestMethod, CleanedRequestUri
 | distinct AppId, RequestMethod, CleanedRequestUri
+| take $maxActivityEntries
 | summarize Activity = make_set(pack("Method", RequestMethod, "Uri", CleanedRequestUri)) by AppId
 "@
 
@@ -130,7 +144,6 @@ MicrosoftGraphActivityLogs
     options          = @{
       truncationMaxSize = 67108864
     }
-    maxRows          = 30000
     workspaceFilters = @{
       regions = @()
     }
@@ -204,15 +217,17 @@ MicrosoftGraphActivityLogs
         return @()
       }
 
-      # Split the time range in half
+      # Split the time range in half AND split the max entries to maintain the overall limit
       $midPoint = $startDate.AddDays($timeSpan.TotalDays / 2)
-      Write-PSFMessage -Level Warning -Message "Response size exceeded ($($errorDetails.message)). Splitting query into two windows."
+      $halfMaxEntries = [Math]::Max(1, [Math]::Floor($maxActivityEntries / 2))
+
+      Write-PSFMessage -Level Warning -Message "Response size exceeded ($($errorDetails.message)). Splitting query into two windows with $halfMaxEntries entries each."
       Write-PSFMessage -Level Verbose -Message "Window 1: $($startDate.ToString('yyyy-MM-dd')) to $($midPoint.ToString('yyyy-MM-dd'))"
       Write-PSFMessage -Level Verbose -Message "Window 2: $($midPoint.ToString('yyyy-MM-dd')) to $($endDate.ToString('yyyy-MM-dd'))"
 
-      # Query each half recursively
-      $firstHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -startDate $startDate -endDate $midPoint
-      $secondHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -startDate $midPoint -endDate $endDate
+      # Query each half recursively with halved max entries
+      $firstHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -maxActivityEntries $halfMaxEntries -startDate $startDate -endDate $midPoint
+      $secondHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -maxActivityEntries $halfMaxEntries -startDate $midPoint -endDate $endDate
 
       # Combine results
       $combinedActivity = @($firstHalf) + @($secondHalf)

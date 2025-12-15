@@ -64,6 +64,21 @@ function Get-AppActivityData {
     - **10**: Balanced performance (default)
     - **20**: Aggressive for high-throughput scenarios
 
+.PARAMETER MaxActivityEntries
+    The maximum number of activity entries to retrieve per application from Log Analytics.
+    This limits the result set size to prevent excessive data retrieval and memory consumption.
+    Default: 100000
+
+    Recommended values:
+    - **30000**: Conservative, faster queries
+    - **100000**: Balanced (default)
+
+
+.PARAMETER retainRawUri
+    Optional switch. Returns cleaned but non-tokenized URIs when specified.
+    Default behavior tokenizes URIs by replacing IDs with {id} placeholders.
+    NOTE if you utilize this switch you will not be able to run a permission analysis on the endpoints
+
 .OUTPUTS
     System.Object
     Returns the input application objects enriched with an "Activity" property.
@@ -95,11 +110,16 @@ function Get-AppActivityData {
         [int]$Days = 30,
 
         [Parameter(Mandatory = $false)]
-        [int]$ThrottleLimit = 10
+        [int]$ThrottleLimit = 10,
+
+        [Parameter(Mandatory = $false)]
+        [int]$MaxActivityEntries = 100000,
+
+        [Parameter(Mandatory = $false)]
+        [switch]$retainRawUri
     )
 
     begin {
-        # Verify authentication
         $logAnalyticsToken = Get-EntraToken | Where-Object { $_.Service -eq 'LogAnalytics' }
 
         if (-not $logAnalyticsToken) {
@@ -125,9 +145,11 @@ function Get-AppActivityData {
 
         # Variables to pass to runspaces
         $variables = @{
-            WorkspaceId       = $WorkspaceId
-            Days              = $Days
-            logAnalyticsToken = $logAnalyticsToken
+            WorkspaceId        = $WorkspaceId
+            Days               = $Days
+            MaxActivityEntries = $MaxActivityEntries
+            logAnalyticsToken  = $logAnalyticsToken
+            retainRawUri       = $retainRawUri
         }
 
         # Add the worker that processes apps
@@ -164,7 +186,7 @@ function Get-AppActivityData {
 
                     # Get activity data
                     try {
-                        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId
+                        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId -maxActivityEntries $MaxActivityEntries -retainRawUri:$retainRawUri.IsPresent
 
                         try {
                             [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', $activity)

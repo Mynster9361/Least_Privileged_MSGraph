@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Modern dark-themed documentation site with responsive design
   - Comprehensive getting started guide
   - Workflow examples demonstrating common use cases
+- **Get-AppActivityData:**
+  - Introduce 3 new parameters
+    - `-ThrottleLimit` allows you to specify a certain amoun of runspaces so it gathers multiple app data at once i recommend setting it somewhere between 5-20 the higher you go the more resources you use
+    - `-MaxActivityEntries` This parameter allows you to specify how much data you want to base your analysis on lets say you want to look back 30 days but some apps might have sent 20 Millon requests in that time frame this parameter allows you to specify how many requests from the last 30 days you want to base of. This also allows you to speed up your analysis even further, usefull if you just want a fast overview but note that you might not get all endpoints that has been hit. Default amount is set to 100.000 request per app.
+    - `-retainRawUri` Interested in the specific url's your apps are hitting? well worry no further this switch allows you to retain the raw url instead of annomynizing it note that if you utilize this switch you will not be able to run a permission analysis on the endpoints
 
 ### Fixed
 - **Critical bug in `Get-AppActivityData`:**

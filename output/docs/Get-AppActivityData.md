@@ -14,7 +14,7 @@ Enriches application data with API activity information from Azure Log Analytics
 
 ```
 Get-AppActivityData [-AppData] <Array> [-WorkspaceId] <String> [[-Days] <Int32>] [[-ThrottleLimit] <Int32>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-MaxActivityEntries] <Int32>] [-retainRawUri] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -133,6 +133,45 @@ Aliases:
 Required: False
 Position: 4
 Default value: 10
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaxActivityEntries
+The maximum number of activity entries to retrieve per application from Log Analytics.
+This limits the result set size to prevent excessive data retrieval and memory consumption.
+Default: 100000
+
+Recommended values:
+- **30000**: Conservative, faster queries
+- **100000**: Balanced (default)
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: 100000
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -retainRawUri
+Optional switch.
+Returns cleaned but non-tokenized URIs when specified.
+Default behavior tokenizes URIs by replacing IDs with {id} placeholders.
+NOTE if you utilize this switch you will not be able to run a permission analysis on the endpoints
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

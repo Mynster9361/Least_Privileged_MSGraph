@@ -1,7 +1,7 @@
 @{
     CustomRulePath      = '.\output\RequiredModules\DscResource.AnalyzerRules'
     includeDefaultRules = $true
-    IncludeRules   = @(
+    IncludeRules        = @(
         # DSC Resource Kit style guideline rules.
         'PSAvoidDefaultValueForMandatoryParameter',
         'PSAvoidDefaultValueSwitchParameter',
@@ -37,8 +37,17 @@
         'PSShouldProcess',
         'PSUseDeclaredVarsMoreThanAssignments',
         'PSUsePSCredentialType',
-
+        'PSUseCompatibleSyntax',
         'Measure-*'
     )
-
+    Rules               = @{
+        PSUseCompatibleSyntax = @{
+            Enable         = $true
+            TargetVersions = @(
+                '5.1',
+                '7.2',
+                '7.4'
+            )
+        }
+    }
 }

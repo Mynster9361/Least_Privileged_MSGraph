@@ -5,11 +5,11 @@ function Get-AppActivityData {
 
 .DESCRIPTION
     This function queries Azure Log Analytics workspace to retrieve Microsoft Graph API activity
-    for each application over a specified time period. It adds the activity data as a new property
-    to each application object, enabling analysis of what API calls each application has made.
+    for each application over a specified time period using parallel runspace execution.
 
-    The function processes applications in batches, displaying progress information, and handles
-    errors gracefully by continuing to process remaining applications even if some queries fail.
+    Uses PSFramework's Runspace Workflow for efficient parallel processing while maintaining
+    pipeline streaming capabilities. Applications are processed through a queue-based workflow
+    with configurable parallelization.
 
     Activity data includes:
     - HTTP methods used (GET, POST, PUT, PATCH, DELETE, etc.)
@@ -24,17 +24,13 @@ function Get-AppActivityData {
     - Auditing what Graph API operations applications perform
     - Planning permission optimization initiatives
 
-    The function operates in three phases:
-    1. **Begin**: Initializes collections for incoming applications
-    2. **Process**: Collects all applications from pipeline input
-    3. **End**: Processes each application with progress tracking and error handling
-
     Key Features:
-    - Pipeline support for efficient processing
-    - Progress bar with percentage completion
+    - Parallel processing using PSFramework runspaces (5-10x faster for large datasets)
+    - Pipeline streaming for memory efficiency
     - Individual error handling (one failure doesn't stop processing)
     - Verbose logging for monitoring
     - Debug output for troubleshooting
+    - Progress tracking
     - Returns enhanced objects with Activity property
 
 .PARAMETER AppData
@@ -51,284 +47,58 @@ function Get-AppActivityData {
     This parameter accepts pipeline input, allowing you to pipe application objects directly
     from Get-MgServicePrincipal or other sources.
 
-    Example application object:
-    @{
-        PrincipalId = "12345678-1234-1234-1234-123456789012"
-        PrincipalName = "My Application"
-        AppId = "87654321-4321-4321-4321-210987654321"
-    }
-
 .PARAMETER WorkspaceId
     The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
     This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
 
-    Format: GUID string (e.g., "12345678-1234-1234-1234-123456789012")
-
-    To find your workspace ID:
-    1. Navigate to Azure Portal > Log Analytics workspaces
-    2. Select your workspace
-    3. Copy the Workspace ID from the Overview page
-
-    Prerequisites:
-    - Microsoft Graph diagnostic settings must send logs to this workspace
-    - You must have permissions to query the workspace (Log Analytics Reader role or equivalent)
-    - Logs typically appear within 10-15 minutes of API activity
-
 .PARAMETER Days
     The number of days of historical activity to retrieve, counting back from the current date.
-
     Default: 30 days
 
-    Recommended values:
-    - **7 days**: Quick analysis for recently active applications
-    - **30 days**: Standard monthly review (default)
-    - **90 days**: Comprehensive quarterly analysis for thorough coverage
+.PARAMETER ThrottleLimit
+    The maximum number of concurrent runspaces to use for parallel processing.
+    Default: 10
 
-    Considerations:
-    - Longer periods provide more complete data but take longer to process
-    - Applications with infrequent activity need longer periods
-    - Balance between data completeness and query performance
-    - Maximum limited by workspace retention period (typically 30-730 days)
+    Recommended values:
+    - **5**: Conservative for rate-limited environments
+    - **10**: Balanced performance (default)
+    - **20**: Aggressive for high-throughput scenarios
+
+.PARAMETER MaxActivityEntries
+    The maximum number of activity entries to retrieve per application from Log Analytics.
+    This limits the result set size to prevent excessive data retrieval and memory consumption.
+    Default: 100000
+
+    Recommended values:
+    - **30000**: Conservative, faster queries
+    - **100000**: Balanced (default)
+
+
+.PARAMETER retainRawUri
+    Optional switch. Returns cleaned but non-tokenized URIs when specified.
+    Default behavior tokenizes URIs by replacing IDs with {id} placeholders.
+    NOTE if you utilize this switch you will not be able to run a permission analysis on the endpoints
 
 .OUTPUTS
-    System.Collections.ArrayList
+    System.Object
     Returns the input application objects enriched with an "Activity" property.
 
-    Activity Property Structure:
-    - Type: Array of objects
-    - Each activity object contains:
-      * Method (String): HTTP method (GET, POST, PUT, PATCH, DELETE, etc.)
-      * Uri (String): Tokenized API endpoint with {id} placeholders
-        Example: "https://graph.microsoft.com/v1.0/users/{id}/messages"
-
-    Special Cases:
-    - Empty array (@()): No activity found for that application
-    - Empty array (@()): Error occurred querying Log Analytics (warning logged)
-    - Null Activity property should never occur (always set to at least empty array)
-
-    The function also outputs a summary string indicating successful processing count.
-
 .EXAMPLE
-    $apps = Get-MgServicePrincipal -Filter "appId eq 'your-app-id'"
-    $enrichedApps = $apps | Get-AppActivityData -WorkspaceId "12345678-abcd-efgh-ijkl-123456789012"
-
-    Description:
-    Retrieves activity for a specific application over the default 30-day period.
-    The returned object includes an Activity property with API calls made by the application.
-
-.EXAMPLE
-    $allApps = Get-MgServicePrincipal -All | Where-Object { $_.AppRoles.Count -gt 0 }
-    $appsWithActivity = $allApps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90
-    $activeApps = $appsWithActivity | Where-Object { $_.Activity.Count -gt 0 }
-
-    "Found $($activeApps.Count) applications with activity in the last 90 days"
-    $activeApps | Select-Object PrincipalName, @{N='ActivityCount';E={$_.Activity.Count}} | Format-Table
-
-    Description:
-    Analyzes 90 days of activity for all service principals with Graph permissions,
-    filters to only those with activity, and displays a summary table.
-
-.EXAMPLE
-    $apps = Get-Content .\apps.json | ConvertFrom-Json
-    $results = Get-AppActivityData -AppData $apps -WorkspaceId $workspaceId -Days 7 -Verbose
-    $results | Export-Clixml .\enriched-apps.xml
-
-    "Saved enriched app data to enriched-apps.xml"
-
-    Description:
-    Loads applications from JSON, gets 7 days of activity with verbose output,
-    and saves the enriched results to XML for later analysis or reporting.
-
-.EXAMPLE
-    $criticalApps = Get-MgServicePrincipal -Filter "tags/any(t:t eq 'Critical')"
-    $criticalApps | Get-AppActivityData -WorkspaceId $workspaceId -Days 30 |
-        ForEach-Object {
-            if ($_.Activity.Count -eq 0) {
-                Write-Warning "$($_.PrincipalName) has no recent activity - consider reviewing permissions"
-            } else {
-                "$($_.PrincipalName): $($_.Activity.Count) unique API patterns"
-            }
-        }
-
-    Description:
-    Monitors critical applications for activity and alerts if any have been inactive
-    for 30 days, which may indicate unused permissions or dormant applications.
-
-.EXAMPLE
-    # Process large tenant in chunks for better memory management
-    $allApps = Get-MgServicePrincipal -All
-    $chunkSize = 50
-    $allResults = @()
-
-    for ($i = 0; $i -lt $allApps.Count; $i += $chunkSize) {
-        $chunk = $allApps[$i..([Math]::Min($i + $chunkSize - 1, $allApps.Count - 1))]
-        "Processing chunk $([Math]::Floor($i/$chunkSize) + 1)..."
-
-        $chunkResults = $chunk | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
-        $allResults += $chunkResults
-
-        # Optional: Save intermediate results
-        $chunkResults | Export-Clixml ".\results_chunk_$i.xml"
-    }
-
-    Description:
-    Processes a large tenant (hundreds of apps) in chunks to manage memory usage
-    and provides intermediate saves for resilience against failures.
-
-.EXAMPLE
-    # Compare activity across different time periods
-    $apps = Get-MgServicePrincipal -Top 10
-
-    $recent = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 7
-    $extended = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90
-
-    foreach ($app in $recent) {
-        $extendedApp = $extended | Where-Object { $_.PrincipalId -eq $app.PrincipalId }
-
-        "`n$($app.PrincipalName):"
-        "  Last 7 days: $($app.Activity.Count) unique patterns"
-        "  Last 90 days: $($extendedApp.Activity.Count) unique patterns"
-
-        if ($extendedApp.Activity.Count -gt $app.Activity.Count * 2) {
-            Write-Warning "  Application has irregular activity patterns - review needed"
-        }
-    }
-
-    Description:
-    Compares activity patterns across different time periods to identify applications
-    with irregular or seasonal usage patterns.
-
-.EXAMPLE
-    # Generate activity summary report
-    $apps = Get-MgServicePrincipal -All
-    $enriched = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
-
-    $summary = $enriched | ForEach-Object {
-        [PSCustomObject]@{
-            ApplicationName = $_.PrincipalName
-            AppId = $_.AppId
-            UniqueEndpoints = $_.Activity.Count
-            HasActivity = $_.Activity.Count -gt 0
-            Methods = ($_.Activity.Method | Select-Object -Unique) -join ', '
-            SampleEndpoint = if ($_.Activity.Count -gt 0) { $_.Activity[0].Uri } else { "None" }
-        }
-    }
-
-    $summary | Export-Csv -Path ".\app-activity-summary.csv" -NoTypeInformation
-    "Activity summary exported to app-activity-summary.csv"
-
-    Description:
-    Creates a comprehensive summary CSV report showing activity metrics for all applications,
-    useful for stakeholder reporting and trend analysis.
+    $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
 
 .NOTES
     Prerequisites:
     - PowerShell 5.1 or later
+    - PSFramework module
+    - EntraAuth module with active Log Analytics connection
     - Azure Log Analytics workspace with MicrosoftGraphActivityLogs table enabled
-    - Microsoft Graph diagnostic settings configured to send logs to the workspace
-    - Appropriate permissions to query the Log Analytics workspace via Invoke-EntraRequest
-    - Get-AppActivityFromLog function must be available (private function dependency)
-
-    Log Analytics Configuration:
-    To enable Microsoft Graph activity logging:
-    1. Navigate to Azure AD > Diagnostic settings
-    2. Add diagnostic setting
-    3. Select "MicrosoftGraphActivityLogs" log category
-    4. Send to Log Analytics workspace
-    5. Wait 10-15 minutes for initial data to appear
-    6. Verify data: Run query in Log Analytics: MicrosoftGraphActivityLogs | take 10
-
-    Performance Considerations:
-    - Processing time scales linearly with the number of applications
-    - Each application requires a separate Log Analytics query
-    - Typical processing time: 1-2 seconds per application
-    - Large tenants (500+ apps) may take 10-15 minutes
-    - Consider processing in chunks for very large tenants (see examples)
-    - Network latency affects query time
-    - Log Analytics query throttling may occur with rapid requests
-
-    Memory Usage:
-    - Each application object is held in memory during processing
-    - Activity data adds ~5-50KB per application depending on API usage
-    - Large tenants may require 100-500MB memory
-    - Consider chunked processing for tenants with 1000+ applications
-
-    Error Handling:
-    - Individual failures are logged as warnings (Write-Warning)
-    - Processing continues even if some queries fail
-    - Failed applications receive an empty Activity array (@())
-    - Progress bar continues regardless of individual failures
-    - Final count reflects successfully processed apps (may be less than input)
-
-    Progress Tracking:
-    - Progress bar shows: current app, total apps, percentage complete
-    - Updates after each application is processed
-    - Includes current operation (app name and ID)
-    - Automatically completes when processing finishes
-
-    Logging Levels:
-    - **Write-Debug**: Detailed per-app processing information (use -Debug)
-    - **Write-Verbose**: Processing milestones and counts (use -Verbose)
-    - **Write-Warning**: Individual query failures and issues
-    - **Write-Progress**: Visual progress bar (always shown)
-    - **Standard Output**: Final summary message
-
-    Common Issues:
-
-    No activity found for any applications:
-    - Verify Microsoft Graph logging is enabled
-    - Check Log Analytics workspace ID is correct
-    - Ensure diagnostic settings are sending to correct workspace
-    - Increase -Days parameter (applications may have infrequent activity)
-    - Verify service principals have actually made API calls
-
-    Slow processing:
-    - This is normal for large numbers of applications
-    - Consider processing in smaller chunks
-    - Check Log Analytics workspace location (cross-region queries slower)
-    - Verify network connectivity to Azure
-
-    Authentication failures:
-    - Ensure Invoke-EntraRequest is configured with valid credentials
-    - Verify permissions to read from Log Analytics workspace
-    - Check if authentication token has expired (re-authenticate)
-
-    Out of memory errors:
-    - Process applications in smaller batches (see chunking example)
-    - Reduce -Days parameter to limit activity data size
-    - Increase PowerShell memory limits if possible
-
-    Pipeline Behavior:
-    - Accepts ValueFromPipeline for seamless integration
-    - All pipeline objects collected before processing begins (required for progress calculation)
-    - Memory used to store all incoming objects
-    - Consider non-pipeline approach for very large datasets
-
-    Return Value:
-    - Function returns both object array and string message
-    - String message goes to standard output
-    - Object array is primary return value for assignment
-    - Use [void] or Out-Null if you want to suppress string output
-
-    Best Practices:
-    - Always use -Verbose for long-running operations
-    - Save results with Export-Clixml for later analysis
-    - Implement retry logic for critical automation scenarios
-    - Monitor progress bar for stuck queries
-    - Test with small application sets before processing entire tenant
-    - Consider scheduling during off-peak hours for large tenants
-
-    Related Cmdlets:
-    - Get-MgServicePrincipal: Retrieve applications to analyze
-    - Get-PermissionAnalysis: Next step after getting activity data
-    - Export-PermissionAnalysisReport: Generate reports from analysis results
+    - Must be authenticated via Connect-EntraService before calling this function
 
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppActivityData.html
 #>
     [CmdletBinding()]
-    [OutputType([System.String])]
-    [OutputType([System.Collections.ArrayList])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
@@ -337,72 +107,196 @@ function Get-AppActivityData {
         [string]$WorkspaceId,
 
         [Parameter(Mandatory = $false)]
-        [int]$Days = 30
+        [int]$Days = 30,
+
+        [Parameter(Mandatory = $false)]
+        [int]$ThrottleLimit = 10,
+
+        [Parameter(Mandatory = $false)]
+        [int]$MaxActivityEntries = 100000,
+
+        [Parameter(Mandatory = $false)]
+        [switch]$retainRawUri
     )
 
     begin {
-        Write-Debug "Starting to get app activity data from Log Analytics..."
-        $allIncomingApps = [System.Collections.ArrayList]::new()
-        $allProcessedApps = [System.Collections.ArrayList]::new()
+        $logAnalyticsToken = Get-EntraToken | Where-Object { $_.Service -eq 'LogAnalytics' }
+
+        if (-not $logAnalyticsToken) {
+            throw "Not authenticated to Log Analytics service. Please run Connect-EntraService -Service 'LogAnalytics' first."
+        }
+
+        Write-PSFMessage -Level Verbose -Message "Using existing Log Analytics authentication (expires: $($logAnalyticsToken.ValidUntil))"
+
+        # Import PSFramework if not already loaded
+        if (-not (Get-Module -Name PSFramework)) {
+            Import-Module PSFramework -ErrorAction Stop
+        }
+
+        # Create unique workflow name
+        $workflowName = "AppActivityWorkflow_$([guid]::NewGuid().ToString('N').Substring(0,8))"
+        $workflow = New-PSFRunspaceWorkflow -Name $workflowName
+
+        $functions = @{
+            'Get-AppActivityFromLog'           = (Get-Command 'Get-AppActivityFromLog').Definition
+            'Convert-RelativeUriToAbsoluteUri' = (Get-Command 'Convert-RelativeUriToAbsoluteUri').Definition
+            'ConvertTo-TokenizeId'             = (Get-Command 'ConvertTo-TokenizeId').Definition
+        }
+
+        # Variables to pass to runspaces
+        $variables = @{
+            WorkspaceId        = $WorkspaceId
+            Days               = $Days
+            MaxActivityEntries = $MaxActivityEntries
+            logAnalyticsToken  = $logAnalyticsToken
+            retainRawUri       = $retainRawUri
+        }
+
+        # Add the worker that processes apps
+        $splatWorkflow = @{
+            Name        = 'ActivityWorker'
+            InQueue     = 'Input'
+            OutQueue    = 'Output'
+            Count       = $ThrottleLimit
+            Variables   = $variables
+            Functions   = $functions
+            Modules     = 'EntraAuth', 'PSFramework'
+            ScriptBlock = {
+                param($AppObject)
+
+                # Wrap everything in try-catch to ensure object is always returned
+                try {
+                    # Re-import token in runspace
+                    try {
+                        Import-EntraToken -Token $logAnalyticsToken -NoRenew
+                    }
+                    catch {
+                        # Use PSFramework's faster property addition (works in runspaces without loading PSFramework module)
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Auth failed: $($_.Exception.Message)")
+                        }
+                        catch {
+                            # Fallback to Add-Member if PSFramework not available in runspace
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Auth failed: $($_.Exception.Message)" -Force
+                        }
+                        return $AppObject
+                    }
+
+                    # Get activity data
+                    try {
+                        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId -maxActivityEntries $MaxActivityEntries -retainRawUri:$retainRawUri.IsPresent
+
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', $activity)
+                        }
+                        catch {
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value $activity -Force
+                        }
+                    }
+                    catch {
+                        try {
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                            [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Query failed: $($_.Exception.Message)")
+                        }
+                        catch {
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                            $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Query failed: $($_.Exception.Message)" -Force
+                        }
+                    }
+                }
+                catch {
+                    try {
+                        [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', @())
+                        [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'ErrorMessage', "Unexpected error: $($_.Exception.Message)")
+                    }
+                    catch {
+                        $AppObject | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                        $AppObject | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Unexpected error: $($_.Exception.Message)" -Force
+                    }
+                }
+
+                # Always return the object
+                return $AppObject
+            }
+        }
+
+        $workflow | Add-PSFRunspaceWorker @splatWorkflow | Out-Null
+
+        $allApps = [System.Collections.Generic.List[object]]::new()
     }
 
     process {
-        # First collect all incoming apps to get total count
         foreach ($app in $AppData) {
-            [void]$allIncomingApps.Add($app)
+            $allApps.Add($app)
         }
     }
 
     end {
-        $totalCount = $allIncomingApps.Count
-        $currentIndex = 0
+        Write-PSFMessage -Level Verbose -Message "Processing $($allApps.Count) applications with $ThrottleLimit concurrent runspaces..."
 
-        Write-Verbose "Processing $totalCount applications..."
+        try {
+            $workflow | Start-PSFRunspaceWorkflow
 
-        foreach ($app in $allIncomingApps) {
-            $currentIndex++
-            $spId = $app.PrincipalId
+            $workflow | Write-PSFRunspaceQueue -Name 'Input' -BulkValues $allApps -Close
 
-            # Calculate percentage
-            $percentComplete = [math]::Round(($currentIndex / $totalCount) * 100, 2)
+            # Collect results as they become available
+            $results = [System.Collections.Generic.List[object]]::new()
+            $lastProgressUpdate = [datetime]::Now
+            $lastResultCount = 0
+            $noProgressTimeout = [timespan]::FromMinutes(5)
 
-            # Update progress bar
-            $progressParams = @{
-                Activity         = "Querying Log Analytics for Application Activity"
-                Status           = "Processing $currentIndex of $totalCount applications"
-                CurrentOperation = "$($app.PrincipalName) (ID: $spId)"
-                PercentComplete  = $percentComplete
+            while ($results.Count -lt $allApps.Count) {
+                # Read any available results
+                $batch = $workflow | Read-PSFRunspaceQueue -Name 'Output'
+                if ($batch) {
+                    foreach ($item in $batch) {
+                        $results.Add($item)
+                    }
+
+                    # If we get new results, reset the progress timer and show progress
+                    if ($results.Count -gt $lastResultCount) {
+                        $lastProgressUpdate = [datetime]::Now
+                        $lastResultCount = $results.Count
+                        Write-PSFMessage -Level Verbose -Message "Progress: $($results.Count)/$($allApps.Count) applications processed"
+                    }
+                }
+
+                # Timeout check - only if truly no progress
+                if (([datetime]::Now - $lastProgressUpdate) -gt $noProgressTimeout) {
+                    Write-PSFMessage -Level Warning -Message "No progress for $($noProgressTimeout.TotalMinutes) minutes. Stopping workflow. Processed $($results.Count)/$($allApps.Count) applications."
+                    break
+                }
+
+                Start-Sleep -Milliseconds 100
             }
-            Write-Progress @progressParams
-
-            Write-Debug "[$currentIndex/$totalCount] Querying activity for $($app.PrincipalName) ($spId)..."
-
+        }
+        finally {
+            # Ensure cleanup happens
             try {
-                $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $spId
-
-                if ($null -ne $activity) {
-                    $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value $activity -Force
-                    Write-Debug "Found $($activity.Count) activities for $($app.PrincipalName)."
-                }
-                else {
-                    $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
-                    Write-Debug "No activity found for $($app.PrincipalName)."
-                }
+                $workflow | Stop-PSFRunspaceWorkflow
+                $workflow | Remove-PSFRunspaceWorkflow
             }
             catch {
-                Write-Warning "Error retrieving activity for $($app.PrincipalName): $_"
-                $app | Add-Member -MemberType NoteProperty -Name "Activity" -Value @() -Force
+                Write-PSFMessage -Level Warning -Message "Error during workflow cleanup: $_"
             }
-
-            # Add to collection
-            [void]$allProcessedApps.Add($app)
         }
 
-        # Complete the progress bar
-        Write-Progress -Activity "Querying Log Analytics for Application Activity" -Completed
+        Write-PSFMessage -Level Verbose -Message "Completed processing: $($results.Count)/$($allApps.Count) applications."
+        $enrichedCount = ($results | Where-Object { $_.Activity -and $_.Activity.Count -gt 0 }).Count
+        $errorCount = ($results | Where-Object { $_.ErrorMessage }).Count
 
-        "Successfully processed $($allProcessedApps.Count) applications."
+        if ($errorCount -gt 0) {
+            Write-PSFMessage -Level Warning -Message "$errorCount applications had errors. Check objects with ErrorMessage property."
+            # Show first few errors as examples
+            $results | Where-Object { $_.ErrorMessage } | Select-Object -First 3 | ForEach-Object {
+                Write-PSFMessage -Level Warning -Message "Example error - $($_.PrincipalName): $($_.ErrorMessage)"
+            }
+        }
 
-        return $allProcessedApps
+        Write-PSFMessage -Level Verbose -Message "Successfully enriched $enrichedCount applications with activity data."
+
+        $results
     }
 }

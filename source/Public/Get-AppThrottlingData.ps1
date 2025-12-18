@@ -66,19 +66,24 @@ function Get-AppThrottlingData {
 
 .PARAMETER WorkspaceId
     The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
-    This workspace must contain the MicrosoftGraphActivityLogs table with throttling information.
+    This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
 
-    Format: GUID string (e.g., "12345678-1234-1234-1234-123456789012")
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
-    To find your workspace ID:
-    1. Navigate to Azure Portal > Log Analytics workspaces
-    2. Select your workspace
-    3. Copy the Workspace ID from the Overview page
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
-    Prerequisites:
-    - Microsoft Graph diagnostic settings enabled and sending to this workspace
-    - You must have permissions to query the workspace
-    - MicrosoftGraphActivityLogs table must contain data
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER Days
     The number of days of historical throttling data to retrieve, counting back from the current date.

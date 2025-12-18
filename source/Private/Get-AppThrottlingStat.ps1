@@ -23,7 +23,25 @@ function Get-AppThrottlingStat {
     - 4: Critical (>= 10%)
 
 .PARAMETER WorkspaceId
-    Log Analytics workspace ID (GUID) containing MicrosoftGraphActivityLogs table.
+    The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
+    This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
+
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER Days
     Number of days of historical data to analyze. Default: 30

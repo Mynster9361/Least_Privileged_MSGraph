@@ -25,9 +25,27 @@ function Get-AppActivityFromLog {
 
 .PARAMETER logAnalyticsWorkspace
     Log Analytics workspace ID (GUID) containing MicrosoftGraphActivityLogs table.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
+
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER days
     Number of days of historical activity to retrieve (used in P{days}D timespan format).
+    Valid range: 1-365 days.
 
 .PARAMETER spId
     Service principal object ID to filter activity for.
@@ -57,12 +75,16 @@ function Get-AppActivityFromLog {
     - $null: Query failed (check debug output)
 
 .EXAMPLE
-    # Used internally by Get-AppActivityData
+    # Used internally by Get-AppActivityData (ByWorkspaceId parameter set)
     $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId
 
 .EXAMPLE
-    # Get raw URIs for debugging
+    # Get raw URIs for debugging (ByWorkspaceId parameter set)
     $rawActivity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 7 -spId $spId -retainRawUri
+
+.EXAMPLE
+    # Query using workspace details (ByWorkspaceDetails parameter set)
+    $activity = Get-AppActivityFromLog -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -days 30 -spId $spId
 
 .NOTES
     This is a private module function not exported to users.
@@ -83,22 +105,37 @@ function Get-AppActivityFromLog {
     - Minimum split window: 1 day
     - Combines results and deduplicates across windows
 #>
-  [CmdletBinding()]
+  [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
   [OutputType([System.Object[]])]
   param(
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+    [ValidateNotNullOrEmpty()]
     [string]$logAnalyticsWorkspace,
+
+    [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+    [ValidateNotNullOrEmpty()]
+    [string]$subId,
+
+    [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+    [ValidateNotNullOrEmpty()]
+    [string]$rgName,
+
+    [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+    [ValidateNotNullOrEmpty()]
+    [string]$workspaceName,
+
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
+    [string]$spId,
 
     [Parameter(Mandatory = $true)]
     [int]$days,
-
-    [Parameter(Mandatory = $true)]
-    [string]$spId,
 
     [Parameter(Mandatory = $false)]
     [switch]$retainRawUri,
 
     [Parameter(Mandatory = $false)]
+    [ValidateRange(1, 500000)]
     [int]$maxActivityEntries = 100000,
 
     [Parameter(Mandatory = $false)]
@@ -150,7 +187,12 @@ MicrosoftGraphActivityLogs
   }
 
   try {
-    $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query" -Body ($body | ConvertTo-Json -Depth 10)
+    if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceDetails') {
+      $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/subscriptions/$subId/resourcegroups/$rgName/providers/microsoft.operationalinsights/workspaces/$workspaceName/query" -Body ($body | ConvertTo-Json -Depth 10)
+    }
+    else {
+      $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query" -Body ($body | ConvertTo-Json -Depth 10)
+    }
 
     # Check for valid response structure
     if (-not $response.tables -or $response.tables.Count -eq 0) {
@@ -226,8 +268,26 @@ MicrosoftGraphActivityLogs
       Write-PSFMessage -Level Verbose -Message "Window 2: $($midPoint.ToString('yyyy-MM-dd')) to $($endDate.ToString('yyyy-MM-dd'))"
 
       # Query each half recursively with halved max entries
-      $firstHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -maxActivityEntries $halfMaxEntries -startDate $startDate -endDate $midPoint
-      $secondHalf = Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspace -days $days -spId $spId -retainRawUri:$retainRawUri -maxActivityEntries $halfMaxEntries -startDate $midPoint -endDate $endDate
+      # Build common parameters
+      $recursiveParams = @{
+        days               = $days
+        spId               = $spId
+        retainRawUri       = $retainRawUri
+        maxActivityEntries = $halfMaxEntries
+      }
+
+      # Add parameter set specific parameters
+      if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceId') {
+        $recursiveParams['logAnalyticsWorkspace'] = $logAnalyticsWorkspace
+      }
+      else {
+        $recursiveParams['subId'] = $subId
+        $recursiveParams['rgName'] = $rgName
+        $recursiveParams['workspaceName'] = $workspaceName
+      }
+
+      $firstHalf = Get-AppActivityFromLog @recursiveParams -startDate $startDate -endDate $midPoint
+      $secondHalf = Get-AppActivityFromLog @recursiveParams -startDate $midPoint -endDate $endDate
 
       # Combine results
       $combinedActivity = @($firstHalf) + @($secondHalf)

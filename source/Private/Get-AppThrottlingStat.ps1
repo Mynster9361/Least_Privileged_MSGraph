@@ -59,11 +59,24 @@ function Get-AppThrottlingStat {
     Query uses KQL summarization for efficiency and returns max 10,000 rows.
     Uses exponential backoff logic handled by Invoke-EntraRequest.
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.Object[]])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+        [ValidateNotNullOrEmpty()]
         [string]$WorkspaceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$subId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$rgName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$workspaceName,
 
         [Parameter(Mandatory = $false)]
         [int]$Days = 30,
@@ -146,9 +159,14 @@ $spIdFilter
         $splatEntraRequest = @{
             Service = "LogAnalytics"
             Method  = "POST"
-            Path    = "/v1/workspaces/$WorkspaceId/query"
             Query   = @{ timespan = "P$($Days)D" }
             Body    = $body
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceDetails') {
+            $splatEntraRequest.Add("Path", "/v1/subscriptions/$subId/resourceGroups/$rgName/providers/Microsoft.OperationalInsights/workspaces/$workspaceName/query")
+        }
+        else {
+            $splatEntraRequest.Add("Path", "/v1/workspaces/$WorkspaceId/query")
         }
 
         $response = Invoke-EntraRequest @splatEntraRequest

@@ -320,15 +320,28 @@ function Get-AppThrottlingData {
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppThrottlingData.html
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.String])]
     [OutputType([System.Collections.ArrayList])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+        [ValidateNotNullOrEmpty()]
         [string]$WorkspaceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$subId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$rgName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$workspaceName,
 
         [Parameter(Mandatory = $false)]
         [int]$Days = 30
@@ -336,7 +349,19 @@ function Get-AppThrottlingData {
 
     begin {
         Write-PSFMessage -Level Verbose -Message  "Fetching throttling statistics for all applications..."
-        $throttlingStats = Get-AppThrottlingStat -WorkspaceId $WorkspaceId -Days $Days
+        $variables = @{
+            Days = $Days
+        }
+        # Add parameter set specific variables
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceId') {
+            $variables['WorkspaceId'] = $WorkspaceId
+        }
+        else {
+            $variables['subId'] = $subId
+            $variables['rgName'] = $rgName
+            $variables['workspaceName'] = $workspaceName
+        }
+        $throttlingStats = Get-AppThrottlingStat @variables
 
         Write-PSFMessage -Level Debug -Message  "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
 

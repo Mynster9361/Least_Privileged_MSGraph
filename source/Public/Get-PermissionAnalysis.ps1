@@ -412,7 +412,7 @@ function Get-PermissionAnalysis {
 
             # Compare with current permissions
             $currentPermissions = if ($app.AppRoles) {
-                $app.AppRoles | ForEach-Object { $_['FriendlyName'] } | Where-Object { $_ -ne $null }
+                $app.AppRoles | ForEach-Object { $_.FriendlyName } | Where-Object { $_ -ne $null }
             }
             else {
                 @()

@@ -138,7 +138,7 @@ function Assert-LPMSGraph {
             [void]$testResults.Add([PSCustomObject]@{
                     Name    = $step
                     Status  = "Passed"
-                    Message = "Found required licenses: $skuNames"
+                    Message = "Found necessary licenses: $skuNames"
                     Error   = $null
                 })
             Write-PSFMessage -Level Verbose -Message "License check passed: $skuNames"

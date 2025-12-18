@@ -1,60 +1,56 @@
 function Assert-LPMSGraph {
     <#
 .SYNOPSIS
-    Validates prerequisites and permissions for LeastPrivilegedMSGraph module functionality.
+    Validates all prerequisites and requirements for using the LeastPrivilegedMSGraph module.
 
 .DESCRIPTION
-    This function performs comprehensive validation checks to ensure that the environment
-    is properly configured for using the LeastPrivilegedMSGraph module. It verifies:
+    The Assert-LPMSGraph function performs a comprehensive validation of all prerequisites required
+    to successfully use the LeastPrivilegedMSGraph module. It checks multiple components including:
 
-    - Entra service connectivity (Log Analytics, Microsoft Graph, Azure)
-    - Azure AD Premium P1 license availability (required for activity logs)
-    - Log Analytics workspace access and data availability
-    - Microsoft Graph API permissions for reading applications
+    - Entra Service Connectivity: Verifies authentication to required services (LogAnalytics, Graph, Azure)
+    - Azure AD Premium License: Confirms that Microsoft Entra ID P1 or higher license is available
+    - Diagnostic Settings: Validates that MicrosoftGraphActivityLogs diagnostic settings are configured
+    - Log Analytics Access: Tests workspace access and verifies MicrosoftGraphActivityLogs data availability
+    - Microsoft Graph API Permissions: Confirms sufficient permissions to read applications
 
-    The function returns a detailed test result object showing the status of each check,
-    making it easy to identify any configuration issues before running permission analysis.
+    The function returns a detailed result object containing the overall status, individual check results,
+    tenant ID, and timestamp. Each check includes a name, status (Passed/Failed), descriptive message,
+    and any error details encountered.
 
-.PARAMETER WorkspaceId
-    The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
-    This workspace must contain the MicrosoftGraphActivityLogs table.
+    This function is useful for troubleshooting setup issues and confirming that the environment is
+    properly configured before performing permission analysis operations.
+
+.EXAMPLE
+    PS C:\> Assert-LPMSGraph
+
+    Runs all prerequisite checks and returns a detailed validation report.
+
+.EXAMPLE
+    PS C:\> $result = Assert-LPMSGraph
+    PS C:\> $result.Checks | Where-Object Status -eq 'Failed'
+
+    Stores the validation result and filters to show only failed checks.
+
+.EXAMPLE
+    PS C:\> Assert-LPMSGraph | Select-Object -ExpandProperty Checks | Format-Table Name, Status, Message -AutoSize
+
+    Displays all validation checks in a formatted table showing name, status, and message.
 
 .OUTPUTS
     PSCustomObject
-    Returns a test result object with the following properties:
-
-    OverallStatus (String)
-        "Passed" if all checks succeeded, "Failed" if any check failed
-
-    Checks (Array of PSCustomObject)
-        Array containing results for each validation check:
-        - Name: Description of the check
-        - Status: "Passed", "Failed", or "Skipped"
-        - Message: Detailed message about the check result
-        - Error: Error details if the check failed (null if passed)
-
-    TenantId (String)
-        The tenant ID of the currently authenticated session
-
-    Timestamp (DateTime)
-        When the validation was performed
-
-.EXAMPLE
-
-    Assert-LPMSGraph -WorkspaceId $workspaceId -Verbose
+    Returns an object with the following properties:
+    - OverallStatus: String indicating "Passed" or "Failed"
+    - Checks: Array of check result objects, each containing Name, Status, Message, and Error properties
+    - TenantId: The current tenant ID from the authentication token
+    - Timestamp: UTC timestamp when the validation was performed
 
 .NOTES
     Prerequisites:
-    - Must call Initialize-LogAnalyticsApi before running this function
-    - Must be authenticated via Connect-EntraService with appropriate services
-    - Requires the following permissions:
-      * Directory.Read.All (to read subscribed SKUs and applications)
-      * Log Analytics Reader role on the workspace
+    - Must be connected to Entra services using Connect-EntraService
+    - Requires access to Azure AD tenant with appropriate permissions
+    - Requires Azure AD Premium P1 or higher license for activity logging
 
-    Required Services:
-    - LogAnalytics: For querying activity logs
-    - Graph or GraphBeta: For reading tenant information
-    - Azure: For checking diagnostic settings (work in progress)
+    This function does not modify any settings or configurations. It only performs read-only validation checks.
 
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Assert-LPMSGraph.html
@@ -62,9 +58,6 @@ function Assert-LPMSGraph {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ValidatePattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')]
-        [string]$WorkspaceId
     )
 
     $testResults = [System.Collections.ArrayList]::new()
@@ -88,28 +81,35 @@ function Assert-LPMSGraph {
     Write-PSFMessage -Level Verbose -Message "Checking Entra service connectivity..."
 
     try {
+        $step = "Entra Service Connectivity"
         $tokens = Get-EntraToken
-        $requiredServices = @('LogAnalytics', 'Graph')
+        $requiredServices = @('LogAnalytics', 'Graph', 'Azure')
         $connectedServices = $tokens.Service
 
         $missingServices = $requiredServices | Where-Object { $_ -notin $connectedServices }
-
         if ($missingServices.Count -gt 0) {
-            throw "Missing authentication for services: $($missingServices -join ', '). Please run Connect-EntraService with these services."
+            $overallSuccess = $false
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Failed"
+                    Message = "Missing authentication for services: $($missingServices -join ', '). Please run Connect-EntraService with these services."
+                    Error   = $null
+                })
         }
-
-        [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Entra Service Connectivity"
-                Status  = "Passed"
-                Message = "Successfully authenticated to required services: $($connectedServices -join ', ')"
-                Error   = $null
-            })
-        Write-PSFMessage -Level Verbose -Message "Entra service connectivity check passed"
+        else {
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Passed"
+                    Message = "Successfully authenticated to required services: $($connectedServices -join ', ')"
+                    Error   = $null
+                })
+            Write-PSFMessage -Level Verbose -Message "Entra service connectivity check passed"
+        }
     }
     catch {
         $overallSuccess = $false
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Entra Service Connectivity"
+                Name    = $step
                 Status  = "Failed"
                 Message = "Failed to verify service connectivity"
                 Error   = $_.Exception.Message
@@ -122,60 +122,83 @@ function Assert-LPMSGraph {
     Write-PSFMessage -Level Verbose -Message "Checking Azure AD Premium license availability..."
 
     try {
+        $step = "Azure AD Premium License"
         $skus = Invoke-EntraRequest -Method GET -Path "/subscribedSkus" -Service "Graph" | Where-Object { $_.servicePlans.servicePlanName -match "AAD_PREMIUM" }
-
         if ($null -eq $skus -or $skus.Count -eq 0) {
-            throw "No AAD Premium SKUs found. Microsoft Entra ID P1 or higher is required for MicrosoftGraphActivityLogs."
+            $overallSuccess = $false
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Failed"
+                    Message = "Microsoft Entra ID P1 or higher is required for activity logging"
+                    Error   = $null
+                })
         }
-
-        $skuNames = $skus.skuPartNumber | Where-Object { $_ -match "AAD_PREMIUM" } | Sort-Object -Unique | Join-String -Separator ', '
-        [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Azure AD Premium License"
-                Status  = "Passed"
-                Message = "Found required licenses: $skuNames"
-                Error   = $null
-            })
-        Write-PSFMessage -Level Verbose -Message "License check passed: $skuNames"
+        else {
+            $skuNames = $skus.skuPartNumber | Where-Object { $_ -match "AAD_PREMIUM" } | Sort-Object -Unique | Join-String -Separator ', '
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Passed"
+                    Message = "Found required licenses: $skuNames"
+                    Error   = $null
+                })
+            Write-PSFMessage -Level Verbose -Message "License check passed: $skuNames"
+        }
     }
     catch {
         $overallSuccess = $false
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Azure AD Premium License"
+                Name    = $step
                 Status  = "Failed"
-                Message = "Azure AD Premium P1 or higher is required for activity logging"
+                Message = "Azure AD Premium P1 or higher is required for activity logging. Unable to verify license."
                 Error   = $_.Exception.Message
             })
         Write-PSFMessage -Level Warning -Message "License check failed: $($_.Exception.Message)"
     }
     #endregion License Requirement Check
 
-    #region Diagnostic Settings Check (Work in Progress)
-    # TODO: Still working on this check
+    #region Diagnostic Settings Check
     # This will verify that diagnostic settings are properly configured for MicrosoftGraphActivityLogs
 
     Write-PSFMessage -Level Verbose -Message "Checking diagnostic settings for MicrosoftGraphActivityLogs..."
 
     try {
-        $uri = "/providers/microsoft.aadiam/diagnosticSettingsCategories/MicrosoftGraphActivityLogs"
-        $diagSettings = Invoke-EntraRequest -Method GET -Path $uri -Service "Azure" -Query @{ 'api-version' = '2021-05-01-preview' } -WarningAction SilentlyContinue
-
-        [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Diagnostic Settings Configuration"
-                Status  = "Passed"
-                Message = "MicrosoftGraphActivityLogs diagnostic settings are configured"
-                Error   = $null
-            })
-        Write-PSFMessage -Level Verbose -Message "Diagnostic settings check passed"
+        $step = "Diagnostic Settings Configuration"
+        $uri = "/providers/microsoft.aadiam/diagnosticSettings"
+        $diagSettings = Invoke-EntraRequest -Method GET -Path $uri -Service "Azure" -Query @{ 'api-version' = '2017-04-01-preview' } | Where-Object { $_.properties.logs -match "MicrosoftGraphActivityLogs" } -WarningAction SilentlyContinue
+        if ($null -eq $diagSettings -or $diagSettings.Count -eq 0) {
+            Write-PSFMessage -Level Debug -Message "No diagnostic settings found for MicrosoftGraphActivityLogs"
+            $overallSuccess = $false
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Failed"
+                    Message = "MicrosoftGraphActivityLogs diagnostic settings are not configured or could not be retrieved"
+                    Error   = $null
+                })
+        }
+        else {
+            foreach ($setting in $diagSettings) {
+                if ($setting.properties.logs -match "MicrosoftGraphActivityLogs") {
+                    Write-PSFMessage -Level Debug -Message "Found diagnostic setting: $($setting.name)"
+                    [void]$testResults.Add([PSCustomObject]@{
+                            Name    = $step
+                            Status  = "Passed"
+                            Message = "MicrosoftGraphActivityLogs diagnostic settings are configured in setting: $($setting.name) - Workspace: $($setting.properties.workspaceId)"
+                            Error   = $null
+                        })
+                }
+            }
+            Write-PSFMessage -Level Verbose -Message "Diagnostic settings check passed"
+        }
     }
     catch {
         $overallSuccess = $false
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Diagnostic Settings Configuration"
+                Name    = $step
                 Status  = "Failed"
-                Message = "Diagnostic settings check is under development"
+                Message = "Cannot retrieve diagnostic settings for MicrosoftGraphActivityLogs"
                 Error   = $_.Exception.Message
             })
-        Write-PSFMessage -Level Verbose -Message "Diagnostic settings check skipped (under development)"
+        Write-PSFMessage -Level Verbose -Message "Diagnostic settings check failed: $($_.Exception.Message)"
     }
 
     #endregion Diagnostic Settings Check
@@ -198,27 +221,34 @@ MicrosoftGraphActivityLogs
                 regions = @()
             }
         }
-
-        $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$WorkspaceId/query" -Body ($body | ConvertTo-Json -Depth 10)
+        $step = "Log Analytics Workspace Access"
+        $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1$($diagSettings.properties.workspaceId)/query" -Body ($body | ConvertTo-Json -Depth 10)
 
         if ($null -eq $response.tables -or $null -eq $response.tables.rows -or $response.tables.rows.Count -eq 0) {
-            throw "No data returned from Log Analytics workspace. Logs may not be flowing yet or workspace is empty."
+            $overallSuccess = $false
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Failed"
+                    Message = "No MicrosoftGraphActivityLogs data found in workspace $WorkspaceId. Ensure diagnostic settings are correctly configured. And you have waited sufficient time for data to populate."
+                    Error   = $null
+                })
         }
-
-        [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Log Analytics Workspace Access"
-                Status  = "Passed"
-                Message = "Successfully queried workspace $WorkspaceId and found MicrosoftGraphActivityLogs data"
-                Error   = $null
-            })
-        Write-PSFMessage -Level Verbose -Message "Log Analytics access check passed"
+        else {
+            [void]$testResults.Add([PSCustomObject]@{
+                    Name    = $step
+                    Status  = "Passed"
+                    Message = "Successfully queried workspace $WorkspaceId and found MicrosoftGraphActivityLogs data"
+                    Error   = $null
+                })
+            Write-PSFMessage -Level Verbose -Message "Log Analytics access check passed"
+        }
     }
     catch {
         $overallSuccess = $false
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Log Analytics Workspace Access"
+                Name    = $step
                 Status  = "Failed"
-                Message = "Cannot access or query Log Analytics workspace"
+                Message = "Cannot access or query Log Analytics workspace. Ensure you have proper access permissions. Least privileged role 'Log Analytics Reader' on the Log Analytics workspace."
                 Error   = $_.Exception.Message
             })
         Write-PSFMessage -Level Warning -Message "Log Analytics access check failed: $($_.Exception.Message)"
@@ -229,10 +259,11 @@ MicrosoftGraphActivityLogs
     Write-PSFMessage -Level Verbose -Message "Verifying Microsoft Graph API permissions..."
 
     try {
+        $step = "Microsoft Graph API Permissions"
         $apps = Invoke-EntraRequest -Method GET -Path "/applications" -Service "Graph" -Query @{ '$top' = '1' } -NoPaging
 
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Microsoft Graph API Permissions"
+                Name    = $step
                 Status  = "Passed"
                 Message = "Successfully retrieved applications from Microsoft Graph"
                 Error   = $null
@@ -242,9 +273,9 @@ MicrosoftGraphActivityLogs
     catch {
         $overallSuccess = $false
         [void]$testResults.Add([PSCustomObject]@{
-                Name    = "Microsoft Graph API Permissions"
+                Name    = $step
                 Status  = "Failed"
-                Message = "Cannot read applications from Microsoft Graph. Requires Directory.Read.All or Application.Read.All permission"
+                Message = "Cannot read applications from Microsoft Graph. Requires Application.Read.All permission or application reader role."
                 Error   = $_.Exception.Message
             })
         Write-PSFMessage -Level Warning -Message "Microsoft Graph permissions check failed: $($_.Exception.Message)"
@@ -263,27 +294,5 @@ MicrosoftGraphActivityLogs
         TenantId      = $currentTenantId
         Timestamp     = [datetime]::UtcNow
     }
-
-    # Display summary
-    Write-PSFMessage -Level Verbose -Message "`nValidation Summary:"
-    Write-PSFMessage -Level Verbose -Message "  Overall Status: $($result.OverallStatus)"
-    Write-PSFMessage -Level Verbose -Message "  Passed: $(($testResults | Where-Object { $_.Status -eq 'Passed' }).Count)"
-    Write-PSFMessage -Level Verbose -Message "  Failed: $(($testResults | Where-Object { $_.Status -eq 'Failed' }).Count)"
-    Write-PSFMessage -Level Verbose -Message "  Skipped: $(($testResults | Where-Object { $_.Status -eq 'Skipped' }).Count)"
-
-    if (-not $overallSuccess) {
-        Write-PSFMessage -Level Warning -Message "`nOne or more checks failed. Review the Checks property for details."
-    }
-    else {
-        Write-PSFMessage -Level Verbose -Message "`nAll checks passed! Environment is ready for permission analysis."
-    }
-
     return $result
 }
-
-$tenantId = Get-Clipboard
-$clientId = Get-Clipboard
-$clientSecret = Get-Clipboard | ConvertTo-SecureString -AsPlainText -Force
-Initialize-LogAnalyticsApi | Out-Null
-Connect-EntraService -Service "LogAnalytics", "Graph", "Azure" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
-$result = Assert-LPMSGraph -WorkspaceId "we698512-852a-234w-t341-ab0f181d0fa5"

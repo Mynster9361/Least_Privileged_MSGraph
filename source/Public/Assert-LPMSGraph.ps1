@@ -114,7 +114,7 @@ function Assert-LPMSGraph {
                 Message = "Failed to verify service connectivity"
                 Error   = $_.Exception.Message
             })
-        Write-PSFMessage -Level Warning -Message "Entra service connectivity check failed: $($_.Exception.Message)"
+        Write-PSFMessage -Level Debug -Message "Entra service connectivity check failed: $($_.Exception.Message)"
     }
     #endregion Service Connectivity Check
 
@@ -152,7 +152,7 @@ function Assert-LPMSGraph {
                 Message = "Azure AD Premium P1 or higher is required for activity logging. Unable to verify license."
                 Error   = $_.Exception.Message
             })
-        Write-PSFMessage -Level Warning -Message "License check failed: $($_.Exception.Message)"
+        Write-PSFMessage -Level Debug -Message "License check failed: $($_.Exception.Message)"
     }
     #endregion License Requirement Check
 
@@ -164,7 +164,7 @@ function Assert-LPMSGraph {
     try {
         $step = "Diagnostic Settings Configuration"
         $uri = "/providers/microsoft.aadiam/diagnosticSettings"
-        $diagSettings = Invoke-EntraRequest -Method GET -Path $uri -Service "Azure" -Query @{ 'api-version' = '2017-04-01-preview' } | Where-Object { $_.properties.logs -match "MicrosoftGraphActivityLogs" } -WarningAction SilentlyContinue
+        $diagSettings = Invoke-EntraRequest -Method GET -Path $uri -Service "Azure" -Query @{ 'api-version' = '2017-04-01-preview' } | Where-Object { $_.properties.logs -match "MicrosoftGraphActivityLogs" } -DebugAction SilentlyContinue
         if ($null -eq $diagSettings -or $diagSettings.Count -eq 0) {
             Write-PSFMessage -Level Debug -Message "No diagnostic settings found for MicrosoftGraphActivityLogs"
             $overallSuccess = $false
@@ -251,7 +251,7 @@ MicrosoftGraphActivityLogs
                 Message = "Cannot access or query Log Analytics workspace. Ensure you have proper access permissions. Least privileged role 'Log Analytics Reader' on the Log Analytics workspace."
                 Error   = $_.Exception.Message
             })
-        Write-PSFMessage -Level Warning -Message "Log Analytics access check failed: $($_.Exception.Message)"
+        Write-PSFMessage -Level Debug -Message "Log Analytics access check failed: $($_.Exception.Message)"
     }
     #endregion Log Analytics Access Check
 
@@ -260,7 +260,7 @@ MicrosoftGraphActivityLogs
 
     try {
         $step = "Microsoft Graph API Permissions"
-        $apps = Invoke-EntraRequest -Method GET -Path "/applications" -Service "Graph" -Query @{ '$top' = '1' } -NoPaging
+        Invoke-EntraRequest -Method GET -Path "/applications" -Service "Graph" -Query @{ '$top' = '1' } -NoPaging | Out-Null
 
         [void]$testResults.Add([PSCustomObject]@{
                 Name    = $step
@@ -278,7 +278,7 @@ MicrosoftGraphActivityLogs
                 Message = "Cannot read applications from Microsoft Graph. Requires Application.Read.All permission or application reader role."
                 Error   = $_.Exception.Message
             })
-        Write-PSFMessage -Level Warning -Message "Microsoft Graph permissions check failed: $($_.Exception.Message)"
+        Write-PSFMessage -Level Debug -Message "Microsoft Graph permissions check failed: $($_.Exception.Message)"
     }
     #endregion Microsoft Graph API Permissions Check
 

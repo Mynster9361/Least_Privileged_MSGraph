@@ -35,9 +35,9 @@ Thanks to Jos Lieben @jflieben for the suggestion
   - Workflow examples demonstrating common use cases
 - **Get-AppActivityData:**
   - Introduce 3 new parameters
-    - `-ThrottleLimit` allows you to specify a certain amoun of runspaces so it gathers multiple app data at once i recommend setting it somewhere between 5-20 the higher you go the more resources you use
-    - `-MaxActivityEntries` This parameter allows you to specify how much data you want to base your analysis on lets say you want to look back 30 days but some apps might have sent 20 Millon requests in that time frame this parameter allows you to specify how many requests from the last 30 days you want to base of. This also allows you to speed up your analysis even further, usefull if you just want a fast overview but note that you might not get all endpoints that has been hit. Default amount is set to 100.000 request per app.
-    - `-retainRawUri` Interested in the specific url's your apps are hitting? well worry no further this switch allows you to retain the raw url instead of annomynizing it note that if you utilize this switch you will not be able to run a permission analysis on the endpoints
+    - `-ThrottleLimit` allows you to specify a certain amount of runspaces so it gathers multiple app data at once. Recommended setting is between 5-20; higher values use more resources
+    - `-MaxActivityEntries` This parameter allows you to specify how much data you want to base your analysis on. For example, you can look back 30 days but some apps might have sent 20 million requests in that timeframe. This parameter allows you to specify how many requests from the last 30 days to analyze. This speeds up analysis significantly, useful for quick overviews, but note that you might not capture all endpoints. Default is 100,000 requests per app
+    - `-retainRawUri` Interested in the specific URLs your apps are hitting? This switch allows you to retain the raw URL instead of anonymizing it. Note that if you use this switch you will not be able to run permission analysis on the endpoints
 
 ### Fixed
 - **Critical bug in `Get-AppActivityData`:**

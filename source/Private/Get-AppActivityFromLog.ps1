@@ -220,12 +220,18 @@ MicrosoftGraphActivityLogs
 
     # Process and tokenize URIs
     $processedActivity = foreach ($entry in $activityData) {
-      $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
-      $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
+      try {
+        $processedUriObject = Convert-RelativeUriToAbsoluteUri -Uri $entry.Uri
+        $tokenizedUri = ConvertTo-TokenizeId -UriString $processedUriObject.Uri
 
-      [PSCustomObject]@{
-        Method = $entry.Method
-        Uri    = $tokenizedUri
+        [PSCustomObject]@{
+          Method = $entry.Method
+          Uri    = $tokenizedUri
+        }
+      }
+      catch {
+        Write-PSFMessage -Level Warning -Message "Failed to process URI '$($entry.Uri)': $($_.Exception.Message). Skipping this entry."
+        # Skip this entry by not outputting anything
       }
     }
 

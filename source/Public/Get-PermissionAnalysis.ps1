@@ -379,7 +379,7 @@ function Get-PermissionAnalysis {
                 Write-PSFMessage -Level Debug -Message "  No activity found for $($app.PrincipalName)"
 
                 $currentPermissions = if ($app.AppRoles) {
-                    $app.AppRoles | ForEach-Object { $_['FriendlyName'] } | Where-Object { $_ -ne $null }
+                    $app.AppRoles | ForEach-Object { $_.FriendlyName } | Where-Object { $_ -ne $null }
                 }
                 else {
                     @()

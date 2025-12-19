@@ -83,16 +83,26 @@ function Assert-LPMSGraph {
     try {
         $step = "Entra Service Connectivity"
         $tokens = Get-EntraToken
-        $requiredServices = @('LogAnalytics', 'Graph', 'Azure')
+        $requiredServices = @('LogAnalytics', 'Azure')
+        $graphServices = @('Graph', 'GraphBeta')
         $connectedServices = $tokens.Service
 
         $missingServices = $requiredServices | Where-Object { $_ -notin $connectedServices }
-        if ($missingServices.Count -gt 0) {
+        $hasGraphService = $connectedServices | Where-Object { $_ -in $graphServices }
+
+        if ($missingServices.Count -gt 0 -or -not $hasGraphService) {
             $overallSuccess = $false
+            $errorMessage = @()
+            if ($missingServices.Count -gt 0) {
+                $errorMessage += "Missing authentication for services: $($missingServices -join ', ')"
+            }
+            if (-not $hasGraphService) {
+                $errorMessage += "Missing authentication for Graph service (Graph or GraphBeta required)"
+            }
             [void]$testResults.Add([PSCustomObject]@{
                     Name    = $step
                     Status  = "Failed"
-                    Message = "Missing authentication for services: $($missingServices -join ', '). Please run Connect-EntraService with these services."
+                    Message = "$($errorMessage -join '. '). Please run Connect-EntraService with these services."
                     Error   = $null
                 })
         }

@@ -217,6 +217,9 @@ function Get-AppActivityData {
 
                 # Wrap everything in try-catch to ensure object is always returned
                 try {
+                    # Enable PSFramework message forwarding from runspace to parent session
+                    $ExecutionContext.SessionState.PSVariable.Set("__PSFrameworkRunspaceParent__", $true)
+
                     # Re-import token in runspace
                     try {
                         Import-EntraToken -Token $logAnalyticsToken -NoRenew

@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Acknowledgments
-Thanks to Jos Lieben @jflieben for the suggestion
+Thanks to Jos Lieben (jflieben) for the suggestion
 
 
 ## [1.0.0] - 2025-12-15
@@ -49,7 +49,7 @@ Thanks to Jos Lieben @jflieben for the suggestion
 - 2x faster execution with PSFramework runspace implementation while maintaining complete data accuracy
 
 ### Acknowledgments
-Huge thanks to @FriedrichWeinmann for his sparring and assistance on the PSFramework implementation.
+Huge thanks to (FriedrichWeinmann) for his sparring and assistance on the PSFramework implementation.
 
 ## [0.1.2-preview] - 2025-11-26
 

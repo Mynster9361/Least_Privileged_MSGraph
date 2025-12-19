@@ -23,7 +23,25 @@ function Get-AppThrottlingStat {
     - 4: Critical (>= 10%)
 
 .PARAMETER WorkspaceId
-    Log Analytics workspace ID (GUID) containing MicrosoftGraphActivityLogs table.
+    The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
+    This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
+
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER Days
     Number of days of historical data to analyze. Default: 30
@@ -59,11 +77,24 @@ function Get-AppThrottlingStat {
     Query uses KQL summarization for efficiency and returns max 10,000 rows.
     Uses exponential backoff logic handled by Invoke-EntraRequest.
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.Object[]])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+        [ValidateNotNullOrEmpty()]
         [string]$WorkspaceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$subId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$rgName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$workspaceName,
 
         [Parameter(Mandatory = $false)]
         [int]$Days = 30,
@@ -146,9 +177,14 @@ $spIdFilter
         $splatEntraRequest = @{
             Service = "LogAnalytics"
             Method  = "POST"
-            Path    = "/v1/workspaces/$WorkspaceId/query"
             Query   = @{ timespan = "P$($Days)D" }
             Body    = $body
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceDetails') {
+            $splatEntraRequest.Add("Path", "/v1/subscriptions/$subId/resourceGroups/$rgName/providers/Microsoft.OperationalInsights/workspaces/$workspaceName/query")
+        }
+        else {
+            $splatEntraRequest.Add("Path", "/v1/workspaces/$WorkspaceId/query")
         }
 
         $response = Invoke-EntraRequest @splatEntraRequest

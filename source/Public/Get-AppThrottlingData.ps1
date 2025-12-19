@@ -66,19 +66,24 @@ function Get-AppThrottlingData {
 
 .PARAMETER WorkspaceId
     The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
-    This workspace must contain the MicrosoftGraphActivityLogs table with throttling information.
+    This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
 
-    Format: GUID string (e.g., "12345678-1234-1234-1234-123456789012")
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
-    To find your workspace ID:
-    1. Navigate to Azure Portal > Log Analytics workspaces
-    2. Select your workspace
-    3. Copy the Workspace ID from the Overview page
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
-    Prerequisites:
-    - Microsoft Graph diagnostic settings enabled and sending to this workspace
-    - You must have permissions to query the workspace
-    - MicrosoftGraphActivityLogs table must contain data
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER Days
     The number of days of historical throttling data to retrieve, counting back from the current date.
@@ -320,15 +325,28 @@ function Get-AppThrottlingData {
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppThrottlingData.html
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.String])]
     [OutputType([System.Collections.ArrayList])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+        [ValidateNotNullOrEmpty()]
         [string]$WorkspaceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$subId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$rgName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$workspaceName,
 
         [Parameter(Mandatory = $false)]
         [int]$Days = 30
@@ -336,7 +354,19 @@ function Get-AppThrottlingData {
 
     begin {
         Write-PSFMessage -Level Verbose -Message  "Fetching throttling statistics for all applications..."
-        $throttlingStats = Get-AppThrottlingStat -WorkspaceId $WorkspaceId -Days $Days
+        $variables = @{
+            Days = $Days
+        }
+        # Add parameter set specific variables
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceId') {
+            $variables['WorkspaceId'] = $WorkspaceId
+        }
+        else {
+            $variables['subId'] = $subId
+            $variables['rgName'] = $rgName
+            $variables['workspaceName'] = $workspaceName
+        }
+        $throttlingStats = Get-AppThrottlingStat @variables
 
         Write-PSFMessage -Level Debug -Message  "Retrieved $($throttlingStats.Count) throttling stat records from Log Analytics"
 

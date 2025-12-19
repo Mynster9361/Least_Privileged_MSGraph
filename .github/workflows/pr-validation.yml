@@ -89,13 +89,13 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin ${{ github.event.pull_request.head.ref }}
-          git checkout ${{ github.event.pull_request.head.ref }}
+          git fetch origin "${{ github.event.pull_request.head.ref }}"
+          git checkout "${{ github.event.pull_request.head.ref }}"
           $docs = Get-ChildItem -Path "./output/docs" -Filter "*.md" -Recurse
           if ($docs) {
             git add -f ./output/docs/*.md
             git commit -m "docs: auto-generate PowerShell help markdown" || echo "No changes to commit"
-            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
           } else {
             echo "No docs to commit"
           }

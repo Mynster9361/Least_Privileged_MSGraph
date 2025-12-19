@@ -50,6 +50,23 @@ function Get-AppActivityData {
 .PARAMETER WorkspaceId
     The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
     This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+    Used with the 'ByWorkspaceId' parameter set (default).
+    Mutually exclusive with subId, rgName, and workspaceName parameters.
+
+.PARAMETER subId
+    Azure subscription ID where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER rgName
+    Resource group name where the Log Analytics workspace is located.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
+
+.PARAMETER workspaceName
+    Log Analytics workspace name.
+    Used with the 'ByWorkspaceDetails' parameter set.
+    Required when using user_impersonation token scope.
 
 .PARAMETER Days
     The number of days of historical activity to retrieve, counting back from the current date.
@@ -57,6 +74,7 @@ function Get-AppActivityData {
 
 .PARAMETER ThrottleLimit
     The maximum number of concurrent runspaces to use for parallel processing.
+    Valid range: 1-50 concurrent workers.
     Default: 10
 
     Recommended values:
@@ -67,6 +85,7 @@ function Get-AppActivityData {
 .PARAMETER MaxActivityEntries
     The maximum number of activity entries to retrieve per application from Log Analytics.
     This limits the result set size to prevent excessive data retrieval and memory consumption.
+    Valid range: 1-500000 entries (Log Analytics limit).
     Default: 100000
 
     Recommended values:
@@ -86,6 +105,13 @@ function Get-AppActivityData {
 .EXAMPLE
     $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
 
+    Queries activity data using the workspace ID (ByWorkspaceId parameter set).
+
+.EXAMPLE
+    $apps | Get-AppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days 30 -Verbose
+
+    Queries activity data using workspace details (ByWorkspaceDetails parameter set) when using user_impersonation scope.
+
 .NOTES
     Prerequisites:
     - PowerShell 5.1 or later
@@ -97,22 +123,37 @@ function Get-AppActivityData {
 .LINK
     https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppActivityData.html
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [array]$AppData,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceId')]
+        [ValidateNotNullOrEmpty()]
         [string]$WorkspaceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$subId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$rgName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByWorkspaceDetails')]
+        [ValidateNotNullOrEmpty()]
+        [string]$workspaceName,
 
         [Parameter(Mandatory = $false)]
         [int]$Days = 30,
 
         [Parameter(Mandatory = $false)]
+        [ValidateRange(1, 50)]
         [int]$ThrottleLimit = 10,
 
         [Parameter(Mandatory = $false)]
+        [ValidateRange(1, 500000)]
         [int]$MaxActivityEntries = 100000,
 
         [Parameter(Mandatory = $false)]
@@ -143,13 +184,23 @@ function Get-AppActivityData {
             'ConvertTo-TokenizeId'             = (Get-Command 'ConvertTo-TokenizeId').Definition
         }
 
-        # Variables to pass to runspaces
+        # Variables to pass to runspaces - include parameter set specific values
         $variables = @{
-            WorkspaceId        = $WorkspaceId
             Days               = $Days
             MaxActivityEntries = $MaxActivityEntries
             logAnalyticsToken  = $logAnalyticsToken
             retainRawUri       = $retainRawUri
+            ParameterSetName   = $PSCmdlet.ParameterSetName
+        }
+
+        # Add parameter set specific variables
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceId') {
+            $variables['WorkspaceId'] = $WorkspaceId
+        }
+        else {
+            $variables['subId'] = $subId
+            $variables['rgName'] = $rgName
+            $variables['workspaceName'] = $workspaceName
         }
 
         # Add the worker that processes apps
@@ -166,6 +217,9 @@ function Get-AppActivityData {
 
                 # Wrap everything in try-catch to ensure object is always returned
                 try {
+                    # Enable PSFramework message forwarding from runspace to parent session
+                    $ExecutionContext.SessionState.PSVariable.Set("__PSFrameworkRunspaceParent__", $true)
+
                     # Re-import token in runspace
                     try {
                         Import-EntraToken -Token $logAnalyticsToken -NoRenew
@@ -184,9 +238,25 @@ function Get-AppActivityData {
                         return $AppObject
                     }
 
-                    # Get activity data
+                    # Get activity data - build parameters based on parameter set
                     try {
-                        $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $WorkspaceId -days $Days -spId $AppObject.PrincipalId -maxActivityEntries $MaxActivityEntries -retainRawUri:$retainRawUri.IsPresent
+                        $activityParams = @{
+                            days               = $Days
+                            spId               = $AppObject.PrincipalId
+                            maxActivityEntries = $MaxActivityEntries
+                            retainRawUri       = $retainRawUri.IsPresent
+                        }
+
+                        if ($ParameterSetName -eq 'ByWorkspaceId') {
+                            $activityParams['logAnalyticsWorkspace'] = $WorkspaceId
+                        }
+                        else {
+                            $activityParams['subId'] = $subId
+                            $activityParams['rgName'] = $rgName
+                            $activityParams['workspaceName'] = $workspaceName
+                        }
+
+                        $activity = Get-AppActivityFromLog @activityParams
 
                         try {
                             [PSFramework.Object.ObjectHost]::AddNoteProperty($AppObject, 'Activity', $activity)

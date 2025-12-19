@@ -3,7 +3,26 @@
 The format is based on and uses the types of changes according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [Unreleased]
+
+### Added
+- **New Cmdlets:**
+  - `Assert-LPMSGraph` - Validates all prerequisites before running analysis (EntraAuth connectivity, workspace configuration, required modules)
+  - `Invoke-LPMSGraphScan` - Single orchestration command that executes the complete least privilege analysis workflow
+    - Supports both workspace ID and detailed workspace parameters (subscription, resource group, workspace name)
+    - Includes optional throttling data collection
+    - Automatically chains all analysis steps: role assignments → activity data → throttling data → permission analysis → report generation
+- **User Context Support:**
+  - Module now supports delegated (user) authentication context in addition to app-only (service principal) authentication
+  - Enhanced flexibility for different authentication scenarios and permission models
+
+
+### Acknowledgments
+Thanks to Jos Lieben @jflieben for the suggestion
+
+
+## [1.0.0] - 2025-12-15
 
 ### Added
 - **PSFramework Integration:**

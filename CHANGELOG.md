@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Invoke-LPMSGraphScan` - Single orchestration command that executes the complete least privilege analysis workflow
     - Supports both workspace ID and detailed workspace parameters (subscription, resource group, workspace name)
     - Includes optional throttling data collection
-    - Automatically chains all analysis steps: role assignments → activity data → throttling data → permission analysis → report generation
+    - Automatically chains all analysis steps: role assignments > activity data > throttling data > permission analysis > report generation
 - **User Context Support:**
   - Module now supports delegated (user) authentication context in addition to app-only (service principal) authentication
   - Enhanced flexibility for different authentication scenarios and permission models

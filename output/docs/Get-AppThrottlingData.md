@@ -12,8 +12,15 @@ Enriches application data with throttling statistics from Azure Log Analytics.
 
 ## SYNTAX
 
+### ByWorkspaceId (Default)
 ```
-Get-AppThrottlingData [-AppData] <Array> [-WorkspaceId] <String> [[-Days] <Int32>]
+Get-AppThrottlingData -AppData <Array> -WorkspaceId <String> [-Days <Int32>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+### ByWorkspaceDetails
+```
+Get-AppThrottlingData -AppData <Array> -subId <String> -rgName <String> -workspaceName <String> [-Days <Int32>]
  [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
@@ -142,7 +149,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
@@ -150,30 +157,68 @@ Accept wildcard characters: False
 
 ### -WorkspaceId
 The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
-This workspace must contain the MicrosoftGraphActivityLogs table with throttling information.
-
-Format: GUID string (e.g., "12345678-1234-1234-1234-123456789012")
-
-To find your workspace ID:
-1.
-Navigate to Azure Portal \> Log Analytics workspaces
-2.
-Select your workspace
-3.
-Copy the Workspace ID from the Overview page
-
-Prerequisites:
-- Microsoft Graph diagnostic settings enabled and sending to this workspace
-- You must have permissions to query the workspace
-- MicrosoftGraphActivityLogs table must contain data
+This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+Used with the 'ByWorkspaceId' parameter set (default).
+Mutually exclusive with subId, rgName, and workspaceName parameters.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByWorkspaceId
 Aliases:
 
 Required: True
-Position: 2
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -subId
+Azure subscription ID where the Log Analytics workspace is located.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -rgName
+Resource group name where the Log Analytics workspace is located.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -workspaceName
+Log Analytics workspace name.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -200,7 +245,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: 30
 Accept pipeline input: False
 Accept wildcard characters: False

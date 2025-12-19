@@ -12,9 +12,17 @@ Enriches application data with API activity information from Azure Log Analytics
 
 ## SYNTAX
 
+### ByWorkspaceId (Default)
 ```
-Get-AppActivityData [-AppData] <Array> [-WorkspaceId] <String> [[-Days] <Int32>] [[-ThrottleLimit] <Int32>]
- [[-MaxActivityEntries] <Int32>] [-retainRawUri] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-AppActivityData -AppData <Array> -WorkspaceId <String> [-Days <Int32>] [-ThrottleLimit <Int32>]
+ [-MaxActivityEntries <Int32>] [-retainRawUri] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+### ByWorkspaceDetails
+```
+Get-AppActivityData -AppData <Array> -subId <String> -rgName <String> -workspaceName <String> [-Days <Int32>]
+ [-ThrottleLimit <Int32>] [-MaxActivityEntries <Int32>] [-retainRawUri] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +63,15 @@ Key Features:
 $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
 ```
 
+Queries activity data using the workspace ID (ByWorkspaceId parameter set).
+
+### EXAMPLE 2
+```
+$apps | Get-AppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days 30 -Verbose
+```
+
+Queries activity data using workspace details (ByWorkspaceDetails parameter set) when using user_impersonation scope.
+
 ## PARAMETERS
 
 ### -AppData
@@ -78,7 +95,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
@@ -87,14 +104,67 @@ Accept wildcard characters: False
 ### -WorkspaceId
 The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
 This workspace must contain the MicrosoftGraphActivityLogs table with diagnostic logging enabled.
+Used with the 'ByWorkspaceId' parameter set (default).
+Mutually exclusive with subId, rgName, and workspaceName parameters.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByWorkspaceId
 Aliases:
 
 Required: True
-Position: 2
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -subId
+Azure subscription ID where the Log Analytics workspace is located.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -rgName
+Resource group name where the Log Analytics workspace is located.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -workspaceName
+Log Analytics workspace name.
+Used with the 'ByWorkspaceDetails' parameter set.
+Required when using user_impersonation token scope.
+
+```yaml
+Type: String
+Parameter Sets: ByWorkspaceDetails
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -110,7 +180,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: 30
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -118,6 +188,7 @@ Accept wildcard characters: False
 
 ### -ThrottleLimit
 The maximum number of concurrent runspaces to use for parallel processing.
+Valid range: 1-50 concurrent workers.
 Default: 10
 
 Recommended values:
@@ -131,7 +202,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: 10
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -140,6 +211,7 @@ Accept wildcard characters: False
 ### -MaxActivityEntries
 The maximum number of activity entries to retrieve per application from Log Analytics.
 This limits the result set size to prevent excessive data retrieval and memory consumption.
+Valid range: 1-500000 entries (Log Analytics limit).
 Default: 100000
 
 Recommended values:
@@ -152,7 +224,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: 100000
 Accept pipeline input: False
 Accept wildcard characters: False

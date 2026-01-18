@@ -1,5 +1,5 @@
 # Microsoft Graph Permissions Extraction Report
-Generated on: Sat Jan 17 05:58:16 UTC 2026
+Generated on: Sun Jan 18 06:14:34 UTC 2026
 
 ## v1.0 Results
 - Endpoints: 10405

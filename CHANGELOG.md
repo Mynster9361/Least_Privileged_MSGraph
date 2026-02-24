@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Delegated permissions is now included in the report to give better visibility into your apps and its permissions
+- Dependencies to 'MSGraphPermissions', 'EntraAuth.Graph' which lets us get better visibility to the correct permission scopes for each url included EntraAuth.Graph for improved performance
+- Improved limitation in activity gathering so you are able to both set a throtle limit on this along with specifying how many activities you would like to base your permission scoping upon
+- Report Improvements as listed below:
+- - Added permission scopes for each permission to difrenciate between application and delegated scopes
+- - Ability to expand the optimal permissions to see which endpoints this permission will cover
+- - Improved UI in regards to the vertical scope of the page and moved a button to the left
+- - Added built in filters in the top overview to understand and apply filters faster
+- - Added tenant information to the report
+- - Added additional data to the csv export from the report
+- - More filtering options
+
+### Removed
+- No longer supports powershell 5.1 minimum powershell version is now 7.4
+- Permission complexity from this module and seperated into its own module 'MSGraphPermissions' with improved permission lookup (More endpoints and more accurate permission scoping)
+- Activity gathering using PSFrameworks runspaces replaced with forech -parralel from powershell 7
+
+### Fixed
+- An issue in gathering activity data caused by runspaces crashing while attempting to pull data from the endpoints
+- Throttling from the log analytics API causing some data to not be returned
+
+### Acknowledgments
+Jake Hildreth - Thanks for the sparring and feedback
+Friedrich Weinmann - Thanks for the sparring and feedback
+
+
+## [1.1.0] - 2025-12-19
+
+### Added
 - **New Cmdlets:**
   - `Assert-LPMSGraph` - Validates all prerequisites before running analysis (EntraAuth connectivity, workspace configuration, required modules)
   - `Invoke-LPMSGraphScan` - Single orchestration command that executes the complete least privilege analysis workflow

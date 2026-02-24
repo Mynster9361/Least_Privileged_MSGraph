@@ -20,5 +20,7 @@
     Sampler             = 'latest'
     PlatyPS             = 'latest'
     EntraAuth           = 'latest'
+    'EntraAuth.Graph'   = 'latest'
     PSFramework         = 'latest'
+    MSGraphPermissions  = 'latest'
 }

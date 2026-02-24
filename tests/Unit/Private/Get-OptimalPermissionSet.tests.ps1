@@ -62,4 +62,120 @@ Describe 'Get-OptimalPermissionSet' {
         }
 
     }
+
+    Context 'Greedy Set Cover Algorithm' {
+        It 'Should select Application permissions when activities have Application scope' {
+            $activityPermissions = @(
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/users'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/users'
+                    MatchedEndpoint            = '/users'
+                    LeastPrivilegedPermissions = @(
+                        [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application'; IsLeastPrivilege = $true }
+                    )
+                    IsMatched                  = $true
+                }
+            )
+
+            $result = Get-OptimalPermissionSet -activityPermissions $activityPermissions
+            $result.OptimalPermissions | Should -Not -BeNullOrEmpty
+            $result.OptimalPermissions[0].ScopeType | Should -Be 'Application'
+            $result.OptimalPermissions[0].Permission | Should -Be 'User.ReadBasic.All'
+        }
+
+        It 'Should select Delegated permissions when activities have Delegated scope' {
+            $activityPermissions = @(
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/users'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/users'
+                    MatchedEndpoint            = '/users'
+                    LeastPrivilegedPermissions = @(
+                        [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Delegated'; IsLeastPrivilege = $true }
+                    )
+                    IsMatched                  = $true
+                }
+            )
+
+            $result = Get-OptimalPermissionSet -activityPermissions $activityPermissions
+            $result.OptimalPermissions | Should -Not -BeNullOrEmpty
+            $result.OptimalPermissions[0].ScopeType | Should -Be 'Delegated'
+        }
+
+        It 'Should select permission covering the most activities first' {
+            # Two activities both covered by User.Read.All (Application), and one also by User.ReadBasic.All
+            $activityPermissions = @(
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/users'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/users'
+                    MatchedEndpoint            = '/users'
+                    LeastPrivilegedPermissions = @(
+                        [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application'; IsLeastPrivilege = $true },
+                        [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application'; IsLeastPrivilege = $false }
+                    )
+                    IsMatched                  = $true
+                },
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/users/{id}'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/users/{id}'
+                    MatchedEndpoint            = '/users/{id}'
+                    LeastPrivilegedPermissions = @(
+                        [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application'; IsLeastPrivilege = $false }
+                    )
+                    IsMatched                  = $true
+                }
+            )
+
+            $result = Get-OptimalPermissionSet -activityPermissions $activityPermissions
+
+            # User.Read.All covers both activities, so it should be selected
+            $result.OptimalPermissions | Should -Not -BeNullOrEmpty
+            $result.OptimalPermissions[0].Permission | Should -Be 'User.ReadBasic.All'
+            $result.OptimalPermissions[0].ActivitiesCovered | Should -Be 1
+        }
+
+        It 'Should handle empty currentPermissions without errors' {
+            $activityPermissions = @(
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/users'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/users'
+                    MatchedEndpoint            = '/users'
+                    LeastPrivilegedPermissions = @(
+                        [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application'; IsLeastPrivilege = $true }
+                    )
+                    IsMatched                  = $true
+                }
+            )
+
+            $result = Get-OptimalPermissionSet -activityPermissions $activityPermissions
+            $result.OptimalPermissions | Should -Not -BeNullOrEmpty
+        }
+
+        It 'Should return empty optimal set when all activities are unmatched' {
+            $activityPermissions = @(
+                [PSCustomObject]@{
+                    Method                     = 'GET'
+                    Version                    = 'v1.0'
+                    Path                       = '/unknown'
+                    OriginalUri                = 'https://graph.microsoft.com/v1.0/unknown'
+                    MatchedEndpoint            = $null
+                    LeastPrivilegedPermissions = @()
+                    IsMatched                  = $false
+                }
+            )
+
+            $result = Get-OptimalPermissionSet -activityPermissions $activityPermissions
+            $result.OptimalPermissions | Should -BeNullOrEmpty
+            $result.UnmatchedActivities.Count | Should -Be 1
+        }
+    }
 }

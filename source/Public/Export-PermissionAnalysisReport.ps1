@@ -211,9 +211,9 @@ function Export-PermissionAnalysisReport {
     - Verify the HTML file isn't corrupted (should be valid UTF-8)
 
     If data appears truncated:
-    - Check that ConvertTo-Json depth (10) is sufficient for nested data
+    - Check that ConvertTo-Json depth (15) is sufficient for nested data
     - Review input data structure for unexpected nesting
-    - Consider simplifying input data if depth exceeds 10 levels
+    - Consider simplifying input data if depth exceeds 15 levels
 
     Common Use Cases:
     1. **Monthly Security Reviews**: Generate reports for security team review
@@ -263,7 +263,7 @@ function Export-PermissionAnalysisReport {
         Write-PSFMessage -Level Debug -Message  "Total apps received: $($allAppData.Count)"
 
         # Convert accumulated data to JSON for embedding
-        $jsonData = $allAppData | ConvertTo-Json -Depth 10 -Compress
+        $jsonData = $allAppData | ConvertTo-Json -Depth 15 -Compress
 
         # Properly escape for JavaScript - need to escape backslashes and quotes
         $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')
@@ -280,10 +280,30 @@ function Export-PermissionAnalysisReport {
         if (-not (Test-Path -Path $templatePath)) {
             throw "Template file not found: $templatePath"
         }
+        # Determine which Graph service to use for tenant info
+        $tokenInfo = (Get-EntraToken).Service
+        if ($tokenInfo -contains "GraphBeta") {
+            $serviceToUse = "GraphBeta"
+        }
+        else {
+            $serviceToUse = "Graph"
+        }
+
+        # Retrieve tenant information
+        try {
+            $tenantInfo = Invoke-EntraRequest -Path "/organization" -Method GET -Service $serviceToUse
+        }
+        catch {
+            Write-PSFMessage -Level Warning -Message "Failed to retrieve tenant information: $_"
+            $tenantInfo = @{ id = "Unknown"; displayName = "Unknown" }
+        }
 
         $html = Get-Content -Path $templatePath -Raw
         $html = $html -replace '{% block app_data %}{% endblock %}', $jsonData
         $html = $html -replace '{% block title %}{% endblock %}', $ReportTitle
+        $html = $html -replace '{% block title %}{% endblock %}', $ReportTitle
+        $html = $html -replace '{% block tenant_id %}{% endblock %}', $tenantInfo.id
+        $html = $html -replace '{% block tenant_name %}{% endblock %}', $tenantInfo.displayName
         $html = $html -replace '{% block generated_on %}{% endblock %}', (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
         # Write the HTML to file
         $html | Out-File -FilePath $OutputPath -Encoding UTF8

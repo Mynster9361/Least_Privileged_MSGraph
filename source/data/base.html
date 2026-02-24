@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,162 +31,265 @@
     <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
-    
+
     <style>
+        /* Hide default DataTables length control */
+        .dt-length {
+            display: none !important;
+        }
+
         /* DataTables controls */
         .dt-search input.dt-input,
-        .dt-length select.dt-input {
+        .dt-length select.dt-input,
+        #customPageLength {
             background-color: #f9fafb;
             color: #111827;
             border: 1px solid #d1d5db;
             padding: 0.375rem 0.75rem;
             border-radius: 0.5rem;
         }
-        
+
         .dt-search input.dt-input:focus,
         .dt-length select.dt-input:focus {
             outline: 2px solid #3b82f6;
             outline-offset: 2px;
             border-color: #3b82f6;
         }
-        
+
         /* Dark mode styles */
-        .dark .dataTables_wrapper { color: #e5e7eb; }
-        .dark .dt-layout-row, .dark .dt-layout-cell { color: #d1d5db; }
-        .dark .dt-search label, .dark .dt-length label, .dark .dt-info { color: #d1d5db; }
-        
+        .dark .dataTables_wrapper {
+            color: #e5e7eb;
+        }
+
+        .dark .dt-layout-row,
+        .dark .dt-layout-cell {
+            color: #d1d5db;
+        }
+
+        .dark .dt-search label,
+        .dark .dt-length label,
+        .dark .dt-info {
+            color: #d1d5db;
+        }
+
         .dark .dt-search input.dt-input,
-        .dark .dt-length select.dt-input {
+        .dark .dt-length select.dt-input,
+        .dark #customPageLength {
             background-color: #374151;
             color: #e5e7eb;
             border-color: #4b5563;
         }
-        
+
         .dark table.dataTable thead th {
             color: #d1d5db;
             border-bottom-color: #4b5563;
         }
-        
+
         .dark table.dataTable tbody tr {
             background-color: #1f2937;
             color: #e5e7eb;
         }
-        
-        .dark table.dataTable.stripe tbody tr.odd { background-color: #374151; }
-        .dark table.dataTable.hover tbody tr:hover { background-color: #4b5563; }
-        .dark table.dataTable tbody td { border-top-color: #4b5563; }
-        
+
+        .dark table.dataTable.stripe tbody tr.odd {
+            background-color: #374151;
+        }
+
+        .dark table.dataTable.hover tbody tr:hover {
+            background-color: #4b5563;
+        }
+
+        .dark table.dataTable tbody td {
+            border-top-color: #4b5563;
+        }
+
         table.dataTable tbody td.sorting_1,
         table.dataTable tbody td.sorting_2,
         table.dataTable tbody td.sorting_3 {
             background-color: transparent !important;
         }
-        
+
         .dark .dt-paging .dt-paging-button {
             color: #d1d5db !important;
             background: transparent;
             border: 1px solid transparent;
         }
-        
+
         .dark .dt-paging .dt-paging-button:hover:not(.disabled) {
             color: #ffffff !important;
             background: #4b5563 !important;
             border-color: #4b5563 !important;
         }
-        
+
         .dark .dt-paging .dt-paging-button.current {
             color: #ffffff !important;
             background: #3b82f6 !important;
             border-color: #3b82f6 !important;
         }
-        
-        .dark .dt-paging .dt-paging-button.disabled { color: #6b7280 !important; }
+
+        .dark .dt-paging .dt-paging-button.disabled {
+            color: #6b7280 !important;
+        }
+
+        /* Mobile responsive improvements */
+        @media (max-width: 640px) {
+
+            /* Reduce padding on small screens */
+            table.dataTable thead th,
+            table.dataTable tbody td {
+                padding: 0.5rem 0.25rem !important;
+                font-size: 0.875rem;
+            }
+
+            /* Make buttons more touch-friendly */
+            button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            /* Adjust pagination for mobile */
+            .dt-paging {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Very small screens (like iPhone in portrait) */
+        @media (max-width: 430px) {
+
+            table.dataTable thead th,
+            table.dataTable tbody td {
+                padding: 0.5rem 0.125rem !important;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-200">
-    <div class="max-w-[70%] mx-auto px-4 py-8">
-        
+    <div class="w-full sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-[80%] 2xl:max-w-[70%] mx-auto px-2 sm:px-4 py-4 sm:py-8">
+
         <!-- Header -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6 transition-colors duration-200">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-6 mb-4 sm:mb-6 transition-colors duration-200">
             <div class="flex justify-between items-center mb-2">
-                <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">{% block title %}{% endblock %}</h1>
-                <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                <h1 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">{% block title %}{% endblock %}</h1>
+                <button id="themeToggle"
+                    class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
                     <svg class="w-6 h-6 hidden dark:block text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z">
+                        </path>
                     </svg>
                     <svg class="w-6 h-6 block dark:hidden text-gray-700" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
                 </button>
             </div>
+            <p class="text-gray-600 dark:text-gray-400">Tenant ID: {% block tenant_id %}{% endblock %}</p>
+            <p class="text-gray-600 dark:text-gray-400">Tenant Name: {% block tenant_name %}{% endblock %}</p>
             <p class="text-gray-600 dark:text-gray-400">Generated on: {% block generated_on %}{% endblock %}</p>
 
             <!-- Statistics -->
-            <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-blue-600 dark:text-blue-400 text-sm font-semibold">Total Applications</div>
-                    <div class="text-2xl font-bold text-blue-900 dark:text-blue-300" id="totalApps">0</div>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+                <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-blue-300 dark:hover:border-blue-500 border-2 border-transparent"
+                    onclick="filterByAll()" title="Click to show all applications">
+                    <div class="text-blue-600 dark:text-blue-400 text-xs sm:text-sm font-semibold">Total Applications
+                        (Click to
+                        filter)</div>
+                    <div class="text-xl sm:text-2xl font-bold text-blue-900 dark:text-blue-300" id="totalApps">0</div>
                 </div>
-                <div class="bg-green-50 dark:bg-green-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-green-600 dark:text-green-400 text-sm font-semibold">Fully Matched</div>
-                    <div class="text-2xl font-bold text-green-900 dark:text-green-300" id="fullyMatched">0</div>
+                <div class="bg-green-50 dark:bg-green-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-green-300 dark:hover:border-green-500 border-2 border-transparent"
+                    onclick="filterByOptimal()" title="Click to filter apps with optimal permissions">
+                    <div class="text-green-600 dark:text-green-400 text-xs sm:text-sm font-semibold">Apps with Optimal
+                        Permissions
+                        (Click to filter)
+                    </div>
+                    <div class="text-xl sm:text-2xl font-bold text-green-900 dark:text-green-300" id="fullyMatched">0
+                    </div>
                 </div>
-                <div class="bg-yellow-50 dark:bg-yellow-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-yellow-600 dark:text-yellow-400 text-sm font-semibold">Excess Permissions</div>
-                    <div class="text-2xl font-bold text-yellow-900 dark:text-yellow-300" id="withExcess">0</div>
+                <div class="bg-yellow-50 dark:bg-yellow-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-yellow-300 dark:hover:border-yellow-500 border-2 border-transparent"
+                    onclick="filterByExcess()" title="Click to filter apps with excessive permissions">
+                    <div class="text-yellow-600 dark:text-yellow-400 text-xs sm:text-sm font-semibold">Apps with
+                        Excessive Permissions (Click to filter)</div>
+                    <div class="text-xl sm:text-2xl font-bold text-yellow-900 dark:text-yellow-300" id="withExcess">0
+                    </div>
                 </div>
-                <div class="bg-red-50 dark:bg-red-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-red-600 dark:text-red-400 text-sm font-semibold">Unmatched Activities</div>
-                    <div class="text-2xl font-bold text-red-900 dark:text-red-300" id="withUnmatched">0</div>
+                <div class="bg-red-50 dark:bg-red-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-red-300 dark:hover:border-red-500 border-2 border-transparent"
+                    onclick="filterByUnmatched()" title="Click to filter apps with unmatched activities">
+                    <div class="text-red-600 dark:text-red-400 text-xs sm:text-sm font-semibold">Apps with Unmatched
+                        Activities
+                        (Click to filter)
+                    </div>
+                    <div class="text-xl sm:text-2xl font-bold text-red-900 dark:text-red-300" id="withUnmatched">0</div>
                 </div>
             </div>
 
-            <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-purple-600 dark:text-purple-400 text-sm font-semibold">Apps Throttled</div>
-                    <div class="text-2xl font-bold text-purple-900 dark:text-purple-300" id="throttledApps">0</div>
+            <div class="mt-2 sm:mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+                <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-purple-300 dark:hover:border-purple-500 border-2 border-transparent"
+                    onclick="filterByThrottled()" title="Click to filter apps with throttling">
+                    <div class="text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-semibold">Apps Throttled
+                        (Click
+                        to filter)</div>
+                    <div class="text-xl sm:text-2xl font-bold text-purple-900 dark:text-purple-300" id="throttledApps">0
+                    </div>
                 </div>
-                <div class="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-orange-600 dark:text-orange-400 text-sm font-semibold">Critical Throttling</div>
-                    <div class="text-2xl font-bold text-orange-900 dark:text-orange-300" id="criticalThrottling">0</div>
+                <div class="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 hover:border-orange-300 dark:hover:border-orange-500 border-2 border-transparent"
+                    onclick="filterByCriticalThrottling()" title="Click to filter apps with critical throttling">
+                    <div class="text-orange-600 dark:text-orange-400 text-xs sm:text-sm font-semibold">Critical
+                        Throttling (Click
+                        to filter)</div>
+                    <div class="text-xl sm:text-2xl font-bold text-orange-900 dark:text-orange-300"
+                        id="criticalThrottling">0</div>
                 </div>
-                <div class="bg-indigo-50 dark:bg-indigo-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-indigo-600 dark:text-indigo-400 text-sm font-semibold">Total 429 Errors</div>
-                    <div class="text-2xl font-bold text-indigo-900 dark:text-indigo-300" id="total429">0</div>
+                <div class="bg-indigo-50 dark:bg-indigo-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-xs sm:text-sm font-semibold">Total 429 Errors
+                    </div>
+                    <div class="text-xl sm:text-2xl font-bold text-indigo-900 dark:text-indigo-300" id="total429">0
+                    </div>
                 </div>
-                <div class="bg-pink-50 dark:bg-pink-900/30 rounded-lg p-4 transition-colors duration-200">
-                    <div class="text-pink-600 dark:text-pink-400 text-sm font-semibold">Avg Throttle Rate</div>
-                    <div class="text-2xl font-bold text-pink-900 dark:text-pink-300" id="avgThrottleRate">0%</div>
+                <div class="bg-pink-50 dark:bg-pink-900/30 rounded-lg p-3 sm:p-4 transition-colors duration-200">
+                    <div class="text-pink-600 dark:text-pink-400 text-xs sm:text-sm font-semibold">Avg Throttle Rate
+                    </div>
+                    <div class="text-xl sm:text-2xl font-bold text-pink-900 dark:text-pink-300" id="avgThrottleRate">0%
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Filters -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6 transition-colors duration-200">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Filters</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-6 mb-4 sm:mb-6 transition-colors duration-200">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Filters</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Permission Status</label>
-                    <select id="statusFilter" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Permission
+                        Status</label>
+                    <select id="statusFilter"
+                        class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
                         <option value="">All</option>
                         <option value="good">Optimal</option>
                         <option value="warning">Has Excess</option>
+                        <option value="missing">Under-Privileged</option>
+                        <option value="misaligned">Misaligned</option>
                         <option value="danger">Unmatched</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Activity Status</label>
-                    <select id="activityFilter" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Activity
+                        Status</label>
+                    <select id="activityFilter"
+                        class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
                         <option value="">All</option>
                         <option value="yes">Has Activity</option>
                         <option value="no">No Activity</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Throttling Severity</label>
-                    <select id="throttlingFilter" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Throttling
+                        Severity</label>
+                    <select id="throttlingFilter"
+                        class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2">
                         <option value="">All</option>
+                        <option value="throttled">All Throttled</option>
                         <option value="4">Critical</option>
                         <option value="3">Warning</option>
                         <option value="2">Low</option>
@@ -194,17 +298,32 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search</label>
-                    <input type="text" id="searchBox" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2" placeholder="Search in the whole table...">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search All
+                        Data</label>
+                    <input type="text" id="searchBox"
+                        class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg p-2"
+                        placeholder="Search apps, permissions, endpoints, throttling...">
                 </div>
             </div>
         </div>
 
         <!-- Results Table -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-200">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">Application Permission Analysis</h2>
-                <button id="exportBtn" class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-6 transition-colors duration-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 sm:gap-0">
+                <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">Application Permission
+                    Analysis</h2>
+                <div class="flex items-center gap-2">
+                    <select id="customPageLength" class="cursor-pointer">
+                        <option value="10">10</option>
+                        <option value="25" selected>25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label for="customPageLength" class="text-sm text-gray-700 dark:text-gray-300">entries per
+                        page</label>
+                </div>
+                <button id="exportBtn"
+                    class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                     Export to CSV
                 </button>
             </div>
@@ -212,15 +331,33 @@
                 <table id="resultsTable" class="min-w-full display stripe hover">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Application Name</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Current Permissions</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Optimal Permissions</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Excess Permissions</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Missing Permissions</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Activities</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Throttling</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Details</th>
+                            <th
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Details</th>
+                            <th
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Application Name</th>
+                            <th
+                                class="hidden sm:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Status</th>
+                            <th
+                                class="hidden md:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Activities</th>
+                            <th
+                                class="hidden lg:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Throttling</th>
+                            <th
+                                class="hidden xl:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Excess Permissions</th>
+                            <th
+                                class="hidden 2xl:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Missing Permissions</th>
+                            <th
+                                class="hidden min-[1920px]:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Current Permissions</th>
+                            <th
+                                class="hidden min-[2560px]:table-cell px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Optimal Permissions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -230,13 +367,17 @@
     </div>
 
     <!-- Modal -->
-    <div id="detailsModal" class="hidden fixed inset-0 bg-gray-600 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-colors duration-200">
-        <div class="relative top-4 mx-auto p-5 border border-gray-300 dark:border-gray-600 w-11/12 max-w-[90%] shadow-lg rounded-lg bg-white dark:bg-gray-800 transition-colors duration-200" style="max-height: 92vh;">
+    <div id="detailsModal"
+        class="hidden fixed inset-0 bg-gray-600 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-colors duration-200">
+        <div class="relative top-4 mx-auto p-5 border border-gray-300 dark:border-gray-600 w-11/12 max-w-[90%] shadow-lg rounded-lg bg-white dark:bg-gray-800 transition-colors duration-200"
+            style="max-height: 92vh;">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100" id="modalTitle">Application Details</h3>
-                <button id="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-3xl font-bold">&times;</button>
+                <button id="closeModal"
+                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-3xl font-bold">&times;</button>
             </div>
-            <div id="modalContent" class="mt-4 overflow-y-auto dark:text-gray-200" style="max-height: calc(92vh - 120px);"></div>
+            <div id="modalContent" class="mt-4 overflow-y-auto dark:text-gray-200"
+                style="max-height: calc(92vh - 120px);"></div>
         </div>
     </div>
 
@@ -244,16 +385,17 @@
         const appData = JSON.parse("{% block app_data %}{% endblock %}");
         let dataTable;
 
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             initThemeToggle();
             updateStatistics();
             initDataTable();
             setupFilters();
             setupModal();
+            setupCustomPageLength();
         });
 
         function initThemeToggle() {
-            jQuery('#themeToggle').click(function() {
+            jQuery('#themeToggle').click(function () {
                 const isDark = document.documentElement.classList.toggle('dark');
                 localStorage.theme = isDark ? 'dark' : 'light';
             });
@@ -275,13 +417,13 @@
             const appsWithThrottling = data.filter(app => app.ThrottlingStats?.ThrottleRate);
             return {
                 total: data.length,
-                fullyMatched: data.filter(app => app.MatchedAllActivity && !app.ExcessPermissions?.length).length,
-                withExcess: data.filter(app => app.ExcessPermissions?.length > 0).length,
+                fullyMatched: data.filter(app => getAppStatus(app) === 'good').length,
+                withExcess: data.filter(app => toArray(app.ExcessPermissions).length > 0).length,
                 withUnmatched: data.filter(app => !app.MatchedAllActivity).length,
                 throttledApps: data.filter(app => app.ThrottlingStats?.Total429Errors > 0).length,
                 criticalThrottling: data.filter(app => app.ThrottlingStats?.ThrottlingSeverity === 4).length,
                 total429: data.reduce((sum, app) => sum + (app.ThrottlingStats?.Total429Errors || 0), 0),
-                avgThrottleRate: appsWithThrottling.length ? 
+                avgThrottleRate: appsWithThrottling.length ?
                     (appsWithThrottling.reduce((sum, app) => sum + app.ThrottlingStats.ThrottleRate, 0) / appsWithThrottling.length).toFixed(2) : 0
             };
         }
@@ -290,45 +432,94 @@
             dataTable = jQuery('#resultsTable').DataTable({
                 data: prepareTableData(appData),
                 pageLength: 25,
-                order: [[7, 'desc']],
+                order: [[4, 'desc']], // Sort by Throttling column by default
+                dom: 'lrtip', // Hide search box (f) but keep search functionality
                 columns: [
-                    { data: 'appName', render: renderAppName },
-                    { data: 'status', render: renderStatus },
-                    { data: 'currentPerms', render: renderCurrentPerms },
-                    { data: 'optimalPerms', render: renderOptimalPerms },
-                    { data: 'excessPerms', render: renderExcessPerms },
-                    { data: 'missingPerms', render: renderMissingPerms },
-                    { data: 'activityCount', render: renderActivityCount },
-                    { data: 'throttling', render: renderThrottling },
-                    { data: 'index', orderable: false, render: renderDetailsButton }
+                    { data: 'index', orderable: false, render: renderDetailsButton, className: '' },
+                    { data: 'appName', render: renderAppName, className: '' },
+                    { data: 'status', render: renderStatus, className: 'hidden sm:table-cell' },
+                    { data: 'activityCount', render: renderActivityCount, className: 'hidden md:table-cell' },
+                    { data: 'throttling', render: renderThrottling, className: 'hidden lg:table-cell' },
+                    { data: 'excessPerms', render: renderExcessPerms, className: 'hidden xl:table-cell' },
+                    { data: 'missingPerms', render: renderMissingPerms, className: 'hidden 2xl:table-cell' },
+                    { data: 'currentPerms', render: renderCurrentPerms, className: 'hidden min-[1920px]:table-cell' },
+                    { data: 'optimalPerms', render: renderOptimalPerms, className: 'hidden min-[2560px]:table-cell' }
                 ]
             });
 
-            // Custom search function to search through permissions
-            jQuery.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            // Enhanced custom search function
+            jQuery.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
                 if (settings.nTable.id !== 'resultsTable') return true;
-                
+
                 const searchValue = jQuery('#searchBox').val().toLowerCase();
                 if (!searchValue) return true;
 
                 const rowData = dataTable.row(dataIndex).data();
-                
+                const app = appData[rowData.index];
+
                 // Search in app name and ID
                 if (rowData.appName.toLowerCase().includes(searchValue)) return true;
                 if (rowData.appId.toLowerCase().includes(searchValue)) return true;
-                
+
                 // Search in current permissions
-                if (rowData.currentPerms.some(p => p.toLowerCase().includes(searchValue))) return true;
-                
+                if (rowData.currentPerms.some(p => {
+                    const perm = p.Permission || p;
+                    return perm.toLowerCase().includes(searchValue);
+                })) return true;
+
                 // Search in optimal permissions
                 if (rowData.optimalPerms.some(p => p.Permission.toLowerCase().includes(searchValue))) return true;
-                
+
                 // Search in excess permissions
-                if (rowData.excessPerms.some(p => p.toLowerCase().includes(searchValue))) return true;
-                
+                if (rowData.excessPerms.some(p => {
+                    const perm = p.Permission || p;
+                    return perm.toLowerCase().includes(searchValue);
+                })) return true;
+
                 // Search in missing permissions
-                if (rowData.missingPerms.some(p => p.toLowerCase().includes(searchValue))) return true;
-                
+                if (rowData.missingPerms.some(p => {
+                    const perm = p.Permission || p;
+                    return perm.toLowerCase().includes(searchValue);
+                })) return true;
+
+                // Search in throttling status and data
+                if (rowData.throttling) {
+                    if (rowData.throttling.status && rowData.throttling.status.toLowerCase().includes(searchValue)) return true;
+                    if (String(rowData.throttling.total429).includes(searchValue)) return true;
+                    if (String(rowData.throttling.rate).includes(searchValue)) return true;
+                }
+
+                // Search in activity data (endpoints and methods)
+                if (app.Activity) {
+                    const activities = toArray(app.Activity);
+                    if (activities.some(act => {
+                        const endpoint = (act.Endpoint || act.Uri || '').toLowerCase();
+                        const method = (act.Method || '').toLowerCase();
+                        return endpoint.includes(searchValue) || method.includes(searchValue);
+                    })) return true;
+                }
+
+                // Search in unmatched activities
+                if (app.UnmatchedActivities) {
+                    const unmatched = toArray(app.UnmatchedActivities);
+                    if (unmatched.some(act => {
+                        const endpoint = (act.Endpoint || act.Uri || '').toLowerCase();
+                        const method = (act.Method || '').toLowerCase();
+                        return endpoint.includes(searchValue) || method.includes(searchValue);
+                    })) return true;
+                }
+
+                // Search in app roles
+                if (app.AppRoles) {
+                    const roles = toArray(app.AppRoles);
+                    if (roles.some(role => {
+                        const friendlyName = (role.FriendlyName || '').toLowerCase();
+                        const permission = (role.Permission || '').toLowerCase();
+                        const permType = (role.PermissionType || '').toLowerCase();
+                        return friendlyName.includes(searchValue) || permission.includes(searchValue) || permType.includes(searchValue);
+                    })) return true;
+                }
+
                 return false;
             });
         }
@@ -358,16 +549,33 @@
             return Array.isArray(val) ? val : [val];
         }
 
+        function getPermissionType(app, permissionName) {
+            const appRoles = toArray(app.AppRoles);
+            const role = appRoles.find(r => r.FriendlyName === permissionName || r.Permission === permissionName);
+            return role ? role.PermissionType : 'Unknown';
+        }
+
+        function getPermissionTypeBadge(type) {
+            const badges = {
+                'Delegated': '<span class="inline-block ml-2 px-2 py-0.5 text-xs font-semibold rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">Delegated</span>',
+                'Application': '<span class="inline-block ml-2 px-2 py-0.5 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">Application</span>',
+                'Unknown': '<span class="inline-block ml-2 px-2 py-0.5 text-xs font-semibold rounded bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">Unknown</span>'
+            };
+            return badges[type] || badges['Unknown'];
+        }
+
         function getAppStatus(app) {
             if (!app.MatchedAllActivity) return 'danger';
+            if (toArray(app.ExcessPermissions).length > 0 && toArray(app.RequiredPermissions).length > 0) return 'misaligned';
             if (toArray(app.ExcessPermissions).length > 0) return 'warning';
+            if (toArray(app.RequiredPermissions).length > 0) return 'missing';
             return 'good';
         }
 
         function renderAppName(data, type, row) {
             if (type !== 'display') return data;
-            return '<div class="font-medium text-gray-900 dark:text-gray-100">' + data + 
-                   '</div><div class="text-xs text-gray-500 dark:text-gray-400">' + row.appId + '</div>';
+            return '<div class="font-medium text-gray-900 dark:text-gray-100">' + data +
+                '</div><div class="text-xs text-gray-500 dark:text-gray-400">' + row.appId + '</div>';
         }
 
         function renderStatus(data, type) {
@@ -375,6 +583,8 @@
             const badges = {
                 good: '<div class="text-green-600 dark:text-green-400 font-semibold text-xs">Optimal</div>',
                 warning: '<div class="text-orange-600 dark:text-orange-400 font-semibold text-xs">Excess</div>',
+                missing: '<div class="text-cyan-600 dark:text-cyan-400 font-semibold text-xs">Under-Privileged</div>',
+                misaligned: '<div class="text-amber-600 dark:text-amber-400 font-semibold text-xs">Misaligned</div>',
                 danger: '<div class="text-red-600 dark:text-red-400 font-bold text-xs">Unmatched</div>'
             };
             return badges[data] || '';
@@ -384,8 +594,17 @@
             if (type !== 'display') return data.length;
             let html = '<span class="font-semibold">' + data.length + '</span>';
             if (data.length > 0) {
-                html += '<br><span class="text-xs text-gray-500 dark:text-gray-400">' + 
-                        data.slice(0, 2).join(', ') + (data.length > 2 ? '...' : '') + '</span>';
+                const names = data.map(p => p.Permission || p);
+                const displayNames = names.slice(0, 2);
+                const remainingCount = names.length - 2;
+                html += '<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">';
+                displayNames.forEach(name => {
+                    html += '<div class="truncate text-right" title="' + name + '">' + name + '</div>';
+                });
+                if (remainingCount > 0) {
+                    html += '<div class="text-blue-600 dark:text-blue-400 cursor-help text-right" title="' + names.slice(2).join('\n') + '">+' + remainingCount + ' more...</div>';
+                }
+                html += '</div>';
             }
             return html;
         }
@@ -395,8 +614,16 @@
             let html = '<span class="font-semibold text-green-600 dark:text-green-400">' + data.length + '</span>';
             if (data.length > 0) {
                 const names = data.map(p => p.Permission);
-                html += '<br><span class="text-xs text-gray-500 dark:text-gray-400">' + 
-                        names.slice(0, 2).join(', ') + (names.length > 2 ? '...' : '') + '</span>';
+                const displayNames = names.slice(0, 2);
+                const remainingCount = names.length - 2;
+                html += '<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">';
+                displayNames.forEach(name => {
+                    html += '<div class="truncate text-right" title="' + name + '">' + name + '</div>';
+                });
+                if (remainingCount > 0) {
+                    html += '<div class="text-green-600 dark:text-green-400 cursor-help text-right" title="' + names.slice(2).join('\n') + '">+' + remainingCount + ' more...</div>';
+                }
+                html += '</div>';
             }
             return html;
         }
@@ -406,8 +633,17 @@
             const color = data.length > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400';
             let html = '<span class="font-semibold ' + color + '">' + data.length + '</span>';
             if (data.length > 0) {
-                html += '<br><span class="text-xs text-red-500 dark:text-red-400">' + 
-                        data.slice(0, 2).join(', ') + (data.length > 2 ? '...' : '') + '</span>';
+                const names = data.map(p => p.Permission || p);
+                const displayNames = names.slice(0, 2);
+                const remainingCount = names.length - 2;
+                html += '<div class="text-xs text-red-500 dark:text-red-400 mt-1 text-right">';
+                displayNames.forEach(name => {
+                    html += '<div class="truncate text-right" title="' + name + '">' + name + '</div>';
+                });
+                if (remainingCount > 0) {
+                    html += '<div class="text-red-600 dark:text-red-400 cursor-help text-right" title="' + names.slice(2).join('\n') + '">+' + remainingCount + ' more...</div>';
+                }
+                html += '</div>';
             }
             return html;
         }
@@ -417,8 +653,17 @@
             const color = data.length > 0 ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400';
             let html = '<span class="font-semibold ' + color + '">' + data.length + '</span>';
             if (data.length > 0) {
-                html += '<br><span class="text-xs text-yellow-600 dark:text-yellow-400">' + 
-                        data.slice(0, 2).join(', ') + (data.length > 2 ? '...' : '') + '</span>';
+                const names = data.map(p => p.Permission || p);
+                const displayNames = names.slice(0, 2);
+                const remainingCount = names.length - 2;
+                html += '<div class="text-xs text-yellow-600 dark:text-yellow-400 mt-1 text-right">';
+                displayNames.forEach(name => {
+                    html += '<div class="truncate text-right" title="' + name + '">' + name + '</div>';
+                });
+                if (remainingCount > 0) {
+                    html += '<div class="text-yellow-600 dark:text-yellow-400 cursor-help text-right" title="' + names.slice(2).join('\n') + '">+' + remainingCount + ' more...</div>';
+                }
+                html += '</div>';
             }
             return html;
         }
@@ -426,8 +671,8 @@
         function renderActivityCount(data, type) {
             if (type !== 'display') return data;
             let html = '<span class="font-semibold">' + data + '</span>';
-            html += data > 0 ? 
-                '<span class="text-xs text-gray-500 dark:text-gray-400"><br>endpoints</span>' : 
+            html += data > 0 ?
+                '<span class="text-xs text-gray-500 dark:text-gray-400"><br>endpoints</span>' :
                 '<span class="text-xs text-gray-400 dark:text-gray-500"><br>No activity</span>';
             return html;
         }
@@ -435,7 +680,7 @@
         function renderThrottling(data, type) {
             if (type !== 'display') return data?.severity || 0;
             if (!data) return '<span class="text-xs text-gray-400 dark:text-gray-500">No data</span>';
-            
+
             const statusColors = {
                 4: 'text-red-600 dark:text-red-400 font-bold',
                 3: 'text-orange-600 dark:text-orange-400 font-semibold',
@@ -443,40 +688,44 @@
                 1: 'text-blue-500 dark:text-blue-400',
                 0: 'text-green-600 dark:text-green-400'
             };
-            
-            let html = '<div class="' + (statusColors[data.severity] || statusColors[0]) + ' font-semibold text-xs">' + 
-                       (data.status || 'Normal') + '</div>';
+
+            let html = '<div class="' + (statusColors[data.severity] || statusColors[0]) + ' font-semibold text-xs">' +
+                (data.status || 'Normal') + '</div>';
             if (data.total429 > 0) {
-                html += '<div class="text-xs text-gray-600 dark:text-gray-400">' + 
-                        data.total429.toLocaleString() + ' errors (' + data.throttleRate + '%)</div>';
+                html += '<div class="text-xs text-gray-600 dark:text-gray-400">' +
+                    data.total429.toLocaleString() + ' errors (' + data.throttleRate + '%)</div>';
             }
             return html;
         }
 
         function renderDetailsButton(data) {
             return '<button onclick="showDetails(' + data + ')" ' +
-                   'class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded text-xs transition-colors duration-200">' +
-                   'View Details</button>';
+                'class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded text-xs transition-colors duration-200">' +
+                'View Details</button>';
         }
 
         function setupFilters() {
-            jQuery('#statusFilter').change(function() {
-                dataTable.column(1).search(jQuery(this).val(), false, false).draw();
+            jQuery('#statusFilter').change(function () {
+                dataTable.column(2).search(jQuery(this).val(), false, false).draw();
             });
 
-            jQuery('#activityFilter').change(function() {
+            jQuery('#activityFilter').change(function () {
                 const val = jQuery(this).val();
-                const search = val === 'yes' ? '^[1-9]' : val === 'no' ? '^0$' : '';
-                dataTable.column(6).search(search, true, false).draw();
+                const search = val === 'yes' ? '^[1-9]\\d*$' : val === 'no' ? '^0$' : '';
+                dataTable.column(3).search(search, true, false).draw(); // Activities is now column 3
             });
 
-            jQuery('#throttlingFilter').change(function() {
+            jQuery('#throttlingFilter').change(function () {
                 const val = jQuery(this).val();
-                dataTable.column(7).search(val ? '^' + val + '$' : '', true, false).draw();
+                // If 'throttled' is selected, match severity 1-4 (exclude 0 which is Normal)
+                const search = val === 'throttled' ? '^[1-4]$' : (val ? '^' + val + '$' : '');
+                dataTable.column(4).search(search, true, false).draw(); // Throttling is now column 4
             });
 
-            jQuery('#searchBox').keyup(function() {
-                dataTable.draw();
+            jQuery('#searchBox').keyup(function () {
+                // Trigger global search which will use our custom filter
+                dataTable.search('dummy').draw();
+                dataTable.search('').draw();
             });
 
             jQuery('#exportBtn').click(exportToCSV);
@@ -484,11 +733,78 @@
 
         function setupModal() {
             jQuery('#closeModal').click(() => jQuery('#detailsModal').addClass('hidden'));
-            jQuery(window).click(function(e) {
+            jQuery(window).click(function (e) {
                 if (jQuery(e.target).is('#detailsModal')) {
                     jQuery('#detailsModal').addClass('hidden');
                 }
             });
+        }
+
+        function setupCustomPageLength() {
+            jQuery('#customPageLength').change(function () {
+                const newLength = parseInt(jQuery(this).val());
+                dataTable.page.len(newLength).draw();
+            });
+        }
+
+        // Filter functions for clickable summary cards
+        function filterByAll() {
+            // Clear all filters
+            jQuery('#statusFilter').val('').trigger('change');
+            jQuery('#activityFilter').val('').trigger('change');
+            jQuery('#throttlingFilter').val('').trigger('change');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('').draw();
+        }
+
+        function filterByOptimal() {
+            // Clear other filters and set status to good (Optimal)
+            jQuery('#activityFilter').val('');
+            jQuery('#throttlingFilter').val('');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('');
+            jQuery('#statusFilter').val('good');
+            dataTable.column(2).search('good', false, false).draw();
+        }
+
+        function filterByExcess() {
+            // Clear other filters and set status to warning (Has Excess)
+            jQuery('#activityFilter').val('');
+            jQuery('#throttlingFilter').val('');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('');
+            jQuery('#statusFilter').val('warning');
+            dataTable.column(2).search('warning', false, false).draw();
+        }
+
+        function filterByUnmatched() {
+            // Clear other filters and set status to danger (Unmatched)
+            jQuery('#activityFilter').val('');
+            jQuery('#throttlingFilter').val('');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('');
+            jQuery('#statusFilter').val('danger');
+            dataTable.column(2).search('danger', false, false).draw();
+        }
+
+        function filterByThrottled() {
+            // Clear other filters and set throttling to show all throttled (severity 1-4)
+            jQuery('#statusFilter').val('');
+            jQuery('#activityFilter').val('');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('');
+            jQuery('#throttlingFilter').val('throttled');
+            dataTable.column(4).search('^[1-4]$', true, false).draw();
+        }
+
+        function filterByCriticalThrottling() {
+            // Clear other filters and set throttling to show only critical (severity 4)
+            jQuery('#statusFilter').val('');
+            jQuery('#activityFilter').val('');
+            jQuery('#searchBox').val('');
+            dataTable.search('').columns().search('');
+            jQuery('#throttlingFilter').val('4');
+            dataTable.column(4).search('^4$', true, false).draw();
         }
 
         function showDetails(index) {
@@ -502,10 +818,10 @@
             let content = '<div class="space-y-4">';
             content += buildAppInfo(app);
             if (app.ThrottlingStats) content += buildThrottlingStats(app.ThrottlingStats);
-            content += buildPermissionSection('Current Permissions', toArray(app.CurrentPermissions));
-            content += buildOptimalPermissionSection(toArray(app.OptimalPermissions));
-            content += buildPermissionSection('Excess Permissions', toArray(app.ExcessPermissions), 'text-red-600 dark:text-red-400');
-            content += buildPermissionSection('Missing Permissions', toArray(app.RequiredPermissions), 'text-yellow-600 dark:text-yellow-400');
+            content += buildPermissionSection('Current Permissions', toArray(app.CurrentPermissions), app);
+            content += buildOptimalPermissionSection(toArray(app.OptimalPermissions), app);
+            content += buildPermissionSection('Excess Permissions', toArray(app.ExcessPermissions), app, 'text-red-600 dark:text-red-400');
+            content += buildPermissionSection('Missing Permissions', toArray(app.RequiredPermissions), app, 'text-yellow-600 dark:text-yellow-400');
             content += buildActivitySection(toArray(app.Activity));
             content += buildUnmatchedSection(toArray(app.UnmatchedActivities));
             content += '</div>';
@@ -514,11 +830,11 @@
 
         function buildAppInfo(app) {
             return '<div class="border-b dark:border-gray-600 pb-4">' +
-                   '<h4 class="font-bold text-lg mb-2 dark:text-gray-100">Application Information</h4>' +
-                   '<p class="dark:text-gray-300"><span class="font-semibold">Principal ID:</span> ' + app.PrincipalId + '</p>' +
-                   '<p class="dark:text-gray-300"><span class="font-semibold">Total App Roles:</span> ' + app.AppRoleCount + '</p>' +
-                   '<p class="dark:text-gray-300"><span class="font-semibold">Matched All Activities:</span> ' + (app.MatchedAllActivity ? 'Yes' : 'No') + '</p>' +
-                   '</div>';
+                '<h4 class="font-bold text-lg mb-2 dark:text-gray-100">Application Information</h4>' +
+                '<p class="dark:text-gray-300"><span class="font-semibold">Principal ID:</span> ' + app.PrincipalId + '</p>' +
+                '<p class="dark:text-gray-300"><span class="font-semibold">Total App Roles:</span> ' + app.AppRoleCount + '</p>' +
+                '<p class="dark:text-gray-300"><span class="font-semibold">Matched All Activities:</span> ' + (app.MatchedAllActivity ? 'Yes' : 'No') + '</p>' +
+                '</div>';
         }
 
         function buildThrottlingStats(ts) {
@@ -529,19 +845,19 @@
                 1: '<span class="severity-badge bg-blue-500 text-white">Minimal</span>',
                 0: '<span class="severity-badge bg-green-500 text-white">Normal</span>'
             };
-            
+
             const statusColors = {
                 'Critical': 'text-red-600 dark:text-red-400 font-bold',
                 'Warning': 'text-orange-600 dark:text-orange-400 font-semibold',
                 'Low': 'text-yellow-600 dark:text-yellow-400',
                 'Minimal': 'text-blue-500 dark:text-blue-400'
             };
-            
+
             let content = '<div class="border-b dark:border-gray-600 pb-4 bg-purple-50 dark:bg-purple-900/30 p-4 rounded">' +
-                         '<h4 class="font-bold text-lg mb-2 text-purple-700 dark:text-purple-300">Throttling Statistics ' + 
-                         (severityBadges[ts.ThrottlingSeverity] || severityBadges[0]) + '</h4>' +
-                         '<div class="grid grid-cols-2 gap-2 text-sm dark:text-gray-300">';
-            
+                '<h4 class="font-bold text-lg mb-2 text-purple-700 dark:text-purple-300">Throttling Statistics ' +
+                (severityBadges[ts.ThrottlingSeverity] || severityBadges[0]) + '</h4>' +
+                '<div class="grid grid-cols-2 gap-2 text-sm dark:text-gray-300">';
+
             const stats = [
                 ['Status', '<span class="' + (statusColors[ts.ThrottlingStatus] || 'text-green-600 dark:text-green-400') + '">' + ts.ThrottlingStatus + '</span>'],
                 ['Severity', ts.ThrottlingSeverity + '/4'],
@@ -554,99 +870,180 @@
                 ['Success Rate', '<span class="text-green-600 dark:text-green-400">' + (ts.SuccessRate || 0) + '%</span>'],
                 ['Error Rate', (ts.ErrorRate || 0) + '%']
             ];
-            
+
             if (ts.FirstOccurrence) stats.push(['First Seen', new Date(ts.FirstOccurrence).toLocaleString()]);
             if (ts.LastOccurrence) stats.push(['Last Seen', new Date(ts.LastOccurrence).toLocaleString()]);
-            
+
             stats.forEach(([label, value]) => {
                 content += '<div><span class="font-semibold">' + label + ':</span> ' + value + '</div>';
             });
-            
+
             return content + '</div></div>';
         }
 
-        function buildPermissionSection(title, perms, colorClass = '') {
+        function buildPermissionSection(title, perms, app, colorClass = '') {
             if (!perms.length) return '';
             return '<div class="border-b dark:border-gray-600 pb-4">' +
-                   '<h4 class="font-bold text-lg mb-2 ' + (colorClass || 'dark:text-gray-100') + '">' + title + ' (' + perms.length + ')</h4>' +
-                   '<ul class="list-disc list-inside text-sm space-y-1 ' + (colorClass || 'dark:text-gray-300') + '">' +
-                   perms.map(p => '<li>' + p + '</li>').join('') +
-                   '</ul></div>';
+                '<h4 class="font-bold text-lg mb-2 ' + (colorClass || 'dark:text-gray-100') + '">' + title + ' (' + perms.length + ')</h4>' +
+                '<ul class="list-disc list-inside text-sm space-y-1 ' + (colorClass || 'dark:text-gray-300') + '">' +
+                perms.map(p => {
+                    const permName = p.Permission || p;
+                    const scopeType = p.ScopeType || getPermissionType(app, permName);
+                    return '<li>' + permName + getPermissionTypeBadge(scopeType) + '</li>';
+                }).join('') +
+                '</ul></div>';
         }
 
-        function buildOptimalPermissionSection(perms) {
+        function buildOptimalPermissionSection(perms, app) {
             if (!perms.length) return '';
-            return '<div class="border-b dark:border-gray-600 pb-4">' +
-                   '<h4 class="font-bold text-lg mb-2 text-green-600 dark:text-green-400">Optimal Permissions (' + perms.length + ')</h4>' +
-                   '<ul class="list-disc list-inside text-sm space-y-1 dark:text-gray-300">' +
-                   perms.map(p => '<li><span class="font-medium">' + p.Permission + '</span> (Covers ' + p.ActivitiesCovered + ' activities)</li>').join('') +
-                   '</ul></div>';
+            let html = '<div class="border-b dark:border-gray-600 pb-4">' +
+                '<h4 class="font-bold text-lg mb-2 text-green-600 dark:text-green-400">Optimal Permissions (' + perms.length + ')</h4>';
+
+            perms.forEach(p => {
+                const scopeType = p.ScopeType || getPermissionType(app, p.Permission);
+                html += '<div class="mb-4 bg-green-50 dark:bg-green-900/20 p-3 rounded">';
+                html += '<div class="font-medium text-green-700 dark:text-green-300">' + p.Permission + getPermissionTypeBadge(scopeType);
+                html += ' <span class="text-sm text-gray-600 dark:text-gray-400">(Covers ' + p.ActivitiesCovered + ' activities)</span></div>';
+
+                // Show covered activities - use the Activities property from OptimalPermissions
+                const activities = toArray(p.Activities);
+
+                if (activities.length > 0) {
+                    html += '<details class="mt-2 ml-4 group">';
+                    html += '<summary class="cursor-pointer text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mb-1 list-none flex items-center gap-1">';
+                    html += '<span class="inline-block transition-transform group-open:rotate-90">▶</span>';
+                    html += '<span>Covered Endpoints</span>';
+                    html += '</summary>';
+                    html += '<ul class="text-xs space-y-1 text-gray-700 dark:text-gray-300 mt-2">';
+                    activities.forEach(a => {
+                        const method = a.Method || a.method || 'GET';
+                        const path = a.Path || a.path || a.Endpoint || a.endpoint || a.Uri || a.uri || a;
+                        const version = a.Version || a.version || '';
+                        const fullPath = version ? ('https://graph.microsoft.com/' + version + path) : path;
+                        html += '<li class="font-mono"><span class="font-semibold">' + method + '</span> ' + fullPath + '</li>';
+                    });
+                    html += '</ul></details>';
+                }
+                html += '</div>';
+            });
+
+            return html + '</div>';
         }
 
         function buildActivitySection(activities) {
             if (!activities.length) return '';
             return '<div><h4 class="font-bold text-lg mb-2 dark:text-gray-100">API Activities (' + activities.length + ')</h4>' +
-                   '<div class="max-h-64 overflow-y-auto"><table class="min-w-full text-sm dark:text-gray-300">' +
-                   '<thead class="bg-gray-50 dark:bg-gray-700 sticky top-0"><tr>' +
-                   '<th class="px-2 py-2 text-left">Method</th><th class="px-2 py-2 text-left">Endpoint</th>' +
-                   '</tr></thead><tbody>' +
-                   activities.map(a => '<tr class="border-b dark:border-gray-600">' +
-                       '<td class="px-2 py-2 font-mono text-xs">' + a.Method + '</td>' +
-                       '<td class="px-2 py-2 font-mono text-xs break-all">' + a.Uri + '</td>' +
-                       '</tr>').join('') +
-                   '</tbody></table></div></div>';
+                '<div class="max-h-64 overflow-y-auto"><table class="min-w-full text-sm dark:text-gray-300">' +
+                '<thead class="bg-gray-50 dark:bg-gray-700 sticky top-0"><tr>' +
+                '<th class="px-2 py-2 text-left">Method</th><th class="px-2 py-2 text-left">Endpoint</th>' +
+                '</tr></thead><tbody>' +
+                activities.map(a => '<tr class="border-b dark:border-gray-600">' +
+                    '<td class="px-2 py-2 font-mono text-xs">' + a.Method + '</td>' +
+                    '<td class="px-2 py-2 font-mono text-xs break-all">' + a.Uri + '</td>' +
+                    '</tr>').join('') +
+                '</tbody></table></div></div>';
         }
 
         function buildUnmatchedSection(unmatched) {
             if (!unmatched.length) return '';
             return '<div class="bg-red-50 dark:bg-red-900/30 p-4 rounded">' +
-                   '<h4 class="font-bold text-lg mb-2 text-red-600 dark:text-red-400">Unmatched Activities (' + unmatched.length + ')</h4>' +
-                   '<ul class="list-disc list-inside text-sm space-y-1 text-red-700 dark:text-red-400">' +
-                   unmatched.map(a => '<li>' + a.Method + ' ' + a.Path + '</li>').join('') +
-                   '</ul></div>';
+                '<h4 class="font-bold text-lg mb-2 text-red-600 dark:text-red-400">Unmatched Activities (' + unmatched.length + ')</h4>' +
+                '<ul class="list-disc list-inside text-sm space-y-1 text-red-700 dark:text-red-400">' +
+                unmatched.map(a => '<li>' + a.Method + ' ' + a.Path + '</li>').join('') +
+                '</ul></div>';
+        }
+
+        function flattenObject(obj, prefix = '') {
+            let flattened = {};
+            for (let key in obj) {
+                if (!obj.hasOwnProperty(key)) continue;
+                const value = obj[key];
+                const newKey = prefix ? `${prefix}.${key}` : key;
+
+                if (value === null || value === undefined) {
+                    flattened[newKey] = '';
+                } else if (Array.isArray(value)) {
+                    // Handle arrays - convert to comma-separated string
+                    if (value.length === 0) {
+                        flattened[newKey] = '';
+                    } else if (typeof value[0] === 'object') {
+                        // Array of objects - extract specific properties
+                        flattened[newKey] = value.map(item => {
+                            if (item.Permission) return item.Permission;
+                            if (item.Method && item.Uri) return `${item.Method} ${item.Uri}`;
+                            if (item.Method && item.Path) return `${item.Method} ${item.Path}`;
+                            return JSON.stringify(item);
+                        }).join(', ');
+
+                        // If items have ScopeType, create separate column
+                        if (value[0].Permission && value[0].ScopeType) {
+                            flattened[`${newKey}.ScopeTypes`] = value.map(item => item.ScopeType || 'Unknown').join(', ');
+                        }
+                    } else {
+                        flattened[newKey] = value.join(', ');
+                    }
+                    flattened[`${newKey}.Count`] = value.length;
+                } else if (typeof value === 'object') {
+                    // Recursively flatten nested objects
+                    Object.assign(flattened, flattenObject(value, newKey));
+                } else {
+                    flattened[newKey] = value;
+                }
+            }
+            return flattened;
+        }
+
+        function escapeCSVValue(value) {
+            if (value === null || value === undefined) return '';
+            const stringValue = String(value);
+            // If contains comma, semicolon, newline, or quote, wrap in quotes and escape existing quotes
+            if (stringValue.includes(',') || stringValue.includes(';') || stringValue.includes('\n') || stringValue.includes('"')) {
+                return '"' + stringValue.replace(/"/g, '""') + '"';
+            }
+            return stringValue;
         }
 
         function exportToCSV() {
-            const headers = ['Application Name', 'Principal ID', 'Status', 'Current Permissions', 'Current Permission Count', 
-                           'Optimal Permissions', 'Optimal Permission Count', 'Excess Permissions', 'Excess Permission Count', 
-                           'Missing Permissions', 'Missing Permission Count', 'Activity Count', 'Matched All Activities', 
-                           'Throttling Severity', 'Throttling Status', 'Total 429 Errors', 'Throttle Rate', 'Total Requests', 
-                           'Success Rate', 'Error Rate'];
-            
-            let csv = headers.join(';') + '\n';
-            
-            appData.forEach(app => {
-                const currentPerms = toArray(app.CurrentPermissions);
-                const optimalPerms = toArray(app.OptimalPermissions);
-                const excessPerms = toArray(app.ExcessPermissions);
-                const missingPerms = toArray(app.RequiredPermissions);
-                const activities = toArray(app.Activity);
-                
-                const row = [
-                    '"' + (app.PrincipalName || '').replace(/"/g, '""') + '"',
-                    '"' + (app.PrincipalId || '').replace(/"/g, '""') + '"',
-                    getAppStatus(app),
-                    '"' + currentPerms.join(', ').replace(/"/g, '""') + '"',
-                    currentPerms.length,
-                    '"' + optimalPerms.map(p => p.Permission).join(', ').replace(/"/g, '""') + '"',
-                    optimalPerms.length,
-                    '"' + excessPerms.join(', ').replace(/"/g, '""') + '"',
-                    excessPerms.length,
-                    '"' + missingPerms.join(', ').replace(/"/g, '""') + '"',
-                    missingPerms.length,
-                    activities.length,
-                    app.MatchedAllActivity ? 'Yes' : 'No',
-                    app.ThrottlingStats?.ThrottlingSeverity || 0,
-                    app.ThrottlingStats ? '"' + (app.ThrottlingStats.ThrottlingStatus || 'Normal').replace(/"/g, '""') + '"' : 'No Data',
-                    app.ThrottlingStats?.Total429Errors || 0,
-                    app.ThrottlingStats?.ThrottleRate || 0,
-                    app.ThrottlingStats?.TotalRequests || 0,
-                    app.ThrottlingStats?.SuccessRate || 0,
-                    app.ThrottlingStats?.ErrorRate || 0
-                ];
-                csv += row.join(';') + '\n';
+            if (!appData || appData.length === 0) {
+                alert('No data to export');
+                return;
+            }
+
+            // Flatten all objects to get all possible columns
+            const flattenedData = appData.map(app => flattenObject(app));
+
+            // Get all unique keys across all objects (for comprehensive headers)
+            const allKeys = new Set();
+            flattenedData.forEach(row => {
+                Object.keys(row).forEach(key => allKeys.add(key));
             });
-            
+
+            // Sort keys for better column organization
+            const headers = Array.from(allKeys).sort((a, b) => {
+                // Prioritize important fields
+                const priority = {
+                    'PrincipalName': 1,
+                    'PrincipalId': 2,
+                    'AppRoleCount': 3,
+                    'MatchedAllActivity': 4
+                };
+
+                const aPriority = priority[a] || 999;
+                const bPriority = priority[b] || 999;
+
+                if (aPriority !== bPriority) return aPriority - bPriority;
+                return a.localeCompare(b);
+            });
+
+            // Build CSV
+            let csv = headers.map(escapeCSVValue).join(';') + '\n';
+
+            flattenedData.forEach(row => {
+                const values = headers.map(header => escapeCSVValue(row[header] || ''));
+                csv += values.join(';') + '\n';
+            });
+
+            // Download
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -655,4 +1052,5 @@
         }
     </script>
 </body>
+
 </html>

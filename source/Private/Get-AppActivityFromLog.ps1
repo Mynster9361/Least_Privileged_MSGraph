@@ -163,17 +163,31 @@ function Get-AppActivityFromLog {
 MicrosoftGraphActivityLogs
 | where TimeGenerated >= datetime($startDateStr) and TimeGenerated <= datetime($endDateStr)
 | where ServicePrincipalId == "$spId"
-| where RequestUri !in("https://graph.microsoft.com/beta/`$batch","https://graph.microsoft.com/v1.0/`$batch")
-| where ResponseStatusCode == "200"
-| where isnotempty(AppId) and isnotempty(RequestUri) and isnotempty(RequestMethod)
-| extend CleanedRequestUri = iff(indexof(RequestUri, "?") != -1, substring(RequestUri, 0, indexof(RequestUri, "?")), RequestUri)
-| extend CleanedRequestUri = replace_string(CleanedRequestUri, "https://", "HTTPSPLACEHOLDER://")
-| extend CleanedRequestUri = replace_regex(CleanedRequestUri, "//+", "/")
-| extend CleanedRequestUri = replace_string(CleanedRequestUri, "HTTPSPLACEHOLDER:/", "https://")
-| project AppId, RequestMethod, CleanedRequestUri
-| distinct AppId, RequestMethod, CleanedRequestUri
-| take $maxActivityEntries
-| summarize Activity = make_set(pack("Method", RequestMethod, "Uri", CleanedRequestUri)) by AppId
+      and ResponseStatusCode == "200"
+      and RequestUri !in (
+          "https://graph.microsoft.com/beta/`$batch",
+          "https://graph.microsoft.com/v1.0/`$batch"
+      )
+      and isnotempty(AppId)
+      and isnotempty(RequestUri)
+      and isnotempty(RequestMethod)
+| extend CleanedRequestUri =
+    replace_regex(
+        tostring(parse_url(RequestUri).Path),
+        "//+",
+        "/"
+    )
+| extend Scheme = iff(isnotempty(ServicePrincipalId), "Application", "Delegated")
+| summarize
+    Activity = make_set(
+        pack(
+            "Method", RequestMethod,
+            "Uri", CleanedRequestUri,
+            "Scheme", Scheme
+        ),
+        $maxActivityEntries
+    )
+    by AppId
 "@
 
   $body = @{
@@ -187,11 +201,59 @@ MicrosoftGraphActivityLogs
   }
 
   try {
-    if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceDetails') {
-      $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/subscriptions/$subId/resourcegroups/$rgName/providers/microsoft.operationalinsights/workspaces/$workspaceName/query" -Body ($body | ConvertTo-Json -Depth 10)
-    }
-    else {
-      $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query" -Body ($body | ConvertTo-Json -Depth 10)
+    # Retry logic for handling rate limiting
+    $maxRetries = 5
+    $retryCount = 0
+    $baseDelaySeconds = 2
+    $response = $null
+
+    while ($retryCount -le $maxRetries) {
+      try {
+        if ($PSCmdlet.ParameterSetName -eq 'ByWorkspaceDetails') {
+          $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/subscriptions/$subId/resourcegroups/$rgName/providers/microsoft.operationalinsights/workspaces/$workspaceName/query" -Body ($body | ConvertTo-Json -Depth 15)
+        }
+        else {
+          $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1/workspaces/$logAnalyticsWorkspace/query" -Body ($body | ConvertTo-Json -Depth 15)
+        }
+
+        # Success - break out of retry loop
+        break
+      }
+      catch {
+        # Check if this is a throttling error
+        $errorDetails = $null
+        if ($_.ErrorDetails.Message) {
+          try {
+            $errorDetails = ($_.ErrorDetails.Message | ConvertFrom-Json).error
+          }
+          catch {
+            # Not a JSON error, rethrow
+            throw
+          }
+        }
+
+        if ($errorDetails.code -eq 'ThrottledError') {
+          $retryCount++
+          if ($retryCount -le $maxRetries) {
+            # Calculate exponential backoff with jitter
+            $delaySeconds = $baseDelaySeconds * [Math]::Pow(2, $retryCount - 1)
+            $jitter = Get-Random -Minimum 0 -Maximum 1000
+            $totalDelayMs = ($delaySeconds * 1000) + $jitter
+
+            Write-PSFMessage -Level Warning -Message "Rate limit hit for service principal $spId. Retry $retryCount/$maxRetries after $([Math]::Round($totalDelayMs/1000, 2))s"
+            Start-Sleep -Milliseconds $totalDelayMs
+            continue
+          }
+          else {
+            Write-PSFMessage -Level Warning -Message "Rate limit exceeded for service principal $spId after $maxRetries retries. Giving up."
+            throw
+          }
+        }
+        else {
+          # Not a throttling error, rethrow immediately
+          throw
+        }
+      }
     }
 
     # Check for valid response structure
@@ -227,6 +289,12 @@ MicrosoftGraphActivityLogs
         [PSCustomObject]@{
           Method = $entry.Method
           Uri    = $tokenizedUri
+          Scheme = if ($entry.Scheme) {
+            $entry.Scheme
+          }
+          else {
+            'Application'
+          }
         }
       }
       catch {
@@ -236,7 +304,7 @@ MicrosoftGraphActivityLogs
     }
 
     # Return unique entries
-    $uniqueActivity = $processedActivity | Sort-Object Method, Uri -Unique
+    $uniqueActivity = $processedActivity | Sort-Object Method, Uri, Scheme -Unique
     Write-PSFMessage -Level Debug -Message "Processed and deduplicated to $($uniqueActivity.Count) unique pattern(s) in this window"
 
     return $uniqueActivity
@@ -303,7 +371,7 @@ MicrosoftGraphActivityLogs
       }
 
       # Deduplicate combined results
-      $uniqueCombined = $combinedActivity | Sort-Object Method, Uri -Unique
+      $uniqueCombined = $combinedActivity | Sort-Object Method, Uri, Scheme -Unique
       Write-PSFMessage -Level Verbose -Message "Combined and deduplicated to $($uniqueCombined.Count) unique pattern(s) across split windows"
 
       return $uniqueCombined

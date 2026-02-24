@@ -51,9 +51,9 @@ BeforeAll {
                 }
             )
             Activity        = @(
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/applications/{id}' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/servicePrincipals/{id}' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/applications/{id}'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/servicePrincipals/{id}'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users'; Scheme = 'Application' }
             )
             ThrottlingStats = @{
                 TotalRequests      = 1290
@@ -84,8 +84,8 @@ BeforeAll {
                 }
             )
             Activity        = @(
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/drives/{id}/items/{id}' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/sites/{id}/lists/{id}/items' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/drives/{id}/items/{id}'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/sites/{id}/lists/{id}/items'; Scheme = 'Application' }
             )
             ThrottlingStats = @{
                 TotalRequests      = 171
@@ -175,11 +175,11 @@ BeforeAll {
                 }
             )
             Activity        = @(
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/beta/sites/{id}/lists/{id}/items' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}' }
-                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}/memberOf' }
-                @{ Method = 'POST'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}/assignLicense' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/beta/sites/{id}/lists/{id}/items'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}'; Scheme = 'Application' }
+                @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}/memberOf'; Scheme = 'Application' }
+                @{ Method = 'POST'; Uri = 'https://graph.microsoft.com/v1.0/users/{id}/assignLicense'; Scheme = 'Application' }
             )
             ThrottlingStats = @{
                 TotalRequests      = 25273
@@ -198,41 +198,16 @@ BeforeAll {
         }
     )
 
-    # Mock Find-LeastPrivilegedPermission
-    if ($script:moduleLoaded) {
-        Mock -CommandName Find-LeastPrivilegedPermission -ModuleName $script:moduleName -MockWith {
-            param($userActivity, $permissionMapv1, $permissionMapbeta)
+    # Mock Find-GraphLeastPrivilege from MSGraphPermissions module
+    Mock -CommandName Find-GraphLeastPrivilege -MockWith {
+        param($Path, $Method, $Scheme)
 
-            # Return mock activity permissions based on input
-            if ($userActivity -and $userActivity.Count -gt 0) {
-                return @(
-                    [PSCustomObject]@{
-                        Activity   = $userActivity[0]
-                        Permission = 'Application.Read.All'
-                        Privilege  = 'Low'
-                        Endpoint   = 'v1.0'
-                    }
-                )
+        # Return mock permissions based on MSGraphPermissions format
+        return @(
+            [PSCustomObject]@{
+                Permission = 'Application.Read.All'
             }
-            return @()
-        }
-    }
-    else {
-        Mock -CommandName Find-LeastPrivilegedPermission -MockWith {
-            param($userActivity, $permissionMapv1, $permissionMapbeta)
-
-            if ($userActivity -and $userActivity.Count -gt 0) {
-                return @(
-                    [PSCustomObject]@{
-                        Activity   = $userActivity[0]
-                        Permission = 'Application.Read.All'
-                        Privilege  = 'Low'
-                        Endpoint   = 'v1.0'
-                    }
-                )
-            }
-            return @()
-        }
+        )
     }
 
     # Mock Get-OptimalPermissionSet
@@ -241,16 +216,27 @@ BeforeAll {
             param($activityPermissions)
 
             return @{
-                OptimalPermissions   = @(
+                OptimalPermissions  = @(
                     [PSCustomObject]@{
                         Permission = 'Application.Read.All'
+                        ScopeType  = 'Application'
                         Privilege  = 'Low'
                         Coverage   = 1
                     }
                 )
-                UnmatchedActivities  = @()
-                MatchedActivities    = if ($activityPermissions) { $activityPermissions.Count } else { 0 }
-                TotalActivities      = if ($activityPermissions) { $activityPermissions.Count } else { 0 }
+                UnmatchedActivities = @()
+                MatchedActivities   = if ($activityPermissions) {
+                    $activityPermissions.Count
+                }
+                else {
+                    0
+                }
+                TotalActivities     = if ($activityPermissions) {
+                    $activityPermissions.Count
+                }
+                else {
+                    0
+                }
             }
         }
     }
@@ -259,16 +245,27 @@ BeforeAll {
             param($activityPermissions)
 
             return @{
-                OptimalPermissions   = @(
+                OptimalPermissions  = @(
                     [PSCustomObject]@{
                         Permission = 'Application.Read.All'
+                        ScopeType  = 'Application'
                         Privilege  = 'Low'
                         Coverage   = 1
                     }
                 )
-                UnmatchedActivities  = @()
-                MatchedActivities    = if ($activityPermissions) { $activityPermissions.Count } else { 0 }
-                TotalActivities      = if ($activityPermissions) { $activityPermissions.Count } else { 0 }
+                UnmatchedActivities = @()
+                MatchedActivities   = if ($activityPermissions) {
+                    $activityPermissions.Count
+                }
+                else {
+                    0
+                }
+                TotalActivities     = if ($activityPermissions) {
+                    $activityPermissions.Count
+                }
+                else {
+                    0
+                }
             }
         }
     }
@@ -314,7 +311,6 @@ Describe 'Get-PermissionAnalysis' {
 
             $result.PSObject.Properties.Name | Should -Contain 'ActivityPermissions'
             $result.PSObject.Properties.Name | Should -Contain 'OptimalPermissions'
-            $result.PSObject.Properties.Name | Should -Contain 'CurrentPermissions'
             $result.PSObject.Properties.Name | Should -Contain 'ExcessPermissions'
             $result.PSObject.Properties.Name | Should -Contain 'RequiredPermissions'
             $result.PSObject.Properties.Name | Should -Contain 'UnmatchedActivities'
@@ -355,17 +351,6 @@ Describe 'Get-PermissionAnalysis' {
     }
 
     Context 'Apps With Activity' {
-        It 'Should call Find-LeastPrivilegedPermission for apps with activity' {
-            $script:testAppData[0] | Get-PermissionAnalysis
-
-            if ($script:moduleLoaded) {
-                Should -Invoke -CommandName Find-LeastPrivilegedPermission -ModuleName $script:moduleName -Times 1
-            }
-            else {
-                Should -Invoke -CommandName Find-LeastPrivilegedPermission -Times 1
-            }
-        }
-
         It 'Should call Get-OptimalPermissionSet for apps with activity' {
             $script:testAppData[0] | Get-PermissionAnalysis
 
@@ -389,28 +374,20 @@ Describe 'Get-PermissionAnalysis' {
             $result.OptimalPermissions | Should -Not -BeNullOrEmpty
         }
 
-        It 'Should populate CurrentPermissions from AppRoles' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
-
-            $result.CurrentPermissions | Should -Contain 'Directory.Read.All'
-            $result.CurrentPermissions | Should -Contain 'User.Read.All'
-            $result.CurrentPermissions.Count | Should -Be 2
-        }
-
         It 'Should calculate ExcessPermissions correctly' {
             $result = $script:testAppData[0] | Get-PermissionAnalysis
 
             $result.ExcessPermissions | Should -Not -BeNullOrEmpty
             # Excess = Current permissions NOT in Optimal set
-            $result.ExcessPermissions | Should -Contain 'Directory.Read.All'
-            $result.ExcessPermissions | Should -Contain 'User.Read.All'
+            $result.ExcessPermissions.Permission | Should -Contain 'Directory.Read.All'
+            $result.ExcessPermissions.Permission | Should -Contain 'User.Read.All'
         }
 
         It 'Should calculate RequiredPermissions (missing permissions)' {
             $result = $script:testAppData[0] | Get-PermissionAnalysis
 
             # Required = Optimal permissions NOT in Current set
-            $result.RequiredPermissions | Should -Contain 'Application.Read.All'
+            $result.RequiredPermissions.Permission | Should -Contain 'Application.Read.All'
         }
 
         It 'Should set MatchedAllActivity to true when all activities matched' {
@@ -446,22 +423,6 @@ Describe 'Get-PermissionAnalysis' {
             $result.UnmatchedActivities | Should -BeNullOrEmpty
         }
 
-        It 'Should populate CurrentPermissions even without activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
-
-            $result.CurrentPermissions | Should -Contain 'User.Read.All'
-            $result.CurrentPermissions | Should -Contain 'Mail.Send'
-            $result.CurrentPermissions | Should -Contain 'Chat.ReadWrite.All'
-            $result.CurrentPermissions | Should -Contain 'Chat.Create'
-            $result.CurrentPermissions.Count | Should -Be 4
-        }
-
-        It 'Should set ExcessPermissions to all CurrentPermissions when no activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
-
-            $result.ExcessPermissions.Count | Should -Be $result.CurrentPermissions.Count
-        }
-
         It 'Should set RequiredPermissions to empty array when no activity' {
             $result = $script:testAppData[2] | Get-PermissionAnalysis
 
@@ -474,13 +435,8 @@ Describe 'Get-PermissionAnalysis' {
             $result.MatchedAllActivity | Should -Be $true
         }
 
-        It 'Should not call Find-LeastPrivilegedPermission for apps without activity' {
-            if ($script:moduleLoaded) {
-                Mock -CommandName Find-LeastPrivilegedPermission -ModuleName $script:moduleName -MockWith { throw "Should not be called" }
-            }
-            else {
-                Mock -CommandName Find-LeastPrivilegedPermission -MockWith { throw "Should not be called" }
-            }
+        It 'Should not call Find-GraphLeastPrivilege for apps without activity' {
+            Mock -CommandName Find-GraphLeastPrivilege -MockWith { throw "Should not be called" }
 
             { $script:testAppData[2] | Get-PermissionAnalysis } | Should -Not -Throw
         }
@@ -492,44 +448,13 @@ Describe 'Get-PermissionAnalysis' {
                 PrincipalId   = 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee'
                 PrincipalName = 'App Without Roles'
                 Activity      = @(
-                    @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users' }
+                    @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users'; Scheme = 'Application' }
                 )
             }
 
             $result = $appWithoutRoles | Get-PermissionAnalysis
 
-            $result.CurrentPermissions | Should -BeNullOrEmpty
             $result.ExcessPermissions | Should -BeNullOrEmpty
-        }
-
-        It 'Should handle apps with null AppRoles' {
-            $appWithNullRoles = [PSCustomObject]@{
-                PrincipalId   = 'ffffffff-ffff-ffff-ffff-ffffffffffff'
-                PrincipalName = 'App With Null Roles'
-                AppRoles      = $null
-                Activity      = @(
-                    @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users' }
-                )
-            }
-
-            $result = $appWithNullRoles | Get-PermissionAnalysis
-
-            $result.CurrentPermissions | Should -BeNullOrEmpty
-        }
-
-        It 'Should handle apps with empty AppRoles array' {
-            $appWithEmptyRoles = [PSCustomObject]@{
-                PrincipalId   = '00000000-0000-0000-0000-000000000001'
-                PrincipalName = 'App With Empty Roles'
-                AppRoles      = @()
-                Activity      = @(
-                    @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users' }
-                )
-            }
-
-            $result = $appWithEmptyRoles | Get-PermissionAnalysis
-
-            $result.CurrentPermissions | Should -BeNullOrEmpty
         }
     }
 
@@ -555,19 +480,12 @@ Describe 'Get-PermissionAnalysis' {
             { $appWithoutName | Get-PermissionAnalysis } | Should -Not -Throw
         }
 
-        It 'Should handle Find-LeastPrivilegedPermission errors gracefully' {
-            if ($script:moduleLoaded) {
-                Mock -CommandName Find-LeastPrivilegedPermission -ModuleName $script:moduleName -MockWith {
-                    throw "Simulated error"
-                }
-            }
-            else {
-                Mock -CommandName Find-LeastPrivilegedPermission -MockWith {
-                    throw "Simulated error"
-                }
+        It 'Should handle Find-GraphLeastPrivilege errors gracefully' {
+            Mock -CommandName Find-GraphLeastPrivilege -MockWith {
+                throw "Simulated error"
             }
 
-            { $script:testAppData[0] | Get-PermissionAnalysis } | Should -Throw
+            { $script:testAppData[0] | Get-PermissionAnalysis } | Should -Not -Throw
         }
 
         It 'Should handle Get-OptimalPermissionSet errors gracefully' {
@@ -642,24 +560,24 @@ Describe 'Get-PermissionAnalysis' {
             if ($script:moduleLoaded) {
                 Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
                     return @{
-                        OptimalPermissions   = @(
-                            [PSCustomObject]@{ Permission = 'User.Read.All' }
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
                         )
-                        UnmatchedActivities  = @()
-                        MatchedActivities    = 1
-                        TotalActivities      = 1
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
                     }
                 }
             }
             else {
                 Mock -CommandName Get-OptimalPermissionSet -MockWith {
                     return @{
-                        OptimalPermissions   = @(
-                            [PSCustomObject]@{ Permission = 'User.Read.All' }
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
                         )
-                        UnmatchedActivities  = @()
-                        MatchedActivities    = 1
-                        TotalActivities      = 1
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
                     }
                 }
             }
@@ -667,7 +585,7 @@ Describe 'Get-PermissionAnalysis' {
             $result = $script:testAppData[0] | Get-PermissionAnalysis
 
             # App has Directory.Read.All and User.Read.All, but only needs User.Read.All
-            $result.ExcessPermissions | Should -Contain 'Directory.Read.All'
+            $result.ExcessPermissions.Permission | Should -Contain 'Directory.Read.All'
         }
 
         It 'Should identify when app is missing required permissions' {
@@ -675,26 +593,26 @@ Describe 'Get-PermissionAnalysis' {
             if ($script:moduleLoaded) {
                 Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
                     return @{
-                        OptimalPermissions   = @(
-                            [PSCustomObject]@{ Permission = 'Mail.Read' }
-                            [PSCustomObject]@{ Permission = 'User.Read.All' }
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'Mail.Read'; ScopeType = 'Application' }
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
                         )
-                        UnmatchedActivities  = @()
-                        MatchedActivities    = 2
-                        TotalActivities      = 2
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 2
+                        TotalActivities     = 2
                     }
                 }
             }
             else {
                 Mock -CommandName Get-OptimalPermissionSet -MockWith {
                     return @{
-                        OptimalPermissions   = @(
-                            [PSCustomObject]@{ Permission = 'Mail.Read' }
-                            [PSCustomObject]@{ Permission = 'User.Read.All' }
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'Mail.Read'; ScopeType = 'Application' }
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
                         )
-                        UnmatchedActivities  = @()
-                        MatchedActivities    = 2
-                        TotalActivities      = 2
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 2
+                        TotalActivities     = 2
                     }
                 }
             }
@@ -702,31 +620,67 @@ Describe 'Get-PermissionAnalysis' {
             $result = $script:testAppData[0] | Get-PermissionAnalysis
 
             # App doesn't have Mail.Read but needs it
-            $result.RequiredPermissions | Should -Contain 'Mail.Read'
+            $result.RequiredPermissions.Permission | Should -Contain 'Mail.Read'
+            # App already has User.Read.All — it should NOT be reported as missing
+            $result.RequiredPermissions.Permission | Should -Not -Contain 'User.Read.All'
         }
 
-        It 'Should set MatchedAllActivity to false when activities are unmatched' {
+        It 'Should NOT report permissions as missing when already in CurrentPermissions' {
+            # Mock optimal to return only permissions the app already has
             if ($script:moduleLoaded) {
                 Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
                     return @{
-                        OptimalPermissions   = @()
-                        UnmatchedActivities  = @(
-                            [PSCustomObject]@{ Method = 'POST'; Uri = 'https://graph.microsoft.com/v1.0/unknown' }
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
                         )
-                        MatchedActivities    = 0
-                        TotalActivities      = 1
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
                     }
                 }
             }
             else {
                 Mock -CommandName Get-OptimalPermissionSet -MockWith {
                     return @{
-                        OptimalPermissions   = @()
-                        UnmatchedActivities  = @(
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
+                        )
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
+                    }
+                }
+            }
+
+            # App 0 has User.Read.All (Application) in its AppRoles
+            $result = $script:testAppData[0] | Get-PermissionAnalysis
+
+            # User.Read.All is already granted — RequiredPermissions should be empty
+            $result.RequiredPermissions | Should -BeNullOrEmpty
+        }
+
+        It 'Should set MatchedAllActivity to false when activities are unmatched' {
+            if ($script:moduleLoaded) {
+                Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
+                    return @{
+                        OptimalPermissions  = @()
+                        UnmatchedActivities = @(
                             [PSCustomObject]@{ Method = 'POST'; Uri = 'https://graph.microsoft.com/v1.0/unknown' }
                         )
-                        MatchedActivities    = 0
-                        TotalActivities      = 1
+                        MatchedActivities   = 0
+                        TotalActivities     = 1
+                    }
+                }
+            }
+            else {
+                Mock -CommandName Get-OptimalPermissionSet -MockWith {
+                    return @{
+                        OptimalPermissions  = @()
+                        UnmatchedActivities = @(
+                            [PSCustomObject]@{ Method = 'POST'; Uri = 'https://graph.microsoft.com/v1.0/unknown' }
+                        )
+                        MatchedActivities   = 0
+                        TotalActivities     = 1
                     }
                 }
             }
@@ -735,6 +689,89 @@ Describe 'Get-PermissionAnalysis' {
 
             $result.MatchedAllActivity | Should -Be $false
             $result.UnmatchedActivities.Count | Should -BeGreaterThan 0
+        }
+    }
+
+    Context 'Scope-Aware Excess Detection' {
+        It 'Should mark Delegated permission as excess when optimal is Application scope only' {
+            # Simulate app with mixed scopes where optimal is Application only
+            if ($script:moduleLoaded) {
+                Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
+                    return @{
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application' }
+                        )
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
+                    }
+                }
+            }
+            else {
+                Mock -CommandName Get-OptimalPermissionSet -MockWith {
+                    return @{
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.ReadBasic.All'; ScopeType = 'Application' }
+                        )
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
+                    }
+                }
+            }
+
+            $mixedScopeApp = [PSCustomObject]@{
+                PrincipalId   = '11111111-1111-1111-1111-111111111111'
+                PrincipalName = 'Mixed Scope App'
+                AppRoleCount  = 3
+                AppRoles      = @(
+                    @{ FriendlyName = 'User.Read.All'; PermissionType = 'Application'; appRoleId = 'id1'; resourceDisplayName = 'Microsoft Graph' }
+                    @{ FriendlyName = 'Calendars.Read'; PermissionType = 'Application'; appRoleId = 'id2'; resourceDisplayName = 'Microsoft Graph' }
+                    @{ FriendlyName = 'User.Read'; PermissionType = 'Delegated'; appRoleId = 'id3'; resourceDisplayName = 'Microsoft Graph' }
+                )
+                Activity      = @(
+                    @{ Method = 'GET'; Uri = 'https://graph.microsoft.com/v1.0/users'; Scheme = 'Application' }
+                )
+            }
+
+            $result = $mixedScopeApp | Get-PermissionAnalysis
+
+            # User.Read (Delegated) should be excess since optimal is only Application scope
+            $result.ExcessPermissions | Where-Object { $_.Permission -eq 'User.Read' -and $_.ScopeType -eq 'Delegated' } | Should -Not -BeNullOrEmpty
+        }
+
+        It 'Should not mark same-scope optimal permission as excess' {
+            if ($script:moduleLoaded) {
+                Mock -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -MockWith {
+                    return @{
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
+                        )
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
+                    }
+                }
+            }
+            else {
+                Mock -CommandName Get-OptimalPermissionSet -MockWith {
+                    return @{
+                        OptimalPermissions  = @(
+                            [PSCustomObject]@{ Permission = 'User.Read.All'; ScopeType = 'Application' }
+                        )
+                        UnmatchedActivities = @()
+                        MatchedActivities   = 1
+                        TotalActivities     = 1
+                    }
+                }
+            }
+
+            $result = $script:testAppData[0] | Get-PermissionAnalysis
+
+            # User.Read.All (Application) is in optimal — should NOT be excess
+            $result.ExcessPermissions | Where-Object { $_.Permission -eq 'User.Read.All' -and $_.ScopeType -eq 'Application' } | Should -BeNullOrEmpty
+            # Directory.Read.All (Application) is NOT in optimal — should be excess
+            $result.ExcessPermissions | Where-Object { $_.Permission -eq 'Directory.Read.All' } | Should -Not -BeNullOrEmpty
         }
     }
 }

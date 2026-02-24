@@ -1,323 +1,129 @@
-function Get-PermissionAnalysis {
+﻿function Get-PermissionAnalysis {
     <#
 .SYNOPSIS
-    Enriches application data with throttling statistics from Azure Log Analytics.
+    Enriches application data with permission analysis using MSGraphPermissions module.
 
 .DESCRIPTION
-    This function queries Azure Log Analytics to retrieve Microsoft Graph API throttling statistics
-    for each application over a specified time period. It adds comprehensive throttling metrics as
-    a new property to each application object, enabling analysis of API rate limiting impacts.
+    This function analyzes application permissions against actual API usage to determine
+    the least privileged permission set required. It uses the Find-GraphLeastPrivilege
+    cmdlet from the MSGraphPermissions module to perform accurate permission lookups.
 
-    The function processes all applications efficiently by:
-    1. Fetching all throttling statistics in a single batch query
-    2. Creating an indexed lookup table for fast matching (O(1) complexity)
-    3. Matching applications to their statistics using ServicePrincipalId
-    4. Adding zeroed statistics for applications without activity
-    5. Providing progress feedback during processing
+    The permission scope (Application vs Delegated) is determined automatically from
+    the activity data — each activity carries a Scheme property set by the Log Analytics
+    query based on whether a ServicePrincipalId was present (Application) or not (Delegated).
 
-    Throttling metrics include:
-    - **Request Counts**: Total requests, successful requests, errors by type
-    - **Rate Calculations**: Throttle rate, error rate, success rate (percentages)
-    - **Severity Classification**: Automatic 0-4 scale based on throttle rate
-    - **Status Descriptions**: Human-readable severity labels (Normal, Warning, Critical, etc.)
-    - **Time Range**: First and last occurrence timestamps for analyzed period
+    The function processes each application's activity and:
+    1. Extracts API version and path from each activity URI
+    2. Uses the activity's Scheme to query Find-GraphLeastPrivilege for the correct scope
+    3. Calculates optimal permission set using greedy set cover algorithm
+    4. Identifies excess permissions (granted but not needed) with scope-aware comparison
+    5. Identifies missing permissions (needed but not granted)
 
-    Severity Classification:
-    - **0 (Normal)**: No throttling detected or < 1% throttle rate
-    - **1 (Minimal)**: 1-5% throttle rate - occasional throttling
-    - **2 (Low)**: 5-10% throttle rate - regular throttling, should be monitored
-    - **3 (Warning)**: 10-25% throttle rate - significant throttling, optimization recommended
-    - **4 (Critical)**: > 25% throttle rate - severe throttling, immediate action required
-
-    This data is critical for:
-    - Identifying applications experiencing API rate limiting issues
-    - Understanding performance impact on users
-    - Prioritizing optimization efforts
-    - Capacity planning for Graph API usage
-    - Troubleshooting application performance problems
-    - Monitoring application health over time
-
-    Use Cases:
-    - **Performance Monitoring**: Track API throttling trends across applications
-    - **Incident Investigation**: Identify throttled apps during performance issues
-    - **Optimization Planning**: Prioritize which apps need retry logic/batching
-    - **Health Dashboards**: Create executive reports on API health
-    - **SLA Monitoring**: Ensure applications meet performance requirements
-    - **Capacity Planning**: Understand API consumption patterns
+    Permission Analysis includes:
+    - **Activity Permissions**: Matched permissions for each API activity
+    - **Optimal Permissions**: Minimum set covering all activities
+    - **Current Permissions**: Currently granted application permissions
+    - **Excess Permissions**: Granted but unused permissions
+    - **Required Permissions**: Needed but missing permissions
+    - **Unmatched Activities**: API calls without permission matches
 
 .PARAMETER AppData
-    An array of application objects to enrich with throttling data. This parameter accepts
-    pipeline input for efficient processing.
+    Array of application objects with Activity and AppRoles properties.
+    Typically from Get-AppRoleAssignment | Get-AppActivityData pipeline.
 
     Required Properties:
-    - **PrincipalId** (String): Service principal object ID (used for matching statistics)
-    - **PrincipalName** (String): Application display name (used for logging and progress)
-
-    Optional Properties:
-    - Any other properties are preserved and passed through
-    - Commonly includes: AppId, Tags, AppRoles, Activity, etc.
+    - **PrincipalName** (String): Application display name
+    - **Activity** (Array): API activity objects with Uri, Method, and Scheme properties
+    - **AppRoles** (Array): Currently assigned Graph permissions
 
     Example application object:
     @{
-        PrincipalId = "12345678-1234-1234-1234-123456789012"
         PrincipalName = "HR Application"
-        AppId = "87654321-4321-4321-4321-210987654321"
+        PrincipalId = "12345678-1234-1234-1234-123456789012"
+        Activity = @(@{Uri = "https://graph.microsoft.com/v1.0/users"; Method = "GET"; Scheme = "Application"})
+        AppRoles = @(@{FriendlyName = "User.Read.All"; PermissionType = "Application"})
     }
-
-.PARAMETER WorkspaceId
-    The Azure Log Analytics workspace ID (GUID) where Microsoft Graph activity logs are stored.
-    This workspace must contain the MicrosoftGraphActivityLogs table with throttling information.
-
-    Format: GUID string (e.g., "12345678-1234-1234-1234-123456789012")
-
-    To find your workspace ID:
-    1. Navigate to Azure Portal > Log Analytics workspaces
-    2. Select your workspace
-    3. Copy the Workspace ID from the Overview page
-
-    Prerequisites:
-    - Microsoft Graph diagnostic settings enabled and sending to this workspace
-    - You must have permissions to query the workspace
-    - MicrosoftGraphActivityLogs table must contain data
-
-.PARAMETER Days
-    The number of days of historical throttling data to retrieve, counting back from the current date.
-
-    Default: 30 days
-
-    Recommended values:
-    - **7 days**: Recent throttling patterns and quick health checks
-    - **30 days**: Standard monthly review and reporting (default)
-    - **90 days**: Comprehensive quarterly analysis for trend detection
-
-    Considerations:
-    - Longer periods provide more comprehensive data
-    - Balance between data completeness and query performance
-    - Maximum limited by Log Analytics retention period (typically 30-730 days)
 
 .OUTPUTS
-    System.Collections.ArrayList
-    Returns the input application objects enriched with a "ThrottlingStats" property.
+    PSCustomObject[]
+    Returns input objects enriched with permission analysis properties:
 
-    ThrottlingStats Property Structure (PSCustomObject):
-
-    TotalRequests (Int64)
-        Total number of Microsoft Graph API requests made during the period
-        Example: 15000
-
-    SuccessfulRequests (Int64)
-        Count of successful requests (HTTP 2xx status codes)
-        Example: 14250
-
-    Total429Errors (Int64)
-        Count of throttling errors (HTTP 429 "Too Many Requests")
-        Example: 150
-
-    TotalClientErrors (Int64)
-        Count of all client errors (HTTP 4xx status codes, including 429)
-        Example: 500
-
-    TotalServerErrors (Int64)
-        Count of all server errors (HTTP 5xx status codes)
-        Example: 250
-
-    ThrottleRate (Double)
-        Percentage of requests that were throttled (429 errors / total * 100)
-        Rounded to 2 decimal places
-        Example: 1.00 (meaning 1%)
-
-    ErrorRate (Double)
-        Percentage of all failed requests (client + server errors / total * 100)
-        Rounded to 2 decimal places
-        Example: 5.00 (meaning 5%)
-
-    SuccessRate (Double)
-        Percentage of successful requests (successful / total * 100)
-        Rounded to 2 decimal places
-        Example: 95.00 (meaning 95%)
-
-    ThrottlingSeverity (Int32)
-        Numeric severity level based on throttle rate
-        Values: 0 (Normal), 1 (Minimal), 2 (Low), 3 (Warning), 4 (Critical)
-
-    ThrottlingStatus (String)
-        Human-readable status description
-        Values: "Normal", "Minimal", "Low", "Warning", "Critical", "No Activity"
-
-    FirstOccurrence (DateTime or $null)
-        Timestamp of the first API request in the analyzed period
-        Example: 2025-11-01T00:00:00Z
-        $null if no activity
-
-    LastOccurrence (DateTime or $null)
-        Timestamp of the last API request in the analyzed period
-        Example: 2025-11-30T23:59:59Z
-        $null if no activity
-
-    Special Cases:
-    - Applications without activity receive zeroed statistics with "No Activity" status
-    - All numeric fields set to 0
-    - FirstOccurrence and LastOccurrence are $null
+    - **ActivityPermissions**: Array of matched permissions per activity
+    - **OptimalPermissions**: Minimum permission set covering all activities
+    - **UnmatchedActivities**: Activities without permission matches
+    - **CurrentPermissions**: Currently granted permissions
+    - **ExcessPermissions**: Granted but unused permissions
+    - **RequiredPermissions**: Needed but missing permissions
+    - **MatchedAllActivity**: Boolean indicating if all activities were matched
 
 .EXAMPLE
-    Connect-EntraService -Service "GraphBeta"
-    $apps = Get-MgServicePrincipal -Filter "appId eq '12345678-1234-1234-1234-123456789012'"
-    $enrichedApps = $apps | Get-AppThrottlingData -WorkspaceId "workspace-guid"
+    $apps = Get-AppRoleAssignment | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
+    $analysis = $apps | Get-PermissionAnalysis
 
     Description:
-    Retrieves throttling statistics for a specific application over the default 30-day period.
-    The returned object includes ThrottlingStats property with all metrics.
+    Analyzes permissions for all applications based on 30 days of activity.
+    The Scheme (Application/Delegated) is automatically determined from the activity data.
 
 .EXAMPLE
-    $allApps = Get-MgServicePrincipal -All
-    $appsWithThrottling = $allApps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 90 -Verbose
-    $criticalApps = $appsWithThrottling | Where-Object {
-        $_.ThrottlingStats.ThrottlingSeverity -ge 3
-    }
-
-    "`nApplications Requiring Immediate Attention:"
-    $criticalApps | Select-Object PrincipalName,
-        @{N='Throttle Rate';E={"{0:N2}%" -f $_.ThrottlingStats.ThrottleRate}},
-        @{N='429 Errors';E={$_.ThrottlingStats.Total429Errors}},
-        @{N='Status';E={$_.ThrottlingStats.ThrottlingStatus}} |
-        Format-Table -AutoSize
+    $analysis = $apps | Get-PermissionAnalysis
+    $analysis | Where-Object { $_.ExcessPermissions.Count -gt 0 } |
+        Select-Object PrincipalName, @{N='Excess';E={$_.ExcessPermissions -join ', '}}
 
     Description:
-    Analyzes 90 days of data for all applications and identifies those with Warning or Critical
-    throttling severity, displaying key metrics for prioritization.
+    Identifies applications with excessive permissions that can be removed.
 
 .EXAMPLE
-    $apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 7 -Verbose |
-        Where-Object { $_.ThrottlingStats.Total429Errors -gt 100 } |
-        Select-Object PrincipalName,
-            @{N='429 Errors';E={$_.ThrottlingStats.Total429Errors}},
-            @{N='Throttle Rate';E={$_.ThrottlingStats.ThrottleRate}},
-            @{N='Total Requests';E={$_.ThrottlingStats.TotalRequests}} |
-        Sort-Object {$_.ThrottlingStats.Total429Errors} -Descending |
-        Export-Csv -Path "high-throttling-apps.csv" -NoTypeInformation
+    $analysis = $apps | Get-PermissionAnalysis
+    $analysis | Where-Object { -not $_.MatchedAllActivity } |
+        ForEach-Object {
+            Write-Warning "$($_.PrincipalName) has unmatched activities"
+            $_.UnmatchedActivities | Format-Table Method, Path
+        }
 
     Description:
-    Finds applications with more than 100 throttling errors in the last 7 days,
-    sorts by error count, and exports to CSV for detailed investigation.
+    Finds applications with API activities that couldn't be matched to permissions.
 
 .NOTES
     Prerequisites:
-    - Azure Log Analytics workspace with MicrosoftGraphActivityLogs table enabled
-    - Microsoft Graph diagnostic settings configured to send logs to workspace
-    - Appropriate permissions to query Log Analytics via Invoke-EntraRequest
-    - Get-AppThrottlingStat function must be available (private function dependency)
+    - MSGraphPermissions module must be installed and imported
+    - Get-OptimalPermissionSet function must be available (private function dependency)
     - PowerShell 5.1 or later
+    - Application objects must have Activity property populated with Scheme
 
-    Log Analytics Configuration:
-    To enable Microsoft Graph activity logging:
-    1. Navigate to Azure AD > Diagnostic settings
-    2. Add diagnostic setting
-    3. Select "MicrosoftGraphActivityLogs" log category
-    4. Send to Log Analytics workspace
-    5. Wait 10-15 minutes for initial data to appear
+    Permission Matching:
+    - Uses Find-GraphLeastPrivilege from MSGraphPermissions module
+    - Extracts version (v1.0 or beta) from URI automatically
+    - Scheme (Application/Delegated) is determined from the activity data
+    - Handles both successful and unmatched activities gracefully
 
-    Performance Characteristics:
-    - **Bulk Query Approach**: Single Log Analytics query for all applications
-    - **Lookup Table**: O(1) complexity for matching applications to statistics
-    - **Memory Efficient**: Indexed lookup minimizes memory overhead
-    - **Processing Time**: ~5-30 seconds for typical tenants (100-1000 apps)
-    - **Scalability**: Handles thousands of applications efficiently
+    Performance:
+    - Calls Find-GraphLeastPrivilege once per unique activity (single scheme lookup)
+    - Efficient permission set calculation using greedy algorithm
+    - Typical processing: 1-5 seconds per application with 100-1000 activities
 
-    Matching Logic:
-    - Uses ServicePrincipalId (object ID) for matching
-    - Case-insensitive matching for reliability
-    - Applications without matches receive zeroed statistics
-    - Verbose logging shows match success/failure for troubleshooting
-
-    Throttling Severity Thresholds:
-    The severity classification uses the following throttle rate thresholds:
-    - **0 (Normal)**: < 1% throttle rate
-    - **1 (Minimal)**: 1-5% throttle rate
-    - **2 (Low)**: 5-10% throttle rate
-    - **3 (Warning)**: 10-25% throttle rate
-    - **4 (Critical)**: >= 25% throttle rate
-
-    Progress Tracking:
-    - Progress bar displays during processing
-    - Shows application count and current operation
-    - Automatically completes when finished
-    - Use -Verbose for detailed match status
-
-    Logging Levels:
-    - **Write-PSFMessage -Level Debug -Message**: Detailed per-app processing and matching logic
-    - **Write-PSFMessage -Level Verbose -Message**: Match results, sample data, and lookup table size
-    - **Write-Progress**: Visual progress bar for user feedback
-    - **Standard Output**: Final application objects with ThrottlingStats
-
-    Error Handling:
-    - Individual query failures handled gracefully
-    - Applications without data receive zeroed statistics
-    - Processing continues even if some lookups fail
-    - Use -Verbose to see which apps couldn't be matched
-
-    Common Issues:
-
-    No throttling data for any applications:
-    - Verify Microsoft Graph logging is enabled in diagnostic settings
-    - Check Log Analytics workspace ID is correct
-    - Ensure applications have made API calls in the specified timeframe
-    - Verify diagnostic logs are flowing to workspace (check MicrosoftGraphActivityLogs table)
-    - Try increasing -Days parameter
-
-    Mismatched ServicePrincipalIds:
-    - Verify applications have valid PrincipalId property
-    - Check if ServicePrincipalIds in logs match app registrations
-    - Use -Verbose to see sample ServicePrincipalIds from both sources
-    - Ensure apps are making requests (not dormant)
-
-    Slow performance:
-    - Normal for very large tenants (5000+ apps)
-    - Single bulk query is already optimized
-    - Network latency to Log Analytics affects performance
-    - Consider running during off-peak hours
-
-    Memory issues:
-    - Bulk approach minimizes memory usage
-    - Lookup table is memory-efficient (hashtable)
-    - Should handle thousands of apps without issues
-    - Increase PowerShell memory limits if needed
-
-    Zero Values vs. No Activity:
-    Both result in zeroed statistics, but interpretation differs:
-    - **No Activity**: App hasn't made any Graph API calls (expected for dormant apps)
-    - **Zero Throttling**: App is active but not being throttled (healthy state)
-    - Check TotalRequests to distinguish: 0 = no activity, > 0 = active
+    Limitations:
+    - Requires accurate activity data from Get-AppActivityData (with Scheme)
+    - Custom/preview APIs may not have permission mappings
+    - Unmatched activities don't fail the overall analysis
 
     Best Practices:
-    - Always use -Verbose for production monitoring
-    - Save results periodically for trend analysis (Export-Clixml)
-    - Monitor critical applications daily with automated alerting
-    - Review Warning/Critical severity apps weekly
-    - Archive monthly reports for compliance and capacity planning
-    - Combine with Get-AppActivityData for complete analysis
-    - Implement retry logic for apps with severity >= 3
-
-    Mitigation Strategies for Throttled Applications:
-    - **Exponential Backoff**: Implement retry logic with exponential delays
-    - **Request Batching**: Use $batch endpoint to combine operations
-    - **Caching**: Cache frequently accessed data to reduce calls
-    - **Delta Queries**: Use delta links for change tracking instead of full queries
-    - **Pagination**: Use proper pagination to avoid large result sets
-    - **Webhooks**: Replace polling patterns with event-driven webhooks
-    - **Rate Limit Headers**: Monitor Retry-After headers and throttle accordingly
-    - **Request Distribution**: Spread requests over time to avoid bursts
+    - Collect sufficient activity data (30+ days recommended)
+    - Review unmatched activities manually
+    - Validate optimal permissions before applying changes
+    - Use -Verbose for detailed matching information
+    - Archive analysis results for compliance tracking
 
     Related Cmdlets:
-    - Get-AppThrottlingStat: Private function that fetches raw throttling data
-    - Get-AppActivityData: Add API activity information to applications
-    - Get-PermissionAnalysis: Complete permission and activity analysis
-    - Export-PermissionAnalysisReport: Generate visual reports including throttling data
+    - Get-AppActivityData: Collect API activity from Log Analytics
+    - Get-OptimalPermissionSet: Calculate minimum permission set (internal)
+    - Find-GraphLeastPrivilege: MSGraphPermissions module cmdlet
+    - Export-PermissionAnalysisReport: Generate visual reports
 
 .LINK
-    https://learn.microsoft.com/en-us/graph/throttling
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-PermissionAnalysis.html
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppThrottlingData.html
+    https://github.com/merill/MSGraphPermissions
 #>
     [CmdletBinding()]
     [OutputType([PSCustomObject[]])]
@@ -328,28 +134,103 @@ function Get-PermissionAnalysis {
     )
 
     begin {
-        $script:moduleRoot = $PSScriptRoot
+        Write-PSFMessage -Level Verbose -Message "Starting permission analysis using MSGraphPermissions module"
 
-        $PermissionMapV1Path = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-v1.0.json"
-        $PermissionMapBetaPath = Join-Path -Path $script:moduleRoot -ChildPath "data\permissions-beta.json"
-
-        Write-PSFMessage -Level Debug -Message "Module root: $script:moduleRoot"
-        Write-PSFMessage -Level Debug -Message "Loading permission maps..."
-        Write-PSFMessage -Level Debug -Message "V1 Path: $PermissionMapV1Path"
-        Write-PSFMessage -Level Debug -Message "Beta Path: $PermissionMapBetaPath"
-
-        # Validate files exist
-        if (-not (Test-Path -Path $PermissionMapV1Path)) {
-            throw "Permission map file not found: $PermissionMapV1Path"
-        }
-        if (-not (Test-Path -Path $PermissionMapBetaPath)) {
-            throw "Permission map file not found: $PermissionMapBetaPath"
+        # Verify MSGraphPermissions module is available
+        if (-not (Get-Command -Name Find-GraphLeastPrivilege -ErrorAction SilentlyContinue)) {
+            throw "Find-GraphLeastPrivilege cmdlet not found. Please install the MSGraphPermissions module: Install-Module MSGraphPermissions"
         }
 
-        $permissionMapv1 = Get-Content -Path $PermissionMapV1Path -Raw | ConvertFrom-Json
-        $permissionMapbeta = Get-Content -Path $PermissionMapBetaPath -Raw | ConvertFrom-Json
+        # Helper function to check if a permission is covered by existing permissions
+        function Test-PermissionCoverage {
+            param(
+                [string]$RequiredPermission,
+                [string]$RequiredScopeType,
+                [array]$CurrentPermissions
+            )
 
-        Write-PSFMessage -Level Debug -Message "Permission maps loaded successfully"
+            # Helper to normalize scope types
+            $normScope = {
+                param([string]$s)
+                if ($s -in @('DelegatedWork', 'DelegatedPersonal')) {
+                    'Delegated'
+                }
+                else {
+                    $s
+                }
+            }
+
+            $requiredNorm = & $normScope $RequiredScopeType
+
+            # Direct match (same permission name and scope type)
+            $directMatch = $CurrentPermissions | Where-Object {
+                $_.Permission -eq $RequiredPermission -and (& $normScope $_.ScopeType) -eq $requiredNorm
+            }
+            if ($directMatch) {
+                return $true
+            }
+
+            # Application permissions can cover Delegated permission requirements
+            if ($requiredNorm -eq 'Delegated') {
+                $appPermission = $CurrentPermissions | Where-Object {
+                    $_.Permission -eq $RequiredPermission -and (& $normScope $_.ScopeType) -eq 'Application'
+                }
+                if ($appPermission) {
+                    Write-PSFMessage -Level Debug -Message "Permission $RequiredPermission (Delegated) is covered by Application scope"
+                    return $true
+                }
+            }
+
+            # Check for hierarchical coverage: ReadBasic < Read < ReadWrite
+            # Build list of higher-level permissions that would cover the required one
+            $higherPermissions = @()
+
+            if ($RequiredPermission -match '^(.+)\.ReadBasic(\.All)?$') {
+                # ReadBasic is covered by Read or ReadWrite (check with and without .All suffix)
+                $baseScope = $Matches[1]
+                $suffix = $Matches[2]
+                $higherPermissions = @(
+                    "$baseScope.Read",
+                    "$baseScope.Read.All",
+                    "$baseScope.ReadWrite",
+                    "$baseScope.ReadWrite.All"
+                )
+                if ($suffix) {
+                    $higherPermissions += "$baseScope.Read$suffix"
+                    $higherPermissions += "$baseScope.ReadWrite$suffix"
+                }
+                $higherPermissions = $higherPermissions | Select-Object -Unique
+            }
+            elseif ($RequiredPermission -match '^(.+)\.Read(\.All)?$') {
+                # Read is covered by ReadWrite (same suffix)
+                $baseScope = $Matches[1]
+                $suffix = $Matches[2]
+                $higherPermissions = @("$baseScope.ReadWrite$suffix")
+            }
+
+            foreach ($higherPerm in $higherPermissions) {
+                $higherMatch = $CurrentPermissions | Where-Object {
+                    $_.Permission -eq $higherPerm -and (& $normScope $_.ScopeType) -eq $requiredNorm
+                }
+                if ($higherMatch) {
+                    Write-PSFMessage -Level Debug -Message "Permission $RequiredPermission ($RequiredScopeType) is covered by $higherPerm (same scope)"
+                    return $true
+                }
+
+                # Also check if Application scope covers Delegated requirement
+                if ($requiredNorm -eq 'Delegated') {
+                    $appHigher = $CurrentPermissions | Where-Object {
+                        $_.Permission -eq $higherPerm -and (& $normScope $_.ScopeType) -eq 'Application'
+                    }
+                    if ($appHigher) {
+                        Write-PSFMessage -Level Debug -Message "Permission $RequiredPermission (Delegated) is covered by $higherPerm (Application scope)"
+                        return $true
+                    }
+                }
+            }
+
+            return $false
+        }
     }
 
     process {
@@ -366,20 +247,19 @@ function Get-PermissionAnalysis {
                 continue
             }
 
-            # Validate required properties
-            if (-not $app.PrincipalName) {
-                Write-Warning "Skipping app without PrincipalName property"
-                continue
-            }
-
-            Write-PSFMessage -Level Debug -Message "`nAnalyzing: $($app.PrincipalName)"
+            Write-PSFMessage -Level Verbose -Message "Analyzing: $($app.PrincipalName)"
 
             # Handle apps without activity
             if ($null -eq $app.Activity -or $app.Activity.Count -eq 0) {
-                Write-PSFMessage -Level Debug -Message "  No activity found for $($app.PrincipalName)"
+                Write-PSFMessage -Level Debug -Message "No activity found for $($app.PrincipalName)"
 
                 $currentPermissions = if ($app.AppRoles) {
-                    $app.AppRoles | ForEach-Object { $_.FriendlyName } | Where-Object { $_ -ne $null }
+                    $app.AppRoles | Where-Object { $null -ne $_.FriendlyName } | ForEach-Object {
+                        [PSCustomObject]@{
+                            Permission = $_.FriendlyName
+                            ScopeType  = $_.PermissionType
+                        }
+                    }
                 }
                 else {
                     @()
@@ -399,41 +279,158 @@ function Get-PermissionAnalysis {
                 continue
             }
 
-            # Find least privileged permissions for each activity
-            $splatLeastPrivileged = @{
-                userActivity      = $app.Activity
-                permissionMapv1   = $permissionMapv1
-                permissionMapbeta = $permissionMapbeta
-            }
-            $activityPermissions = Find-LeastPrivilegedPermission @splatLeastPrivileged
+            # Process each activity using Find-GraphLeastPrivilege
+            $activityPermissions = @()
 
-            # Get optimal permission set
+            foreach ($activity in $app.Activity) {
+                try {
+                    # Extract version and path from URI using regex split
+                    $uriParts = $activity.Uri -split "https://graph\.microsoft\.com/(v1\.0|beta)"
+
+                    if ($uriParts.Count -lt 3) {
+                        Write-PSFMessage -Level Debug -Message "Could not parse URI: $($activity.Uri)"
+
+                        # Add as unmatched activity
+                        $activityPermissions += [PSCustomObject]@{
+                            Method                     = $activity.Method
+                            Version                    = $null
+                            Path                       = $null
+                            OriginalUri                = $activity.Uri
+                            MatchedEndpoint            = $null
+                            LeastPrivilegedPermissions = @()
+                            IsMatched                  = $false
+                        }
+                        continue
+                    }
+
+                    $version = $uriParts[1]
+                    $path = $uriParts[2]
+
+                    # Determine the scheme from the activity data (set by Log Analytics query)
+                    # Map "Application" → "Application", "Delegated" → "DelegatedWork" for Find-GraphLeastPrivilege
+                    $activityScheme = if ($activity.Scheme -eq 'Delegated') {
+                        'DelegatedWork'
+                    }
+                    else {
+                        'Application'
+                    }
+
+                    # Map scheme to ScopeType for permission objects
+                    $permScopeType = if ($activityScheme -eq 'Application') {
+                        'Application'
+                    }
+                    else {
+                        'Delegated'
+                    }
+
+                    Write-PSFMessage -Level Debug -Message "Querying $activityScheme permissions for: $($activity.Method) $path"
+
+                    $schemePermissions = $null
+                    try {
+                        $schemePermissions = Find-GraphLeastPrivilege -Path $path -Method $activity.Method -Scheme $activityScheme
+                    }
+                    catch {
+                        Write-PSFMessage -Level Debug -Message "Error querying $activityScheme permissions: $_"
+                    }
+
+                    if ($schemePermissions -and $schemePermissions.Count -gt 0) {
+                        Write-PSFMessage -Level Debug -Message "Found $($schemePermissions.Count) $activityScheme permissions for $($activity.Method) $path"
+
+                        $permissionObjects = $schemePermissions | ForEach-Object {
+                            [PSCustomObject]@{
+                                Permission       = $_.Permission
+                                ScopeType        = $permScopeType
+                                IsLeastPrivilege = $true
+                            }
+                        }
+
+                        $activityPermissions += [PSCustomObject]@{
+                            Method                     = $activity.Method
+                            Version                    = $version
+                            Path                       = $path
+                            OriginalUri                = $activity.Uri
+                            MatchedEndpoint            = $path
+                            LeastPrivilegedPermissions = $permissionObjects
+                            IsMatched                  = $true
+                        }
+                    }
+                    else {
+                        Write-PSFMessage -Level Debug -Message "No permissions found for: $($activity.Method) $path"
+
+                        $activityPermissions += [PSCustomObject]@{
+                            Method                     = $activity.Method
+                            Version                    = $version
+                            Path                       = $path
+                            OriginalUri                = $activity.Uri
+                            MatchedEndpoint            = $null
+                            LeastPrivilegedPermissions = @()
+                            IsMatched                  = $false
+                        }
+                    }
+                }
+                catch {
+                    Write-PSFMessage -Level Warning -Message "Error processing activity $($activity.Method) $($activity.Uri): $_"
+
+                    # Add as unmatched activity
+                    $activityPermissions += [PSCustomObject]@{
+                        Method                     = $activity.Method
+                        Version                    = $null
+                        Path                       = $null
+                        OriginalUri                = $activity.Uri
+                        MatchedEndpoint            = $null
+                        LeastPrivilegedPermissions = @()
+                        IsMatched                  = $false
+                    }
+                }
+            }
+
+            # Get current permissions - all types included since scope is determined per-activity
+            $currentPermissions = if ($app.AppRoles) {
+                $app.AppRoles | Where-Object { $null -ne $_.FriendlyName } | ForEach-Object {
+                    [PSCustomObject]@{
+                        Permission = $_.FriendlyName
+                        ScopeType  = $_.PermissionType
+                    }
+                }
+            }
+            else {
+                @()
+            }
+
+            Write-PSFMessage -Level Debug -Message "Current permissions: $($currentPermissions.Count)"
+
+            # Get optimal permission set using greedy algorithm
             $optimalSet = Get-OptimalPermissionSet -activityPermissions $activityPermissions
 
-            # Compare with current permissions
-            $currentPermissions = if ($app.AppRoles) {
-                $app.AppRoles | ForEach-Object { $_.FriendlyName } | Where-Object { $_ -ne $null }
-            }
-            else {
-                @()
-            }
-
-            $optimalPermissionNames = if ($optimalSet.OptimalPermissions.Count -gt 0) {
-                $optimalSet.OptimalPermissions | Select-Object -ExpandProperty Permission -Unique
-            }
-            else {
-                @()
+            # Helper to normalize scope types for comparison (DelegatedWork/DelegatedPersonal → Delegated)
+            $normScope = {
+                param([string]$s)
+                if ($s -in @('DelegatedWork', 'DelegatedPersonal')) {
+                    'Delegated'
+                }
+                else {
+                    $s
+                }
             }
 
-            $excessPermissions = $currentPermissions | Where-Object { $optimalPermissionNames -notcontains $_ }
-            $missingPermissions = $optimalPermissionNames | Where-Object { $currentPermissions -notcontains $_ }
+            # Find excess permissions (granted but not needed) - compare by both Permission name AND ScopeType
+            $excessPermissions = $currentPermissions | Where-Object {
+                $currentPerm = $_
+                $currentNormScope = & $normScope $currentPerm.ScopeType
+                -not ($optimalSet.OptimalPermissions | Where-Object {
+                        $_.Permission -eq $currentPerm.Permission -and (& $normScope $_.ScopeType) -eq $currentNormScope
+                    })
+            }
+
+            # Find missing permissions (needed but not granted) considering hierarchical coverage
+            $missingPermissions = $optimalSet.OptimalPermissions | Where-Object {
+                -not (Test-PermissionCoverage -RequiredPermission $_.Permission -RequiredScopeType $_.ScopeType -CurrentPermissions $currentPermissions)
+            } | Select-Object Permission, ScopeType
 
             $matchedAllActivity = ($null -eq $app.Activity -or $app.Activity.Count -eq 0) -or
             ($null -eq $optimalSet.UnmatchedActivities -or $optimalSet.UnmatchedActivities.Count -eq 0)
 
-            Write-PSFMessage -Level Debug -Message "  Matched all activity: $matchedAllActivity"
-
-            # Use individual AddNoteProperty calls - still faster than Add-Member
+            # Use individual AddNoteProperty calls
             [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'ActivityPermissions', $activityPermissions)
             [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'OptimalPermissions', $optimalSet.OptimalPermissions)
             [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'UnmatchedActivities', $optimalSet.UnmatchedActivities)
@@ -443,10 +440,14 @@ function Get-PermissionAnalysis {
             [PSFramework.Object.ObjectHost]::AddNoteProperty($app, 'MatchedAllActivity', $matchedAllActivity)
 
             # Display summary
-            Write-PSFMessage -Level Debug -Message "  Matched Activities: $($optimalSet.MatchedActivities)/$($optimalSet.TotalActivities)"
-            Write-PSFMessage -Level Debug -Message "  Optimal Permissions: $($optimalSet.OptimalPermissions.Count)"
-            Write-PSFMessage -Level Debug -Message "  Current Permissions: $($currentPermissions.Count)"
-            Write-PSFMessage -Level Debug -Message "  Excess Permissions: $($excessPermissions.Count)"
+            $optimalCount = if ($optimalSet.OptimalPermissions.Count -gt 0) {
+                ($optimalSet.OptimalPermissions | Select-Object -ExpandProperty Permission -Unique).Count
+            }
+            else {
+                0
+            }
+            Write-PSFMessage -Level Verbose -Message "Analysis complete for $($app.PrincipalName): $optimalCount optimal permissions, $($excessPermissions.Count) excess, $($missingPermissions.Count) missing"
+            Write-PSFMessage -Level Debug -Message "Matched: $($activityPermissions | Where-Object IsMatched | Measure-Object | Select-Object -ExpandProperty Count)/$($activityPermissions.Count) activities"
 
             # Output the app immediately to the pipeline
             Write-Output $app

@@ -67,6 +67,14 @@ function Convert-RelativeUriToAbsoluteUri {
 
   $Value = $Uri.TrimStart("/", "\").TrimEnd("/", "\")
   $Value = [System.Uri]::UnescapeDataString($Value)
+
+  # Add base URL if not already present
+  if (-not $Value.StartsWith("http://") -and -not $Value.StartsWith("https://")) {
+    Write-PSFMessage -Level Debug -Message  "Adding base URL to relative path: $Value"
+    $Value = "https://graph.microsoft.com/" + $Value
+    Write-PSFMessage -Level Debug -Message  "After adding base URL: $Value"
+  }
+
   $UriBuilder = New-Object System.UriBuilder -ArgumentList $Value
 
   # Handle /me segment replacement
@@ -104,6 +112,22 @@ function Convert-RelativeUriToAbsoluteUri {
     Write-PSFMessage -Level Debug -Message  "Replacing email segment in URI: $ProcessedUri"
     $ProcessedUri = $ProcessedUri -replace "/[^/]+@[^/]+", "/{id}"
     Write-PSFMessage -Level Debug -Message  "After email replacement: $ProcessedUri"
+  }
+
+  # Handle guest user identifiers (email addresses with @ replaced by _)
+  # Pattern: /users/{name}_{domain} where underscore separates username from domain
+  if ($ProcessedUri -match '/users/[^/@]+_[^/@]+(?:/|$)') {
+    Write-PSFMessage -Level Debug -Message  "Found guest user identifier in URI: $ProcessedUri"
+    # Replace guest user pattern: anything after /users/ up to next slash or end, containing underscore
+    $ProcessedUri = $ProcessedUri -replace '/users/[^/@]+_[^/@]+(?=/|$)', '/users/{id}'
+    Write-PSFMessage -Level Debug -Message  "After guest user replacement: $ProcessedUri"
+  }
+
+  # Handle $value suffix removal (used for binary content like photos)
+  if ($ProcessedUri -match '/\$value(\?.*)?$') {
+    Write-PSFMessage -Level Debug -Message  "Removing /$value suffix from URI: $ProcessedUri"
+    $ProcessedUri = $ProcessedUri -replace '/\$value(\?.*)?$', '$1'
+    Write-PSFMessage -Level Debug -Message  "After $value removal: $ProcessedUri"
   }
 
   Write-PSFMessage -Level Debug -Message  "Final processed URI: $ProcessedUri"

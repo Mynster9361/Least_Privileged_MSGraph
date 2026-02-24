@@ -12,7 +12,7 @@
     RootModule           = 'LeastPrivilegedMSGraph.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '0.0.1'
+    ModuleVersion        = '2.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -33,7 +33,7 @@
     Description          = 'Analyzes Microsoft Graph permissions and provides least privileged recommendations'
 
     # Minimum version of the PowerShell engine required by this module
-    PowerShellVersion    = '5.0'
+    PowerShellVersion    = '7.4'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules      = @('EntraAuth', 'PSFramework')
+    RequiredModules      = @('EntraAuth', 'PSFramework', 'MSGraphPermissions', 'EntraAuth.Graph')
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
@@ -97,8 +97,6 @@
 
     # List of all files packaged with this module
     FileList             = @(
-        'data/permissions-v1.0.json',
-        'data/permissions-beta.json',
         'data/base.html'
     )
 

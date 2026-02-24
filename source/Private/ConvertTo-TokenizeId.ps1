@@ -65,9 +65,18 @@ function ConvertTo-TokenizeId {
   $UnescapedUri = $Uri.ToString()
   for ($i = 0 ; $i -lt $Uri.Segments.length; $i++) {
     Write-PSFMessage -Level Debug -Message  "Processing Segment [$i]: $($Uri.Segments[$i])"
-    # Segment contains an integer/id and is not API version.
-    if ($Uri.Segments[$i] -match "[^v1.0|beta]\d") {
-      Write-PSFMessage -Level Debug -Message  "Segment [$i] matches ID pattern."
+
+    $segment = $Uri.Segments[$i].TrimEnd('/')
+
+    # Check if this is a guest user identifier (contains underscore, not a GUID, not @ symbol)
+    # GUID pattern: 8-4-4-4-12 format with hyphens
+    $isGuestUser = $segment -match '_' -and
+    $segment -notmatch '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$' -and
+    $segment -notmatch '@'
+
+    # Segment contains an integer/id or is a guest user, and is not API version
+    if (($Uri.Segments[$i] -match "[^v1.0|beta]\d") -or $isGuestUser) {
+      Write-PSFMessage -Level Debug -Message  "Segment [$i] matches ID pattern or guest user."
       #For Uris whose last segments match the regex '(.*?)', all characters from the first '(' are substituted with '.*'
       if ($i -eq $LastSegmentIndex) {
         Write-PSFMessage -Level Debug -Message  "Segment [$i] is the last segment."
@@ -86,13 +95,21 @@ function ConvertTo-TokenizeId {
       }
       else {
         Write-PSFMessage -Level Debug -Message  "Substituting Segment [$i] with {id}/"
-        # Substitute integers/ids with {id} tokens, e.g, /users/289ee2a5-9450-4837-aa87-6bd8d8e72891 -> users/{id}.
+        # Substitute integers/ids/guest users with {id} tokens
         $TokenizedUri += "{id}/"
       }
     }
     else {
       Write-PSFMessage -Level Debug -Message  "Segment [$i] does not match ID pattern. Keeping original segment."
-      $TokenizedUri += $Uri.Segments[$i]
+      # Handle delta() function - strip the empty parentheses
+      if ($Uri.Segments[$i] -match 'delta\(\)') {
+        $cleanedSegment = $Uri.Segments[$i] -replace 'delta\(\)', 'delta'
+        Write-PSFMessage -Level Debug -Message  "Cleaned delta() to delta: $cleanedSegment"
+        $TokenizedUri += $cleanedSegment
+      }
+      else {
+        $TokenizedUri += $Uri.Segments[$i]
+      }
     }
   }
   Write-PSFMessage -Level Debug -Message  "Final Tokenized URI: $TokenizedUri"

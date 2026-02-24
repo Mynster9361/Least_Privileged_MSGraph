@@ -1,4 +1,4 @@
-function Get-OptimalPermissionSet {
+﻿function Get-OptimalPermissionSet {
   <#
 .SYNOPSIS
     Internal function to calculate the optimal set of permissions covering all API activities.
@@ -17,7 +17,7 @@ function Get-OptimalPermissionSet {
     Tracks unmatched activities separately and provides coverage statistics.
 
 .PARAMETER activityPermissions
-    Array of activity objects from Find-LeastPrivilegedPermission.
+    Array of activity objects from Get-PermissionAnalysis.
     Expected properties: IsMatched, LeastPrivilegedPermissions, Method, Version, Path
 
 .OUTPUTS
@@ -55,7 +55,7 @@ function Get-OptimalPermissionSet {
     Get-PermissionAnalysis
 
 .LINK
-    Find-LeastPrivilegedPermission
+    Find-GraphLeastPrivilege
 #>
   [CmdletBinding()]
   [OutputType([PSCustomObject])]
@@ -144,7 +144,7 @@ function Get-OptimalPermissionSet {
 
   # Check if we found any permissions
   if ($allPermissions.Count -eq 0) {
-    Write-PSFMessage -Level Debug -Message  "No valid permissions found in activities"
+    Write-PSFMessage -Level Debug -Message "No valid permissions found in activities"
     return [PSCustomObject]@{
       OptimalPermissions  = @()
       UnmatchedActivities = $unmatchedActivities
@@ -153,29 +153,53 @@ function Get-OptimalPermissionSet {
     }
   }
 
-  # Convert to array and sort by coverage (most activities covered first)
-  $sortedPermissions = $allPermissions.Values | Sort-Object { $_.Activities.Count } -Descending
+  # Convert to array and sort by:
+  # 1. Sort by coverage (most activities covered first)
+  # 2. Prefer least privilege marked permissions
+  $sortedPermissions = $allPermissions.Values | Sort-Object {
+    # Primary sort: coverage (descending)
+    - $_.Activities.Count
+  }, {
+    # Secondary sort: least privilege flag
+    if ($_.IsLeastPrivilege) {
+      1
+    }
+    else {
+      0
+    }
+  } -Descending
 
   # Greedy set cover: pick permissions that cover the most activities
   $selectedPermissions = @()
   $coveredActivities = @{}
 
+  # Create a lookup for activities by ID for easy retrieval
+  $activityLookup = @{}
+  foreach ($activity in $activitiesWithPermissions) {
+    $activityId = "$($activity.Method)|$($activity.Version)|$($activity.Path)"
+    $activityLookup[$activityId] = $activity
+  }
+
   foreach ($perm in $sortedPermissions) {
     # Check if this permission covers any new activities
-    $newActivityCount = 0
+    $newActivities = @()
     foreach ($activityId in $perm.Activities) {
       if (-not $coveredActivities.ContainsKey($activityId)) {
-        $newActivityCount++
+        # Get the actual activity object
+        if ($activityLookup.ContainsKey($activityId)) {
+          $newActivities += $activityLookup[$activityId]
+        }
       }
     }
 
-    if ($newActivityCount -gt 0) {
-      # Add this permission
+    if ($newActivities.Count -gt 0) {
+      # Add this permission with the actual activities it covers
       $selectedPermissions += [PSCustomObject]@{
         Permission        = $perm.Permission
         ScopeType         = $perm.ScopeType
         IsLeastPrivilege  = $perm.IsLeastPrivilege
-        ActivitiesCovered = $newActivityCount
+        ActivitiesCovered = $newActivities.Count
+        Activities        = $newActivities
       }
 
       # Mark activities as covered

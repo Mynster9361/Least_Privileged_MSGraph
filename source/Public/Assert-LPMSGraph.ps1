@@ -232,7 +232,7 @@ MicrosoftGraphActivityLogs
             }
         }
         $step = "Log Analytics Workspace Access"
-        $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1$($diagSettings.properties.workspaceId)/query" -Body ($body | ConvertTo-Json -Depth 10)
+        $response = Invoke-EntraRequest -Service "LogAnalytics" -Method POST -Path "/v1$($diagSettings.properties.workspaceId)/query" -Body ($body | ConvertTo-Json -Depth 15)
 
         if ($null -eq $response.tables -or $null -eq $response.tables.rows -or $response.tables.rows.Count -eq 0) {
             $overallSuccess = $false

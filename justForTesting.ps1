@@ -6,15 +6,18 @@ param(
   [string]$logAnalyticsWorkspaceId,
   [int]$daysToQuery = 30
 )
-$tenantId = "your tenant id"
-$clientId = "your client id"
-$clientSecret = "your secret" | ConvertTo-SecureString -AsPlainText -Force
+
+#TODO: Missing Permissions does not look at the Current Permissions at all right now, need to add that in
+
+$tenantId = $env:tenantId
+$clientId = $env:clientId
+$clientSecret = $env:clientSecret | ConvertTo-SecureString -AsPlainText -Force
 $daysToQuery = 5
-$logAnalyticsWorkspaceId = "your workspace id"
+$logAnalyticsWorkspaceId = $env:logAnalyticsWorkspaceId
 
 #region temp implementation to load in all functions in the clean folder
 ./build.ps1 -ResolveDependency -tasks clean, build, test
-Import-Module .\output\module\LeastPrivilegedMSGraph\1.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
+Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
 #endregion temp implementation to load in all functions in the clean folder
 
 
@@ -25,34 +28,45 @@ Initialize-LogAnalyticsApi
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
 
 #region the good stuff
-Measure-Command {
 
-  Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
+Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
 
-  $lightweightGroups = Get-AppRoleAssignment | Select-Object -First 5
+$lightweightGroups = Get-AppRoleAssignment
 
-  $lightweightGroups | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
+$lightweightGroups | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 100000 -Verbose -Debug
 
-  $lightweightGroups | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-  $lightweightGroups | Get-PermissionAnalysis
+$lightweightGroups | Get-PermissionAnalysis
 
-  Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report2.html"
-}
+Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report2.html"
+
 #endregion the good stuff
+
+#region test delegated apps
+./build.ps1 -ResolveDependency -tasks clean, build, test
+Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
+
+Initialize-LogAnalyticsApi
+Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
+$delegatedOnly = Get-AppRoleAssignment -Verbose
+$delegatedOnly | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 10000 -Verbose -Debug
+$delegatedOnly | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
+$delegatedOnly | Get-PermissionAnalysis -Verbose -Debug
+Export-PermissionAnalysisReport -AppData $delegatedOnly -OutputPath ".\report-delegated.html"
+
+$apps = Get-AppRoleAssignment |
+  Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 |
+    Get-PermissionAnalysis
+$apps | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
+Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report-delegated-2.html"
+
+#endregion test delegated apps
 
 #region test app activty data
 # Get one app to test with
 $testApp = (Get-AppRoleAssignment | Select-Object -First 1)
 
-# Call Get-AppActivityFromLog directly
-$activity = Get-AppActivityFromLog -subId "your subscription id" `
-  -rgName "your rg name" `
-  -workspaceName "your workspace name" `
-  -spId "spid" `
-  -days 5 `
-  -maxActivityEntries 100 `
-  -Verbose -Debug
 
 # Check all PSFramework messages
 Get-PSFMessage | Select-Object -Last 30 | Format-Table Timestamp, FunctionName, Level, Message -AutoSize
@@ -61,9 +75,6 @@ Get-PSFMessage | Select-Object -Last 30 | Format-Table Timestamp, FunctionName, 
 #region the good stuff for user context
 Initialize-LogAnalyticsApi
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -AsAzAccount
-$subscriptionId = "your subscription id"
-$resourceGroup = "your rg name"
-$workspace = "your workspace name"
 $daysToQuery = 5
 $lightweightGroups = Get-AppRoleAssignment
 $lightweightGroups | Get-AppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
@@ -129,9 +140,6 @@ Get-AppRoleAssignment |
 Initialize-LogAnalyticsApi
 Connect-EntraService -Service "LogAnalytics", "GraphBeta", "Azure" -AsAzAccount
 (Assert-LPMSGraph).checks
-$subscriptionId = "your subscription id"
-$resourceGroup = "your rg name"
-$workspace = "your workspace name"
 $paramUser = @{
   subId              = $subscriptionId
   rgName             = $resourceGroup
@@ -145,10 +153,6 @@ $paramUser = @{
 }
 Invoke-LPMSGraphScan @paramUser
 
-$tenantId = "your tenant id"
-$clientId = "your client id"
-$clientSecret = "your secret" | ConvertTo-SecureString -AsPlainText -Force
-$logAnalyticsWorkspaceId = "your workspace id"
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
 $paramApp = @{
   WorkspaceId        = $logAnalyticsWorkspaceId

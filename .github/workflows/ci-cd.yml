@@ -82,10 +82,6 @@ jobs:
             name: Windows (PowerShell)
             pwsh: true
             coverage-name: CodeCoverageWinPS7
-          - os: windows-latest
-            name: Windows (Windows PowerShell)
-            pwsh: false
-            coverage-name: CodeCoverageWinPS51
           - os: macos-latest
             name: macOS
             pwsh: true

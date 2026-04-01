@@ -18,14 +18,14 @@ BeforeAll {
             . $func.FullName
         }
 
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-PermissionAnalysis.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-LPMSPermissionAnalysis.ps1" -ErrorAction SilentlyContinue
 
         if ($publicFunction) {
             . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Get-PermissionAnalysis.ps1"
+            throw "Could not find Get-LPMSPermissionAnalysis.ps1"
         }
     }
 
@@ -275,39 +275,39 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'Get-PermissionAnalysis' {
+Describe 'Get-LPMSPermissionAnalysis' {
     Context 'Parameter Validation' {
         It 'Should have mandatory AppData parameter' {
-            $command = Get-Command -Name Get-PermissionAnalysis
+            $command = Get-Command -Name Get-LPMSPermissionAnalysis
             $command.Parameters['AppData'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should accept pipeline input for AppData' {
-            $command = Get-Command -Name Get-PermissionAnalysis
+            $command = Get-Command -Name Get-LPMSPermissionAnalysis
             $command.Parameters['AppData'].Attributes.ValueFromPipeline | Should -Be $true
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name Get-PermissionAnalysis
+            $command = Get-Command -Name Get-LPMSPermissionAnalysis
             $command.CmdletBinding | Should -Be $true
         }
 
         It 'Should accept null input for AppData' {
-            $command = Get-Command -Name Get-PermissionAnalysis
+            $command = Get-Command -Name Get-LPMSPermissionAnalysis
             $command.Parameters['AppData'].Attributes.Where({ $_.TypeId.Name -eq 'AllowNullAttribute' }) | Should -Not -BeNullOrEmpty
         }
     }
 
     Context 'Basic Functionality' {
         It 'Should process application data from pipeline' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result | Should -Not -BeNullOrEmpty
             $result.PrincipalId | Should -Be 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
         }
 
         It 'Should add analysis properties to output' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.PSObject.Properties.Name | Should -Contain 'ActivityPermissions'
             $result.PSObject.Properties.Name | Should -Contain 'OptimalPermissions'
@@ -318,7 +318,7 @@ Describe 'Get-PermissionAnalysis' {
         }
 
         It 'Should preserve original properties' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.PrincipalId | Should -Be $script:testAppData[0].PrincipalId
             $result.PrincipalName | Should -Be $script:testAppData[0].PrincipalName
@@ -328,7 +328,7 @@ Describe 'Get-PermissionAnalysis' {
         }
 
         It 'Should process multiple applications from pipeline' {
-            $results = $script:testAppData | Get-PermissionAnalysis
+            $results = $script:testAppData | Get-LPMSPermissionAnalysis
 
             $results.Count | Should -Be 4
             $results[0].PrincipalId | Should -Be 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
@@ -338,13 +338,13 @@ Describe 'Get-PermissionAnalysis' {
         }
 
         It 'Should handle null input gracefully' {
-            $result = $null | Get-PermissionAnalysis
+            $result = $null | Get-LPMSPermissionAnalysis
 
             $result | Should -BeNullOrEmpty
         }
 
         It 'Should handle empty array input' {
-            $result = @() | Get-PermissionAnalysis
+            $result = @() | Get-LPMSPermissionAnalysis
 
             $result | Should -BeNullOrEmpty
         }
@@ -352,7 +352,7 @@ Describe 'Get-PermissionAnalysis' {
 
     Context 'Apps With Activity' {
         It 'Should call Get-OptimalPermissionSet for apps with activity' {
-            $script:testAppData[0] | Get-PermissionAnalysis
+            $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             if ($script:moduleLoaded) {
                 Should -Invoke -CommandName Get-OptimalPermissionSet -ModuleName $script:moduleName -Times 1
@@ -363,19 +363,19 @@ Describe 'Get-PermissionAnalysis' {
         }
 
         It 'Should populate ActivityPermissions for apps with activity' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.ActivityPermissions | Should -Not -BeNullOrEmpty
         }
 
         It 'Should populate OptimalPermissions for apps with activity' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.OptimalPermissions | Should -Not -BeNullOrEmpty
         }
 
         It 'Should calculate ExcessPermissions correctly' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.ExcessPermissions | Should -Not -BeNullOrEmpty
             # Excess = Current permissions NOT in Optimal set
@@ -384,14 +384,14 @@ Describe 'Get-PermissionAnalysis' {
         }
 
         It 'Should calculate RequiredPermissions (missing permissions)' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             # Required = Optimal permissions NOT in Current set
             $result.RequiredPermissions.Permission | Should -Contain 'Application.Read.All'
         }
 
         It 'Should set MatchedAllActivity to true when all activities matched' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.MatchedAllActivity | Should -Be $true
         }
@@ -399,38 +399,38 @@ Describe 'Get-PermissionAnalysis' {
 
     Context 'Apps Without Activity' {
         It 'Should handle apps with null Activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result | Should -Not -BeNullOrEmpty
             $result.PrincipalName | Should -Be 'DataDogNotify'
         }
 
         It 'Should set ActivityPermissions to empty array for apps without activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result.ActivityPermissions | Should -BeNullOrEmpty
         }
 
         It 'Should set OptimalPermissions to empty array for apps without activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result.OptimalPermissions | Should -BeNullOrEmpty
         }
 
         It 'Should set UnmatchedActivities to empty array for apps without activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result.UnmatchedActivities | Should -BeNullOrEmpty
         }
 
         It 'Should set RequiredPermissions to empty array when no activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result.RequiredPermissions | Should -BeNullOrEmpty
         }
 
         It 'Should set MatchedAllActivity to true for apps without activity' {
-            $result = $script:testAppData[2] | Get-PermissionAnalysis
+            $result = $script:testAppData[2] | Get-LPMSPermissionAnalysis
 
             $result.MatchedAllActivity | Should -Be $true
         }
@@ -438,7 +438,7 @@ Describe 'Get-PermissionAnalysis' {
         It 'Should not call Find-GraphLeastPrivilege for apps without activity' {
             Mock -CommandName Find-GraphLeastPrivilege -MockWith { throw "Should not be called" }
 
-            { $script:testAppData[2] | Get-PermissionAnalysis } | Should -Not -Throw
+            { $script:testAppData[2] | Get-LPMSPermissionAnalysis } | Should -Not -Throw
         }
     }
 
@@ -452,7 +452,7 @@ Describe 'Get-PermissionAnalysis' {
                 )
             }
 
-            $result = $appWithoutRoles | Get-PermissionAnalysis
+            $result = $appWithoutRoles | Get-LPMSPermissionAnalysis
 
             $result.ExcessPermissions | Should -BeNullOrEmpty
         }
@@ -466,7 +466,7 @@ Describe 'Get-PermissionAnalysis' {
                 $script:testAppData[1]
             )
 
-            $results = $mixedData | Get-PermissionAnalysis
+            $results = $mixedData | Get-LPMSPermissionAnalysis
 
             $results.Count | Should -Be 2
         }
@@ -477,7 +477,7 @@ Describe 'Get-PermissionAnalysis' {
                 Activity    = @()
             }
 
-            { $appWithoutName | Get-PermissionAnalysis } | Should -Not -Throw
+            { $appWithoutName | Get-LPMSPermissionAnalysis } | Should -Not -Throw
         }
 
         It 'Should handle Find-GraphLeastPrivilege errors gracefully' {
@@ -485,7 +485,7 @@ Describe 'Get-PermissionAnalysis' {
                 throw "Simulated error"
             }
 
-            { $script:testAppData[0] | Get-PermissionAnalysis } | Should -Not -Throw
+            { $script:testAppData[0] | Get-LPMSPermissionAnalysis } | Should -Not -Throw
         }
 
         It 'Should handle Get-OptimalPermissionSet errors gracefully' {
@@ -500,14 +500,14 @@ Describe 'Get-PermissionAnalysis' {
                 }
             }
 
-            { $script:testAppData[0] | Get-PermissionAnalysis } | Should -Throw
+            { $script:testAppData[0] | Get-LPMSPermissionAnalysis } | Should -Throw
         }
     }
 
     Context 'Data Integrity' {
 
         It 'Should preserve all original properties in output' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.PSObject.Properties.Name | Should -Contain 'PrincipalId'
             $result.PSObject.Properties.Name | Should -Contain 'PrincipalName'
@@ -521,13 +521,13 @@ Describe 'Get-PermissionAnalysis' {
 
     Context 'Output Format' {
         It 'Should return PSCustomObject' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result | Should -BeOfType [PSCustomObject]
         }
 
         It 'Should maintain property order' {
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $properties = $result.PSObject.Properties.Name
             $originalProperties = @('PrincipalId', 'PrincipalName', 'AppRoleCount', 'AppRoles', 'Activity', 'ThrottlingStats')
@@ -546,7 +546,7 @@ Describe 'Get-PermissionAnalysis' {
 
         It 'Should output objects immediately during pipeline processing' {
             $outputCount = 0
-            $script:testAppData | Get-PermissionAnalysis | ForEach-Object {
+            $script:testAppData | Get-LPMSPermissionAnalysis | ForEach-Object {
                 $outputCount++
             }
 
@@ -582,7 +582,7 @@ Describe 'Get-PermissionAnalysis' {
                 }
             }
 
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             # App has Directory.Read.All and User.Read.All, but only needs User.Read.All
             $result.ExcessPermissions.Permission | Should -Contain 'Directory.Read.All'
@@ -617,7 +617,7 @@ Describe 'Get-PermissionAnalysis' {
                 }
             }
 
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             # App doesn't have Mail.Read but needs it
             $result.RequiredPermissions.Permission | Should -Contain 'Mail.Read'
@@ -653,7 +653,7 @@ Describe 'Get-PermissionAnalysis' {
             }
 
             # App 0 has User.Read.All (Application) in its AppRoles
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             # User.Read.All is already granted — RequiredPermissions should be empty
             $result.RequiredPermissions | Should -BeNullOrEmpty
@@ -685,7 +685,7 @@ Describe 'Get-PermissionAnalysis' {
                 }
             }
 
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             $result.MatchedAllActivity | Should -Be $false
             $result.UnmatchedActivities.Count | Should -BeGreaterThan 0
@@ -734,7 +734,7 @@ Describe 'Get-PermissionAnalysis' {
                 )
             }
 
-            $result = $mixedScopeApp | Get-PermissionAnalysis
+            $result = $mixedScopeApp | Get-LPMSPermissionAnalysis
 
             # User.Read (Delegated) should be excess since optimal is only Application scope
             $result.ExcessPermissions | Where-Object { $_.Permission -eq 'User.Read' -and $_.ScopeType -eq 'Delegated' } | Should -Not -BeNullOrEmpty
@@ -766,7 +766,7 @@ Describe 'Get-PermissionAnalysis' {
                 }
             }
 
-            $result = $script:testAppData[0] | Get-PermissionAnalysis
+            $result = $script:testAppData[0] | Get-LPMSPermissionAnalysis
 
             # User.Read.All (Application) is in optimal — should NOT be excess
             $result.ExcessPermissions | Where-Object { $_.Permission -eq 'User.Read.All' -and $_.ScopeType -eq 'Application' } | Should -BeNullOrEmpty

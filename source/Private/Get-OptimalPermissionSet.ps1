@@ -6,7 +6,7 @@
 .DESCRIPTION
     This private function implements a greedy set cover algorithm to determine the smallest set of
     Microsoft Graph permissions needed to cover all matched API activities. Used internally by
-    Get-PermissionAnalysis and Export-PermissionAnalysisReport.
+    Get-LPMSPermissionAnalysis and Export-LPMSPermissionAnalysisReport.
 
     The algorithm:
     1. Collects all unique permissions across activities
@@ -17,7 +17,7 @@
     Tracks unmatched activities separately and provides coverage statistics.
 
 .PARAMETER activityPermissions
-    Array of activity objects from Get-PermissionAnalysis.
+    Array of activity objects from Get-LPMSPermissionAnalysis.
     Expected properties: IsMatched, LeastPrivilegedPermissions, Method, Version, Path
 
 .OUTPUTS
@@ -29,7 +29,7 @@
     - MatchedActivities: Count of successfully matched activities
 
 .EXAMPLE
-    # Used internally by Get-PermissionAnalysis
+    # Used internally by Get-LPMSPermissionAnalysis
     $optimal = Get-OptimalPermissionSet -activityPermissions $activityPermissions
 
 .EXAMPLE
@@ -52,7 +52,7 @@
     Uses Write-PSFMessage -Level Debug -Message for processing details. Run with -Debug to see selection logic.
 
 .LINK
-    Get-PermissionAnalysis
+    Get-LPMSPermissionAnalysis
 
 .LINK
     Find-GraphLeastPrivilege

@@ -1,4 +1,4 @@
-﻿function Get-PermissionAnalysis {
+﻿function Get-LPMSPermissionAnalysis {
     <#
 .SYNOPSIS
     Enriches application data with permission analysis using MSGraphPermissions module.
@@ -29,7 +29,7 @@
 
 .PARAMETER AppData
     Array of application objects with Activity and AppRoles properties.
-    Typically from Get-AppRoleAssignment | Get-AppActivityData pipeline.
+    Typically from Get-LPMSAppRoleAssignment | Get-LPMSAppActivityData pipeline.
 
     Required Properties:
     - **PrincipalName** (String): Application display name
@@ -57,15 +57,15 @@
     - **MatchedAllActivity**: Boolean indicating if all activities were matched
 
 .EXAMPLE
-    $apps = Get-AppRoleAssignment | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
-    $analysis = $apps | Get-PermissionAnalysis
+    $apps = Get-LPMSAppRoleAssignment | Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 30
+    $analysis = $apps | Get-LPMSPermissionAnalysis
 
     Description:
     Analyzes permissions for all applications based on 30 days of activity.
     The Scheme (Application/Delegated) is automatically determined from the activity data.
 
 .EXAMPLE
-    $analysis = $apps | Get-PermissionAnalysis
+    $analysis = $apps | Get-LPMSPermissionAnalysis
     $analysis | Where-Object { $_.ExcessPermissions.Count -gt 0 } |
         Select-Object PrincipalName, @{N='Excess';E={$_.ExcessPermissions -join ', '}}
 
@@ -73,7 +73,7 @@
     Identifies applications with excessive permissions that can be removed.
 
 .EXAMPLE
-    $analysis = $apps | Get-PermissionAnalysis
+    $analysis = $apps | Get-LPMSPermissionAnalysis
     $analysis | Where-Object { -not $_.MatchedAllActivity } |
         ForEach-Object {
             Write-Warning "$($_.PrincipalName) has unmatched activities"
@@ -102,7 +102,7 @@
     - Typical processing: 1-5 seconds per application with 100-1000 activities
 
     Limitations:
-    - Requires accurate activity data from Get-AppActivityData (with Scheme)
+    - Requires accurate activity data from Get-LPMSAppActivityData (with Scheme)
     - Custom/preview APIs may not have permission mappings
     - Unmatched activities don't fail the overall analysis
 
@@ -114,13 +114,13 @@
     - Archive analysis results for compliance tracking
 
     Related Cmdlets:
-    - Get-AppActivityData: Collect API activity from Log Analytics
+    - Get-LPMSAppActivityData: Collect API activity from Log Analytics
     - Get-OptimalPermissionSet: Calculate minimum permission set (internal)
     - Find-GraphLeastPrivilege: MSGraphPermissions module cmdlet
-    - Export-PermissionAnalysisReport: Generate visual reports
+    - Export-LPMSPermissionAnalysisReport: Generate visual reports
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-PermissionAnalysis.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSPermissionAnalysis.html
 
 .LINK
     https://github.com/merill/MSGraphPermissions

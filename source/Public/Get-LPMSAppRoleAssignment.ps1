@@ -1,4 +1,4 @@
-function Get-AppRoleAssignment {
+function Get-LPMSAppRoleAssignment {
   <#
 .SYNOPSIS
     Retrieves Microsoft Graph app role assignments for all applications in the tenant.
@@ -75,14 +75,14 @@ function Get-AppRoleAssignment {
 
 .EXAMPLE
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "GraphBeta"
-    $assignments = Get-AppRoleAssignment
+    $assignments = Get-LPMSAppRoleAssignment
 
     Description:
     Retrieves all Microsoft Graph app role assignments after authenticating to the tenant.
     Output shows all applications and their assigned Graph API permissions.
 
 .EXAMPLE
-    $assignments = Get-AppRoleAssignment -Verbose
+    $assignments = Get-LPMSAppRoleAssignment -Verbose
     $overPrivilegedApps = $assignments | Where-Object { $_.AppRoleCount -gt 50 }
 
     "Found $($overPrivilegedApps.Count) over-privileged applications:"
@@ -95,7 +95,7 @@ function Get-AppRoleAssignment {
     and displays them sorted by permission count. Uses verbose output to track progress.
 
 .EXAMPLE
-    $assignments = Get-AppRoleAssignment -PermissionType Application
+    $assignments = Get-LPMSAppRoleAssignment -PermissionType Application
     $appOnlyPerms = $assignments | ForEach-Object {
         $app = $_
         $app.AppRoles | ForEach-Object {
@@ -116,7 +116,7 @@ function Get-AppRoleAssignment {
     to CSV for security review or compliance documentation.
 
 .EXAMPLE
-    $delegatedPerms = Get-AppRoleAssignment -PermissionType Delegated -Verbose
+    $delegatedPerms = Get-LPMSAppRoleAssignment -PermissionType Delegated -Verbose
     $adminConsentRequired = $delegatedPerms | ForEach-Object {
         $app = $_
         $app.AppRoles | Where-Object { $_.consentType -eq 'AllPrincipals' } | ForEach-Object {
@@ -253,19 +253,19 @@ function Get-AppRoleAssignment {
     - Implement error handling in automation scripts
     - Schedule during off-peak hours for large tenants
     - Archive results periodically for change tracking
-    - Combine with Get-PermissionAnalysis for comprehensive reviews
+    - Combine with Get-LPMSPermissionAnalysis for comprehensive reviews
 
     Related Cmdlets:
     - Connect-EntraService: Authenticate to Microsoft Graph
-    - Get-PermissionAnalysis: Analyze if assigned permissions are actually needed
-    - Get-AppActivityData: Get API activity to determine permission usage
-    - Export-PermissionAnalysisReport: Generate HTML reports
+    - Get-LPMSPermissionAnalysis: Analyze if assigned permissions are actually needed
+    - Get-LPMSAppActivityData: Get API activity to determine permission usage
+    - Export-LPMSPermissionAnalysisReport: Generate HTML reports
 
 .LINK
     https://learn.microsoft.com/en-us/graph/permissions-reference
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppRoleAssignment.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSAppRoleAssignment.html
 #>
   [CmdletBinding()]
   param (

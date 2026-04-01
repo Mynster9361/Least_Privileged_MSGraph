@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Renamed Export-PermissionAnalysisReport to Export-LPMPermissionAnalysisReport to create a more consistent naming convention across the module.
+- Renamed Get-AppActivityData to Get-LPMSAppActivityData to create a more consistent naming convention across the module.
+- Renamed Get-AppRoleAssignment to Get-LPMSAppRoleAssignment to create a more consistent naming convention across the module.
+- Renamed Get-AppThrottlingData to Get-LPMSAppThrottlingData to create a more consistent naming convention across the module.
+- Renamed Get-PermissionAnalysis to Get-LPMSPermissionAnalysis to create a more consistent naming convention across the module.
+- Renamed Initialize-LogAnalyticsApi to Initialize-LPMSLogAnalyticsApi to create a more consistent naming convention across the module.
+
 ### Added
 - Delegated permissions is now included in the report to give better visibility into your apps and its permissions
 - Dependencies to 'MSGraphPermissions', 'EntraAuth.Graph' which lets us get better visibility to the correct permission scopes for each url included EntraAuth.Graph for improved performance

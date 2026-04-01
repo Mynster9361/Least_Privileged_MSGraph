@@ -95,27 +95,27 @@ Describe 'Invoke-LPMSGraphScan' {
 
     Context 'Error Handling' {
         BeforeAll {
-            Mock Get-AppRoleAssignment { return $script:mockAppData }
-            Mock Get-AppActivityData { return $args[0] }
-            Mock Get-AppThrottlingData { return $args[0] }
-            Mock Get-PermissionAnalysis { return $args[0] }
-            Mock Export-PermissionAnalysisReport { }
+            Mock Get-LPMSAppRoleAssignment { return $script:mockAppData }
+            Mock Get-LPMSAppActivityData { return $args[0] }
+            Mock Get-LPMSAppThrottlingData { return $args[0] }
+            Mock Get-LPMSPermissionAnalysis { return $args[0] }
+            Mock Export-LPMSPermissionAnalysisReport { }
         }
 
-        It 'Should throw and propagate errors from Get-AppActivityData' {
-            Mock Get-AppActivityData { throw "Activity data error" }
+        It 'Should throw and propagate errors from Get-LPMSAppActivityData' {
+            Mock Get-LPMSAppActivityData { throw "Activity data error" }
 
             { Invoke-LPMSGraphScan -WorkspaceId '/subscriptions/test/resourceGroups/test/providers/Microsoft.OperationalInsights/workspaces/test' -ErrorAction Stop } | Should -Throw
         }
 
-        It 'Should throw and propagate errors from Get-PermissionAnalysis' {
-            Mock Get-PermissionAnalysis { throw "Permission analysis error" }
+        It 'Should throw and propagate errors from Get-LPMSPermissionAnalysis' {
+            Mock Get-LPMSPermissionAnalysis { throw "Permission analysis error" }
 
             { Invoke-LPMSGraphScan -WorkspaceId '/subscriptions/test/resourceGroups/test/providers/Microsoft.OperationalInsights/workspaces/test' -ErrorAction Stop } | Should -Throw
         }
 
-        It 'Should throw and propagate errors from Export-PermissionAnalysisReport' {
-            Mock Export-PermissionAnalysisReport { throw "Export error" }
+        It 'Should throw and propagate errors from Export-LPMSPermissionAnalysisReport' {
+            Mock Export-LPMSPermissionAnalysisReport { throw "Export error" }
 
             { Invoke-LPMSGraphScan -WorkspaceId '/subscriptions/test/resourceGroups/test/providers/Microsoft.OperationalInsights/workspaces/test' -ErrorAction Stop } | Should -Throw
         }

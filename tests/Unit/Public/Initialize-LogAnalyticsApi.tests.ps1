@@ -30,14 +30,14 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Initialize-LogAnalyticsApi.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Initialize-LPMSLogAnalyticsApi.ps1" -ErrorAction SilentlyContinue
 
         if ($publicFunction) {
             . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Initialize-LogAnalyticsApi.ps1"
+            throw "Could not find Initialize-LPMSLogAnalyticsApi.ps1"
         }
     }
 }
@@ -49,16 +49,16 @@ AfterAll {
     Remove-Item -Path Function:\Register-EntraService -ErrorAction SilentlyContinue
 }
 
-Describe 'Initialize-LogAnalyticsApi' {
+Describe 'Initialize-LPMSLogAnalyticsApi' {
     Context 'Parameter Validation' {
         It 'Should have no mandatory parameters' {
-            $command = Get-Command -Name Initialize-LogAnalyticsApi
+            $command = Get-Command -Name Initialize-LPMSLogAnalyticsApi
             $mandatoryParams = $command.Parameters.Values | Where-Object { $_.Attributes.Mandatory -eq $true }
             $mandatoryParams | Should -BeNullOrEmpty
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name Initialize-LogAnalyticsApi
+            $command = Get-Command -Name Initialize-LPMSLogAnalyticsApi
             $command.CmdletBinding | Should -Be $true
         }
     }
@@ -79,12 +79,12 @@ Describe 'Initialize-LogAnalyticsApi' {
         }
 
         It 'Should register Log Analytics service' {
-            $result = Initialize-LogAnalyticsApi
+            $result = Initialize-LPMSLogAnalyticsApi
             $result | Should -Not -BeNullOrEmpty
         }
 
         It 'Should return object with ServiceName property' {
-            $result = Initialize-LogAnalyticsApi
+            $result = Initialize-LPMSLogAnalyticsApi
             $result.ServiceName | Should -Be 'LogAnalytics'
         }
 
@@ -98,7 +98,7 @@ Describe 'Initialize-LogAnalyticsApi' {
                 }
             }
 
-            $result = Initialize-LogAnalyticsApi
+            $result = Initialize-LPMSLogAnalyticsApi
             $result.AlreadyRegistered | Should -Be $true
         }
     }
@@ -118,7 +118,7 @@ Describe 'Initialize-LogAnalyticsApi' {
         }
 
         It 'Should be callable without parameters' {
-            { Initialize-LogAnalyticsApi } | Should -Not -Throw
+            { Initialize-LPMSLogAnalyticsApi } | Should -Not -Throw
         }
 
         It 'Should return consistent results on multiple calls' {
@@ -131,8 +131,8 @@ Describe 'Initialize-LogAnalyticsApi' {
                 }
             }
 
-            $result1 = Initialize-LogAnalyticsApi
-            $result2 = Initialize-LogAnalyticsApi
+            $result1 = Initialize-LPMSLogAnalyticsApi
+            $result2 = Initialize-LPMSLogAnalyticsApi
 
             $result1.ServiceName | Should -Be $result2.ServiceName
             $result1.ResourceId | Should -Be $result2.ResourceId

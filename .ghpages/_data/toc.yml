@@ -14,18 +14,18 @@
     - title: "Command Reference"
       url: "commands"
       children:
-        - title: Get-PermissionAnalysis
-          url: "commands/Get-PermissionAnalysis"
-        - title: Export-PermissionAnalysisReport
-          url: "commands/Export-PermissionAnalysisReport"
-        - title: Get-AppActivityData
-          url: "commands/Get-AppActivityData"
-        - title: Get-AppRoleAssignment
-          url: "commands/Get-AppRoleAssignment"
-        - title: Get-AppThrottlingData
-          url: "commands/Get-AppThrottlingData"
-        - title: Initialize-LogAnalyticsApi
-          url: "commands/Initialize-LogAnalyticsApi"
+        - title: Get-LPMSPermissionAnalysis
+          url: "commands/Get-LPMSPermissionAnalysis"
+        - title: Export-LPMSPermissionAnalysisReport
+          url: "commands/Export-LPMSPermissionAnalysisReport"
+        - title: Get-LPMSAppActivityData
+          url: "commands/Get-LPMSAppActivityData"
+        - title: Get-LPMSAppRoleAssignment
+          url: "commands/Get-LPMSAppRoleAssignment"
+        - title: Get-LPMSAppThrottlingData
+          url: "commands/Get-LPMSAppThrottlingData"
+        - title: Initialize-LPMSLogAnalyticsApi
+          url: "commands/Initialize-LPMSLogAnalyticsApi"
     - title: "Examples"
       url: "examples"
       children:

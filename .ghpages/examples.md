@@ -14,13 +14,13 @@ Analyze permissions for a single application:
 
 ```powershell
 # Initialize Log Analytics
-Initialize-LogAnalyticsApi `
+Initialize-LPMSLogAnalyticsApi `
     -WorkspaceId "12345678-1234-1234-1234-123456789abc" `
     -SharedKey "your-shared-key"
 
 # Analyze application
 $appId = "app-id-here"
-$analysis = Get-PermissionAnalysis -ApplicationId $appId
+$analysis = Get-LPMSPermissionAnalysis -ApplicationId $appId
 
 # Display results
 Write-Host "Current Permissions: $($analysis.CurrentPermissions.Count)"
@@ -41,17 +41,17 @@ $applications = @(
 )
 
 # Initialize connection
-Initialize-LogAnalyticsApi -WorkspaceId $workspaceId -SharedKey $sharedKey
+Initialize-LPMSLogAnalyticsApi -WorkspaceId $workspaceId -SharedKey $sharedKey
 
 # Analyze each application
 foreach ($appId in $applications) {
     Write-Host "Analyzing $appId..." -ForegroundColor Cyan
     
     # Get analysis
-    $analysis = Get-PermissionAnalysis -ApplicationId $appId
+    $analysis = Get-LPMSPermissionAnalysis -ApplicationId $appId
     
     # Export report
-    Export-PermissionAnalysisReport `
+    Export-LPMSPermissionAnalysisReport `
         -ApplicationId $appId `
         -OutputPath "./reports/$appId" `
         -Format HTML,JSON
@@ -68,10 +68,10 @@ Monitor application activity and throttling:
 $appId = "your-app-id"
 
 # Get last 7 days of activity
-$activity = Get-AppActivityData -ApplicationId $appId -Days 7
+$activity = Get-LPMSAppActivityData -ApplicationId $appId -Days 7
 
 # Check for throttling issues
-$throttling = Get-AppThrottlingData -ApplicationId $appId
+$throttling = Get-LPMSAppThrottlingData -ApplicationId $appId
 
 # Display summary
 Write-Host "Activity Summary for $appId"
@@ -96,13 +96,13 @@ param(
 )
 
 # Initialize
-Initialize-LogAnalyticsApi -WorkspaceId $WorkspaceId -SharedKey $SharedKey
+Initialize-LPMSLogAnalyticsApi -WorkspaceId $WorkspaceId -SharedKey $SharedKey
 
 $overPrivilegedApps = @()
 
 # Check each application
 foreach ($appId in $ApplicationIds) {
-    $analysis = Get-PermissionAnalysis -ApplicationId $appId
+    $analysis = Get-LPMSPermissionAnalysis -ApplicationId $appId
     
     if ($analysis.OverPrivilegedPermissions.Count -gt 0) {
         $overPrivilegedApps += [PSCustomObject]@{
@@ -137,11 +137,11 @@ Integrate with CI/CD pipelines:
     script: |
       Install-Module -Name LeastPrivilegedMSGraph -Force -Scope CurrentUser
       
-      Initialize-LogAnalyticsApi `
+      Initialize-LPMSLogAnalyticsApi `
         -WorkspaceId $(LogAnalyticsWorkspaceId) `
         -SharedKey $(LogAnalyticsSharedKey)
       
-      $analysis = Get-PermissionAnalysis -ApplicationId $(ApplicationId)
+      $analysis = Get-LPMSPermissionAnalysis -ApplicationId $(ApplicationId)
       
       # Fail pipeline if over-privileged
       if ($analysis.OverPrivilegedPermissions.Count -gt 0) {
@@ -149,7 +149,7 @@ Integrate with CI/CD pipelines:
         exit 1
       }
       
-      Export-PermissionAnalysisReport `
+      Export-LPMSPermissionAnalysisReport `
         -ApplicationId $(ApplicationId) `
         -OutputPath "$(Build.ArtifactStagingDirectory)/reports"
 ```

@@ -45,7 +45,7 @@ First, you need to configure your Log Analytics workspace connection:
 
 ```powershell
 # Initialize the Log Analytics API connection
-Initialize-LogAnalyticsApi -WorkspaceId "your-workspace-id" -SharedKey "your-shared-key"
+Initialize-LPMSLogAnalyticsApi -WorkspaceId "your-workspace-id" -SharedKey "your-shared-key"
 ```
 
 {% include alert.html type="warning" title="Security Note" content="Store your shared key securely. Consider using Azure Key Vault or environment variables instead of hardcoding credentials." %}
@@ -56,7 +56,7 @@ Test your configuration:
 
 ```powershell
 # Get activity data for an application
-Get-AppActivityData -ApplicationId "your-app-id" -Days 30
+Get-LPMSAppActivityData -ApplicationId "your-app-id" -Days 30
 ```
 
 ## Basic Usage
@@ -65,7 +65,7 @@ Get-AppActivityData -ApplicationId "your-app-id" -Days 30
 
 ```powershell
 # Get permission analysis
-$analysis = Get-PermissionAnalysis -ApplicationId "12345678-1234-1234-1234-123456789abc"
+$analysis = Get-LPMSPermissionAnalysis -ApplicationId "12345678-1234-1234-1234-123456789abc"
 
 # Display recommended permissions
 $analysis.RecommendedPermissions
@@ -81,13 +81,13 @@ $analysis.OverPrivilegedPermissions
 
 ```powershell
 # Export detailed analysis report
-Export-PermissionAnalysisReport `
+Export-LPMSPermissionAnalysisReport `
     -ApplicationId "12345678-1234-1234-1234-123456789abc" `
     -OutputPath "./reports" `
     -Format HTML
 
 # Export as JSON for automation
-Export-PermissionAnalysisReport `
+Export-LPMSPermissionAnalysisReport `
     -ApplicationId "12345678-1234-1234-1234-123456789abc" `
     -OutputPath "./reports" `
     -Format JSON
@@ -97,13 +97,13 @@ Export-PermissionAnalysisReport `
 
 ```powershell
 # Get recent activity data
-Get-AppActivityData -ApplicationId "12345678-1234-1234-1234-123456789abc" -Days 7
+Get-LPMSAppActivityData -ApplicationId "12345678-1234-1234-1234-123456789abc" -Days 7
 
 # Check for throttling issues
-Get-AppThrottlingData -ApplicationId "12345678-1234-1234-1234-123456789abc"
+Get-LPMSAppThrottlingData -ApplicationId "12345678-1234-1234-1234-123456789abc"
 
 # Get role assignments
-Get-AppRoleAssignment -ApplicationId "12345678-1234-1234-1234-123456789abc"
+Get-LPMSAppRoleAssignment -ApplicationId "12345678-1234-1234-1234-123456789abc"
 ```
 
 ## Next Steps
@@ -136,7 +136,7 @@ Get-Module -ListAvailable -Refresh
 
 ```powershell
 # Get help for any cmdlet
-Get-Help Get-PermissionAnalysis -Full
+Get-Help Get-LPMSPermissionAnalysis -Full
 
 # List all available commands
 Get-Command -Module LeastPrivilegedMSGraph

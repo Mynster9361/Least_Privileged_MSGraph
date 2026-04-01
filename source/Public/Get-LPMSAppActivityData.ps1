@@ -1,4 +1,4 @@
-function Get-AppActivityData {
+function Get-LPMSAppActivityData {
     <#
 .SYNOPSIS
     Enriches application data with API activity information from Azure Log Analytics.
@@ -108,12 +108,12 @@ function Get-AppActivityData {
     will have both an empty Activity array and an ErrorMessage property explaining the failure.
 
 .EXAMPLE
-    $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
+    $apps | Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 90 -ThrottleLimit 20 -Verbose
 
     Queries activity data using the workspace ID (ByWorkspaceId parameter set).
 
 .EXAMPLE
-    $apps | Get-AppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days 30 -Verbose
+    $apps | Get-LPMSAppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days 30 -Verbose
 
     Queries activity data using workspace details (ByWorkspaceDetails parameter set) when using user_impersonation scope.
 
@@ -126,7 +126,7 @@ function Get-AppActivityData {
     - Must be authenticated via Connect-EntraService before calling this function
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppActivityData.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSAppActivityData.html
 #>
     [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.Object])]

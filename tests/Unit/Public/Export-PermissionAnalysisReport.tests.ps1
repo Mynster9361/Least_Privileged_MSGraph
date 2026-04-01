@@ -38,14 +38,14 @@ BeforeAll {
     }
     else {
         # Fallback: dot source the functions directly for testing
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Export-PermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Export-LPMSPermissionAnalysisReport.ps1" -ErrorAction SilentlyContinue
 
         if ($publicFunction) {
             . $publicFunction.FullName
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Export-PermissionAnalysisReport.ps1"
+            throw "Could not find Export-LPMSPermissionAnalysisReport.ps1"
         }
     }
 
@@ -217,30 +217,30 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'Export-PermissionAnalysisReport' {
+Describe 'Export-LPMSPermissionAnalysisReport' {
     Context 'Parameter Validation' {
         It 'Should have mandatory AppData parameter' {
-            $command = Get-Command -Name Export-PermissionAnalysisReport
+            $command = Get-Command -Name Export-LPMSPermissionAnalysisReport
             $command.Parameters['AppData'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should not have mandatory OutputPath parameter' {
-            $command = Get-Command -Name Export-PermissionAnalysisReport
+            $command = Get-Command -Name Export-LPMSPermissionAnalysisReport
             $command.Parameters['OutputPath'].Attributes.Mandatory | Should -Be $false
         }
 
         It 'Should not have mandatory ReportTitle parameter' {
-            $command = Get-Command -Name Export-PermissionAnalysisReport
+            $command = Get-Command -Name Export-LPMSPermissionAnalysisReport
             $command.Parameters['ReportTitle'].Attributes.Mandatory | Should -Be $false
         }
 
         It 'Should accept pipeline input for AppData' {
-            $command = Get-Command -Name Export-PermissionAnalysisReport
+            $command = Get-Command -Name Export-LPMSPermissionAnalysisReport
             $command.Parameters['AppData'].Attributes.ValueFromPipeline | Should -Be $true
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name Export-PermissionAnalysisReport
+            $command = Get-Command -Name Export-LPMSPermissionAnalysisReport
             $command.CmdletBinding | Should -Be $true
         }
     }
@@ -257,7 +257,7 @@ Describe 'Export-PermissionAnalysisReport' {
                 }
             }
 
-            $result = Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            $result = Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $script:outputPath | Should -Exist
             $result | Should -Not -BeNullOrEmpty
@@ -274,7 +274,7 @@ Describe 'Export-PermissionAnalysisReport' {
 
             Push-Location -Path $TestDrive
             try {
-                $result = Export-PermissionAnalysisReport -AppData $script:testAppData
+                $result = Export-LPMSPermissionAnalysisReport -AppData $script:testAppData
 
                 # Function returns multiple lines, extract the file path from output
                 $filePath = $result | Where-Object { $_ -like '*.html' } | Select-Object -Last 1
@@ -297,7 +297,7 @@ Describe 'Export-PermissionAnalysisReport' {
             }
 
             $customTitle = "Custom Test Report"
-            $result = Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath -ReportTitle $customTitle
+            $result = Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath -ReportTitle $customTitle
 
             $content = Get-Content -Path $script:outputPath -Raw
             $content | Should -Match $customTitle
@@ -315,7 +315,7 @@ Describe 'Export-PermissionAnalysisReport' {
             New-Item -Path $nestedDir -ItemType Directory -Force | Out-Null
 
             $nestedPath = Join-Path -Path $nestedDir -ChildPath "report.html"
-            $result = Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $nestedPath
+            $result = Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $nestedPath
 
             $nestedPath | Should -Exist
             Split-Path -Path $nestedPath -Parent | Should -Exist
@@ -334,7 +334,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should embed all application data in the report' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
 
@@ -346,7 +346,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should include generation timestamp' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
             $content | Should -Match '\d{4}-\d{2}-\d{2}'
@@ -372,7 +372,7 @@ Describe 'Export-PermissionAnalysisReport' {
                 }
             )
 
-            Export-PermissionAnalysisReport -AppData $minimalData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $minimalData -OutputPath $script:outputPath
 
             $script:outputPath | Should -Exist
             $content = Get-Content -Path $script:outputPath -Raw
@@ -380,7 +380,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should properly escape JSON data for JavaScript' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
 
@@ -389,7 +389,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should include all permission types in data' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
 
@@ -401,7 +401,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should include throttling statistics' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
 
@@ -410,7 +410,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should include activity information' {
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $script:outputPath
 
             $content = Get-Content -Path $script:outputPath -Raw
 
@@ -432,7 +432,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should accept AppData from pipeline' {
-            $result = $script:testAppData | Export-PermissionAnalysisReport -OutputPath $script:outputPath
+            $result = $script:testAppData | Export-LPMSPermissionAnalysisReport -OutputPath $script:outputPath
 
             $script:outputPath | Should -Exist
             # Last item in output array should be the path
@@ -440,7 +440,7 @@ Describe 'Export-PermissionAnalysisReport' {
         }
 
         It 'Should process multiple pipeline inputs' {
-            $result = $script:testAppData[0], $script:testAppData[1] | Export-PermissionAnalysisReport -OutputPath $script:outputPath
+            $result = $script:testAppData[0], $script:testAppData[1] | Export-LPMSPermissionAnalysisReport -OutputPath $script:outputPath
 
             $script:outputPath | Should -Exist
             $content = Get-Content -Path $script:outputPath -Raw
@@ -451,7 +451,7 @@ Describe 'Export-PermissionAnalysisReport' {
 
     Context 'Error Handling' {
         It 'Should throw when AppData is null' {
-            { Export-PermissionAnalysisReport -AppData $null -OutputPath (Join-Path $TestDrive "error-test.html") } | Should -Throw
+            { Export-LPMSPermissionAnalysisReport -AppData $null -OutputPath (Join-Path $TestDrive "error-test.html") } | Should -Throw
         }
 
         It 'Should handle invalid output path gracefully' {
@@ -464,7 +464,7 @@ Describe 'Export-PermissionAnalysisReport' {
             $invalidPath = "Z:\NonExistent\Path\report.html"
 
             # This should throw because the path doesn't exist
-            { Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $invalidPath } | Should -Throw
+            { Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $invalidPath } | Should -Throw
         }
     }
 
@@ -477,7 +477,7 @@ Describe 'Export-PermissionAnalysisReport' {
             }
 
             $outputPath = Join-Path -Path $TestDrive -ChildPath "template-test.html"
-            Export-PermissionAnalysisReport -AppData $script:testAppData -OutputPath $outputPath
+            Export-LPMSPermissionAnalysisReport -AppData $script:testAppData -OutputPath $outputPath
 
             $content = Get-Content -Path $outputPath -Raw
 

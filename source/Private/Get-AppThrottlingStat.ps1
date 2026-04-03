@@ -5,7 +5,7 @@ function Get-AppThrottlingStat {
 
 .DESCRIPTION
     This private function queries Azure Log Analytics to retrieve throttling statistics for service
-    principals. It's used internally by Get-AppThrottlingData and Get-PermissionAnalysis to analyze
+    principals. It's used internally by Get-LPMSAppThrottlingData and Get-LPMSPermissionAnalysis to analyze
     application health and API consumption patterns.
 
     The function returns detailed metrics including:
@@ -63,7 +63,7 @@ function Get-AppThrottlingStat {
     $criticalApps = $stats | Where-Object { $_.ThrottlingSeverity -ge 3 }
 
 .EXAMPLE
-    # Used internally by Get-AppThrottlingData
+    # Used internally by Get-LPMSAppThrottlingData
     $throttlingData = Get-AppThrottlingStat -WorkspaceId $config.WorkspaceId -Days $Days -ServicePrincipalId $spId
 
 .NOTES

@@ -1,4 +1,4 @@
-function Initialize-LogAnalyticsApi {
+function Initialize-LPMSLogAnalyticsApi {
     <#
 .SYNOPSIS
     Initializes and registers the Log Analytics API service for use with Entra authentication.
@@ -65,7 +65,7 @@ function Initialize-LogAnalyticsApi {
         - "NewlyRegistered": Service was registered by this call
 
 .EXAMPLE
-    Initialize-LogAnalyticsApi
+    Initialize-LPMSLogAnalyticsApi
 
     ServiceName       : LogAnalytics
     AlreadyRegistered : False
@@ -76,7 +76,7 @@ function Initialize-LogAnalyticsApi {
     The service is now ready for authentication and queries.
 
 .EXAMPLE
-    $result = Initialize-LogAnalyticsApi
+    $result = Initialize-LPMSLogAnalyticsApi
     if ($result.Status -eq 'NewlyRegistered') {
         "Log Analytics API is now ready for use"
     } else {
@@ -89,7 +89,7 @@ function Initialize-LogAnalyticsApi {
 
 .EXAMPLE
     # Complete authentication workflow
-    Initialize-LogAnalyticsApi
+    Initialize-LPMSLogAnalyticsApi
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $secret -Service 'LogAnalytics'
 
     $workspaceId = "12345678-1234-1234-1234-123456789012"
@@ -101,7 +101,7 @@ function Initialize-LogAnalyticsApi {
     This is the typical pattern for using the module with Log Analytics.
 
 .EXAMPLE
-    Initialize-LogAnalyticsApi -Verbose
+    Initialize-LPMSLogAnalyticsApi -Verbose
 
     VERBOSE: LogAnalytics service was already registered. Skipping initialization.
     ServiceName       : LogAnalytics
@@ -114,13 +114,13 @@ function Initialize-LogAnalyticsApi {
 
 .EXAMPLE
     # Register multiple services in a script
-    Initialize-LogAnalyticsApi | Out-Null
+    Initialize-LPMSLogAnalyticsApi | Out-Null
     Connect-EntraService -Service 'GraphBeta'
     Connect-EntraService -Service 'LogAnalytics' -ClientID $clientId -TenantID $tenantId -ClientSecret $secret
 
-    $apps = Get-AppRoleAssignment
-    $appsWithActivity = $apps | Get-AppActivityData -WorkspaceId $workspaceId -Days 30
-    $analysis = $appsWithActivity | Get-PermissionAnalysis
+    $apps = Get-LPMSAppRoleAssignment
+    $appsWithActivity = $apps | Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 30
+    $analysis = $appsWithActivity | Get-LPMSPermissionAnalysis
 
     Description:
     Shows how to initialize Log Analytics alongside Graph API services for complete
@@ -129,7 +129,7 @@ function Initialize-LogAnalyticsApi {
 
 .EXAMPLE
     # Verify service registration status
-    Initialize-LogAnalyticsApi
+    Initialize-LPMSLogAnalyticsApi
     $service = Get-EntraService -Name 'LogAnalytics'
 
     if ($service) {
@@ -145,7 +145,7 @@ function Initialize-LogAnalyticsApi {
 .EXAMPLE
     # Error handling in automation
     try {
-        $init = Initialize-LogAnalyticsApi -ErrorAction Stop
+        $init = Initialize-LPMSLogAnalyticsApi -ErrorAction Stop
         "Initialization $($init.Status): $($init.ServiceName)"
 
         Connect-EntraService -Service 'LogAnalytics' -ClientID $clientId -TenantID $tenantId -ClientSecret $secret -ErrorAction Stop
@@ -230,12 +230,12 @@ function Initialize-LogAnalyticsApi {
 
     Silent initialization (most common):
     ```powershell
-    Initialize-LogAnalyticsApi | Out-Null
+    Initialize-LPMSLogAnalyticsApi | Out-Null
     ```
 
     Conditional logic based on status:
     ```powershell
-    $result = Initialize-LogAnalyticsApi
+    $result = Initialize-LPMSLogAnalyticsApi
     if (-not $result.AlreadyRegistered) {
         "Service newly registered - first use in this session"
     }
@@ -244,7 +244,7 @@ function Initialize-LogAnalyticsApi {
     Error handling in production:
     ```powershell
     try {
-        Initialize-LogAnalyticsApi -ErrorAction Stop
+        Initialize-LPMSLogAnalyticsApi -ErrorAction Stop
     } catch {
         Write-Error "Failed to initialize Log Analytics API: $_"
         exit 1
@@ -273,8 +273,8 @@ function Initialize-LogAnalyticsApi {
     This function is typically used in conjunction with:
     - Connect-EntraService: Authenticate to Log Analytics
     - Invoke-EntraRequest: Execute Log Analytics queries
-    - Get-AppActivityData: Retrieve application activity from logs
-    - Get-AppThrottlingData: Get throttling statistics from logs
+    - Get-LPMSAppActivityData: Retrieve application activity from logs
+    - Get-LPMSAppThrottlingData: Get throttling statistics from logs
 
     Best Practices:
     - Call at the beginning of scripts that use Log Analytics
@@ -300,7 +300,7 @@ function Initialize-LogAnalyticsApi {
     https://docs.microsoft.com/en-us/azure/azure-monitor/logs/api/overview
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Initialize-LogAnalyticsApi.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Initialize-LPMSLogAnalyticsApi.html
 #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]

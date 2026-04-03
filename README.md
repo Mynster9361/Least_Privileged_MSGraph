@@ -145,7 +145,7 @@ Import-Module LeastPrivilegedMSGraph
 Get-Command -Module LeastPrivilegedMSGraph
 
 # Get help for a specific function
-Get-Help Get-AppRoleAssignment -Full
+Get-Help Get-LPMSAppRoleAssignment -Full
 
 #region Sample params needed to run below
 
@@ -158,22 +158,22 @@ $daysToQuery = 30 # The amount of days to look back within your workspace for th
 #endregion Sample params needed to run below
 
 #region Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 
 Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics", "GraphBeta"
 
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
 
 #region the good stuff Getting a full report of your app role assignments
-$appRoleAssignments = Get-AppRoleAssignment | select -First 5
+$appRoleAssignments = Get-LPMSAppRoleAssignment | select -First 5
 
-$appRoleAssignments | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$appRoleAssignments | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$appRoleAssignments | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$appRoleAssignments | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$appRoleAssignments | Get-PermissionAnalysis
+$appRoleAssignments | Get-LPMSPermissionAnalysis
 
-Export-PermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\report.html"
+Export-LPMSPermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\report.html"
 
 #endregion the good stuff Getting a full report of your app role assignments
 ```
@@ -181,12 +181,12 @@ Export-PermissionAnalysisReport -AppData $appRoleAssignments -OutputPath ".\repo
 ### Pipe everything
 ```powershell
 # You could also just pipe it all together
-Get-AppRoleAssignment | 
+Get-LPMSAppRoleAssignment | 
     select -First 50 | 
-    Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
-    Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
-    Get-PermissionAnalysis |
-    Export-PermissionAnalysisReport -OutputPath ".\report50.html"
+    Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+    Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+    Get-LPMSPermissionAnalysis |
+    Export-LPMSPermissionAnalysisReport -OutputPath ".\report50.html"
 ```
 
 ## Development Guide

@@ -27,10 +27,10 @@ Install-Module -Name LeastPrivilegedMSGraph -Repository PSGallery
 Import-Module LeastPrivilegedMSGraph
 
 # Initialize Log Analytics API
-Initialize-LogAnalyticsApi -WorkspaceId "your-workspace-id" -SharedKey "your-shared-key"
+Initialize-LPMSLogAnalyticsApi -WorkspaceId "your-workspace-id" -SharedKey "your-shared-key"
 
 # Get permission analysis for an application
-Get-PermissionAnalysis -ApplicationId "your-application-id"
+Get-LPMSPermissionAnalysis -ApplicationId "your-application-id"
 ```
 
 ## Features

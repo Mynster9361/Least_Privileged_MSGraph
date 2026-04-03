@@ -119,7 +119,7 @@ function Invoke-LPMSGraphScan {
     Progress and status information is written to the verbose and information streams.
 
 .EXAMPLE
-    Initialize-LogAnalyticsApi
+    Initialize-LPMSLogAnalyticsApi
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "GraphBeta", "LogAnalytics"
     Invoke-LPMSGraphScan -WorkspaceId "123456-workspace-id-456"
 
@@ -233,7 +233,7 @@ function Invoke-LPMSGraphScan {
     process {
         try {
             Write-Verbose "Retrieving app role assignments..."
-            $appData = Get-AppRoleAssignment
+            $appData = Get-LPMSAppRoleAssignment
 
             if (-not $appData) {
                 Write-Warning "No app role assignments found"
@@ -243,21 +243,21 @@ function Invoke-LPMSGraphScan {
             Write-Verbose "Found $($appData.Count) app role assignment(s)"
 
             Write-Verbose "Retrieving app activity data for the last $Days days..."
-            $appData = $appData | Get-AppActivityData @variables -Days $Days -ThrottleLimit $ThrottleLimit -MaxActivityEntries $MaxActivityEntries
+            $appData = $appData | Get-LPMSAppActivityData @variables -Days $Days -ThrottleLimit $ThrottleLimit -MaxActivityEntries $MaxActivityEntries
 
             if (-not $ExcludeThrottleData) {
                 Write-Verbose "Retrieving app throttling data..."
-                $appData = $appData | Get-AppThrottlingData @variables -Days $Days
+                $appData = $appData | Get-LPMSAppThrottlingData @variables -Days $Days
             }
             else {
                 Write-Verbose "Skipping throttling data collection"
             }
 
             Write-Verbose "Performing permission analysis..."
-            $appData = $appData | Get-PermissionAnalysis
+            $appData = $appData | Get-LPMSPermissionAnalysis
 
             Write-Verbose "Exporting report to: $OutputPath"
-            Export-PermissionAnalysisReport -AppData $appData -OutputPath $OutputPath
+            Export-LPMSPermissionAnalysisReport -AppData $appData -OutputPath $OutputPath
 
             Write-Verbose "Scan completed successfully"
         }

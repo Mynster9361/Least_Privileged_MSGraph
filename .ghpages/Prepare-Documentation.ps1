@@ -606,17 +606,17 @@ $indexContent = @'
 Import-Module LeastPrivilegedMSGraph
 
 # Initialize and connect
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $secret -Service "LogAnalytics", "GraphBeta"
 
 # Analyze permissions
-$apps = Get-AppRoleAssignment |
-    Get-AppActivityData -WorkspaceId $workspaceId -Days 30 |
-    Get-AppThrottlingData -WorkspaceId $workspaceId -Days 30 |
-    Get-PermissionAnalysis
+$apps = Get-LPMSAppRoleAssignment |
+    Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 30 |
+    Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days 30 |
+    Get-LPMSPermissionAnalysis
 
 # Generate report
-Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code></pre>
+Export-LPMSPermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code></pre>
 </div>
 
 <div class="card">
@@ -717,12 +717,12 @@ Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report.html"</code
     <h2>🏗️ Module Architecture</h2>
     <p>The module follows a pipeline-based architecture with six main cmdlets:</p>
     <ul>
-        <li><code>Initialize-LogAnalyticsApi</code> - Registers Log Analytics service for authentication</li>
-        <li><code>Get-AppRoleAssignment</code> - Retrieves current Microsoft Graph permissions for all applications</li>
-        <li><code>Get-AppActivityData</code> - Enriches applications with API activity from Log Analytics</li>
-        <li><code>Get-AppThrottlingData</code> - Adds throttling statistics and health metrics</li>
-        <li><code>Get-PermissionAnalysis</code> - Analyzes permissions against activity to determine optimal set</li>
-        <li><code>Export-PermissionAnalysisReport</code> - Generates interactive HTML reports</li>
+        <li><code>Initialize-LPMSLogAnalyticsApi</code> - Registers Log Analytics service for authentication</li>
+        <li><code>Get-LPMSAppRoleAssignment</code> - Retrieves current Microsoft Graph permissions for all applications</li>
+        <li><code>Get-LPMSAppActivityData</code> - Enriches applications with API activity from Log Analytics</li>
+        <li><code>Get-LPMSAppThrottlingData</code> - Adds throttling statistics and health metrics</li>
+        <li><code>Get-LPMSPermissionAnalysis</code> - Analyzes permissions against activity to determine optimal set</li>
+        <li><code>Export-LPMSPermissionAnalysisReport</code> - Generates interactive HTML reports</li>
     </ul>
 </div>
 
@@ -804,7 +804,7 @@ $daysToAnalyze = 30</code></pre>
 
     <h3>2. Initialize and Connect</h3>
     <pre><code># Initialize Log Analytics API service
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 
 # Connect to both Microsoft Graph and Log Analytics
 $connectSplat = @{
@@ -818,19 +818,19 @@ Connect-EntraService @connectSplat
 
     <h3>3. Analyze Permissions</h3>
     <pre><code># Get all apps with Graph permissions
-$apps = Get-AppRoleAssignment
+$apps = Get-LPMSAppRoleAssignment
 
 # Add API activity data from Log Analytics
-$apps | Get-AppActivityData -WorkspaceId $workspaceId -Days $daysToAnalyze
+$apps | Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days $daysToAnalyze
 
 # Add throttling statistics
-$apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days $daysToAnalyze
+$apps | Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days $daysToAnalyze
 
 # Perform permission analysis
-$analysis = $apps | Get-PermissionAnalysis
+$analysis = $apps | Get-LPMSPermissionAnalysis
 
 # Generate interactive HTML report
-Export-PermissionAnalysisReport -AppData $analysis -OutputPath ".\PermissionReport.html"</code></pre>
+Export-LPMSPermissionAnalysisReport -AppData $analysis -OutputPath ".\PermissionReport.html"</code></pre>
 
     <h3>4. View Results</h3>
     <pre><code># Open the report in your default browser
@@ -855,7 +855,7 @@ $workspaceId = "abcdef00-1111-2222-3333-444444444444"
 
 # Setup
 Import-Module LeastPrivilegedMSGraph
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 $connectSplat = @{
     ClientID     = $clientId
     TenantID     = $tenantId
@@ -866,13 +866,13 @@ $connectSplat = @{
 Connect-EntraService @connectSplat
 
 # Analysis pipeline
-$results = Get-AppRoleAssignment |
-    Get-AppActivityData -WorkspaceId $workspaceId -Days 30 |
-    Get-AppThrottlingData -WorkspaceId $workspaceId -Days 30 |
-    Get-PermissionAnalysis
+$results = Get-LPMSAppRoleAssignment |
+    Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 30 |
+    Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days 30 |
+    Get-LPMSPermissionAnalysis
 
 # Generate report
-Export-PermissionAnalysisReport -AppData $results -OutputPath ".\analysis-$(Get-Date -Format 'yyyyMMdd').html"
+Export-LPMSPermissionAnalysisReport -AppData $results -OutputPath ".\analysis-$(Get-Date -Format 'yyyyMMdd').html"
 
 # Display summary
 "`nAnalysis Complete!"
@@ -885,13 +885,13 @@ Export-PermissionAnalysisReport -AppData $results -OutputPath ".\analysis-$(Get-
 <div class="card">
     <h2>Analyzing Specific Applications</h2>
     <pre><code># Analyze only specific applications
-$criticalApps = Get-AppRoleAssignment |
+$criticalApps = Get-LPMSAppRoleAssignment |
     Where-Object { $_.PrincipalName -like "*Production*" }
 
 $analysis = $criticalApps |
-    Get-AppActivityData -WorkspaceId $workspaceId -Days 90 |
-    Get-AppThrottlingData -WorkspaceId $workspaceId -Days 90 |
-    Get-PermissionAnalysis
+    Get-LPMSAppActivityData -WorkspaceId $workspaceId -Days 90 |
+    Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days 90 |
+    Get-LPMSPermissionAnalysis
 
 # Find apps with high-privilege permissions they don't use
 $dangerousPerms = @('Directory.ReadWrite.All', 'RoleManagement.ReadWrite.Directory')
@@ -910,7 +910,7 @@ if ($overPrivileged) {
     <h2>Troubleshooting</h2>
     <h3>Connection Issues</h3>
     <pre><code># Test Log Analytics connectivity
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics"
 
 # Verify you can query the workspace

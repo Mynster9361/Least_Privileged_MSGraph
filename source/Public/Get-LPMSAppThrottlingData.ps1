@@ -1,4 +1,4 @@
-function Get-AppThrottlingData {
+function Get-LPMSAppThrottlingData {
     <#
 .SYNOPSIS
     Enriches application data with throttling statistics from Azure Log Analytics.
@@ -167,7 +167,7 @@ function Get-AppThrottlingData {
 .EXAMPLE
     Connect-EntraService -Service "GraphBeta"
     $apps = Get-MgServicePrincipal -Filter "appId eq '12345678-1234-1234-1234-123456789012'"
-    $enrichedApps = $apps | Get-AppThrottlingData -WorkspaceId "workspace-guid"
+    $enrichedApps = $apps | Get-LPMSAppThrottlingData -WorkspaceId "workspace-guid"
 
     Description:
     Retrieves throttling statistics for a specific application over the default 30-day period.
@@ -175,7 +175,7 @@ function Get-AppThrottlingData {
 
 .EXAMPLE
     $allApps = Get-MgServicePrincipal -All
-    $appsWithThrottling = $allApps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 90 -Verbose
+    $appsWithThrottling = $allApps | Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days 90 -Verbose
     $criticalApps = $appsWithThrottling | Where-Object {
         $_.ThrottlingStats.ThrottlingSeverity -ge 3
     }
@@ -192,7 +192,7 @@ function Get-AppThrottlingData {
     throttling severity, displaying key metrics for prioritization.
 
 .EXAMPLE
-    $apps | Get-AppThrottlingData -WorkspaceId $workspaceId -Days 7 -Verbose |
+    $apps | Get-LPMSAppThrottlingData -WorkspaceId $workspaceId -Days 7 -Verbose |
         Where-Object { $_.ThrottlingStats.Total429Errors -gt 100 } |
         Select-Object PrincipalName,
             @{N='429 Errors';E={$_.ThrottlingStats.Total429Errors}},
@@ -300,7 +300,7 @@ function Get-AppThrottlingData {
     - Monitor critical applications daily with automated alerting
     - Review Warning/Critical severity apps weekly
     - Archive monthly reports for compliance and capacity planning
-    - Combine with Get-AppActivityData for complete analysis
+    - Combine with Get-LPMSAppActivityData for complete analysis
     - Implement retry logic for apps with severity >= 3
 
     Mitigation Strategies for Throttled Applications:
@@ -315,15 +315,15 @@ function Get-AppThrottlingData {
 
     Related Cmdlets:
     - Get-AppThrottlingStat: Private function that fetches raw throttling data
-    - Get-AppActivityData: Add API activity information to applications
-    - Get-PermissionAnalysis: Complete permission and activity analysis
-    - Export-PermissionAnalysisReport: Generate visual reports including throttling data
+    - Get-LPMSAppActivityData: Add API activity information to applications
+    - Get-LPMSPermissionAnalysis: Complete permission and activity analysis
+    - Export-LPMSPermissionAnalysisReport: Generate visual reports including throttling data
 
 .LINK
     https://learn.microsoft.com/en-us/graph/throttling
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-AppThrottlingData.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSAppThrottlingData.html
 #>
     [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.String])]

@@ -8,7 +8,7 @@ CopyPaths:
   - data
 Encoding: UTF8
 # Force manual version - bypass GitVersion completely
-SemVer: '2.0.0'
+SemVer: "3.0.0"
 VersionedOutputDirectory: true
 IgnoreGitVersion: true
 
@@ -16,7 +16,7 @@ IgnoreGitVersion: true
 #       Sampler Pipeline Configuration             #
 ####################################################
 BuildWorkflow:
-  '.':
+  ".":
     - build
     - test
 
@@ -64,7 +64,7 @@ Pester:
 
 ModuleBuildTasks:
   Sampler:
-    - '*.build.Sampler.ib.tasks'
+    - "*.build.Sampler.ib.tasks"
 
 TaskHeader: |
   param($Path)
@@ -78,10 +78,10 @@ TaskHeader: |
   ""
 
 PlatyPS:
-  Path: './docs'
-  ModulePage: 'LeastPrivilegedMSGraph.md'
-  OutputFolder: './output/docs'
-  Encoding: 'UTF8'
+  Path: "./docs"
+  ModulePage: "LeastPrivilegedMSGraph.md"
+  OutputFolder: "./output/docs"
+  Encoding: "UTF8"
 
 # Force version configuration
 GitVersion:

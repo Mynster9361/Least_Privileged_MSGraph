@@ -4,31 +4,31 @@ on:
   workflow_dispatch:
     inputs:
       api_delay:
-        description: 'Delay between API calls (ms)'
+        description: "Delay between API calls (ms)"
         required: false
-        default: '100'
+        default: "100"
         type: string
       test_mode:
-        description: 'Enable test mode'
+        description: "Enable test mode"
         required: false
-        default: 'false'
+        default: "false"
         type: choice
         options:
-        - 'false'
-        - 'true'
+          - "false"
+          - "true"
       skip_count:
-        description: 'Skip first N endpoints (test mode only)'
+        description: "Skip first N endpoints (test mode only)"
         required: false
-        default: '0'
+        default: "0"
         type: string
       limit_count:
-        description: 'Limit to N endpoints (test mode only)'
+        description: "Limit to N endpoints (test mode only)"
         required: false
-        default: '0'
+        default: "0"
         type: string
-  schedule:
-    # Run daily at 2 AM UTC
-    - cron: '0 2 * * *'
+  #schedule:
+  # Run daily at 2 AM UTC
+  #- cron: '0 2 * * *'
 
 permissions:
   contents: write
@@ -36,442 +36,442 @@ permissions:
 jobs:
   extract-permissions:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22.16.0'
-        
-    - name: Install dependencies
-      run: |
-        npm init -y
-        npm install js-yaml axios
-        
-    - name: Backup existing files for comparison
-      run: |
-        mkdir -p backup
-        if [ -f source/data/permissions-v1.0.json ]; then
-          cp source/data/permissions-v1.0.json backup/permissions-v1.0-old.json
-          echo "Backed up existing v1.0 file"
-        fi
-        if [ -f source/data/permissions-beta.json ]; then
-          cp source/data/permissions-beta.json backup/permissions-beta-old.json
-          echo "Backed up existing beta file"
-        fi
-        
-    - name: Download Microsoft Graph metadata
-      run: |
-        echo "Downloading Microsoft Graph metadata repository..."
-        git clone --depth=1 https://github.com/microsoftgraph/msgraph-metadata.git temp-metadata
-        
-        # Create openapi directory structure
-        mkdir -p openapi/v1.0
-        mkdir -p openapi/beta
-        
-        # Copy the OpenAPI files
-        if [ -f temp-metadata/openapi/v1.0/openapi.yaml ]; then
-          cp temp-metadata/openapi/v1.0/openapi.yaml openapi/v1.0/
-          echo "Copied v1.0 OpenAPI file"
-        else
-          echo "Warning: v1.0 OpenAPI file not found"
-          ls -la temp-metadata/openapi/ || echo "openapi directory not found"
-        fi
-        
-        if [ -f temp-metadata/openapi/beta/openapi.yaml ]; then
-          cp temp-metadata/openapi/beta/openapi.yaml openapi/beta/
-          echo "Copied beta OpenAPI file"
-        else
-          echo "Warning: beta OpenAPI file not found"
-          ls -la temp-metadata/openapi/ || echo "openapi directory not found"
-        fi
-        
-        # Clean up temporary directory
-        rm -rf temp-metadata
-        
-        # Verify files exist
-        echo "Verifying OpenAPI files:"
-        ls -la openapi/v1.0/ || echo "v1.0 directory empty"
-        ls -la openapi/beta/ || echo "beta directory empty"
-        
-    - name: Extract permissions data (Ultra-Fast Mode)
-      run: node tools/run-production.js
-      if: ${{ github.event.inputs.test_mode != 'true' }}
-      
-    - name: Extract permissions data (Test Mode)
-      run: node tools/permissions-extractor.js
-      if: ${{ github.event.inputs.test_mode == 'true' }}
-      env:
-        API_DELAY: ${{ github.event.inputs.api_delay || '10' }}
-        TEST_MODE: 'true'
-        SKIP_COUNT: ${{ github.event.inputs.skip_count || '0' }}
-        LIMIT_COUNT: ${{ github.event.inputs.limit_count || '0' }}
-        CONCURRENT_REQUESTS: '50'
-        MAX_CONCURRENT_BATCHES: '5'
-      
-    - name: Create output directory and move files
-      run: |
-        mkdir -p source/data
-        
-        if [ -f permissions-v1.0.json ]; then
-          mv permissions-v1.0.json source/data/
-          echo "Moved v1.0 permissions file to source/data/"
-        else
-          echo "Warning: permissions-v1.0.json not found"
-        fi
-        
-        if [ -f permissions-beta.json ]; then
-          mv permissions-beta.json source/data/
-          echo "Moved beta permissions file to source/data/"
-        else
-          echo "Warning: permissions-beta.json not found"
-        fi
-        
-    - name: Analyze changes
-      id: analyze
-      shell: pwsh
-      run: |
-        # Function to analyze differences
-        function Compare-PermissionFiles {
-          param($OldFile, $NewFile, $ApiVersion)
-          
-          $changes = @{
-            added = @()
-            removed = @()
-            modified = @()
-          }
-          
-          if (-not (Test-Path $OldFile)) {
-            if (Test-Path $NewFile) {
-              $newData = Get-Content $NewFile | ConvertFrom-Json
-              $changes.added = @("Initial extraction: $($newData.Count) endpoints")
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.16.0"
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          npm install js-yaml axios
+
+      - name: Backup existing files for comparison
+        run: |
+          mkdir -p backup
+          if [ -f source/data/permissions-v1.0.json ]; then
+            cp source/data/permissions-v1.0.json backup/permissions-v1.0-old.json
+            echo "Backed up existing v1.0 file"
+          fi
+          if [ -f source/data/permissions-beta.json ]; then
+            cp source/data/permissions-beta.json backup/permissions-beta-old.json
+            echo "Backed up existing beta file"
+          fi
+
+      - name: Download Microsoft Graph metadata
+        run: |
+          echo "Downloading Microsoft Graph metadata repository..."
+          git clone --depth=1 https://github.com/microsoftgraph/msgraph-metadata.git temp-metadata
+
+          # Create openapi directory structure
+          mkdir -p openapi/v1.0
+          mkdir -p openapi/beta
+
+          # Copy the OpenAPI files
+          if [ -f temp-metadata/openapi/v1.0/openapi.yaml ]; then
+            cp temp-metadata/openapi/v1.0/openapi.yaml openapi/v1.0/
+            echo "Copied v1.0 OpenAPI file"
+          else
+            echo "Warning: v1.0 OpenAPI file not found"
+            ls -la temp-metadata/openapi/ || echo "openapi directory not found"
+          fi
+
+          if [ -f temp-metadata/openapi/beta/openapi.yaml ]; then
+            cp temp-metadata/openapi/beta/openapi.yaml openapi/beta/
+            echo "Copied beta OpenAPI file"
+          else
+            echo "Warning: beta OpenAPI file not found"
+            ls -la temp-metadata/openapi/ || echo "openapi directory not found"
+          fi
+
+          # Clean up temporary directory
+          rm -rf temp-metadata
+
+          # Verify files exist
+          echo "Verifying OpenAPI files:"
+          ls -la openapi/v1.0/ || echo "v1.0 directory empty"
+          ls -la openapi/beta/ || echo "beta directory empty"
+
+      - name: Extract permissions data (Ultra-Fast Mode)
+        run: node tools/run-production.js
+        if: ${{ github.event.inputs.test_mode != 'true' }}
+
+      - name: Extract permissions data (Test Mode)
+        run: node tools/permissions-extractor.js
+        if: ${{ github.event.inputs.test_mode == 'true' }}
+        env:
+          API_DELAY: ${{ github.event.inputs.api_delay || '10' }}
+          TEST_MODE: "true"
+          SKIP_COUNT: ${{ github.event.inputs.skip_count || '0' }}
+          LIMIT_COUNT: ${{ github.event.inputs.limit_count || '0' }}
+          CONCURRENT_REQUESTS: "50"
+          MAX_CONCURRENT_BATCHES: "5"
+
+      - name: Create output directory and move files
+        run: |
+          mkdir -p source/data
+
+          if [ -f permissions-v1.0.json ]; then
+            mv permissions-v1.0.json source/data/
+            echo "Moved v1.0 permissions file to source/data/"
+          else
+            echo "Warning: permissions-v1.0.json not found"
+          fi
+
+          if [ -f permissions-beta.json ]; then
+            mv permissions-beta.json source/data/
+            echo "Moved beta permissions file to source/data/"
+          else
+            echo "Warning: permissions-beta.json not found"
+          fi
+
+      - name: Analyze changes
+        id: analyze
+        shell: pwsh
+        run: |
+          # Function to analyze differences
+          function Compare-PermissionFiles {
+            param($OldFile, $NewFile, $ApiVersion)
+            
+            $changes = @{
+              added = @()
+              removed = @()
+              modified = @()
             }
-            return $changes
-          }
-          
-          if (-not (Test-Path $NewFile)) {
-            return $changes
-          }
-          
-          $oldData = Get-Content $OldFile | ConvertFrom-Json
-          $newData = Get-Content $NewFile | ConvertFrom-Json
-          
-          # Create lookup tables
-          $oldEndpoints = @{}
-          $newEndpoints = @{}
-          
-          foreach ($endpoint in $oldData) {
-            $oldEndpoints[$endpoint.Endpoint] = $endpoint
-          }
-          
-          foreach ($endpoint in $newData) {
-            $newEndpoints[$endpoint.Endpoint] = $endpoint
-          }
-          
-          # Find added endpoints
-          foreach ($endpoint in $newEndpoints.Keys) {
-            if (-not $oldEndpoints.ContainsKey($endpoint)) {
-              $methods = ($newEndpoints[$endpoint].Method.PSObject.Properties.Name) -join ", "
-              $changes.added += "$endpoint ($methods)"
+            
+            if (-not (Test-Path $OldFile)) {
+              if (Test-Path $NewFile) {
+                $newData = Get-Content $NewFile | ConvertFrom-Json
+                $changes.added = @("Initial extraction: $($newData.Count) endpoints")
+              }
+              return $changes
             }
-          }
-          
-          # Find removed endpoints
-          foreach ($endpoint in $oldEndpoints.Keys) {
-            if (-not $newEndpoints.ContainsKey($endpoint)) {
-              $methods = ($oldEndpoints[$endpoint].Method.PSObject.Properties.Name) -join ", "
-              $changes.removed += "$endpoint ($methods)"
+            
+            if (-not (Test-Path $NewFile)) {
+              return $changes
             }
-          }
-          
-          # Find modified endpoints (new methods or permission changes)
-          foreach ($endpoint in $newEndpoints.Keys) {
-            if ($oldEndpoints.ContainsKey($endpoint)) {
-              $oldMethods = $oldEndpoints[$endpoint].Method.PSObject.Properties.Name | Sort-Object
-              $newMethods = $newEndpoints[$endpoint].Method.PSObject.Properties.Name | Sort-Object
-              
-              $methodDiff = Compare-Object $oldMethods $newMethods
-              if ($methodDiff) {
-                $addedMethods = ($methodDiff | Where-Object { $_.SideIndicator -eq '=>' }).InputObject
-                $removedMethods = ($methodDiff | Where-Object { $_.SideIndicator -eq '<=' }).InputObject
-                
-                $changeDesc = @()
-                if ($addedMethods) { $changeDesc += "Added: $($addedMethods -join ', ')" }
-                if ($removedMethods) { $changeDesc += "Removed: $($removedMethods -join ', ')" }
-                
-                $changes.modified += "$endpoint ($($changeDesc -join '; '))"
+            
+            $oldData = Get-Content $OldFile | ConvertFrom-Json
+            $newData = Get-Content $NewFile | ConvertFrom-Json
+            
+            # Create lookup tables
+            $oldEndpoints = @{}
+            $newEndpoints = @{}
+            
+            foreach ($endpoint in $oldData) {
+              $oldEndpoints[$endpoint.Endpoint] = $endpoint
+            }
+            
+            foreach ($endpoint in $newData) {
+              $newEndpoints[$endpoint.Endpoint] = $endpoint
+            }
+            
+            # Find added endpoints
+            foreach ($endpoint in $newEndpoints.Keys) {
+              if (-not $oldEndpoints.ContainsKey($endpoint)) {
+                $methods = ($newEndpoints[$endpoint].Method.PSObject.Properties.Name) -join ", "
+                $changes.added += "$endpoint ($methods)"
               }
             }
+            
+            # Find removed endpoints
+            foreach ($endpoint in $oldEndpoints.Keys) {
+              if (-not $newEndpoints.ContainsKey($endpoint)) {
+                $methods = ($oldEndpoints[$endpoint].Method.PSObject.Properties.Name) -join ", "
+                $changes.removed += "$endpoint ($methods)"
+              }
+            }
+            
+            # Find modified endpoints (new methods or permission changes)
+            foreach ($endpoint in $newEndpoints.Keys) {
+              if ($oldEndpoints.ContainsKey($endpoint)) {
+                $oldMethods = $oldEndpoints[$endpoint].Method.PSObject.Properties.Name | Sort-Object
+                $newMethods = $newEndpoints[$endpoint].Method.PSObject.Properties.Name | Sort-Object
+                
+                $methodDiff = Compare-Object $oldMethods $newMethods
+                if ($methodDiff) {
+                  $addedMethods = ($methodDiff | Where-Object { $_.SideIndicator -eq '=>' }).InputObject
+                  $removedMethods = ($methodDiff | Where-Object { $_.SideIndicator -eq '<=' }).InputObject
+                  
+                  $changeDesc = @()
+                  if ($addedMethods) { $changeDesc += "Added: $($addedMethods -join ', ')" }
+                  if ($removedMethods) { $changeDesc += "Removed: $($removedMethods -join ', ')" }
+                  
+                  $changes.modified += "$endpoint ($($changeDesc -join '; '))"
+                }
+              }
+            }
+            
+            return $changes
           }
-          
-          return $changes
-        }
-        
-        # Analyze v1.0 changes
-        $v10Changes = Compare-PermissionFiles "backup/permissions-v1.0-old.json" "source/data/permissions-v1.0.json" "v1.0"
-        
-        # Analyze beta changes
-        $betaChanges = Compare-PermissionFiles "backup/permissions-beta-old.json" "source/data/permissions-beta.json" "beta"
-        
-        # Store results for later use
-        $v10Changes | ConvertTo-Json -Depth 10 | Out-File "changes-v10.json"
-        $betaChanges | ConvertTo-Json -Depth 10 | Out-File "changes-beta.json"
-        
-        # Output summary
-        $totalChanges = $v10Changes.added.Count + $v10Changes.removed.Count + $v10Changes.modified.Count + $betaChanges.added.Count + $betaChanges.removed.Count + $betaChanges.modified.Count
-        
-        if ($totalChanges -gt 0) {
-          Write-Output "has_significant_changes=true" >> $env:GITHUB_OUTPUT
-          Write-Output "Found $totalChanges changes across APIs"
-        } else {
-          Write-Output "has_significant_changes=false" >> $env:GITHUB_OUTPUT
-          Write-Output "No significant changes detected"
-        }
-        
-    - name: Generate summary report
-      run: |
-        echo "# Microsoft Graph Permissions Extraction Report" > source/data/extraction-summary.md
-        echo "Generated on: $(date)" >> source/data/extraction-summary.md
-        echo "" >> source/data/extraction-summary.md
-        
-        if [ -f source/data/permissions-v1.0.json ]; then
-          v10_endpoints=$(jq length source/data/permissions-v1.0.json)
-          v10_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-v1.0.json)
-          echo "## v1.0 Results" >> source/data/extraction-summary.md
-          echo "- Endpoints: $v10_endpoints" >> source/data/extraction-summary.md
-          echo "- Total Methods: $v10_methods" >> source/data/extraction-summary.md
-          echo "" >> source/data/extraction-summary.md
-        fi
-        
-        if [ -f source/data/permissions-beta.json ]; then
-          beta_endpoints=$(jq length source/data/permissions-beta.json)
-          beta_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-beta.json)
-          echo "## Beta Results" >> source/data/extraction-summary.md
-          echo "- Endpoints: $beta_endpoints" >> source/data/extraction-summary.md
-          echo "- Total Methods: $beta_methods" >> source/data/extraction-summary.md
-        fi
-        
-    - name: Check for changes
-      id: changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # Add the files from source/data
-        git add source/data/
-        
-        # Check if there are changes to commit
-        if git diff --staged --quiet; then
-          echo "has_changes=false" >> $GITHUB_OUTPUT
-          echo "No changes detected"
-        else
-          echo "has_changes=true" >> $GITHUB_OUTPUT
-          echo "Changes detected"
-        fi
-        
-    - name: Display summary
-      run: |
-        echo "## Extraction Summary"
-        if [ -f source/data/extraction-summary.md ]; then
-          cat source/data/extraction-summary.md
-        fi
-        
-    - name: Commit and Push Changes
-      if: steps.changes.outputs.has_changes == 'true'
-      id: commit
-      run: |
-        git commit -m "Update Microsoft Graph permissions data [skip ci]
-        
-        - Updated $(date '+%Y-%m-%d %H:%M:%S UTC')
-        - Extraction mode: ${{ github.event.inputs.test_mode == 'true' && 'Test' || 'Production' }}
-        - Files updated: $(ls -1 source/data/*.json | wc -l) permission files"
-        
-        git push
-        
-        # Get the commit SHA for the Discord notification
-        COMMIT_SHA=$(git rev-parse HEAD)
-        echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
 
-    - name: Send Discord Notification
-      if: steps.changes.outputs.has_changes == 'true'
-      shell: pwsh
-      run: |
-        $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
-        
-        # Read the summary data
-        $v10Exists = Test-Path "source/data/permissions-v1.0.json"
-        $betaExists = Test-Path "source/data/permissions-beta.json"
-        
-        if ($v10Exists) {
-          $v10Data = Get-Content "source/data/permissions-v1.0.json" | ConvertFrom-Json
-          $v10Endpoints = $v10Data.Count
-          $v10Methods = ($v10Data | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
-        } else {
-          $v10Endpoints = 0
-          $v10Methods = 0
-        }
-        
-        if ($betaExists) {
-          $betaData = Get-Content "source/data/permissions-beta.json" | ConvertFrom-Json
-          $betaEndpoints = $betaData.Count
-          $betaMethods = ($betaData | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
-        } else {
-          $betaEndpoints = 0
-          $betaMethods = 0
-        }
-        
-        # Read changes data
-        $v10Changes = @{ added = @(); removed = @(); modified = @() }
-        $betaChanges = @{ added = @(); removed = @(); modified = @() }
-        
-        if (Test-Path "changes-v10.json") {
-          $v10Changes = Get-Content "changes-v10.json" | ConvertFrom-Json
-        }
-        
-        if (Test-Path "changes-beta.json") {
-          $betaChanges = Get-Content "changes-beta.json" | ConvertFrom-Json
-        }
-        
-        $extractionMode = if ("${{ github.event.inputs.test_mode }}" -eq "true") { "Test Mode" } else { "Production Mode" }
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
-        $repositoryUrl = "${{ github.server_url }}/${{ github.repository }}"
-        $commitSha = "${{ steps.commit.outputs.commit_sha }}"
-        $commitUrl = "$repositoryUrl/commit/$commitSha"
-        
-        # Create embed fields
-        $fields = @(
-          @{
-            name = "📊 v1.0 API"
-            value = "**Endpoints:** $v10Endpoints`n**Methods:** $v10Methods"
-            inline = $true
-          },
-          @{
-            name = "🧪 Beta API"
-            value = "**Endpoints:** $betaEndpoints`n**Methods:** $betaMethods"
-            inline = $true
-          },
-          @{
-            name = "⚙️ Extraction Info"
-            value = "**Mode:** $extractionMode`n**Updated:** $timestamp"
-            inline = $false
+          # Analyze v1.0 changes
+          $v10Changes = Compare-PermissionFiles "backup/permissions-v1.0-old.json" "source/data/permissions-v1.0.json" "v1.0"
+
+          # Analyze beta changes
+          $betaChanges = Compare-PermissionFiles "backup/permissions-beta-old.json" "source/data/permissions-beta.json" "beta"
+
+          # Store results for later use
+          $v10Changes | ConvertTo-Json -Depth 10 | Out-File "changes-v10.json"
+          $betaChanges | ConvertTo-Json -Depth 10 | Out-File "changes-beta.json"
+
+          # Output summary
+          $totalChanges = $v10Changes.added.Count + $v10Changes.removed.Count + $v10Changes.modified.Count + $betaChanges.added.Count + $betaChanges.removed.Count + $betaChanges.modified.Count
+
+          if ($totalChanges -gt 0) {
+            Write-Output "has_significant_changes=true" >> $env:GITHUB_OUTPUT
+            Write-Output "Found $totalChanges changes across APIs"
+          } else {
+            Write-Output "has_significant_changes=false" >> $env:GITHUB_OUTPUT
+            Write-Output "No significant changes detected"
           }
-        )
-        
-        # Add v1.0 changes if any
-        if ($v10Changes.added.Count -gt 0 -or $v10Changes.removed.Count -gt 0 -or $v10Changes.modified.Count -gt 0) {
-          $v10ChangeText = @()
-          if ($v10Changes.added.Count -gt 0) {
-            $v10ChangeText += "**Added:** $($v10Changes.added.Count)"
-            if ($v10Changes.added.Count -le 3) {
-              $v10ChangeText += ($v10Changes.added | ForEach-Object { "• $_" })
+
+      - name: Generate summary report
+        run: |
+          echo "# Microsoft Graph Permissions Extraction Report" > source/data/extraction-summary.md
+          echo "Generated on: $(date)" >> source/data/extraction-summary.md
+          echo "" >> source/data/extraction-summary.md
+
+          if [ -f source/data/permissions-v1.0.json ]; then
+            v10_endpoints=$(jq length source/data/permissions-v1.0.json)
+            v10_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-v1.0.json)
+            echo "## v1.0 Results" >> source/data/extraction-summary.md
+            echo "- Endpoints: $v10_endpoints" >> source/data/extraction-summary.md
+            echo "- Total Methods: $v10_methods" >> source/data/extraction-summary.md
+            echo "" >> source/data/extraction-summary.md
+          fi
+
+          if [ -f source/data/permissions-beta.json ]; then
+            beta_endpoints=$(jq length source/data/permissions-beta.json)
+            beta_methods=$(jq '[.[].Method | keys | length] | add' source/data/permissions-beta.json)
+            echo "## Beta Results" >> source/data/extraction-summary.md
+            echo "- Endpoints: $beta_endpoints" >> source/data/extraction-summary.md
+            echo "- Total Methods: $beta_methods" >> source/data/extraction-summary.md
+          fi
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Add the files from source/data
+          git add source/data/
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Display summary
+        run: |
+          echo "## Extraction Summary"
+          if [ -f source/data/extraction-summary.md ]; then
+            cat source/data/extraction-summary.md
+          fi
+
+      - name: Commit and Push Changes
+        if: steps.changes.outputs.has_changes == 'true'
+        id: commit
+        run: |
+          git commit -m "Update Microsoft Graph permissions data [skip ci]
+
+          - Updated $(date '+%Y-%m-%d %H:%M:%S UTC')
+          - Extraction mode: ${{ github.event.inputs.test_mode == 'true' && 'Test' || 'Production' }}
+          - Files updated: $(ls -1 source/data/*.json | wc -l) permission files"
+
+          git push
+
+          # Get the commit SHA for the Discord notification
+          COMMIT_SHA=$(git rev-parse HEAD)
+          echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
+
+      - name: Send Discord Notification
+        if: steps.changes.outputs.has_changes == 'true'
+        shell: pwsh
+        run: |
+          $webhookUrl = "${{ secrets.DISCORD_WEBHOOK_URL }}"
+
+          # Read the summary data
+          $v10Exists = Test-Path "source/data/permissions-v1.0.json"
+          $betaExists = Test-Path "source/data/permissions-beta.json"
+
+          if ($v10Exists) {
+            $v10Data = Get-Content "source/data/permissions-v1.0.json" | ConvertFrom-Json
+            $v10Endpoints = $v10Data.Count
+            $v10Methods = ($v10Data | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
+          } else {
+            $v10Endpoints = 0
+            $v10Methods = 0
+          }
+
+          if ($betaExists) {
+            $betaData = Get-Content "source/data/permissions-beta.json" | ConvertFrom-Json
+            $betaEndpoints = $betaData.Count
+            $betaMethods = ($betaData | ForEach-Object { $_.Method.PSObject.Properties.Count } | Measure-Object -Sum).Sum
+          } else {
+            $betaEndpoints = 0
+            $betaMethods = 0
+          }
+
+          # Read changes data
+          $v10Changes = @{ added = @(); removed = @(); modified = @() }
+          $betaChanges = @{ added = @(); removed = @(); modified = @() }
+
+          if (Test-Path "changes-v10.json") {
+            $v10Changes = Get-Content "changes-v10.json" | ConvertFrom-Json
+          }
+
+          if (Test-Path "changes-beta.json") {
+            $betaChanges = Get-Content "changes-beta.json" | ConvertFrom-Json
+          }
+
+          $extractionMode = if ("${{ github.event.inputs.test_mode }}" -eq "true") { "Test Mode" } else { "Production Mode" }
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
+          $repositoryUrl = "${{ github.server_url }}/${{ github.repository }}"
+          $commitSha = "${{ steps.commit.outputs.commit_sha }}"
+          $commitUrl = "$repositoryUrl/commit/$commitSha"
+
+          # Create embed fields
+          $fields = @(
+            @{
+              name = "📊 v1.0 API"
+              value = "**Endpoints:** $v10Endpoints`n**Methods:** $v10Methods"
+              inline = $true
+            },
+            @{
+              name = "🧪 Beta API"
+              value = "**Endpoints:** $betaEndpoints`n**Methods:** $betaMethods"
+              inline = $true
+            },
+            @{
+              name = "⚙️ Extraction Info"
+              value = "**Mode:** $extractionMode`n**Updated:** $timestamp"
+              inline = $false
+            }
+          )
+
+          # Add v1.0 changes if any
+          if ($v10Changes.added.Count -gt 0 -or $v10Changes.removed.Count -gt 0 -or $v10Changes.modified.Count -gt 0) {
+            $v10ChangeText = @()
+            if ($v10Changes.added.Count -gt 0) {
+              $v10ChangeText += "**Added:** $($v10Changes.added.Count)"
+              if ($v10Changes.added.Count -le 3) {
+                $v10ChangeText += ($v10Changes.added | ForEach-Object { "• $_" })
+              }
+            }
+            if ($v10Changes.removed.Count -gt 0) {
+              $v10ChangeText += "**Removed:** $($v10Changes.removed.Count)"
+              if ($v10Changes.removed.Count -le 3) {
+                $v10ChangeText += ($v10Changes.removed | ForEach-Object { "• $_" })
+              }
+            }
+            if ($v10Changes.modified.Count -gt 0) {
+              $v10ChangeText += "**Modified:** $($v10Changes.modified.Count)"
+              if ($v10Changes.modified.Count -le 2) {
+                $v10ChangeText += ($v10Changes.modified | ForEach-Object { "• $_" })
+              }
+            }
+            
+            $fields += @{
+              name = "🔄 v1.0 Changes"
+              value = ($v10ChangeText -join "`n")[0..1000] -join ""  # Limit to 1000 chars
+              inline = $false
             }
           }
-          if ($v10Changes.removed.Count -gt 0) {
-            $v10ChangeText += "**Removed:** $($v10Changes.removed.Count)"
-            if ($v10Changes.removed.Count -le 3) {
-              $v10ChangeText += ($v10Changes.removed | ForEach-Object { "• $_" })
+
+          # Add beta changes if any
+          if ($betaChanges.added.Count -gt 0 -or $betaChanges.removed.Count -gt 0 -or $betaChanges.modified.Count -gt 0) {
+            $betaChangeText = @()
+            if ($betaChanges.added.Count -gt 0) {
+              $betaChangeText += "**Added:** $($betaChanges.added.Count)"
+              if ($betaChanges.added.Count -le 3) {
+                $betaChangeText += ($betaChanges.added | ForEach-Object { "• $_" })
+              }
+            }
+            if ($betaChanges.removed.Count -gt 0) {
+              $betaChangeText += "**Removed:** $($betaChanges.removed.Count)"
+              if ($betaChanges.removed.Count -le 3) {
+                $betaChangeText += ($betaChanges.removed | ForEach-Object { "• $_" })
+              }
+            }
+            if ($betaChanges.modified.Count -gt 0) {
+              $betaChangeText += "**Modified:** $($betaChanges.modified.Count)"
+              if ($betaChanges.modified.Count -le 2) {
+                $betaChangeText += ($betaChanges.modified | ForEach-Object { "• $_" })
+              }
+            }
+            
+            $fields += @{
+              name = "🔄 Beta Changes"
+              value = ($betaChangeText -join "`n")[0..1000] -join ""  # Limit to 1000 chars
+              inline = $false
             }
           }
-          if ($v10Changes.modified.Count -gt 0) {
-            $v10ChangeText += "**Modified:** $($v10Changes.modified.Count)"
-            if ($v10Changes.modified.Count -le 2) {
-              $v10ChangeText += ($v10Changes.modified | ForEach-Object { "• $_" })
-            }
-          }
-          
+
+          # Add links
           $fields += @{
-            name = "🔄 v1.0 Changes"
-            value = ($v10ChangeText -join "`n")[0..1000] -join ""  # Limit to 1000 chars
+            name = "🔗 Links"
+            value = "[📁 Repository]($repositoryUrl) • [📝 View Commit]($commitUrl)"
             inline = $false
           }
-        }
-        
-        # Add beta changes if any
-        if ($betaChanges.added.Count -gt 0 -or $betaChanges.removed.Count -gt 0 -or $betaChanges.modified.Count -gt 0) {
-          $betaChangeText = @()
-          if ($betaChanges.added.Count -gt 0) {
-            $betaChangeText += "**Added:** $($betaChanges.added.Count)"
-            if ($betaChanges.added.Count -le 3) {
-              $betaChangeText += ($betaChanges.added | ForEach-Object { "• $_" })
+
+          # Create Discord embed
+          $embed = @{
+            title = "🔄 Microsoft Graph Permissions Updated"
+            description = "New permissions data has been extracted and committed to the repository."
+            color = 3066993  # Green color
+            fields = $fields
+            footer = @{
+              text = "Least Privileged MSGraph"
             }
+            timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
           }
-          if ($betaChanges.removed.Count -gt 0) {
-            $betaChangeText += "**Removed:** $($betaChanges.removed.Count)"
-            if ($betaChanges.removed.Count -le 3) {
-              $betaChangeText += ($betaChanges.removed | ForEach-Object { "• $_" })
+
+          $payload = @{
+            username = "Graph Permissions Bot"
+            avatar_url = "https://github.com/microsoft.png"
+            embeds = @($embed)
+          } | ConvertTo-Json -Depth 10
+
+          # Send webhook
+          try {
+            $headers = @{
+              "Content-Type" = "application/json"
             }
+            
+            Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $payload -Headers $headers
+            Write-Output "✅ Discord notification sent successfully"
           }
-          if ($betaChanges.modified.Count -gt 0) {
-            $betaChangeText += "**Modified:** $($betaChanges.modified.Count)"
-            if ($betaChanges.modified.Count -le 2) {
-              $betaChangeText += ($betaChanges.modified | ForEach-Object { "• $_" })
-            }
+          catch {
+            Write-Output "❌ Failed to send Discord notification: $($_.Exception.Message)"
+            Write-Output "Payload was: $payload"
           }
-          
-          $fields += @{
-            name = "🔄 Beta Changes"
-            value = ($betaChangeText -join "`n")[0..1000] -join ""  # Limit to 1000 chars
-            inline = $false
-          }
-        }
-        
-        # Add links
-        $fields += @{
-          name = "🔗 Links"
-          value = "[📁 Repository]($repositoryUrl) • [📝 View Commit]($commitUrl)"
-          inline = $false
-        }
-        
-        # Create Discord embed
-        $embed = @{
-          title = "🔄 Microsoft Graph Permissions Updated"
-          description = "New permissions data has been extracted and committed to the repository."
-          color = 3066993  # Green color
-          fields = $fields
-          footer = @{
-            text = "Least Privileged MSGraph"
-          }
-          timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-        }
-        
-        $payload = @{
-          username = "Graph Permissions Bot"
-          avatar_url = "https://github.com/microsoft.png"
-          embeds = @($embed)
-        } | ConvertTo-Json -Depth 10
-        
-        # Send webhook
-        try {
-          $headers = @{
-            "Content-Type" = "application/json"
-          }
-          
-          Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $payload -Headers $headers
-          Write-Output "✅ Discord notification sent successfully"
-        }
-        catch {
-          Write-Output "❌ Failed to send Discord notification: $($_.Exception.Message)"
-          Write-Output "Payload was: $payload"
-        }
-        
-    - name: Cleanup
-      run: |
-        rm -rf backup changes-*.json openapi temp-metadata
-        
-    - name: Debug information
-      if: failure()
-      run: |
-        echo "=== Debug Information ==="
-        echo "Current directory contents:"
-        ls -la
-        echo ""
-        echo "Source data directory contents:"
-        ls -la source/data/ 2>/dev/null || echo "No source/data directory found"
-        echo ""
-        echo "Git status:"
-        git status
+
+      - name: Cleanup
+        run: |
+          rm -rf backup changes-*.json openapi temp-metadata
+
+      - name: Debug information
+        if: failure()
+        run: |
+          echo "=== Debug Information ==="
+          echo "Current directory contents:"
+          ls -la
+          echo ""
+          echo "Source data directory contents:"
+          ls -la source/data/ 2>/dev/null || echo "No source/data directory found"
+          echo ""
+          echo "Git status:"
+          git status

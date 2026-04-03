@@ -22,7 +22,7 @@ Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGrap
 
 
 #region Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 
 
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
@@ -31,15 +31,15 @@ Initialize-LogAnalyticsApi
 
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
 
-$lightweightGroups = Get-AppRoleAssignment
+$lightweightGroups = Get-LPMSAppRoleAssignment
 
-$lightweightGroups | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 100000 -Verbose -Debug
+$lightweightGroups | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 100000 -Verbose -Debug
 
-$lightweightGroups | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$lightweightGroups | Get-PermissionAnalysis
+$lightweightGroups | Get-LPMSPermissionAnalysis
 
-Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report2.html"
+Export-LPMSPermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report2.html"
 
 #endregion the good stuff
 
@@ -47,25 +47,25 @@ Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\repor
 ./build.ps1 -ResolveDependency -tasks clean, build, test
 Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
 
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
-$delegatedOnly = Get-AppRoleAssignment -Verbose
-$delegatedOnly | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 10000 -Verbose -Debug
-$delegatedOnly | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
-$delegatedOnly | Get-PermissionAnalysis -Verbose -Debug
-Export-PermissionAnalysisReport -AppData $delegatedOnly -OutputPath ".\report-delegated.html"
+$delegatedOnly = Get-LPMSAppRoleAssignment -Verbose
+$delegatedOnly | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 10000 -Verbose -Debug
+$delegatedOnly | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
+$delegatedOnly | Get-LPMSPermissionAnalysis -Verbose -Debug
+Export-LPMSPermissionAnalysisReport -AppData $delegatedOnly -OutputPath ".\report-delegated.html"
 
-$apps = Get-AppRoleAssignment |
-  Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 |
-    Get-PermissionAnalysis
-$apps | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
-Export-PermissionAnalysisReport -AppData $apps -OutputPath ".\report-delegated-2.html"
+$apps = Get-LPMSAppRoleAssignment |
+  Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 |
+    Get-LPMSPermissionAnalysis
+$apps | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -Verbose -Debug
+Export-LPMSPermissionAnalysisReport -AppData $apps -OutputPath ".\report-delegated-2.html"
 
 #endregion test delegated apps
 
 #region test app activty data
 # Get one app to test with
-$testApp = (Get-AppRoleAssignment | Select-Object -First 1)
+$testApp = (Get-LPMSAppRoleAssignment | Select-Object -First 1)
 
 
 # Check all PSFramework messages
@@ -73,23 +73,23 @@ Get-PSFMessage | Select-Object -Last 30 | Format-Table Timestamp, FunctionName, 
 #endregion test app activty data
 
 #region the good stuff for user context
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -AsAzAccount
 $daysToQuery = 5
-$lightweightGroups = Get-AppRoleAssignment
-$lightweightGroups | Get-AppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
+$lightweightGroups = Get-LPMSAppRoleAssignment
+$lightweightGroups | Get-LPMSAppActivityData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
 
-$lightweightGroups | Get-AppThrottlingData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days $daysToQuery -Verbose -Debug
+$lightweightGroups | Get-LPMSAppThrottlingData -subId $subscriptionId -rgName $resourceGroup -workspaceName $workspace -Days $daysToQuery -Verbose -Debug
 
-$lightweightGroups | Get-PermissionAnalysis
+$lightweightGroups | Get-LPMSPermissionAnalysis
 
-Export-PermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report.html"
+Export-LPMSPermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report.html"
 #endregion the good stuff for user context
 
 $t = $lightweightGroups | Where-Object { $_.PrincipalName -eq "" }
-$t | Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
-$t | Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
-$t | Get-PermissionAnalysis
+$t | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$t | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$t | Get-LPMSPermissionAnalysis
 
 Get-AppActivityFromLog -logAnalyticsWorkspace $logAnalyticsWorkspaceId -days 30 -spId "" -Debug -Verbose
 <# Before Freds suggestions
@@ -126,18 +126,18 @@ TotalMilliseconds : 776076,5648
 #region full pipeline
 
 # PIPE EVERYTHING!!!!
-Get-AppRoleAssignment |
-  Get-AppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
-    Get-AppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
-      Get-PermissionAnalysis |
-        Export-PermissionAnalysisReport -OutputPath ".\report5.html"
+Get-LPMSAppRoleAssignment |
+  Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+    Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery |
+      Get-LPMSPermissionAnalysis |
+        Export-LPMSPermissionAnalysisReport -OutputPath ".\report5.html"
 
 
 #endregion full pipeline
 
 
 #region testing the new assert + invoke-lpmsgraphscan
-Initialize-LogAnalyticsApi
+Initialize-LPMSLogAnalyticsApi
 Connect-EntraService -Service "LogAnalytics", "GraphBeta", "Azure" -AsAzAccount
 (Assert-LPMSGraph).checks
 $paramUser = @{

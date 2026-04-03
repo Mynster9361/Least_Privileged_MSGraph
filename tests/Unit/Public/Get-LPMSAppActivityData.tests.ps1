@@ -14,7 +14,7 @@ BeforeAll {
     else {
         # Fallback: dot source the functions directly for testing
         $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppActivityFromLog.ps1" -ErrorAction SilentlyContinue
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppActivityData.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-LPMSAppActivityData.ps1" -ErrorAction SilentlyContinue
 
         if ($privateFunction) {
             . $privateFunction.FullName
@@ -24,7 +24,7 @@ BeforeAll {
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Get-AppActivityData.ps1"
+            throw "Could not find Get-LPMSAppActivityData.ps1"
         }
     }
 }
@@ -33,25 +33,25 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'Get-AppActivityData' {
+Describe 'Get-LPMSAppActivityData' {
     Context 'Parameter Validation' {
         It 'Should have mandatory WorkspaceId parameter' {
-            $command = Get-Command -Name Get-AppActivityData
+            $command = Get-Command -Name Get-LPMSAppActivityData
             $command.Parameters['WorkspaceId'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should accept pipeline input for AppData' {
-            $command = Get-Command -Name Get-AppActivityData
+            $command = Get-Command -Name Get-LPMSAppActivityData
             $command.Parameters['AppData'].Attributes.ValueFromPipeline | Should -Be $true
         }
 
         It 'Should have Days parameter with default value of 30' {
-            $command = Get-Command -Name Get-AppActivityData
+            $command = Get-Command -Name Get-LPMSAppActivityData
             $command.Parameters['Days'] | Should -Not -BeNullOrEmpty
         }
 
         It 'Should have mandatory AppData parameter' {
-            $command = Get-Command -Name Get-AppActivityData
+            $command = Get-Command -Name Get-LPMSAppActivityData
             $command.Parameters['AppData'].Attributes.Mandatory | Should -Be $true
         }
     }

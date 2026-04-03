@@ -1,4 +1,4 @@
-function Export-PermissionAnalysisReport {
+function Export-LPMSPermissionAnalysisReport {
     <#
 .SYNOPSIS
     Generates an interactive HTML report for Microsoft Graph permission analysis results.
@@ -28,7 +28,7 @@ function Export-PermissionAnalysisReport {
        - Throttling statistics and health indicators
        - Permission recommendations
 
-    The function processes application analysis data (typically from Get-PermissionAnalysis),
+    The function processes application analysis data (typically from Get-LPMSPermissionAnalysis),
     embeds it as JSON into an HTML template with Tailwind CSS styling, and generates a
     standalone HTML file that can be shared, archived, or viewed in any modern browser.
 
@@ -40,7 +40,7 @@ function Export-PermissionAnalysisReport {
     - **Historical Tracking**: Archive reports over time to track permission hygiene trends
 
 .PARAMETER AppData
-    An array of application permission analysis objects, typically from Get-PermissionAnalysis.
+    An array of application permission analysis objects, typically from Get-LPMSPermissionAnalysis.
     This parameter accepts pipeline input, allowing multiple applications to be processed efficiently.
 
     Each object should contain the following properties:
@@ -97,16 +97,16 @@ function Export-PermissionAnalysisReport {
     or copy operations to move it to a shared location.
 
 .EXAMPLE
-    $results = Get-PermissionAnalysis -WorkspaceId $wsId -Days 30
-    $reportPath = Export-PermissionAnalysisReport -AppData $results -OutputPath ".\reports\monthly-analysis.html"
+    $results = Get-LPMSPermissionAnalysis -WorkspaceId $wsId -Days 30
+    $reportPath = Export-LPMSPermissionAnalysisReport -AppData $results -OutputPath ".\reports\monthly-analysis.html"
     Start-Process $reportPath
 
     Description:
     Analyzes 30 days of activity, generates a report, and immediately opens it in the default browser.
 
 .EXAMPLE
-    Get-PermissionAnalysis -WorkspaceId $wsId -Days 90 -ApplicationId $criticalApps |
-        Export-PermissionAnalysisReport -OutputPath "C:\Reports\Critical_Apps_$(Get-Date -Format 'yyyyMMdd').html" -ReportTitle "Critical Applications - Q4 Analysis"
+    Get-LPMSPermissionAnalysis -WorkspaceId $wsId -Days 90 -ApplicationId $criticalApps |
+        Export-LPMSPermissionAnalysisReport -OutputPath "C:\Reports\Critical_Apps_$(Get-Date -Format 'yyyyMMdd').html" -ReportTitle "Critical Applications - Q4 Analysis"
 
     Description:
     Analyzes specific critical applications over 90 days, generates a timestamped report
@@ -114,13 +114,13 @@ function Export-PermissionAnalysisReport {
 
 .EXAMPLE
     # Compare current vs. previous month
-    $thisMonth = Get-PermissionAnalysis -WorkspaceId $wsId -Days 30
-    $lastMonth = Get-PermissionAnalysis -WorkspaceId $wsId -Days 60 | Where-Object {
+    $thisMonth = Get-LPMSPermissionAnalysis -WorkspaceId $wsId -Days 30
+    $lastMonth = Get-LPMSPermissionAnalysis -WorkspaceId $wsId -Days 60 | Where-Object {
         $_.LastActivityDate -lt (Get-Date).AddDays(-30)
     }
 
-    Export-PermissionAnalysisReport -AppData $thisMonth -OutputPath ".\reports\current-month.html" -ReportTitle "Current Month"
-    Export-PermissionAnalysisReport -AppData $lastMonth -OutputPath ".\reports\last-month.html" -ReportTitle "Previous Month"
+    Export-LPMSPermissionAnalysisReport -AppData $thisMonth -OutputPath ".\reports\current-month.html" -ReportTitle "Current Month"
+    Export-LPMSPermissionAnalysisReport -AppData $lastMonth -OutputPath ".\reports\last-month.html" -ReportTitle "Previous Month"
 
     Description:
     Generates two separate reports for comparison between time periods to identify
@@ -128,7 +128,7 @@ function Export-PermissionAnalysisReport {
 
 .EXAMPLE
     # Filter and report on problematic applications only
-    $allResults = Get-PermissionAnalysis -WorkspaceId $wsId -Days 30
+    $allResults = Get-LPMSPermissionAnalysis -WorkspaceId $wsId -Days 30
     $problematic = $allResults | Where-Object {
         $_.ExcessPermissions.Count -gt 5 -or
         $_.RequiredPermissions.Count -gt 0 -or
@@ -136,7 +136,7 @@ function Export-PermissionAnalysisReport {
     }
 
     if ($problematic.Count -gt 0) {
-        $report = Export-PermissionAnalysisReport -AppData $problematic -OutputPath ".\ActionRequired.html" -ReportTitle "Applications Requiring Attention"
+        $report = Export-LPMSPermissionAnalysisReport -AppData $problematic -OutputPath ".\ActionRequired.html" -ReportTitle "Applications Requiring Attention"
         "Found $($problematic.Count) applications requiring attention. Report: $report"
     } else {
         "All applications are optimally configured!"
@@ -235,7 +235,7 @@ function Export-PermissionAnalysisReport {
     https://learn.microsoft.com/en-us/graph/permissions-reference
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Export-PermissionAnalysisReport.html
+    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Export-LPMSPermissionAnalysisReport.html
 #>
     [CmdletBinding()]
     [OutputType([System.String])]

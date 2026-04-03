@@ -14,7 +14,7 @@ BeforeAll {
     else {
         # Fallback: dot source the functions directly for testing
         $privateFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Private" -Filter "Get-AppThrottlingStat.ps1" -ErrorAction SilentlyContinue
-        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-AppThrottlingData.ps1" -ErrorAction SilentlyContinue
+        $publicFunction = Get-ChildItem -Path "$PSScriptRoot/../../../source/Public" -Filter "Get-LPMSAppThrottlingData.ps1" -ErrorAction SilentlyContinue
 
         if ($privateFunction) {
             . $privateFunction.FullName
@@ -24,7 +24,7 @@ BeforeAll {
             $script:moduleLoaded = $false
         }
         else {
-            throw "Could not find Get-AppThrottlingData.ps1"
+            throw "Could not find Get-LPMSAppThrottlingData.ps1"
         }
     }
 
@@ -185,30 +185,30 @@ AfterAll {
     Remove-Module -Name $script:moduleName -Force -ErrorAction SilentlyContinue
 }
 
-Describe 'Get-AppThrottlingData' {
+Describe 'Get-LPMSAppThrottlingData' {
     Context 'Parameter Validation' {
         It 'Should have mandatory WorkspaceId parameter' {
-            $command = Get-Command -Name Get-AppThrottlingData
+            $command = Get-Command -Name Get-LPMSAppThrottlingData
             $command.Parameters['WorkspaceId'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should accept pipeline input for AppData' {
-            $command = Get-Command -Name Get-AppThrottlingData
+            $command = Get-Command -Name Get-LPMSAppThrottlingData
             $command.Parameters['AppData'].Attributes.ValueFromPipeline | Should -Be $true
         }
 
         It 'Should have Days parameter with default value of 30' {
-            $command = Get-Command -Name Get-AppThrottlingData
+            $command = Get-Command -Name Get-LPMSAppThrottlingData
             $command.Parameters['Days'] | Should -Not -BeNullOrEmpty
         }
 
         It 'Should have mandatory AppData parameter' {
-            $command = Get-Command -Name Get-AppThrottlingData
+            $command = Get-Command -Name Get-LPMSAppThrottlingData
             $command.Parameters['AppData'].Attributes.Mandatory | Should -Be $true
         }
 
         It 'Should have CmdletBinding attribute' {
-            $command = Get-Command -Name Get-AppThrottlingData
+            $command = Get-Command -Name Get-LPMSAppThrottlingData
             $command.CmdletBinding | Should -Be $true
         }
     }
@@ -228,17 +228,17 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should process application data from pipeline' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
             $result | Should -Not -BeNullOrEmpty
         }
 
         It 'Should add ThrottlingStats property to output' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
             $result.PSObject.Properties.Name | Should -Contain 'ThrottlingStats'
         }
 
         It 'Should preserve original properties' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.PrincipalId | Should -Be 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
             $result.PrincipalName | Should -Be 'TestApp-DirectoryReader'
@@ -247,7 +247,7 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should call Get-AppThrottlingStat with correct parameters' {
-            $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             if ($script:moduleLoaded) {
                 Should -Invoke -CommandName Get-AppThrottlingStat -ModuleName $script:moduleName -Times 1 -Exactly
@@ -258,13 +258,13 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should process multiple applications from pipeline' {
-            $result = $script:testAppData | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.Count | Should -Be $script:testAppData.Count
         }
 
         It 'Should accept custom Days parameter' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 7
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 7
 
             $result | Should -Not -BeNullOrEmpty
         }
@@ -286,33 +286,33 @@ Describe 'Get-AppThrottlingData' {
 
         It 'Should include TotalRequests in ThrottlingStats' {
             Write-Host "Test App PrincipalId: $($script:testAppData[0].PrincipalId)"
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             Write-Host "Result ThrottlingStats: $($result.ThrottlingStats | ConvertTo-Json -Depth 3)"
             $result.ThrottlingStats.TotalRequests | Should -Be 1294
         }
 
         It 'Should include SuccessfulRequests in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.SuccessfulRequests | Should -Be 679
         }
 
         It 'Should include Total429Errors in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.Total429Errors | Should -Be 0
         }
 
         It 'Should include error counts in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.TotalClientErrors | Should -Be 615
             $result.ThrottlingStats.TotalServerErrors | Should -Be 0
         }
 
         It 'Should include rate calculations in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.ThrottleRate | Should -Be 0
             $result.ThrottlingStats.ErrorRate | Should -Be 47.53
@@ -320,14 +320,14 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should include severity and status in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.ThrottlingSeverity | Should -Be 0
             $result.ThrottlingStats.ThrottlingStatus | Should -Be 'Normal'
         }
 
         It 'Should include occurrence timestamps in ThrottlingStats' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.FirstOccurrence | Should -Not -BeNullOrEmpty
             $result.ThrottlingStats.LastOccurrence | Should -Not -BeNullOrEmpty
@@ -349,7 +349,7 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should handle apps with no throttling' {
-            $result = $script:testAppData[1] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[1] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.Total429Errors | Should -Be 0
             $result.ThrottlingStats.ThrottleRate | Should -Be 0
@@ -358,7 +358,7 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should handle apps with high error rates' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             # Verify the data is being returned
             $result | Should -Not -BeNullOrEmpty
@@ -369,7 +369,7 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should handle apps with throttling warnings' {
-            $result = $script:testAppData[4] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[4] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.Total429Errors | Should -Be 1
             $result.ThrottlingStats.ThrottlingSeverity | Should -Be 3
@@ -377,21 +377,21 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should handle apps with high success rates' {
-            $result = $script:testAppData[3] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[3] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.SuccessRate | Should -Be 99.92
             $result.ThrottlingStats.ErrorRate | Should -Be 0.08
         }
 
         It 'Should handle high volume applications' {
-            $result = $script:testAppData[5] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[5] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.TotalRequests | Should -Be 25280
             $result.ThrottlingStats.SuccessRate | Should -Be 99.66
         }
 
         It 'Should handle apps with server errors' {
-            $result = $script:testAppData[3] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[3] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats.TotalServerErrors | Should -Be 18
         }
@@ -411,7 +411,7 @@ Describe 'Get-AppThrottlingData' {
                 }
             }
 
-            { $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30 } | Should -Throw
+            { $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30 } | Should -Throw
         }
 
         It 'Should handle empty throttling data by providing default stats' {
@@ -426,7 +426,7 @@ Describe 'Get-AppThrottlingData' {
                 }
             }
 
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result | Should -Not -BeNullOrEmpty
             # Function provides default "No Activity" stats when no data found
@@ -450,13 +450,13 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should maintain PrincipalId association' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.PrincipalId | Should -Be $script:testAppData[0].PrincipalId
         }
 
         It 'Should preserve all AppRoles data' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.AppRoles.Count | Should -Be $script:testAppData[0].AppRoles.Count
             $result.AppRoles[0].FriendlyName | Should -Be $script:testAppData[0].AppRoles[0].FriendlyName
@@ -478,20 +478,20 @@ Describe 'Get-AppThrottlingData' {
         }
 
         It 'Should return PSCustomObject' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result | Should -BeOfType [PSCustomObject]
         }
 
         It 'Should have ThrottlingStats as hashtable or PSCustomObject' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $result.ThrottlingStats | Should -Not -BeNullOrEmpty
             $result.ThrottlingStats.GetType().Name | Should -BeIn @('Hashtable', 'PSCustomObject')
         }
 
         It 'Should maintain property order' {
-            $result = $script:testAppData[0] | Get-AppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
+            $result = $script:testAppData[0] | Get-LPMSAppThrottlingData -WorkspaceId 'test-workspace-id' -Days 30
 
             $properties = $result.PSObject.Properties.Name
             $properties | Should -Contain 'PrincipalId'

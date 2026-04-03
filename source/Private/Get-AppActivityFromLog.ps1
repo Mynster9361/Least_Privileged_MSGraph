@@ -5,7 +5,7 @@ function Get-AppActivityFromLog {
 
 .DESCRIPTION
     This private function queries Azure Log Analytics to extract API activity patterns for a given
-    service principal. It's used internally by Get-AppActivityData and Get-PermissionAnalysis.
+    service principal. It's used internally by Get-LPMSAppActivityData and Get-LPMSPermissionAnalysis.
 
     The function:
     - Queries MicrosoftGraphActivityLogs for successful requests (HTTP 200)
@@ -75,7 +75,7 @@ function Get-AppActivityFromLog {
     - $null: Query failed (check debug output)
 
 .EXAMPLE
-    # Used internally by Get-AppActivityData (ByWorkspaceId parameter set)
+    # Used internally by Get-LPMSAppActivityData (ByWorkspaceId parameter set)
     $activity = Get-AppActivityFromLog -logAnalyticsWorkspace $workspaceId -days 30 -spId $spId
 
 .EXAMPLE

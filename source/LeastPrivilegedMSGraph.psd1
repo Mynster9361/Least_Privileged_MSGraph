@@ -12,7 +12,7 @@
     RootModule           = 'LeastPrivilegedMSGraph.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '2.0.0'
+    ModuleVersion        = '3.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -71,12 +71,12 @@
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport    = @(
         'Assert-LPMSGraph',
-        'Export-PermissionAnalysisReport',
-        'Get-AppActivityData',
-        'Get-AppRoleAssignment',
-        'Get-AppThrottlingData',
-        'Get-PermissionAnalysis',
-        'Initialize-LogAnalyticsApi',
+        'Export-LPMSPermissionAnalysisReport',
+        'Get-LPMSAppActivityData',
+        'Get-LPMSAppRoleAssignment',
+        'Get-LPMSAppThrottlingData',
+        'Get-LPMSPermissionAnalysis',
+        'Initialize-LPMSLogAnalyticsApi',
         'Invoke-LPMSGraphScan'
     )
 
@@ -106,13 +106,13 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags = @('MicrosoftGraph', 'GraphAPI', 'Permissions', 'Security', 'Audit')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph'
 
             # A URL to an icon representing this module.
             # IconUri = ''

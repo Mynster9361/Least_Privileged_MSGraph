@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- BREAKING CHANGE: Renamed Export-PermissionAnalysisReport to Export-LPMPermissionAnalysisReport to create a more consistent naming convention across the module.
+- BREAKING CHANGE: Renamed Get-AppActivityData to Get-LPMSAppActivityData to create a more consistent naming convention across the module.
+- BREAKING CHANGE: Renamed Get-AppRoleAssignment to Get-LPMSAppRoleAssignment to create a more consistent naming convention across the module.
+- BREAKING CHANGE: Renamed Get-AppThrottlingData to Get-LPMSAppThrottlingData to create a more consistent naming convention across the module.
+- BREAKING CHANGE: Renamed Get-PermissionAnalysis to Get-LPMSPermissionAnalysis to create a more consistent naming convention across the module.
+- BREAKING CHANGE: Renamed Initialize-LogAnalyticsApi to Initialize-LPMSLogAnalyticsApi to create a more consistent naming convention across the module.
+
+### Acknowledgments
+Constantin Hager - Thanks for taking the initiative to uniform the module to follow a consistent naming convention
+
+## [2.0.0] - 2026-02-24
+
 ### Added
 - Delegated permissions is now included in the report to give better visibility into your apps and its permissions
 - Dependencies to 'MSGraphPermissions', 'EntraAuth.Graph' which lets us get better visibility to the correct permission scopes for each url included EntraAuth.Graph for improved performance
@@ -31,24 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Acknowledgments
 Jake Hildreth - Thanks for the sparring and feedback
 Friedrich Weinmann - Thanks for the sparring and feedback
-
-
-## [1.1.0] - 2025-12-19
-
-### Added
-- **New Cmdlets:**
-  - `Assert-LPMSGraph` - Validates all prerequisites before running analysis (EntraAuth connectivity, workspace configuration, required modules)
-  - `Invoke-LPMSGraphScan` - Single orchestration command that executes the complete least privilege analysis workflow
-    - Supports both workspace ID and detailed workspace parameters (subscription, resource group, workspace name)
-    - Includes optional throttling data collection
-    - Automatically chains all analysis steps: role assignments > activity data > throttling data > permission analysis > report generation
-- **User Context Support:**
-  - Module now supports delegated (user) authentication context in addition to app-only (service principal) authentication
-  - Enhanced flexibility for different authentication scenarios and permission models
-
-
-### Acknowledgments
-Thanks to Jos Lieben (jflieben) for the suggestion
 
 
 ## [1.0.0] - 2025-12-15

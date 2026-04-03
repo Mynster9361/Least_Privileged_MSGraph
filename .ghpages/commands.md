@@ -12,29 +12,29 @@ Complete reference documentation for all cmdlets in the LeastPrivilegedMSGraph m
 
 ### Permission Analysis
 
-- **[Get-PermissionAnalysis](commands/Get-PermissionAnalysis)** - Analyze application permissions and recommend least privileged access
-- **[Export-PermissionAnalysisReport](commands/Export-PermissionAnalysisReport)** - Export detailed permission analysis reports
+- **[Get-LPMSPermissionAnalysis](commands/Get-LPMSPermissionAnalysis)** - Analyze application permissions and recommend least privileged access
+- **[Export-LPMSPermissionAnalysisReport](commands/Export-LPMSPermissionAnalysisReport)** - Export detailed permission analysis reports
 
 ### Application Monitoring
 
-- **[Get-AppActivityData](commands/Get-AppActivityData)** - Retrieve application API usage activity data
-- **[Get-AppRoleAssignment](commands/Get-AppRoleAssignment)** - Get current role assignments for an application
-- **[Get-AppThrottlingData](commands/Get-AppThrottlingData)** - Retrieve throttling and rate limit information
+- **[Get-LPMSAppActivityData](commands/Get-LPMSAppActivityData)** - Retrieve application API usage activity data
+- **[Get-LPMSAppRoleAssignment](commands/Get-LPMSAppRoleAssignment)** - Get current role assignments for an application
+- **[Get-LPMSAppThrottlingData](commands/Get-LPMSAppThrottlingData)** - Retrieve throttling and rate limit information
 
 ### Configuration
 
-- **[Initialize-LogAnalyticsApi](commands/Initialize-LogAnalyticsApi)** - Initialize Log Analytics API connection
+- **[Initialize-LPMSLogAnalyticsApi](commands/Initialize-LPMSLogAnalyticsApi)** - Initialize Log Analytics API connection
 
 ## Quick Reference
 
 | Cmdlet                            | Description                       | Category      |
 | --------------------------------- | --------------------------------- | ------------- |
-| `Get-PermissionAnalysis`          | Analyze and recommend permissions | Analysis      |
-| `Export-PermissionAnalysisReport` | Generate detailed reports         | Reporting     |
-| `Get-AppActivityData`             | Get API usage data                | Monitoring    |
-| `Get-AppRoleAssignment`           | List role assignments             | Monitoring    |
-| `Get-AppThrottlingData`           | Check throttling status           | Monitoring    |
-| `Initialize-LogAnalyticsApi`      | Setup Log Analytics               | Configuration |
+| `Get-LPMSPermissionAnalysis`          | Analyze and recommend permissions | Analysis      |
+| `Export-LPMSPermissionAnalysisReport` | Generate detailed reports         | Reporting     |
+| `Get-LPMSAppActivityData`             | Get API usage data                | Monitoring    |
+| `Get-LPMSAppRoleAssignment`           | List role assignments             | Monitoring    |
+| `Get-LPMSAppThrottlingData`           | Check throttling status           | Monitoring    |
+| `Initialize-LPMSLogAnalyticsApi`      | Setup Log Analytics               | Configuration |
 
 ## Usage Patterns
 
@@ -42,26 +42,26 @@ Complete reference documentation for all cmdlets in the LeastPrivilegedMSGraph m
 
 ```powershell
 # 1. Initialize connection
-Initialize-LogAnalyticsApi -WorkspaceId "..." -SharedKey "..."
+Initialize-LPMSLogAnalyticsApi -WorkspaceId "..." -SharedKey "..."
 
 # 2. Analyze permissions
-$analysis = Get-PermissionAnalysis -ApplicationId "..."
+$analysis = Get-LPMSPermissionAnalysis -ApplicationId "..."
 
 # 3. Generate report
-Export-PermissionAnalysisReport -ApplicationId "..." -OutputPath "./reports"
+Export-LPMSPermissionAnalysisReport -ApplicationId "..." -OutputPath "./reports"
 ```
 
 ### Monitoring Workflow
 
 ```powershell
 # Check activity
-Get-AppActivityData -ApplicationId "..." -Days 30
+Get-LPMSAppActivityData -ApplicationId "..." -Days 30
 
 # Check for issues
-Get-AppThrottlingData -ApplicationId "..."
+Get-LPMSAppThrottlingData -ApplicationId "..."
 
 # Review assignments
-Get-AppRoleAssignment -ApplicationId "..."
+Get-LPMSAppRoleAssignment -ApplicationId "..."
 ```
 
 ---

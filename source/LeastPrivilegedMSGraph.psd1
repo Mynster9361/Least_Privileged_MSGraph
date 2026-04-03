@@ -12,7 +12,7 @@
     RootModule           = 'LeastPrivilegedMSGraph.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '2.0.0'
+    ModuleVersion        = '3.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -106,13 +106,13 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags = @('MicrosoftGraph', 'GraphAPI', 'Permissions', 'Security', 'Audit')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph'
 
             # A URL to an icon representing this module.
             # IconUri = ''

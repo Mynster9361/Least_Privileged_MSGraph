@@ -55,6 +55,9 @@ export function App() {
     const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
     const [selectedApp, setSelectedApp] = useState<AppData | null>(null);
 
+    const resolvedTitle = reportTitle.startsWith('{%') ? 'Microsoft Graph Permission Analysis Report' : reportTitle;
+    document.title = resolvedTitle;
+
     function setStatus(status: string) {
         setFilters({ ...INITIAL_FILTERS, status });
     }
@@ -64,7 +67,7 @@ export function App() {
             <div className="w-full sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-[80%] 2xl:max-w-[70%] mx-auto px-2 sm:px-4 py-4 sm:py-8">
                 <Header
                     appData={appData}
-                    title={reportTitle.startsWith('{%') ? 'Microsoft Graph Permission Analysis Report' : reportTitle}
+                    title={resolvedTitle}
                     tenantId={tenantId.startsWith('{%') ? 'dev-tenant-id' : tenantId}
                     tenantName={tenantName.startsWith('{%') ? 'Development' : tenantName}
                     generatedOn={generatedOn.startsWith('{%') ? new Date().toLocaleString() : generatedOn}

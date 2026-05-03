@@ -36,12 +36,12 @@ interface Props {
     onShowDetails: (index: number) => void;
 }
 
-const statusBadges: Record<string, string> = {
-    good: 'text-green-600 dark:text-green-400',
-    warning: 'text-orange-600 dark:text-orange-400',
-    missing: 'text-cyan-600 dark:text-cyan-400',
-    misaligned: 'text-amber-600 dark:text-amber-400',
-    danger: 'text-red-600 dark:text-red-400',
+const statusPills: Record<string, string> = {
+    good: 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 ring-1 ring-green-400/40',
+    warning: 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 ring-1 ring-orange-400/40',
+    missing: 'bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 ring-1 ring-cyan-400/40',
+    misaligned: 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 ring-1 ring-amber-400/40',
+    danger: 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 ring-1 ring-red-400/40',
 };
 
 const statusLabels: Record<string, string> = {
@@ -174,28 +174,24 @@ export function AppTable({ appData, filters, onShowDetails }: Props) {
 
     const columns = useMemo<ColumnDef<TableRow>[]>(() => [
         {
-            id: 'details',
-            header: 'Details',
-            cell: ({ row }) => (
-                <button
-                    onClick={() => onShowDetails(row.original.index)}
-                    className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded text-xs transition-colors duration-200"
-                >
-                    View Details
-                </button>
-            ),
-            enableSorting: false,
-        },
-        {
             id: 'appName',
             accessorKey: 'appName',
             header: 'Application Name',
-            cell: ({ row }) => (
-                <div>
-                    <div className="font-medium text-gray-900 dark:text-gray-100">{row.original.appName}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">{row.original.appId}</div>
-                </div>
-            ),
+            cell: ({ row }) => {
+                const app = appData[row.original.index];
+                const hasUnmatched = app && toArray(app.UnmatchedActivities).length > 0;
+                return (
+                    <div>
+                        <div className="flex items-center gap-1.5 font-medium text-gray-900 dark:text-gray-100">
+                            {row.original.appName}
+                            {hasUnmatched && (
+                                <span title="Has unmatched activities" className="text-red-500 text-xs leading-none">⚠</span>
+                            )}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">{row.original.appId}</div>
+                    </div>
+                );
+            },
         },
         {
             id: 'status',
@@ -204,7 +200,9 @@ export function AppTable({ appData, filters, onShowDetails }: Props) {
             cell: ({ getValue }) => {
                 const val = getValue<string>();
                 return (
-                    <div className={`font-semibold text-xs ${statusBadges[val] ?? ''}`}>{statusLabels[val] ?? val}</div>
+                    <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-full ${statusPills[val] ?? ''}`}>
+                        {statusLabels[val] ?? val}
+                    </span>
                 );
             },
         },
@@ -371,7 +369,8 @@ export function AppTable({ appData, filters, onShowDetails }: Props) {
                         {table.getRowModel().rows.map((row, i) => (
                             <tr
                                 key={row.id}
-                                className={`border-b dark:border-gray-600 ${i % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-700'} hover:bg-gray-100 dark:hover:bg-gray-600`}
+                                onClick={() => onShowDetails(row.original.index)}
+                                className={`border-b dark:border-gray-600 cursor-pointer ${i % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-700'} hover:bg-gray-100 dark:hover:bg-gray-600`}
                             >
                                 {row.getVisibleCells().map((cell) => (
                                     <td

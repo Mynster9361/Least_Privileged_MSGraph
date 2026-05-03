@@ -30,6 +30,7 @@ export function Header({
     onFilterCriticalThrottling,
 }: Props) {
     const stats = calculateStats(appData);
+    const pct = (n: number) => stats.total > 0 ? ` (${Math.round((n / stats.total) * 100)}%)` : '';
 
     function toggleTheme() {
         const isDark = document.documentElement.classList.toggle('dark');
@@ -42,8 +43,9 @@ export function Header({
             border: 'hover:border-blue-300 dark:hover:border-blue-500',
             text: 'text-blue-600 dark:text-blue-400',
             value: 'text-blue-900 dark:text-blue-300',
-            label: 'Total Applications (Click to filter)',
+            label: 'Total Applications',
             count: stats.total,
+            pct: '',
             onClick: onFilterAll,
         },
         {
@@ -51,8 +53,9 @@ export function Header({
             border: 'hover:border-green-300 dark:hover:border-green-500',
             text: 'text-green-600 dark:text-green-400',
             value: 'text-green-900 dark:text-green-300',
-            label: 'Apps with Optimal Permissions (Click to filter)',
+            label: 'Optimal Permissions',
             count: stats.fullyMatched,
+            pct: pct(stats.fullyMatched),
             onClick: onFilterOptimal,
         },
         {
@@ -60,8 +63,9 @@ export function Header({
             border: 'hover:border-yellow-300 dark:hover:border-yellow-500',
             text: 'text-yellow-600 dark:text-yellow-400',
             value: 'text-yellow-900 dark:text-yellow-300',
-            label: 'Apps with Excessive Permissions (Click to filter)',
+            label: 'Excessive Permissions',
             count: stats.withExcess,
+            pct: pct(stats.withExcess),
             onClick: onFilterExcess,
         },
         {
@@ -69,8 +73,9 @@ export function Header({
             border: 'hover:border-red-300 dark:hover:border-red-500',
             text: 'text-red-600 dark:text-red-400',
             value: 'text-red-900 dark:text-red-300',
-            label: 'Apps with Unmatched Activities (Click to filter)',
+            label: 'Unmatched Activities',
             count: stats.withUnmatched,
+            pct: pct(stats.withUnmatched),
             onClick: onFilterUnmatched,
         },
     ];
@@ -81,8 +86,9 @@ export function Header({
             border: 'hover:border-purple-300 dark:hover:border-purple-500',
             text: 'text-purple-600 dark:text-purple-400',
             value: 'text-purple-900 dark:text-purple-300',
-            label: 'Apps Throttled (Click to filter)',
+            label: 'Apps Throttled',
             count: stats.throttledApps,
+            pct: pct(stats.throttledApps),
             onClick: onFilterThrottled,
             clickable: true,
         },
@@ -91,8 +97,9 @@ export function Header({
             border: 'hover:border-orange-300 dark:hover:border-orange-500',
             text: 'text-orange-600 dark:text-orange-400',
             value: 'text-orange-900 dark:text-orange-300',
-            label: 'Critical Throttling (Click to filter)',
+            label: 'Critical Throttling',
             count: stats.criticalThrottling,
+            pct: pct(stats.criticalThrottling),
             onClick: onFilterCriticalThrottling,
             clickable: true,
         },
@@ -103,6 +110,7 @@ export function Header({
             value: 'text-indigo-900 dark:text-indigo-300',
             label: 'Total 429 Errors',
             count: stats.total429.toLocaleString(),
+            pct: '',
             onClick: undefined,
         },
         {
@@ -112,6 +120,7 @@ export function Header({
             value: 'text-pink-900 dark:text-pink-300',
             label: 'Avg Throttle Rate',
             count: `${stats.avgThrottleRate}%`,
+            pct: '',
             onClick: undefined,
         },
     ];
@@ -144,9 +153,13 @@ export function Header({
                         key={card.label}
                         className={`${card.bg} rounded-lg p-3 sm:p-4 transition-colors duration-200 cursor-pointer hover:shadow-md hover:border-2 ${card.border} border-2 border-transparent`}
                         onClick={card.onClick}
+                        title="Click to filter"
                     >
                         <div className={`${card.text} text-xs sm:text-sm font-semibold`}>{card.label}</div>
-                        <div className={`text-xl sm:text-2xl font-bold ${card.value}`}>{card.count}</div>
+                        <div className={`text-xl sm:text-2xl font-bold ${card.value}`}>
+                            {card.count}
+                            {card.pct && <span className="text-sm font-normal ml-1 opacity-70">{card.pct}</span>}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -157,9 +170,13 @@ export function Header({
                         key={card.label}
                         className={`${card.bg} rounded-lg p-3 sm:p-4 transition-colors duration-200 ${card.onClick ? 'cursor-pointer hover:shadow-md hover:border-2 ' + card.border + ' border-2 border-transparent' : ''}`}
                         onClick={card.onClick}
+                        title={card.onClick ? 'Click to filter' : undefined}
                     >
                         <div className={`${card.text} text-xs sm:text-sm font-semibold`}>{card.label}</div>
-                        <div className={`text-xl sm:text-2xl font-bold ${card.value}`}>{card.count}</div>
+                        <div className={`text-xl sm:text-2xl font-bold ${card.value}`}>
+                            {card.count}
+                            {card.pct && <span className="text-sm font-normal ml-1 opacity-70">{card.pct}</span>}
+                        </div>
                     </div>
                 ))}
             </div>

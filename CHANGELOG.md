@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added `Get-PermissionRiskLevel` private function that replaces the previous single-factor schema lookup with a multi-factor risk analysis:
+  - **Critical override list** – curated patterns for permissions that can compromise tenant security (e.g. `RoleManagement.*`, `AppRoleAssignment.ReadWrite.All`, `Application.ReadWrite.All`)
+  - **High override list** – permissions with significant data exposure or write capability (e.g. `Mail.Send`, `AuditLog.Read.All`, `BitlockerKey.Read.All`)
+  - **Schema baseline** – Microsoft's official `privilegeLevel` from `permissions.json` when no override applies
+  - **Scope type adjustment** – Application-scope permissions receive a +1 risk bump (capped at 4) since they are persistent, have no user-context ceiling and carry full tenant blast radius
+- Added `RiskLabel` property (`Low`, `Medium`, `High`, `Critical`) to all permission objects output by `Get-LPMSPermissionAnalysis`
+- Added colored risk badges (`Critical`, `High`, `Medium`, `Low`) to individual permissions in the HTML report detail panel (Current, Excess, Missing, and Optimal permission sections)
+- Added descriptive labels to the privilege level column in the HTML report table (`L4 - Critical`, `L3 - High`, `L2 - Medium`, `L1 - Low`)
+- Added unit tests for `Get-PermissionRiskLevel` covering critical/high overrides, name-pattern inference, schema integration, scope bumping, and output structure
+- Added `source/report/` — a Vite + React + TypeScript project that produces the HTML report template as a single self-contained file (no CDN dependencies). Run `npm run build` in `source/report/` to rebuild the template at `source/data/base.html`. Features: TanStack Table (replacing jQuery DataTables), PostCSS Tailwind (replacing CDN browser build), `vite-plugin-singlefile` for full asset inlining
+
+## [3.0.0] - 2026-04-03
+
 ### Changed
 - BREAKING CHANGE: Renamed Export-PermissionAnalysisReport to Export-LPMPermissionAnalysisReport to create a more consistent naming convention across the module.
 - BREAKING CHANGE: Renamed Get-AppActivityData to Get-LPMSAppActivityData to create a more consistent naming convention across the module.

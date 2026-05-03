@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added descriptive labels to the privilege level column in the HTML report table (`L4 - Critical`, `L3 - High`, `L2 - Medium`, `L1 - Low`)
 - Added unit tests for `Get-PermissionRiskLevel` covering critical/high overrides, name-pattern inference, schema integration, scope bumping, and output structure
 - Added `source/report/` — a Vite + React + TypeScript project that produces the HTML report template as a single self-contained file (no CDN dependencies). Run `npm run build` in `source/report/` to rebuild the template at `source/data/base.html`. Features: TanStack Table (replacing jQuery DataTables), PostCSS Tailwind (replacing CDN browser build), `vite-plugin-singlefile` for full asset inlining
+- Report modal: **Summary banner** — colored pill chips directly under the app name showing excess permissions, missing permissions, unmatched activities, and throttling severity at a glance without scrolling
+- Report modal: **Application Overview stat cards** — App Roles, Max Privilege (color-coded), Privilege Score, and Activities Matched displayed as metric cards instead of a plain list
+- Report modal: **Permission Changes diff view** — unified permission list replacing the four separate Current/Excess/Missing/Optimal sections; each permission is tagged `✓ keep`, `− remove`, or `+ add` with a count summary. Includes optimal permissions not currently held (scope-aware: `User.Read (Delegated)` and `User.Read (Application)` are treated as distinct grants)
+- Report modal: **Collapsible Throttling Statistics** — starts collapsed showing only the severity badge (Normal/Low/Warning/Critical); click to expand the full stats grid
+- Report modal: **Escape key** closes the modal; clicking the backdrop also closes it
+- Report modal: **Body scroll lock** — background page no longer scrolls while a modal is open
+- Report: **Dynamic browser tab title** — `document.title` is set at runtime from the report's `ReportTitle` value; falls back to `"Microsoft Graph Permission Analysis Report"` when the template placeholder has not been replaced
 
 ## [3.0.0] - 2026-04-03
 

@@ -62,6 +62,28 @@ export function resolveRiskLabel(p: Permission | string | undefined, level?: num
     return labelMap[p.PrivilegeLevel ?? 1] ?? 'Low';
 }
 
+export function calculateThrottlingBreakdown(data: AppData[]) {
+    const counts = { critical: 0, warning: 0, low: 0, minimal: 0, normal: 0 };
+    data.forEach((app) => {
+        const sev = app.ThrottlingStats?.ThrottlingSeverity ?? 0;
+        if (sev >= 4) counts.critical++;
+        else if (sev === 3) counts.warning++;
+        else if (sev === 2) counts.low++;
+        else if (sev === 1) counts.minimal++;
+        else counts.normal++;
+    });
+    return counts;
+}
+
+export function calculateStatusBreakdown(data: AppData[]) {
+    const counts = { good: 0, warning: 0, missing: 0, misaligned: 0, danger: 0 };
+    data.forEach((app) => {
+        const s = getAppStatus(app);
+        counts[s as keyof typeof counts]++;
+    });
+    return counts;
+}
+
 export function calculateStats(data: AppData[]) {
     const appsWithThrottling = data.filter((app) => app.ThrottlingStats?.ThrottleRate);
     return {

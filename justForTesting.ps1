@@ -33,11 +33,11 @@ Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -T
 
 $lightweightGroups = Get-LPMSAppRoleAssignment
 
-$lightweightGroups[0..20] | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
+$lightweightGroups[0..100] | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 1000 -Verbose -Debug
 
-$lightweightGroups[0..20] | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups[0..100] | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$groups = $lightweightGroups[0..20]
+$groups = $lightweightGroups[0..100]
 $groups | Get-LPMSPermissionAnalysis
 #$lightweightGroups | Get-LPMSPermissionAnalysis
 

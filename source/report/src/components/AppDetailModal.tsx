@@ -33,9 +33,9 @@ function MethodBadge({ method }: { method: string }) {
 // ---------------------------------------------------------------------------
 
 function SummaryBanner({ app }: { app: AppData }) {
-    const excess = (app.ExcessPermissions ?? []).length;
-    const missing = (app.RequiredPermissions ?? []).length;
-    const unmatched = (app.UnmatchedActivities ?? []).length;
+    const excess = toArray(app.ExcessPermissions).length;
+    const missing = toArray(app.RequiredPermissions).length;
+    const unmatched = toArray(app.UnmatchedActivities).length;
     const throttleSev = app.ThrottlingStats?.ThrottlingSeverity ?? 0;
 
     const chips: { label: string; color: string }[] = [];
@@ -177,9 +177,9 @@ function ThrottlingSection({ ts }: { ts: NonNullable<AppData['ThrottlingStats']>
 type PermDiff = { name: string; tag: 'keep' | 'remove' | 'add'; scopeType: string; perm?: Permission };
 
 function PermissionDiff({ app }: { app: AppData }) {
-    const current = (app.CurrentPermissions ?? []) as (Permission | string)[];
-    const excess = (app.ExcessPermissions ?? []) as (Permission | string)[];
-    const missing = (app.RequiredPermissions ?? []) as (Permission | string)[];
+    const current = toArray(app.CurrentPermissions) as (Permission | string)[];
+    const excess = toArray(app.ExcessPermissions) as (Permission | string)[];
+    const missing = toArray(app.RequiredPermissions) as (Permission | string)[];
     const optimal = toArray(app.OptimalPermissions);
 
     if (current.length === 0 && excess.length === 0 && missing.length === 0 && optimal.length === 0) return null;

@@ -13,7 +13,6 @@ Analyzes Microsoft Graph permissions and provides least privileged recommendatio
   - [Description](#description)
       - [Front Page](#front-page)
       - [Details Modal - Top](#details-modal---top)
-      - [Details Modal - Bottom](#details-modal---bottom)
       - [Sample report](#sample-report)
     - [So what is it?](#so-what-is-it)
     - [What it isn't](#what-it-isnt)
@@ -60,14 +59,11 @@ To show an example of what the report could look like here is a bit of visual ai
 #### Details Modal - Top
 ![Modal Top](data/MSGraph_Report_Modal_Top.png "Modal Top")
 
-#### Details Modal - Bottom
-![Modal Bottom](data/MSGraph_Report_Modal_Bottom.png "Modal Bottom")
-
 #### Sample report
 
 You are more than welcome to go and download the anonymized html report that can be found here
 
-[sample_report.html](data/report_anonymized.html)
+[sample_report.html](data/sample-report.html)
 
 To play arround with an already generated report with 50 diffrent app registrations.
 

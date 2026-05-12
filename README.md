@@ -13,7 +13,6 @@ Analyzes Microsoft Graph permissions and provides least privileged recommendatio
   - [Description](#description)
       - [Front Page](#front-page)
       - [Details Modal - Top](#details-modal---top)
-      - [Details Modal - Bottom](#details-modal---bottom)
       - [Sample report](#sample-report)
     - [So what is it?](#so-what-is-it)
     - [What it isn't](#what-it-isnt)
@@ -60,14 +59,11 @@ To show an example of what the report could look like here is a bit of visual ai
 #### Details Modal - Top
 ![Modal Top](data/MSGraph_Report_Modal_Top.png "Modal Top")
 
-#### Details Modal - Bottom
-![Modal Bottom](data/MSGraph_Report_Modal_Bottom.png "Modal Bottom")
-
 #### Sample report
 
 You are more than welcome to go and download the anonymized html report that can be found here
 
-[sample_report.html](data/report_anonymized.html)
+[sample_report.html](data/sample-report.html)
 
 To play arround with an already generated report with 50 diffrent app registrations.
 
@@ -94,25 +90,25 @@ From time to time you might find that you are being throttled and it can be very
 
 Well like anything that is free it is not perfect.
 
-The basis of this module i feel is in a very good place with the current setup and sure somethings could be better and i wish to deliver on that part but to do that i would also love any and all feedback whether you lvoe it or hate it if there is anything that you feel is not the way it should be then please reach out either through a Github Issue or through my own [LinkedIn](https://www.linkedin.com/in/mortenmynster/) My messages are open 
+The basis of this module i feel is in a very good place with the current setup and sure somethings could be better and i wish to deliver on that part but to do that i would also love any and all feedback whether you love it or hate it if there is anything that you feel is not the way it should be then please reach out either through a Github Issue or through my own [LinkedIn](https://www.linkedin.com/in/mortenmynster/) My messages are open 
 
 Here are some of the things i can say right of the bat that is not perfect and that will still require you to have some knowledge about MSGraph and the permission structure itself so it is not your north star (Not yet atleast)
   - Permissions recommendation is not always spot on like an optimal permission for an application utilizing Sharepoint on specific sites should utilize Sites.Selected roles and not Sites.Read.All.
   - The way certain objects correlate like if you have Group.Read.All and want to get all members then i am guessing you would also like some User.ReadBasic.all Permissions in order to get more than just ID's of the users in groups.
-  - Currently this module does not include any permission report in regards to delegated permissions it only looks for Application permissions
+  - ~~Currently this module does not include any permission report in regards to delegated permissions it only looks for Application permissions~~
 
 
 ### The goal is to always follow least privelegde permisisons on our SP (Service Principals) / MI (Managed Identity) based on what these SP/MI are being used for.
 
 In the future i hope that we find a way to 
-1. Get Delegated permissions included in the report as that would allow us to identify both gaps but also threats to our users and who has exposed some of their data to an app in order to limit the exposure and maybe even allow us to run some analysis on whether it could be malicius or not.
+1. ~~Get Delegated permissions included in the report as that would allow us to identify both gaps but also threats to our users and who has exposed some of their data to an app in order to limit the exposure and maybe even allow us to run some analysis on whether it could be malicius or not.~~
    
 2. Get a better way to gather the intel for our permission comparraison in order to better determine the least privledge permission.
    - An example on this topic is something like sharepoint permissions the least priveledge permission would be something like Site.Selected and then limit the apps access rights with the PnP module (Currently this module would suggest the Sites.Read.All permission as it does not have a complete grasph of permissions that can be limited further in other platforms like sharepoint or Mail.ReadWrite.All where you can limit it in exchange with a group)
   
-3. Create a correlation between what an endpoint returns and the permissions needed to read the scope of the given data. 
-   - [ISSUE 1: Figure out correlation between @odata.type and corresponding least privilege permission](https://github.com/Mynster9361/Least_Privileged_MSGraph/issues/1)
-   - example request something from /memberOf and you can get 3 diffrent object types back like user, group, Service Principal but if you do not have User.ReadBasic.All perms then you can only see the ID of the user and nothing else. The same goes for the 2 other categories.
+3. ~~Create a correlation between what an endpoint returns and the permissions needed to read the scope of the given data. ~~
+   - ~~[ISSUE 1: Figure out correlation between @odata.type and corresponding least privilege permission](https://github.com/Mynster9361/Least_Privileged_MSGraph/issues/1)~~
+   - ~~example request something from /memberOf and you can get 3 diffrent object types back like user, group, Service Principal but if you do not have User.ReadBasic.All perms then you can only see the ID of the user and nothing else. The same goes for the 2 other categories.~~
 
 ## Installation
 

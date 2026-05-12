@@ -17,7 +17,7 @@ $logAnalyticsWorkspaceId = $env:logAnalyticsWorkspaceId
 
 #region temp implementation to load in all functions in the clean folder
 ./build.ps1 -ResolveDependency -tasks clean, build, test
-Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
+Import-Module .\output\module\LeastPrivilegedMSGraph\3.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
 #endregion temp implementation to load in all functions in the clean folder
 
 
@@ -33,13 +33,15 @@ Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -T
 
 $lightweightGroups = Get-LPMSAppRoleAssignment
 
-$lightweightGroups | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 100000 -Verbose -Debug
+$lightweightGroups[0..100] | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 100000 -Verbose -Debug
 
-$lightweightGroups | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
+$lightweightGroups[0..100] | Get-LPMSAppThrottlingData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery
 
-$lightweightGroups | Get-LPMSPermissionAnalysis
+$groups = $lightweightGroups[0..100]
+$groups | Get-LPMSPermissionAnalysis
+#$lightweightGroups | Get-LPMSPermissionAnalysis
 
-Export-LPMSPermissionAnalysisReport -AppData $lightweightGroups -OutputPath ".\report2.html"
+Export-LPMSPermissionAnalysisReport -AppData $groups -OutputPath ".\report2.html"
 
 #endregion the good stuff
 

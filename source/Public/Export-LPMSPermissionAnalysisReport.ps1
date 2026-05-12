@@ -263,7 +263,9 @@ function Export-LPMSPermissionAnalysisReport {
         Write-PSFMessage -Level Debug -Message  "Total apps received: $($allAppData.Count)"
 
         # Convert accumulated data to JSON for embedding
-        $jsonData = $allAppData | ConvertTo-Json -Depth 15 -Compress
+        # Wrap in @() to guarantee an array even when only one app is present.
+        # ConvertTo-Json emits a plain object (not array) for single-item input.
+        $jsonData = @($allAppData) | ConvertTo-Json -Depth 15 -Compress
 
         # Properly escape for JavaScript - need to escape backslashes and quotes
         $jsonData = $jsonData.Replace('\', '\\').Replace('"', '\"').Replace([Environment]::NewLine, '\n')

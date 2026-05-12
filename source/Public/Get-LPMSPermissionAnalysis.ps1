@@ -141,6 +141,8 @@
             throw "Find-GraphLeastPrivilege cmdlet not found. Please install the MSGraphPermissions module: Install-Module MSGraphPermissions"
         }
 
+        $msgraphPermissionSchema = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-devx-content/refs/heads/master/permissions/new/permissions.json" | ConvertFrom-Json -AsHashtable
+
         # Helper function to check if a permission is covered by existing permissions
         function Test-PermissionCoverage {
             param(
@@ -255,9 +257,12 @@
 
                 $currentPermissions = if ($app.AppRoles) {
                     $app.AppRoles | Where-Object { $null -ne $_.FriendlyName } | ForEach-Object {
+                        $risk = Get-PermissionRiskLevel -PermissionName $_.FriendlyName -ScopeType $_.PermissionType -Schema $msgraphPermissionSchema
                         [PSCustomObject]@{
-                            Permission = $_.FriendlyName
-                            ScopeType  = $_.PermissionType
+                            Permission     = $_.FriendlyName
+                            ScopeType      = $_.PermissionType
+                            PrivilegeLevel = $risk.Level
+                            RiskLabel      = $risk.Label
                         }
                     }
                 }
@@ -387,9 +392,12 @@
             # Get current permissions - all types included since scope is determined per-activity
             $currentPermissions = if ($app.AppRoles) {
                 $app.AppRoles | Where-Object { $null -ne $_.FriendlyName } | ForEach-Object {
+                    $risk = Get-PermissionRiskLevel -PermissionName $_.FriendlyName -ScopeType $_.PermissionType -Schema $msgraphPermissionSchema
                     [PSCustomObject]@{
-                        Permission = $_.FriendlyName
-                        ScopeType  = $_.PermissionType
+                        Permission     = $_.FriendlyName
+                        ScopeType      = $_.PermissionType
+                        PrivilegeLevel = $risk.Level
+                        RiskLabel      = $risk.Label
                     }
                 }
             }

@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added `Get-PermissionRiskLevel` private function that determines a numeric risk level (1–5) for any Microsoft Graph permission. Schema-first using Microsoft's official `permissions.json`, falling back to curated critical/high override lists and name-pattern inference with a +1 Application scope bump (capped at 5). Risk levels: `1 – Low`, `2 – Medium`, `3 – High`, `4 – Critical`, `5 – Maximum`
+- `Get-LPMSPermissionAnalysis` now fetches the MS Graph permissions schema once per run and passes it to `Get-PermissionRiskLevel` so all permission objects carry accurate `PrivilegeLevel` (1–5) and `RiskLabel` values
+- Added `RiskLabel` property (`Low`, `Medium`, `High`, `Critical`, `Maximum`) to all permission objects output by `Get-LPMSPermissionAnalysis`
+- Added unit tests for `Get-PermissionRiskLevel` covering schema lookup, critical/high overrides, name-pattern inference, Application scope bumping, and output structure
+- Added `source/report/` — a Vite + React + TypeScript project that produces the HTML report template as a single self-contained file (no CDN dependencies). Run `npm run build` in `source/report/` to rebuild the template at `source/data/base.html`
+- Report: replaced jQuery DataTables with TanStack Table and CDN Tailwind with PostCSS Tailwind via `vite-plugin-singlefile` for full asset inlining
+- Report: privilege filter now uses distinct levels `L1` through `L5` instead of cumulative range options
+- Report: colored risk badges (`Maximum`, `Critical`, `High`, `Medium`, `Low`) on individual permissions in the detail panel
+- Report: privilege level column now shows descriptive labels (`L5 – Maximum`, `L4 – Critical`, `L3 – High`, `L2 – Medium`, `L1 – Low`)
+- Report modal: summary banner with colored pill chips for excess permissions, missing permissions, unmatched activities, and throttling severity
+- Report modal: Application Overview stat cards showing App Roles, Max Privilege, Privilege Score, and Activities Matched
+- Report modal: permission changes diff view tagging each permission as `✓ keep`, `− remove`, or `+ add` with a count summary
+- Report modal: collapsible Throttling Statistics section, collapsed by default showing only the severity badge
+- Report modal: Escape key and backdrop click close the modal; background scroll is locked while the modal is open
+- Report: `document.title` is set at runtime from the report's `ReportTitle` value
+
+## [3.0.0] - 2026-04-03
+
 ### Changed
 - BREAKING CHANGE: Renamed Export-PermissionAnalysisReport to Export-LPMPermissionAnalysisReport to create a more consistent naming convention across the module.
 - BREAKING CHANGE: Renamed Get-AppActivityData to Get-LPMSAppActivityData to create a more consistent naming convention across the module.

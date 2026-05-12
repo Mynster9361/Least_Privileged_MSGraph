@@ -12,7 +12,7 @@
     RootModule           = 'LeastPrivilegedMSGraph.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '3.0.0'
+    ModuleVersion        = '3.1.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()

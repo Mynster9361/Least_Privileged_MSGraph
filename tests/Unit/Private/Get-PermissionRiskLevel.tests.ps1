@@ -210,22 +210,6 @@ Describe 'Get-PermissionRiskLevel' {
             $result.Label | Should -Be 'High'
         }
 
-        It 'Schema level is bumped by +1 for Application scope' {
-            $mockSchema = @{
-                permissions = @{
-                    'CustomService.Read' = @{
-                        schemes = @{
-                            Application = @{ privilegeLevel = 2 }
-                        }
-                    }
-                }
-            }
-
-            $result = Get-PermissionRiskLevel -PermissionName 'CustomService.Read' -ScopeType 'Application' -Schema $mockSchema
-            $result.Level | Should -Be 3
-            $result.Label | Should -Be 'High'
-        }
-
         It 'Application scope bump is capped at 4' {
             $mockSchema = @{
                 permissions = @{

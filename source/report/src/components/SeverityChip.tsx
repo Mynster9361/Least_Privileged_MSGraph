@@ -84,7 +84,7 @@ export function statusToSeverity(status: string): SeverityLevel {
 }
 
 export function privilegeToSeverity(level: number): SeverityLevel {
-    const m: Record<number, SeverityLevel> = { 4: 'critical', 3: 'high', 2: 'medium', 1: 'low', 0: 'none' };
+    const m: Record<number, SeverityLevel> = { 5: 'critical', 4: 'critical', 3: 'high', 2: 'medium', 1: 'low', 0: 'none' };
     return m[level] ?? 'none';
 }
 

@@ -7,23 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Added `Get-PermissionRiskLevel` private function that replaces the previous single-factor schema lookup with a multi-factor risk analysis:
-  - **Critical override list** – curated patterns for permissions that can compromise tenant security (e.g. `RoleManagement.*`, `AppRoleAssignment.ReadWrite.All`, `Application.ReadWrite.All`)
-  - **High override list** – permissions with significant data exposure or write capability (e.g. `Mail.Send`, `AuditLog.Read.All`, `BitlockerKey.Read.All`)
-  - **Schema baseline** – Microsoft's official `privilegeLevel` from `permissions.json` when no override applies
-  - **Scope type adjustment** – Application-scope permissions receive a +1 risk bump (capped at 4) since they are persistent, have no user-context ceiling and carry full tenant blast radius
-- Added `RiskLabel` property (`Low`, `Medium`, `High`, `Critical`) to all permission objects output by `Get-LPMSPermissionAnalysis`
-- Added colored risk badges (`Critical`, `High`, `Medium`, `Low`) to individual permissions in the HTML report detail panel (Current, Excess, Missing, and Optimal permission sections)
-- Added descriptive labels to the privilege level column in the HTML report table (`L4 - Critical`, `L3 - High`, `L2 - Medium`, `L1 - Low`)
-- Added unit tests for `Get-PermissionRiskLevel` covering critical/high overrides, name-pattern inference, schema integration, scope bumping, and output structure
-- Added `source/report/` — a Vite + React + TypeScript project that produces the HTML report template as a single self-contained file (no CDN dependencies). Run `npm run build` in `source/report/` to rebuild the template at `source/data/base.html`. Features: TanStack Table (replacing jQuery DataTables), PostCSS Tailwind (replacing CDN browser build), `vite-plugin-singlefile` for full asset inlining
-- Report modal: **Summary banner** — colored pill chips directly under the app name showing excess permissions, missing permissions, unmatched activities, and throttling severity at a glance without scrolling
-- Report modal: **Application Overview stat cards** — App Roles, Max Privilege (color-coded), Privilege Score, and Activities Matched displayed as metric cards instead of a plain list
-- Report modal: **Permission Changes diff view** — unified permission list replacing the four separate Current/Excess/Missing/Optimal sections; each permission is tagged `✓ keep`, `− remove`, or `+ add` with a count summary. Includes optimal permissions not currently held (scope-aware: `User.Read (Delegated)` and `User.Read (Application)` are treated as distinct grants)
-- Report modal: **Collapsible Throttling Statistics** — starts collapsed showing only the severity badge (Normal/Low/Warning/Critical); click to expand the full stats grid
-- Report modal: **Escape key** closes the modal; clicking the backdrop also closes it
-- Report modal: **Body scroll lock** — background page no longer scrolls while a modal is open
-- Report: **Dynamic browser tab title** — `document.title` is set at runtime from the report's `ReportTitle` value; falls back to `"Microsoft Graph Permission Analysis Report"` when the template placeholder has not been replaced
+- Added `Get-PermissionRiskLevel` private function that determines a numeric risk level (1–5) for any Microsoft Graph permission. Schema-first using Microsoft's official `permissions.json`, falling back to curated critical/high override lists and name-pattern inference with a +1 Application scope bump (capped at 5). Risk levels: `1 – Low`, `2 – Medium`, `3 – High`, `4 – Critical`, `5 – Maximum`
+- `Get-LPMSPermissionAnalysis` now fetches the MS Graph permissions schema once per run and passes it to `Get-PermissionRiskLevel` so all permission objects carry accurate `PrivilegeLevel` (1–5) and `RiskLabel` values
+- Added `RiskLabel` property (`Low`, `Medium`, `High`, `Critical`, `Maximum`) to all permission objects output by `Get-LPMSPermissionAnalysis`
+- Added unit tests for `Get-PermissionRiskLevel` covering schema lookup, critical/high overrides, name-pattern inference, Application scope bumping, and output structure
+- Added `source/report/` — a Vite + React + TypeScript project that produces the HTML report template as a single self-contained file (no CDN dependencies). Run `npm run build` in `source/report/` to rebuild the template at `source/data/base.html`
+- Report: replaced jQuery DataTables with TanStack Table and CDN Tailwind with PostCSS Tailwind via `vite-plugin-singlefile` for full asset inlining
+- Report: privilege filter now uses distinct levels `L1` through `L5` instead of cumulative range options
+- Report: colored risk badges (`Maximum`, `Critical`, `High`, `Medium`, `Low`) on individual permissions in the detail panel
+- Report: privilege level column now shows descriptive labels (`L5 – Maximum`, `L4 – Critical`, `L3 – High`, `L2 – Medium`, `L1 – Low`)
+- Report modal: summary banner with colored pill chips for excess permissions, missing permissions, unmatched activities, and throttling severity
+- Report modal: Application Overview stat cards showing App Roles, Max Privilege, Privilege Score, and Activities Matched
+- Report modal: permission changes diff view tagging each permission as `✓ keep`, `− remove`, or `+ add` with a count summary
+- Report modal: collapsible Throttling Statistics section, collapsed by default showing only the severity badge
+- Report modal: Escape key and backdrop click close the modal; background scroll is locked while the modal is open
+- Report: `document.title` is set at runtime from the report's `ReportTitle` value
 
 ## [3.0.0] - 2026-04-03
 

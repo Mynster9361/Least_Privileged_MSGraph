@@ -92,7 +92,7 @@ const recommendedActions: Record<string, string> = {
 };
 
 const privilegeLabels: Record<number, string> = {
-    4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low', 0: 'None',
+    5: 'Maximum', 4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low',
 };
 
 const throttlingSeverityLabel: Record<number, string> = {
@@ -220,11 +220,8 @@ export function AppTable({ appData, filters, onShowDetails, onClearFilters }: Pr
 
             // Privilege filter
             if (filters.privilege) {
-                if (filters.privilege === '4' && row.maxPrivilegeLevel !== 4) return false;
-                else if (filters.privilege === '3plus' && row.maxPrivilegeLevel < 3) return false;
-                else if (filters.privilege === '2plus' && row.maxPrivilegeLevel < 2) return false;
-                else if (filters.privilege === '1' && row.maxPrivilegeLevel !== 1) return false;
-                else if (filters.privilege === '0' && row.maxPrivilegeLevel !== 0) return false;
+                const filterLevel = Number(filters.privilege);
+                if (row.maxPrivilegeLevel !== filterLevel) return false;
             }
 
             // Search filter

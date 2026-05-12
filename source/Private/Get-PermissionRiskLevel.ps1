@@ -1,31 +1,36 @@
-function Get-PermissionRiskLevel {
+﻿function Get-PermissionRiskLevel {
     <#
 .SYNOPSIS
     Determines the risk level of a Microsoft Graph permission using multi-factor analysis.
 
 .DESCRIPTION
-    Calculates a numeric risk level (1–4) and a descriptive label for a given Graph permission
+    Calculates a numeric risk level (1–5) and a descriptive label for a given Graph permission
     by combining four factors in priority order:
 
-    1. **Critical/High override list** – curated patterns for permissions that carry inherent
-       tenant-wide security risk regardless of what the schema says (e.g. RoleManagement.*,
-       Directory.ReadWrite.All, Application.ReadWrite.All).
-
-    2. **Microsoft Graph permissions schema** – the official `privilegeLevel` value from
+    1. **Microsoft Graph permissions schema** – the official `privilegeLevel` value from
        Microsoft's permissions.json, fetched scope-aware (Application vs DelegatedWork).
+       When the permission is found in the schema this value is returned directly, since
+       the schema already differentiates between Application and Delegated grant types.
+
+    2. **Critical/High override list** – curated patterns for permissions that carry inherent
+       tenant-wide security risk, used as fallback when the permission is absent from the
+       schema (e.g. RoleManagement.*, Directory.ReadWrite.All, Application.ReadWrite.All).
 
     3. **Name-pattern analysis** – infers risk from permission name conventions when the
-       permission is absent from the schema (.ReadWrite.All → High, .Read.All → Medium, etc.).
+       permission is absent from both the schema and the override lists
+       (.ReadWrite.All → High, .Read.All → Medium, etc.).
 
-    4. **Scope type adjustment** – Application-scope grants have no user context, persist
-       indefinitely, and have full tenant blast radius. The level is therefore bumped by +1
-       (capped at 4) for Application permissions after the base level is determined.
+    4. **Scope type adjustment** – applied only for schema-less fallback paths.  Application
+       grants have no user context, persist indefinitely, and have full tenant blast radius.
+       The level is bumped by +1 (capped at 5) after name-pattern inference.
 
     Risk levels:
       1 – Low:      Minimal scope, read-only or per-user (e.g. User.Read, openid, profile)
       2 – Medium:   Moderate access; limited write or scoped tenant-read (e.g. Group.Read.All)
       3 – High:     Broad read or write, significant data exposure (e.g. Mail.Send, AuditLog.Read.All)
       4 – Critical: Can fundamentally compromise tenant security (e.g. RoleManagement.ReadWrite.All)
+      5 – Maximum:  Highest risk tier as defined by the Graph permissions schema
+                    (e.g. DelegatedPermissionGrant.ReadWrite.All, BackupRestore-*.ReadWrite.All)
 
 .PARAMETER PermissionName
     The Microsoft Graph permission name (e.g. "User.Read.All", "Directory.ReadWrite.All").
@@ -65,9 +70,11 @@ function Get-PermissionRiskLevel {
     # but this permission already lands in the High override returning 3 for Application scope)
 
 .NOTES
-    - Override patterns take priority over schema and name-pattern analysis.
-    - Application-scope adjustment applies AFTER all other factors.
-    - Permissions not found in any override list fall back to schema → name-pattern → scope bump.
+    - When the Schema parameter is provided and the permission is found, the schema value
+      is returned immediately — no additional overrides or scope adjustment are applied,
+      since the schema already differentiates by scope.
+    - Override patterns are only consulted when the permission is absent from the schema.
+    - The Application scope bump (+1, capped at 5) is applied only for schema-less fallback paths.
     - Scope values "DelegatedWork" and "DelegatedPersonal" are both treated as Delegated.
 #>
     [CmdletBinding()]
@@ -85,14 +92,60 @@ function Get-PermissionRiskLevel {
 
     $isApplication = $ScopeType -eq 'Application'
     $schemaKey = if ($isApplication) {
-        'Application' 
+        'Application'
     }
     else {
-        'DelegatedWork' 
+        'DelegatedWork'
     }
 
     # -------------------------------------------------------------------------
-    # 1. Critical override patterns
+    # 1. Schema-based level (primary source)
+    #    Use Microsoft's official privilegeLevel for this permission and scope
+    #    directly from permissions.json.  The schema already differentiates
+    #    between Application and Delegated scope, so no additional bump is needed
+    #    when a schema match is found.  Supports levels 1–5.
+    # -------------------------------------------------------------------------
+    if ($null -ne $Schema) {
+        $permissions = $Schema['permissions']
+        if ($permissions -is [hashtable] -and $permissions.ContainsKey($PermissionName)) {
+            $permNode = $permissions[$PermissionName]
+            if ($permNode -is [hashtable]) {
+                $schemes = $permNode['schemes']
+                if ($schemes -is [hashtable] -and $schemes.ContainsKey($schemaKey)) {
+                    $schemeNode = $schemes[$schemaKey]
+                    if ($schemeNode -is [hashtable]) {
+                        $rawLevel = $schemeNode['privilegeLevel']
+                        if ($null -ne $rawLevel) {
+                            $parsed = [int]$rawLevel
+                            if ($parsed -gt 0) {
+                                $label = switch ($parsed) {
+                                    5 {
+                                        'Maximum'
+                                    }
+                                    4 {
+                                        'Critical'
+                                    }
+                                    3 {
+                                        'High'
+                                    }
+                                    2 {
+                                        'Medium'
+                                    }
+                                    default {
+                                        'Low'
+                                    }
+                                }
+                                return [PSCustomObject]@{ Level = $parsed; Label = $label }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    # -------------------------------------------------------------------------
+    # 2. Critical override patterns (fallback when permission absent from schema)
     #    Permissions that can fundamentally compromise tenant security.
     #    Application scope → Critical (4).  Delegated scope → High (3) because
     #    the user's own permissions act as a ceiling, but the capability is still
@@ -125,7 +178,7 @@ function Get-PermissionRiskLevel {
     }
 
     # -------------------------------------------------------------------------
-    # 2. High override patterns
+    # 3. High override patterns (fallback when permission absent from schema)
     #    Significant data exposure or write capability even without full directory
     #    write.  Application scope → High (3).  Delegated scope → Medium (2).
     # -------------------------------------------------------------------------
@@ -165,35 +218,8 @@ function Get-PermissionRiskLevel {
     }
 
     # -------------------------------------------------------------------------
-    # 3. Schema-based level
-    #    Fall back to Microsoft's official privilegeLevel for this permission and
-    #    scope combination when no override matched.
-    # -------------------------------------------------------------------------
-    $schemaLevel = 1
-    if ($null -ne $Schema) {
-        $permissions = $Schema['permissions']
-        if ($permissions -is [hashtable] -and $permissions.ContainsKey($PermissionName)) {
-            $permNode = $permissions[$PermissionName]
-            if ($permNode -is [hashtable]) {
-                $schemes = $permNode['schemes']
-                if ($schemes -is [hashtable] -and $schemes.ContainsKey($schemaKey)) {
-                    $schemeNode = $schemes[$schemaKey]
-                    if ($schemeNode -is [hashtable]) {
-                        $rawLevel = $schemeNode['privilegeLevel']
-                        if ($null -ne $rawLevel) {
-                            $parsed = [int]$rawLevel
-                            if ($parsed -gt 0) {
-                                $schemaLevel = $parsed 
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    # -------------------------------------------------------------------------
-    # 4. Name-pattern inference (fallback when permission is absent from schema)
+    # 4. Name-pattern inference (fallback when permission is absent from schema
+    #    and does not match any override list)
     #    Inferred from standard Graph permission naming conventions.
     # -------------------------------------------------------------------------
     $nameLevel = 1
@@ -208,28 +234,31 @@ function Get-PermissionRiskLevel {
     }
 
     # -------------------------------------------------------------------------
-    # 5. Scope type adjustment
+    # 5. Scope type adjustment (applied only for schema-less fallback paths)
     #    Application permissions are persistent and have full tenant blast radius
-    #    with no user-context ceiling.  Bump the level by +1 (capped at 4).
+    #    with no user-context ceiling.  Bump the level by +1 (capped at 5).
     # -------------------------------------------------------------------------
-    $baseLevel = [Math]::Max($schemaLevel, $nameLevel)
+    $baseLevel = $nameLevel
 
-    if ($isApplication -and $baseLevel -lt 4) {
-        $baseLevel = [Math]::Min($baseLevel + 1, 4)
+    if ($isApplication -and $baseLevel -lt 5) {
+        $baseLevel = [Math]::Min($baseLevel + 1, 5)
     }
 
     $label = switch ($baseLevel) {
+        5 {
+            'Maximum'
+        }
         4 {
-            'Critical' 
+            'Critical'
         }
         3 {
-            'High' 
+            'High'
         }
         2 {
-            'Medium' 
+            'Medium'
         }
         default {
-            'Low' 
+            'Low'
         }
     }
 

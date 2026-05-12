@@ -44,6 +44,7 @@ export function getPermissionType(app: AppData, permissionName: string): string 
 
 export function getRiskBadgeClass(label: string): string {
     const map: Record<string, string> = {
+        Maximum: 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-700',
         Critical: 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-700',
         High: 'bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border border-orange-300 dark:border-orange-700',
         Medium: 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 border border-yellow-300 dark:border-yellow-700',
@@ -54,11 +55,11 @@ export function getRiskBadgeClass(label: string): string {
 
 export function resolveRiskLabel(p: Permission | string | undefined, level?: number): string {
     if (!p || typeof p === 'string') {
-        const labelMap: Record<number, string> = { 4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low' };
+        const labelMap: Record<number, string> = { 5: 'Maximum', 4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low' };
         return labelMap[level ?? 1] ?? 'Low';
     }
     if (p.RiskLabel) return p.RiskLabel;
-    const labelMap: Record<number, string> = { 4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low' };
+    const labelMap: Record<number, string> = { 5: 'Maximum', 4: 'Critical', 3: 'High', 2: 'Medium', 1: 'Low' };
     return labelMap[p.PrivilegeLevel ?? 1] ?? 'Low';
 }
 

@@ -14,7 +14,7 @@ const filterLabels: Partial<Record<keyof FilterState, Record<string, string>>> =
     status: { good: 'Status: Optimal', warning: 'Status: Excess', missing: 'Status: Under-Privileged', misaligned: 'Status: Misaligned', danger: 'Status: Unmatched' },
     activity: { yes: 'Activity: Has Activity', no: 'Activity: No Activity' },
     throttling: { throttled: 'Throttling: All Throttled', '4': 'Throttling: Critical', '3': 'Throttling: Warning', '2': 'Throttling: Low', '1': 'Throttling: Minimal', '0': 'Throttling: Normal' },
-    privilege: { '4': 'Privilege: L4 Critical', '3plus': 'Privilege: L3+', '2plus': 'Privilege: L2+', '1': 'Privilege: L1 Low', '0': 'Privilege: None' },
+    privilege: { '5': 'Privilege: L5 Maximum', '4': 'Privilege: L4 Critical', '3': 'Privilege: L3 High', '2': 'Privilege: L2 Medium', '1': 'Privilege: L1 Low' },
 };
 
 export function FiltersPanel({ filters, onChange, searchRef }: Props) {
@@ -143,11 +143,11 @@ export function FiltersPanel({ filters, onChange, searchRef }: Props) {
                         <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Privilege</label>
                         <select value={filters.privilege} onChange={set('privilege')} className={selectClass}>
                             <option value="">All</option>
-                            <option value="4">Level 4 (Critical)</option>
-                            <option value="3plus">Level 3+ (High/Critical)</option>
-                            <option value="2plus">Level 2+ (Medium+)</option>
-                            <option value="1">Level 1 (Low only)</option>
-                            <option value="0">No Permissions</option>
+                            <option value="5">L5 – Maximum</option>
+                            <option value="4">L4 – Critical</option>
+                            <option value="3">L3 – High</option>
+                            <option value="2">L2 – Medium</option>
+                            <option value="1">L1 – Low</option>
                         </select>
                     </div>
                     <div>

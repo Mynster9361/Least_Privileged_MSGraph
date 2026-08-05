@@ -45,25 +45,68 @@ Before contributing, ensure you have:
    cd LeastPrivilegedMSGraph
    ```
 
-2. **Add Upstream Remote**
+1. **Add Upstream Remote**
 
    ```bash
    git remote add upstream https://github.com/Mynster9361/Least_Privileged_MSGraph.git
    ```
 
-3. **Bootstrap Development Dependencies**
+1. **Bootstrap Development Dependencies**
 
    ```powershell
    # Install all required modules for development
    ./build.ps1 -ResolveDependency -Tasks noop
    ```
 
-4. **Verify Setup**
+1. **Verify Setup**
 
    ```powershell
    # Run a test build to ensure everything works
    ./build.ps1 -Tasks clean, build, test
    ```
+
+## Project Structure
+
+```
+LeastPrivilegedMSGraph/
+├── .github/                    # GitHub templates and workflows
+│   ├── ISSUE_TEMPLATE/        # Issue templates
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .vscode/                   # VS Code configuration
+├── output/                    # Build output (auto-generated)
+├── source/                    # Source code
+│   ├── LeastPrivilegedMSGraph.psd1    # Module manifest
+│   ├── LeastPrivilegedMSGraph.psm1    # Module script file
+│   ├── en-US/               # Help files
+│   ├── Private/             # Private functions (not exported)
+│   └── Public/              # Public functions (exported)
+├── tests/                     # Test files
+│   ├── Unit/                # Unit tests
+│   ├── Integration/         # Integration tests
+│   └── QA/                  # Quality assurance tests
+├── build.ps1                 # Main build script
+├── build.yaml               # Build configuration
+└── RequiredModules.psd1     # Development dependencies
+```
+
+### Build Commands
+
+```powershell
+# Full build with dependency resolution
+./build.ps1 -ResolveDependency
+
+# Build only (no tests)
+./build.ps1 -Tasks build
+
+# Clean build
+./build.ps1 -Tasks clean, build
+
+# Run tests
+./build.ps1 -Tasks test
+
+# Quick test without a full build
+Invoke-Pester ./tests/Unit -EnableExit
+```
 
 ## Development Guidelines
 
@@ -114,45 +157,45 @@ For general questions, use the [general template](.github/ISSUE_TEMPLATE/General
 ### Quick Contribution Steps
 
 1. **Fork the repository**
-2. **Create a feature branch**:
+1. **Create a feature branch**:
 
    ```bash
    git checkout -b feature/amazing-feature
    ```
 
-3. **Make your changes** following our guidelines
-4. **Add tests** for your changes
-5. **Ensure all tests pass**:
+1. **Make your changes** following our guidelines
+1. **Add tests** for your changes
+1. **Ensure all tests pass**:
 
    ```powershell
    ./build.ps1 -Tasks test
    ```
 
-6. **Update documentation** as needed
-7. **Commit your changes**:
+1. **Update documentation** as needed
+1. **Commit your changes**:
 
    ```bash
    git commit -m 'Add amazing feature'
    ```
 
-8. **Push to your branch**:
+1. **Push to your branch**:
 
    ```bash
    git push origin feature/amazing-feature
    ```
 
-9. **Submit a pull request**
+1. **Submit a pull request**
 
 ### Pull Request Guidelines
 
 When submitting a PR, please:
 
 1. **Use the [PR template](.github/PULL_REQUEST_TEMPLATE.md)**
-2. **Provide a clear description** of what your PR does
-3. **Link related issues** using keywords (e.g., "fixes #123")
-4. **Update the [CHANGELOG.md](CHANGELOG.md)** following [Keep a Changelog](https://keepachangelog.com/) format
-5. **Ensure GitHub Actions CI passes** on all platforms
-6. **Request review** from maintainers
+1. **Provide a clear description** of what your PR does
+1. **Link related issues** using keywords (e.g., "fixes #123")
+1. **Update the [CHANGELOG.md](CHANGELOG.md)** following [Keep a Changelog](https://keepachangelog.com/) format
+1. **Ensure GitHub Actions CI passes** on all platforms
+1. **Request review** from maintainers
 
 ### PR Checklist
 
@@ -400,25 +443,25 @@ All changes must be documented in [CHANGELOG.md](CHANGELOG.md) following [Keep a
 This project uses automated releases:
 
 1. **Merge to main** - Changes are merged via pull request
-2. **Version calculation** - GitVersion automatically determines version based on commit messages
-3. **CI/CD pipeline** - [GitHub Actions](.github/workflows/ci-cd.yml) builds, tests, and packages
-4. **Automatic release** - On successful build, creates GitHub release and publishes to PowerShell Gallery
+1. **Version calculation** - GitVersion automatically determines version based on commit messages
+1. **CI/CD pipeline** - [GitHub Actions](.github/workflows/ci-cd.yml) builds, tests, and packages
+1. **Automatic release** - On successful build, creates GitHub release and publishes to PowerShell Gallery
 
 ### Manual Release Steps (if needed)
 
 1. **Update version** in [GitVersion.yml](GitVersion.yml) if needed
-2. **Update changelog** with release notes
-3. **Create release tag** following semantic versioning
-4. **GitHub Actions pipeline** will handle the rest
+1. **Update changelog** with release notes
+1. **Create release tag** following semantic versioning
+1. **GitHub Actions pipeline** will handle the rest
 
 ## Getting Help
 
 If you need help:
 
 1. **Check existing issues** - Your question might already be answered
-2. **Search documentation** - Look through README and wiki
-3. **Ask in discussions** - Use GitHub Discussions for questions
-4. **Contact maintainers** - For sensitive issues
+1. **Search documentation** - Look through README and wiki
+1. **Ask in discussions** - Use GitHub Discussions for questions
+1. **Contact maintainers** - For sensitive issues
 
 ---
 

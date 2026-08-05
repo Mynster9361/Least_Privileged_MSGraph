@@ -53,11 +53,6 @@ jobs:
         run: |
           ./build.ps1 -Tasks test
 
-      - name: Generate Documentation
-        shell: pwsh
-        run: |
-          ./build.ps1 -Tasks docs
-
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |

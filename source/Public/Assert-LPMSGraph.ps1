@@ -53,7 +53,7 @@ function Assert-LPMSGraph {
     This function does not modify any settings or configurations. It only performs read-only validation checks.
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Assert-LPMSGraph.html
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Assert-LPMSGraph
 #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]

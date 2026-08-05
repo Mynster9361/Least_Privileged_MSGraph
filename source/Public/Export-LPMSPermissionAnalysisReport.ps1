@@ -235,7 +235,7 @@ function Export-LPMSPermissionAnalysisReport {
     https://learn.microsoft.com/en-us/graph/permissions-reference
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Export-LPMSPermissionAnalysisReport.html
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Export-LPMSPermissionAnalysisReport
 #>
     [CmdletBinding()]
     [OutputType([System.String])]

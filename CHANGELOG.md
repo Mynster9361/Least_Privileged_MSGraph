@@ -3,8 +3,16 @@
 The format is based on and uses the types of changes according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
+
+### Added
+- Added `Get-PermissionRiskLevel` private function that determines a numeric risk level (1–5) for any Microsoft Graph permission. Schema-first using Microsoft's official `permissions.json`, falling back to curated critical/high override lists and name-pattern inference with a +1 Application scope bump (capped at 5). Risk levels: `1 – Low`, `2 – Medium`, `3 – High`, `4 – Critical`, `5 – Maximum`
+
+### Removed
+- Removed `Initialize-LPMSLogAnalyticsApi` as it has been added to newer version of EntraAuth Module
+
+
+## [3.1.0] - 2026-05-12
 
 ### Added
 - Added `Get-PermissionRiskLevel` private function that determines a numeric risk level (1–5) for any Microsoft Graph permission. Schema-first using Microsoft's official `permissions.json`, falling back to curated critical/high override lists and name-pattern inference with a +1 Application scope bump (capped at 5). Risk levels: `1 – Low`, `2 – Medium`, `3 – High`, `4 – Critical`, `5 – Maximum`

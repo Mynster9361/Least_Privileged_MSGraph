@@ -323,7 +323,7 @@ function Get-LPMSAppThrottlingData {
     https://learn.microsoft.com/en-us/graph/throttling
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSAppThrottlingData.html
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Get-LPMSAppThrottlingData
 #>
     [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.String])]

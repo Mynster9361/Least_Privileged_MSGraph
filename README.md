@@ -17,8 +17,8 @@ A PowerShell module that audits Microsoft Graph permission assignments and recom
 
 ## Report Preview
 
-| Front Page | Details Modal |
-|---|---|
+| Front Page                                       | Details Modal                                   |
+| ------------------------------------------------ | ----------------------------------------------- |
 | ![Front Page](data/MSGraph_Report_FrontPage.png) | ![Modal Top](data/MSGraph_Report_Modal_Top.png) |
 
 Try the [sample report](data/sample-report.html) — an anonymized example with 50 app registrations.
@@ -60,7 +60,7 @@ $daysToQuery             = 30
 
 Import-Module LeastPrivilegedMSGraph
 
-Initialize-LPMSLogAnalyticsApi
+
 Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics", "GraphBeta"
 
 Get-LPMSAppRoleAssignment |

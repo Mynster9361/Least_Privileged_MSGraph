@@ -3,264 +3,230 @@ name: CI/CD Pipeline
 # Triggers: push to main, tags, manual dispatch
 
 on:
-  push:
-    branches:
-      - main  # Updated to match your default branch
-    paths-ignore:
-      - 'CHANGELOG.md'
-    tags:
-      - 'v*'
-      - '!*-*'
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to run the workflow on'
-        required: false
-        default: 'main'
-        type: string
-      skip_deploy:
-        description: 'Skip deployment step'
-        required: false
-        default: false
-        type: boolean
+    push:
+        branches:
+            - main # Updated to match your default branch
+        paths-ignore:
+            - "CHANGELOG.md"
+        tags:
+            - "v*"
+            - "!*-*"
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: "Branch to run the workflow on"
+                required: false
+                default: "main"
+                type: string
+            skip_deploy:
+                description: "Skip deployment step"
+                required: false
+                default: false
+                type: boolean
 
 env:
-  buildFolderName: output
-  buildArtifactName: output
-  testResultFolderName: testResults
-  defaultBranch: main  # Updated to match your default branch
+    buildFolderName: output
+    buildArtifactName: output
+    testResultFolderName: testResults
+    defaultBranch: main # Updated to match your default branch
 
 jobs:
-  build:
-    name: Build & Package Module
-    runs-on: ubuntu-latest
-    env:
-      MANUAL_VERSION: 0.1.0-preview${{ github.run_number }}
-    outputs:
-      moduleVersion: 0.1.0-preview${{ github.run_number }}
-      fullSemVer: 0.1.0-preview${{ github.run_number }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup PowerShell
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
-          Import-Module -Name PowerShellGet -Force
-          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-
-      - name: Build & Package Module
-        shell: pwsh
-        run: |
-          ./build.ps1 -ResolveDependency -tasks pack
+    build:
+        name: Build & Package Module
+        runs-on: ubuntu-latest
         env:
-          ModuleVersion: ${{ env.MANUAL_VERSION }}
+            MANUAL_VERSION: 0.1.0-preview${{ github.run_number }}
+        outputs:
+            moduleVersion: 0.1.0-preview${{ github.run_number }}
+            fullSemVer: 0.1.0-preview${{ github.run_number }}
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.buildArtifactName }}
-          path: ${{ env.buildFolderName }}/
-          retention-days: 30
+            - name: Setup PowerShell
+              shell: pwsh
+              run: |
+                  $ErrorActionPreference = "Stop"
+                  Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
+                  Import-Module -Name PowerShellGet -Force
+                  Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
-  test:
-    name: Test
-    needs: build
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            name: Linux
-            pwsh: true
-            coverage-name: CodeCoverageLinux
-          - os: windows-latest
-            name: Windows (PowerShell)
-            pwsh: true
-            coverage-name: CodeCoverageWinPS7
-          - os: macos-latest
-            name: macOS
-            pwsh: true
-            coverage-name: CodeCoverageMacOS
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+            - name: Build & Package Module
+              shell: pwsh
+              run: |
+                  ./build.ps1 -ResolveDependency -tasks pack
+              env:
+                  ModuleVersion: ${{ env.MANUAL_VERSION }}
 
-      - name: Setup PowerShell (if needed)
-        if: matrix.pwsh == true && runner.os != 'Windows'
-        shell: pwsh
-        run: |
-          Write-Host "PowerShell Core version: $($PSVersionTable.PSVersion)"
+            - name: Upload Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ env.buildArtifactName }}
+                  path: ${{ env.buildFolderName }}/
+                  retention-days: 30
 
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.buildArtifactName }}
-          path: ${{ env.buildFolderName }}
+    test:
+        name: Test
+        needs: build
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - os: ubuntu-latest
+                      name: Linux
+                      pwsh: true
+                      coverage-name: CodeCoverageLinux
+                    - os: windows-latest
+                      name: Windows (PowerShell)
+                      pwsh: true
+                      coverage-name: CodeCoverageWinPS7
+                    - os: macos-latest
+                      name: macOS
+                      pwsh: true
+                      coverage-name: CodeCoverageMacOS
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
 
-      - name: Run Tests (PowerShell Core)
-        if: matrix.pwsh == true
-        shell: pwsh
-        run: |
-          ./build.ps1 -tasks test
+            - name: Setup PowerShell (if needed)
+              if: matrix.pwsh == true && runner.os != 'Windows'
+              shell: pwsh
+              run: |
+                  Write-Host "PowerShell Core version: $($PSVersionTable.PSVersion)"
 
-      - name: Run Tests (Windows PowerShell)
-        if: matrix.pwsh == false
-        shell: powershell
-        run: |
-          ./build.ps1 -tasks test
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: ${{ env.buildArtifactName }}
+                  path: ${{ env.buildFolderName }}
 
-      - name: Upload Test Artifact
-        uses: actions/upload-artifact@v4
+            - name: Run Tests (PowerShell Core)
+              if: matrix.pwsh == true
+              shell: pwsh
+              run: |
+                  ./build.ps1 -tasks test
+
+            - name: Run Tests (Windows PowerShell)
+              if: matrix.pwsh == false
+              shell: powershell
+              run: |
+                  ./build.ps1 -tasks test
+
+            - name: Upload Test Artifact
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: ${{ matrix.coverage-name }}
+                  path: ${{ env.buildFolderName }}/${{ env.testResultFolderName }}/
+                  retention-days: 30
+
+    publish-test-results:
+        name: "Publish Test Results"
+        needs: test
+        runs-on: ubuntu-latest
         if: always()
-        with:
-          name: ${{ matrix.coverage-name }}
-          path: ${{ env.buildFolderName }}/${{ env.testResultFolderName }}/
-          retention-days: 30
+        steps:
+            - name: Download Test Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: test-artifacts
 
-  publish-test-results:
-    name: "Publish Test Results"
-    needs: test
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Download Test Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: test-artifacts
+            - name: Publish Unit Test Results
+              uses: EnricoMi/publish-unit-test-result-action@v2
+              if: always()
+              with:
+                  files: test-artifacts/**/NUnit*.xml
+                  check_name: "CI/CD Test Results"
+                  action_fail: false
+              continue-on-error: true
 
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+    code-coverage:
+        name: Publish Code Coverage
+        needs: test
+        runs-on: ubuntu-latest
         if: always()
-        with:
-          files: test-artifacts/**/NUnit*.xml
-          check_name: "CI/CD Test Results"
-          action_fail: false
-        continue-on-error: true
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
 
-  code-coverage:
-    name: Publish Code Coverage
-    needs: test
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: ${{ env.buildArtifactName }}
+                  path: ${{ env.buildFolderName }}
 
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.buildArtifactName }}
-          path: ${{ env.buildFolderName }}
+            - name: Download Test Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: coverage-artifacts
 
-      - name: Download Test Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: coverage-artifacts
+            - name: Copy Coverage Files
+              shell: pwsh
+              run: |
+                  $coverageFiles = @(
+                    'CodeCoverageLinux',
+                    'CodeCoverageWinPS7',
+                    'CodeCoverageWinPS51',
+                    'CodeCoverageMacOS'
+                  )
 
-      - name: Copy Coverage Files
-        shell: pwsh
-        run: |
-          $coverageFiles = @(
-            'CodeCoverageLinux',
-            'CodeCoverageWinPS7',
-            'CodeCoverageWinPS51',
-            'CodeCoverageMacOS'
-          )
+                  foreach ($coverageFile in $coverageFiles) {
+                    $sourcePath = "coverage-artifacts/$coverageFile"
+                    $destPath = "${{ env.buildFolderName }}/${{ env.testResultFolderName }}"
 
-          foreach ($coverageFile in $coverageFiles) {
-            $sourcePath = "coverage-artifacts/$coverageFile"
-            $destPath = "${{ env.buildFolderName }}/${{ env.testResultFolderName }}"
+                    if (Test-Path $sourcePath) {
+                      Write-Host "Copying $sourcePath to $destPath"
+                      Copy-Item -Path "$sourcePath/*" -Destination $destPath -Recurse -Force
+                    } else {
+                      Write-Warning "Coverage artifact $coverageFile not found"
+                    }
+                  }
 
-            if (Test-Path $sourcePath) {
-              Write-Host "Copying $sourcePath to $destPath"
-              Copy-Item -Path "$sourcePath/*" -Destination $destPath -Recurse -Force
-            } else {
-              Write-Warning "Coverage artifact $coverageFile not found"
-            }
-          }
+            # Uncomment these steps if you want to merge code coverage and publish to services
+            # - name: Merge Code Coverage Files
+            #   shell: pwsh
+            #   run: |
+            #     ./build.ps1 -tasks merge
 
-      # Uncomment these steps if you want to merge code coverage and publish to services
-      # - name: Merge Code Coverage Files
-      #   shell: pwsh
-      #   run: |
-      #     ./build.ps1 -tasks merge
+    deploy:
+        name: Deploy Module
+        needs: [build, test]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pages: write
+            id-token: write
+        if: |
+            always() &&
+            needs.test.result == 'success' &&
+            github.event.inputs.skip_deploy != 'true' &&
+            (
+              github.ref == 'refs/heads/main' ||
+              startsWith(github.ref, 'refs/tags/') ||
+              github.event_name == 'workflow_dispatch'
+            )
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: ${{ env.buildArtifactName }}
+                  path: ${{ env.buildFolderName }}
 
-  deploy:
-    name: Deploy Module
-    needs: [build, test]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    if: |
-      always() &&
-      needs.test.result == 'success' &&
-      github.event.inputs.skip_deploy != 'true' &&
-      (
-        github.ref == 'refs/heads/main' ||
-        startsWith(github.ref, 'refs/tags/') ||
-        github.event_name == 'workflow_dispatch'
-      )
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.buildArtifactName }}
-          path: ${{ env.buildFolderName }}
-
-      - name: Generate Documentation
-        shell: pwsh
-        run: |
-          Write-Host "Generating module documentation"
-          ./build.ps1 -tasks docs
-        continue-on-error: false
-
-      - name: Prepare Documentation Directory
-        shell: pwsh
-        run: |
-          ./.ghpages/Prepare-Documentation.ps1 `
-            -BuildOutputPath "${{ env.buildFolderName }}" `
-            -RepositoryDocsPath "./docs" `
-            -OutputPath "./gh-pages-docs"
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./gh-pages-docs
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      - name: Display Pages URL
-        shell: pwsh
-        run: |
-          Write-Host "✅ GitHub Pages deployed successfully!" -ForegroundColor Green
-          Write-Host "📚 Documentation URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" -ForegroundColor Cyan
-
-      - name: Publish Release
-        shell: pwsh
-        run: |
-          Write-Host "Publishing module to PowerShell Gallery"
-          ./build.ps1 -tasks publish
-        env:
-          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
-          ReleaseBranch: ${{ env.defaultBranch }}
-          MainGitBranch: ${{ env.defaultBranch }}
+            - name: Publish Release
+              shell: pwsh
+              run: |
+                  Write-Host "Publishing module to PowerShell Gallery"
+                  ./build.ps1 -tasks publish
+              env:
+                  GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  GalleryApiToken: ${{ secrets.GALLERY_API_TOKEN }}
+                  ReleaseBranch: ${{ env.defaultBranch }}
+                  MainGitBranch: ${{ env.defaultBranch }}

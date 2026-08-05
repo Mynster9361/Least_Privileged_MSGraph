@@ -154,7 +154,7 @@ $daysToQuery = 30 # The amount of days to look back within your workspace for th
 #endregion Sample params needed to run below
 
 #region Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
-Initialize-LPMSLogAnalyticsApi
+
 
 Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "LogAnalytics", "GraphBeta"
 

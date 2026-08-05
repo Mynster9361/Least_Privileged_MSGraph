@@ -119,7 +119,6 @@ function Invoke-LPMSGraphScan {
     Progress and status information is written to the verbose and information streams.
 
 .EXAMPLE
-    Initialize-LPMSLogAnalyticsApi
     Connect-EntraService -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret -Service "GraphBeta", "LogAnalytics"
     Invoke-LPMSGraphScan -WorkspaceId "123456-workspace-id-456"
 
@@ -181,6 +180,8 @@ function Invoke-LPMSGraphScan {
     - Propagates errors from individual workflow steps
     - Provides detailed error messages for troubleshooting
 
+.LINK
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Invoke-LPMSGraphScan
 #>
     [CmdletBinding()]
     param (

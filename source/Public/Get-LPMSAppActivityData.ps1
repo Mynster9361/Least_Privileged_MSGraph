@@ -126,7 +126,7 @@ function Get-LPMSAppActivityData {
     - Must be authenticated via Connect-EntraService before calling this function
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSAppActivityData.html
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Get-LPMSAppActivityData
 #>
     [CmdletBinding(DefaultParameterSetName = 'ByWorkspaceId')]
     [OutputType([System.Object])]

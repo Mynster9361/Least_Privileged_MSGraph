@@ -120,10 +120,10 @@
     - Export-LPMSPermissionAnalysisReport: Generate visual reports
 
 .LINK
-    https://mynster9361.github.io/Least_Privileged_MSGraph/commands/Get-LPMSPermissionAnalysis.html
+    https://mynster-it.dk/docs/modules/leastprivilegedmsgraph/commands/Get-LPMSPermissionAnalysis
 
 .LINK
-    https://github.com/merill/MSGraphPermissions
+    https://github.com/microsoftgraph/microsoft-graph-devx-content/blob/master/permissions/new/permissions.json
 #>
     [CmdletBinding()]
     [OutputType([PSCustomObject[]])]

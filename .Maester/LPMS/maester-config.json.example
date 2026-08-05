@@ -1,0 +1,9 @@
+{
+  "GlobalSettings": {
+    "LPMSLogAnalyticsWorkspaceId": "<workspace_id>",
+    "LPMSDaysToQuery": <days_to_query INT 1-90 (default 30)>,
+    "LPMSMaxActivityEntries": <max_activity_entries INT 1-500000 (default 100000)>,
+    "LPMSThrottleLimit": <throttle_limit INT 1-50 (default 10)>,
+    "LPMSOnlyPrivilegXAndOver": <only_privileg_x_and_over INT 1-5 (default 1)>
+  }
+}

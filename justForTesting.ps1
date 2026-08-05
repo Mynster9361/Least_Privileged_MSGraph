@@ -22,7 +22,7 @@ Import-Module .\output\module\LeastPrivilegedMSGraph\3.0.0\LeastPrivilegedMSGrap
 
 
 #region Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
-Initialize-LPMSLogAnalyticsApi
+
 
 
 #endregion Initialize log analytics service and connect to msgraph,LogAnalytics with app read all permission
@@ -49,7 +49,7 @@ Export-LPMSPermissionAnalysisReport -AppData $groups -OutputPath ".\report2.html
 ./build.ps1 -ResolveDependency -tasks clean, build, test
 Import-Module .\output\module\LeastPrivilegedMSGraph\2.0.0\LeastPrivilegedMSGraph.psd1 -Force -Verbose
 
-Initialize-LPMSLogAnalyticsApi
+
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -ClientID $clientId -TenantID $tenantId -ClientSecret $clientSecret
 $delegatedOnly = Get-LPMSAppRoleAssignment -Verbose
 $delegatedOnly | Get-LPMSAppActivityData -WorkspaceId $logAnalyticsWorkspaceId -Days $daysToQuery -ThrottleLimit 20 -MaxActivityEntries 10000 -Verbose -Debug
@@ -75,7 +75,7 @@ Get-PSFMessage | Select-Object -Last 30 | Format-Table Timestamp, FunctionName, 
 #endregion test app activty data
 
 #region the good stuff for user context
-Initialize-LPMSLogAnalyticsApi
+
 Connect-EntraService -Service "LogAnalytics", "GraphBeta" -AsAzAccount
 $daysToQuery = 5
 $lightweightGroups = Get-LPMSAppRoleAssignment
@@ -139,7 +139,7 @@ Get-LPMSAppRoleAssignment |
 
 
 #region testing the new assert + invoke-lpmsgraphscan
-Initialize-LPMSLogAnalyticsApi
+
 Connect-EntraService -Service "LogAnalytics", "GraphBeta", "Azure" -AsAzAccount
 (Assert-LPMSGraph).checks
 $paramUser = @{

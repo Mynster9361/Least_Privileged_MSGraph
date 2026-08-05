@@ -76,7 +76,6 @@
         'Get-LPMSAppRoleAssignment',
         'Get-LPMSAppThrottlingData',
         'Get-LPMSPermissionAnalysis',
-        'Initialize-LPMSLogAnalyticsApi',
         'Invoke-LPMSGraphScan'
     )
 
@@ -106,13 +105,13 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('MicrosoftGraph', 'GraphAPI', 'Permissions', 'Security', 'Audit')
+            Tags         = @('MicrosoftGraph', 'GraphAPI', 'Permissions', 'Security', 'Audit')
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/LICENSE'
+            LicenseUri   = 'https://github.com/Mynster9361/Least_Privileged_MSGraph/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/Mynster9361/Least_Privileged_MSGraph'
+            ProjectUri   = 'https://github.com/Mynster9361/Least_Privileged_MSGraph'
 
             # A URL to an icon representing this module.
             # IconUri = ''

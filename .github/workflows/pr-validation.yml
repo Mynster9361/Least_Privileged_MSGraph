@@ -7,15 +7,15 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened]
     paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - '.github/**'
+      - "**.md"
+      - "docs/**"
+      - ".github/**"
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to validate'
+        description: "Branch to validate"
         required: false
-        default: 'main'
+        default: "main"
         type: string
 
 env:
@@ -58,19 +58,6 @@ jobs:
         run: |
           ./build.ps1 -Tasks docs
 
-      - name: Check Documentation Changes
-        shell: pwsh
-        run: |
-          # Check if documentation was generated/updated
-          $docsPath = "./output/docs"
-          if (Test-Path $docsPath) {
-            $docFiles = Get-ChildItem -Path $docsPath -Recurse -Filter "*.md"
-            Write-Host "✅ Generated $($docFiles.Count) documentation files:" -ForegroundColor Green
-            $docFiles | ForEach-Object { Write-Host "  - $($_.Name)" }
-          } else {
-            Write-Warning "No documentation files were generated"
-          }
-
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -83,39 +70,12 @@ jobs:
             Write-Host "✅ PSScriptAnalyzer found no issues" -ForegroundColor Green
           }
 
-      - name: Commit generated documentation to PR branch
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        shell: pwsh
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin "${{ github.event.pull_request.head.ref }}"
-          git checkout "${{ github.event.pull_request.head.ref }}"
-          $docs = Get-ChildItem -Path "./output/docs" -Filter "*.md" -Recurse
-          if ($docs) {
-            git add -f ./output/docs/*.md
-            git commit -m "docs: auto-generate PowerShell help markdown" || echo "No changes to commit"
-            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
-          } else {
-            echo "No docs to commit"
-          }
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Unit Test Results (PR Validation)
           path: ${{ env.buildFolderName }}/${{ env.testResultFolderName }}/*.xml
-
-      - name: Upload Generated Documentation
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: Generated Documentation (PR Validation)
-          path: ${{ env.buildFolderName }}/docs/
-          retention-days: 7
 
   publish-test-results:
     name: "Publish PR Test Results"
@@ -136,51 +96,3 @@ jobs:
           check_name: "PR Validation Results"
           action_fail: false
         continue-on-error: true
-
-  documentation-preview:
-    name: "Documentation Preview"
-    needs: validate
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Download Documentation Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: Generated Documentation (PR Validation)
-          path: docs-preview
-
-      - name: Create Documentation Summary Markdown
-        id: doc-summary
-        shell: pwsh
-        run: |
-          $summary = ""
-          if (Test-Path "./docs-preview") {
-            $docFiles = Get-ChildItem -Path "./docs-preview" -Recurse -Filter "*.md"
-            if ($docFiles.Count -gt 0) {
-              $summary += "## 📚 Generated Documentation`n"
-              $summary += "The following documentation files were generated:`n"
-              foreach ($file in $docFiles) {
-                $summary += "- 📄 $($file.Name)`n"
-              }
-              $summary += "`n> **Note**: Documentation is automatically generated from comment-based help in your PowerShell functions.`n"
-            } else {
-              $summary += "## ⚠️ No Documentation Generated`n"
-              $summary += "No documentation files were generated. Make sure your functions have proper comment-based help.`n"
-            }
-          } else {
-            $summary += "## ⚠️ No Documentation Generated`n"
-            $summary += "No documentation files were generated. Make sure your functions have proper comment-based help.`n"
-          }
-          $summary | Set-Content doc-summary.md
-          Get-Content doc-summary.md | Out-String | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
-          # Set output for next step
-          $summary = Get-Content doc-summary.md -Raw
-          echo "DOC_SUMMARY<<EOF" >> $env:GITHUB_OUTPUT
-          echo "$summary" >> $env:GITHUB_OUTPUT
-          echo "EOF" >> $env:GITHUB_OUTPUT
-
-      - name: Comment on PR with Documentation Summary
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: ${{ steps.doc-summary.outputs.DOC_SUMMARY }}

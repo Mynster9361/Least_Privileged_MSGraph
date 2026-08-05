@@ -8,7 +8,7 @@ CopyPaths:
   - data
 Encoding: UTF8
 # Force manual version - bypass GitVersion completely
-SemVer: "3.2.0"
+SemVer: "3.3.0"
 VersionedOutputDirectory: true
 IgnoreGitVersion: true
 

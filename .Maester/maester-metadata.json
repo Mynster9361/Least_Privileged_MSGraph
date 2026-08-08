@@ -1,5 +1,5 @@
 {
-    "Message": "Setup required before running these tests:\n1. Enable the 'MicrosoftGraphActivityLogs' diagnostic setting in Entra ID -> Log Analytics.\n2. Add your workspace ID to tests/Custom/maester-config.json under GlobalSettings.LPMSLogAnalyticsWorkspaceId.\n3. Run 'Connect-AzAccount -AuthScope https://api.loganalytics.io' before Invoke-Maester.\n\nSee https://github.com/Mynster9361/Least_Privileged_MSGraph for full docs.",
+    "Message": "Setup required before running these tests:\n1. Enable the 'MicrosoftGraphActivityLogs' diagnostic setting in Entra ID -> Log Analytics.\n2. Add your workspace ID to tests/Custom/maester-config.json under GlobalSettings.LPMSLogAnalyticsWorkspaceId.\n3. Run 'Connect-AzAccount -AuthScope https://api.loganalytics.io' before Invoke-Maester.\n\nSee https://mynster-it.dk/2026/02/26/LeastPrivilegedMSGraphSetup for step by step guide.\nSee https://mynster-it.dk/docs/modules/leastprivilegedmsgraph for docs.",
     "RequiredModules": [
         {
             "Name": "LeastPrivilegedMSGraph",

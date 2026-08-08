@@ -104,15 +104,6 @@ function Get-LPMSCachedAppData {
             1
         }
 
-        # Ensure the Log Analytics OAuth scope is cached in the Az token store.
-        # Connect-AzAccount -AuthScope is a no-op when the token is already cached;
-        # it only prompts if Conditional Access requires a one-time MFA step-up for
-        # the https://api.loganalytics.io resource. Skip this block when Az.Accounts
-        # is not available (e.g. pure service-principal environments).
-        if (Get-Command 'Connect-AzAccount' -ErrorAction SilentlyContinue) {
-            Connect-AzAccount -AuthScope 'https://api.loganalytics.io' -ErrorAction SilentlyContinue | Out-Null
-        }
-
         Connect-EntraService -Service "LogAnalytics", "GraphBeta" -AsAzAccount
         $script:_LPMSCachedData = Get-LPMSAppRoleAssignment |
             Get-LPMSAppActivityData   -WorkspaceId $wsId -Days $days -MaxActivityEntries $maxEntries -ThrottleLimit $throttle |

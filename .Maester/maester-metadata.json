@@ -1,0 +1,25 @@
+{
+    "Message": "Setup required before running these tests:\n1. Enable the 'MicrosoftGraphActivityLogs' diagnostic setting in Entra ID -> Log Analytics.\n2. Add your workspace ID to tests/Custom/maester-config.json under GlobalSettings.LPMSLogAnalyticsWorkspaceId.\n3. Run 'Connect-AzAccount -AuthScope https://api.loganalytics.io' before Invoke-Maester.\n\nSee https://github.com/Mynster9361/Least_Privileged_MSGraph for full docs.",
+    "RequiredModules": [
+        {
+            "Name": "LeastPrivilegedMSGraph",
+            "MinimumVersion": "3.3.0"
+        },
+        {
+            "Name": "Az.Accounts",
+            "MinimumVersion": "5.5.0"
+        },
+        {
+            "Name": "EntraAuth",
+            "MinimumVersion": "1.8.55"
+        },
+        {
+            "Name": "EntraAuth.Graph",
+            "MinimumVersion": "1.0.5"
+        },
+        {
+            "Name": "PSFramework",
+            "MinimumVersion": "1.14.457"
+        }
+    ]
+}

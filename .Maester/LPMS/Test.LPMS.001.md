@@ -2,7 +2,7 @@ Checks that no service principal holds Microsoft Graph API permissions beyond th
 
 Excess permissions violate the **principle of least privilege**. If a service principal is compromised, an attacker can abuse every permission assigned to it — even permissions the application never actually uses. Removing unused permissions directly reduces the blast radius of a credential or token compromise.
 
-#### Remediation action:
+#### Remediation action
 
 For each application listed below:
 
@@ -19,5 +19,4 @@ For each application listed below:
 * [LeastPrivilegedMSGraph module](https://github.com/Mynster9361/LeastPrivilegedMSGraph)
 
 <!--- Results --->
-
 %TestResult%

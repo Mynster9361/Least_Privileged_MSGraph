@@ -9,7 +9,7 @@ Persistent or high throttle rates may indicate:
 - **Missing retry logic** — the application retries immediately on 429 instead of honouring the `Retry-After` header.
 - **Unintended runaway jobs** — a scheduled task or background worker that is executing more frequently than intended.
 
-#### Remediation action:
+#### Remediation action
 
 For each throttled application listed below:
 
@@ -30,5 +30,4 @@ For each throttled application listed below:
 * [Microsoft Graph — JSON batching](https://learn.microsoft.com/en-us/graph/json-batching)
 
 <!--- Results --->
-
 %TestResult%

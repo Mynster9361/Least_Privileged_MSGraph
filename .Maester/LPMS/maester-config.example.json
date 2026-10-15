@@ -1,0 +1,10 @@
+{
+  "GlobalSettings": {
+    "LPMSLogAnalyticsWorkspaceId": "00000000-0000-0000-0000-000000000000",
+    "LPMSDaysToQuery": 30,
+    "LPMSMaxActivityEntries": 100000,
+    "LPMSThrottleLimit": 10,
+    "LPMSOnlyPrivilegXAndOver": 1,
+    "LPMSCacheMinutes": 60
+  }
+}

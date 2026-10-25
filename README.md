@@ -15,6 +15,17 @@ A PowerShell module that audits Microsoft Graph permission assignments and recom
 - Generates an HTML report showing current permissions, optimal permissions, and excess permissions per app
 - Optionally includes throttling statistics per app
 
+## Maester Packs
+
+Maester packs is available to integrate into your existing deployment see the blog here:
+
+- [Blog - Least privileged MSGraph is now a Maester Pack](https://mynster-it.dk/2026/10/25/LeastPrivilegedMSGraphMaesterPack)
+
+And the pack here:
+
+- [Maester Pack - Least Privileged MSGraph](https://packs.maester.cloud/p/lpms)
+
+
 ## Report Preview
 
 | Front Page                                       | Details Modal                                   |
